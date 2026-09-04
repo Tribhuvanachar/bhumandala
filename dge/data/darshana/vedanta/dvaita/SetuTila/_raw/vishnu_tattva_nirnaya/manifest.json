@@ -1,0 +1,45 @@
+{
+ "post_id": 766,
+ "slug": "vishnu-tattva-nirnaya",
+ "title": "विष्णुतत्त्वनिर्णयः",
+ "link": "https://setutila.in/vishnu-tattva-nirnaya/",
+ "modified_gmt": "2026-08-30T12:55:38",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "सदागमैकविज्ञेयत्वपरिच्छेदः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/vishnu_tattva_nirnaya/chapter-001.chunk.html",
+   "anchor": "6d6f6468-078e-4d3e-bca8-4f8948eaa776",
+   "blocks": 390,
+   "pathantara_entries": 24,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "समतीतक्षराक्षरत्वपरिच्छेदः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/vishnu_tattva_nirnaya/chapter-002.chunk.html",
+   "anchor": "67653228-010b-46de-a728-fadff73436f5",
+   "blocks": 13,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "निर्दोषाशेषसद्गुणत्वपरिच्छेदः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/vishnu_tattva_nirnaya/chapter-003.chunk.html",
+   "anchor": "0fc1812a-5d50-44e1-83da-6fccb4c3985e",
+   "blocks": 22,
+   "pathantara_entries": 5,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/vishnu-tattva-nirnaya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

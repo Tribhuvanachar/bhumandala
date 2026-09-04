@@ -1,0 +1,378 @@
+{
+ "post_id": 1087,
+ "slug": "rg-bhashya",
+ "title": "ऋग्भाष्यं",
+ "link": "https://setutila.in/rg-bhashya/",
+ "modified_gmt": "2026-08-30T15:20:22",
+ "categories": [
+  "श्रुतिप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "अग्निमीळ इति नवर्चम्॥ १॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-001.chunk.html",
+   "anchor": "4330a919-7969-452b-95fb-022de9380659",
+   "blocks": 33,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "वायवायाहीति नवर्चम्॥ २॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-002.chunk.html",
+   "anchor": "f9d63ecd-e9f2-4428-9e4f-a487b8193de0",
+   "blocks": 20,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "अश्विनायज्वरीरिति द्वादशर्चम्॥ ३॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-003.chunk.html",
+   "anchor": "023eec41-b20a-405f-8079-da46cf5945c4",
+   "blocks": 24,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "सुरूपकृत्नुमिति दशर्चम्॥ ४॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-004.chunk.html",
+   "anchor": "38cb7641-61f8-40a2-a5ff-f8cf8d3f0ed6",
+   "blocks": 40,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "आत्वेतेति दशर्चम्॥ ५॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-005.chunk.html",
+   "anchor": "cbdeb5c6-6787-43e6-b51b-5b4a7fccbd8e",
+   "blocks": 32,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "युञ्जन्तीति दशर्चम्॥ ६॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-006.chunk.html",
+   "anchor": "203ee668-9198-4c9c-b620-084a3d73d18b",
+   "blocks": 32,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "इन्द्रमिदिति दशर्चम्॥ ७॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-007.chunk.html",
+   "anchor": "0e85d488-4587-410b-9036-ebafe8dcd066",
+   "blocks": 21,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "ऐन्द्रेति दशर्चम्॥ ८॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-008.chunk.html",
+   "anchor": "0f9aa03c-7d15-45ed-af84-ef736a7ee9d3",
+   "blocks": 19,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "इन्द्रेहेति दशर्चम्॥ ९॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-009.chunk.html",
+   "anchor": "86e69f06-9084-4970-a2e9-66606188abe6",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "गायन्तीति द्वादशर्चम्॥ १०॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-010.chunk.html",
+   "anchor": "1992e6a2-fa2a-473f-938e-4706921ed0fd",
+   "blocks": 16,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "इन्द्रं विश्वा इत्यष्टर्चम्॥ ११॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-011.chunk.html",
+   "anchor": "7f3af275-5779-430e-bee4-433a89894302",
+   "blocks": 46,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "अग्निन्दूतमिति द्वादशर्चम्॥ १२॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-012.chunk.html",
+   "anchor": "aa88a263-2ae7-4950-af99-7806f1375fe6",
+   "blocks": 38,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-013",
+   "title": "सुसमिद्ध इति द्वादशर्चम्॥ १३॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-013.chunk.html",
+   "anchor": "55738b04-546f-4dde-bdc8-01c1ff574264",
+   "blocks": 33,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-014",
+   "title": "एभिरग्न इति द्वादशार्चम्॥ १४॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-014.chunk.html",
+   "anchor": "77e8f6d4-f47b-42e9-999a-c2cafc481f4c",
+   "blocks": 24,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-015",
+   "title": "इन्द्रसोममिति द्वादशार्चम्॥ १५॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-015.chunk.html",
+   "anchor": "777af3ce-95ad-4652-b741-f7d25ea31c13",
+   "blocks": 23,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-016",
+   "title": "आत्वावहन्त्विति नवर्चम्॥ १६॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-016.chunk.html",
+   "anchor": "1768efa5-eab1-4ced-a72d-8f33d4bbb66e",
+   "blocks": 16,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-017",
+   "title": "इन्द्रावरुणयोरिति नवर्चम्॥ १७॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-017.chunk.html",
+   "anchor": "398100b3-47ec-4f27-89b1-0a0e3aaff13b",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-018",
+   "title": "सोमानमिति नवर्चम्॥ १८॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-018.chunk.html",
+   "anchor": "75ad6efd-dcd8-4363-9f24-e28149cd28d1",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-019",
+   "title": "प्रतित्यमिति नवर्चम्॥ १९॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-019.chunk.html",
+   "anchor": "e06d2cd8-8e16-485f-8d98-bc11891aaece",
+   "blocks": 19,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-001",
+   "title": "अयन्देवायेत्यष्टर्चम्॥ २० (२/१)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-001.chunk.html",
+   "anchor": "9770083d-d0b2-46d3-a071-c01e826d5ba4",
+   "blocks": 33,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "इहेन्द्राग्नी इति षडृचम् ॥ २१ (२/२)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-002.chunk.html",
+   "anchor": "93692129-c316-4746-9784-75488e77b486",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "प्रातर्युजेत्येकविंशत्यृचम्॥ २२ (२/३)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-003.chunk.html",
+   "anchor": "06015869-fd70-4863-84b9-34c72d9b0ccb",
+   "blocks": 24,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "तीव्रासोमास इति चतुर्विंशत्यृचम्॥ २३ (२/४)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-004.chunk.html",
+   "anchor": "063b60d4-1ae2-4472-92bb-2244a9c8c805",
+   "blocks": 40,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "कस्यनूनमिति पञ्चदशर्चम्॥ २४ (२/५)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-005.chunk.html",
+   "anchor": "ec313cef-dedf-4194-b5fb-ae4b064b83e6",
+   "blocks": 32,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "सोमानमिति नवर्चम्॥ २५  (२/६)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-006.chunk.html",
+   "anchor": "980e6d69-d1b1-4094-a5b3-b084c599d12a",
+   "blocks": 32,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "सोमानमिति नवर्चम्॥ २६ (२/७)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-007.chunk.html",
+   "anchor": "bfd0e99e-7c67-4e82-aa95-80c204ec9383",
+   "blocks": 21,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "सोमानमिति नवर्चम्॥ २७ (२/८)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-008.chunk.html",
+   "anchor": "6d0db578-d122-452f-a5cc-49620133749b",
+   "blocks": 19,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "सोमानमिति नवर्चम्॥ २८ (२/९)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-009.chunk.html",
+   "anchor": "a3a40ba6-29db-4c1f-9005-48d75a5b9aac",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "सोमानमिति नवर्चम्॥ २९ (२/१०)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-010.chunk.html",
+   "anchor": "c9be358a-14ae-4191-865b-f22b02fe4017",
+   "blocks": 16,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "सोमानमिति नवर्चम्॥ ३० (२/११)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-011.chunk.html",
+   "anchor": "320d53b3-5862-46ba-a412-cf05a75f9a3b",
+   "blocks": 46,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "सोमानमिति नवर्चम्॥ ३१ (२/१२)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-012.chunk.html",
+   "anchor": "85048d77-c1d7-4cd2-ab3e-445e1d6aca1d",
+   "blocks": 38,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-013",
+   "title": "सोमानमिति नवर्चम्॥ ३२ (२/१३)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-013.chunk.html",
+   "anchor": "eaf0168b-ba2c-465f-8729-3a67afea5660",
+   "blocks": 33,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-001",
+   "title": "सोमानमिति नवर्चम्॥ ३३ (३/१)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-001.chunk.html",
+   "anchor": "810fc29e-0a2a-44ad-8aab-ce129850f649",
+   "blocks": 33,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "सोमानमिति नवर्चम्॥ ३४ (३/२)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-002.chunk.html",
+   "anchor": "10e41bca-5724-45ac-8063-cb75aa10ef76",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "सोमिति नवर्चम्मान॥ ३५ (३/३)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-003.chunk.html",
+   "anchor": "bc1d6e36-4a95-4ab8-bad0-244ff381d54b",
+   "blocks": 24,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "सोमानमिति नवर्चम्॥ ३६ (३/४)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-004.chunk.html",
+   "anchor": "3a85ff17-7c02-49e1-b477-bc633263dc63",
+   "blocks": 40,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "सोमानमिति नवर्चम्॥ ३७ (३/५)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-005.chunk.html",
+   "anchor": "69b2cabd-d1df-416f-92c3-e2e9311e2609",
+   "blocks": 32,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "सोमानमिति नवर्चम्॥ ३८ (३/६)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-006.chunk.html",
+   "anchor": "60e9d56c-de18-461c-a9d6-d700e9866e71",
+   "blocks": 32,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "सोमानमिति नवर्चम्॥ ३९ (३/७)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-007.chunk.html",
+   "anchor": "aee8b5e5-0495-4e2d-9721-0054f0d34abe",
+   "blocks": 21,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "सोमानमिति नवर्चम्॥ ४० (३/८)॥",
+   "file": "/wp-content/themes/twentytwentyfour/texts/rg_bhashya/chapter-008.chunk.html",
+   "anchor": "8ec1305c-040b-4ce8-a08c-89b6f2d5a745",
+   "blocks": 19,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/rg-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

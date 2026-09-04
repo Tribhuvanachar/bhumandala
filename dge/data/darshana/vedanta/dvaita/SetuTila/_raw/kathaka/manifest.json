@@ -1,0 +1,27 @@
+{
+ "post_id": 320,
+ "slug": "kathaka",
+ "title": "कठोपनिषत्",
+ "link": "https://setutila.in/kathaka/",
+ "modified_gmt": "2026-03-26T10:21:18",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "inline",
+   "title": "कठोपनिषत्",
+   "file": null,
+   "anchor": null,
+   "blocks": 138,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/kathaka/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "post_id": 1049,
+ "slug": "bhagavata-tatparya-nirnaya",
+ "title": "भागवततात्पर्यनिर्णयः",
+ "link": "https://setutila.in/bhagavata-tatparya-nirnaya/",
+ "modified_gmt": "2026-08-30T12:11:24",
+ "categories": [
+  "पुराणप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "अथ प्रथमस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-001.chunk.html",
+   "anchor": "82c66f9e-8a2d-4d8f-b450-e66fb8ca1de0",
+   "blocks": 278,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "अथ द्वितीयस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-002.chunk.html",
+   "anchor": "d80d3738-5d59-4522-bd70-f9f22aa38eef",
+   "blocks": 298,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "अथ तृतीयस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-003.chunk.html",
+   "anchor": "42130e21-df94-4d36-b5d5-bf8915702fd2",
+   "blocks": 532,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "अथ चतुर्थस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-004.chunk.html",
+   "anchor": "afe99a81-e78c-4b70-8aac-8b7b7e1caf81",
+   "blocks": 323,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "अथ पञ्चमस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-005.chunk.html",
+   "anchor": "bf111c8f-2743-4b51-8957-34bafeb5ddf8",
+   "blocks": 131,
+   "pathantara_entries": 21,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "अथ षष्ठस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-006.chunk.html",
+   "anchor": "9c941653-2051-48ac-ac66-f0d9ce8427be",
+   "blocks": 138,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "अथ सप्तमः स्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-007.chunk.html",
+   "anchor": "dd87eaee-d509-4de8-b62f-2bd5070564a6",
+   "blocks": 205,
+   "pathantara_entries": 125,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "अथाष्टमस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-008.chunk.html",
+   "anchor": "d9d70ea9-a95f-4c2c-afc4-f6e2913bff35",
+   "blocks": 50,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "अथ नवमः स्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-009.chunk.html",
+   "anchor": "adb2629a-d5f1-47c9-8a74-a4c3f32cf25d",
+   "blocks": 31,
+   "pathantara_entries": 5,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "अथ दशमस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-010.chunk.html",
+   "anchor": "9540b1d1-40bd-489f-9bb6-ee7e13c0f251",
+   "blocks": 309,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "अथ एकादशस्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-011.chunk.html",
+   "anchor": "718926b6-f0bc-47c3-820f-da6c71b95844",
+   "blocks": 699,
+   "pathantara_entries": 3,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "अथ द्वादशः स्कन्धः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/btn/chapter-012.chunk.html",
+   "anchor": "9574de40-99c2-4c95-8b17-59b3bfeba032",
+   "blocks": 26,
+   "pathantara_entries": 21,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/bhagavata-tatparya-nirnaya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "post_id": 768,
+ "slug": "karma-nirnaya",
+ "title": "कर्मनिर्णयः",
+ "link": "https://setutila.in/karma-nirnaya/",
+ "modified_gmt": "2026-08-30T12:53:26",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "मङ्गलाचारणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/karma_nirnaya/chapter-001.chunk.html",
+   "anchor": "c349b1f0-7fd0-4942-8398-11092e8dc171",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "उपोद्घातः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/karma_nirnaya/chapter-002.chunk.html",
+   "anchor": "e9312840-6553-4703-a733-fed61ca9674b",
+   "blocks": 22,
+   "pathantara_entries": 7,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "महानाम्नीनां व्याख्यानम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/karma_nirnaya/chapter-003.chunk.html",
+   "anchor": "a94d4d59-7cce-4022-b44a-ddd2bd94112b",
+   "blocks": 40,
+   "pathantara_entries": 13,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "शस्त्रशेषव्याख्यानम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/karma_nirnaya/chapter-004.chunk.html",
+   "anchor": "45d3cc59-dbdb-4de4-8971-48099a599f15",
+   "blocks": 78,
+   "pathantara_entries": 52,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "शिष्टस्य ब्राह्मणस्य ऋचां च व्याख्यानम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/karma_nirnaya/chapter-005.chunk.html",
+   "anchor": "cdbf9749-439c-4599-957a-f528d53b86d2",
+   "blocks": 13,
+   "pathantara_entries": 8,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "अन्तिममङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/karma_nirnaya/chapter-006.chunk.html",
+   "anchor": "d8ee62aa-d0d8-4e71-ac50-c698d193d6f6",
+   "blocks": 4,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/karma-nirnaya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

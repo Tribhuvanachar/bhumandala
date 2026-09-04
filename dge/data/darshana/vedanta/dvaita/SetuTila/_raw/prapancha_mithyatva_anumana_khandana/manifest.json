@@ -1,0 +1,81 @@
+{
+ "post_id": 34,
+ "slug": "prapancha-mithyatva-anumana-khandana",
+ "title": "प्रपञ्चमिथ्यात्वानुमानखण्डनम्",
+ "link": "https://setutila.in/prapancha-mithyatva-anumana-khandana/",
+ "modified_gmt": "2026-08-30T14:57:26",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "मायावाद्युदितप्रपञ्चमिथ्यात्वानुमानानुवादः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-001.chunk.html",
+   "anchor": "a9f24f37-07b9-46fd-8c39-ec4680f78c93",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "तत्र प्रतिज्ञादोषाः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-002.chunk.html",
+   "anchor": "1fef2e1e-acdd-4659-abfa-1fa8ce7abb86",
+   "blocks": 2,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "हेतुदोषाः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-003.chunk.html",
+   "anchor": "6674ed50-0860-4a30-b0fd-bbf8624daad1",
+   "blocks": 2,
+   "pathantara_entries": 3,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "दृष्टान्तदोषौ",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-004.chunk.html",
+   "anchor": "05442cf0-986c-4a90-9cdb-559b1bdc690a",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "उपाधिरूपदोषः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-005.chunk.html",
+   "anchor": "8c3b8c34-502f-47b5-b51f-1ca542a554b3",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "पक्षप्रतिज्ञादिदलक्षणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-006.chunk.html",
+   "anchor": "bbc06d32-1ffc-498f-a3f5-c2e383cddaf7",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "अन्तिममङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prapancha_mithyatva_anumana_khandana/chapter-007.chunk.html",
+   "anchor": "28889afd-c439-4720-8f2f-d97ec5c5b95c",
+   "blocks": 4,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/prapancha-mithyatva-anumana-khandana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

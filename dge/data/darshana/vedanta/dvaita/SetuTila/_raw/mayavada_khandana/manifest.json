@@ -1,0 +1,54 @@
+{
+ "post_id": 40,
+ "slug": "mayavada-khandana",
+ "title": "मायावादखण्डनम्",
+ "link": "https://setutila.in/mayavada-khandana/",
+ "modified_gmt": "2026-08-30T14:53:10",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "मङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mayavada_khandana/chapter-001.chunk.html",
+   "anchor": "4e9a7f97-70d7-4c2a-b489-a3093ee543cb",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "मायावादस्यानारम्भणीयत्वानुमानम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mayavada_khandana/chapter-002.chunk.html",
+   "anchor": "2faad063-4bb3-4afc-86f0-4c93b1a59dba",
+   "blocks": 6,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "विष्णुसर्वोत्तमत्वस्यैव शास्त्रप्रतिपाद्यत्वसमर्थनम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mayavada_khandana/chapter-003.chunk.html",
+   "anchor": "f2baf9c0-0dcc-455b-9b25-a28959c653fa",
+   "blocks": 4,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mayavada_khandana/chapter-004.chunk.html",
+   "anchor": "9a0927ee-4748-43e6-bb99-2f525335bb83",
+   "blocks": 4,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/mayavada-khandana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

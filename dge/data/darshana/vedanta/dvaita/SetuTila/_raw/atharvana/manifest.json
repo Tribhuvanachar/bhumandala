@@ -1,0 +1,72 @@
+{
+ "post_id": 324,
+ "slug": "atharvana",
+ "title": "आथर्वणोपनिषत्",
+ "link": "https://setutila.in/atharvana/",
+ "modified_gmt": "2026-08-30T13:15:58",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथममुण्डके प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana/chapter-001.chunk.html",
+   "anchor": "cce4f794-81fd-42c4-81f8-b6b6c39c6f96",
+   "blocks": 13,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "प्रथममुण्डके द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana/chapter-002.chunk.html",
+   "anchor": "4bd25802-9c95-490f-822c-982b6a7f7280",
+   "blocks": 16,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "द्वितीयमुण्डके प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana/chapter-003.chunk.html",
+   "anchor": "9fea6a96-3ef9-4e61-9de8-c770ee186e29",
+   "blocks": 13,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "द्वितीयमुण्डके द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana/chapter-004.chunk.html",
+   "anchor": "182238e9-f802-4a48-839e-da42c3207826",
+   "blocks": 15,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "तृतीयमुण्डके प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana/chapter-005.chunk.html",
+   "anchor": "c1488f5c-188c-4057-860a-2ee3d9652984",
+   "blocks": 12,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "तृतीयमुण्डके द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana/chapter-006.chunk.html",
+   "anchor": "ecb577dd-69a3-4fbc-92e3-8820f898a671",
+   "blocks": 15,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/atharvana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

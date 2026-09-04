@@ -1,0 +1,72 @@
+{
+ "post_id": 36,
+ "slug": "pramana-lakshana",
+ "title": "प्रमाणलक्षणम्",
+ "link": "https://setutila.in/pramana-lakshana/",
+ "modified_gmt": "2026-08-30T14:54:44",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "देवतानमस्कारपूर्वकं विषयनिर्देशः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/pramana_lakshana/chapter-001.chunk.html",
+   "anchor": "7a057bca-8335-42ab-8707-6e1a4e75314f",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "प्रायः प्रमाणविचारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/pramana_lakshana/chapter-002.chunk.html",
+   "anchor": "2193269b-67b7-4ffd-8a86-e1053b856ef5",
+   "blocks": 9,
+   "pathantara_entries": 10,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "प्रमाणाभासविचारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/pramana_lakshana/chapter-003.chunk.html",
+   "anchor": "91a7e4c4-fba6-4edd-b0b7-42ad4983fdbc",
+   "blocks": 7,
+   "pathantara_entries": 13,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "स्वोक्तप्रमाणलक्षणदृढीकरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/pramana_lakshana/chapter-004.chunk.html",
+   "anchor": "93b7e76b-9ac5-42cf-971d-124d4acd0434",
+   "blocks": 2,
+   "pathantara_entries": 7,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "सिंहावलोकनन्यायेन मतानुज्ञाया असङ्गतावन्तर्भावः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/pramana_lakshana/chapter-005.chunk.html",
+   "anchor": "7c5a3d1b-e4b5-440c-b094-272a6f945ee5",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/pramana_lakshana/chapter-006.chunk.html",
+   "anchor": "a8c12755-3e69-4352-92e5-b539ba015582",
+   "blocks": 3,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/pramana-lakshana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

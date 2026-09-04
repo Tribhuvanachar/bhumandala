@@ -1,0 +1,126 @@
+{
+ "post_id": 54,
+ "slug": "dvadasha-stotra",
+ "title": "द्वादशस्तोत्रम्",
+ "link": "https://setutila.in/dvadasha-stotra/",
+ "modified_gmt": "2026-08-30T14:22:43",
+ "categories": [
+  "स्तोत्रग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-001.chunk.html",
+   "anchor": "04f1f047-c165-4fb0-9df1-505b7401e9ac",
+   "blocks": 14,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-002.chunk.html",
+   "anchor": "9a65bdf3-0629-4036-84bb-8d88c5f5d6a0",
+   "blocks": 13,
+   "pathantara_entries": 10,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-003.chunk.html",
+   "anchor": "b7977846-0462-49cf-a2a7-4ad843e8a495",
+   "blocks": 11,
+   "pathantara_entries": 5,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-004.chunk.html",
+   "anchor": "ff407e6a-05b3-48ef-99a0-71633048239c",
+   "blocks": 10,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "पञ्चमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-005.chunk.html",
+   "anchor": "150dff44-3a17-481b-ab3f-19343bd94e42",
+   "blocks": 10,
+   "pathantara_entries": 14,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "षष्ठोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-006.chunk.html",
+   "anchor": "1b9e1a01-d1f6-4c2d-bfd4-2708357481a5",
+   "blocks": 10,
+   "pathantara_entries": 13,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "सप्तमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-007.chunk.html",
+   "anchor": "648e5376-4b76-4c63-a535-c6426fc6df65",
+   "blocks": 11,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "अष्टमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-008.chunk.html",
+   "anchor": "16536612-9995-44fb-953b-0eea4118a43a",
+   "blocks": 14,
+   "pathantara_entries": 19,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "नवमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-009.chunk.html",
+   "anchor": "2bafe176-9805-4c99-8319-3af7fc59f43d",
+   "blocks": 18,
+   "pathantara_entries": 33,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "दशमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-010.chunk.html",
+   "anchor": "3a0abb01-eafa-4aac-94c9-1aaa97badb85",
+   "blocks": 21,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "एकादशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-011.chunk.html",
+   "anchor": "a9b53860-4b37-4b25-8bbe-d39c4b8a500b",
+   "blocks": 11,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "द्वादशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/dvadasha_stotra/chapter-012.chunk.html",
+   "anchor": "1b3956b9-56cf-4d02-85da-a14f05c612d1",
+   "blocks": 12,
+   "pathantara_entries": 3,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/dvadasha-stotra/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

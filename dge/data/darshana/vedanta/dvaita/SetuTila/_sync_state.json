@@ -1,0 +1,810 @@
+{
+ "posts": {
+  "brahmasutra-bhashya": {
+   "modified_gmt": "2026-08-30T15:50:18",
+   "chunk_hashes": {
+    "chapter-001": "83cf84693070ace4",
+    "chapter-002": "83899f719fb85c1a",
+    "chapter-003": "d3ef314495562500",
+    "chapter-004": "b8fd6b81e56a2328"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/brahmasutra_bhashya",
+   "items": 1970
+  },
+  "brihad-bhashya": {
+   "modified_gmt": "2026-08-30T15:45:58",
+   "chunk_hashes": {
+    "chapter-001": "64c79219bf7c6e85",
+    "chapter-002": "77411cabea238cc1",
+    "chapter-003": "e0ab91e82e549433",
+    "chapter-004": "150908d5bc297420",
+    "chapter-005": "cd06e5f629c3eb2c",
+    "chapter-006": "87ff385e08a527a8"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/brihad_bhashya",
+   "items": 545
+  },
+  "aitareya-bhashya": {
+   "modified_gmt": "2026-08-30T15:42:39",
+   "chunk_hashes": {
+    "chapter-001": "e41699474ccbb129",
+    "chapter-002": "5d6438cc3c6e56ae"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/aitareya_bhashya",
+   "items": 367
+  },
+  "%e0%a4%9b%e0%a4%be%e0%a4%a8%e0%a5%8d%e0%a4%a6%e0%a5%8b%e0%a4%97%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%aa%e0%a4%a8%e0%a4%bf%e0%a4%b7%e0%a4%a6%e0%a5%8d%e0%a4%ad%e0%a4%be%e0%a4%b7%e0%a5%8d%e0%a4%af%e0%a4%ae": {
+   "modified_gmt": "2026-08-30T15:37:11",
+   "chunk_hashes": {
+    "chapter-001": "1497583dca1d1e02",
+    "chapter-002": "d021302bc9bac576",
+    "chapter-003": "dbdf9b965c1cd6f6",
+    "chapter-004": "530537eba3303c9b",
+    "chapter-005": "4ee72e03c4b29434",
+    "chapter-006": "3ecab4b5d5bc1314",
+    "chapter-007": "5d7758cf437670b4",
+    "chapter-008": "84cbc8aca976f496"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/chhaandogyopnishdbhaashym",
+   "items": 394
+  },
+  "gita-tatparya": {
+   "modified_gmt": "2026-08-30T15:33:56",
+   "chunk_hashes": {
+    "chapter-001": "36f8e455d38b2934",
+    "chapter-002": "00557df1af9f3879",
+    "chapter-003": "ed1a2a5c3cbfb018",
+    "chapter-004": "5c1b1d95a2ae0547",
+    "chapter-005": "254636ca7855cd60",
+    "chapter-006": "1b227fc73b38649e",
+    "chapter-007": "74280ef17a71e1b8",
+    "chapter-008": "7ee6dfbe01949dcb",
+    "chapter-009": "9985fd132bd533bb",
+    "chapter-010": "33724328ed54ddc2",
+    "chapter-011": "1efbe3f954c44fe7",
+    "chapter-012": "43b6ccdb9fa16046",
+    "chapter-013": "6af157e7e7e542f7",
+    "chapter-014": "9e7d77548bd999d2",
+    "chapter-015": "36cb76ef46ef759e",
+    "chapter-016": "fd474800f5fd6699",
+    "chapter-017": "d5653d2828a2d592",
+    "chapter-018": "68af2352317641fd"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/gita_prasthana/gita_tatparya",
+   "items": 1299
+  },
+  "gita-bhashya": {
+   "modified_gmt": "2026-08-30T15:30:14",
+   "chunk_hashes": {
+    "chapter-001": "7060c6fbb00424ee",
+    "chapter-002": "e5bcff14c9c7e458",
+    "chapter-003": "f6c49992a6fd7f08",
+    "chapter-004": "1a627e423df105a7",
+    "chapter-005": "ff29148ed57dc71c",
+    "chapter-006": "c3f2df5bc2d618c8",
+    "chapter-007": "5b0747d4623bd17c",
+    "chapter-008": "5cd4cc6c8b6583e5",
+    "chapter-009": "9194df4f8457d709",
+    "chapter-010": "2c020e50e7d75af4",
+    "chapter-011": "f9227407d5c61539",
+    "chapter-012": "3271d7e0671cd17d",
+    "chapter-013": "c6303f63c4374f47",
+    "chapter-014": "a8e0c46b5636df93",
+    "chapter-015": "fffa48e3c5ba5cef",
+    "chapter-016": "2759c68c7fb99cec",
+    "chapter-017": "e3c3d1cd7546750a",
+    "chapter-018": "5c4c541ccde5f417"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/gita_prasthana/gita_bhashya",
+   "items": 1652
+  },
+  "mahabharata-tatparya-nirnaya": {
+   "modified_gmt": "2026-08-30T15:27:20",
+   "chunk_hashes": {
+    "chapter-001": "af06ed372e1e56e7",
+    "chapter-002": "df7199a2fa8b96e0",
+    "chapter-003": "3054dfb2959b98fd",
+    "chapter-004": "a3d3f0dc716e81fa",
+    "chapter-005": "950dd561a7984bcb",
+    "chapter-006": "f99bf5a6c533e5a8",
+    "chapter-007": "aafcd61b8efb9f2b",
+    "chapter-008": "88e3cb10c95468b4",
+    "chapter-009": "5b52c7ed870eaa16",
+    "chapter-010": "c485427a894e2f18",
+    "chapter-011": "5ffd0ca418ed2894",
+    "chapter-012": "9bd09c0e700fff10",
+    "chapter-013": "d363dc20870bb8bb",
+    "chapter-014": "f7f11c098276bf01",
+    "chapter-015": "cb98fa4797f3ac31",
+    "chapter-016": "323ce19d1eca27dd",
+    "chapter-017": "c43e04fb4889621b",
+    "chapter-018": "081cae9c984971d9",
+    "chapter-019": "7cc7813a602ac9e2",
+    "chapter-020": "f8a641dc87b37a48",
+    "chapter-021": "b5db3e7711ff04c2",
+    "chapter-022": "cdeeb576d94aca53",
+    "chapter-023": "b2bed343c8e9909f",
+    "chapter-024": "fc1abae968d1c462",
+    "chapter-025": "a7fa129870f7cc73",
+    "chapter-026": "5e7acab0fb2304fe",
+    "chapter-027": "48c048476a61cc2f",
+    "chapter-028": "86bd621ddf4bdff6",
+    "chapter-029": "de2f696d9b248128",
+    "chapter-030": "cae980ce8a20ea22",
+    "chapter-031": "34e123e766484c81",
+    "chapter-032": "65246d2beb8bb59a"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/itihasa_prasthana/mahabharata_tatparya_nirnaya",
+   "items": 1456
+  },
+  "rg-bhashya": {
+   "modified_gmt": "2026-08-30T15:20:22",
+   "chunk_hashes": {
+    "chapter-001": "50d5765ec6f6817b",
+    "chapter-002": "22a27d2b40f45efb",
+    "chapter-003": "1e35d6e5ac925a82",
+    "chapter-004": "61026ec6f4c9a28f",
+    "chapter-005": "8bcedb67ef7d1a26",
+    "chapter-006": "47527fe7b3bb879c",
+    "chapter-007": "eb6a315a23c92f53",
+    "chapter-008": "8333050c0efa2fd6",
+    "chapter-009": "34340784409f082c",
+    "chapter-010": "6e7426ce1fa57325",
+    "chapter-011": "ea3de3a53cde2be1",
+    "chapter-012": "83e3df33ad200046",
+    "chapter-013": "ff2af3049786fdb9",
+    "chapter-014": "338a0af6b4e755bc",
+    "chapter-015": "02f9f5c6fabf155f",
+    "chapter-016": "f12f1d191c8816af",
+    "chapter-017": "66be5abd8212435e",
+    "chapter-018": "62a693223ad2ad06",
+    "chapter-019": "baa92a3e7a0f8c99"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/shruti_prasthana/rg_bhashya",
+   "items": 1091
+  },
+  "anuvyakhyana": {
+   "modified_gmt": "2026-08-30T15:19:32",
+   "chunk_hashes": {
+    "chapter-001": "7b86925bebea623a",
+    "chapter-002": "831869b991129bdd",
+    "chapter-003": "2de27fc9d15b3290",
+    "chapter-004": "fb97075f91ac59a7"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/anuvyakhyana",
+   "items": 525
+  },
+  "bhagavata-tatparya-nirnaya": {
+   "modified_gmt": "2026-08-30T12:11:24",
+   "chunk_hashes": {
+    "chapter-001": "c3067a15de009d07",
+    "chapter-002": "cc0c20b4a11ddbc4",
+    "chapter-003": "2cf8040e1902e8ec",
+    "chapter-004": "4c9328824f0f6ec0",
+    "chapter-005": "86f5c01f078e2ab0",
+    "chapter-006": "7d259a66f1b69210",
+    "chapter-007": "c92b3e4c27680805",
+    "chapter-008": "3288be71b6f2b462",
+    "chapter-009": "be288006f4498887",
+    "chapter-010": "3efc9bbb866e949a",
+    "chapter-011": "853f9e61a454b2ae",
+    "chapter-012": "b29fcfb230de8fda"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/purana_prasthana/bhagavata_tatparya_nirnaya",
+   "items": 3020
+  },
+  "mahabharata": {
+   "modified_gmt": "2026-04-28T08:39:00",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "svargarohana-parva": {
+   "modified_gmt": "2026-04-28T10:36:07",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "mahaprasathanika-parva": {
+   "modified_gmt": "2026-04-28T08:33:12",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "mousala-parva": {
+   "modified_gmt": "2026-04-28T08:32:32",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "aashramavasika-parva": {
+   "modified_gmt": "2026-04-28T08:31:59",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "aashvamedhika-parva": {
+   "modified_gmt": "2026-04-28T08:31:15",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "anushasana-parva": {
+   "modified_gmt": "2026-04-28T08:30:23",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "shanti-parva": {
+   "modified_gmt": "2026-04-28T08:29:44",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "stri-parva": {
+   "modified_gmt": "2026-04-28T08:29:03",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "souptika-parva": {
+   "modified_gmt": "2026-04-28T08:28:24",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "shalya-parva": {
+   "modified_gmt": "2026-04-28T08:27:39",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "karna-parva": {
+   "modified_gmt": "2026-04-28T08:27:03",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "drona-parva": {
+   "modified_gmt": "2026-04-28T08:26:21",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "bhishma-parva": {
+   "modified_gmt": "2026-04-28T08:25:21",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "%e0%a4%89%e0%a4%a6%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%97%e0%a4%aa%e0%a4%b0%e0%a5%8d%e0%a4%b5": {
+   "modified_gmt": "2026-04-28T08:11:55",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "virata-parva": {
+   "modified_gmt": "2026-04-28T08:08:13",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "aranya-parva": {
+   "modified_gmt": "2026-04-28T08:07:23",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "sabha-parva": {
+   "modified_gmt": "2026-04-28T08:06:13",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "adi-parva": {
+   "modified_gmt": "2026-04-28T08:06:34",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  },
+  "nyasa-paddhati": {
+   "modified_gmt": "2026-08-30T12:38:57",
+   "chunk_hashes": {
+    "inline": "33b26e42eeb1f100"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/nyasa_paddhati",
+   "items": 14
+  },
+  "tantrasara": {
+   "modified_gmt": "2026-08-30T12:39:59",
+   "chunk_hashes": {
+    "chapter-001": "c00c8da24885d207",
+    "chapter-002": "d30a628b9eaed3b5",
+    "chapter-003": "fc35b17a07c55be8",
+    "chapter-004": "deb29fc4a469845c"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/tantrasara",
+   "items": 485
+  },
+  "krishnamruta-maharnava": {
+   "modified_gmt": "2026-08-30T12:45:35",
+   "chunk_hashes": {
+    "chapter-001": "c00c8da24885d207",
+    "chapter-002": "d30a628b9eaed3b5",
+    "chapter-003": "fc35b17a07c55be8",
+    "chapter-004": "deb29fc4a469845c",
+    "chapter-005": "d0b4604e75771da2",
+    "chapter-006": "c3c720ed2dc4db8d",
+    "chapter-007": "b4bc659e9a427562",
+    "chapter-012": "f96a2986ce130f8b",
+    "chapter-013": "064742d439449cf9",
+    "chapter-014": "cdc518fc932bcaaf",
+    "chapter-015": "4edd5f6939853103",
+    "chapter-016": "594661d08420f926",
+    "chapter-020": "444e58ddb2c2f3e7",
+    "chapter-021": "558725ffa3fffc7a"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/krishnamruta_maharnava",
+   "items": 524,
+   "errors": [
+    "chapter-004 pathantara: HTTP Error 404: Not Found",
+    "chapter-005 pathantara: HTTP Error 404: Not Found",
+    "chapter-006 pathantara: HTTP Error 404: Not Found",
+    "chapter-007 pathantara: HTTP Error 404: Not Found",
+    "chapter-008: HTTP Error 404: Not Found",
+    "chapter-009: HTTP Error 404: Not Found",
+    "chapter-010: HTTP Error 404: Not Found",
+    "chapter-011: HTTP Error 404: Not Found",
+    "chapter-012 pathantara: HTTP Error 404: Not Found",
+    "chapter-013 pathantara: HTTP Error 404: Not Found",
+    "chapter-015 pathantara: HTTP Error 404: Not Found",
+    "chapter-016 pathantara: HTTP Error 404: Not Found",
+    "chapter-017: HTTP Error 404: Not Found",
+    "chapter-018: HTTP Error 404: Not Found",
+    "chapter-019: HTTP Error 404: Not Found",
+    "chapter-020 pathantara: HTTP Error 404: Not Found",
+    "chapter-021 pathantara: HTTP Error 404: Not Found",
+    "chapter-022: HTTP Error 404: Not Found"
+   ]
+  },
+  "nyaya-vivarana": {
+   "modified_gmt": "2026-08-30T12:47:47",
+   "chunk_hashes": {
+    "chapter-001": "8aac5dc0166e69b7",
+    "chapter-002": "bc75c74fb6c9bcba",
+    "chapter-003": "2708dfcfd361429b",
+    "chapter-004": "dd831fa61cf3b6ad",
+    "chapter-005": "ae6f40544e7cde10"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/nyaya_vivarana",
+   "items": 493
+  },
+  "karma-nirnaya": {
+   "modified_gmt": "2026-08-30T12:53:26",
+   "chunk_hashes": {
+    "chapter-001": "8ba3ed37abe7a523",
+    "chapter-002": "31782bd7c7dba497",
+    "chapter-003": "7ab06abc56701f6b",
+    "chapter-004": "a8f2e70efcb34123",
+    "chapter-005": "33e35575dd3e5eff",
+    "chapter-006": "e91f189219010998"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/karma_nirnaya",
+   "items": 160
+  },
+  "vishnu-tattva-nirnaya": {
+   "modified_gmt": "2026-08-30T12:55:38",
+   "chunk_hashes": {
+    "chapter-001": "98cdb468e3fbf756",
+    "chapter-002": "b0b470b7f3f7f703",
+    "chapter-003": "8faa517eebbbdc87"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/vishnu_tattva_nirnaya",
+   "items": 425
+  },
+  "gita": {
+   "modified_gmt": "2026-08-30T12:58:32",
+   "chunk_hashes": {
+    "chapter-001": "cdbad76b5043a6d2",
+    "chapter-002": "10f0bbbd57e9df55",
+    "chapter-003": "9d4d8f1f2e661796",
+    "chapter-004": "44eb2b1547da7713",
+    "chapter-005": "3b3b87e2da188eab",
+    "chapter-006": "42ad9fa6fef09d1e",
+    "chapter-007": "c9a792ce33b4deef",
+    "chapter-008": "e1a513743dd7de51",
+    "chapter-009": "ae82cc26860dbc69",
+    "chapter-010": "dfed540084b26d71",
+    "chapter-011": "75f7e05a3fc2ed41",
+    "chapter-012": "6076df1298b10b2e",
+    "chapter-013": "fe3ab4395b987f55",
+    "chapter-014": "d17ab58dab455c49",
+    "chapter-015": "eb86a58f37430325",
+    "chapter-016": "0ad63bc74063fd7a",
+    "chapter-017": "a59ead3fbf845301",
+    "chapter-018": "c0989e97a7ee3d9d"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/gita",
+   "items": 945
+  },
+  "taittiriya-bhashya": {
+   "modified_gmt": "2026-08-30T13:07:44",
+   "chunk_hashes": {
+    "chapter-001": "3caddbcc71783104",
+    "chapter-002": "3594112fc027e05d",
+    "chapter-003": "b04a48308fee68f5"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/taittiriya_bhashya",
+   "items": 111
+  },
+  "atharvana-bhashya": {
+   "modified_gmt": "2026-08-30T13:09:39",
+   "chunk_hashes": {
+    "chapter-001": "c60ae71ab927903d",
+    "chapter-002": "99dd2b78eff339af",
+    "chapter-003": "24870218f7c3515b",
+    "chapter-004": "44fa18b29f6b8f55",
+    "chapter-005": "42598b9a4e5d016a",
+    "chapter-006": "185030505991544a"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/atharvana_bhashya",
+   "items": 150
+  },
+  "kathaka-bhashya": {
+   "modified_gmt": "2026-08-30T13:11:16",
+   "chunk_hashes": {
+    "chapter-001": "96bcdd1350a805e9",
+    "chapter-002": "c0d0c1e23873dfd9"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/kathaka_bhashya",
+   "items": 215
+  },
+  "taittiriya": {
+   "modified_gmt": "2026-08-30T13:12:51",
+   "chunk_hashes": {
+    "chapter-001": "4a7691b62a7438e1",
+    "chapter-002": "2627a6f9d50735c3",
+    "chapter-003": "4b7b002c9643d9b5"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/taittiriya",
+   "items": 59
+  },
+  "manduka": {
+   "modified_gmt": "2026-08-30T13:14:38",
+   "chunk_hashes": {
+    "chapter-001": "c2fcaa36607236a7",
+    "chapter-002": "70b3d4729542a0e2",
+    "chapter-003": "519be48b5268fee5",
+    "chapter-004": "5604ddedb9777dbe"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/manduka",
+   "items": 52
+  },
+  "atharvana": {
+   "modified_gmt": "2026-08-30T13:15:58",
+   "chunk_hashes": {
+    "chapter-001": "07e58e5c73a125cc",
+    "chapter-002": "64d1c0d83508d9f0",
+    "chapter-003": "f43dae0058011362",
+    "chapter-004": "0259ba7aa36c9a30",
+    "chapter-005": "70fdc2d1352ee589",
+    "chapter-006": "b4c7da5315c7fa7b"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/atharvana",
+   "items": 84
+  },
+  "prashna": {
+   "modified_gmt": "2026-08-30T13:17:12",
+   "chunk_hashes": {
+    "chapter-001": "ba9b214251dd4d20",
+    "chapter-002": "d4ec2c7b9cefba9c",
+    "chapter-003": "f3f21e974ed4163d",
+    "chapter-004": "2dc441d3fc25f3d3",
+    "chapter-005": "03e7fc63d615e63f",
+    "chapter-006": "905cadb177ff98ec"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/prashna",
+   "items": 80
+  },
+  "kathaka": {
+   "modified_gmt": "2026-03-26T10:21:18",
+   "chunk_hashes": {
+    "inline": "693ce0a645af8afe"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/kathaka",
+   "items": 138
+  },
+  "talavakara": {
+   "modified_gmt": "2026-08-30T13:21:07",
+   "chunk_hashes": {
+    "chapter-001": "82659bb4ec999ff4",
+    "chapter-002": "70e13f720ff2ba5b",
+    "chapter-003": "f4fbad1aea4a7ddf",
+    "chapter-004": "30b8b4d93580c1bf"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/talavakara",
+   "items": 46
+  },
+  "isha": {
+   "modified_gmt": "2026-03-26T10:20:31",
+   "chunk_hashes": {
+    "inline": "9a480c5b9499195a"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/isha",
+   "items": 18
+  },
+  "sutra": {
+   "modified_gmt": "2026-08-30T13:24:03",
+   "chunk_hashes": {
+    "chapter-001": "cdeea9d53525dc1a",
+    "chapter-002": "d9638ac1a1f32e96",
+    "chapter-003": "5115e9491f719ef9",
+    "chapter-004": "8859df8f21aca006"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/sutra",
+   "items": 807
+  },
+  "anu-bhashya": {
+   "modified_gmt": "2026-08-30T13:27:56",
+   "chunk_hashes": {
+    "chapter-001": "a6c97b61ca2a94e1",
+    "chapter-002": "0b5b3164c434accb",
+    "chapter-003": "a7b81abb70808295",
+    "chapter-004": "e4f97bf904e4b221"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/anu_bhashya",
+   "items": 42
+  },
+  "dvadasha-stotra": {
+   "modified_gmt": "2026-08-30T14:22:43",
+   "chunk_hashes": {
+    "chapter-001": "a703ff5c87051b5d",
+    "chapter-002": "09c6609258cebf4d",
+    "chapter-003": "32a34761b62134f5",
+    "chapter-004": "36e855580146efbb",
+    "chapter-005": "9f4f10f40b68b3d5",
+    "chapter-006": "d5944cc6b9c364a0",
+    "chapter-007": "afed1db516d0c1bf",
+    "chapter-008": "758196d08cb8e976",
+    "chapter-009": "d7a122e989abbc3d",
+    "chapter-010": "855f42b2ae4f2c74",
+    "chapter-011": "15f491088405e95f",
+    "chapter-012": "44ab4c197783c0d4"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/stotra_granthas/dvadasha_stotra",
+   "items": 155
+  },
+  "ishavasya-bhashya": {
+   "modified_gmt": "2026-08-30T14:45:51",
+   "chunk_hashes": {
+    "inline": "e5ee3b54fa23e843"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/ishavasya_bhashya",
+   "items": 50
+  },
+  "jayanti-kalpa": {
+   "modified_gmt": "2026-08-30T14:46:44",
+   "chunk_hashes": {
+    "inline": "91e7e0db96b9a8c1"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/jayanti_kalpa",
+   "items": 14
+  },
+  "katha-lakshana": {
+   "modified_gmt": "2026-08-30T14:49:17",
+   "chunk_hashes": {
+    "chapter-001": "6a0d824543128fb3",
+    "chapter-002": "715870cb055beaea",
+    "chapter-003": "b6d2ed03ef68320b",
+    "chapter-004": "26dbf0fd15c0a811",
+    "chapter-005": "088a7024c627f2f9",
+    "chapter-006": "89f4c6ae83d32e24",
+    "chapter-007": "1c32790af38bcd3a"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/katha_lakshana",
+   "items": 45
+  },
+  "manduka-bhashya": {
+   "modified_gmt": "2026-08-30T14:51:32",
+   "chunk_hashes": {
+    "chapter-001": "3498f1758b9d5a0d",
+    "chapter-002": "ee6cad5aafb9a6e2",
+    "chapter-003": "0454820e975e88e3",
+    "chapter-004": "2209782a10f97572"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/manduka_bhashya",
+   "items": 118
+  },
+  "mayavada-khandana": {
+   "modified_gmt": "2026-08-30T14:53:10",
+   "chunk_hashes": {
+    "chapter-001": "e99210a5d6a6b79e",
+    "chapter-002": "9ab5f2e6d903c8f4",
+    "chapter-003": "844c32ee810fd9c2",
+    "chapter-004": "2e505d0571d7652e"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/mayavada_khandana",
+   "items": 16
+  },
+  "pramana-lakshana": {
+   "modified_gmt": "2026-08-30T14:54:44",
+   "chunk_hashes": {
+    "chapter-001": "dcdd284a11272add",
+    "chapter-002": "8a4573e19ffaf2a6",
+    "chapter-003": "bc4f9e304c3bae3a",
+    "chapter-004": "b6985c0bd5e2a2b9",
+    "chapter-005": "3de5733d5eca9e20",
+    "chapter-006": "f801326ee790e46e"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/pramana_lakshana",
+   "items": 25
+  },
+  "prapancha-mithyatva-anumana-khandana": {
+   "modified_gmt": "2026-08-30T14:57:26",
+   "chunk_hashes": {
+    "chapter-001": "55363c60d3a444f8",
+    "chapter-002": "a1e97baf6680e0bd",
+    "chapter-003": "64aef3b2a27ed7aa",
+    "chapter-004": "eadc614046047e3a",
+    "chapter-005": "146102f7854a995e",
+    "chapter-006": "f12ab4c851da6e0d",
+    "chapter-007": "222eaf909aa8df54"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/prapancha_mithyatva_anumana_khandana",
+   "items": 16
+  },
+  "nakhastuti-kandukastuti-more": {
+   "modified_gmt": "2026-08-30T15:00:54",
+   "chunk_hashes": {
+    "chapter-001": "2dfc3a3bca196487",
+    "chapter-002": "b1dfff7af9d2b7ff",
+    "chapter-003": "44f1f5cf4204e963",
+    "chapter-004": "fd96f6827c2647e9",
+    "chapter-005": "dd26d2463d7465b6"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/stotra_granthas/nakhastuti_kandukastuti_more",
+   "items": 31
+  },
+  "shatprashna-bhashya": {
+   "modified_gmt": "2026-08-30T15:02:26",
+   "chunk_hashes": {
+    "chapter-001": "4770d460e2f8491a",
+    "chapter-002": "13ffe3ad252fbf54",
+    "chapter-003": "a409abe91f84ebeb",
+    "chapter-004": "e6632d9f510c5cec",
+    "chapter-005": "133b3f0fe0a3ad90",
+    "chapter-006": "fb70cee0ae8a2463"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/shatprashna_bhashya",
+   "items": 106
+  },
+  "sadacharasmriti": {
+   "modified_gmt": "2026-08-30T15:03:49",
+   "chunk_hashes": {
+    "chapter-001": "25d8513db7391d39",
+    "chapter-002": "6f13946589ec96db",
+    "chapter-003": "cb7259ae05b79f4d",
+    "chapter-004": "6c03b7e6694deb5a",
+    "chapter-005": "a381535e5b616081"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/sadacharasmriti",
+   "items": 40
+  },
+  "talavakara-bhashya": {
+   "modified_gmt": "2026-08-30T15:07:48",
+   "chunk_hashes": {
+    "chapter-001": "1ab704736a87013b",
+    "chapter-002": "d1d41bf2c17d8b51",
+    "chapter-003": "b1fd63b5b55e4648",
+    "chapter-004": "4c0f7dc6f07f4234"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/talavakara_bhashya",
+   "items": 70
+  },
+  "tattvasankhyana": {
+   "modified_gmt": "2026-08-30T12:15:11",
+   "chunk_hashes": {
+    "chapter-001": "68ed32c19acf16bf",
+    "chapter-002": "3184ff1c7684444e",
+    "chapter-003": "83ece9236e438d66",
+    "chapter-004": "e8eaea066eca9adc",
+    "chapter-005": "221d30ea582139d7",
+    "chapter-006": "3dc647dd8a5e2326",
+    "chapter-007": "0dcd245d0cfdef65",
+    "chapter-008": "53af0378184ca39a"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvasankhyana",
+   "items": 21
+  },
+  "tattvodyota": {
+   "modified_gmt": "2026-08-30T11:20:08",
+   "chunk_hashes": {
+    "chapter-001": "17256e76fcc6cc99",
+    "chapter-002": "507813720def447e",
+    "chapter-003": "f3a4efbfb2f5de35",
+    "chapter-004": "01c4f853bcb1b3db",
+    "chapter-005": "4a1903196ee7695e",
+    "chapter-006": "84072a224c1b4daa",
+    "chapter-007": "e26346745e49cdb6",
+    "chapter-008": "1652eef630551181",
+    "chapter-009": "f1db678e954710d9",
+    "chapter-010": "00d70a38a0919d13",
+    "chapter-011": "2016744c2f3498d8",
+    "chapter-012": "42c4011200070571",
+    "chapter-013": "1ab1f2aef5b70d95",
+    "chapter-014": "04ce7ae4f5125b47",
+    "chapter-015": "71d1322632941471",
+    "chapter-016": "1e74c0eb8172a6b0",
+    "chapter-017": "077eda5a7b6b0cb1"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvodyota",
+   "items": 110
+  },
+  "tattvaviveka": {
+   "modified_gmt": "2026-08-30T11:13:10",
+   "chunk_hashes": {
+    "chapter-001": "d275293bbe4b8648",
+    "chapter-002": "b229b711269c4064",
+    "chapter-003": "f7fe71910b3b9f00"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvaviveka",
+   "items": 13
+  },
+  "upadhi-khandhana": {
+   "modified_gmt": "2026-08-30T11:08:29",
+   "chunk_hashes": {
+    "inline": "91c08adb5c04c119"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/upadhi_khandhana",
+   "items": 30
+  },
+  "yamaka-bharata": {
+   "modified_gmt": "2026-08-30T10:46:53",
+   "chunk_hashes": {
+    "chapter-001": "6bef7a82953b7381",
+    "chapter-002": "c63a9548b2312859",
+    "chapter-003": "8f149f8232c379e9",
+    "chapter-004": "2fe37eb163847a12",
+    "chapter-005": "5e06210a76ea2efd",
+    "chapter-006": "ac30a7d7737f7a5c",
+    "chapter-007": "235b7ada1d6b7251"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/itihasa_prasthana/yamaka_bharata",
+   "items": 106
+  },
+  "yati-pranava-kalpa": {
+   "modified_gmt": "2026-08-30T10:30:19",
+   "chunk_hashes": {
+    "inline": "da36121ca8d508fa"
+   },
+   "work_dir": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/yati_pranava_kalpa",
+   "items": 34
+  },
+  "hello-world": {
+   "modified_gmt": "2025-12-23T05:25:42",
+   "chunk_hashes": {},
+   "work_dir": null,
+   "items": 0,
+   "note": "no book content"
+  }
+ }
+}

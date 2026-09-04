@@ -1,0 +1,90 @@
+{
+ "post_id": 1099,
+ "slug": "%e0%a4%9b%e0%a4%be%e0%a4%a8%e0%a5%8d%e0%a4%a6%e0%a5%8b%e0%a4%97%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%aa%e0%a4%a8%e0%a4%bf%e0%a4%b7%e0%a4%a6%e0%a5%8d%e0%a4%ad%e0%a4%be%e0%a4%b7%e0%a5%8d%e0%a4%af%e0%a4%ae",
+ "title": "छान्दोग्योपनिषद्भाष्यम्",
+ "link": "https://setutila.in/%e0%a4%9b%e0%a4%be%e0%a4%a8%e0%a5%8d%e0%a4%a6%e0%a5%8b%e0%a4%97%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%aa%e0%a4%a8%e0%a4%bf%e0%a4%b7%e0%a4%a6%e0%a5%8d%e0%a4%ad%e0%a4%be%e0%a4%b7%e0%a5%8d%e0%a4%af%e0%a4%ae/",
+ "modified_gmt": "2026-08-30T15:37:11",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-001.chunk.html",
+   "anchor": "0a57b23e-4d2f-4880-8aa3-80eba5ffc064",
+   "blocks": 65,
+   "pathantara_entries": 29,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-002.chunk.html",
+   "anchor": "9fad608e-0d09-4b22-a581-0668c9689264",
+   "blocks": 90,
+   "pathantara_entries": 47,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-003.chunk.html",
+   "anchor": "613bcbd9-0134-4986-92b9-5d0d04e0f365",
+   "blocks": 58,
+   "pathantara_entries": 97,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-004.chunk.html",
+   "anchor": "2d3aecb5-db8a-4a9b-966f-acdeabd35ca2",
+   "blocks": 27,
+   "pathantara_entries": 17,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "पञ्चमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-005.chunk.html",
+   "anchor": "f4b0c3e8-09c9-4be6-965a-b37d468db70c",
+   "blocks": 26,
+   "pathantara_entries": 17,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "षष्ठोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-006.chunk.html",
+   "anchor": "115214a2-39aa-4203-b9a2-6b35a38e4f1c",
+   "blocks": 63,
+   "pathantara_entries": 84,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "सप्तमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-007.chunk.html",
+   "anchor": "53f8d31d-68bb-416c-b0c2-fb8d6c83dc7e",
+   "blocks": 35,
+   "pathantara_entries": 38,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "अष्टमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/chandogya_bhashya/chapter-008.chunk.html",
+   "anchor": "d0c1cb22-0a42-4324-a976-215c7e7854d6",
+   "blocks": 30,
+   "pathantara_entries": 61,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/%e0%a4%9b%e0%a4%be%e0%a4%a8%e0%a5%8d%e0%a4%a6%e0%a5%8b%e0%a4%97%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%aa%e0%a4%a8%e0%a4%bf%e0%a4%b7%e0%a4%a6%e0%a5%8d%e0%a4%ad%e0%a4%be%e0%a4%b7%e0%a5%8d%e0%a4%af%e0%a4%ae/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

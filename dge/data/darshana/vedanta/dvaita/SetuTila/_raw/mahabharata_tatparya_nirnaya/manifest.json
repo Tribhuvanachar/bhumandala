@@ -1,0 +1,306 @@
+{
+ "post_id": 1090,
+ "slug": "mahabharata-tatparya-nirnaya",
+ "title": "महाभारततात्पर्यनिर्णयः",
+ "link": "https://setutila.in/mahabharata-tatparya-nirnaya/",
+ "modified_gmt": "2026-08-30T15:27:20",
+ "categories": [
+  "इतिहासप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-001.chunk.html",
+   "anchor": "acf7b94b-c3ea-41f7-b217-0dbc762e3bc2",
+   "blocks": 41,
+   "pathantara_entries": 28,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-002.chunk.html",
+   "anchor": "63009c72-1b7a-408d-8bba-06656d902ef8",
+   "blocks": 25,
+   "pathantara_entries": 58,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-003.chunk.html",
+   "anchor": "69a8263a-c6d4-4c62-bce1-3ced8a66bafc",
+   "blocks": 41,
+   "pathantara_entries": 27,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-004.chunk.html",
+   "anchor": "73f411ce-1f27-413a-8db7-dd69c1c9823e",
+   "blocks": 20,
+   "pathantara_entries": 21,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "पञ्चमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-005.chunk.html",
+   "anchor": "436e0190-ee32-48e8-b577-ee5a504d7f98",
+   "blocks": 31,
+   "pathantara_entries": 20,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "षष्ठोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-006.chunk.html",
+   "anchor": "3a8c8e40-c23d-4656-9385-7bf75d3e2338",
+   "blocks": 24,
+   "pathantara_entries": 20,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "सप्तमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-007.chunk.html",
+   "anchor": "5ff18f97-3aed-4b3a-972a-d140621ed95e",
+   "blocks": 22,
+   "pathantara_entries": 23,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "अष्टमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-008.chunk.html",
+   "anchor": "7bc9a262-901a-4975-ba79-400e1b056418",
+   "blocks": 126,
+   "pathantara_entries": 107,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "नवमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-009.chunk.html",
+   "anchor": "4c94bc11-64aa-4297-91b9-366a3af543f5",
+   "blocks": 52,
+   "pathantara_entries": 40,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "दशमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-010.chunk.html",
+   "anchor": "5c8e5723-818c-4f6d-88c8-08a92a4ad689",
+   "blocks": 25,
+   "pathantara_entries": 44,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "एकादशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-011.chunk.html",
+   "anchor": "8322809d-0961-4055-ba8c-b0dde4f845a6",
+   "blocks": 52,
+   "pathantara_entries": 32,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "द्वादशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-012.chunk.html",
+   "anchor": "d4920e87-c012-4b92-a22a-5ebe68a0b6ee",
+   "blocks": 28,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-013",
+   "title": "त्रयोदशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-013.chunk.html",
+   "anchor": "b6b63e21-5c2b-4478-b3fb-53c76db771ac",
+   "blocks": 31,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-014",
+   "title": "चतुर्दशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-014.chunk.html",
+   "anchor": "783c492f-0d63-49a1-a3ed-88717eca7ed0",
+   "blocks": 15,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-015",
+   "title": "पञ्चदशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-015.chunk.html",
+   "anchor": "e213bde4-5181-475a-8447-affa482619ba",
+   "blocks": 13,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-016",
+   "title": "षोडशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-016.chunk.html",
+   "anchor": "a86e58e6-fb43-4fa5-a53e-788c733fd9ef",
+   "blocks": 8,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-017",
+   "title": "सप्तदशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-017.chunk.html",
+   "anchor": "ee138679-02a2-4b83-abf6-5278103b2496",
+   "blocks": 15,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-018",
+   "title": "अष्टादशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-018.chunk.html",
+   "anchor": "c1587744-93d6-4a55-b008-b4f1853c9c95",
+   "blocks": 24,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-019",
+   "title": "एकोनविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-019.chunk.html",
+   "anchor": "1eaa0459-1eeb-44b1-aa08-967e07bc8dfc",
+   "blocks": 27,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-020",
+   "title": "विंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-020.chunk.html",
+   "anchor": "087c1a1e-f0f6-4491-9057-db89199a36de",
+   "blocks": 253,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-021",
+   "title": "एकविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-021.chunk.html",
+   "anchor": "ac571d75-4cd8-4db8-b631-9bb56fec07e6",
+   "blocks": 53,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-022",
+   "title": "द्वाविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-022.chunk.html",
+   "anchor": "446df0bc-9956-40fd-86ca-d3e2fbb7c474",
+   "blocks": 63,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-023",
+   "title": "त्रयोविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-023.chunk.html",
+   "anchor": "e1262c35-0536-46f2-82f6-20420cd1414b",
+   "blocks": 15,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-024",
+   "title": "चतुर्विंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-024.chunk.html",
+   "anchor": "baf928dd-ff5c-41dd-b234-8586fb14de6e",
+   "blocks": 24,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-025",
+   "title": "पञ्चविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-025.chunk.html",
+   "anchor": "3a96567e-c127-4bc4-acd2-12f5d05b44de",
+   "blocks": 54,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-026",
+   "title": "षड्विंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-026.chunk.html",
+   "anchor": "3605e062-423c-4048-bfba-06f066ad1556",
+   "blocks": 86,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-027",
+   "title": "सप्तविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-027.chunk.html",
+   "anchor": "847d6ee2-2784-4fc9-b7f8-2a11e3bf81e2",
+   "blocks": 53,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-028",
+   "title": "अष्टाविंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-028.chunk.html",
+   "anchor": "30ed3543-4307-4b37-a0f3-3899514860de",
+   "blocks": 63,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-029",
+   "title": "एकोनत्रिंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-029.chunk.html",
+   "anchor": "b56bfb32-3bd4-4da1-9505-5b9cd5001beb",
+   "blocks": 8,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-030",
+   "title": "त्रिंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-030.chunk.html",
+   "anchor": "98dc2ffd-925c-4965-95ca-6e6cf20b8628",
+   "blocks": 34,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-031",
+   "title": "एकत्रिंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-031.chunk.html",
+   "anchor": "162db118-c1f6-473e-90a7-3079c4cd4ea9",
+   "blocks": 76,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-032",
+   "title": "द्वात्रिंशोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/mbtn/chapter-032.chunk.html",
+   "anchor": "bd43dfbf-3097-426b-8ccf-c512751a5f7c",
+   "blocks": 54,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/mahabharata-tatparya-nirnaya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

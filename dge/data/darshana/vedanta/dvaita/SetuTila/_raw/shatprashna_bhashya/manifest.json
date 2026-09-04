@@ -1,0 +1,72 @@
+{
+ "post_id": 30,
+ "slug": "shatprashna-bhashya",
+ "title": "षट्प्रश्नोपनिषद्भाष्यम्‌",
+ "link": "https://setutila.in/shatprashna-bhashya/",
+ "modified_gmt": "2026-08-30T15:02:26",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/shatprashna_bhashya/chapter-001.chunk.html",
+   "anchor": "d9e2378b-b299-4a7c-9b99-7abab5152287",
+   "blocks": 22,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/shatprashna_bhashya/chapter-002.chunk.html",
+   "anchor": "a5b85403-03a0-4969-a613-cc0c02fc1177",
+   "blocks": 17,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/shatprashna_bhashya/chapter-003.chunk.html",
+   "anchor": "f9844b06-b66d-4ff8-b9d0-b7178b3f9493",
+   "blocks": 13,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/shatprashna_bhashya/chapter-004.chunk.html",
+   "anchor": "d9a18338-6ac4-4e88-b369-d8c132d6bdcb",
+   "blocks": 16,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "पञ्चमः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/shatprashna_bhashya/chapter-005.chunk.html",
+   "anchor": "f4ecf3f8-d30c-4e6c-89e0-72d588657ca2",
+   "blocks": 9,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "षष्ठः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/shatprashna_bhashya/chapter-006.chunk.html",
+   "anchor": "63fcd685-cda0-4181-a939-b5c21e40b06b",
+   "blocks": 29,
+   "pathantara_entries": 8,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/shatprashna-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

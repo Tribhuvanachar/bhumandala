@@ -1,0 +1,81 @@
+{
+ "post_id": 46,
+ "slug": "katha-lakshana",
+ "title": "कथालक्षणम्",
+ "link": "https://setutila.in/katha-lakshana/",
+ "modified_gmt": "2026-08-30T14:49:17",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "देवतानमस्कारपूर्वकं विवक्षितनिर्देशः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-001.chunk.html",
+   "anchor": "17ef0324-1af8-4790-b658-88beda7ed00a",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "कथासामान्यलक्षणम्, तद्विभागश्च",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-002.chunk.html",
+   "anchor": "af347ca8-0e64-4708-a931-79ec91b3a735",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "वादादीनां लक्षणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-003.chunk.html",
+   "anchor": "c866986a-e0d3-4248-8ac4-70c30e3f291f",
+   "blocks": 12,
+   "pathantara_entries": 20,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "प्राश्निकविचारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-004.chunk.html",
+   "anchor": "8df4e98c-3e7c-4823-a2bc-228f6369855b",
+   "blocks": 5,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "वादादीनां प्रवृत्तिप्रकारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-005.chunk.html",
+   "anchor": "0dd7dc16-f724-4eb7-b5c3-3555b20c6062",
+   "blocks": 11,
+   "pathantara_entries": 3,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "वादादिषु पराजयादिविचारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-006.chunk.html",
+   "anchor": "cbc23087-af47-415e-a35a-b61c6ea2f27a",
+   "blocks": 8,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/katha_lakshana/chapter-007.chunk.html",
+   "anchor": "3c2c6c1a-597c-4932-99a6-c94687595986",
+   "blocks": 5,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/katha-lakshana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

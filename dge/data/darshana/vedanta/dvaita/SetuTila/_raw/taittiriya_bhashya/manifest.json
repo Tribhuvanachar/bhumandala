@@ -1,0 +1,45 @@
+{
+ "post_id": 545,
+ "slug": "taittiriya-bhashya",
+ "title": "तैत्तिरीयोपनिषद्भाष्यम्‌",
+ "link": "https://setutila.in/taittiriya-bhashya/",
+ "modified_gmt": "2026-08-30T13:07:44",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "शिक्षावल्ली",
+   "file": "/wp-content/themes/twentytwentyfour/texts/taittiriya_bhashya/chapter-001.chunk.html",
+   "anchor": "80e076f8-4378-400b-b3cd-18d639466468",
+   "blocks": 53,
+   "pathantara_entries": 12,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "ब्रह्मवल्ली",
+   "file": "/wp-content/themes/twentytwentyfour/texts/taittiriya_bhashya/chapter-002.chunk.html",
+   "anchor": "b8390749-7b12-4f50-9f44-bc35028f8452",
+   "blocks": 30,
+   "pathantara_entries": 39,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "भृगुवल्ली",
+   "file": "/wp-content/themes/twentytwentyfour/texts/taittiriya_bhashya/chapter-003.chunk.html",
+   "anchor": "bc805f93-f1a7-464c-92ad-86196f1d04f1",
+   "blocks": 28,
+   "pathantara_entries": 17,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/taittiriya-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

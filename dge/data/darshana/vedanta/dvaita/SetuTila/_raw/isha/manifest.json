@@ -1,0 +1,27 @@
+{
+ "post_id": 316,
+ "slug": "isha",
+ "title": "ईशवास्योपनिषत्",
+ "link": "https://setutila.in/isha/",
+ "modified_gmt": "2026-03-26T10:20:31",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "inline",
+   "title": "ईशवास्योपनिषत्",
+   "file": null,
+   "anchor": null,
+   "blocks": 18,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/isha/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

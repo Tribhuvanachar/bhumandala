@@ -1,0 +1,81 @@
+{
+ "post_id": 13,
+ "slug": "yamaka-bharata",
+ "title": "यमकभारतम्",
+ "link": "https://setutila.in/yamaka-bharata/",
+ "modified_gmt": "2026-08-30T10:46:53",
+ "categories": [
+  "इतिहासप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "मङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-001.chunk.html",
+   "anchor": "0fba7b77-2d35-46da-a185-2ad8efd3e5f6",
+   "blocks": 2,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "उपोद्घातः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-002.chunk.html",
+   "anchor": "de71ff95-bd08-446d-99b4-56a0d69b6027",
+   "blocks": 4,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "श्रीकृष्णकथा प्रद्युम्नादिप्रादुर्भावपर्यन्ता [हरिवंशनिर्णयः]",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-003.chunk.html",
+   "anchor": "941cc163-6d1e-40ea-95b5-25364e760667",
+   "blocks": 26,
+   "pathantara_entries": 13,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "भारतकथानिर्णयः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-004.chunk.html",
+   "anchor": "c2fc735d-8670-44a4-84e2-54e508ca1256",
+   "blocks": 52,
+   "pathantara_entries": 22,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "अन्यभगवद्रूपाणां स्तुतिः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-005.chunk.html",
+   "anchor": "3294dc76-24c9-4f9a-bb1d-f284c7902446",
+   "blocks": 15,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "भगवतः सर्ववर्णप्रतिपाद्यत्वसूचनम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-006.chunk.html",
+   "anchor": "ec654772-c144-4a68-a0b7-1840887dd8d9",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/yamaka_bharata/chapter-007.chunk.html",
+   "anchor": "104d2200-cbc1-4506-8e56-4587643335f3",
+   "blocks": 5,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/yamaka-bharata/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

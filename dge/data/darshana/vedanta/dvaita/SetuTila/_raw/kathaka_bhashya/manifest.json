@@ -1,0 +1,36 @@
+{
+ "post_id": 364,
+ "slug": "kathaka-bhashya",
+ "title": "काठकोपनिषद्भाष्यम्‌",
+ "link": "https://setutila.in/kathaka-bhashya/",
+ "modified_gmt": "2026-08-30T13:11:16",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kathaka_bhashya/chapter-001.chunk.html",
+   "anchor": "41c56ec3-fb2b-4ef0-9923-46cb7ed8d710",
+   "blocks": 123,
+   "pathantara_entries": 27,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kathaka_bhashya/chapter-002.chunk.html",
+   "anchor": "afc2948b-5dd2-4b78-9aec-47945cb492ca",
+   "blocks": 92,
+   "pathantara_entries": 49,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/kathaka-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

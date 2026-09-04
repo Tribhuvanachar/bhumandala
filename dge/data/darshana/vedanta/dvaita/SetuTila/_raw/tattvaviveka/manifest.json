@@ -1,0 +1,45 @@
+{
+ "post_id": 17,
+ "slug": "tattvaviveka",
+ "title": "तत्त्वविवेकः",
+ "link": "https://setutila.in/tattvaviveka/",
+ "modified_gmt": "2026-08-30T11:13:10",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रमेयविवेकः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_viveka/chapter-001.chunk.html",
+   "anchor": "121bb200-6c2d-4964-8b37-ebf7abbd978c",
+   "blocks": 9,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "गुणादिविवेकः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_viveka/chapter-002.chunk.html",
+   "anchor": "4cd1a829-d433-47d0-9527-d250db435f9c",
+   "blocks": 2,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_viveka/chapter-003.chunk.html",
+   "anchor": "b51ac388-ec04-4f72-913b-a728a46ab5c5",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/tattvaviveka/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

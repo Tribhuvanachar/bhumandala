@@ -1,0 +1,54 @@
+{
+ "post_id": 312,
+ "slug": "sutra",
+ "title": "ब्रह्मसूत्राणि",
+ "link": "https://setutila.in/sutra/",
+ "modified_gmt": "2026-08-30T13:24:03",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "समन्वयाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra/chapter-001.chunk.html",
+   "anchor": "2111aef4-8028-4785-a8bf-a5570cb6f6e1",
+   "blocks": 180,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "अविरोधाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra/chapter-002.chunk.html",
+   "anchor": "1a91586b-e43c-43cf-b247-64aeaddfc7b8",
+   "blocks": 219,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "साधनाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra/chapter-003.chunk.html",
+   "anchor": "181585df-024d-4301-9b17-c550700230f3",
+   "blocks": 288,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "फलाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra/chapter-004.chunk.html",
+   "anchor": "6698fca6-5acf-4dc8-bc5c-22c802f74066",
+   "blocks": 120,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/sutra/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

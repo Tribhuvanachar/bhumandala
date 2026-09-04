@@ -1,0 +1,63 @@
+{
+ "post_id": 32,
+ "slug": "nakhastuti-kandukastuti-more",
+ "title": "नखस्तुतिः, कन्दुकस्तुतिः इत्यादयः",
+ "link": "https://setutila.in/nakhastuti-kandukastuti-more/",
+ "modified_gmt": "2026-08-30T15:00:54",
+ "categories": [
+  "स्तोत्रग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "नरसिंहनखस्तोत्रम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/parishishta/chapter-001.chunk.html",
+   "anchor": "25bf4a5b-3308-4847-b191-efbbb215ff67",
+   "blocks": 3,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "कन्दुकस्तुतिः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/parishishta/chapter-002.chunk.html",
+   "anchor": "391d3bb0-6ece-4048-ba46-f0b92196d7dc",
+   "blocks": 2,
+   "pathantara_entries": 3,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "स्तोत्रमेकम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/parishishta/chapter-003.chunk.html",
+   "anchor": "e0da64f7-73a4-45bd-99e3-3c25d34625ed",
+   "blocks": 16,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "पद्यानि कानिचित्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/parishishta/chapter-004.chunk.html",
+   "anchor": "cf139848-0964-4e62-840c-bc0c2475f5bb",
+   "blocks": 8,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "वाक्यमेकम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/parishishta/chapter-005.chunk.html",
+   "anchor": "106c006e-4d45-421c-bdcc-f3991fa7ceae",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/nakhastuti-kandukastuti-more/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

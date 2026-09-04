@@ -1,0 +1,54 @@
+{
+ "post_id": 1084,
+ "slug": "anuvyakhyana",
+ "title": "ब्रह्मसूत्रानुव्याख्यानम्",
+ "link": "https://setutila.in/anuvyakhyana/",
+ "modified_gmt": "2026-08-30T15:19:32",
+ "categories": [
+  "सूत्रप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "समन्वयाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/anu_vyakhyana/chapter-001.chunk.html",
+   "anchor": "0c1f97eb-a054-4f49-8d00-cc9fc76aede9",
+   "blocks": 152,
+   "pathantara_entries": 94,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/anu_vyakhyana/chapter-002.chunk.html",
+   "anchor": "e51f769f-b58e-4b3c-ba0f-11da4fc0efb9",
+   "blocks": 133,
+   "pathantara_entries": 149,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/anu_vyakhyana/chapter-003.chunk.html",
+   "anchor": "7fe67dd1-3b48-444c-99dd-f26ddf6e8155",
+   "blocks": 158,
+   "pathantara_entries": 171,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/anu_vyakhyana/chapter-004.chunk.html",
+   "anchor": "29c4a2c5-9a67-448c-8925-a98fb046b6eb",
+   "blocks": 82,
+   "pathantara_entries": 58,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/anuvyakhyana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

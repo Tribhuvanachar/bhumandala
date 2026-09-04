@@ -4245,7 +4245,74 @@
      "_visibility_note": "Not linked in the Library nav for a normal reader, excluded from global search results, and not rendered without an admin unlock. This is a UI convenience, not real access control -- dge/data/ files are public on GitHub Pages regardless (see admin-gate.js's own documented caveat)."
     },
     "SetuTila": {
-     "_readme": "Placeholder for a second Sarvamula edition, not yet added."
+     "_readme": "Setu Tila edition of the Sarvamula (setutila.in), imported by tools/setutila/import_setutila.py with block UUIDs + pathantara variant readings preserved; works registered hidden in library.json pending review.",
+     "achara_granthas": {
+      "jayanti_kalpa": {},
+      "krishnamruta_maharnava": {},
+      "nyasa_paddhati": {},
+      "sadacharasmriti": {},
+      "tantrasara": {},
+      "yati_pranava_kalpa": {}
+     },
+     "dasha_prakarana_granthas": {
+      "karma_nirnaya": {},
+      "katha_lakshana": {},
+      "mayavada_khandana": {},
+      "pramana_lakshana": {},
+      "prapancha_mithyatva_anumana_khandana": {},
+      "tattvasankhyana": {},
+      "tattvaviveka": {},
+      "tattvodyota": {},
+      "upadhi_khandhana": {},
+      "vishnu_tattva_nirnaya": {}
+     },
+     "gita_prasthana": {
+      "gita_bhashya": {},
+      "gita_tatparya": {}
+     },
+     "itihasa_prasthana": {
+      "mahabharata_tatparya_nirnaya": {},
+      "yamaka_bharata": {}
+     },
+     "mula_granthas": {
+      "atharvana": {},
+      "gita": {},
+      "isha": {},
+      "kathaka": {},
+      "manduka": {},
+      "prashna": {},
+      "sutra": {},
+      "taittiriya": {},
+      "talavakara": {}
+     },
+     "purana_prasthana": {
+      "bhagavata_tatparya_nirnaya": {}
+     },
+     "shruti_prasthana": {
+      "rg_bhashya": {}
+     },
+     "stotra_granthas": {
+      "dvadasha_stotra": {},
+      "nakhastuti_kandukastuti_more": {}
+     },
+     "sutra_prasthana": {
+      "anu_bhashya": {},
+      "anuvyakhyana": {},
+      "brahmasutra_bhashya": {},
+      "nyaya_vivarana": {}
+     },
+     "upanishat_prasthana": {
+      "aitareya_bhashya": {},
+      "atharvana_bhashya": {},
+      "brihad_bhashya": {},
+      "chhaandogyopnishdbhaashym": {},
+      "ishavasya_bhashya": {},
+      "kathaka_bhashya": {},
+      "manduka_bhashya": {},
+      "shatprashna_bhashya": {},
+      "taittiriya_bhashya": {},
+      "talavakara_bhashya": {}
+     }
     }
    },
    "advaita": {

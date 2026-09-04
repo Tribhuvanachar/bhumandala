@@ -1,0 +1,90 @@
+{
+ "post_id": 22,
+ "slug": "tattvasankhyana",
+ "title": "तत्त्वसङ्ख्यानम्",
+ "link": "https://setutila.in/tattvasankhyana/",
+ "modified_gmt": "2026-08-30T12:15:11",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "तत्त्वस्य सामान्यविभागोद्देशौ",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-001.chunk.html",
+   "anchor": "26db02b5-2452-4970-9377-b59d5198f840",
+   "blocks": 3,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "स्वतन्त्रतत्त्वनिर्देशः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-002.chunk.html",
+   "anchor": "827be43f-14c5-43c5-ba99-18154511a5b7",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "अस्वतन्त्रतत्त्वविभागनिर्देशौ",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-003.chunk.html",
+   "anchor": "caa6d0a3-32aa-4add-bee7-5db9e95a4409",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "अभावविभागनिर्देशौ",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-004.chunk.html",
+   "anchor": "6d88b962-8c70-4f0f-b0b0-5cd275a73db0",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "भावविभागनिर्देशौ",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-005.chunk.html",
+   "anchor": "43bb9cf0-da13-4b50-b5c6-31c8a6f8f678",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "चेतनविभागादि",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-006.chunk.html",
+   "anchor": "62dc963b-cc4c-4936-9de8-54a0808741d8",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "अचेतनविभागादि",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-007.chunk.html",
+   "anchor": "b4f595e6-7226-4fd2-97c6-256f5b35288b",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "स्वतन्त्रास्वतन्त्रसम्बन्धप्रदर्शनपूर्वक उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattva_sankhyana/chapter-008.chunk.html",
+   "anchor": "db0cc121-e84f-4243-b55f-8f12392de102",
+   "blocks": 5,
+   "pathantara_entries": 24,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/tattvasankhyana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "post_id": 318,
+ "slug": "talavakara",
+ "title": "तलवकारोपनिषत्",
+ "link": "https://setutila.in/talavakara/",
+ "modified_gmt": "2026-08-30T13:21:07",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara/chapter-001.chunk.html",
+   "anchor": "31d86e6e-ec8d-4164-a2da-ae7fc367e981",
+   "blocks": 13,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara/chapter-002.chunk.html",
+   "anchor": "14aa3b67-0ba5-44b1-8c9a-0680acdcf57e",
+   "blocks": 7,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara/chapter-003.chunk.html",
+   "anchor": "461808cb-82d1-42b8-8f5c-6886fd4c343a",
+   "blocks": 14,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara/chapter-004.chunk.html",
+   "anchor": "87c476cf-05e8-4920-9b8e-cd89578105b2",
+   "blocks": 12,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/talavakara/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

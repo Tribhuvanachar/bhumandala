@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+
+<meta charset="utf-8"/>
+<link href="styles.css" rel="stylesheet"/>
+<!-- Floating TOC Toggle Button -->
+<button aria-label="Show Table of Contents" id="toc-float-toggle">☰</button>
+<!-- TOC container -->
+<div class="toc-right minimized" id="toc">
+<button aria-label="Hide Table of Contents" id="toc-toggle">−</button>
+<div id="toc-content"><strong>विषयानुक्रमणिका</strong><ul><ul><li><a href="#heading-0">1. नित्यागण्यगुणालयस्य प्रसादाशंसनम्</a></li><li><a href="#heading-1">2. मायावाद-भास्करमतयोः क्रमेण निराकरणम्</a></li><li><a href="#heading-2">3. उभयोरपि साधारणदोषेण दूषणम्</a></li><li><a href="#heading-3">4. अद्वैतमतेऽधिकार्याद्यभावसमर्थनम्</a></li><li><a href="#heading-4">5. अज्ञानदौर्घट्यस्य भूषणत्वदूषणम्</a></li><li><a href="#heading-5">6. भेदमते विषयादिसद्भावप्रतिपादनम्</a></li><li><a href="#heading-6">7. उपसंहारः</a></li></ul></ul></div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/aksharamukha-v3.js?class=content"></script>
+<script>
+    // Prevent background scroll when touching the TOC on mobile
+    document.querySelector('.toc-right').addEventListener('touchmove', function(e) {
+        e.stopPropagation();
+    }, { passive: false });
+
+    // Handle TOC Interactivity
+    document.addEventListener("DOMContentLoaded", () => {
+        const toc = document.getElementById('toc');
+        const floatToggle = document.getElementById('toc-float-toggle');
+        const mainToggle = document.getElementById('toc-toggle');
+
+        if (floatToggle && toc) {
+            floatToggle.addEventListener('click', () => toc.classList.toggle('minimized'));
+        }
+        if (mainToggle && toc) {
+            mainToggle.addEventListener('click', () => toc.classList.toggle('minimized'));
+        }
+
+        const toggleBtns = document.querySelectorAll('.toc-toggle-btn');
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const siblingUl = e.target.parentElement.querySelector('ul');
+                if (siblingUl) {
+                    const isHidden = siblingUl.style.display === 'none';
+                    siblingUl.style.display = isHidden ? 'block' : 'none';
+                    e.target.textContent = isHidden ? '−' : '+';
+                }
+            });
+        });
+    });
+    </script>
+<div class="content">
+<div class="Heading1 block-container" id="heading-0"><span class="heading-number">1. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("d50884af-9dd2-495a-bede-88b148815e42")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "d50884af-9dd2-495a-bede-88b148815e42")' style="display:none;" title="Select for LaTeX">+</span></div><span id="d50884af-9dd2-495a-bede-88b148815e42">नित्यागण्यगुणालयस्य प्रसादाशंसनम्</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("06da8d97-1ead-4697-afbd-ca94b160865b")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "06da8d97-1ead-4697-afbd-ca94b160865b")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="06da8d97-1ead-4697-afbd-ca94b160865b">ॐ॥ नारायणोऽगण्यगुणनित्यैकनिलयाकृतिः।</span><span class="padya" id="d8297bc9-1d68-4567-8dd5-4ba3f5742b8c">अशेषदोषरहितः प्रीयतां</span><span class="inline" id="3de0a415-9a0e-4cdd-8c83-b0de0464fdfe">कमलालयः<span class="pathantara" data-note="“कमलालयः” - इति कृ पाठः, “कमळालयः”- इति गो पाठः"><a class="pathantara-ref" href="#note-pathantara-1" id="ref-pathantara-1" style="margin-left: 2px;">[1]</a></span></span><span class="inline" id="0380be51-7a92-41a3-b1a0-454e43667953">॥ १॥</span>
+</div>
+<div class="Heading1 block-container" id="heading-1"><span class="heading-number">2. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("60853f58-2c97-4b37-9185-6450d87b39d4")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "60853f58-2c97-4b37-9185-6450d87b39d4")' style="display:none;" title="Select for LaTeX">+</span></div><span id="60853f58-2c97-4b37-9185-6450d87b39d4">मायावाद-भास्करमतयोः क्रमेण निराकरणम्</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("9932f4a9-c06c-4a00-8092-89d2026dd966")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "9932f4a9-c06c-4a00-8092-89d2026dd966")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="9932f4a9-c06c-4a00-8092-89d2026dd966">अज्ञताऽखिलसंवेत्तुर्घटते न कुतश्चन।</span><span class="padya" id="12b4fac0-0800-436f-9300-ce39b8c50f50">उपाधिभेदाद् घटत इति चेत् स स्वभावतः॥ २॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("9ef29020-d2c6-49bf-999b-ae6baf6fb520")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "9ef29020-d2c6-49bf-999b-ae6baf6fb520")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="9ef29020-d2c6-49bf-999b-ae6baf6fb520">अज्ञानतो वा द्वैतस्य सत्यता स्वत एव चेत्।</span><span class="padya" id="81b95f87-6bf0-4f2a-89ee-9f622c41780b">अनवस्थितिरज्ञानहेतौ वाऽन्योन्यसिद्धिता॥ ३॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("a45cb238-7de8-4427-a686-21abbc528d82")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "a45cb238-7de8-4427-a686-21abbc528d82")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="a45cb238-7de8-4427-a686-21abbc528d82">चक्रकापत्तिरथवा भेदश्चोपाधितः कुतः।</span><span class="padya" id="10c36965-0a50-4671-b98b-8b52fe3afbd5">विद्यमानस्य भेदस्य ज्ञापको नैव कारकः॥ ४॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("a09f1caf-6431-4557-9bed-4efce869b0f7")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "a09f1caf-6431-4557-9bed-4efce869b0f7")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="a09f1caf-6431-4557-9bed-4efce869b0f7">उपाधिर्दृष्टपूर्वो हि खेऽपि देशान्तरस्य सः।</span><span class="padya" id="2cbddc40-f915-4d7a-9cc0-e3d38a9e3b25">ज्ञापको विद्यमानस्य मूढबुद्धिव्यपेक्षया॥ ५॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("d8a81cd1-5f81-4291-96c8-9bd45bdc72ca")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "d8a81cd1-5f81-4291-96c8-9bd45bdc72ca")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="d8a81cd1-5f81-4291-96c8-9bd45bdc72ca">न चेदुपाधिसम्बन्ध एकदेशेऽथ सर्वगः।</span><span class="padya" id="d291d701-d982-4bfc-9c7f-a2697488c002">एकदेशेऽनवस्था स्यात् सर्वगश्चेन्न भेदकः॥ ६॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("37dc5c6a-b90b-4d52-9923-837d24ee471a")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "37dc5c6a-b90b-4d52-9923-837d24ee471a")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="37dc5c6a-b90b-4d52-9923-837d24ee471a">सुखदुःखादिभोगश्च स्वरूपैक्ये न भेदतः।</span><span class="padya" id="55e532d0-3db7-4c5c-962e-807a079a5d0b">दृश्यो ह्युपाधिभेदेऽपि हस्तपादादिगो यथा॥ ७॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("58e828a8-9a8d-49dc-9993-1d5bcf9c4d16")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "58e828a8-9a8d-49dc-9993-1d5bcf9c4d16")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="58e828a8-9a8d-49dc-9993-1d5bcf9c4d16">नानादेहगभोगानुसन्धानं योगिनो यथा।</span><span class="padya" id="b4739bc3-c595-43a5-a770-7383917398be">न चेद् भोगानुसन्धानं तदिच्छा योगिनः कुतः॥ ८॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("823ee35e-8f97-4ded-9532-77712ab85aa5")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "823ee35e-8f97-4ded-9532-77712ab85aa5")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="823ee35e-8f97-4ded-9532-77712ab85aa5">अनुसन्धानरहितदेहबाहुल्यमन्यथा।</span><span class="padya" id="dad5f425-a5cd-4faf-b04d-e2b34ca05ecb">सिद्धमेव हि तत्पक्षे विशेषो योगिनः कुतः॥ ९॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("88ac3f80-b2fd-45cf-82ca-f605d8d8c55c")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "88ac3f80-b2fd-45cf-82ca-f605d8d8c55c")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="88ac3f80-b2fd-45cf-82ca-f605d8d8c55c">सिद्धौ हि कर्मभेदस्य स्यादुपाधिविभिन्नता।</span><span class="padya" id="f364c0ec-e085-4f2a-afa8-101bdf86235c">तत्सिद्धौ चैव तत्सिद्धिरित्यन्योन्यव्यपाश्रयः॥ १०॥</span>
+</div>
+<div class="Heading1 block-container" id="heading-2"><span class="heading-number">3. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("e203c4fd-b92f-4eab-8d4f-9191ae54c39d")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "e203c4fd-b92f-4eab-8d4f-9191ae54c39d")' style="display:none;" title="Select for LaTeX">+</span></div><span id="e203c4fd-b92f-4eab-8d4f-9191ae54c39d">उभयोरपि साधारणदोषेण दूषणम्</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("57879a84-fe9b-42ec-967c-025fa1bd90e1")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "57879a84-fe9b-42ec-967c-025fa1bd90e1")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="57879a84-fe9b-42ec-967c-025fa1bd90e1">आत्मस्वभावभेदस्य विदोषत्वेन चाखिलः।</span><span class="padya" id="8eef5209-cd75-43a9-bc5b-5a7edf0ff7a8">प्रत्यक्षादिविरोधाच्च दुष्टः पक्षोऽयमञ्जसा॥ ११॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("d6b9ceea-c7ff-4087-b118-296d985657ca")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "d6b9ceea-c7ff-4087-b118-296d985657ca")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="d6b9ceea-c7ff-4087-b118-296d985657ca">चेष्टालिङ्गेन सात्मत्वे परदेहस्य साधिते।</span><span class="padya" id="2e19b691-b93c-46bb-bb6a-412dd43c808f">अन्यत्वं स्वात्मनस्तस्मात् सर्वैरेवानुभूयते॥ १२॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("709e93f5-93eb-4932-8f47-40c44566ea05")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "709e93f5-93eb-4932-8f47-40c44566ea05")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="709e93f5-93eb-4932-8f47-40c44566ea05">अज्ञता चाल्पशक्तित्वं दुःखित्वं स्वल्पकर्तृता।</span><span class="padya" id="59393186-0573-4c6d-8b40-550d299e0f6b">सर्वज्ञतादीशगुणविरुद्धा ह्यनुभूतिगाः॥ १३॥<span class="pathantara" data-note="“सर्वज्ञत्वा---” इति क्वचित्"><a class="pathantara-ref" href="#note-pathantara-2" id="ref-pathantara-2" style="margin-left: 2px;">[2]</a></span></span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("38555ded-8264-46f4-a33c-b12358f596d4")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "38555ded-8264-46f4-a33c-b12358f596d4")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="38555ded-8264-46f4-a33c-b12358f596d4">सार्वज्ञादिगुणा विष्णोः श्रुतिषु प्रतिपादिताः।</span>
+<span class="pramana" data-is-pramana="Yes" data-pramana-info="प्रसिद्धिः" data-source="ऋग्वेदसंहिता"><span class="padya" id="9c5bdcf7-4fb9-4df6-b408-3e2e72eaf6a6">“सत्यः सो अस्य महिमा”</span><span class="inline" id="d436d48b-380c-484f-8cae-dfe9f3150a93">इत्यादिवाक्यान्मृषा नच॥ १४॥</span><span class="kutra">ऋग्वेदसंहिताया ८/३/४</span></span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("fda5a9a0-9eb9-43ff-bced-a815ccb0f567")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "fda5a9a0-9eb9-43ff-bced-a815ccb0f567")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="fda5a9a0-9eb9-43ff-bced-a815ccb0f567">नच वेदोक्तमिथ्यात्वे मानं तन्मानताऽपि न।</span>
+</div>
+<div class="Heading1 block-container" id="heading-3"><span class="heading-number">4. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("e88868b6-0e9f-4e07-b45a-8e5ccb9b0bdb")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "e88868b6-0e9f-4e07-b45a-8e5ccb9b0bdb")' style="display:none;" title="Select for LaTeX">+</span></div><span id="e88868b6-0e9f-4e07-b45a-8e5ccb9b0bdb">अद्वैतमतेऽधिकार्याद्यभावसमर्थनम्</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("0fd2babe-31a2-4897-91a2-7aa47e35c0b1")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "0fd2babe-31a2-4897-91a2-7aa47e35c0b1")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="0fd2babe-31a2-4897-91a2-7aa47e35c0b1">अतोऽज्ञासम्भवादेव नाधिकार्यैक्यवादिनाम्॥ १५॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("b936c180-eaaf-4bf3-971a-4544c58d11d3")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "b936c180-eaaf-4bf3-971a-4544c58d11d3")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="b936c180-eaaf-4bf3-971a-4544c58d11d3">अतो नाज्ञातमिति च विषयो विषयान्तरे।</span><span class="padya" id="dd9de1ae-c5b2-4387-ab13-7b4055d04c3d">अज्ञाभावात् फलं कस्य योगः शशनृशृङ्गयोः॥ १६॥</span>
+</div>
+<div class="Heading1 block-container" id="heading-4"><span class="heading-number">5. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("d08a5ed4-f99e-412e-87bf-826043a0e80c")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "d08a5ed4-f99e-412e-87bf-826043a0e80c")' style="display:none;" title="Select for LaTeX">+</span></div><span id="d08a5ed4-f99e-412e-87bf-826043a0e80c">अज्ञानदौर्घट्यस्य भूषणत्वदूषणम्</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("f7dcd426-ab27-44ca-97d7-f8b476b0fb80")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "f7dcd426-ab27-44ca-97d7-f8b476b0fb80")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="f7dcd426-ab27-44ca-97d7-f8b476b0fb80">दुर्घटत्वं भूषणं चेत् स्यादविद्यात्वमात्मनः।</span><span class="padya" id="ba9d6c7f-89b0-4e7c-bc01-9d546db533f6">अन्धन्तमोऽप्यलङ्कारो नित्यदुःखं शिरोमणिः॥ १७॥</span>
+</div>
+<div class="Heading1 block-container" id="heading-5"><span class="heading-number">6. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("4ad85445-8ebd-4eb7-b5c1-d8d4ea1a03a4")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "4ad85445-8ebd-4eb7-b5c1-d8d4ea1a03a4")' style="display:none;" title="Select for LaTeX">+</span></div><span id="4ad85445-8ebd-4eb7-b5c1-d8d4ea1a03a4">भेदमते विषयादिसद्भावप्रतिपादनम्</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("9628b38a-0071-46d0-9af3-b3b769728a3d")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "9628b38a-0071-46d0-9af3-b3b769728a3d")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="9628b38a-0071-46d0-9af3-b3b769728a3d">अतः</span>
+<span class="pramana" data-is-pramana="Yes" data-pramana-info="प्रसिद्धिः" data-source="ऋग्वेदसंहिता"><span class="inline" id="09c3f30a-05f1-4647-b2c8-2e7955d9d750">“परो मात्रया”</span><span class="inline" id="8185270f-1223-4778-b32f-ad47d8b43939">इतिपूर्वश्रुतिनिदर्शितः।</span><span class="kutra">ऋग्वेदसंहिता ७/९९/१</span></span>
+<span class="pramana" data-is-pramana="Yes" data-pramana-info="प्रसिद्धिः" data-source="आथर्वणोपनिषत्"><span class="padya" id="13004a66-bba7-48d6-8b67-f49c5509c0ea">“अन्यमीशम्”</span><span class="inline" id="3e344db2-df64-40a0-a974-e168fe8ace69">इति श्रुत्या भिन्नजीवदृशं गतः।</span><a class="source" href="/atharvana/#45ad9eaf-9bd8-4b55-89c7-c500d3379d74" rel="noopener noreferrer" target="_blank">🔗</a><span class="kutra">आथर्वणोपनिषत् ३/१/२</span></span>
+<span class="padya" id="6e086f75-5c84-488a-b729-3c8338b7d0af">भिन्नत्वेनात्मसादृश्यदो</span>
+<span class="pramana" data-is-pramana="Yes" data-pramana-info="प्रसिद्धिः" data-source="आथर्वणोपनिषत्"><span class="inline" id="3d9ca604-4445-411f-9510-48278673e663">“यदा”</span><span class="inline" id="78f2db64-2cfb-43c5-813b-2567399e313c">इति श्रुतेः सदा॥ १८॥</span><a class="source" href="/atharvana/#daedcb24-2326-43bd-a79f-2bd853780d1e" rel="noopener noreferrer" target="_blank">🔗</a><span class="kutra">आथर्वणोपनिषत् ३/१/३</span></span>
+</div>
+<div class="Heading1 block-container" id="heading-6"><span class="heading-number">7. </span><span class="heading-text"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("b340a93a-d887-4a34-8bf7-6761eb6417dc")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "b340a93a-d887-4a34-8bf7-6761eb6417dc")' style="display:none;" title="Select for LaTeX">+</span></div><span id="b340a93a-d887-4a34-8bf7-6761eb6417dc">उपसंहारः</span>
+</span></div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("797d23b9-ffde-4780-b4e9-c4240830262b")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "797d23b9-ffde-4780-b4e9-c4240830262b")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="797d23b9-ffde-4780-b4e9-c4240830262b">मायावादतमोव्याप्तमिति तत्त्वदृशा जगत्।</span><span class="padya" id="99ef82b4-e02e-4308-9eaa-f01b777278ec">भातं सर्वज्ञसूर्येण प्रीतये श्रीपतेः सदा॥ १९॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("81585081-10fb-408d-a187-95710ff45a8b")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "81585081-10fb-408d-a187-95710ff45a8b")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="81585081-10fb-408d-a187-95710ff45a8b">नमोऽमन्दनिजानन्दसान्द्रसुन्दरमूर्तये।</span><span class="padya" id="ed53ce1d-9e71-46fa-9f30-285bda4bc9de">इन्दिरापतये नित्यानन्दभोजनदायिने॥ २०॥</span>
+</div>
+<div class="Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("e60b546c-328c-4272-aae8-07144f0ee0fb")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "e60b546c-328c-4272-aae8-07144f0ee0fb")' style="display:none;" title="Select for LaTeX">+</span></div><span class="padya" id="e60b546c-328c-4272-aae8-07144f0ee0fb">-<span class="pathantara" data-note="“-” - इति कृ पाठः, “नास्ति नारायणसमं न भूतं न भविष्यति”- इति गो पाठः"><a class="pathantara-ref" href="#note-pathantara-3" id="ref-pathantara-3" style="margin-left: 2px;">[3]</a></span></span><span class="inline" id="21c05332-8461-4f9e-9076-465167b8e0d6">-<span class="pathantara" data-note="“-” - इति कृ पाठः, “एतेन सत्यवाक्येन सर्वार्थान् साधयाम्यहम्॥”- इति गो पाठः"><a class="pathantara-ref" href="#note-pathantara-4" id="ref-pathantara-4" style="margin-left: 2px;">[4]</a></span></span>
+</div>
+<div class="Colophon_Sarvamula block-container"><div class="block-tools"><span class="bt-copy" onclick='copyBlockLink("9ce8b208-14fd-471a-a143-b6df0253cb67")' title="Copy link to this block">🔗</span><span class="bt-expand" onclick="toggleBlockExpand(this)" title="Expand/Collapse">▼</span><span class="bt-select" onclick='toggleLatexSelect(this, "9ce8b208-14fd-471a-a143-b6df0253cb67")' style="display:none;" title="Select for LaTeX">+</span></div><span id="9ce8b208-14fd-471a-a143-b6df0253cb67">॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमुपाधिखण्डनं [तत्त्वप्रकाशिकापरनामकं] सम्पूर्णम्॥<span class="pathantara" data-note="“॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमुपाधिखण्डनं सम्पूर्णम्” - इति कृ पाठः, “॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमायावाददूषणं समाप्तम्”- इति गो पाठः"><a class="pathantara-ref" href="#note-pathantara-5" id="ref-pathantara-5" style="margin-left: 2px;">[5]</a></span></span>
+</div>
+<div id="footnotes-container"><div class="pathantaras-container"><h3>पाठान्तरविषयकटिप्पण्यः</h3><ol><li id="note-pathantara-1">“कमलालयः” - इति कृ पाठः, “कमळालयः”- इति गो पाठः <a href="#ref-pathantara-1" style="text-decoration:none;">↩</a></li><li id="note-pathantara-2">“सर्वज्ञत्वा---” इति क्वचित् <a href="#ref-pathantara-2" style="text-decoration:none;">↩</a></li><li id="note-pathantara-3">“-” - इति कृ पाठः, “नास्ति नारायणसमं न भूतं न भविष्यति”- इति गो पाठः <a href="#ref-pathantara-3" style="text-decoration:none;">↩</a></li><li id="note-pathantara-4">“-” - इति कृ पाठः, “एतेन सत्यवाक्येन सर्वार्थान् साधयाम्यहम्॥”- इति गो पाठः <a href="#ref-pathantara-4" style="text-decoration:none;">↩</a></li><li id="note-pathantara-5">“॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमुपाधिखण्डनं सम्पूर्णम्” - इति कृ पाठः, “॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमायावाददूषणं समाप्तम्”- इति गो पाठः <a href="#ref-pathantara-5" style="text-decoration:none;">↩</a></li></ol></div></div>
+</div>
+<script>
+const pathantaraData = {"3de0a415-9a0e-4cdd-8c83-b0de0464fdfe": {"setutila": "कमलालयः", "trk_patha": "कमलालयः", "bg_patha": "कमळालयः"}, "e60b546c-328c-4272-aae8-07144f0ee0fb": {"setutila": "-", "trk_patha": "-", "bg_patha": "“नास्ति नारायणसमं न भूतं न भविष्यति।"}, "21c05332-8461-4f9e-9076-465167b8e0d6": {"setutila": "-", "trk_patha": "-", "bg_patha": "एतेन सत्यवाक्येन सर्वार्थान् साधयाम्यहम्॥”"}, "9ce8b208-14fd-471a-a143-b6df0253cb67": {"setutila": "॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमुपाधिखण्डनं [तत्त्वप्रकाशिकापरनामकं] सम्पूर्णम्॥", "trk_patha": "॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमुपाधिखण्डनं सम्पूर्णम्॥", "bg_patha": "॥ इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितमायावाददूषणं समाप्तम्॥"}};
+
+function showPatha(which) {
+    Object.keys(pathantaraData).forEach(function(spanId) {
+        const span = document.getElementById(spanId);
+        if (!span) return;
+        let newText = '';
+        if (which === 'setutila') {
+            newText = pathantaraData[spanId].setutila || '';
+        } else if (which === 'bg') {
+            newText = pathantaraData[spanId].bg_patha || '';
+        } else if (which === 'trk') {
+            newText = pathantaraData[spanId].trk_patha || '';
+        }
+        let target = span.querySelector('.pramana, .pratika');
+        if (target) {
+            let textNode = null;
+            for (let node of target.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    textNode = node;
+                    break;
+                }
+            }
+            if (textNode) {
+                textNode.textContent = newText;
+            } else {
+                target.insertBefore(document.createTextNode(newText), target.firstChild);
+            }
+        } else {
+            let textNode = null;
+            for (let node of span.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    textNode = node;
+                    break;
+                }
+            }
+            if (textNode) {
+                textNode.textContent = newText;
+            } else {
+                span.insertBefore(document.createTextNode(newText), span.firstChild);
+            }
+        }
+    });
+}
+
+function showCitation(which) {
+    document.querySelectorAll('.pramana').forEach(function(span) {
+        let actual = span.getAttribute('data-pramana-actual');
+        if (!actual) return;
+        
+        if (!span._indicatedText) {
+            // Save original indicated text the first time we toggle
+            let textNode = null;
+            for (let node of span.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    textNode = node;
+                    break;
+                }
+            }
+            if (textNode) span._indicatedText = textNode.textContent;
+            else {
+                // If there's an inner pratika span, use that
+                let inner = span.querySelector('.pratika');
+                if (inner && inner.firstChild && inner.firstChild.nodeType === Node.TEXT_NODE) {
+                    span._indicatedText = inner.firstChild.textContent;
+                }
+            }
+        }
+        
+        let newText = which === 'actual' ? actual : (span._indicatedText || '');
+        
+        let textNode = null;
+        for (let node of span.childNodes) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                textNode = node;
+                break;
+            }
+        }
+        if (textNode) textNode.textContent = newText;
+        else {
+            let inner = span.querySelector('.pratika');
+            if (inner && inner.firstChild && inner.firstChild.nodeType === Node.TEXT_NODE) {
+                inner.firstChild.textContent = newText;
+            } else {
+                span.insertBefore(document.createTextNode(newText), span.firstChild);
+            }
+        }
+    });
+}
+
+function convertScript(targetScript) {
+    const aksharamukhaSelect = document.getElementById('aksharamukhaselect');
+    if (aksharamukhaSelect) {
+        aksharamukhaSelect.value = targetScript;
+        setTimeout(() => {
+            if (typeof transliterate === 'function') {
+                transliterate();
+            } else {
+                const changeEvent = new Event('change', { bubbles: true, cancelable: true });
+                const inputEvent = new Event('input', { bubbles: true, cancelable: true });
+                aksharamukhaSelect.dispatchEvent(inputEvent);
+                aksharamukhaSelect.dispatchEvent(changeEvent);
+            }
+        }, 0);
+    }
+}
+
+function copyBlockLink(id) {
+    var url = window.location.origin + window.location.pathname + '#' + id;
+    navigator.clipboard.writeText(url).then(function() {
+        // success
+    }).catch(function(e) {
+        console.error('Failed to copy link: ', e);
+    });
+}
+
+function toggleBlockExpand(btn) {
+    var container = btn.closest('.block-container');
+    if (container) {
+        container.classList.toggle('collapsed');
+    }
+}
+
+function toggleHeadings(showLevel) {
+    const headings = document.querySelectorAll('[class*="Heading"]:not(.Heading0):not(.Heading1)');
+    if (showLevel === 'all') {
+        headings.forEach(el => el.style.display = '');
+    } else if (showLevel === 'main') {
+        headings.forEach(el => el.style.display = 'none');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    toggleHeadings('all');
+    const footer = document.createElement('footer');
+    footer.id = 'footer-controls';
+    footer.className = 'footer-controls';
+    
+    const controlsContainer = document.createElement('div');
+    controlsContainer.className = 'footer-controls-container';
+    
+    const headingsLabel = document.createElement('label');
+    headingsLabel.textContent = 'Headings: ';
+    headingsLabel.className = 'footer-label';
+    
+    const headingsSelect = document.createElement('select');
+    headingsSelect.className = 'footer-dropdown';
+    headingsSelect.innerHTML = `
+        <option value="all">Show all Headings</option>
+        <option value="main">Show Main Headings</option>
+    `;
+    headingsSelect.addEventListener('change', function() { toggleHeadings(this.value); });
+    
+    const pathaLabel = document.createElement('label');
+    pathaLabel.textContent = 'Pāṭha: ';
+    pathaLabel.className = 'footer-label';
+    
+    const pathaSelect = document.createElement('select');
+    pathaSelect.className = 'footer-dropdown';
+    pathaSelect.innerHTML = `
+        <option value="setutila">Setutila</option>
+        <option value="bg">BG</option>
+        <option value="trk">TRK</option>
+    `;
+    pathaSelect.addEventListener('change', function() { showPatha(this.value); });
+    
+    const scriptLabel = document.createElement('label');
+    scriptLabel.textContent = 'Script: ';
+    scriptLabel.className = 'footer-label';
+    
+    const scriptSelect = document.createElement('select');
+    scriptSelect.className = 'footer-dropdown';
+    scriptSelect.innerHTML = `
+        <option value="Devanagari" selected>देवनागरी</option>
+        <option value="Kannada">ಕನ್ನಡ</option>
+        <option value="Telugu">తెలుగు</option>
+        <option value="Tamil">தமிழ்</option>
+        <option value="Malayalam">മലയാളം</option>
+        <option value="Bengali">বাংলা</option>
+        <option value="IAST">IAST</option>
+        <option value="Brahmi">Brahmi</option>
+        <option value="Grantha">𑌙𑍍𑌰𑌨𑍍𑌥</option>
+    `;
+    scriptSelect.addEventListener('change', function() { convertScript(this.value); });
+    
+    const citLabel = document.createElement('label');
+    citLabel.textContent = 'Citation: ';
+    citLabel.className = 'footer-label';
+    
+    const citSelect = document.createElement('select');
+    citSelect.className = 'footer-dropdown';
+    citSelect.innerHTML = `
+        <option value="indicated">Indicated</option>
+        <option value="actual">Actual</option>
+    `;
+    citSelect.addEventListener('change', function() { showCitation(this.value); });
+
+    controlsContainer.appendChild(headingsLabel);
+    controlsContainer.appendChild(headingsSelect);
+    controlsContainer.appendChild(pathaLabel);
+    controlsContainer.appendChild(pathaSelect);
+    controlsContainer.appendChild(scriptLabel);
+    controlsContainer.appendChild(scriptSelect);
+    controlsContainer.appendChild(citLabel);
+    controlsContainer.appendChild(citSelect);
+    
+    footer.appendChild(controlsContainer);
+    document.body.appendChild(footer);
+});
+
+// ── Google Scholar-Style Citations Popover Controller ──────────────────────
+window.SetutilaCitations = (function() {
+    function getModal() {
+        let modal = document.getElementById('st-citations-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'st-citations-modal';
+            modal.className = 'st-citation-modal-overlay';
+            modal.innerHTML = `
+                <div class="st-citation-drawer" role="dialog" aria-modal="true" aria-label="उद्धरणानि (Citations)">
+                    <div class="st-citation-drawer-header">
+                        <div class="st-citation-drawer-title">
+                            <span class="st-cite-header-icon">📜</span>
+                            <span id="st-cite-modal-title">उद्धरणानि (Citations)</span>
+                        </div>
+                        <button type="button" class="st-cite-close-btn" onclick="window.SetutilaCitations.close()" title="Close (Esc)">✕</button>
+                    </div>
+                    <div id="st-cite-modal-body" class="st-citation-drawer-body"></div>
+                    <div class="st-citation-drawer-footer">
+                        <span>Scholar Citations Engine</span>
+                        <kbd>ESC to close</kbd>
+                    </div>
+                </div>
+            `;
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) window.SetutilaCitations.close();
+            });
+            document.body.appendChild(modal);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('st-open')) {
+                    window.SetutilaCitations.close();
+                }
+            });
+        }
+        return modal;
+    }
+
+    function show(badgeEl) {
+        const wrapper = badgeEl.closest('.st-citation-wrapper');
+        if (!wrapper) return;
+        const raw = wrapper.getAttribute('data-citations');
+        if (!raw) return;
+
+        let citations = [];
+        try {
+            citations = JSON.parse(raw);
+        } catch(e) {
+            console.error('Error parsing citations JSON', e);
+            return;
+        }
+
+        const modal = getModal();
+        const body = document.getElementById('st-cite-modal-body');
+        const title = document.getElementById('st-cite-modal-title');
+        if (!body || !title) return;
+
+        const count = citations.length;
+        title.textContent = `उद्धरणानि (Citations in Sarvamūla — ${count} location${count === 1 ? '' : 's'})`;
+
+        let html = '<div class="st-citation-cards-list">';
+        citations.forEach((c) => {
+            const citeText = `${c.citing_work_name || c.citing_sheet}${c.citing_kutra ? ' (' + c.citing_kutra + ')' : ''}: ${c.citing_snippet || ''}`;
+            const safeCiteText = encodeURIComponent(citeText);
+
+            html += `
+                <div class="st-citation-card">
+                    <div class="st-citation-card-header">
+                        <div class="st-citation-badges">
+                            <span class="st-cite-badge-work">${escapeHtml(c.citing_work_name || c.citing_sheet)}</span>
+                            ${c.citing_kutra ? `<span class="st-cite-badge-kutra">स्थानम्: ${escapeHtml(c.citing_kutra)}</span>` : ''}
+                            ${c.citing_source ? `<span class="st-cite-badge-source">स्रोतस्: ${escapeHtml(c.citing_source)}</span>` : ''}
+                        </div>
+                        <button type="button" class="st-cite-copy-btn" data-cite-text="${safeCiteText}" onclick="window.SetutilaCitations.copy(this)" title="Copy academic citation">
+                            📋 Copy
+                        </button>
+                    </div>
+                    ${c.citing_snippet ? `<div class="st-citation-snippet">“${escapeHtml(c.citing_snippet)}”</div>` : ''}
+                    <div class="st-citation-card-footer">
+                        <a href="${escapeHtml(c.url)}" class="st-citation-link-btn" target="_self">
+                            <span>संदर्भे पठ्यताम् (View in Context)</span>
+                            <span class="st-cite-arrow">➔</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+
+        body.innerHTML = html;
+        modal.classList.add('st-open');
+    }
+
+    function close() {
+        const modal = document.getElementById('st-citations-modal');
+        if (modal) modal.classList.remove('st-open');
+    }
+
+    function copy(btnEl) {
+        const text = decodeURIComponent((btnEl && btnEl.getAttribute('data-cite-text')) || '');
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(() => {
+            if (btnEl) {
+                const orig = btnEl.innerHTML;
+                btnEl.innerHTML = '✓ Copied!';
+                setTimeout(() => btnEl.innerHTML = orig, 1500);
+            }
+        });
+    }
+
+    function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, m => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[m]);
+    }
+
+    return { show, close, copy };
+})();
+
+// Global click event delegation for citation badges
+document.addEventListener('click', function(e) {
+    var badge = e.target.closest('.st-citation-badge');
+    if (badge) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.SetutilaCitations) {
+            window.SetutilaCitations.show(badge);
+        }
+    }
+});
+
+function sendHeight() {
+    const height = document.documentElement.scrollHeight;
+    parent.postMessage({ type: "setHeight", height }, "*");
+}
+window.addEventListener("load", sendHeight);
+window.addEventListener("resize", sendHeight);
+setInterval(sendHeight, 500);
+</script>
+

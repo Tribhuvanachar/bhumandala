@@ -85,11 +85,15 @@ def fetch_json(url):
 def sha(s):
     return hashlib.sha256(s.encode("utf-8") if isinstance(s, str) else s).hexdigest()[:16]
 
-TOOLS_RE = re.compile(r"<div class='block-tools'>.*?</div>", re.S)
+TOOLS_RE = re.compile(r"<div class=['\"]block-tools['\"]>.*?</div>", re.S)
 BLOCK_RE = re.compile(
     r"<div class='([A-Za-z0-9_]+) block-container'( data-uuid='([0-9a-f-]+)')?>(.*?)</div>\s*(?=<div class='[A-Za-z0-9_]+ block-container'|\Z)",
     re.S)
-UUID_IN_TOOLS = re.compile(r'copyBlockLink\("([0-9a-f-]+)"\)')
+# a handful of shorter works (upadhi-khandhana, ishavasya-bhashya,
+# yati-pranava-kalpa) skip the chunk-file system entirely and inline the
+# same block-container markup straight in the post body, double-quoted
+BLOCK_START_RE = re.compile(r"<div class=[\"']([A-Za-z0-9_]+) block-container[\"'][^>]*>")
+UUID_IN_TOOLS = re.compile(r'copyBlockLink\((?:"|&quot;)([0-9a-f-]+)(?:"|&quot;)\)')
 TAG_RE = re.compile(r"<[^>]+>")
 
 def parse_blocks(chunk_html):
@@ -104,6 +108,29 @@ def parse_blocks(chunk_html):
         text = html.unescape(TAG_RE.sub(" ", clean))
         text = re.sub(r"\s+", " ", text).strip()
         blocks.append({"cls": cls, "uuid": uuid, "html": clean.strip(), "text": text})
+    return blocks
+
+def parse_blocks_inline(body):
+    """Fallback for posts whose blocks are inlined in the post body itself
+    (no __BOOK_CHUNKS__): slice between consecutive block-container starts.
+    Same block vocabulary, but double-quoted attrs and trailing TOC/scripts."""
+    starts = list(BLOCK_START_RE.finditer(body))
+    blocks = []
+    for i, m in enumerate(starts):
+        end = starts[i + 1].start() if i + 1 < len(starts) else len(body)
+        seg = body[m.end():end]
+        if i + 1 == len(starts):
+            cut = seg.find("<script")
+            if cut >= 0:
+                seg = seg[:cut]
+        # trailing run of </div> = the block's own closer + page wrappers
+        seg = re.sub(r"(\s*</div>)+\s*$", "", seg)
+        um = UUID_IN_TOOLS.search(seg)
+        clean = TOOLS_RE.sub("", seg)
+        text = html.unescape(TAG_RE.sub(" ", clean))
+        text = re.sub(r"\s+", " ", text).strip()
+        blocks.append({"cls": m.group(1), "uuid": um.group(1) if um else None,
+                       "html": clean.strip(), "text": text})
     return blocks
 
 def attribution(url):
@@ -128,6 +155,15 @@ def import_post(post, cats_by_id, state, force, summary):
     body = post["content"]["rendered"]
     m = re.search(r"__BOOK_CHUNKS__\s*=\s*(\[[\s\S]*?\]);", body)
     chunks = json.loads(m.group(1)) if m else []
+    inline = not chunks and BLOCK_START_RE.search(body) is not None
+    if not chunks and not inline:
+        # no chunk manifest AND no inline blocks: not a text post at all
+        # (e.g. WordPress's stock hello-world) — record and write nothing
+        state["posts"][slug] = {"modified_gmt": mod, "chunk_hashes": {},
+                                "work_dir": None, "items": 0,
+                                "note": "no book content"}
+        print(f"  {slug}: no book content, skipped")
+        return
     cat_names = [cats_by_id.get(c, "") for c in post.get("categories", [])]
     cat_dir = next((CAT_DIRS[c] for c in cat_names if c in CAT_DIRS), "misc")
     wslug = slug if re.match(r"^[a-z0-9-]+$", slug) else dev_slug(title)
@@ -136,21 +172,32 @@ def import_post(post, cats_by_id, state, force, summary):
     os.makedirs(wdir, exist_ok=True)
     os.makedirs(raw_dir, exist_ok=True)
 
+    if inline:
+        # the post body itself is the (single) chunk
+        chunks = [{"id": "inline", "title": title, "file": None}]
     items, chunk_meta, chunk_hashes = [], [], {}
+    post_errors = []
     seq = 0
     for ch in chunks:
         cid = ch["id"]
-        # the chunk FILE is authoritative (chunk 0 is also inlined in the
-        # post body, but the file exists for all of them)
-        churl = BASE + ch["file"]
-        try:
-            chtml = fetch(churl)
-        except Exception as e:
-            summary["errors"].append(f"{slug}/{cid}: {e}")
-            continue
-        chunk_hashes[cid] = sha(chtml)
-        with open(os.path.join(raw_dir, os.path.basename(ch["file"])), "w", encoding="utf-8") as f:
-            f.write(chtml)
+        if ch["file"] is None:
+            chtml = body
+            chunk_hashes[cid] = sha(chtml)
+            with open(os.path.join(raw_dir, "inline.body.html"), "w", encoding="utf-8") as f:
+                f.write(chtml)
+        else:
+            # the chunk FILE is authoritative (chunk 0 is also inlined in the
+            # post body, but the file exists for all of them)
+            churl = BASE + ch["file"]
+            try:
+                chtml = fetch(churl)
+            except Exception as e:
+                summary["errors"].append(f"{slug}/{cid}: {e}")
+                post_errors.append(f"{cid}: {e}")
+                continue
+            chunk_hashes[cid] = sha(chtml)
+            with open(os.path.join(raw_dir, os.path.basename(ch["file"])), "w", encoding="utf-8") as f:
+                f.write(chtml)
         pt = {}
         if ch.get("pathantara_file"):
             try:
@@ -159,6 +206,7 @@ def import_post(post, cats_by_id, state, force, summary):
                     json.dump(pt, f, ensure_ascii=False, indent=0)
             except Exception as e:
                 summary["errors"].append(f"{slug}/{cid} pathantara: {e}")
+                post_errors.append(f"{cid} pathantara: {e}")
         com_html = None
         if ch.get("commentary_file"):
             try:
@@ -167,8 +215,9 @@ def import_post(post, cats_by_id, state, force, summary):
                     f.write(com_html)
             except Exception as e:
                 summary["errors"].append(f"{slug}/{cid} commentary: {e}")
+                post_errors.append(f"{cid} commentary: {e}")
 
-        blocks = parse_blocks(chtml)
+        blocks = parse_blocks_inline(chtml) if ch["file"] is None else parse_blocks(chtml)
         sec_title = ch.get("title") or cid
         cur_heads = []
         for b in blocks:
@@ -220,6 +269,11 @@ def import_post(post, cats_by_id, state, force, summary):
 
     state["posts"][slug] = {"modified_gmt": mod, "chunk_hashes": chunk_hashes,
                             "work_dir": wdir, "items": len(items)}
+    if post_errors:
+        # persisted so a later --force / delta run knows what is still
+        # missing upstream (e.g. chunk files the site's own manifest lists
+        # but its server 404s on)
+        state["posts"][slug]["errors"] = post_errors
     summary["imported"] += 1
     summary["items"] += len(items)
     print(f"  {slug}: {len(chunks)} chunks, {len(items)} items -> {wdir}")

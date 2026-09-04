@@ -1,0 +1,63 @@
+{
+ "post_id": 28,
+ "slug": "sadacharasmriti",
+ "title": "सदाचारस्मृतिः",
+ "link": "https://setutila.in/sadacharasmriti/",
+ "modified_gmt": "2026-08-30T15:03:49",
+ "categories": [
+  "आचारग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "आदिमङ्गलम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sadachara_smrti/chapter-001.chunk.html",
+   "anchor": "7cea3014-cf02-42f7-9751-2d7a5e55bd19",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "नित्याचारसङ्ग्रहः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sadachara_smrti/chapter-002.chunk.html",
+   "anchor": "2e72c358-9a65-4cda-aedf-ac26f42f6587",
+   "blocks": 17,
+   "pathantara_entries": 9,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "अनुसन्धानपद्धतिङ्ग्रहः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sadachara_smrti/chapter-003.chunk.html",
+   "anchor": "c225f9f2-d65a-4cc7-af03-3fecf70b5d87",
+   "blocks": 9,
+   "pathantara_entries": 16,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "पुनश्च परिशिष्टाचारादिसङ्ग्रहः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sadachara_smrti/chapter-004.chunk.html",
+   "anchor": "807cc4c8-a833-4eff-9c7b-a02c43179cf0",
+   "blocks": 8,
+   "pathantara_entries": 7,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "उपसंहारः, अन्तिममङ्गलम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sadachara_smrti/chapter-005.chunk.html",
+   "anchor": "cc78fdfa-4602-43f6-9157-2df8f3476a54",
+   "blocks": 4,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/sadacharasmriti/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

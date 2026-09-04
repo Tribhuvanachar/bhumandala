@@ -1,0 +1,54 @@
+{
+ "post_id": 326,
+ "slug": "manduka",
+ "title": "माण्डूकोपनिषत्",
+ "link": "https://setutila.in/manduka/",
+ "modified_gmt": "2026-08-30T13:14:38",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka/chapter-001.chunk.html",
+   "anchor": "50903c25-c9dd-4dae-a893-ce1fbbfa6e1f",
+   "blocks": 18,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka/chapter-002.chunk.html",
+   "anchor": "f606c1d3-9fcb-428d-8b81-9472e1432ea6",
+   "blocks": 12,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka/chapter-003.chunk.html",
+   "anchor": "d2c46da6-5cbd-47f9-be87-116962e7ecfc",
+   "blocks": 11,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka/chapter-004.chunk.html",
+   "anchor": "7080a0d1-b4e9-403a-9ccc-4e5f933f4376",
+   "blocks": 11,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/manduka/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

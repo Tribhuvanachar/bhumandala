@@ -1,0 +1,36 @@
+{
+ "post_id": 1101,
+ "slug": "aitareya-bhashya",
+ "title": "महैतरेयोपनिषद्भाष्यम्",
+ "link": "https://setutila.in/aitareya-bhashya/",
+ "modified_gmt": "2026-08-30T15:42:39",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "द्वितीयारण्यकम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/aitareya_bhashya/chapter-001.chunk.html",
+   "anchor": "48643fd7-040c-4675-8451-e46c4e34b8dc",
+   "blocks": 279,
+   "pathantara_entries": 285,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "तृतीयारण्यकम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/aitareya_bhashya/chapter-002.chunk.html",
+   "anchor": "000ff77c-9813-4923-942e-22ad61406ae5",
+   "blocks": 88,
+   "pathantara_entries": 111,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/aitareya-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

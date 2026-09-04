@@ -1,0 +1,45 @@
+{
+ "post_id": 328,
+ "slug": "taittiriya",
+ "title": "तैत्तिरीयोपनिषत्",
+ "link": "https://setutila.in/taittiriya/",
+ "modified_gmt": "2026-08-30T13:12:51",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "शिक्षावल्ली",
+   "file": "/wp-content/themes/twentytwentyfour/texts/taittiriya/chapter-001.chunk.html",
+   "anchor": "98a4eb2c-8fc3-432c-b998-bc7f7f73cb33",
+   "blocks": 26,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "ब्रह्मवल्ली",
+   "file": "/wp-content/themes/twentytwentyfour/texts/taittiriya/chapter-002.chunk.html",
+   "anchor": "643d70c0-cc90-445e-93fd-efe2eeb6007f",
+   "blocks": 14,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "भृगुवल्ली",
+   "file": "/wp-content/themes/twentytwentyfour/texts/taittiriya/chapter-003.chunk.html",
+   "anchor": "bc572ea8-7eed-4334-8c4f-57fbf970387a",
+   "blocks": 19,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/taittiriya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

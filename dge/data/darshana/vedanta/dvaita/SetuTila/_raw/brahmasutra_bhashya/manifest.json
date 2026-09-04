@@ -1,0 +1,54 @@
+{
+ "post_id": 1105,
+ "slug": "brahmasutra-bhashya",
+ "title": "ब्रह्मसूत्रभाष्यम्",
+ "link": "https://setutila.in/brahmasutra-bhashya/",
+ "modified_gmt": "2026-08-30T15:50:18",
+ "categories": [
+  "सूत्रप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "समन्वयाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra_bhashya/chapter-001.chunk.html",
+   "anchor": "ac5a2a1a-87fe-4fdd-ab01-050d9ee30dec",
+   "blocks": 518,
+   "pathantara_entries": 407,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "अविरोधाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra_bhashya/chapter-002.chunk.html",
+   "anchor": "b14a4fa2-b160-411c-ac40-56b0d4afc9f5",
+   "blocks": 525,
+   "pathantara_entries": 376,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "साधनाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra_bhashya/chapter-003.chunk.html",
+   "anchor": "5de2d9f3-4c16-40ca-9b36-02bda838e58a",
+   "blocks": 666,
+   "pathantara_entries": 420,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "फलाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sutra_bhashya/chapter-004.chunk.html",
+   "anchor": "8215690b-b30c-46b4-94e9-f514b9a73eec",
+   "blocks": 261,
+   "pathantara_entries": 183,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/brahmasutra-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

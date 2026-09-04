@@ -1,0 +1,54 @@
+{
+ "post_id": 24,
+ "slug": "talavakara-bhashya",
+ "title": "तलवकारोपनिषद्भाष्यम्‌",
+ "link": "https://setutila.in/talavakara-bhashya/",
+ "modified_gmt": "2026-08-30T15:07:48",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara_bhashya/chapter-001.chunk.html",
+   "anchor": "45dfd3f5-9201-42e2-9b6e-b1958c7e1f8c",
+   "blocks": 14,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara_bhashya/chapter-002.chunk.html",
+   "anchor": "c4cc6177-c71f-4e8f-846a-5d896b249dd4",
+   "blocks": 7,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara_bhashya/chapter-003.chunk.html",
+   "anchor": "4d343e0b-c0fb-4e0f-bd05-927723775a74",
+   "blocks": 14,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/talavakara_bhashya/chapter-004.chunk.html",
+   "anchor": "f9cabecd-4440-425f-a137-2db99ecddb4a",
+   "blocks": 35,
+   "pathantara_entries": 18,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/talavakara-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

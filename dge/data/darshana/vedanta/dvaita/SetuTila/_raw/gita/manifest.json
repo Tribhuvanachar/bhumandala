@@ -1,0 +1,180 @@
+{
+ "post_id": 763,
+ "slug": "gita",
+ "title": "भगवद्गीता",
+ "link": "https://setutila.in/gita/",
+ "modified_gmt": "2026-08-30T12:58:32",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "अर्जुनविषादयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-001.chunk.html",
+   "anchor": "452e6588-98e5-4724-a34a-e1f494413eb3",
+   "blocks": 56,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "साङ्ख्ययोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-002.chunk.html",
+   "anchor": "6414f755-b9e6-4df3-82cf-5f9b2d286b45",
+   "blocks": 126,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "कर्मयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-003.chunk.html",
+   "anchor": "cdbf972f-3c28-4232-993c-9f98f5af1dc0",
+   "blocks": 80,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "ज्ञानयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-004.chunk.html",
+   "anchor": "75021775-9f4e-42da-b972-8f6b58de3454",
+   "blocks": 84,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "कर्मसन्न्यासयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-005.chunk.html",
+   "anchor": "4fd70b74-2023-4b50-977b-5699f6fa0540",
+   "blocks": 59,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "ध्यानयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-006.chunk.html",
+   "anchor": "71b4b62c-8f76-42c2-b930-2b639da52d2e",
+   "blocks": 55,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "ज्ञानविज्ञानयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-007.chunk.html",
+   "anchor": "ae7fc047-fc4f-402c-887c-2b87a8cc2dde",
+   "blocks": 40,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "अक्षरब्रह्मयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-008.chunk.html",
+   "anchor": "ac5de494-787e-43eb-83d2-3b216ad72f0a",
+   "blocks": 32,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "राजविद्याराजगुह्ययोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-009.chunk.html",
+   "anchor": "69976638-a411-44d6-a53f-3bd4ececbe99",
+   "blocks": 37,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "विभूतियोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-010.chunk.html",
+   "anchor": "e3501336-5335-461e-8b4e-fd81490b2427",
+   "blocks": 47,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "विश्वरूपदर्शनयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-011.chunk.html",
+   "anchor": "7959ec09-4f11-4ec6-a828-fa1422790fa5",
+   "blocks": 68,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "भक्तियोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-012.chunk.html",
+   "anchor": "9debbc42-04e9-4618-9350-6acf80b60325",
+   "blocks": 24,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-013",
+   "title": "क्षेत्रक्षेत्रज्ञयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-013.chunk.html",
+   "anchor": "f020ea68-c365-427c-8aae-2925fc266a51",
+   "blocks": 39,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-014",
+   "title": "गुणत्रयविभागयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-014.chunk.html",
+   "anchor": "c2b075e5-a567-4cf5-b912-ec16d6d7ad4a",
+   "blocks": 32,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-015",
+   "title": "पुरुषोत्तमयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-015.chunk.html",
+   "anchor": "e67600b0-6a99-45a8-8af3-eea110e8861a",
+   "blocks": 23,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-016",
+   "title": "दैवासुरसम्पद्विभागयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-016.chunk.html",
+   "anchor": "b8a7fc05-03ee-4427-9116-083610175a06",
+   "blocks": 27,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-017",
+   "title": "श्रद्धात्रयविभागयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-017.chunk.html",
+   "anchor": "7d8ac2be-96b3-4997-a5d9-a199bb3ed017",
+   "blocks": 32,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-018",
+   "title": "मोक्षसन्न्यासयोगः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/gita/chapter-018.chunk.html",
+   "anchor": "9d0c27c6-6467-456b-84ae-787ccee6202c",
+   "blocks": 84,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/gita/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

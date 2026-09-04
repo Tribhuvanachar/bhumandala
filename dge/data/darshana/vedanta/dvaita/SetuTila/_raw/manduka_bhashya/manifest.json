@@ -1,0 +1,54 @@
+{
+ "post_id": 42,
+ "slug": "manduka-bhashya",
+ "title": "माण्डूकोपनिषद्भाष्यम्‌",
+ "link": "https://setutila.in/manduka-bhashya/",
+ "modified_gmt": "2026-08-30T14:51:32",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka_bhashya/chapter-001.chunk.html",
+   "anchor": "38222ee7-95d9-4864-9b4d-e3f1dc60912c",
+   "blocks": 38,
+   "pathantara_entries": 7,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka_bhashya/chapter-002.chunk.html",
+   "anchor": "a1a5c698-624b-45ae-9ab6-95a7c385556b",
+   "blocks": 39,
+   "pathantara_entries": 12,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka_bhashya/chapter-003.chunk.html",
+   "anchor": "d30a711f-4b50-40d6-a0b3-12e42b31b43d",
+   "blocks": 23,
+   "pathantara_entries": 12,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/manduka_bhashya/chapter-004.chunk.html",
+   "anchor": "35f05880-6fcd-4516-93c7-184b3959001c",
+   "blocks": 18,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/manduka-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

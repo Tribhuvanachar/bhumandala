@@ -1,0 +1,63 @@
+{
+ "post_id": 776,
+ "slug": "nyaya-vivarana",
+ "title": "ब्रह्मसूत्रानुव्याख्यान-न्यायविवरणम्",
+ "link": "https://setutila.in/nyaya-vivarana/",
+ "modified_gmt": "2026-08-30T12:47:47",
+ "categories": [
+  "सूत्रप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "समन्वयाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/nyaya_vivarana/chapter-001.chunk.html",
+   "anchor": "51a7fd4e-71c1-4cf3-a095-14f342897cbf",
+   "blocks": 122,
+   "pathantara_entries": 35,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "अविरोधाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/nyaya_vivarana/chapter-002.chunk.html",
+   "anchor": "dac32005-feab-423b-a100-6cbcb40e8c01",
+   "blocks": 98,
+   "pathantara_entries": 37,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "साधनाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/nyaya_vivarana/chapter-003.chunk.html",
+   "anchor": "ed85efe2-7a43-4b9e-9c15-c265d3354b18",
+   "blocks": 192,
+   "pathantara_entries": 94,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "फलाध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/nyaya_vivarana/chapter-004.chunk.html",
+   "anchor": "2c39dede-fb6a-4f67-9126-ca30671dd735",
+   "blocks": 74,
+   "pathantara_entries": 50,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "उपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/nyaya_vivarana/chapter-005.chunk.html",
+   "anchor": "67f15b21-7694-4084-9a45-11e63a3f445e",
+   "blocks": 7,
+   "pathantara_entries": 9,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/nyaya-vivarana/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

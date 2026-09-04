@@ -1,0 +1,54 @@
+{
+ "post_id": 785,
+ "slug": "tantrasara",
+ "title": "तन्त्रसारसङ्ग्रहः",
+ "link": "https://setutila.in/tantrasara/",
+ "modified_gmt": "2026-08-30T12:39:59",
+ "categories": [
+  "आचारग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tantrasara_sangraha/chapter-001.chunk.html",
+   "anchor": "1922a70c-c955-4cd2-864b-f607d0f2c083",
+   "blocks": 81,
+   "pathantara_entries": 20,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tantrasara_sangraha/chapter-002.chunk.html",
+   "anchor": "3c695d6c-7739-4e56-acda-80e838e0c1be",
+   "blocks": 26,
+   "pathantara_entries": 11,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tantrasara_sangraha/chapter-003.chunk.html",
+   "anchor": "12adceaf-ad26-4f51-ba66-09b7da07d4d4",
+   "blocks": 162,
+   "pathantara_entries": 49,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tantrasara_sangraha/chapter-004.chunk.html",
+   "anchor": "f945dc63-a422-432e-99aa-3e34d220c82d",
+   "blocks": 216,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/tantrasara/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

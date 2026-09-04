@@ -1,0 +1,72 @@
+{
+ "post_id": 366,
+ "slug": "atharvana-bhashya",
+ "title": "आथर्वणोपनिषद्भाष्यम्‌",
+ "link": "https://setutila.in/atharvana-bhashya/",
+ "modified_gmt": "2026-08-30T13:09:39",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथममुण्डके प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana_bhashya/chapter-001.chunk.html",
+   "anchor": "51265087-4706-426b-b71a-92c57290df23",
+   "blocks": 24,
+   "pathantara_entries": 15,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "प्रथममुण्डके द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana_bhashya/chapter-002.chunk.html",
+   "anchor": "53b9df19-fa64-4573-bfee-1494dd90733e",
+   "blocks": 28,
+   "pathantara_entries": 9,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "द्वितीयमुण्डके प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana_bhashya/chapter-003.chunk.html",
+   "anchor": "6e19933c-75d9-4409-af01-3b2c91cc371b",
+   "blocks": 20,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "द्वितीयमुण्डके द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana_bhashya/chapter-004.chunk.html",
+   "anchor": "0a031df1-bb30-48c0-a2fd-655b647dcc5c",
+   "blocks": 22,
+   "pathantara_entries": 3,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "तृतीयमुण्डके प्रथमः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana_bhashya/chapter-005.chunk.html",
+   "anchor": "1d150b4e-18f4-4f17-ab23-25c2bb6006e2",
+   "blocks": 20,
+   "pathantara_entries": 7,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "तृतीयमुण्डके द्वितीयः खण्डः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/atharvana_bhashya/chapter-006.chunk.html",
+   "anchor": "daa3f26f-01af-4662-9efa-d956a3bf7705",
+   "blocks": 36,
+   "pathantara_entries": 24,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/atharvana-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

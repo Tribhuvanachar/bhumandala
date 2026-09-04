@@ -1,0 +1,72 @@
+{
+ "post_id": 1103,
+ "slug": "brihad-bhashya",
+ "title": "बृहदारण्कोपनिषद्भाष्यम्",
+ "link": "https://setutila.in/brihad-bhashya/",
+ "modified_gmt": "2026-08-30T15:45:58",
+ "categories": [
+  "उपनिषत्प्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kanva_bhashya/chapter-001.chunk.html",
+   "anchor": "4feb2cb6-c7b0-493d-92a4-f9800bc205ff",
+   "blocks": 191,
+   "pathantara_entries": 221,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "चतुर्थोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kanva_bhashya/chapter-002.chunk.html",
+   "anchor": "7f4499f4-c266-45ce-ae18-6efe29ac7e15",
+   "blocks": 40,
+   "pathantara_entries": 40,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "पञ्चमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kanva_bhashya/chapter-003.chunk.html",
+   "anchor": "b74165d9-85c2-487d-b833-086627453eda",
+   "blocks": 86,
+   "pathantara_entries": 75,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "षष्ठोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kanva_bhashya/chapter-004.chunk.html",
+   "anchor": "ee1f5881-373e-4162-8881-a240070c3654",
+   "blocks": 148,
+   "pathantara_entries": 110,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "सप्तमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kanva_bhashya/chapter-005.chunk.html",
+   "anchor": "21f44594-01b3-466f-bd39-c97e91836d2a",
+   "blocks": 54,
+   "pathantara_entries": 17,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "अष्टमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/kanva_bhashya/chapter-006.chunk.html",
+   "anchor": "58170aa0-6790-4f08-9902-3966e32f62bf",
+   "blocks": 26,
+   "pathantara_entries": 23,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/brihad-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

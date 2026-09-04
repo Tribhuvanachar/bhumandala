@@ -1,0 +1,144 @@
+{
+ "post_id": 783,
+ "slug": "krishnamruta-maharnava",
+ "title": "कृष्णामृतमहार्णवः",
+ "link": "https://setutila.in/krishnamruta-maharnava/",
+ "modified_gmt": "2026-08-30T12:45:35",
+ "categories": [
+  "आचारग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "मङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-001.chunk.html",
+   "anchor": "2fd323e7-6311-429a-8c09-19c9043f25a8",
+   "blocks": 81,
+   "pathantara_entries": 20,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "विष्ण्वर्चनमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-002.chunk.html",
+   "anchor": "2d2d110b-319e-4c35-96f5-d2a7e8febf91",
+   "blocks": 26,
+   "pathantara_entries": 11,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "हरिस्मरणमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-003.chunk.html",
+   "anchor": "40348677-f622-43ad-a234-7fde72c6a354",
+   "blocks": 162,
+   "pathantara_entries": 49,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "हरिध्यानमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-004.chunk.html",
+   "anchor": "4323fd56-fa35-4f05-ac32-b425376cdba2",
+   "blocks": 216,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "हरिकीर्तनमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-005.chunk.html",
+   "anchor": "59ee0d5d-1271-408c-9502-44f4008bacc0",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "विष्णुप्रदक्षिणनमस्करादि",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-006.chunk.html",
+   "anchor": "df330fb3-ae5a-4fe2-9bc5-162584233673",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "विष्णुनैवेद्यमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-007.chunk.html",
+   "anchor": "a13125e4-6889-49d4-8f42-1b34230c5ec9",
+   "blocks": 8,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "विष्णुभक्तिमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-012.chunk.html",
+   "anchor": "0be01364-39c9-44e6-85cc-ffbbb08576e4",
+   "blocks": 8,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-013",
+   "title": "विष्णुप्रार्थना",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-013.chunk.html",
+   "anchor": "ee4d4c79-d058-402a-a882-c782aeccac11",
+   "blocks": 4,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-014",
+   "title": "विष्णुस्मरणफलम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-014.chunk.html",
+   "anchor": "3fe9271a-4592-4105-8774-33b0ab5a0f78",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-015",
+   "title": "शास्त्रश्रवणादिविचारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-015.chunk.html",
+   "anchor": "97556363-a1a0-436b-82f9-22d0e820467b",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-016",
+   "title": "पुनश्च विष्णुपादोदकादिमहिमा",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-016.chunk.html",
+   "anchor": "9520e619-4f92-4b46-924b-1b4845ea89fa",
+   "blocks": 4,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-020",
+   "title": "गोपिचन्दनमहिमा (ऊर्ध्वपुण्ड्रमहिमा)",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-020.chunk.html",
+   "anchor": "b8cf715f-4c31-45a7-b695-455063912faa",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-021",
+   "title": "ज्ञानिनोऽपि कर्मविधिः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/krshna_amrta_maharnava/chapter-021.chunk.html",
+   "anchor": "1afdea3a-f6c2-4750-b610-68a031e12429",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/krishnamruta-maharnava/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

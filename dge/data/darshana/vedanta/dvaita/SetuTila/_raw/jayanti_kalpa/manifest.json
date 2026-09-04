@@ -1,0 +1,27 @@
+{
+ "post_id": 50,
+ "slug": "jayanti-kalpa",
+ "title": "जयन्तीकल्पः",
+ "link": "https://setutila.in/jayanti-kalpa/",
+ "modified_gmt": "2026-08-30T14:46:44",
+ "categories": [
+  "आचारग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "inline",
+   "title": "जयन्तीकल्पः",
+   "file": null,
+   "anchor": null,
+   "blocks": 14,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/jayanti-kalpa/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

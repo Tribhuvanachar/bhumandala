@@ -1,0 +1,54 @@
+{
+ "post_id": 58,
+ "slug": "anu-bhashya",
+ "title": "ब्रह्मसूत्राणुभाष्यम्",
+ "link": "https://setutila.in/anu-bhashya/",
+ "modified_gmt": "2026-08-30T13:27:56",
+ "categories": [
+  "सूत्रप्रस्थानम्"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sangraha_bhashya/chapter-001.chunk.html",
+   "anchor": "8e62ad2d-c8a0-4f37-829e-a3830876abe8",
+   "blocks": 10,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sangraha_bhashya/chapter-002.chunk.html",
+   "anchor": "65b472f2-b37e-4c82-8140-c50c11e53f44",
+   "blocks": 10,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sangraha_bhashya/chapter-003.chunk.html",
+   "anchor": "678846c1-4de9-4058-8b6f-aae06d0effcd",
+   "blocks": 9,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थोऽध्यायः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/sangraha_bhashya/chapter-004.chunk.html",
+   "anchor": "636d5630-6c81-4e9f-ae47-ebb9b2cafdc1",
+   "blocks": 13,
+   "pathantara_entries": 4,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/anu-bhashya/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

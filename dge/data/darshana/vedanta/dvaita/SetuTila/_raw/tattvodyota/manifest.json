@@ -1,0 +1,171 @@
+{
+ "post_id": 19,
+ "slug": "tattvodyota",
+ "title": "तत्त्वोद्योतः",
+ "link": "https://setutila.in/tattvodyota/",
+ "modified_gmt": "2026-08-30T11:20:08",
+ "categories": [
+  "दशप्रकरणानि"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "मङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-001.chunk.html",
+   "anchor": "e9d61f45-b335-466e-8c0f-0ecb90680499",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "मुक्तभेदेऽनुमानम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-002.chunk.html",
+   "anchor": "18bcba87-e489-4f67-b397-bf84bbe0de7d",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तत्र साध्यविकल्पनिराकरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-003.chunk.html",
+   "anchor": "5ab160b4-edb8-4ac0-b9af-6ea179384271",
+   "blocks": 25,
+   "pathantara_entries": 11,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "तत्र हेत्वादिविकल्पनिराकरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-004.chunk.html",
+   "anchor": "dccc52e4-3ae0-4a9f-a372-7bcb4919a26a",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "दृश्यत्वाद्यनुमाननिराकरणम् - प्रत्येकशः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-005.chunk.html",
+   "anchor": "10e01654-2791-4786-822d-5c9f39f9a1c1",
+   "blocks": 8,
+   "pathantara_entries": 5,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "दृश्यत्वाद्यनुमानानां साधारणतो निराकरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-006.chunk.html",
+   "anchor": "eda6b2c8-bd5c-4db4-9e75-4b9a60778734",
+   "blocks": 35,
+   "pathantara_entries": 24,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-007",
+   "title": "वाचारम्भणश्रुतेरद्वैतप्रतिपादकत्वनिराकरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-007.chunk.html",
+   "anchor": "5cc1f73b-928e-4608-93ee-d1b80e8ef714",
+   "blocks": 2,
+   "pathantara_entries": 10,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-008",
+   "title": "मुक्तत्वहेतोरप्रयोजकतानिरासाय विपक्षे बाधकोक्तिः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-008.chunk.html",
+   "anchor": "f18b860b-7bb7-410c-a1b9-5502327dade9",
+   "blocks": 4,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-009",
+   "title": "ईश्वरप्रत्यक्षमूलानुमानान्तरेणापि मुक्तभेदसमर्थनम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-009.chunk.html",
+   "anchor": "fac5359f-8fc8-496e-926d-1c76298658c2",
+   "blocks": 2,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-010",
+   "title": "औपाधिकभेदनिरासः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-010.chunk.html",
+   "anchor": "cfc87cd6-5cd1-457b-8a5f-5f5faae47b33",
+   "blocks": 4,
+   "pathantara_entries": 6,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-011",
+   "title": "आगमैर्मुक्तभेदसमर्थनम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-011.chunk.html",
+   "anchor": "709b87a6-ab04-4d33-a54c-2206d4fff038",
+   "blocks": 2,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-012",
+   "title": "मुक्ताभेदवचनानामन्यार्थनिरूपणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-012.chunk.html",
+   "anchor": "64e720f5-8885-4680-a6eb-148078bb8669",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-013",
+   "title": "भेदज्ञानस्य भ्रान्तित्वनिरासः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-013.chunk.html",
+   "anchor": "20607a31-c501-400b-84d5-bfc75320d5ce",
+   "blocks": 2,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-014",
+   "title": "एकजीववादिनोऽपि विपक्षे बाधकनिरूपणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-014.chunk.html",
+   "anchor": "be6cce0d-d73e-4ef0-a77c-e18a421648d2",
+   "blocks": 2,
+   "pathantara_entries": 2,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-015",
+   "title": "मुक्तभेदसमर्थनोपसंहारः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-015.chunk.html",
+   "anchor": "724cf124-2bb3-40ce-852c-549834abb642",
+   "blocks": 2,
+   "pathantara_entries": 1,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-016",
+   "title": "मुक्तस्येश्वरनियन्तृत्वसमर्थनम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-016.chunk.html",
+   "anchor": "839a52da-273d-4567-b876-6abb47da1df8",
+   "blocks": 3,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-017",
+   "title": "अन्तिममङ्गलाचरणम्",
+   "file": "/wp-content/themes/twentytwentyfour/texts/tattvodyota/chapter-017.chunk.html",
+   "anchor": "ec28d786-1a54-4586-b17d-416abf25adea",
+   "blocks": 10,
+   "pathantara_entries": 7,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/tattvodyota/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}

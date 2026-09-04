@@ -150,6 +150,11 @@ def scan(data_root):
             # deliberately outside library.json until the reader's v2 path
             # ships — never auto-registered by --fix, never counted orphans
             continue
+        if isinstance(payload, dict) and payload.get("schema") == "vyakarana_corpus_v1":
+            # sutra-corpora consumed by their own dge/vyakarana/*.html pages
+            # (phitsutra/ganapatha/linganushasana/unadi), not by the reader —
+            # same standing exclusion as grantha_layer_v2
+            continue
         found[rel] = {"count": item_count(payload), "payload": payload, "full": full}
     return found
 

@@ -1,0 +1,72 @@
+{
+ "post_id": 322,
+ "slug": "prashna",
+ "title": "प्रश्नोपनिषत्",
+ "link": "https://setutila.in/prashna/",
+ "modified_gmt": "2026-08-30T13:17:12",
+ "categories": [
+  "मूलग्रन्थाः"
+ ],
+ "chunks": [
+  {
+   "id": "chapter-001",
+   "title": "प्रथमः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prashna/chapter-001.chunk.html",
+   "anchor": "463bc6cf-000d-49ab-8d91-d18ab63fcbdc",
+   "blocks": 20,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-002",
+   "title": "द्वितीयः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prashna/chapter-002.chunk.html",
+   "anchor": "6315b6c8-14b7-4744-bc73-d407b416692f",
+   "blocks": 15,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-003",
+   "title": "तृतीयः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prashna/chapter-003.chunk.html",
+   "anchor": "2a81a7b7-8233-4863-adf7-4288379738fd",
+   "blocks": 11,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-004",
+   "title": "चतुर्थः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prashna/chapter-004.chunk.html",
+   "anchor": "97e09c49-65df-4ec7-b158-9289486aa7ed",
+   "blocks": 12,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-005",
+   "title": "पञ्चमः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prashna/chapter-005.chunk.html",
+   "anchor": "ab442c5d-88e9-44b4-80f7-7256fa3e1b4a",
+   "blocks": 9,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  },
+  {
+   "id": "chapter-006",
+   "title": "षष्ठः प्रश्नः",
+   "file": "/wp-content/themes/twentytwentyfour/texts/prashna/chapter-006.chunk.html",
+   "anchor": "625850d1-30b2-441c-aee4-55fc9fb35fde",
+   "blocks": 13,
+   "pathantara_entries": 0,
+   "has_commentary": false
+  }
+ ],
+ "attribution": {
+  "source_name": "setutila.in",
+  "source_url": "https://setutila.in/prashna/",
+  "accessed_date": "2026-09-04",
+  "license_notes": "Public Sarvamula edition site; imported for non-commercial study with attribution; raw source preserved under _raw/ for provenance."
+ }
+}
