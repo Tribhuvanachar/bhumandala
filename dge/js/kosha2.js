@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha2.js'] = 'v1.3 (3 Sep 2026 report: kosha order preference — Default/A–Z/Z–A/My order in ⚙ Settings, Move up / Move to top in each card menu, persisted in localStorage; browse picker gains a name filter; the alphabet rail sorts in varnamala order instead of page-encounter order; degraded-index toast + suggestion catch on top of kosha.js v2.0 shard honesty) · v1.1 (mobile: search input owns its own header row; browse: tap feedback + loading states + alphabet rail grouped by first akshara instead of one button per page; search-failure message; corpus pinned by dist SHA in config.js; v1.0: script switcher, jump rail, gender digest, 7 AI actions, settings sheet)';
+  window.DGE_VERSIONS['kosha2.js'] = 'v1.4 (3 Sep 2026 mobile field report: every menu/reference opens as a BOTTOM SHEET with ✕/back — nothing runs off-screen or navigates away (Ashtadhyayi sutras render in-page from sutrapatha data, dhatu citations link to the dhatupatha, Unadi refs get an honest not-yet sheet); licence chips removed from reading cards (admin manager only); cards collapsible; long paragraph entries break per numbered sense; cluster-safe hit highlighting (अब्जेषु); digest shows unique-meaning count + top 4; language filter is one compact select; kosha arranging moved to ⚙ Arrange; NEW अर्थे mode: search inside the meanings via the gloss index) · v1.3 (3 Sep 2026 report: kosha order preference — Default/A–Z/Z–A/My order in ⚙ Settings, Move up / Move to top in each card menu, persisted in localStorage; browse picker gains a name filter; the alphabet rail sorts in varnamala order instead of page-encounter order; degraded-index toast + suggestion catch on top of kosha.js v2.0 shard honesty) · v1.1 (mobile: search input owns its own header row; browse: tap feedback + loading states + alphabet rail grouped by first akshara instead of one button per page; search-failure message; corpus pinned by dist SHA in config.js; v1.0: script switcher, jump rail, gender digest, 7 AI actions, settings sheet)';
 
   var E = window.DGEKoshaEngine;
   var RENDER_BASE = (window.KOSHA_RENDER_BASE || '').replace(/\/+$/, '');
@@ -31,6 +31,8 @@
     pins: lsGet('kosha2_pins', []), hidden: lsGet('kosha2_hidden', []),
     order: lsGet('kosha2_order', []),
     sortmode: lsGet('kosha2_sortmode', 'curated'),   // curated | az | za | custom
+    collapsed: lsGet('kosha2_collapsed', []),
+    consMore: false,
     script: lsGet('kosha2_script', 'deva'),   // 'deva' | 'iast' | 'knda'
     history: lsGet('kosha2_history', []),
     browseDict: null, browsePage: 0, browseIndex: null,
@@ -120,14 +122,61 @@
     if (!q || q.length < 2) return escaped;
     try {
       var re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-      return escaped.replace(re, function (m) { return '<mark class="k2-hit">' + m + '</mark>'; });
+      // NEVER split a Devanagari cluster: highlighting अब्ज inside अब्जेषु
+      // used to cut ज from its े and the akshara rendered broken (the
+      // lead's 3 Sep report — copy-paste was fine, display was not).
+      // Extend the highlight over trailing combining marks, and across a
+      // virama into the next consonant.
+      var CMB = /[ऀ-ःऺ-्॑-ॗॢॣ‌‍]/;
+      var out = '', last = 0, m;
+      while ((m = re.exec(escaped)) !== null) {
+        var end = m.index + m[0].length;
+        while (end < escaped.length) {
+          var c = escaped[end];
+          if (CMB.test(c)) {
+            end++;
+            if (c === '्' && end < escaped.length && /[क-हक़-य़ॸ-ॿ]/.test(escaped[end])) end++;
+          } else break;
+        }
+        out += escaped.slice(last, m.index) + '<mark class="k2-hit">' + escaped.slice(m.index, end) + '</mark>';
+        last = end;
+        re.lastIndex = end;
+      }
+      return out + escaped.slice(last);
     } catch (e) { return escaped; }
+  }
+
+  // reference linkifiers, applied to already-escaped gloss text.
+  // Unadi refs like (उ० ४-९८) become tappable everywhere; dhatu citations
+  // like आप्लृ (व्याप्तौ) only inside etymology blocks, where that shape is
+  // canonical (in running gloss prose it would be far too greedy).
+  var inEtym = false, breakNums = false;
+  function linkifyRefs(h) {
+    h = h.replace(/उ(?:०|\.)\s*([०-९0-9]+[-–][०-९0-9]+)/g, function (mm, ref) {
+      return '<button class="k2-ref unadi" data-unadi="' + esc(ref) + '" lang="sa">' + mm + '</button>';
+    });
+    if (inEtym) {
+      var L = '[\\u0904-\\u0939\\u093c-\\u094d\\u0950-\\u0963\\u0971-\\u097f]';
+      h = h.replace(new RegExp('(' + L + '{2,})\\s*\\((\\s*' + L + '+\\s*)\\)', 'g'),
+        function (mm, root, artha) {
+          return '<button class="k2-ref dhatu" data-dhatu="' + esc(root) + '" data-artha="' +
+            esc(artha.trim()) + '" lang="sa">' + esc(root) + '</button> (' + esc(artha.trim()) + ')';
+        });
+    }
+    // long paragraph-style entries (Vachaspatya, SKD, MW…): each numbered
+    // sense starts on its own line, like Shabdartha-Kaustubha's layout
+    if (breakNums) {
+      h = h.replace(/(^|[\s।॥])([०-९]{1,3}|\d{1,3})(\s)/g, '$1<br><b class="k2-inl-no">$2</b>$3');
+    }
+    return h;
   }
   function spanHtml(sp) {
     if (!sp) return '';
     if (sp.t === 'sutra') {
-      return '<a class="k2-ref sutra" href="vyakarana/ashtadhyayi.html#' + esc(sp.id) +
-             '" data-sutra="' + esc(sp.id) + '" title="अष्टाध्यायी ' + esc(sp.id) + '">' + esc(sp.s) + '</a>';
+      // in-page sheet, not a navigation — the full Ashtadhyayi page stays a
+      // link INSIDE the sheet for whoever wants the deep context
+      return '<button class="k2-ref sutra" data-sutra="' + esc(sp.id) +
+             '" title="अष्टाध्यायी ' + esc(sp.id) + '">' + esc(sp.s) + '</button>';
     }
     if (sp.t === 'cite') {
       return '<button class="k2-ref cite" data-cite="' + esc(sp.s) + '" data-q="' + esc(sp.q || '') + '">' + esc(sp.s) + '</button>';
@@ -135,13 +184,19 @@
     if (sp.t === 'src') {
       return '<button class="k2-ref src" data-src="' + esc(sp.s) + '">' + esc(sp.s) + '</button>';
     }
-    return markHits(esc(sp.s));
+    return linkifyRefs(markHits(esc(sp.s)));
   }
   function spansHtml(spans) { return (spans || []).map(spanHtml).join(''); }
 
   function senseHtml(rs) {
     var h = '<div class="k2-sense"><span class="k2-sense-no">' + esc(rs.n) + '</span>';
+    var glossLen = (rs.spans || []).reduce(function (n, sp) {
+      // plain text spans carry t:"txt" (or no t at all in older builds)
+      return n + (sp && (!sp.t || sp.t === 'txt') ? String(sp.s || '').length : 0);
+    }, 0);
+    breakNums = glossLen > 260;
     h += spansHtml(rs.spans);
+    breakNums = false;
     if (rs.pos) h += '<span class="k2-pos">' + esc(rs.pos) + '</span>';
     if (rs.subs && rs.subs.length) {
       h += rs.subs.map(function (sub) {
@@ -149,7 +204,9 @@
       }).join('');
     }
     if (rs.etym && rs.etym.length) {
+      inEtym = true;
       h += '<div class="k2-etym"><b>व्युत्पत्तिः / निष्पत्तिः</b>' + spansHtml(rs.etym) + '</div>';
+      inEtym = false;
     }
     if (rs.cites && rs.cites.length) {
       h += '<div class="k2-cites">' + rs.cites.map(function (c) { return '<span>' + spansHtml(c) + '</span>'; }).join('') + '</div>';
@@ -162,9 +219,15 @@
   }
   function rawSenseHtml(sense, i) {
     var h = '<div class="k2-sense"><span class="k2-sense-no">' + (i + 1) + '</span>';
-    h += markHits(esc(sense.gloss || ''));
+    breakNums = String(sense.gloss || '').length > 260;
+    h += linkifyRefs(markHits(esc(sense.gloss || '')));
+    breakNums = false;
     if (sense.pos) h += '<span class="k2-pos">' + esc(sense.pos) + '</span>';
-    if (sense.etymology) h += '<div class="k2-etym"><b>व्युत्पत्तिः / निष्पत्तिः</b>' + markHits(esc(sense.etymology)) + '</div>';
+    if (sense.etymology) {
+      inEtym = true;
+      h += '<div class="k2-etym"><b>व्युत्पत्तिः / निष्पत्तिः</b>' + linkifyRefs(markHits(esc(sense.etymology))) + '</div>';
+      inEtym = false;
+    }
     if (sense.citations && sense.citations.length) {
       h += '<div class="k2-cites">' + sense.citations.map(function (c) { return '<span class="k2-ref cite">' + esc(c.text || '') + '</span>'; }).join('') + '</div>';
     }
@@ -234,7 +297,7 @@
         });
       });
     });
-    return out.slice(0, 8);
+    return out.slice(0, 20);
   }
 
   // gender / part-of-speech consensus across the dictionaries' own tags
@@ -276,15 +339,26 @@
         body += (it.senses || []).map(rawSenseHtml).join('');
       });
     }
-    return '<article class="k2-card' + (pinned ? ' pinned' : '') + '" id="k2c-' + esc(slug) + '" data-slug="' + esc(slug) + '">' +
-      '<header class="k2-chead"><div class="k2-mark">' + esc(mark(meta.name)) + '</div>' +
+    // licensing is a curation detail — it lives in admin/kosha.html (the
+    // Kosha Manager), never on the reading page (lead's 3 Sep report)
+    var collapsed = state.collapsed.indexOf(slug) >= 0;
+    return '<article class="k2-card' + (pinned ? ' pinned' : '') + (collapsed ? ' collapsed' : '') +
+      '" id="k2c-' + esc(slug) + '" data-slug="' + esc(slug) + '">' +
+      '<header class="k2-chead" data-collapse="' + esc(slug) + '"><div class="k2-mark">' + esc(mark(meta.name)) + '</div>' +
       '<div class="k2-cname"><h2>' + (pinned ? '★ ' : '') + esc(meta.name || slug) + '</h2>' +
       '<div class="k2-cmeta"><span class="k2-lang">' + esc(LANG_NAME[meta.gloss_language] || meta.gloss_language || '') + '</span>' +
-      (meta.license ? '<span>· ' + esc(meta.license) + '</span>' : '') +
       (tier !== 'public' && state.superadmin ? '<span>· ' + esc(tier) + ' (admin view)</span>' : '') +
       '</div></div>' +
+      '<button class="k2-collbtn" data-collapse="' + esc(slug) + '" aria-label="Collapse" title="Collapse / expand">▾</button>' +
       '<div class="k2-cmenu"><button data-menu="' + esc(slug) + '" aria-label="Actions">⋯</button></div>' +
       '</header><div class="k2-cbody">' + (body || '<div class="k2-empty">—</div>') + '</div></article>';
+  }
+  function toggleCollapse(slug) {
+    var i = state.collapsed.indexOf(slug);
+    if (i >= 0) state.collapsed.splice(i, 1); else state.collapsed.push(slug);
+    lsSet('kosha2_collapsed', state.collapsed);
+    var el = $('#k2c-' + CSS.escape(slug));
+    if (el) el.classList.toggle('collapsed', i < 0);
   }
 
   function renderResults() {
@@ -301,15 +375,22 @@
       (gen.length ? '<div class="k2-gender">' + gen.map(function (g) {
         return '<span class="k2-gchip" title="' + g.n + ' senses">' + esc(g.g) + '<span class="n">' + g.n + '</span></span>';
       }).join('') + '</div>' : '') +
-      (cons.length ? '<div class="k2-consensus">' + cons.map(function (c) { return '<span lang="sa">' + markHits(esc(c)) + '</span>'; }).join('') + '</div>' : '') +
-      '<div class="k2-digest-meta"><span>' + state.perDict.length + ' कोश</span>' +
+      (cons.length ? '<div class="k2-consensus">' +
+        cons.slice(0, state.consMore ? cons.length : 4).map(function (c) { return '<span lang="sa">' + markHits(esc(c)) + '</span>'; }).join('') +
+        (cons.length > 4 ? '<button class="k2-morebtn" id="k2ConsMore">' +
+          (state.consMore ? 'less' : '+' + (cons.length - 4) + ' more') + '</button>' : '') +
+        '</div>' : '') +
+      '<div class="k2-digest-meta"><span>' + cons.length + ' भिन्नार्थाः · ' + state.perDict.length + ' कोश</span>' +
       '<span>· <button class="k2-textbtn" id="k2CopyAll">Copy all</button> <button class="k2-textbtn" id="k2Share">Share</button></span></div></section>';
-    var lensHtml = '<div class="k2-lens">' +
+    // language filter lives as ONE compact select in the countline — the
+    // old chip row was clutter on mobile (lead's 3 Sep report)
+    var lensSel = '<select class="k2-lensel" id="k2LensSel" aria-label="Filter by language">' +
       ['all'].concat(Object.keys(langs).sort()).map(function (l) {
-        var label = l === 'all' ? 'All' : (LANG_NAME[l] || l);
+        var label = l === 'all' ? 'All languages' : (LANG_NAME[l] || l);
         var n = l === 'all' ? state.perDict.length : langs[l];
-        return '<button class="' + (state.lens === l ? 'active' : '') + '" data-lens="' + esc(l) + '">' + esc(label) + ' <span class="n">' + n + '</span></button>';
-      }).join('') + '</div>';
+        return '<option value="' + esc(l) + '"' + (state.lens === l ? ' selected' : '') + '>' +
+          esc(label) + ' (' + n + ')</option>';
+      }).join('') + '</select>';
     // jump rail: one chip per kosha, in display order, scrolls to its card
     var jumpHtml = dicts.length > 1 ? '<div class="k2-jump">' + dicts.map(function (d) {
       var nm = (d.meta.name || d.slug).replace(/\s*\(.*\)$/, '');
@@ -318,9 +399,9 @@
     }).join('') + '</div>' : '';
     var count = '<div class="k2-countline"><span>' + dicts.length + ' / ' + state.perDict.length + ' shown' +
       (state.hidden.length ? ' · ' + state.hidden.length + ' hidden by you' : '') + '</span>' +
-      '<span class="k2-note">references are tappable · AI under ⋯</span></div>';
-    main.innerHTML = hero + lensHtml + jumpHtml + count + dicts.map(cardHtml).join('') +
-      (dicts.length ? '' : '<div class="k2-empty">No dictionaries match this lens.</div>');
+      lensSel + '</div>';
+    main.innerHTML = hero + jumpHtml + count + dicts.map(cardHtml).join('') +
+      (dicts.length ? '' : '<div class="k2-empty">No dictionaries match this language filter.</div>');
     bindResults();
     applyScript(main);
   }
@@ -422,17 +503,27 @@
       });
   }
 
-  // ---- popovers / menus ---------------------------------------------------
-  function popAt(anchor, html) {
-    var pop = $('#k2Pop'), r = anchor.getBoundingClientRect();
-    pop.innerHTML = html;
+  // ---- bottom sheet: the ONE surface for menus and reference popups -------
+  // The anchored popover ran past the right edge on mobile; a sheet from the
+  // bottom never covers the reading column and always carries ✕ (and ‹ back
+  // when it was opened from another sheet). The anchor argument is kept for
+  // call-site compatibility but no longer positions anything.
+  function popAt(anchor, html, backFn) {
+    var pop = $('#k2Pop'), bd = $('#k2Back');
+    pop.innerHTML = '<div class="k2-sheet-bar">' +
+      (backFn ? '<button id="k2PopBack">‹ back</button>' : '<span></span>') +
+      '<button id="k2PopClose" aria-label="Close">✕ close</button></div>' + html;
     applyScript(pop);
-    pop.hidden = false;
-    var top = Math.min(window.innerHeight - pop.offsetHeight - 12, Math.max(60, r.bottom + 6));
-    var left = Math.min(window.innerWidth - pop.offsetWidth - 10, Math.max(10, r.left));
-    pop.style.top = top + 'px'; pop.style.left = left + 'px';
+    pop.hidden = false; if (bd) bd.hidden = false;
+    pop.scrollTop = 0;
+    $('#k2PopClose').onclick = closePop;
+    var bb = $('#k2PopBack');
+    if (bb && backFn) bb.onclick = function () { backFn(); };
   }
-  function closePop() { $('#k2Pop').hidden = true; }
+  function closePop() {
+    $('#k2Pop').hidden = true;
+    var bd = $('#k2Back'); if (bd) bd.hidden = true;
+  }
 
   function citePop(anchor, text, q) {
     var gsHref = 'index.html?gs=' + encodeURIComponent(q || text);
@@ -454,17 +545,77 @@
       '<button data-act="link" data-slug="' + esc(slug) + '">🔗 Copy link to this card</button>' +
       '<button data-act="pin" data-slug="' + esc(slug) + '">' + (pinned ? '☆ Unpin' : '★ Pin to top') + '</button>' +
       '<button data-act="hide" data-slug="' + esc(slug) + '">' + (hidden ? '👁 Show' : '🙈 Hide for me') + '</button>' +
-      '<button data-act="up" data-slug="' + esc(slug) + '">⬆ Move up</button>' +
-      '<button data-act="top" data-slug="' + esc(slug) + '">⇱ Move to top</button>' +
       '<button data-act="ai" data-slug="' + esc(slug) + '">✦ Ask AI about this entry…</button>' +
-      '</div><div class="k2-note" style="margin-top:6px">Moves are remembered as “My order” (⚙ Settings).</div>');
+      '</div><div class="k2-note" style="margin-top:6px">Reorder the koshas under ⚙ Settings → Arrange.</div>');
   }
   function aiMenu(anchor, slug) {
     popAt(anchor, '<h4>AI · BYOK Gemini</h4><div class="row">' +
       ['Explain simply', 'Paninian analysis (sutras & derivation)', 'Etymology',
        'Puranic context', 'Usage in texts', 'Translate to ಕನ್ನಡ', 'Translate to English']
         .map(function (a) { return '<button data-ai="' + esc(a) + '" data-slug="' + esc(slug) + '">' + esc(a) + '</button>'; }).join('') +
-      '</div><div class="k2-note" style="margin-top:6px">Uses your own Gemini key (⚙ Settings in the reader).</div>');
+      '</div><div class="k2-note" style="margin-top:6px">Uses your own Gemini key (⚙ Settings in the reader).</div>',
+      function () { cardMenu(null, slug); });
+  }
+
+  // ---- vyakarana reference sheets (no page navigation, ever) ---------------
+  var vyData = { sutra: null, dhatu: null };
+  function sutraById() {
+    vyData.sutra = vyData.sutra ||
+      fetchJson('data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json').then(function (d) {
+        var by = {};
+        ((d && d.items) || []).forEach(function (it) { by[it.id] = it; });
+        return by;
+      });
+    return vyData.sutra;
+  }
+  function dhatuItems() {
+    vyData.dhatu = vyData.dhatu ||
+      fetchJson('data/vedanga/vyakarana/dhatupatha/data.json').then(function (d) {
+        return (d && d.items) || [];
+      });
+    return vyData.dhatu;
+  }
+  function sutraSheet(id) {
+    popAt(null, '<h4>अष्टाध्यायी · ' + esc(id) + '</h4><div class="body">Loading…</div>');
+    sutraById().then(function (by) {
+      var s = by && by[id];
+      popAt(null, '<h4>अष्टाध्यायी · ' + esc(id) + '</h4>' +
+        (s ? '<div class="k2-sutra-text" lang="sa">' + esc(s.sanskrit_text || '') + '</div>' +
+          (s.padaccheda && s.padaccheda.length ? '<div class="k2-note">पदच्छेदः</div><div class="body" lang="sa">' + esc(s.padaccheda.join(' · ')) + '</div>' : '') +
+          (s.anvaya ? '<div class="k2-note" style="margin-top:6px">अन्वयः</div><div class="body" lang="sa">' + esc(s.anvaya) + '</div>' : '')
+          : '<div class="body">सूत्रं न लब्धम् (' + esc(id) + ').</div>') +
+        '<div class="row">' +
+        '<a href="vyakarana/ashtadhyayi.html#' + esc(id) + '">पूर्णसन्दर्भः अष्टाध्यायीपृष्ठे ↗</a>' +
+        '<button data-copy="' + esc(s ? s.sanskrit_text + ' (' + id + ')' : id) + '">⧉ Copy</button></div>');
+    });
+  }
+  var COMBINING = /[ऀ-ःऺ-्॑-ॗॢॣ]/;
+  function stripSvara(s) { return String(s || '').replace(/[ँॅऀ॒॑॓॔]/g, ''); }
+  function dhatuSheet(root, artha) {
+    popAt(null, '<h4>धातुः · <span lang="sa">' + esc(root) + '</span></h4><div class="body">Loading…</div>');
+    dhatuItems().then(function (items) {
+      var r = stripSvara(root);
+      var hits = items.filter(function (it) { return stripSvara(it.dhatu) === r; });
+      if (!hits.length && artha) {
+        hits = items.filter(function (it) { return (it.artha || '').indexOf(artha) >= 0; }).slice(0, 12);
+      }
+      popAt(null, '<h4>धातुः · <span lang="sa">' + esc(root) + (artha ? ' (' + esc(artha) + ')' : '') + '</span></h4>' +
+        (hits.length ? hits.map(function (it) {
+          return '<div class="k2-dhatu-row"><b lang="sa">' + esc(it.dhatu) + '</b>' +
+            '<span lang="sa">' + esc(it.artha || '') + '</span>' +
+            '<span class="g">गण ' + esc(it.gana) + ' · ' + esc(it.pada_code || '') + '</span></div>';
+        }).join('') +
+          (stripSvara(hits[0].dhatu) !== r ? '<div class="k2-note" style="margin-top:6px">धातुपाठे ‘' + esc(root) + '’ इति रूपं साक्षात् न लब्धम् — समानार्थकाः दर्शिताः।</div>' : '')
+          : '<div class="body">धातुपाठे न लब्धः।</div>') +
+        '<div class="row"><a href="vyakarana/dhatu.html">धातुपाठपृष्ठं पश्यतु ↗</a>' +
+        '<button data-copy="' + esc(root + (artha ? ' (' + artha + ')' : '')) + '">⧉ Copy</button></div>');
+    });
+  }
+  function unadiSheet(ref) {
+    popAt(null, '<h4>उणादिसूत्रम् · ' + esc(ref) + '</h4>' +
+      '<div class="body" lang="sa">उणादिसूत्रपाठः अस्माकं ग्रन्थालये अद्यापि योजितः नास्ति।</div>' +
+      '<div class="k2-note" style="margin-top:6px">The Unadi-sutra text is not in the library yet; this reference is shown as the dictionary printed it.</div>' +
+      '<div class="row"><button data-copy="' + esc('उ० ' + ref) + '">⧉ Copy reference</button></div>');
   }
   // ---- ⚙ sheet: everything that is not content lives here -----------------
   function dictName(slug) {
@@ -493,6 +644,12 @@
         state.pins.map(function (s) { return '<button data-unpin="' + esc(s) + '" title="Unpin">★ ' + esc(dictName(s)).slice(0, 24) + ' ✕</button>'; }).join('') + '</div>' : '') +
       (state.hidden.length ? '<div class="k2-note" style="margin-top:8px">Hidden by you</div><div class="row">' +
         state.hidden.map(function (s) { return '<button data-unhide="' + esc(s) + '" title="Show again">🙈 ' + esc(dictName(s)).slice(0, 24) + ' ✕</button>'; }).join('') + '</div>' : '') +
+      (state.group ? '<div class="k2-note" style="margin-top:8px">Arrange — ↑ one up · ⇱ to top (saved as My order)</div>' +
+        orderedDicts().map(function (d) {
+          return '<div class="k2-arr-row"><span>' + esc(d.meta.name || d.slug) + '</span>' +
+            '<button data-arrup="' + esc(d.slug) + '" aria-label="Move up">↑</button>' +
+            '<button data-arrtop="' + esc(d.slug) + '" aria-label="Move to top">⇱</button></div>';
+        }).join('') : '') +
       (state.superadmin ? '<div class="k2-note" style="margin-top:8px"><a href="../admin/kosha.html" style="color:inherit">Kosha Manager → committed tiers & pins</a></div>' : '');
     popAt(anchor, html);
     var pop = $('#k2Pop');
@@ -518,6 +675,12 @@
     });
     pop.querySelectorAll('[data-unhide]').forEach(function (b) {
       b.onclick = function () { toggleHide(b.dataset.unhide); closePop(); };
+    });
+    pop.querySelectorAll('[data-arrup]').forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); moveDict(b.dataset.arrup, false); cfgSheet(anchor); };
+    });
+    pop.querySelectorAll('[data-arrtop]').forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); moveDict(b.dataset.arrtop, true); cfgSheet(anchor); };
     });
   }
 
@@ -556,6 +719,27 @@
 
   // ---- events -------------------------------------------------------------
   function bindResults() {
+    var ls = $('#k2LensSel');
+    if (ls) ls.onchange = function () { state.lens = ls.value; renderResults(); };
+    var cm = $('#k2ConsMore');
+    if (cm) cm.onclick = function () { state.consMore = !state.consMore; renderResults(); };
+    $('#k2Main').querySelectorAll('[data-collapse]').forEach(function (b) {
+      b.onclick = function (e) {
+        // the ⋯ menu button sits inside the header; don't collapse for it
+        if (e.target.closest('[data-menu]')) return;
+        e.stopPropagation();
+        toggleCollapse(b.dataset.collapse || b.closest('[data-slug]').dataset.slug);
+      };
+    });
+    $('#k2Main').querySelectorAll('[data-sutra]').forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); sutraSheet(b.dataset.sutra); };
+    });
+    $('#k2Main').querySelectorAll('[data-dhatu]').forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); dhatuSheet(b.dataset.dhatu, b.dataset.artha); };
+    });
+    $('#k2Main').querySelectorAll('[data-unadi]').forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); unadiSheet(b.dataset.unadi); };
+    });
     $('#k2Main').querySelectorAll('[data-lens]').forEach(function (b) {
       b.onclick = function () { state.lens = b.dataset.lens; renderResults(); };
     });
@@ -682,9 +866,60 @@
   function setMode(mode) {
     state.mode = mode;
     document.querySelectorAll('#k2Mode button').forEach(function (b) { b.classList.toggle('active', b.dataset.mode === mode); });
+    var input = $('#k2Input');
+    if (input) input.placeholder = mode === 'gloss'
+      ? 'Search inside the meanings… (महाभारते, चन्द्र)'
+      : 'Search Sanskrit, IAST, Kannada… (अब्ज, abja, ಅಬ್ಜ)';
     if (mode === 'browse') { state.browseDict ? openBrowse(state.browseDict, state.browsePage) : renderBrowsePicker(); }
+    else if (mode === 'gloss') {
+      $('#k2Main').innerHTML = '<div class="k2-empty" lang="sa">अर्थेषु अन्वेषणम् — type a word to find every ' +
+        'headword whose MEANING mentions it (e.g. महाभारते), then press Enter.</div>';
+    }
     else if (state.group) renderResults();
     else $('#k2Main').innerHTML = '<div class="k2-empty">कोशं अन्विष्यताम् — search across the dictionaries, or open one from Browse.</div>';
+  }
+
+  // ---- search inside the meanings (gloss index) ---------------------------
+  var glossSeq = 0;
+  function doGlossSearch(q) {
+    q = (q || '').trim();
+    if (!q) return;
+    var mine = ++glossSeq;
+    $('#k2Sug').hidden = true;
+    $('#k2Main').innerHTML = '<div class="k2-empty">अर्थेषु अन्वेषणम्…</div>';
+    E.glossSearch(q).then(function (r) {
+      if (mine !== glossSeq) return;
+      if (!r || !r.hits || !r.hits.length) {
+        $('#k2Main').innerHTML = '<div class="k2-empty">No meanings mention “' + esc(q) + '”.</div>';
+        return;
+      }
+      var byDict = {};
+      r.hits.forEach(function (h) { (byDict[h.d] = byDict[h.d] || []).push(h); });
+      var total = r.hits.length;
+      $('#k2Main').innerHTML =
+        '<div class="k2-countline" style="padding-top:12px"><span>“' + esc(q) + '” appears in the meanings of ' +
+        total + ' headword-entr' + (total === 1 ? 'y' : 'ies') + ' across ' + Object.keys(byDict).length + ' कोश' +
+        (r.truncated ? ' (first ' + total + ')' : '') + '</span></div>' +
+        Object.keys(byDict).sort().map(function (slug) {
+          var rows = byDict[slug];
+          return '<div class="k2-gloss-dict">' + esc(dictName(slug)) + ' <span class="n">' + rows.length + '</span></div>' +
+            '<div class="k2-gloss-hits">' + rows.map(function (h) {
+              return '<button data-glookup="' + esc(h.h) + '" lang="sa">' + esc(h.h) +
+                (h.n > 1 ? '<span class="n">×' + h.n + '</span>' : '') + '</button>';
+            }).join('') + '</div>';
+        }).join('');
+      $('#k2Main').querySelectorAll('[data-glookup]').forEach(function (b) {
+        b.onclick = function () { setMode('search'); doLookup(b.dataset.glookup); };
+      });
+      applyScript($('#k2Main'));
+    }).catch(function (e) {
+      if (mine !== glossSeq) return;
+      var msg = String(e && e.message || e);
+      $('#k2Main').innerHTML = '<div class="k2-empty">' +
+        (msg.indexOf('not built') >= 0
+          ? 'The meaning-search index is being built — this feature lights up as soon as it is published.'
+          : 'Meaning-search could not reach its index (' + esc(msg.slice(0, 80)) + '). Try again.') + '</div>';
+    });
   }
 
   // ---- boot ---------------------------------------------------------------
@@ -693,9 +928,17 @@
     fetchJson('../admin/config/kosha-overrides.json').then(function (ov) {
       if (ov) state.overrides = Object.assign(state.overrides, ov);
       var input = $('#k2Input'), t;
-      input.oninput = function () { clearTimeout(t); var q = input.value; t = setTimeout(function () { renderSug(q); }, 140); };
+      input.oninput = function () {
+        clearTimeout(t);
+        if (state.mode === 'gloss') return;   // no headword suggestions there
+        var q = input.value; t = setTimeout(function () { renderSug(q); }, 140);
+      };
       input.onkeydown = function (e) {
-        if (e.key === 'Enter') { clearTimeout(t); sugSeq++; var first = $('#k2Sug [data-key]'); if (first) doLookup(first.dataset.key); else doLookup(input.value); }
+        if (e.key === 'Enter') {
+          clearTimeout(t); sugSeq++;
+          if (state.mode === 'gloss') { doGlossSearch(input.value); return; }
+          var first = $('#k2Sug [data-key]'); if (first) doLookup(first.dataset.key); else doLookup(input.value);
+        }
         if (e.key === 'Escape') { clearTimeout(t); sugSeq++; $('#k2Sug').hidden = true; }
       };
       // tapping anywhere in the results must not leave suggestions floating

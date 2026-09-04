@@ -161,11 +161,32 @@
     font: 13px/1 var(--font-sanskrit, serif); cursor: pointer; }
   .k2-alpha button.active { background: var(--accent-red); color: #fff; border-color: var(--accent-red); }
 
-  /* popover + menu */
-  .k2-pop { position: fixed; z-index: 90; width: min(320px, calc(100vw - 20px));
-    border: 1px solid var(--card-border); border-radius: 14px; background: var(--card-bg);
-    box-shadow: var(--shadow-lg, 0 14px 40px rgba(0,0,0,.35)); padding: 10px; }
+  /* bottom sheet — ONE surface for every menu / reference popup, on every
+     viewport. The old anchored popover ran off-screen on mobile (the lead's
+     3 Sep report); a sheet from the bottom never obstructs the reading
+     column and always carries ✕ / back. */
+  .k2-back { position: fixed; inset: 0; z-index: 89; background: rgba(0,0,0,.45); }
+  .k2-back[hidden] { display: none; }
+  .k2-pop { position: fixed; z-index: 90; left: 50%; transform: translateX(-50%);
+    bottom: 0; top: auto; width: min(560px, 100vw); max-height: 74vh; overflow-y: auto;
+    border: 1px solid var(--card-border); border-bottom: 0;
+    border-radius: 18px 18px 0 0; background: var(--card-bg);
+    box-shadow: var(--shadow-lg, 0 -14px 40px rgba(0,0,0,.45)); padding: 0 14px 16px;
+    animation: k2SheetUp .18s ease-out; }
+  @keyframes k2SheetUp { from { transform: translate(-50%, 30px); opacity: .5; }
+    to { transform: translate(-50%, 0); opacity: 1; } }
   .k2-pop[hidden] { display: none; }
+  .k2-sheet-bar { position: sticky; top: 0; display: flex; align-items: center;
+    justify-content: space-between; gap: 8px; padding: 10px 0 8px;
+    background: var(--card-bg); z-index: 2; }
+  .k2-sheet-bar::before { content: ""; position: absolute; top: 6px; left: 50%;
+    transform: translateX(-50%); width: 42px; height: 4px; border-radius: 4px;
+    background: var(--card-border); }
+  .k2-sheet-bar button { min-height: 34px; min-width: 34px; padding: 4px 12px;
+    border: 1px solid var(--card-border); border-radius: 999px;
+    background: var(--panel-bg); color: var(--text-primary); font-size: 12.5px;
+    cursor: pointer; }
+  .k2-sheet-bar button:hover { border-color: var(--accent-gold); }
   .k2-pop h4 { margin: 0 0 6px; font-size: 12px; color: var(--muted-text);
     letter-spacing: .06em; text-transform: uppercase; }
   .k2-pop .body { font-size: 13.5px; }
@@ -175,6 +196,52 @@
     background: var(--panel-bg); color: var(--text-primary); font-size: 13px;
     text-align: left; text-decoration: none; cursor: pointer; }
   .k2-pop .row a:hover, .k2-pop .row button:hover { background: var(--card-bg); }
+
+  /* collapsible kosha cards */
+  .k2-chead { cursor: pointer; }
+  .k2-collbtn { background: none; border: 0; color: var(--muted-text); cursor: pointer;
+    font-size: 13px; min-width: 30px; min-height: 30px; transition: transform .15s; }
+  .k2-card.collapsed .k2-collbtn { transform: rotate(-90deg); }
+  .k2-card.collapsed .k2-cbody { display: none; }
+
+  /* reference buttons inside gloss text */
+  .k2-ref.dhatu, .k2-ref.unadi { background: none; border: 0; padding: 0;
+    color: var(--accent-gold); cursor: pointer; font: inherit;
+    border-bottom: 1px dotted var(--accent-gold); }
+  .k2-sutra-text { font-family: var(--font-sanskrit); font-size: 18px;
+    color: var(--accent-gold); margin: 4px 0 8px; }
+  .k2-dhatu-row { display: flex; gap: 10px; align-items: baseline; padding: 7px 2px;
+    border-bottom: 1px solid var(--card-border); font-family: var(--font-sanskrit); }
+  .k2-dhatu-row .g { margin-left: auto; color: var(--muted-text); font-size: 12px;
+    font-family: var(--font-ui); white-space: nowrap; }
+
+  /* ⚙ arrange rows */
+  .k2-arr-row { display: flex; align-items: center; gap: 8px; padding: 5px 2px;
+    border-bottom: 1px solid var(--card-border); font-size: 13px; }
+  .k2-arr-row span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .k2-arr-row button { min-width: 34px; min-height: 30px; border: 1px solid var(--card-border);
+    border-radius: 8px; background: var(--panel-bg); color: var(--text-primary); cursor: pointer; }
+
+  /* inline sense numerals injected when a paragraph entry is broken up */
+  .k2-inl-no { color: var(--accent-gold); font-weight: 700; margin-right: 4px; }
+
+  /* compact language filter in the countline */
+  .k2-lensel { min-height: 32px; border: 1px solid var(--card-border); border-radius: 9px;
+    background: var(--card-bg); color: var(--text-primary); font-size: 12.5px; padding: 2px 6px; }
+
+  /* digest: unique-meaning count + expandable chips */
+  .k2-morebtn { background: none; border: 1px dashed var(--card-border); border-radius: 999px;
+    color: var(--muted-text); cursor: pointer; font-size: 12px; padding: 4px 12px; }
+  .k2-morebtn:hover { border-color: var(--accent-gold); color: var(--text-primary); }
+
+  /* gloss (search-inside-meanings) results */
+  .k2-gloss-dict { margin: 14px 0 4px; font-weight: 700; color: var(--accent-gold); }
+  .k2-gloss-hits { display: flex; flex-wrap: wrap; gap: 7px; }
+  .k2-gloss-hits button { border: 1px solid var(--card-border); border-radius: 999px;
+    background: var(--card-bg); color: var(--text-primary); padding: 6px 13px;
+    font-family: var(--font-sanskrit); font-size: 14px; cursor: pointer; }
+  .k2-gloss-hits button:hover { border-color: var(--accent-gold); }
+  .k2-gloss-hits .n { font-size: 10.5px; color: var(--muted-text); margin-left: 4px; }
 
   .k2-empty { padding: 40px 8px; text-align: center; color: var(--muted-text); }
   .k2-toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);

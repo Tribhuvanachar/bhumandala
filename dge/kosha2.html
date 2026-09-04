@@ -10,7 +10,7 @@
      the existing overlay; replaces it only after project-lead sign-off. -->
 <script src="js/vandana-guard.js"></script>
 <link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/kosha2.css?v=1.3">
+<link rel="stylesheet" href="css/kosha2.css?v=1.4">
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
         onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
 <script src="js/config.js?v=4.75.8"></script>
@@ -24,7 +24,7 @@ window.KOSHA_RENDER_BASE = window.KOSHA_RENDER_BASE ||
   ((window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/koshas?$/, '') + '/koshas_r');
 </script>
 <script src="js/gemini.js"></script>
-<script src="js/kosha.js?v=2.0"></script>
+<script src="js/kosha.js?v=2.1"></script>
 </head>
 <body class="kosha2">
 <div class="k2-top"><div class="k2-app"><div class="k2-top-in">
@@ -42,13 +42,15 @@ window.KOSHA_RENDER_BASE = window.KOSHA_RENDER_BASE ||
   <div class="k2-mode" id="k2Mode" role="tablist">
     <button data-mode="search" class="active">Search</button>
     <button data-mode="browse">Browse</button>
+    <button data-mode="gloss" title="Search inside the meanings/definitions" lang="sa">अर्थे</button>
   </div>
   <button class="k2-iconbtn" id="k2Cfg" title="Settings — script, history, pins" aria-label="Settings">⚙</button>
   <a class="k2-iconbtn" href="index.html" title="Back to the library" style="display:grid;place-items:center;text-decoration:none">⌂</a>
 </div></div></div>
 <main class="k2-app" id="k2Main" aria-live="polite"></main>
+<div id="k2Back" class="k2-back" hidden></div>
 <div id="k2Pop" class="k2-pop" hidden></div>
 <div id="k2Toast" class="k2-toast" hidden></div>
-<script src="js/kosha2.js?v=1.3"></script>
+<script src="js/kosha2.js?v=1.4"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v2.0 (आशितृ report, 3 Sep 2026: a failed index-shard fetch is retried once and then reported — empty-with-failures rejects so the UI says the index was unreachable instead of the false "No headword found"; partial results carry a degraded list. On top of v1.9) · v1.9 (the अब्ज/Śabdārthakaustubha report, 1 Sep 2026: pinned-but-hidden dictionaries now show a Show strip + hidden state/toggle in the pin panel instead of silently vanishing; the toolbar count says how many are hidden; failed shard fetches are no longer cached for the session (404s still are); %-named shard files are URI-encoded so bhutasankhya-kp-shukla\'s Devanagari-digit buckets fetch instead of 400ing; SAK joins the always-link sūtra list for its hyphenated निष्पत्तिः citations. On top of v1.8)';
+  window.DGE_VERSIONS['kosha.js'] = 'v2.1 (3 Sep 2026: glossSearch — exact folded-token lookup in the _gloss inverted index, for kosha2\'s search-inside-meanings mode; licence badges removed from the legacy overlay cards, licensing lives only in admin/kosha.html) · v2.0 (आशितृ report, 3 Sep 2026: a failed index-shard fetch is retried once and then reported — empty-with-failures rejects so the UI says the index was unreachable instead of the false "No headword found"; partial results carry a degraded list. On top of v1.9) · v1.9 (the अब्ज/Śabdārthakaustubha report, 1 Sep 2026: pinned-but-hidden dictionaries now show a Show strip + hidden state/toggle in the pin panel instead of silently vanishing; the toolbar count says how many are hidden; failed shard fetches are no longer cached for the session (404s still are); %-named shard files are URI-encoded so bhutasankhya-kp-shukla\'s Devanagari-digit buckets fetch instead of 400ing; SAK joins the always-link sūtra list for its hyphenated निष्पत्तिः citations. On top of v1.8)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -492,20 +492,10 @@
     card.dataset.slug = d.slug;
 
     var head = el('div', 'kosha-src');
-    var lic = d.meta.license && d.meta.license.indexOf('CC-BY') === 0;
-    // Short badge, full text in the tooltip. Spelling the licence out here
-    // ("Unclear (3rd-party book title — repo licence excludes it)") is a long
-    // nowrap run that squeezed the dictionary's own name down to one word per
-    // line — the name is what the reader is actually looking for.
-    var full = [d.meta.license || '', d.meta.license_note || ''].filter(Boolean).join(' — ');
-    // The Cleared/Unclear badge is a licensing-curation detail for whoever
-    // is vetting dictionary sources, not something a reader looking up a
-    // word needs on screen — gated the same way as every other admin-only
-    // indicator in this app (localStorage.acharyaAuthorized/is_superadmin).
-    var isAdmin = (function(){ try { return localStorage.getItem('acharyaAuthorized')==='true' || localStorage.getItem('is_superadmin')==='true'; } catch(e){ return false; } })();
-    head.innerHTML = '<span class="kosha-src-name">' + esc(tl(d.meta.name)) + '</span>' +
-      (isAdmin ? '<span class="kosha-lic' + (lic ? ' ok' : '') + '" title="' + esc(full) + '">' +
-      (lic ? 'Cleared' : 'Unclear') + '</span>' : '');
+    // Licensing lives ONLY in admin/kosha.html (the Kosha Manager) — the
+    // lead's 3 Sep 2026 call: no licence text on any reading surface, admin
+    // or not.
+    head.innerHTML = '<span class="kosha-src-name">' + esc(tl(d.meta.name)) + '</span>';
     var hide = el('button', 'kosha-hidebtn', '🚫');
     hide.title = 'Hide ' + (d.meta.name || d.slug) + ' from results';
     hide.onclick = function (ev) { ev.stopPropagation(); toggleUserHidden(d.slug); onHide(); };
@@ -1034,8 +1024,55 @@
   // fetch the ENRICHED twin (kosha_r) of exactly the shard an entry lives
   // in. Setting window.DGE_KOSHA_ENGINE_ONLY (before this script) skips the
   // floating-button/overlay build entirely — engine with no UI.
+  // search inside the MEANINGS: exact folded-token lookup in the gloss
+  // inverted index (data/koshas/_gloss, built by the data repo's Actions).
+  // Returns { hits: [{d, h, n}], truncated } — d dictionary slug, h the
+  // headword whose gloss carries the token, n occurrences.
+  var glossManifest = null;
+  function glossSearch(query) {
+    return (glossManifest ? Promise.resolve(glossManifest)
+      : j(BASE + '/_gloss/manifest.json').then(function (m) { glossManifest = m; return m; }))
+      .then(function (gm) {
+        if (!gm) throw new Error('gloss index not built yet');
+        var folds = [], seen = {};
+        toSLP1list(query).map(fold).forEach(function (f) {
+          if (f && !seen[f]) { seen[f] = 1; folds.push(f); }
+        });
+        if (!folds.length) return { hits: [], truncated: false };
+        var need = {};
+        folds.forEach(function (qf) {
+          gm.buckets.forEach(function (b) { if (qf.indexOf(b) === 0) need[b] = 1; });
+        });
+        var buckets = Object.keys(need);
+        if (!buckets.length) return { hits: [], truncated: false };
+        return Promise.all(buckets.map(function (b) {
+          return j(BASE + '/_gloss/' + safeBucket(b) + '.json');
+        })).then(function (shards) {
+          var failed = buckets.filter(function (b, i) { return !shards[i]; });
+          var hits = [], dedup = {};
+          shards.forEach(function (sh) {
+            if (!sh) return;
+            folds.forEach(function (qf) {
+              (sh[qf] || []).forEach(function (row) {
+                var k = row[0] + '|' + row[1];
+                if (dedup[k]) return; dedup[k] = 1;
+                hits.push({ d: row[0], h: row[1], n: row[2] || 1 });
+              });
+            });
+          });
+          if (failed.length && !hits.length) {
+            throw new Error('gloss index shard unreachable (' + failed.join(', ') + ')');
+          }
+          hits.sort(function (a, b) { return b.n - a.n || a.h.localeCompare(b.h); });
+          var truncated = hits.length > 400;
+          return { hits: hits.slice(0, 400), truncated: truncated };
+        });
+      });
+  }
+
   window.DGEKoshaEngine = {
     search: search,
+    glossSearch: glossSearch,
     loadEntry: loadEntry,
     applyUserOrder: applyUserOrder,
     fold: fold,
