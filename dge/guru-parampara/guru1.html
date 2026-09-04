@@ -676,7 +676,7 @@
     </div>
   </dialog>
 
-<script src="guru-data.js?v=1"></script>
+<script src="guru-data.js?v=2"></script>
 <script>
   let G = null;                     // central data (DGE_GURU.load())
   let currentLine = 'all';
@@ -835,6 +835,7 @@
           ((G.children[s.id] || []).length ? '<div class="detail-row"><span class="detail-label">Śiṣyas</span><div>' + G.children[s.id].map(c => '<span class="chip-link" onclick="event.stopPropagation(); jumpToSaint(\'' + c + '\')">↓ ' + esc(G.byId[c].name) + '</span>').join('') + '</div></div>' : '') +
           ((s.contemporaries || []).length ? '<div class="detail-row"><span class="detail-label">Contemporaries</span><div>' + s.contemporaries.filter(c => G.byId[c]).map(c => '<span class="chip-link" onclick="event.stopPropagation(); jumpToSaint(\'' + c + '\')">🔗 ' + esc(G.byId[c].name) + '</span>').join('') + '</div></div>' : '') +
           ((s.sources || []).length ? '<div class="detail-row"><span class="detail-label">Sources (tracking)</span><span style="font-size:0.78rem;color:var(--text-secondary)">' + esc(s.sources.join(' · ')) + (s.confidence ? ' — confidence: ' + esc(s.confidence) : '') + '</span></div>' : '') +
+          window.DGE_GURU.bioHtml(s) +
         '</div>';
       railContainer.appendChild(node);
     });

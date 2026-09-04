@@ -5296,20 +5296,30 @@
    "matha": "vyasaraja",
    "tag": "acharya",
    "purva": null,
-   "titles": [],
+   "titles": [
+    "Bhāṣyadīpikācārya",
+    "Vidvatpaṅkaja Mārtāṇḍa",
+    "Vādimattebhakesarī",
+    "Yatikulatilaka"
+   ],
    "period": "pontificate 1755-1770",
    "b": null,
    "d": null,
    "pont": null,
    "brindavana": "Kumbakonam",
    "place": "Kumbakonam, Tamil Nadu",
-   "works": [],
-   "contrib": "One of the few Vyasaraja Matha pontiffs to take sannyasa directly from brahmacharya. Disciple of Sheshachandrikacharya and guru of Srinatha Tirtha (1755-1770); his vrindavana is at Kumbakonam.",
+   "works": [
+    "Bhāṣyadīpikā",
+    "Sūtradīpikā",
+    "Rigbhāṣya-ṭīkā Tippaṇī (traced, unrecovered)"
+   ],
+   "contrib": "Pontiff of the Vyāsarāja Maṭha 1755–1770; disciple of Śeṣacandrikācārya and guru of Śrīnātha Tīrtha. Author of the Bhāṣyadīpikā and Sūtradīpikā on Madhva's Brahma-sūtra Bhāṣya — for which he is known as Bhāṣyadīpikācārya — held indispensable across all Mādhva maṭhas. One of the few Vyāsarāja Maṭha yatis to take saṁnyāsa directly from brahmacarya. Bṛndāvana at Kumbhakoṇam; ārādhanā on Puṣya Śukla Dvitīyā.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
     "Wikipedia",
-    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/jagannatha-tirtharu/"
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/jagannatha-tirtharu/",
+    "https://madhwayati.blogspot.com/2019/04/jagannatha-teertharu-1770-kumbakonam.html"
    ],
    "note": null,
    "role": null,
@@ -5317,7 +5327,47 @@
    "gps": [
     10.9602,
     79.3845
-   ]
+   ],
+   "bio": {
+    "image": "https://www.sumadhwaseva.com/wp-content/uploads/2009/12/JAGANNATHA-Teertharu-Kumbukonam.jpg",
+    "dhyana": {
+     "deva": "विद्वत्पङ्कजमार्ताण्डो वादिमत्तेभकेसरी।\nजगन्नाथगुरुर्भूयात् ज्यायसे श्रेयसे मम॥",
+     "note": "Dhyāna-śloka — “May Guru Jagannātha, the sun that unfolds the lotus-scholars, the lion among rutting debater-elephants, be for my greater good.”"
+    },
+    "summary": "Śrī Jagannātha Tīrtha — celebrated as <b>Bhāṣyadīpikācārya</b> after his masterwork — was the pontiff of the Vyāsarāja Maṭha from 1755 to 1770, with his bṛndāvana at Kumbhakoṇam. Tradition holds him to be an avatāra of Gālava Ṛṣi. He was among the very few Vyāsarāja Maṭha yatis to take saṁnyāsa directly from brahmacarya after Śrī Vyāsarāja himself. He studied for nearly thirty years under his guru Śrī Śeṣacandrikācārya, and his own commentaries on the Brahma-sūtra Bhāṣya remain indispensable to Mādhva students of every maṭha.",
+    "origin": "Born in <b>Varavani</b> village on the north bank of the Pinākinī (Pennār) river, Gauribidanūr tāluk, Kolār district. Kauṇḍinya gotra, Tangedi family (Ṣaṣṭika vaṁśa). His forebears held rights over five villages known together as the “Varavani Pañcagrāma”; the family deity was Narasiṁha at Honnappanahaḷḷi.",
+    "anecdotes": [
+     {
+      "title": "Saved by Narasiṁha from the mango tree",
+      "text": "While travelling in the Tekkalu region of Tamil country he was pursued by hostile soldiers. He prayed to his family deity Narasiṁha, who burst forth from a nearby mango tree and destroyed the attackers. He recorded the deliverance in his own verse within the Bhāṣyadīpikā."
+     },
+     {
+      "title": "Swimming the Kāverī with the devara-peṭṭige",
+      "text": "When soldiers tried to seize the devara-peṭṭige (the casket of the worship-icons and ornaments), he swam some twenty kilometres down the rushing Kāverī holding the sacred chest so that no unqualified hand should touch it. A sword-wound taken in the act would have disqualified him from ritual service, but his guru healed him within forty-eight days through special Narasiṁha worship."
+     },
+     {
+      "title": "How the title Bhāṣyadīpikācārya was won",
+      "text": "One night his guru Śeṣacandrikācārya found the young ascetic asleep clutching a manuscript — the Bhāṣyadīpikā. On reading it he was astonished at its brilliance, conferred the honorific “Bhāṣyadīpikācārya,” and reinstated him as successor. The place where he composed his works — the Bhāvan Kalmaṇṭapam — still bears his image carved on a pillar."
+     }
+    ],
+    "verses": [
+     {
+      "deva": "आम्रस्तम्भात् समागत्य ताम्रतुण्डान् निहत्य यः।\nनम्रं नौमि जगन्नाथं ताम्रोपात्तं नृकेसरी॥",
+      "iast": "āmrastambhāt samāgatya tāmratuṇḍān nihatya yaḥ | namraṃ naumi jagannāthaṃ tāmropāttaṃ nṛkesarī ||",
+      "note": "His own verse on the man-lion (Nṛkesarī) who came forth from the mango-pillar and struck down the copper-armed foe — from the Bhāṣyadīpikā. (Reading normalised from the two source sites.)"
+     }
+    ],
+    "refs": [
+     {
+      "label": "madhwayati.blogspot.com",
+      "url": "https://madhwayati.blogspot.com/2019/04/jagannatha-teertharu-1770-kumbakonam.html"
+     },
+     {
+      "label": "sumadhwaseva.com",
+      "url": "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/jagannatha-tirtharu/"
+     }
+    ]
+   }
   },
   {
    "id": "srinatha_v",

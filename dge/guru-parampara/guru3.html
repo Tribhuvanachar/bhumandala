@@ -143,7 +143,7 @@ dialog::backdrop{background:#0008}.sheet{padding:16px}.sheet-head{display:flex;a
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </div>
 
-<script src="guru-data.js?v=1"></script>
+<script src="guru-data.js?v=2"></script>
 <script>
 /* guru3 — the Trunk-and-Lines layout, fed from the CENTRAL parampara store.
    Every real line with true counts; era slider; bottom nav; toasts. */
@@ -239,6 +239,7 @@ function card(p, i, list, l) {
    ${(p.contemporaries || []).filter(c => G.byId[c]).slice(0, 4).map(c =>
      `<button class="linkbtn" onclick="crossJump('${c}')">Contemporary · ${esc(G.byId[c].name.split(" ")[0])}</button>`).join("")}
   </div>
+  ${window.DGE_GURU.bioHtml(p)}
  </div></div></div>
  </article>`;
 }
