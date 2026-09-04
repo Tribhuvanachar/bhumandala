@@ -44,6 +44,55 @@ def is_heading(line):
     return leading_tabs(line) >= 2 and len(t) <= 40
 
 
+def linkify_footnotes(vy, vid):
+    """Split the vyākhyā into main prose + the trailing F.N. apparatus, and
+    return one HTML string where each inline (N)/(*) marker in the prose is a
+    superscript link to its footnote, and each footnote back-links (↩) to its
+    marker. Pure in-card anchors — no reader JS. If there is no F.N. block the
+    prose is returned unchanged (markers left as plain text)."""
+    m = re.search(r'(^|\n)\s*F\.N\.?\s*\n', vy)
+    if not m:
+        return vy
+    prose, fnraw = vy[:m.start()].strip(), vy[m.end():]
+    # footnote definitions: a line opening "(<key>. " with balanced parens
+    defs = []                                     # (key, text)
+    tokens = re.split(r'\n(?=\(\s*(?:\d+|\*+)\.)', fnraw)
+    for tok in tokens:
+        dm = re.match(r'\(\s*(\d+|\*+)\.\s*(.*)', tok, re.S)
+        if not dm:
+            continue
+        key = dm.group(1)
+        text = dm.group(2).strip().rstrip(')').strip()
+        text = re.sub(r'\s+', ' ', text)
+        defs.append((key, text))
+    if not defs:
+        return prose
+    star_seen = [0]
+
+    def ref2(mo):
+        k = mo.group(1)
+        if k.isdigit():
+            sub = k
+        else:
+            star_seen[0] += 1
+            sub = 's%d' % star_seen[0]
+        return ('<sup class="tp-fnref" id="tpref-%s-%s"><a href="#tpfn-%s-%s">%s</a></sup>'
+                % (vid, sub, vid, sub, k))
+    prose_html = re.sub(r'\((\d+|\*+)\)', ref2, prose)
+    items = []
+    star_out = [0]
+    for key, text in defs:
+        if key.isdigit():
+            sub = key
+        else:
+            star_out[0] += 1
+            sub = 's%d' % star_out[0]
+        items.append('<div class="tp-fnote" id="tpfn-%s-%s"><a class="tp-fnback" '
+                     'href="#tpref-%s-%s">%s.</a> %s</div>'
+                     % (vid, sub, vid, sub, key, text))
+    return prose_html + '<div class="tp-fnotes">' + ''.join(items) + '</div>'
+
+
 def parse_block(body, vnum):
     """-> (heading_or_None, mula_str, vyakhya_str)."""
     raw_lines = [ln for ln in body.split('\n') if ln.strip()]
@@ -106,7 +155,7 @@ def main():
                 if not cats or cats[-1] != b['category']:
                     cats.append(b['category'])
             if b['vyakhya']:
-                it.setdefault('commentaries', {})[KEY] = b['vyakhya']
+                it.setdefault('commentaries', {})[KEY] = linkify_footnotes(b['vyakhya'], it['id'])
         if mode == '--write':
             json.dump(data, open(dj, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         report[slug] = (len(data['items']), n_mula, n_cat, len(cats))

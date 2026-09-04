@@ -971,3 +971,14 @@ body.dge-app-view .shloka-list { gap: 20px; }
 }
 .dge-tp-place:hover { background: var(--accent-red); color: #fff; }
 .dge-tp-place .dge-tp-arrow { opacity: .7; font-weight: 400; }
+
+/* Tīrthaprabandha ṭīkā footnotes: inline superscript refs + a back-linked
+   footnote list, embedded in the commentary HTML (tools/tirtha rebuild). */
+sup.tp-fnref { font-size: .7em; line-height: 0; }
+sup.tp-fnref a { color: var(--accent-red); text-decoration: none; font-weight: 700; padding: 0 1px; }
+sup.tp-fnref a:hover { text-decoration: underline; }
+sup.tp-fnref:target a, .tp-fnref:target { background: var(--accent-glow, rgba(200,120,40,.25)); border-radius: 3px; }
+.tp-fnotes { margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--card-border); font-size: .92em; }
+.tp-fnote { margin: 3px 0; color: var(--muted-text); }
+.tp-fnote:target { background: var(--accent-glow, rgba(200,120,40,.18)); border-radius: 4px; padding: 2px 4px; }
+.tp-fnote a.tp-fnback { color: var(--accent-red); text-decoration: none; font-weight: 700; margin-right: 4px; }
