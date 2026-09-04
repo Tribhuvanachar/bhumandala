@@ -29,7 +29,7 @@
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "adamaru",
       "confidence": "traditional"
     },
@@ -54,6 +54,50 @@
       "role": null,
       "matha": "core",
       "confidence": "medium"
+    },
+    {
+      "id": "amarendra",
+      "name": "Amarendra Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "anandanidhi",
+      "name": "Anandanidhi Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "anuprajna",
+      "name": "Anuprajna Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "aparajitha",
+      "name": "Aparajitha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
     },
     {
       "id": "balagaru",
@@ -100,6 +144,17 @@
       "confidence": "high"
     },
     {
+      "id": "bhuvanendra_2",
+      "name": "Bhuvanendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "bhuvanendra_k",
       "name": "Bhuvanendra Tirtha",
       "titles": [],
@@ -133,6 +188,39 @@
       "confidence": "medium"
     },
     {
+      "id": "chintamani",
+      "name": "Chintamani Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "damodara",
+      "name": "Damodara Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "damodara_2",
+      "name": "Damodara Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
       "id": "dayanidhi",
       "name": "Dayanidhi Tirtha",
       "titles": [],
@@ -155,6 +243,39 @@
       "confidence": "medium"
     },
     {
+      "id": "dharadhara",
+      "name": "Dharadhara Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "dharaneedhara",
+      "name": "Dharaneedhara Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "dharanidhara",
+      "name": "Dharanidhara Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "dheerendra",
       "name": "Dheerendra Tirtha",
       "titles": [],
@@ -174,6 +295,17 @@
       "death": null,
       "role": null,
       "matha": "mula",
+      "confidence": "traditional"
+    },
+    {
+      "id": "eeshapriya",
+      "name": "Eeshapriya Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "33th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
       "confidence": "traditional"
     },
     {
@@ -234,6 +366,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "gopinatha",
+      "name": "Gopinatha Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "gunanidhi",
       "name": "Gunanidhi Tirtha",
       "titles": [],
@@ -245,6 +388,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "gunanidhi_2",
+      "name": "Gunanidhi Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "gunasaranidhi",
       "name": "Gunasaranidhi Tirtha",
       "titles": [],
@@ -253,6 +407,17 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "hamsendra",
+      "name": "Hamsendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
       "confidence": "traditional"
     },
     {
@@ -275,6 +440,39 @@
       "death": null,
       "role": null,
       "matha": "haridasa",
+      "confidence": "traditional"
+    },
+    {
+      "id": "hiranyagarbha",
+      "name": "Hiranyagarbha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "jagadbhushana",
+      "name": "Jagadbhushana Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "jagannatha",
+      "name": "Jagannatha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
       "confidence": "traditional"
     },
     {
@@ -403,6 +601,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "kamalaksha",
+      "name": "Kamalaksha Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "kamalekshana",
+      "name": "Kamalekshana Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "kanaka",
       "name": "Kanaka Dasa",
       "titles": [
@@ -433,7 +653,7 @@
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
       "confidence": "traditional"
     },
@@ -449,6 +669,28 @@
       "role": null,
       "matha": "uttaradi",
       "confidence": "medium"
+    },
+    {
+      "id": "kavindra_2",
+      "name": "Kavindra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "kavindra_3",
+      "name": "Kavindra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
     },
     {
       "id": "keshava_k",
@@ -473,6 +715,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "krishna",
+      "name": "Krishna Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
       "id": "krishnapura_cur",
       "name": "Vidyasagara Tirtha (Krishnapura)",
       "titles": [],
@@ -490,7 +743,7 @@
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
       "confidence": "traditional"
     },
@@ -514,6 +767,28 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmidhara_2",
+      "name": "Lakshmidhara Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmikanta",
+      "name": "Lakshmikanta Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
       "confidence": "traditional"
     },
     {
@@ -550,6 +825,50 @@
       "confidence": "traditional"
     },
     {
+      "id": "lakshmimanohara_2",
+      "name": "Lakshmimanohara Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmimanojna",
+      "name": "Lakshmimanojna Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshminarayana",
+      "name": "Lakshminarayana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshminarayana_2",
+      "name": "Lakshminarayana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
       "id": "lakshminarayana_v",
       "name": "Lakshminarayana Tirtha",
       "titles": [],
@@ -583,6 +902,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "lakshmindra",
+      "name": "Lakshmindra Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmipathi",
+      "name": "Lakshmipathi Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
       "id": "lakshmipathi_v",
       "name": "Lakshmipathi Tirtha",
       "titles": [],
@@ -605,6 +946,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "lakshmipriya",
+      "name": "Lakshmipriya Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmiramana",
+      "name": "Lakshmiramana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmisamudra",
+      "name": "Lakshmisamudra Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
       "id": "lakshmivallabha",
       "name": "Lakshmivallabha Tirtha",
       "titles": [],
@@ -613,6 +987,61 @@
       "death": null,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmivallabha_2",
+      "name": "Lakshmivallabha Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lokanaatha",
+      "name": "Lokanaatha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lokanatha",
+      "name": "Lokanatha Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lokapoojya",
+      "name": "Lokapoojya Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lokesha",
+      "name": "Lokesha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
       "confidence": "traditional"
     },
     {
@@ -652,6 +1081,28 @@
       "role": null,
       "matha": "core",
       "confidence": "high"
+    },
+    {
+      "id": "mahendra",
+      "name": "Mahendra Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "mahesha",
+      "name": "Mahesha Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
     },
     {
       "id": "mahipatidasa",
@@ -754,7 +1205,7 @@
       "period": "13th-14th c.",
       "birth": 1250,
       "death": 1330,
-      "role": null,
+      "role": "1st pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
       "confidence": "traditional"
     },
@@ -787,7 +1238,7 @@
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "pejawara",
       "confidence": "traditional"
     },
@@ -800,6 +1251,28 @@
       "death": null,
       "role": null,
       "matha": "mula",
+      "confidence": "traditional"
+    },
+    {
+      "id": "prajnaamoorthi",
+      "name": "Prajnaamoorthi Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "prajnaamurthi",
+      "name": "Prajnaamurthi Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
       "confidence": "traditional"
     },
     {
@@ -827,6 +1300,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "punyasloka",
+      "name": "Punyasloka Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
       "id": "purandara",
       "name": "Purandara Dasa",
       "titles": [
@@ -851,14 +1335,36 @@
       "confidence": "traditional"
     },
     {
+      "id": "pushkaraksha",
+      "name": "Pushkaraksha Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
       "id": "puttige_u",
       "name": "Upendra Tirtha (Puttige)",
       "titles": [],
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghava",
+      "name": "Raghava Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
       "confidence": "traditional"
     },
     {
@@ -876,6 +1382,28 @@
       "confidence": "high"
     },
     {
+      "id": "raghavendra_2",
+      "name": "Raghavendra Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghavendra_3",
+      "name": "Raghavendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghavendra_k",
       "name": "Raghavendra Tirtha",
       "titles": [],
@@ -887,6 +1415,28 @@
       "confidence": "medium"
     },
     {
+      "id": "raghubhushana",
+      "name": "Raghubhushana Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghumanya",
+      "name": "Raghumanya Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghunandana",
       "name": "Raghunandana Tirtha",
       "titles": [],
@@ -895,6 +1445,61 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunandana_2",
+      "name": "Raghunandana Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunandana_3",
+      "name": "Raghunandana Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha",
+      "name": "Raghunatha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_2",
+      "name": "Raghunatha Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_3",
+      "name": "Raghunatha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
       "confidence": "traditional"
     },
     {
@@ -931,6 +1536,72 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghupathi",
+      "name": "Raghupathi Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati",
+      "name": "Raghupati Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupraveera",
+      "name": "Raghupraveera Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupriya",
+      "name": "Raghupriya Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupungava",
+      "name": "Raghupungava Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuratna",
+      "name": "Raghuratna Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghuttama",
       "name": "Raghuttama Tirtha (Bhavabodhacharya)",
       "titles": [
@@ -944,6 +1615,39 @@
       "confidence": "high"
     },
     {
+      "id": "raghuttma",
+      "name": "Raghuttma Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvallabha",
+      "name": "Raghuvallabha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvara",
+      "name": "Raghuvara Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghuvarya",
       "name": "Raghuvarya Tirtha",
       "titles": [],
@@ -953,6 +1657,28 @@
       "role": null,
       "matha": "uttaradi",
       "confidence": "medium"
+    },
+    {
+      "id": "raghuvarya_2",
+      "name": "Raghuvarya Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "rajarajshwara",
+      "name": "Rajarajshwara Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
     },
     {
       "id": "rajendra",
@@ -988,6 +1714,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "ramabhadra",
+      "name": "Ramabhadra Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramachandra",
+      "name": "Ramachandra Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramachandra_2",
+      "name": "Ramachandra Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "ramachandra_u",
       "name": "Ramachandra Tirtha",
       "titles": [],
@@ -1007,6 +1766,61 @@
       "death": null,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramanatha",
+      "name": "Ramanatha Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ranganatha",
+      "name": "Ranganatha Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ratnagarbha",
+      "name": "Ratnagarbha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "samatmesha",
+      "name": "Samatmesha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "sambhava",
+      "name": "Sambhava Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
       "confidence": "traditional"
     },
     {
@@ -1353,6 +2167,17 @@
       "confidence": "high"
     },
     {
+      "id": "shatayushi_sudhindra",
+      "name": "Shatayushi Sudhindra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "shirur_cur",
       "name": "Lakshmivara Tirtha (Shirur)",
       "titles": [],
@@ -1370,8 +2195,52 @@
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "shreenidhi",
+      "name": "Shreenidhi Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "shreenivasa",
+      "name": "Shreenivasa Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "shreevallabha",
+      "name": "Shreevallabha Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "shreevatsanka",
+      "name": "Shreevatsanka Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
       "confidence": "traditional"
     },
     {
@@ -1392,9 +2261,20 @@
       "period": "13th-14th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "1st pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "sode",
       "confidence": "medium"
+    },
+    {
+      "id": "sridhara",
+      "name": "Sridhara Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
     },
     {
       "id": "sridhara_s",
@@ -1438,6 +2318,28 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "srinidhi_2",
+      "name": "Srinidhi Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "srinivasa",
+      "name": "Srinivasa Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
       "confidence": "traditional"
     },
     {
@@ -1485,6 +2387,28 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "srivallabha",
+      "name": "Srivallabha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "srivatsanka",
+      "name": "Srivatsanka Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
       "confidence": "traditional"
     },
     {
@@ -1668,6 +2592,17 @@
       "confidence": "high"
     },
     {
+      "id": "sujnanendra_2",
+      "name": "Sujnanendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "sukrathindra_k",
       "name": "Sukrathindra Tirtha",
       "titles": [],
@@ -1714,6 +2649,17 @@
       "confidence": "high"
     },
     {
+      "id": "sumatindra_2",
+      "name": "Sumatindra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
       "id": "suprajnendra",
       "name": "Suprajnendra Tirtha",
       "titles": [],
@@ -1745,6 +2691,61 @@
       "role": null,
       "matha": "raghavendra",
       "confidence": "high"
+    },
+    {
+      "id": "surendra_2",
+      "name": "Surendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "suresha",
+      "name": "Suresha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "suresha_2",
+      "name": "Suresha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "suresha_3",
+      "name": "Suresha Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "sureshwara",
+      "name": "Sureshwara Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
     },
     {
       "id": "suryindra",
@@ -1782,6 +2783,17 @@
       "role": null,
       "matha": "raghavendra",
       "confidence": "high"
+    },
+    {
+      "id": "sushreendra",
+      "name": "Sushreendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
     },
     {
       "id": "suvratindra",
@@ -1825,6 +2837,39 @@
       "death": 1420,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "tapomurthi",
+      "name": "Tapomurthi Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "taponidhi",
+      "name": "Taponidhi Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "trailokyapavana",
+      "name": "Trailokyapavana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
       "confidence": "traditional"
     },
     {
@@ -1872,6 +2917,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "uttama",
+      "name": "Uttama Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
       "id": "uttanda",
       "name": "Uttanda Ramachandra Tirtha",
       "titles": [],
@@ -1880,6 +2936,17 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vadeendra",
+      "name": "Vadeendra Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
       "confidence": "traditional"
     },
     {
@@ -1894,6 +2961,17 @@
       "confidence": "high"
     },
     {
+      "id": "vadindra_2",
+      "name": "Vadindra Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
       "id": "vadiraja",
       "name": "Vadiraja Tirtha",
       "titles": [
@@ -1902,9 +2980,20 @@
       "period": "c.1480-1600 (traditional 120-yr lifespan; 16th-c. floruit attested)",
       "birth": 1480,
       "death": 1600,
-      "role": null,
+      "role": "20th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "sode",
       "confidence": "high"
+    },
+    {
+      "id": "vadivandya",
+      "name": "Vadivandya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
     },
     {
       "id": "vageesha",
@@ -1918,6 +3007,50 @@
       "confidence": "traditional"
     },
     {
+      "id": "vageesha_2",
+      "name": "Vageesha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vagisha",
+      "name": "Vagisha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vagisha_2",
+      "name": "Vagisha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vaikuntharaja",
+      "name": "Vaikuntharaja Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vairagyanidhi",
       "name": "Vairagyanidhi Tirtha",
       "titles": [],
@@ -1926,6 +3059,61 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vamana",
+      "name": "Vamana Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vamana_2",
+      "name": "Vamana Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "varadapati",
+      "name": "Varadapati Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "varadaraja",
+      "name": "Varadaraja Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "varadaraja_2",
+      "name": "Varadaraja Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
       "confidence": "traditional"
     },
     {
@@ -1951,6 +3139,39 @@
       "confidence": "medium"
     },
     {
+      "id": "varaha",
+      "name": "Varaha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vareesha",
+      "name": "Vareesha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "varijaksha",
+      "name": "Varijaksha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vasudendra_k",
       "name": "Vasudendra Tirtha",
       "titles": [],
@@ -1960,6 +3181,50 @@
       "role": null,
       "matha": "kashi",
       "confidence": "medium"
+    },
+    {
+      "id": "vasudeva",
+      "name": "Vasudeva Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vasudeva_2",
+      "name": "Vasudeva Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vasudeva_3",
+      "name": "Vasudeva Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vasudeva_4",
+      "name": "Vasudeva Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
     },
     {
       "id": "vasudhendra",
@@ -1973,6 +3238,116 @@
       "confidence": "high"
     },
     {
+      "id": "vedabhushana",
+      "name": "Vedabhushana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedagamya",
+      "name": "Vedagamya Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedagarbha",
+      "name": "Vedagarbha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedagarbha_2",
+      "name": "Vedagarbha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedagarbha_3",
+      "name": "Vedagarbha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedagarbha_4",
+      "name": "Vedagarbha Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedanga",
+      "name": "Vedanga Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedanidhi",
+      "name": "Vedanidhi Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedanidhi_2",
+      "name": "Vedanidhi Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedanidhi_3",
+      "name": "Vedanidhi Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
       "id": "vedanidhi_u",
       "name": "Vedanidhi Tirtha",
       "titles": [],
@@ -1984,6 +3359,138 @@
       "confidence": "medium"
     },
     {
+      "id": "vedapati",
+      "name": "Vedapati Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedaraja",
+      "name": "Vedaraja Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedaraja_2",
+      "name": "Vedaraja Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedatma",
+      "name": "Vedatma Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavandhya",
+      "name": "Vedavandhya Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavardhana",
+      "name": "Vedavardhana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavedya",
+      "name": "Vedavedya Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavedya_2",
+      "name": "Vedavedya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavedya_3",
+      "name": "Vedavedya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavyasa",
+      "name": "Vedavyasa Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavyasa_2",
+      "name": "Vedavyasa Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedavyasa_3",
+      "name": "Vedavyasa Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
       "id": "vedavyasa_u",
       "name": "Vedavyasa Tirtha",
       "titles": [],
@@ -1993,6 +3500,28 @@
       "role": null,
       "matha": "uttaradi",
       "confidence": "medium"
+    },
+    {
+      "id": "vedhanidhi",
+      "name": "Vedhanidhi Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedhavallabha",
+      "name": "Vedhavallabha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
     },
     {
       "id": "venugopaladasa",
@@ -2008,6 +3537,94 @@
       "confidence": "traditional"
     },
     {
+      "id": "vibhudadiraja",
+      "name": "Vibhudadiraja Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudamanya",
+      "name": "Vibhudamanya Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudapati",
+      "name": "Vibhudapati Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudavallabha",
+      "name": "Vibhudavallabha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudavarya",
+      "name": "Vibhudavarya Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudavndya",
+      "name": "Vibhudavndya Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudeesha",
+      "name": "Vibhudeesha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudendra",
+      "name": "Vibhudendra Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vibhudendra_k",
       "name": "Vibhudendra Tirtha",
       "titles": [],
@@ -2019,15 +3636,59 @@
       "confidence": "medium"
     },
     {
+      "id": "vibudhadhiraja",
+      "name": "Vibudhadhiraja Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vibudhapriya",
       "name": "Vibudhapriya Tirtha",
       "titles": [],
       "period": "late 19th - mid 20th c.",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "29th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "adamaru",
       "confidence": "medium"
+    },
+    {
+      "id": "vibudhapriya_2",
+      "name": "Vibudhapriya Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibudhavandya",
+      "name": "Vibudhavandya Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibudhavarya",
+      "name": "Vibudhavarya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
     },
     {
       "id": "vibudhendra",
@@ -2041,6 +3702,182 @@
       "confidence": "traditional"
     },
     {
+      "id": "vibudhendra_2",
+      "name": "Vibudhendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibudhesha",
+      "name": "Vibudhesha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyaaraja",
+      "name": "Vidhyaaraja Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyadheesha",
+      "name": "Vidhyadheesha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyamurthi",
+      "name": "Vidhyamurthi Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyamurthi_2",
+      "name": "Vidhyamurthi Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyanidhi",
+      "name": "Vidhyanidhi Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyapati",
+      "name": "Vidhyapati Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyapati_2",
+      "name": "Vidhyapati Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyarajeshwara",
+      "name": "Vidhyarajeshwara Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaadheesha",
+      "name": "Vidyaadheesha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaadhiraja",
+      "name": "Vidyaadhiraja Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaanidhi",
+      "name": "Vidyaanidhi Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaapathi",
+      "name": "Vidyaapathi Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaapoorna",
+      "name": "Vidyaapoorna Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "33th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaasamudra",
+      "name": "Vidyaasamudra Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyadhiraja",
       "name": "Vidyadhiraja Tirtha",
       "titles": [],
@@ -2050,6 +3887,17 @@
       "role": null,
       "matha": "core",
       "confidence": "medium"
+    },
+    {
+      "id": "vidyadhisha",
+      "name": "Vidyadhisha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
     },
     {
       "id": "vidyadhisha_u",
@@ -2091,9 +3939,20 @@
       "period": "27 Jul 1913 - 14 May 2000",
       "birth": 1913,
       "death": 2000,
-      "role": null,
+      "role": "30th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
       "confidence": "high"
+    },
+    {
+      "id": "vidyamoorthi",
+      "name": "Vidyamoorthi Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
     },
     {
       "id": "vidyanatha_v",
@@ -2104,6 +3963,28 @@
       "death": null,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyanidhi",
+      "name": "Vidyanidhi Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyanidhi_2",
+      "name": "Vidyanidhi Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
       "confidence": "traditional"
     },
     {
@@ -2151,6 +4032,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyapati",
+      "name": "Vidyapati Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyapati_2",
+      "name": "Vidyapati Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyapayonidhi",
       "name": "Vidyapayonidhi Tirtha",
       "titles": [],
@@ -2184,6 +4087,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyaraja",
+      "name": "Vidyaraja Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaraja_2",
+      "name": "Vidyaraja Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyarathna",
+      "name": "Vidyarathna Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "34th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyaratnakara",
       "name": "Vidyaratnakara Tirtha",
       "titles": [],
@@ -2195,6 +4131,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyasagara",
+      "name": "Vidyasagara Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyasamudra",
       "name": "Vidyasamudra Tirtha",
       "titles": [],
@@ -2203,6 +4150,17 @@
       "death": null,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyasamudra_2",
+      "name": "Vidyasamudra Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
       "confidence": "traditional"
     },
     {
@@ -2261,6 +4219,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyavallabha",
+      "name": "Vidyavallabha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyavallabha_v",
       "name": "Vidyavallabha Tirtha",
       "titles": [],
@@ -2283,6 +4252,50 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyavarinidhi",
+      "name": "Vidyavarinidhi Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyendra",
+      "name": "Vidyendra Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyesha",
+      "name": "Vidyesha Tirtha (Palimaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyesha_2",
+      "name": "Vidyesha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vignananidhi",
       "name": "Vignananidhi Tirtha",
       "titles": [],
@@ -2291,6 +4304,17 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vijaya",
+      "name": "Vijaya Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
       "confidence": "traditional"
     },
     {
@@ -2315,7 +4339,7 @@
       "period": "15th-16th c. (dates contested: 1381-1410 / 1410 / 1434-1448)",
       "birth": null,
       "death": null,
-      "role": null,
+      "role": "6th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "pejawara",
       "confidence": "medium"
     },
@@ -2344,6 +4368,358 @@
       "confidence": "high"
     },
     {
+      "id": "vishva",
+      "name": "Vishva Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvabhushana",
+      "name": "Vishvabhushana Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvabhushana_2",
+      "name": "Vishvabhushana Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvabodha",
+      "name": "Vishvabodha Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvadhiraja",
+      "name": "Vishvadhiraja Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvadhirajendra",
+      "name": "Vishvadhirajendra Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvadhisha",
+      "name": "Vishvadhisha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvadhisha_2",
+      "name": "Vishvadhisha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "33th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvadhisha_3",
+      "name": "Vishvadhisha Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvajna",
+      "name": "Vishvajna Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvamanohara",
+      "name": "Vishvamanohara Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvamanya",
+      "name": "Vishvamanya Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvamurthy",
+      "name": "Vishvamurthy Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvamurti",
+      "name": "Vishvamurti Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvanatha",
+      "name": "Vishvanatha Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvanidhi",
+      "name": "Vishvanidhi Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvanidhi_2",
+      "name": "Vishvanidhi Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvapati",
+      "name": "Vishvapati Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvapati_2",
+      "name": "Vishvapati Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvaprajna",
+      "name": "Vishvaprajna Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvapriya",
+      "name": "Vishvapriya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvapriya_2",
+      "name": "Vishvapriya Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvaraja",
+      "name": "Vishvaraja Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvatma",
+      "name": "Vishvatma Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvavallabha",
+      "name": "Vishvavallabha Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvavandya",
+      "name": "Vishvavandya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvavandya_2",
+      "name": "Vishvavandya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvavandya_3",
+      "name": "Vishvavandya Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvavandya_4",
+      "name": "Vishvavandya Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvavarya",
+      "name": "Vishvavarya Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvendra",
+      "name": "Vishvendra Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "34th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvendra_2",
+      "name": "Vishvendra Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
       "id": "vishvesha",
       "name": "Vishvesha Tirtha",
       "titles": [
@@ -2352,9 +4728,108 @@
       "period": "27 Apr 1931 - 29 Dec 2019",
       "birth": 1931,
       "death": 2019,
-      "role": null,
+      "role": "33th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "pejawara",
       "confidence": "high"
+    },
+    {
+      "id": "vishvesha_2",
+      "name": "Vishvesha Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishveshwara",
+      "name": "Vishveshwara Tirtha (Pejawara)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Pejawara Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "pejawara",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishvottama",
+      "name": "Vishvottama Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "35th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwaadheesha",
+      "name": "Vishwaadheesha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwaadhiraja",
+      "name": "Vishwaadhiraja Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwaaraja",
+      "name": "Vishwaaraja Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwabhooshana",
+      "name": "Vishwabhooshana Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwadheesha",
+      "name": "Vishwadheesha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwapati",
+      "name": "Vishwapati Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
     },
     {
       "id": "vishwaprasanna",
@@ -2379,6 +4854,105 @@
       "confidence": "high"
     },
     {
+      "id": "vishwapungava",
+      "name": "Vishwapungava Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwaraja",
+      "name": "Vishwaraja Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwavallabha",
+      "name": "Vishwavallabha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwavallabha_2",
+      "name": "Vishwavallabha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwavandhya",
+      "name": "Vishwavandhya Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwendra",
+      "name": "Vishwendra Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwesha",
+      "name": "Vishwesha Tirtha (Adamaru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwesha_2",
+      "name": "Vishwesha Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vithala",
+      "name": "Vithala Tirtha (Sode)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
       "id": "vyasatirtha",
       "name": "Vyasatirtha (Vyasaraja)",
       "titles": [
@@ -2392,6 +4966,28 @@
       "role": null,
       "matha": "vyasaraja",
       "confidence": "high"
+    },
+    {
+      "id": "yaadhavendra",
+      "name": "Yaadhavendra Tirtha (Krishnapura)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "yadavendra",
+      "name": "Yadavendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
     },
     {
       "id": "yadavendra1",
@@ -2427,6 +5023,39 @@
       "confidence": "medium"
     },
     {
+      "id": "yadavendra_2",
+      "name": "Yadavendra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "yadavottama",
+      "name": "Yadavottama Tirtha (Shirur)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "yadunandana",
+      "name": "Yadunandana Tirtha (Kaniyooru)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
       "id": "yogindra",
       "name": "Yogindra Tirtha",
       "titles": [],
@@ -2435,6 +5064,17 @@
       "death": 1688,
       "role": null,
       "matha": "raghavendra",
+      "confidence": "traditional"
+    },
+    {
+      "id": "yogindra_2",
+      "name": "Yogindra Tirtha (Puttige)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
+      "matha": "puttige",
       "confidence": "traditional"
     }
   ]
