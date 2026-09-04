@@ -331,6 +331,8 @@
       "id": "kumbakonam-tamil-nadu",
       "label": "Kumbakonam, Tamil Nadu",
       "people": [
+        "jagannatha_v",
+        "vidyapathi_v",
         "vijayindra"
       ],
       "gps": null
@@ -550,6 +552,14 @@
       "gps": null
     },
     {
+      "id": "penukonda-andhra-pradesh",
+      "label": "Penukonda, Andhra Pradesh",
+      "people": [
+        "lakshmikantha_v"
+      ],
+      "gps": null
+    },
+    {
       "id": "pune-maharashtra",
       "label": "Pune, Maharashtra",
       "people": [
@@ -599,6 +609,15 @@
       "gps": null
     },
     {
+      "id": "rayavellore-arcot-district-tamil-nadu",
+      "label": "Rayavellore, Arcot district, Tamil Nadu",
+      "people": [
+        "ramachandra_v",
+        "sripathi_v"
+      ],
+      "gps": null
+    },
+    {
       "id": "sangli-district-maharashtra",
       "label": "Sangli district, Maharashtra",
       "people": [
@@ -640,11 +659,28 @@
       "gps": null
     },
     {
+      "id": "sosale-t-narasipura-karnataka",
+      "label": "Sosale, T. Narasipura, Karnataka",
+      "people": [
+        "srinatha_v",
+        "vidyakantha_v",
+        "vidyanidhi_v",
+        "vidyaprasanna",
+        "vidyapurna_v",
+        "vidyasamudra",
+        "vidyasrinivasa"
+      ],
+      "gps": null
+    },
+    {
       "id": "srirangam-tamil-nadu",
       "label": "Srirangam, Tamil Nadu",
       "people": [
+        "lakshminatha_v",
         "sumatindra",
-        "upendra_r"
+        "upendra_r",
+        "vidyasridhara",
+        "vidyavaridhi"
       ],
       "gps": null
     },
@@ -661,6 +697,16 @@
       "label": "Tiruchirapalli, Tamil Nadu",
       "people": [
         "yogindra"
+      ],
+      "gps": null
+    },
+    {
+      "id": "tirumakudalu-karnataka",
+      "label": "Tirumakudalu, Karnataka",
+      "people": [
+        "lakshmivallabha",
+        "vidyavachaspathi",
+        "vidyavallabha_v"
       ],
       "gps": null
     },

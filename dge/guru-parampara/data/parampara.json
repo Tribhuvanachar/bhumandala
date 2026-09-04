@@ -4953,22 +4953,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1584-1594",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Penukonda",
+   "place": "Penukonda, Andhra Pradesh",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Rama Tirtha and guru of Sripathi Tirtha, holding the Vyasaraja Matha seat 1584-1594. His vrindavana is at Penukonda.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/lakshmikantha-thirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    14.08,
+    77.59
+   ]
   },
   {
    "id": "sripathi_v",
@@ -4978,22 +4983,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1594-1612",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Rayavellore",
+   "place": "Rayavellore, Arcot district, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "A pontiff praised as learned in every school (sarva-tantra-kovida), disciple of Lakshmikantha Tirtha and guru of Kambaluru Ramachandra Tirtha; he led the seat 1594-1612. His vrindavana is at Rayavellore.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/sri-sripathi-thirthara-aradhana/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.9165,
+    79.1325
+   ]
   },
   {
    "id": "ramachandra_v",
@@ -5001,24 +5011,29 @@
    "guru": "sripathi_v",
    "matha": "vyasaraja",
    "tag": "acharya",
-   "purva": null,
+   "purva": "Kambaluru Ramachandra",
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1575-1632; pontificate 1612-1632",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Rayavellore (moola); Tirumakudalu (mrittika)",
+   "place": "Rayavellore, Arcot district, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Known as Kambaluru Ramachandra Tirtha, a notable pontiff of the line whose disciples included Ratnagarbha Odeyaru and Vativala Narasimhacharya. He held the seat 1612-1632; his moola vrindavana is at Rayavellore in Arcot, with a mrittika vrindavana at Tirumakudalu.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/kambalur-ramachandra/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.21,
+    76.9
+   ]
   },
   {
    "id": "lakshmivallabha",
@@ -5028,22 +5043,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1632-1642",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Tirumakudalu",
+   "place": "Tirumakudalu, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Kambaluru Ramachandra Tirtha (1632-1642). His vrindavana, originally at Belur, was shifted to Tirumakudalu during the time of Vidyapayonidhi Tirtha so regular worship could continue.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/lakshmivallabha-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.21,
+    76.9
+   ]
   },
   {
    "id": "lakshminatha_v",
@@ -5053,22 +5073,29 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1642-1660",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
-   "works": [],
-   "contrib": null,
+   "brindavana": "Srirangam",
+   "place": "Srirangam, Tamil Nadu",
+   "works": [
+    "Chandrika Subodhini (vyakhyana)"
+   ],
+   "contrib": "Disciple of Lakshmivallabha Tirtha, who also studied under Yadavendra Tirtha and wrote the Chandrika Subodhini. He led the seat 1642-1660; his vrindavana is at Srirangam.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/lakshminatha-tirtharu-vm/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    10.862,
+    78.69
+   ]
   },
   {
    "id": "lakshmipathi_v",
@@ -5078,18 +5105,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1660-1670",
    "b": null,
    "d": null,
    "pont": null,
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Lakshminatha Tirtha and guru of Lakshminarayana Tirtha, holding the seat 1660-1670.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/lakshmipathi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -5110,7 +5138,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Lakshmipathi Tirtha and guru of Raghunatha Tirtha in the Vyasaraja Matha succession.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
@@ -5135,7 +5163,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Lakshminarayana Tirtha and guru of Jagannatha Tirtha in the Vyasaraja Matha succession.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
@@ -5153,22 +5181,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "pontificate 1755-1770",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Kumbakonam",
+   "place": "Kumbakonam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "One of the few Vyasaraja Matha pontiffs to take sannyasa directly from brahmacharya. Disciple of Sheshachandrikacharya and guru of Srinatha Tirtha (1755-1770); his vrindavana is at Kumbakonam.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/jagannatha-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    10.9602,
+    79.3845
+   ]
   },
   {
    "id": "srinatha_v",
@@ -5178,22 +5211,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "pontificate 1770-1780",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Jagannatha Tirtha and guru of Vidyanatha Tirtha (1770-1780). His vrindavana is at Sosale.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/srinatha-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyanatha_v",
@@ -5203,18 +5241,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "late 18th c.",
    "b": null,
    "d": null,
    "pont": null,
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Srinatha Tirtha and guru of Vidyapathi Tirtha, from whom the Vyasaraja Matha's long 'Vidya-' succession of names begins.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyanatha-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -5228,22 +5267,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "pontificate to 1798",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Kumbakonam",
+   "place": "Kumbakonam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyanatha Tirtha and guru of Vidyavallabha Tirtha; he entered his vrindavana at Kumbakonam in 1798.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyapathi-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    10.9602,
+    79.3845
+   ]
   },
   {
    "id": "vidyavallabha_v",
@@ -5253,22 +5297,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1798-1812",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Tirumakudalu",
+   "place": "Tirumakudalu, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyapathi Tirtha of Kumbakonam and guru of Vidyakantha Tirtha of Sosale (1798-1812). His vrindavana is at Tirumakudalu.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyavallaba-tirtharu-2/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.21,
+    76.9
+   ]
   },
   {
    "id": "vidyakantha_v",
@@ -5278,22 +5327,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "early 19th c.",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyavallabha Tirtha and guru of Vidyanidhi Tirtha; his vrindavana is at Sosale.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/sri-vidyakantha-theertharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyanidhi_v",
@@ -5303,22 +5357,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "pontificate to 1824",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyakantha Tirtha and guru of Vidyapurna Tirtha; he entered his vrindavana at Sosale in 1824.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyanidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyapurna_v",
@@ -5328,22 +5387,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1824-1872",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "A long-serving pontiff (1824-1872), disciple of Vidyanidhi Tirtha and guru of Vidyasrisindhu Tirtha; his vrindavana is at Sosale.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyapoorna-thirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyasrisindhu",
@@ -5353,18 +5417,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "late 19th c.",
    "b": null,
    "d": null,
    "pont": null,
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyapurna Tirtha and guru of Vidyasridhara Tirtha.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyasrisindhu-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -5378,22 +5443,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1884-1887",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srirangam",
+   "place": "Srirangam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyasrisindhu Tirtha and guru of Vidyasrinivasa Tirtha (1884-1887); his vrindavana is at Srirangam.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidya-sridhara-theertharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    10.862,
+    78.69
+   ]
   },
   {
    "id": "vidyasrinivasa",
@@ -5403,22 +5473,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1887-1890",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyasridhara Tirtha and guru of Vidyasamudra Tirtha; he entered his vrindavana at Sosale in 1890.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidya-srinivasa-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyasamudra",
@@ -5428,22 +5503,27 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "pontificate to 1903",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyasrinivasa Tirtha and guru of Vidyaratnakara Tirtha; he entered his vrindavana at Sosale in 1903.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyasamudraru/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyaratnakara",
@@ -5460,7 +5540,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Also known in his purvashrama as Ahobalacharya, father of Vidyaprasanna Tirtha; disciple of Vidyasamudra Tirtha and guru of Vidyavaridhi Tirtha.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
@@ -5476,24 +5556,29 @@
    "guru": "vidyaratnakara",
    "matha": "vyasaraja",
    "tag": "acharya",
-   "purva": null,
+   "purva": "Ramachar",
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1915-1940",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srirangam",
+   "place": "Srirangam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "In his purvashrama the son of Vidyasrinivasa Tirtha, he led the seat 1915-1940 and was guru of Vidyaprasanna Tirtha; his vrindavana is at Srirangam.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidya-varidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    10.862,
+    78.69
+   ]
   },
   {
    "id": "vidyaprasanna",
@@ -5501,24 +5586,29 @@
    "guru": "vidyavaridhi",
    "matha": "vyasaraja",
    "tag": "acharya",
-   "purva": null,
+   "purva": "Narasimhacharya",
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "1935-1969",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Sosale",
+   "place": "Sosale, T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "An advocate at Mysore before renouncing, son of Ahobalacharya (Vidyaratnakara Tirtha). He took sannyasa in 1935 and led the Vyasaraja Matha for the better part of three decades until 1969, when he entered his vrindavana at Sosale.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidyaprasanna-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.2,
+    76.89
+   ]
   },
   {
    "id": "vidyapayonidhi",
@@ -5535,7 +5625,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyaprasanna Tirtha and guru of Vidyavachaspathi Tirtha; during his time the vrindavana of Lakshmivallabha Tirtha was shifted to Tirumakudalu.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
@@ -5551,24 +5641,29 @@
    "guru": "vidyapayonidhi",
    "matha": "vyasaraja",
    "tag": "acharya",
-   "purva": null,
+   "purva": "G. N. Jayatirthacharya",
    "titles": [],
-   "period": "16th-20th c.",
+   "period": "20th c.",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Tirumakudalu",
+   "place": "Tirumakudalu, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Born G. N. Jayatirthacharya and taught by his father Narasimhamurthachar, noted for weaving citations from the Tamil Tiruppavai into his discourses. His vrindavana is at Tirumakudalu.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
-    "Wikipedia"
+    "Wikipedia",
+    "https://www.sumadhwaseva.com/yatigalu/vyasaraja-mutt/vidya-vachaspati-tirtharu/"
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.21,
+    76.9
+   ]
   },
   {
    "id": "vidyamanohara_v",
@@ -5585,7 +5680,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyavachaspathi Tirtha and guru of the present pontiff Vidyashreesha Tirtha.",
    "confidence": "traditional",
    "sources": [
     "vyasarajamatha.org",
