@@ -535,7 +535,7 @@ dialog.search::backdrop { background: rgba(0,0,0,.4); }
   </div>
 </dialog>
 
-<script src="guru-data.js?v=1"></script>
+<script src="guru-data.js?v=2"></script>
 <script>
 /* guru2 — the Metro layout, fed from the CENTRAL parampara store. All 19
    real lines; the metro overview shows the trunk + major rails and a
@@ -673,6 +673,7 @@ function renderRail(matha, focusId) {
               ${(n.sources || []).length ? `<dt>Sources</dt><dd style="font-size:.78rem;color:var(--ink-muted)">${esc(n.sources.join(" · "))}</dd>` : ""}
             </dl>
             <div class="conf" data-c="${esc(n.confidence === 'high' ? 'high' : n.confidence === 'low' ? 'low' : 'med')}">Confidence: ${esc(n.confidence || "unrated")}</div>
+            ${window.DGE_GURU.bioHtml(n)}
           </div>
         </div>
       </div>`;
