@@ -1,0 +1,2486 @@
+{
+ "schema": "grantha_mula_text",
+ "default_author": "Sri Vadiraja Tirtha",
+ "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+ "source_url": "https://tirthaprabandha.wordpress.com/",
+ "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation.",
+ "source_note": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation.",
+ "title": "तीर्थप्रबन्धः — पश्चिमप्रबन्धः (पश्चिमदिक्)",
+ "items": [
+  {
+   "id": "TP_PAS_001",
+   "reference": "Mangalacharana and Prarthana · 1",
+   "sanskrit_text": "|| श्रीमत् हनुमभीममध्वान्तर्गत रामकृष्णवेदव्यासात्मक श्री लक्ष्मीहयग्रीवाय नमः ||\nहरिक्षीराम्बुधेः स्वैरं भवघर्मरिपोर्मनः |\nविहराहरहश्चित्रचारित्रचतुरोर्मिषु",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Mangalacharana and Prarthana"
+   ],
+   "tirtha_link": "",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Mangalacharana and Prarthana",
+    "verse": 1
+   }
+  },
+  {
+   "id": "TP_PAS_002",
+   "reference": "Mangalacharana and Prarthana · 2",
+   "sanskrit_text": "हयग्रीवदयासिन्धुरंधूकृतभवाम्बुधिः |\nप्रबन्धमप्रतिद्वन्द्वं करोत्वेनमनेनसम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Mangalacharana and Prarthana"
+   ],
+   "tirtha_link": "",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Mangalacharana and Prarthana",
+    "verse": 2
+   }
+  },
+  {
+   "id": "TP_PAS_003",
+   "reference": "Mangalacharana and Prarthana · 3",
+   "sanskrit_text": "आजन्मभूर्मरटतोsखिलेषु तीर्थेषु तद्वर्णनभारमूड्वा |\nआयासमस्मन्म्रुदुमानसस्य वायुर्मुहुः कृन्ततु मध्वरूपी",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Mangalacharana and Prarthana"
+   ],
+   "tirtha_link": "",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Mangalacharana and Prarthana",
+    "verse": 3
+   }
+  },
+  {
+   "id": "TP_PAS_004",
+   "reference": "Mangalacharana and Prarthana · 4",
+   "sanskrit_text": "वागीशतीर्थमुनिवर्य भवद्दयाम्बु\nयोगेन पावय मनोगृहमन्वहं मे |\nनागेन्द्रतल्पमधिरोपय तत्पदाब्ज\nरागेण रंजय कलिं जय तद्विविक्षुम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Mangalacharana and Prarthana"
+   ],
+   "tirtha_link": "",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Mangalacharana and Prarthana",
+    "verse": 4
+   }
+  },
+  {
+   "id": "TP_PAS_005",
+   "reference": "Mangalacharana and Prarthana · 5",
+   "sanskrit_text": "तीर्थक्षेत्रतदीशानां माहात्म्यानि यथामति |\nवादिराजो यतिः स्तौति पद्यैः कतिपयैः कविः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Mangalacharana and Prarthana"
+   ],
+   "tirtha_link": "",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Mangalacharana and Prarthana",
+    "verse": 5
+   }
+  },
+  {
+   "id": "TP_PAS_006",
+   "reference": "Parashurama Kshetra · 6",
+   "sanskrit_text": "कर्णे पदन्यस्तरुची रिरंसुर्वाराशिवस्त्रं जघन्नाद्धि यस्याः |\nअमूमुचद्बाणकरेण भूमेः श्रीभार्गवः सा जयति क्षितिर्नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Parashurama Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Parashurama",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Parashurama Kshetra",
+    "verse": 6
+   }
+  },
+  {
+   "id": "TP_PAS_007",
+   "reference": "Udupi (Rajatapeethapura) · 7",
+   "sanskrit_text": "काशीतले कृतपदाsपि सरित् सुराणा\nमायाति यद्गतपवित्रसरोsधुनाsपि |\nरुद्रादिदेवगणसेवितसर्वभागं\nतद्रूप्यपीठपुरमप्रतिमं त्रिलोक्याम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 7
+   }
+  },
+  {
+   "id": "TP_PAS_008",
+   "reference": "Udupi (Rajatapeethapura) · 8",
+   "sanskrit_text": "यस्मिन् वाग्वज्रधारा दुरितकुलमहातूलदाहेsतिशूराः\nदण्डप्रोद्भासिहस्ताः स्पुरदसिसमसन्मार्गसक्ताः समस्ताः |\nश्रीकृष्णस्नेहपाशाः श्रमहरगतयः शान्तिभाजो विरक्ताः\nयोगीन्द्राश्चित्रलोकाधिपनिभविभावा मध्वदासा जयन्ति",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 8
+   }
+  },
+  {
+   "id": "TP_PAS_009",
+   "reference": "Udupi (Rajatapeethapura) · 9",
+   "sanskrit_text": "द्वारावतीं सकलभाग्यवतीमुपेक्ष्य\nगोपालबालललनाकरपूजनं च |\nवार्धिं वधूगृहमतीत्य स मध्वनाथो\nयत्रास्ति तद्रजतपीठपुरं गरीयः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 9
+   }
+  },
+  {
+   "id": "TP_PAS_010",
+   "reference": "Udupi (Rajatapeethapura) · 10",
+   "sanskrit_text": "रूपात्मकस्य भवतस्तुलानां न भेजुः\nक्षेत्राणि भारतमहीरचितान्यमूनि |\nईशाचलं च जयसीश्वरमात्रवासं\nश्रीमध्वहस्तकमलार्चितकृष्णमूर्त्या",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 10
+   }
+  },
+  {
+   "id": "TP_PAS_011",
+   "reference": "Udupi (Rajatapeethapura) · 11",
+   "sanskrit_text": "निर्मथ्योग्रभवार्णवे निजमनोsभीष्टं दिशामीति यः\nसम्यग् ज्ञापयितुं करेण विलसन्मन्थानमन्येन च |\nरम्यं दाम दधन् महेशरजतग्रामश्रियोsलन्कृतिः\nकर्मन्दीश्वरभक्तिबन्धनवशः प्रीतोsस्तु कृष्ण प्रभुः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 11
+   }
+  },
+  {
+   "id": "TP_PAS_012",
+   "reference": "Udupi (Rajatapeethapura) · 12",
+   "sanskrit_text": "चाञ्चल्यं पृष्ठदेशे कठिणकृतिरधोवक्त्रता क्वापि कोपो\nयाञ्चा कस्मादपकृतिरूपकारिश्वापि प्राज्ञमौले |\nस्त्र्यर्थेsन्यस्त्रीश्ववज्ञा किमिति रमण ते चोरता मायिकत्वम्\nचित्रं रोहावरोहाविति विरसगिराsप्यादृतः पातु कृष्णः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 12
+   }
+  },
+  {
+   "id": "TP_PAS_013",
+   "reference": "Udupi (Rajatapeethapura) · 13",
+   "sanskrit_text": "रूप्यात्मकामरपुरःसर सन्निरूप्य\nरूप्यात्मकं च भवतः कृपया गतस्य |\nरूप्यात्मकालयकृतालय यत् त्वमेव\nरूप्यात्मनो गतिरिहापि तदीश पाहि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 13
+   }
+  },
+  {
+   "id": "TP_PAS_014",
+   "reference": "Udupi (Rajatapeethapura) · 14",
+   "sanskrit_text": "शिवान्तर्यामितां स्वीयां प्रियान् प्रति निबोधयन् |\nदयावारिनिधिः शैवीं शिलामाश्रित्य शोभते",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 14
+   }
+  },
+  {
+   "id": "TP_PAS_015",
+   "reference": "Udupi (Rajatapeethapura) · 15",
+   "sanskrit_text": "ईशास्याहीशपदवीं भासयन्निव भाविनीम् |\nअध्यास्ते शेषशयनः स्निग्धां लिङ्गाशिलां हरिः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Udupi (Rajatapeethapura)"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Udupi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Udupi (Rajatapeethapura)",
+    "verse": 15
+   }
+  },
+  {
+   "id": "TP_PAS_016",
+   "reference": "Pajaka · 16",
+   "sanskrit_text": "पवित्रं पाजकक्षेत्रं कोन सेवेत कोविदः |\nसत्यलोकेश्वरः प्राणो यत्रावातरदुत्सुकः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Pajaka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Pajaka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Pajaka",
+    "verse": 16
+   }
+  },
+  {
+   "id": "TP_PAS_017",
+   "reference": "Kunjarugiri · 17",
+   "sanskrit_text": "परश्वधधनुर्बाणगदातीर्थोपशोभिते |\nगिरौ यत्र सुतप्रेम्नेवास्ते नित्यं हरिस्वसा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kunjarugiri"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kunjarugiri",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kunjarugiri",
+    "verse": 17
+   }
+  },
+  {
+   "id": "TP_PAS_018",
+   "reference": "Kunjarugiri · 18",
+   "sanskrit_text": "त्रिशूलधारणी दैत्यगजकुम्भविदारिणी |\nगिरीन्द्रशिखरावासा दुर्गा स्वर्गापवर्गदा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kunjarugiri"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kunjarugiri",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kunjarugiri",
+    "verse": 18
+   }
+  },
+  {
+   "id": "TP_PAS_019",
+   "reference": "Kunjarugiri · 19",
+   "sanskrit_text": "प्रलये जलदुर्गाsसि सर्गादौ गिरिविस्तृतिः |\nइदानीं स्थलदुर्गाsसि दुर्गे त्वं सद्गुणार्णवे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kunjarugiri"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kunjarugiri",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kunjarugiri",
+    "verse": 19
+   }
+  },
+  {
+   "id": "TP_PAS_020",
+   "reference": "Kunjarugiri · 20",
+   "sanskrit_text": "दुर्ज्ञेयत्वाद्दुःखदत्वादुष्ट्राप्यत्वाच्चदुर्जनैः |\nसतामभयभूत्वाच्च दुर्गा त्वं हृद्गुहाश्रयात्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kunjarugiri"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kunjarugiri",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kunjarugiri",
+    "verse": 20
+   }
+  },
+  {
+   "id": "TP_PAS_021",
+   "reference": "Ellooru · 21",
+   "sanskrit_text": "रक्षोगणक्षपणदक्षमहात्रिशूलं त्र्यक्षं वलक्षतनुमुल्लसदक्षमालम् |\nरूक्षाघशिक्षणविचक्षणशक्तयूथं दक्षाध्वरक्षयदमाश्रयविश्वनाथं",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Ellooru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ellooru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Ellooru",
+    "verse": 21
+   }
+  },
+  {
+   "id": "TP_PAS_022",
+   "reference": "Ellooru · 22",
+   "sanskrit_text": "अङ्गानुशङ्गतभुजङ्गमतुङ्गभोगम्\nगङ्गातरङ्गकृतमङ्गलमौलिभागम् |\nसंगीतलोलयतिपुङ्गवगीतगाथम्\nतं गौर्यंपागरसमाश्रय विश्वनाथम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Ellooru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ellooru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Ellooru",
+    "verse": 22
+   }
+  },
+  {
+   "id": "TP_PAS_023",
+   "reference": "Ellooru · 23",
+   "sanskrit_text": "इन्द्रादिदेवगणवन्दितपादपद्मम्\nचन्द्रार्धचूडमरविन्ददलायताक्षम् |\nकन्दर्पवैरिणमनिन्द्यममन्दबोधम्\nतं देवदेवमिममाश्रय विश्वनाथम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Ellooru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ellooru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Ellooru",
+    "verse": 23
+   }
+  },
+  {
+   "id": "TP_PAS_024",
+   "reference": "Ellooru · 24",
+   "sanskrit_text": "वन्दारुनारदसनन्दनमुख्ययोगि\nवृन्दैः प्रवन्द्यचरितैः परितश्चसेव्यम् |\nइन्दिन्दिरोपमसितेतरकण्ठकान्तिं\nसौन्दर्यमूर्तिमिममाश्रय विश्वनाथम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Ellooru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ellooru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Ellooru",
+    "verse": 24
+   }
+  },
+  {
+   "id": "TP_PAS_025",
+   "reference": "Ellooru · 25",
+   "sanskrit_text": "छन्दश्चयस्तुतचरित्र पुरत्रयारे\nकुन्दप्रसूनकृतसेवनतृप्तचित्त |\nत्वां दीनबन्धुमरुणेन्दुलसत्कपर्दं\nवन्देsरिमर्दन सुह्रुद्धन विश्वनाथ",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Ellooru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ellooru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Ellooru",
+    "verse": 25
+   }
+  },
+  {
+   "id": "TP_PAS_026",
+   "reference": "Ellooru · 26",
+   "sanskrit_text": "सुचारुकर्णलाङ्गूलशृङ्गान्घ्र्युदरद्रुञमुखम् |\nककुद्मन्तं वृषं श्वेतं नौमि शङ्करवाहनम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Ellooru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ellooru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Ellooru",
+    "verse": 26
+   }
+  },
+  {
+   "id": "TP_PAS_027",
+   "reference": "Madhyavata Matha · 27",
+   "sanskrit_text": "भवघर्मभवार्तिघ्नः स मठः सेव्यतां सता |\nकृष्णद्वैपायनघनो यत्रागाद्वायुवर्त्मना",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Madhyavata Matha"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Madhyavata",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Madhyavata Matha",
+    "verse": 27
+   }
+  },
+  {
+   "id": "TP_PAS_028",
+   "reference": "Madhyavata Matha · 28",
+   "sanskrit_text": "स्नेहार्द्रमध्वहृदयाख्यदशानुषक्तं\nमोहाख्यसन्तमसकृन्तनतीव्रशक्तिम् |\nश्रीमध्यवाठपौरटभाजनस्थं\nव्यासप्रदीपमिममादरतो भजध्वम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Madhyavata Matha"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Madhyavata",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Madhyavata Matha",
+    "verse": 28
+   }
+  },
+  {
+   "id": "TP_PAS_029",
+   "reference": "Madhyavata Matha · 29",
+   "sanskrit_text": "वेदव्यास गुणावास विद्याधीश सतां वश |\nमां निराशं गतक्लेशं कुर्वनाशं हरेsनिशम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Madhyavata Matha"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Madhyavata",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Madhyavata Matha",
+    "verse": 29
+   }
+  },
+  {
+   "id": "TP_PAS_030",
+   "reference": "Chintamani · 30",
+   "sanskrit_text": "भून्यस्तवामाङ्कगवामपाणिं उत्क्षिप्तदक्षोरुगतान्यहस्तम् |\nचक्रायुधं वेत्रवतीतटस्थं चिन्तामणिं श्रीनरसिंहमीडे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Chintamani"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Chintamani",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Chintamani",
+    "verse": 30
+   }
+  },
+  {
+   "id": "TP_PAS_031",
+   "reference": "Chintamani · 31",
+   "sanskrit_text": "उद्गत्यपातालतलात् करस्थचक्रेण चक्रं खलयोगिनीनाम् |\nनिहत्य गौरीवरकामदोsभूदुन्नम्रकर्णो नरसिंह एषः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Chintamani"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Chintamani",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Chintamani",
+    "verse": 31
+   }
+  },
+  {
+   "id": "TP_PAS_032",
+   "reference": "Netravati nadee · 32",
+   "sanskrit_text": "वराहनयनानन्दधारा नेत्रावतीसरित् |\nशुष्कां तद्भक्तिलतिकां पुष्णाति कथमन्यता",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Netravati nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Netravati",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Netravati nadee",
+    "verse": 32
+   }
+  },
+  {
+   "id": "TP_PAS_033",
+   "reference": "Netravati nadee · 33",
+   "sanskrit_text": "कोललोलकृपाशीललोचनाम्बुजचुम्बिनि |\nमज्जन्नेत्रावतीतोये तद्दयेक्षास्पदं न कः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Netravati nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Netravati",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Netravati nadee",
+    "verse": 33
+   }
+  },
+  {
+   "id": "TP_PAS_034",
+   "reference": "Netravati nadee · 34",
+   "sanskrit_text": "कुमारधारासरिता समेता\nनेत्रावती भाति तरङ्गिणीयम् |\nत्रिमार्गगातीरगतोsप्यवात्सीत्\nत्रिलोचनो यत्र सहस्रमूर्तिः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Netravati nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Netravati",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Netravati nadee",
+    "verse": 34
+   }
+  },
+  {
+   "id": "TP_PAS_035",
+   "reference": "Kumaradhara nadee · 35",
+   "sanskrit_text": "कुमारधारे सुजनोद्धारे विज्ञानधारया |\nपुनीहि मामघस्तोमं लुनीहि सदनीहितम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kumaradhara nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kumaradhara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kumaradhara nadee",
+    "verse": 35
+   }
+  },
+  {
+   "id": "TP_PAS_036",
+   "reference": "Kumaradhara nadee · 36",
+   "sanskrit_text": "कुमारधारे त्वत्तीरे मुक्तिद्वारे गुणाकरे |\nतपस्तपन्तः सन्मन्त्रं जपन्तः स्याम सन्ततम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kumaradhara nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kumaradhara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kumaradhara nadee",
+    "verse": 36
+   }
+  },
+  {
+   "id": "TP_PAS_037",
+   "reference": "Kukke Subramanya · 37",
+   "sanskrit_text": "सुब्रह्मण्यस्य महिमा वर्णितुं केन शक्यते |\nयत्रोच्छिष्ठमपि स्पष्टं श्वित्रिणः शोधयत्यहो",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 37
+   }
+  },
+  {
+   "id": "TP_PAS_038",
+   "reference": "Kukke Subramanya · 38",
+   "sanskrit_text": "ब्रह्महत्यादोषशेषं ब्राह्मणानां हरन्नयम् |\nविरोधे तु परम् कार्यमिति न्यायममानयत्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 38
+   }
+  },
+  {
+   "id": "TP_PAS_039",
+   "reference": "Kukke Subramanya · 39",
+   "sanskrit_text": "सुब्रह्मण्य सुराग्रगण्य कुजनारण्यज्वलत्पावक\nप्रब्रूयात् तव विक्रमं भुवि कविः को वाsमरो वा दिवि |\nयः प्रागप्रतिमल्लतारकमहादैत्यं सुद्रुप्तं भवान्\nविप्रौघप्रिय सुप्रभाव समरे क्रीडन्नजैषीद् द्विषम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 39
+   }
+  },
+  {
+   "id": "TP_PAS_040",
+   "reference": "Kukke Subramanya · 40",
+   "sanskrit_text": "अन्नं ददासि विदधास्यखिलस्य रक्षां\nक्लिन्नं पुनासि विलुनासि समस्तदोषान् |\nहे स्कन्द वन्द्य भवतो भुवने भवानी\nसूनो कृपाजलनिधे कतमः समः स्यात्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 40
+   }
+  },
+  {
+   "id": "TP_PAS_041",
+   "reference": "Kukke Subramanya · 41",
+   "sanskrit_text": "प्रवर्तितस्कान्दमतः पृथिव्यां जगत्पतिं श्रीपतिमात्मनाथम् |\nरहस्युपाराधयितुं गुहाद्य गुहांश्रितोsसीति मम प्रतर्कः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 41
+   }
+  },
+  {
+   "id": "TP_PAS_042",
+   "reference": "Kukke Subramanya · 42",
+   "sanskrit_text": "श्रीविष्णुतीर्थमुनिमित्र सुरारिजैत्र\nश्रीकृष्णपज्जलजभृङ्ग कृताघभङ्ग |\nसह्येश देहि सकलैरूपजीव्यमन्नं\nसंहर्त्रु सर्वभुवनस्य कुमार मह्यम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 42
+   }
+  },
+  {
+   "id": "TP_PAS_043",
+   "reference": "Kukke Subramanya · 43",
+   "sanskrit_text": "यत्र संपुटमस्फोटं कृष्णस्य स्फोरयत्यहो |\nअग्राह्यत्वमद्रुष्यत्वं किं पुनस्तत्र पण्डिताः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 43
+   }
+  },
+  {
+   "id": "TP_PAS_044",
+   "reference": "Kukke Subramanya · 44",
+   "sanskrit_text": "अभेद्यमतियत्नेनाप्यस्खलत्कृष्णविग्रहम् |\nतत्पूजाभाजनं भाति माध्वं ह्रुदिव संपुटम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kukke Subramanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kukke Subramanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kukke Subramanya",
+    "verse": 44
+   }
+  },
+  {
+   "id": "TP_PAS_045",
+   "reference": "Payasvini nadee · 45",
+   "sanskrit_text": "पयस्विनि जगत्स्वामी त्वयि सन्निहितो ध्रुवम् |\nन् चेत् तत्प्रेयसी तीरे कथं तेsवतरिष्यति",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Payasvini nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Payasvini",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Payasvini nadee",
+    "verse": 45
+   }
+  },
+  {
+   "id": "TP_PAS_046",
+   "reference": "Suvarna nadee · 46",
+   "sanskrit_text": "वेदाचलह्रुदुद्भूतां सुवर्णां को नु वर्णयेत् |\nअंहसो दह्यमानस्य श्रावयन्तीं स्वनं जनान्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Suvarna nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Suvarna",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Suvarna nadee",
+    "verse": 46
+   }
+  },
+  {
+   "id": "TP_PAS_047",
+   "reference": "Kumbhasi · 47",
+   "sanskrit_text": "भासि कुम्भासिसंज्ञ त्वं क्षेत्रं श्रीशगिरीशयोः |\nयत्र कुम्भासुरस्यासिरभासीद् द्रौपदीपतिः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kumbhasi"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kumbhasi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kumbhasi",
+    "verse": 47
+   }
+  },
+  {
+   "id": "TP_PAS_048",
+   "reference": "Kumbhasi · 48",
+   "sanskrit_text": "गुहामुखं तीर्थनेत्रं वेदस्थानं वनायनम् |\nयत्यर्थं गौतमक्षेत्रं चित्रं तत्तनुवद् बभौ",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kumbhasi"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kumbhasi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kumbhasi",
+    "verse": 48
+   }
+  },
+  {
+   "id": "TP_PAS_049",
+   "reference": "Koteshwara · 49",
+   "sanskrit_text": "चारु कोटीश्वरस्थानं शोभते यत् पुरत्रयम् |\nपुरारिरिव निर्जित्य ध्वजेनाद्यापि जृम्भते",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Koteshwara"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Koteshwara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Koteshwara",
+    "verse": 49
+   }
+  },
+  {
+   "id": "TP_PAS_050",
+   "reference": "Koteshwara · 50",
+   "sanskrit_text": "नमस्ते शितिकण्ठाय कोटिसंख्यर्षितोषणात् |\nयः कोटीश्वरसंज्ञोsभूत् स किं नैकर्षिकामधुक्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Koteshwara"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Koteshwara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Koteshwara",
+    "verse": 50
+   }
+  },
+  {
+   "id": "TP_PAS_051",
+   "reference": "KroDa · 51",
+   "sanskrit_text": "क्रोडयोगीश्वरक्षेत्रं भाति शुक्तिमतीतटे |\nसतां मता द्विता यत्र स्पष्टोमेशरमेशयोः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "KroDa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=KroDa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "KroDa",
+    "verse": 51
+   }
+  },
+  {
+   "id": "TP_PAS_052",
+   "reference": "KroDa · 52",
+   "sanskrit_text": "द्वासुपर्णेति वेदार्थभूतौ तौ प्रायशोsमरौ |\nयदेकोsश्नाति बहुशोsनश्नन्नन्यो विवर्धते",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "KroDa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=KroDa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "KroDa",
+    "verse": 52
+   }
+  },
+  {
+   "id": "TP_PAS_053",
+   "reference": "KroDa · 53",
+   "sanskrit_text": "श्रुतिशतवर्णितचरितं यतिह्रुन्निरतं यथेष्टगुणभरितं |\nकिङ्करवरदमुनिन्द्यं शङ्करनारायणं वन्दे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "KroDa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=KroDa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "KroDa",
+    "verse": 53
+   }
+  },
+  {
+   "id": "TP_PAS_054",
+   "reference": "KroDa · 54",
+   "sanskrit_text": "शूलसुदर्शनसुरुचं बालेन्दूज्ज्वलकिरीटशोभितशिरसम् |\nपङ्कजमुखकरचरणं शङ्करनारायणं वन्दे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "KroDa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=KroDa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "KroDa",
+    "verse": 54
+   }
+  },
+  {
+   "id": "TP_PAS_055",
+   "reference": "KroDa · 55",
+   "sanskrit_text": "पीनोरुकटिसुनाभिं ध्यानार्होरःस्थिताहिफणहारम् |\nशङ्खाभ्रवर्णमनघं शङ्करनारायणं वन्दे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "KroDa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=KroDa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "KroDa",
+    "verse": 55
+   }
+  },
+  {
+   "id": "TP_PAS_056",
+   "reference": "Kolluru · 56",
+   "sanskrit_text": "मूकाम्बिका कृपालोकादाकान्क्षितफलप्रदा |\nमूकानकृत मे शत्रूनेकान्तिकजनप्रिया",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kolluru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kolluru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kolluru",
+    "verse": 56
+   }
+  },
+  {
+   "id": "TP_PAS_057",
+   "reference": "Kolluru · 57",
+   "sanskrit_text": "क्वचित् पृथिव्यां परितश्चरन्ती नभःस्थलं क्वापि मुहुर्व्रजन्ती |\nविपक्षविध्वंसविधौ स्फुरन्ती कात्यायनी कन्दुकवद् विभाति",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kolluru"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kolluru",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kolluru",
+    "verse": 57
+   }
+  },
+  {
+   "id": "TP_PAS_058",
+   "reference": "Sahya parvata · 58",
+   "sanskrit_text": "सह्योsप्यसह्योsसि गिरे पापानामस्तु तत्तथा |\nअचलस्त्वं चलसि मन्मसस्तन्न रोचते",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Sahya parvata"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Sahya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Sahya parvata",
+    "verse": 58
+   }
+  },
+  {
+   "id": "TP_PAS_059",
+   "reference": "Harihara Kshetra · 59",
+   "sanskrit_text": "मुरपुरहर लक्ष्मीपार्वतीकेलिलोल\nस्फुरदसितसिताङ्गासह्यचक्रत्रिशूल |\nपरतरगुरुमूर्ते पावनापारकीर्ते\nहरिहर तव पादाम्भोजयुग्मं नतोsस्मि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Harihara Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Harihara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Harihara Kshetra",
+    "verse": 59
+   }
+  },
+  {
+   "id": "TP_PAS_060",
+   "reference": "Harihara Kshetra · 60",
+   "sanskrit_text": "हरे भवहरे तेsङघ्रौ भक्तिर्मुक्तिप्रदाsस्तु मे |\nवैराग्यभाग्यं वितर हर गौरीमनोहर",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Harihara Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Harihara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Harihara Kshetra",
+    "verse": 60
+   }
+  },
+  {
+   "id": "TP_PAS_061",
+   "reference": "Harihara Kshetra · 61",
+   "sanskrit_text": "यदेकेन न वध्योsरिः ततो हरिहरावुभौ |\nसहागतावर्धदृश्यावैक्यं चेत् शत्रुणा जितम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Harihara Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Harihara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Harihara Kshetra",
+    "verse": 61
+   }
+  },
+  {
+   "id": "TP_PAS_062",
+   "reference": "Harihara Kshetra · 62",
+   "sanskrit_text": "अर्धनारीश्वरः शम्भुर्यथा भेदेsपि दृश्यते |\nमूर्तेरेकैकभागस्थौ तथा हरिहराविमौ",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Harihara Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Harihara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Harihara Kshetra",
+    "verse": 62
+   }
+  },
+  {
+   "id": "TP_PAS_063",
+   "reference": "Harihara Kshetra · 63",
+   "sanskrit_text": "निर्विषं वत्सनाभिश्च यथैकामाश्रितौ लताम् |\nतथा हरिहरौ भिन्नतरावप्येकमूर्तिगौ",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Harihara Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Harihara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Harihara Kshetra",
+    "verse": 63
+   }
+  },
+  {
+   "id": "TP_PAS_064",
+   "reference": "Bidarahalli · 64",
+   "sanskrit_text": "मा याहि पुष्करमहीमथवा प्रयागं\nकाशीं गयां बदरिकाश्रममप्यसाध्यम् |\nसेतुं च राघवकृतं वरतुङ्गभद्रा\nतीरस्थपिप्पलगृहं हरिमेहि सिद्धै",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Bidarahalli"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Bidarahalli",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Bidarahalli",
+    "verse": 64
+   }
+  },
+  {
+   "id": "TP_PAS_065",
+   "reference": "Bidarahalli · 65",
+   "sanskrit_text": "पादस्थानल्पपादः तनुनिहिततनुः कोमलाग्रस्थितास्यः\nस्कन्दस्कन्दोsग्र्यशाखास्थितकरनिकरः श्रीधराश्लिष्टपार्श्वः |\nव्याप्याश्वत्थं मुकुन्दस्त्रिदशपरिवृतस्तुङ्गभद्रातिभद्रे\nवेणुग्रामे सदाssस्ते सकलजनमनोsभिष्टदायी दयालुः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Bidarahalli"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Bidarahalli",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Bidarahalli",
+    "verse": 65
+   }
+  },
+  {
+   "id": "TP_PAS_066",
+   "reference": "Bidarahalli · 66",
+   "sanskrit_text": "मध्यस्थ कृष्ण परिपालय भक्तवर्गं\nरुद्राश्रिताग्र रुजमर्दय सेवकस्य |\nपद्मासनावसथमूल स्रुजास्य तन्तुं\nसद्वन्द्य पिप्पलतरो वितराखिलेष्टम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Bidarahalli"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Bidarahalli",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Bidarahalli",
+    "verse": 66
+   }
+  },
+  {
+   "id": "TP_PAS_067",
+   "reference": "Bidarahalli · 67",
+   "sanskrit_text": "तुङ्गातरङ्गपरिवर्तनपूतवात\nसङ्गेन तेsन्घ्रिप चलन्ति दलानि भान्ति |\nजन्मान्तरोत्थदृढमूलदुरन्तदुष्कृ\nत्युन्मूलनोद्यतकरांगुलिकान्तिमन्ति",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Bidarahalli"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Bidarahalli",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Bidarahalli",
+    "verse": 67
+   }
+  },
+  {
+   "id": "TP_PAS_068",
+   "reference": "Bidarahalli · 68",
+   "sanskrit_text": "सोमेश्वराय सितभूतिविकस्वराय\nप्रेमप्रवृद्धगिरिजाहृदि भास्वराय |\nतुङ्गोल्लसत्पवनपावितवंशपल्ली\nमाङ्गल्यहेतुचरिताय नमः शिवाय",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Bidarahalli"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Bidarahalli",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Bidarahalli",
+    "verse": 68
+   }
+  },
+  {
+   "id": "TP_PAS_069",
+   "reference": "Bankapura · 69",
+   "sanskrit_text": "शङ्काम्भोजगदासुदर्शनधरं संकीर्त्यमानं सुरैः\nकैन्कर्यप्रियलक्ष्मणेन्द्ररचितालङ्कारपूजोत्सवम् |\nपङ्कोद्भूतसमानलोचनयुगं बन्कापुरश्रीकरं\nहुङ्कारस्वनधिक्कृताश्रितजनातंकं भजे केशवम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Bankapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Bankapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Bankapura",
+    "verse": 69
+   }
+  },
+  {
+   "id": "TP_PAS_070",
+   "reference": "Varada nadee · 70",
+   "sanskrit_text": "स्मरदाश्रितदुष्कर्मगुरुदाहविदारिणीम् |\nवरदां हरिदासेष्टवरदानरतां भजे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Varada nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Varada",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Varada nadee",
+    "verse": 70
+   }
+  },
+  {
+   "id": "TP_PAS_071",
+   "reference": "Madhukeshwara · 71",
+   "sanskrit_text": "हर सायकनिर्दग्धपुर गायकधूर्धर |\nसुरनायक दैत्येन्द्रवरदायक पाहि माम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Madhukeshwara"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Madhukeshwara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Madhukeshwara",
+    "verse": 71
+   }
+  },
+  {
+   "id": "TP_PAS_072",
+   "reference": "Dharmaganga nadee · 72",
+   "sanskrit_text": "हे धर्मगङ्गे पापौघभङ्गे तुङ्गतरङ्गिणि |\nचेतो मदीयं सद्धर्मकर्मण्येव स्थिरं कुरु",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dharmaganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dharmaganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dharmaganga nadee",
+    "verse": 72
+   }
+  },
+  {
+   "id": "TP_PAS_073",
+   "reference": "Shalmalee nadee · 73",
+   "sanskrit_text": "नदी मुदेsस्त्वियं प्रत्यञ्नदीनह्रुदयङ्गमा |\nगन्गोत्तुङ्गा दृश्यतेsद्धा रम्याsष्टम्यां यदम्भसि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Shalmalee nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Shalmalee",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Shalmalee nadee",
+    "verse": 73
+   }
+  },
+  {
+   "id": "TP_PAS_074",
+   "reference": "Shalmalee nadee · 74",
+   "sanskrit_text": "भर्तुरग्रे स्वलावण्यविस्तृतेरविवेकिनीम् |\nस्वासेवितां सखीमेतां सर्वसेव्यां करोति सा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Shalmalee nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Shalmalee",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Shalmalee nadee",
+    "verse": 74
+   }
+  },
+  {
+   "id": "TP_PAS_075",
+   "reference": "Sodaa · 75",
+   "sanskrit_text": "गङ्गा माध्वयतेः कीर्त्यै स्थानश्रीभूमनोहरम् |\nकृत्वा त्रिविक्रमं चक्रे पितृमात्रग्रजोत्सवम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Sodaa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Sodaa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Sodaa",
+    "verse": 75
+   }
+  },
+  {
+   "id": "TP_PAS_076",
+   "reference": "Sodaa · 76",
+   "sanskrit_text": "त्रिविक्रमं रम्यगदारिशङ्खसरोजमालाधरमिन्दुवर्णम् |\nमनोरमाङ्गं यतिवादिराजप्रतिष्ठितं नौमि सदा प्रसन्नम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Sodaa"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Sodaa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Sodaa",
+    "verse": 76
+   }
+  },
+  {
+   "id": "TP_PAS_077",
+   "reference": "ManjuguNi Kshetra · 77",
+   "sanskrit_text": "मनोहरगिरिद्रोणीवासं श्रीशं सतां वशम् |\nधनुर्बाणधरं भाग्यकरं पापहरं भजे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "ManjuguNi Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=ManjuguNi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "ManjuguNi Kshetra",
+    "verse": 77
+   }
+  },
+  {
+   "id": "TP_PAS_078",
+   "reference": "ManjuguNi Kshetra · 78",
+   "sanskrit_text": "खलमृगमृगयार्थं पादुकाशोभिपादः\nकरधृतशरचक्रोद्दामशङ्खाग्र्यचापः |\nसकलभुवि चरित्वा मञ्जुगुण्याख्यरम्य\nस्थलसदनगतोsभूद्वेङ्कटेशो मुकुन्दः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "ManjuguNi Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=ManjuguNi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "ManjuguNi Kshetra",
+    "verse": 78
+   }
+  },
+  {
+   "id": "TP_PAS_079",
+   "reference": "Yenabhairava Kshetra · 79",
+   "sanskrit_text": "यस्य भैरवनादेन विद्रवन्त्यघराशयः |\nएणा इव भयानित्यं तं नतोsस्येणभैरवम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Yenabhairava Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Yenabhairava",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Yenabhairava Kshetra",
+    "verse": 79
+   }
+  },
+  {
+   "id": "TP_PAS_080",
+   "reference": "Gokarna Kshetra · 80",
+   "sanskrit_text": "ये विष्णोः पदपद्मचिन्तनरतास्तत्कर्मनिष्टाश्च ये\nये तद्भक्तिपरायणाः शुभधियः येsर्चन्ति मां चानिशम् |\nएकान्ते तदभीष्टमाशु वसुधे देहेति गां बोधयन्\nश्रीगोकर्णकृतालयो विजयते देवः स गौरीधवः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Gokarna Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gokarna",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Gokarna Kshetra",
+    "verse": 80
+   }
+  },
+  {
+   "id": "TP_PAS_081",
+   "reference": "Gokarna Kshetra · 81",
+   "sanskrit_text": "गोकर्णभासिताङ्गः प्रत्युपकुर्वन्निवाम्बिकारमणः |\nगोकर्णसंज्ञमधुना भासयति क्षेत्रमम्बुधेस्तीरे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Gokarna Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gokarna",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Gokarna Kshetra",
+    "verse": 81
+   }
+  },
+  {
+   "id": "TP_PAS_082",
+   "reference": "Gokarna Kshetra · 82",
+   "sanskrit_text": "पूर्णेन्दुवर्ण गोकर्णाकार मारभयङ्कर |\nभवाय भव मे देव भवानीप्रिय शङ्कर",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Gokarna Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gokarna",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Gokarna Kshetra",
+    "verse": 82
+   }
+  },
+  {
+   "id": "TP_PAS_083",
+   "reference": "Gokarna Kshetra · 83",
+   "sanskrit_text": "दुष्टानां विघ्नकर्ता सुचरितसुजनस्तोमविघ्नापहर्ता\nतस्माद्विघ्नाधिपोsहं मत इति सुधियां स्पष्टमाज्ञापनाय |\nपौलस्त्येच्छान्तराय सुरमुनिकराभीष्टसम्प्राप्त्युपायः\nश्रेयो विघ्नाधिराजः प्रदिशतु सततं भूरि गौरीतनूजः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Gokarna Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gokarna",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Gokarna Kshetra",
+    "verse": 83
+   }
+  },
+  {
+   "id": "TP_PAS_084",
+   "reference": "Kolhapura · 84",
+   "sanskrit_text": "अमानवनजस्थानसरसीकुलसंकुले |\nरमा कोळ्हापुरक्षेत्रे वसतीति किमद्भुतम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kolhapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kolhapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kolhapura",
+    "verse": 84
+   }
+  },
+  {
+   "id": "TP_PAS_085",
+   "reference": "Kolhapura · 85",
+   "sanskrit_text": "ध्याताssध्यातान्तशान्तप्रियजनविभवायान्वहं या ह्रुदन्तः\nख्याताख्या तादृशाभ्युन्नतिवितरणशक्त्यालया या पयोब्देः |\nजाताssजातादिदेवव्रजमनुजततेः श्रेयसे भूयसे सा\nमाता मातापसाराधितपदकमलाsधोक्षजप्रेयसी स्यात्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Kolhapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kolhapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Kolhapura",
+    "verse": 85
+   }
+  },
+  {
+   "id": "TP_PAS_086",
+   "reference": "Taapaa nadee · 86",
+   "sanskrit_text": "कथं तापाभिधा तेsम्ब तापघ्न्या इति संशयः |\nअघतापप्रदायिन्यास्तव संदर्शनाद्गतः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Taapaa nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Taapaa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Taapaa nadee",
+    "verse": 86
+   }
+  },
+  {
+   "id": "TP_PAS_087",
+   "reference": "Narmada nadee · 87",
+   "sanskrit_text": "स्वावगाहनमात्रेण या स्वर्गवनिताजनैः |\nसह नर्मगिरां दात्री भजे तां नर्मदानदीम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Narmada nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Narmada",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Narmada nadee",
+    "verse": 87
+   }
+  },
+  {
+   "id": "TP_PAS_088",
+   "reference": "Prabhasa Kshetra · 88",
+   "sanskrit_text": "सरस्वतीहिरण्याभ्यां सङ्गो यत्रापराम्बुधेः |\nप्रभासाख्यां तदाभाति प्रभाssस हि यतो भुवः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Prabhasa Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Prabhasa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Prabhasa Kshetra",
+    "verse": 88
+   }
+  },
+  {
+   "id": "TP_PAS_089",
+   "reference": "Prabhasa Kshetra · 89",
+   "sanskrit_text": "बाणप्रयोगसञ्जाता बाणगङ्गा विभाति सा |\nस्वच्छा स्मरदघच्छेत्री कृष्णकीर्तिरिवोन्मुखी",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Prabhasa Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Prabhasa",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Prabhasa Kshetra",
+    "verse": 89
+   }
+  },
+  {
+   "id": "TP_PAS_090",
+   "reference": "Dwaraka · 90",
+   "sanskrit_text": "विश्वम्भरां घनतरामपि भूरियत्नै\nर्निर्भिद्य यत्पदमुपेत्य बलीन्द्रगेहात् |\nआस्ते त्रिविक्रमतनुर्हरिर्द्वितीया\nसा द्वारकेप्सितपुमर्थकरी पुरी नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 90
+   }
+  },
+  {
+   "id": "TP_PAS_091",
+   "reference": "Dwaraka · 91",
+   "sanskrit_text": "त्रिविक्रमो विजयते त्रयीविख्यातविक्रमः |\nयः कुशं दमयित्वेमां चक्रे विप्रकुशस्थलीम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 91
+   }
+  },
+  {
+   "id": "TP_PAS_092",
+   "reference": "Dwaraka · 92",
+   "sanskrit_text": "सगदोsपि ह्यसौ देवः संसारे ह्यगदतामगात् |\nत्रिविक्रमोsप्यसौ योगिमनसोsविक्रमोsभवत्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 92
+   }
+  },
+  {
+   "id": "TP_PAS_093",
+   "reference": "Dwaraka · 93",
+   "sanskrit_text": "श्रीकृष्णचरणाम्भोजरजोरञ्जितगोमतीम् |\nगोमतीमब्धिरमणीं भजे तापत्रयापहाम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 93
+   }
+  },
+  {
+   "id": "TP_PAS_094",
+   "reference": "Dwaraka · 94",
+   "sanskrit_text": "फुल्लफेनसिताम्बोधिकल्लोलधृतया तया |\nवल्लभालिङ्गनसुखं दुर्लभं लभ्यतेsनिशम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 94
+   }
+  },
+  {
+   "id": "TP_PAS_095",
+   "reference": "Dwaraka · 95",
+   "sanskrit_text": "चक्रतीर्थस्य महिमा वर्णितुं केन शक्यते |\nयच्छिलामपि सङ्गेन विधत्ते विश्ववन्दिताम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 95
+   }
+  },
+  {
+   "id": "TP_PAS_096",
+   "reference": "Dwaraka · 96",
+   "sanskrit_text": "पापेनापि समावृतस्य विमलज्ञानोज्झितस्याप्यलं\nमग्नास्यापि भवाम्बुधाविह भवेत् पूतस्य जात्योद्धृतिः |\nइत्याख्यापयितुं दरं मुरहरो यत्रोद्दधारादरात्\nशङ्खोद्धारपदं विभाति तदिदं क्षेत्रं पवित्रं भुवि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 96
+   }
+  },
+  {
+   "id": "TP_PAS_097",
+   "reference": "Dwaraka · 97",
+   "sanskrit_text": "फाले यल्लिखितं धुनोति विविधां लेखां विधात्रा कृतां\nलीलार्थं तिलकीकृतं वितनुते विद्वल्ललामायितान् |\nऊर्ध्वं यद्धृतमुच्चलोकपदवीसोपानमन्वेति तद्\nगोपीचन्दनमञ्जसा विजयते तापत्रयध्वंसनम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Dwaraka"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Dwaraka",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Dwaraka",
+    "verse": 97
+   }
+  },
+  {
+   "id": "TP_PAS_098",
+   "reference": "Siddhapuri Kshetra · 98",
+   "sanskrit_text": "भाति सिद्धपुरी यत्र सिद्धा मुक्तिपुरी नृणाम् |\nपुण्यं बिन्दुसरो यत्र बिन्दुमात्रं सरःसमम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Siddhapuri Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Siddhapuri",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Siddhapuri Kshetra",
+    "verse": 98
+   }
+  },
+  {
+   "id": "TP_PAS_099",
+   "reference": "Pushkara Kshetra · 99",
+   "sanskrit_text": "तीर्थानामुत्तमं तीर्थं पुष्करं मर्त्यदुष्करम् |\nविहरन्नपि वाराशौ वराहो यत्सरोsविशत्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Paścima Prabandha",
+    "Pushkara Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Pushkara",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Paścima",
+    "kshetra": "Pushkara Kshetra",
+    "verse": 99
+   }
+  }
+ ]
+}

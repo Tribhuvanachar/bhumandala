@@ -17512,6 +17512,62 @@
    "facets": {
     "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
    }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/paschima_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — पश्चिमप्रबन्धः (पश्चिमदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/uttara_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — उत्तरप्रबन्धः (उत्तरदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/purva_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — पूर्वप्रबन्धः (पूर्वदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/dakshina_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — दक्षिणप्रबन्धः (दक्षिणदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
   }
  ]
 }

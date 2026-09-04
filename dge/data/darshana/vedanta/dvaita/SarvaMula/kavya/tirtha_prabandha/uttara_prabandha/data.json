@@ -1,0 +1,1161 @@
+{
+ "schema": "grantha_mula_text",
+ "default_author": "Sri Vadiraja Tirtha",
+ "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+ "source_url": "https://tirthaprabandha.wordpress.com/",
+ "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation.",
+ "source_note": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation.",
+ "title": "तीर्थप्रबन्धः — उत्तरप्रबन्धः (उत्तरदिक्)",
+ "items": [
+  {
+   "id": "TP_UTT_001",
+   "reference": "Krishnaveni nadee · 1",
+   "sanskrit_text": "नमामि सुकृतश्रेणीं कृष्णवेणीं तरङ्गिणीम् |\nयद्वीक्षणं कोटिजन्मकृतदुष्कर्मशिक्षणम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Krishnaveni nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Krishnaveni",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Krishnaveni nadee",
+    "verse": 1
+   }
+  },
+  {
+   "id": "TP_UTT_002",
+   "reference": "Krishnaveni nadee · 2",
+   "sanskrit_text": "गुरुं कन्यागतं धन्या या पुरस्कृत्य सेव्यसे |\nश्रीकृष्णवेणि पापानि सा त्वं पुण्ययसि ध्रुवम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Krishnaveni nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Krishnaveni",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Krishnaveni nadee",
+    "verse": 2
+   }
+  },
+  {
+   "id": "TP_UTT_003",
+   "reference": "Krishnaveni nadee · 3",
+   "sanskrit_text": "किं वर्णयामि हे कृष्णे त्वयि कृष्णस्य सन्निधिम् |\nयत् समस्तपदोक्तौ तु पुम्भावमवलम्बसे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Krishnaveni nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Krishnaveni",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Krishnaveni nadee",
+    "verse": 3
+   }
+  },
+  {
+   "id": "TP_UTT_004",
+   "reference": "Krishnaveni nadee · 4",
+   "sanskrit_text": "श्रीकृष्णवेणि कल्याणि याचे त्वामहमन्वहम् |\nश्रीकृष्णचरणाम्भोजे भक्तिं भक्तभवच्छिदि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Krishnaveni nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Krishnaveni",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Krishnaveni nadee",
+    "verse": 4
+   }
+  },
+  {
+   "id": "TP_UTT_005",
+   "reference": "Pandarapura · 5",
+   "sanskrit_text": "श्रीभीमरथ्यमलनीरसमीरवेग\nनिर्धूततीरगनराशुभघर्मजालम् |\nश्रीपाण्डुरङ्गलसितं वरपुण्डरीक\nक्षेत्रं पवित्रमहमन्वहमाश्रितोsस्मि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Pandarapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Pandarapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Pandarapura",
+    "verse": 5
+   }
+  },
+  {
+   "id": "TP_UTT_006",
+   "reference": "Pandarapura · 6",
+   "sanskrit_text": "तीरे सत्सरितस्तिरस्कृतधनासक्तिर्विरक्तिप्रियः\nपादाम्भोजमिदं मदन्कसहितः संचिन्तयान्तर्ह्रुदि |\nपश्चात् ते कटिमात्र एव भविता संसारवार्धिर्न चेत्\nशिक्षामीति हि लक्षयत्यनुदिनं स्वावस्थया विठलः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Pandarapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Pandarapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Pandarapura",
+    "verse": 6
+   }
+  },
+  {
+   "id": "TP_UTT_007",
+   "reference": "Pandarapura · 7",
+   "sanskrit_text": "पापावलीपाटनपट्वपाङ्गः श्रीपाणिपद्मान्चितजानुजङ्घः |\nगोपालबालः कृपया स्वयं नः श्रीपाण्डुरङ्गो भवतु प्रसन्नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Pandarapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Pandarapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Pandarapura",
+    "verse": 7
+   }
+  },
+  {
+   "id": "TP_UTT_008",
+   "reference": "Pandarapura · 8",
+   "sanskrit_text": "पापापनोदनपटु प्रियभृत्यभृङ्गैः\nपेपीयमानशुभसुन्दरतारसार्द्रम् |\nतापत्रयोपशमनं तरुणार्कवर्णं\nगोपालबालचरणाम्बुरुहं श्रितोsमि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Pandarapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Pandarapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Pandarapura",
+    "verse": 8
+   }
+  },
+  {
+   "id": "TP_UTT_009",
+   "reference": "Godavari nadee · 9",
+   "sanskrit_text": "विप्रर्षिदेवकुलसंकुलतीरयुग्मा\nविद्राविताघतृणरेणुकणा स्ववातैः |\nस्वादूदकप्रशमिताखिललोकशोका\nगोदावरी शुभकरी सरिदुद्धरेन्नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Godavari nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Godavari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Godavari nadee",
+    "verse": 9
+   }
+  },
+  {
+   "id": "TP_UTT_010",
+   "reference": "Godavari nadee · 10",
+   "sanskrit_text": "अम्हांसि हंसि सततं किल रासि पुण्यं\nसिम्हस्थिते सुरगुरौ न तदम्ब याचे |\nगोदे समस्तफलदे दिश कृष्णपादे\nभक्तिं विरक्तिमितरत्र परत्र मुक्तिम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Godavari nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Godavari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Godavari nadee",
+    "verse": 10
+   }
+  },
+  {
+   "id": "TP_UTT_011",
+   "reference": "Godavari nadee · 11",
+   "sanskrit_text": "आदौ धवलगङ्गा या गङ्गाद्वाराभिधाsन्तरे |\nपश्चात् कुशावर्तपदा गोदा मोदाय सा सदा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Godavari nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Godavari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Godavari nadee",
+    "verse": 11
+   }
+  },
+  {
+   "id": "TP_UTT_012",
+   "reference": "Yamuna nadee · 12",
+   "sanskrit_text": "कालिन्दि त्वमघान्वितानपि सतः कृत्वा पवित्रात्मनो\nगन्तुं नैव कदाsपि मुञ्चसि तव भ्रातुर्निकेतं प्रति |\nकिन्तु क्षीरपयोधिवासनिरतान् प्रीत्या करोष्याश्रितान्\nस्निग्धे भर्तरि कामिनीजनरुचिः तत्पक्ष एव ह्यलम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Yamuna nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Yamuna",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Yamuna nadee",
+    "verse": 12
+   }
+  },
+  {
+   "id": "TP_UTT_013",
+   "reference": "Prayaga Kshetra · 13",
+   "sanskrit_text": "त्रिवेणीयमघश्रेणीकृपाणी मुक्तिकारिणी |\nममानीहितमादह्याद्धिमानीमन्शुमानिव",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Prayaga Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Prayaga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Prayaga Kshetra",
+    "verse": 13
+   }
+  },
+  {
+   "id": "TP_UTT_014",
+   "reference": "Prayaga Kshetra · 14",
+   "sanskrit_text": "प्रयागमाधवो भूयाद्दयावारिनिधिर्ह्रुदि |\nप्रकृष्टयागसदृशी सकृद्यस्य हि संस्मृतिः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Prayaga Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Prayaga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Prayaga Kshetra",
+    "verse": 14
+   }
+  },
+  {
+   "id": "TP_UTT_015",
+   "reference": "Ganga nadee · 15",
+   "sanskrit_text": "त्वं दीनेषु दयावतीति विदितं यद्ब्रह्महस्ताश्रयं\nप्राप्ताsथाच्युतपादसङ्गमहिता पश्चाच्चनाकं गता |\nसौवर्णाचलशृङ्गमेत्य मुदिता शम्भोः शिरःसङ्गताs\nप्यास्माकक्षितिमण्डले त्रिपथगे तुष्टाsस्यभीष्टप्रदा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 15
+   }
+  },
+  {
+   "id": "TP_UTT_016",
+   "reference": "Ganga nadee · 16",
+   "sanskrit_text": "आदौ पादतलोर्ध्वभागमहसा या रक्तनीला हरेः\nस्वर्गस्त्रीकुचकुंकुमाङ्कनयनोपान्तश्रियाsभ्यन्तरे |\nअन्ते शम्भुकपर्दपन्नगगलश्रेणीज्वलज्ज्योतिषा\nजन्मारभ्य सरस्वतीनतनयासङ्गेव गङ्गाsस्ति सा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 16
+   }
+  },
+  {
+   "id": "TP_UTT_017",
+   "reference": "Ganga nadee · 17",
+   "sanskrit_text": "अज्ञानाद्यदि सज्जनेषु रचितद्रोहान्मयि स्वर्धुनि\nस्वस्फूर्त्या सुजनेषु दूषणगणारोपादवज्ञा तव |\nतर्हि त्वां सगरात्मजास्थिनिकरा जानन्ति किं तैः प्रभोः\nद्रोहः किं न कृतः किमम्ब न हरावरोपिता चोरता",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 17
+   }
+  },
+  {
+   "id": "TP_UTT_018",
+   "reference": "Ganga nadee · 18",
+   "sanskrit_text": "आरभ्याब्जजलोकमाक्षितितलादायातया किं त्वया\nमच्चित्तं बहुदूरमित्यमलया त्यक्तं भिया जाह्नवि |\nअक्षय्याचलतुङ्गशृङ्गनिकरान्निर्भिद्य यान्ती मम\nस्वल्पं किं बहु मन्यसेsशुभकुलं गङ्गेsन्तरङ्गे चलम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 18
+   }
+  },
+  {
+   "id": "TP_UTT_019",
+   "reference": "Ganga nadee · 19",
+   "sanskrit_text": "अस्थिस्पर्शनमात्रतः किमु तव श्रेयःप्रदत्वं गतं\nविस्तीर्णा न किमच्युतस्य नगरी मन्मात्रदेशोज्झिता |\nतद्वर्त्मापि सकण्टकं किमु सतां संतानजोsहं न किं\nकस्मादम्ब न मे प्रदास्यसि पदं गङ्गेsखिलार्थप्रदम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 19
+   }
+  },
+  {
+   "id": "TP_UTT_020",
+   "reference": "Ganga nadee · 20",
+   "sanskrit_text": "हे गङ्गे तव कोमलाङ्घ्रिनलिनं रम्भोरु नीवीलसत्\nकाञ्चीदाम तनूदरं घनकुचव्याकीर्णहारं वपुः |\nसन्मुद्राङ्गदकङ्कणावृतकरं स्मेरं स्फुरत्कुण्डलं\nसारङ्गाक्षि जलान्यदिन्दुरुचि ये जानन्ति तेsन्ये जलात्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 20
+   }
+  },
+  {
+   "id": "TP_UTT_021",
+   "reference": "Ganga nadee · 21",
+   "sanskrit_text": "श्रीनारायणरामगोपतिहृषीकेशादिरूपोsक्षम\nस्त्वां हातुं हरिसूकराकृतिरथ श्रीदेवहूत्यात्मजः |\nवेणीमाधवबिन्दुमाधवतनुस्तीरे व्यधत्त स्थिथिं\nगङ्गे किं बहुनाsधुनाsपि वसति तवद्भर्त्रुगेहेsप्यसौ",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 21
+   }
+  },
+  {
+   "id": "TP_UTT_022",
+   "reference": "Ganga nadee · 22",
+   "sanskrit_text": "गङ्गे त्वं शुभसंचयस्य जयदा दोषात्मना न त्विति\nज्ञातं यत् क्रतुकोट्यलभ्यसुकृतस्याभ्युन्नतिं यच्छसि |\nदुष्कर्माण्यमितानि दूरयसि च तवद्गेयतोयेक्षया\nपानेनाप्यवगाहनेन मनसा ध्यानेन गानेन वा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ganga nadee"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ganga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ganga nadee",
+    "verse": 22
+   }
+  },
+  {
+   "id": "TP_UTT_023",
+   "reference": "Kashi Kshetra · 23",
+   "sanskrit_text": "रूप्याचले कृतपदोsपि गिरीन्द्रपुत्री\nप्रेमप्रवाहभरमानितमानसोsपि |\nकाशीमसीवरणयोः पुरमन्तराले\nप्रेतावृतामपि सतीपतिरध्यतिष्ठत्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Kashi Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kashi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Kashi Kshetra",
+    "verse": 23
+   }
+  },
+  {
+   "id": "TP_UTT_024",
+   "reference": "Kashi Kshetra · 24",
+   "sanskrit_text": "स बिन्दुमाधवः पायाद्विभोर्यस्य निरीक्षणात् |\nअपारोsपि हि संसारसिन्धुर्बिन्दुत्वमश्नुते",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Kashi Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kashi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Kashi Kshetra",
+    "verse": 24
+   }
+  },
+  {
+   "id": "TP_UTT_025",
+   "reference": "Kashi Kshetra · 25",
+   "sanskrit_text": "दोषं मे हर हे हरेति पतितं पादे नखच्छद्मना\nनिर्दोषं मृगबिम्बमेणहरणात् कृत्वेव मूर्ध्नि न्यधात् |\nगङ्गातीरनिवासतः शुचितमं कुर्वन्निवाहीश्वरा\nसङ्गात् तत्प्रयथयन्निव प्रतिदिनं पायात् स मृत्युञ्जयः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Kashi Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kashi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Kashi Kshetra",
+    "verse": 25
+   }
+  },
+  {
+   "id": "TP_UTT_026",
+   "reference": "Kashi Kshetra · 26",
+   "sanskrit_text": "मौलौ यच्छरणाम्बु फालफलके यस्यान्घ्रिरेणुः कथा\nकर्णे वाचि यदीयनाम हृदि यद्रूपं यदास्वादितम् |\nकुक्षौ यत्तपसेsपटं कटितटं व्याघ्राजिने संस्थितिः\nपादौ यत्पुरचारिणौ स हि सदा तत्किङ्करः शङ्करः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Kashi Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kashi",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Kashi Kshetra",
+    "verse": 26
+   }
+  },
+  {
+   "id": "TP_UTT_027",
+   "reference": "Gaya Kshetra · 27",
+   "sanskrit_text": "गयाभिधमिदं क्षेत्रं श्रये श्रेयस्करं नृणाम् |\nन यत्र सहते जातु क्रिया जन्मान्तरक्रियाम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Gaya Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gaya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Gaya Kshetra",
+    "verse": 27
+   }
+  },
+  {
+   "id": "TP_UTT_028",
+   "reference": "Gaya Kshetra · 28",
+   "sanskrit_text": "गदाधर सदाsधरस्फुरितचारुहासोल्लसत्\nसुधाधर मदाधरामरकृतस्तुते सुन्दर |\nपदा धर मुदाधरस्खलितमीश मां सद्वर\nप्रदाधरचिदादरप्रमुदितान्तर श्रीधर",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Gaya Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gaya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Gaya Kshetra",
+    "verse": 28
+   }
+  },
+  {
+   "id": "TP_UTT_029",
+   "reference": "Gaya Kshetra · 29",
+   "sanskrit_text": "यद्यात्रा पितृमण्डलस्य तनुते वैकुण्ठयात्रां परां\nयत्रक्षिप्ततिला महान्ति तिलशः कुर्वन्ति पापान्यहो |\nपिण्डो यत्र समर्पितो यमभटान् पिण्डीकरोत्यक्षता\nमर्त्यं स्माक्षतमीड्यतां स्तुतिततिस्तं विष्णुपादं भजे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Gaya Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gaya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Gaya Kshetra",
+    "verse": 29
+   }
+  },
+  {
+   "id": "TP_UTT_030",
+   "reference": "Gaya Kshetra · 30",
+   "sanskrit_text": "अपि जन्मशतोद्भूतं कृपया या हरन्त्यघम् |\nमनुते फल्गु सा फल्गुनदी सद्गुणदाsस्तु मे",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Gaya Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Gaya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Gaya Kshetra",
+    "verse": 30
+   }
+  },
+  {
+   "id": "TP_UTT_031",
+   "reference": "Mathura Kshetra · 31",
+   "sanskrit_text": "सेना यत्र विरक्त वैष्णवजना नामायुधं श्रीपतेः\nकामाद्यैः सहितः कलिः किल रिपुर्यत्रान्वहं हन्यते |\nप्राकारादि च यत्र तीर्थनिचयः कर्माणि वर्मामलं\nदद्यात् सा मधुरा पुरी शुभकरी श्रेयांसि भूयांसि नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Mathura Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Mathura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Mathura Kshetra",
+    "verse": 31
+   }
+  },
+  {
+   "id": "TP_UTT_032",
+   "reference": "Mathura Kshetra · 32",
+   "sanskrit_text": "संसारसंसरणखेदविभेदकारि कंसारिसंश्रिततटीगतचारुवारि |\nविश्रान्तितीर्थममलं हरिलोकवास विश्रान्तिदं दिशतु नः सकलेप्सितानि",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Mathura Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Mathura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Mathura Kshetra",
+    "verse": 32
+   }
+  },
+  {
+   "id": "TP_UTT_033",
+   "reference": "Mathura Kshetra · 33",
+   "sanskrit_text": "मखकोटिसहस्राणां मुखं म्लानयतो मुहुः |\nअघश्रान्तिकरस्यास्य कथं विश्रान्तितीर्थता",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Mathura Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Mathura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Mathura Kshetra",
+    "verse": 33
+   }
+  },
+  {
+   "id": "TP_UTT_034",
+   "reference": "Vrundavana · 34",
+   "sanskrit_text": "यत्कुञ्जा मुरवैरिसङ्गतवधूविक्रीडनैर्वासिता\nयत्सन्जातसुरद्रुमौघमहसा विद्योतिताशामुखम् |\nयत्पाथः सुरसिन्धुसिन्धुमहितं यत्राखिलैर्लक्षितं\nश्रुत्यन्तान्तरितं महः परमदो वृन्दावनं पावनम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Vrundavana"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Vrundavana",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Vrundavana",
+    "verse": 34
+   }
+  },
+  {
+   "id": "TP_UTT_035",
+   "reference": "Ayodhya · 35",
+   "sanskrit_text": "अयोध्या नाम नगरी भाति साध्वी वधूरिव |\nवनं गतस्यापि तस्य पादुके याsकरोत् पतिम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Ayodhya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Ayodhya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Ayodhya",
+    "verse": 35
+   }
+  },
+  {
+   "id": "TP_UTT_036",
+   "reference": "Naimisharanya · 36",
+   "sanskrit_text": "मुनीन्द्रमानसावालरूढकृष्णकथालता |\nविभाति नैमिषारण्यमही सर्वमहीयसी",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Naimisharanya"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Naimisharanya",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Naimisharanya",
+    "verse": 36
+   }
+  },
+  {
+   "id": "TP_UTT_037",
+   "reference": "Hastinapura · 37",
+   "sanskrit_text": "अन्तर्निविष्टकलिकौरवसैनिकाsपि\nया धर्ममेव दयितं वरयाम्बभूव |\nयोगीन्द्रबुद्धिरिव भीमपराक्रमेण\nसा भाति हस्तिनपुरी प्रथिता पृथिव्याम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Hastinapura"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Hastinapura",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Hastinapura",
+    "verse": 37
+   }
+  },
+  {
+   "id": "TP_UTT_038",
+   "reference": "Kurukshetra · 38",
+   "sanskrit_text": "श्रीभीमसेनकरकञ्जगदाप्रहारै\nश्चूर्नीकृताश्वगजपत्तिमृदुग्रपिण्डम् |\nउत्खातपार्थशरसस्यपदं कुरूणां\nक्षेत्रं दिशासु विततान सुकीर्तिध्यानम्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Kurukshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Kurukshetra",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Kurukshetra",
+    "verse": 38
+   }
+  },
+  {
+   "id": "TP_UTT_039",
+   "reference": "Shambala Kshetra · 39",
+   "sanskrit_text": "कलेर्भीतजना यात शम्बलं जगतां बलम् |\nकलिशौर्यहरः कल्की यत्र प्रादुर्भविष्यति",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Shambala Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Shambala",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Shambala Kshetra",
+    "verse": 39
+   }
+  },
+  {
+   "id": "TP_UTT_040",
+   "reference": "Shat-prayaga · 40",
+   "sanskrit_text": "षट्प्रयागाः स्ववेगेन कामाद्यरिमहीरुहः |\nउन्मूलयन्तु पापाख्यं पङ्कं प्रक्षालयन्तु नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Shat-prayaga"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Shat-prayaga",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Shat-prayaga",
+    "verse": 40
+   }
+  },
+  {
+   "id": "TP_UTT_041",
+   "reference": "Badari Kshetra · 41",
+   "sanskrit_text": "अमरीभ्रमरीपुञ्जसुमरीचिभिरन्चिता |\nबदरे वद रे किं किमधरीकुरुते न सा",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Badari Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Badari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Badari Kshetra",
+    "verse": 41
+   }
+  },
+  {
+   "id": "TP_UTT_042",
+   "reference": "Badari Kshetra · 42",
+   "sanskrit_text": "धर्माद्योsजनि धर्म एव स रतिं दद्यात् स्वयोगश्रियं\nयोगाभ्यासरतः स्मरादिविजयं कन्दर्पदर्पापहः |\nउत्तुङ्गाद्रिगतः सदोच्चपदवीं योष्कितदम्बेषु नः\nपुत्रीवन्मतिमुर्वषीजनयिता नारायणः सद्गुणान्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Badari Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Badari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Badari Kshetra",
+    "verse": 42
+   }
+  },
+  {
+   "id": "TP_UTT_043",
+   "reference": "Badari Kshetra · 43",
+   "sanskrit_text": "हस्तद्वन्द्वगचक्रशङ्खरुचिरं वृत्तोरुमध्यस्फुर\nद्रक्तोत्तानकरारविन्दयुगलं पद्मासनस्थं प्रभुम् |\nविश्वङ् नारदमुख्ययोगिनिकरैः संसेव्यमानं सुधा\nवीक्षाक्षालितभक्तकिल्बिषविषं नारायणं चिन्तये",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Badari Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Badari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Badari Kshetra",
+    "verse": 43
+   }
+  },
+  {
+   "id": "TP_UTT_044",
+   "reference": "Badari Kshetra · 44",
+   "sanskrit_text": "यत्र क्षेत्रे विधेः सत्रे हयग्रीवो ह्यवातरत् |\nधाराद्वारा त्रयी तत्र श्रूयतेsद्यापि सूरिभिः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Badari Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Badari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Badari Kshetra",
+    "verse": 44
+   }
+  },
+  {
+   "id": "TP_UTT_045",
+   "reference": "Badari Kshetra · 45",
+   "sanskrit_text": "धातर्देवसमूह मन्दर महि प्रह्लाद शक्र द्विज\nव्रात ख्यातसमुद्र पार्थ शिव सद्धर्मानृतं मा वद |\nअश्वग्रीवमिमुं विहाय कतमं देवं नमामः स्तुमः\nसत्कुर्मः किमु कर्म शर्मदमितोsन्यद्ब्रह्म किंवस्ति नः",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Badari Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Badari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Badari Kshetra",
+    "verse": 45
+   }
+  },
+  {
+   "id": "TP_UTT_046",
+   "reference": "Badari Kshetra · 46",
+   "sanskrit_text": "श्लोकेनैकेन लोकेशश्लोकाल्लेशोsनुवर्णितः |\nतच्च सच्चरितश्चित्ते प्रत्यर्प्य प्रीयतां भवान्",
+   "tags": [
+    "verse",
+    "kavya"
+   ],
+   "notes": "",
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "Tīrthaprabandha",
+    "Uttara Prabandha",
+    "Badari Kshetra"
+   ],
+   "tirtha_link": "tirtha/index.html?q=Badari",
+   "commentaries": {},
+   "source": {
+    "site": "tirthaprabandha.wordpress.com",
+    "prabandha": "Uttara",
+    "kshetra": "Badari Kshetra",
+    "verse": 46
+   }
+  }
+ ]
+}

@@ -615,6 +615,13 @@ function renderList() {
     const srcViewHtml = shloka.sourceHtml
       ? `<div class="dge-srcview" hidden>${shloka.sourceHtml}</div>` : '';
 
+    // Tīrthaprabandha verses carry a link to the project's Tīrtha holy-places
+    // page, filtered to the kṣetra this verse describes (tirtha_link in the
+    // data). Rendered as a small 📍 chip; empty/absent for every other text.
+    const tirthaPlace = (shloka.breadcrumb && shloka.breadcrumb[2]) ? shloka.breadcrumb[2] : 'Tīrtha';
+    const tirthaChipHtml = shloka.tirthaLink
+      ? `<div class="dge-tp-place-row"><a class="dge-tp-place" href="${shloka.tirthaLink}" onclick="event.stopPropagation();" title="See ${tirthaPlace} on the Tīrtha holy-places map">📍 ${tirthaPlace} <span class="dge-tp-arrow">↗</span></a></div>` : '';
+
     c.innerHTML = `
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
@@ -625,6 +632,7 @@ function renderList() {
         ${srcBtnHtml}
         ${moreBtnHtml}
       </div>
+      ${tirthaChipHtml}
       ${footnoteListHtml}
       ${appViewToggleHtml}
       ${extraFieldsHtml}

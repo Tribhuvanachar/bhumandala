@@ -1238,6 +1238,16 @@
         "_schema": "grantha_tippani_text"
        }
       }
+     },
+     "kavya": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Sri Vadiraja Tirtha",
+      "tirtha_prabandha": {
+       "paschima_prabandha": {},
+       "uttara_prabandha": {},
+       "purva_prabandha": {},
+       "dakshina_prabandha": {}
+      }
      }
     },
     "DvaitaVedanta": {

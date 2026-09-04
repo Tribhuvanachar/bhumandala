@@ -158,6 +158,11 @@ $('dirtabs').addEventListener('click',e=>{
   render();
 });
 ['q','type','state','conf','sort'].forEach(id=>$(id).addEventListener('input',render));
+// Deep link: ?q=<kṣetra> pre-filters the list (Tīrthaprabandha verse → its place).
+try{
+  const dq=new URLSearchParams(location.search).get('q');
+  if(dq){ $('q').value=dq; }
+}catch(e){}
 render();
 </script>
 </body>

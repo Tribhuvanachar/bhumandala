@@ -788,7 +788,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // importer, 1 Sep 2026): class="shloka" headers, lang="HI" spans,
         // h3 layer banners — render.js offers a styled "source view" per
         // card where this exists. Empty string everywhere else.
-        sourceHtml: typeof item.source_html === 'string' ? item.source_html : ''
+        sourceHtml: typeof item.source_html === 'string' ? item.source_html : '',
+        // Optional outbound link to a related project page (Tīrthaprabandha
+        // verses → the Tīrtha holy-places page, filtered to the kṣetra).
+        // Empty for every other grantha; render.js shows a 📍 chip when set.
+        tirthaLink: typeof item.tirtha_link === 'string' ? item.tirtha_link : ''
       };
     });
 
