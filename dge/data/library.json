@@ -17784,6 +17784,16 @@
    "facets": {
     "default_author": "Prof. Gururao V. Nadgouda & Smt. Indira Nadgouda"
    }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/krishnacharitra_manjari/mula/data.json",
+   "populated": true,
+   "title": "श्रीकृष्णचरित्रमञ्जरी — mula",
+   "addedAt": "2026-09-04",
+   "source": {},
+   "facets": {
+    "default_author": "श्रीराघवेन्द्रतीर्थः"
+   }
   }
  ]
 }
