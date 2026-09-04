@@ -23,6 +23,17 @@
       "confidence": "medium"
     },
     {
+      "id": "achyutha",
+      "name": "Achyutha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "adamaru_n",
       "name": "Narasimha Tirtha (Adamaru)",
       "titles": [],
@@ -56,6 +67,94 @@
       "confidence": "medium"
     },
     {
+      "id": "akshobhya_2",
+      "name": "Akshobhya Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyachandra",
+      "name": "Akshobhyachandra Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyaraghumanya",
+      "name": "Akshobhyaraghumanya Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyaraghupoorna",
+      "name": "Akshobhyaraghupoorna Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyaraghupragnya",
+      "name": "Akshobhyaraghupragnya Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyaraghupriya",
+      "name": "Akshobhyaraghupriya Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyaraghuvallabha",
+      "name": "Akshobhyaraghuvallabha Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "akshobhyarama",
+      "name": "Akshobhyarama Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "amarendra",
       "name": "Amarendra Tirtha (Pejawara)",
       "titles": [],
@@ -67,6 +166,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "ananda",
+      "name": "Ananda Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "anandanidhi",
       "name": "Anandanidhi Tirtha (Puttige)",
       "titles": [],
@@ -75,6 +185,50 @@
       "death": null,
       "role": "17th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "anandanidhi_2",
+      "name": "Anandanidhi Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "aniruddha",
+      "name": "Aniruddha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "aniruddha_2",
+      "name": "Aniruddha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "anujeevothama",
+      "name": "Anujeevothama Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -166,6 +320,17 @@
       "confidence": "medium"
     },
     {
+      "id": "bhuvijaya_ramachandra",
+      "name": "Bhuvijaya Ramachandra Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "brahma",
       "name": "Chaturmukha Brahma",
       "titles": [],
@@ -186,6 +351,17 @@
       "role": null,
       "matha": "vyasaraja",
       "confidence": "medium"
+    },
+    {
+      "id": "chakrapani",
+      "name": "Chakrapani Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
     },
     {
       "id": "chintamani",
@@ -221,6 +397,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "damodara_3",
+      "name": "Damodara Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "damodhara",
+      "name": "Damodhara Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "dayanidhi",
       "name": "Dayanidhi Tirtha",
       "titles": [],
@@ -229,6 +427,17 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "devagarbha",
+      "name": "Devagarbha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
       "confidence": "traditional"
     },
     {
@@ -276,6 +485,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "dheeramadhava",
+      "name": "Dheeramadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "dheerendra",
       "name": "Dheerendra Tirtha",
       "titles": [],
@@ -285,6 +505,17 @@
       "role": null,
       "matha": "raghavendra",
       "confidence": "high"
+    },
+    {
+      "id": "digvijaya_ramachandra",
+      "name": "Digvijaya Ramachandra Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
     },
     {
       "id": "durvasa",
@@ -298,6 +529,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "dwarakanatha",
+      "name": "Dwarakanatha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "eeshapriya",
       "name": "Eeshapriya Tirtha (Adamaru)",
       "titles": [],
@@ -306,6 +548,39 @@
       "death": null,
       "role": "33th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "gadhadhara",
+      "name": "Gadhadhara Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "gadhadhara_2",
+      "name": "Gadhadhara Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "gangadhara",
+      "name": "Gangadhara Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
       "confidence": "traditional"
     },
     {
@@ -327,17 +602,6 @@
       "birth": null,
       "death": 1517,
       "role": null,
-      "matha": "gokarna",
-      "confidence": "medium"
-    },
-    {
-      "id": "gokarna_vidyadheesh",
-      "name": "Vidyadheesh Tirtha (Partagali)",
-      "titles": [],
-      "period": "present",
-      "birth": 1995,
-      "death": null,
-      "role": "present incumbent (Gokarna Partagali)",
       "matha": "gokarna",
       "confidence": "medium"
     },
@@ -432,6 +696,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "hayagreeva_2",
+      "name": "Hayagreeva Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "helavanakatte_giriyamma",
       "name": "Helavanakatte Giriyamma",
       "titles": [],
@@ -454,6 +729,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "hiranyagarbha_2",
+      "name": "Hiranyagarbha Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "indirakantha",
+      "name": "Indirakantha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "jagadbhushana",
       "name": "Jagadbhushana Tirtha (Palimaru)",
       "titles": [],
@@ -473,6 +770,17 @@
       "death": null,
       "role": "18th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "jagannatha_2",
+      "name": "Jagannatha Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
       "confidence": "traditional"
     },
     {
@@ -590,6 +898,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "jnanivarya",
+      "name": "Jnanivarya Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "kaivalya",
       "name": "Kaivalya Tirtha",
       "titles": [],
@@ -598,6 +917,28 @@
       "death": null,
       "role": null,
       "matha": "mula",
+      "confidence": "traditional"
+    },
+    {
+      "id": "kamalakantha",
+      "name": "Kamalakantha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
+      "id": "kamalakantha_2",
+      "name": "Kamalakantha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -704,6 +1045,17 @@
       "confidence": "medium"
     },
     {
+      "id": "keshavamadhava",
+      "name": "Keshavamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "keshavanidhi",
       "name": "Keshavanidhi Tirtha",
       "titles": [],
@@ -723,6 +1075,17 @@
       "death": null,
       "role": "8th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "krishnadvaipayana",
+      "name": "Krishnadvaipayana Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
       "confidence": "traditional"
     },
     {
@@ -759,6 +1122,17 @@
       "confidence": "medium"
     },
     {
+      "id": "lakahmivallabha",
+      "name": "Lakahmivallabha Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "lakshmidhara",
       "name": "Lakshmidhara Tirtha",
       "titles": [],
@@ -789,6 +1163,17 @@
       "death": null,
       "role": "19th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshmikantha",
+      "name": "Lakshmikantha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -847,6 +1232,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "lakshminaatha",
+      "name": "Lakshminaatha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "lakshminarayana",
       "name": "Lakshminarayana Tirtha (Shirur)",
       "titles": [],
@@ -866,6 +1262,17 @@
       "death": null,
       "role": "20th pontiff of Shirur Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "shirur",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lakshminarayana_3",
+      "name": "Lakshminarayana Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -1034,6 +1441,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "lokapujya",
+      "name": "Lokapujya Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lokavanditha",
+      "name": "Lokavanditha Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "lokavanditha_2",
+      "name": "Lokavanditha Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "lokesha",
       "name": "Lokesha Tirtha (Krishnapura)",
       "titles": [],
@@ -1065,6 +1505,28 @@
       "role": null,
       "matha": "kashi",
       "confidence": "medium"
+    },
+    {
+      "id": "madhuhari",
+      "name": "Madhuhari Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "madhupathi",
+      "name": "Madhupathi Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
     },
     {
       "id": "madhva",
@@ -1142,6 +1604,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "mounivarya",
+      "name": "Mounivarya Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "mukunda",
+      "name": "Mukunda Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
       "id": "narahari",
       "name": "Narahari Tirtha",
       "titles": [
@@ -1155,6 +1639,17 @@
       "confidence": "medium"
     },
     {
+      "id": "narahari_2",
+      "name": "Narahari Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "narayana",
       "name": "Narayana (Vishnu, as Hamsa)",
       "titles": [],
@@ -1163,6 +1658,28 @@
       "death": null,
       "role": "Source of the sampradaya",
       "matha": "mula",
+      "confidence": "traditional"
+    },
+    {
+      "id": "narayana_2",
+      "name": "Narayana Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "narayana_3",
+      "name": "Narayana Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
       "confidence": "traditional"
     },
     {
@@ -1186,6 +1703,17 @@
       "role": null,
       "matha": "core",
       "confidence": "medium"
+    },
+    {
+      "id": "padmanabha_2",
+      "name": "Padmanabha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
     },
     {
       "id": "palimaru_cur",
@@ -1221,6 +1749,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "paramajyothi",
+      "name": "Paramajyothi Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "parashurama",
       "name": "Parashurama Tirtha",
       "titles": [],
@@ -1243,6 +1782,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "poornaprajna",
+      "name": "Poornaprajna Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
+      "id": "pradyumna",
+      "name": "Pradyumna Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "pradyumna_2",
+      "name": "Pradyumna Tirtha (Sagarakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Sagarakatte (Madhva/Dvaita lineage)",
+      "matha": "sagarakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "prajna",
       "name": "Prajna Tirtha (Prajnanidhi)",
       "titles": [],
@@ -1251,6 +1823,17 @@
       "death": null,
       "role": null,
       "matha": "mula",
+      "confidence": "traditional"
+    },
+    {
+      "id": "prajnaadhiraja",
+      "name": "Prajnaadhiraja Tirtha (Sagarakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Sagarakatte (Madhva/Dvaita lineage)",
+      "matha": "sagarakatte",
       "confidence": "traditional"
     },
     {
@@ -1273,6 +1856,28 @@
       "death": null,
       "role": "15th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "prajnadhirajendra",
+      "name": "Prajnadhirajendra Tirtha (Sagarakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Sagarakatte (Madhva/Dvaita lineage)",
+      "matha": "sagarakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "prajnamadhava",
+      "name": "Prajnamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
       "confidence": "traditional"
     },
     {
@@ -1300,6 +1905,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "prasannashuramadhava",
+      "name": "Prasannashuramadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "pundarikaksha",
+      "name": "Pundarikaksha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "punyakeerthi",
+      "name": "Punyakeerthi Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "punyasloka",
       "name": "Punyasloka Tirtha (Shirur)",
       "titles": [],
@@ -1322,6 +1960,28 @@
       "role": null,
       "matha": "haridasa",
       "confidence": "medium"
+    },
+    {
+      "id": "purandhara",
+      "name": "Purandhara Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "purushothama",
+      "name": "Purushothama Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
     },
     {
       "id": "purushottama_v",
@@ -1368,6 +2028,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghava_2",
+      "name": "Raghava Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghavendra",
       "name": "Raghavendra Tirtha (Rayaru)",
       "titles": [
@@ -1404,6 +2075,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghavendra_4",
+      "name": "Raghavendra Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghavendra_5",
+      "name": "Raghavendra Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghavendra_6",
+      "name": "Raghavendra Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "33th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghavendra_k",
       "name": "Raghavendra Tirtha",
       "titles": [],
@@ -1415,6 +2119,17 @@
       "confidence": "medium"
     },
     {
+      "id": "raghothama",
+      "name": "Raghothama Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "35th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghubhushana",
       "name": "Raghubhushana Tirtha (Palimaru)",
       "titles": [],
@@ -1423,6 +2138,72 @@
       "death": null,
       "role": "25th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghubhushana_2",
+      "name": "Raghubhushana Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghubhushana_3",
+      "name": "Raghubhushana Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "40th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghubhushana_4",
+      "name": "Raghubhushana Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuchandra",
+      "name": "Raghuchandra Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghudanta",
+      "name": "Raghudanta Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghukanta",
+      "name": "Raghukanta Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
       "confidence": "traditional"
     },
     {
@@ -1470,6 +2251,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghunandana_4",
+      "name": "Raghunandana Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunandana_5",
+      "name": "Raghunandana Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghunatha",
       "name": "Raghunatha Tirtha (Palimaru)",
       "titles": [],
@@ -1500,6 +2303,61 @@
       "death": null,
       "role": "2nd pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_4",
+      "name": "Raghunatha Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_5",
+      "name": "Raghunatha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "38th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_6",
+      "name": "Raghunatha Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_7",
+      "name": "Raghunatha Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghunatha_8",
+      "name": "Raghunatha Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
       "confidence": "traditional"
     },
     {
@@ -1547,6 +2405,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghupathi_2",
+      "name": "Raghupathi Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghupati",
       "name": "Raghupati Tirtha (Palimaru)",
       "titles": [],
@@ -1555,6 +2424,94 @@
       "death": null,
       "role": "17th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati_2",
+      "name": "Raghupati Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati_3",
+      "name": "Raghupati Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati_4",
+      "name": "Raghupati Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati_5",
+      "name": "Raghupati Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati_6",
+      "name": "Raghupati Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupati_7",
+      "name": "Raghupati Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupramathi",
+      "name": "Raghupramathi Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupraveena",
+      "name": "Raghupraveena Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "39th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
       "confidence": "traditional"
     },
     {
@@ -1569,6 +2526,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghuprema",
+      "name": "Raghuprema Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghupriya",
       "name": "Raghupriya Tirtha (Palimaru)",
       "titles": [],
@@ -1577,6 +2545,39 @@
       "death": null,
       "role": "27th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupriya_2",
+      "name": "Raghupriya Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "37th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupriya_3",
+      "name": "Raghupriya Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupriya_4",
+      "name": "Raghupriya Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
       "confidence": "traditional"
     },
     {
@@ -1591,6 +2592,83 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghupungava_2",
+      "name": "Raghupungava Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupungava_3",
+      "name": "Raghupungava Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghupungava_4",
+      "name": "Raghupungava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuraja",
+      "name": "Raghuraja Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuraja_2",
+      "name": "Raghuraja Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "34th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuraja_3",
+      "name": "Raghuraja Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuraja_4",
+      "name": "Raghuraja Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghuratna",
       "name": "Raghuratna Tirtha (Palimaru)",
       "titles": [],
@@ -1599,6 +2677,28 @@
       "death": null,
       "role": "26th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghushaanta",
+      "name": "Raghushaanta Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuthilaka",
+      "name": "Raghuthilaka Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "41th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
       "confidence": "traditional"
     },
     {
@@ -1613,6 +2713,17 @@
       "role": null,
       "matha": "uttaradi",
       "confidence": "high"
+    },
+    {
+      "id": "raghuttama_2",
+      "name": "Raghuttama Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
     },
     {
       "id": "raghuttma",
@@ -1637,6 +2748,50 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghuvallabha_2",
+      "name": "Raghuvallabha Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvallabha_3",
+      "name": "Raghuvallabha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvallabha_4",
+      "name": "Raghuvallabha Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvandya",
+      "name": "Raghuvandya Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
       "id": "raghuvara",
       "name": "Raghuvara Tirtha (Palimaru)",
       "titles": [],
@@ -1645,6 +2800,28 @@
       "death": null,
       "role": "23th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvara_2",
+      "name": "Raghuvara Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvara_3",
+      "name": "Raghuvara Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
       "confidence": "traditional"
     },
     {
@@ -1670,6 +2847,160 @@
       "confidence": "traditional"
     },
     {
+      "id": "raghuvarya_3",
+      "name": "Raghuvarya Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvarya_4",
+      "name": "Raghuvarya Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvarya_5",
+      "name": "Raghuvarya Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvarya_6",
+      "name": "Raghuvarya Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "36th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvarya_7",
+      "name": "Raghuvarya Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvarya_8",
+      "name": "Raghuvarya Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvarya_9",
+      "name": "Raghuvarya Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvedanta",
+      "name": "Raghuvedanta Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuveera",
+      "name": "Raghuveera Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "raghuvijaya",
+      "name": "Raghuvijaya Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ragupungava",
+      "name": "Ragupungava Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "rahuttama",
+      "name": "Rahuttama Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "rajadhiraja",
+      "name": "Rajadhiraja Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "rajadhiraja_2",
+      "name": "Rajadhiraja Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "rajarajshwara",
       "name": "Rajarajshwara Tirtha (Palimaru)",
       "titles": [],
@@ -1678,6 +3009,17 @@
       "death": null,
       "role": "6th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "rajavandya",
+      "name": "Rajavandya Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
       "confidence": "traditional"
     },
     {
@@ -1703,6 +3045,17 @@
       "confidence": "medium"
     },
     {
+      "id": "rama",
+      "name": "Rama Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
       "id": "rama_v",
       "name": "Rama Tirtha",
       "titles": [],
@@ -1711,6 +3064,28 @@
       "death": 1584,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramaakantha",
+      "name": "Ramaakantha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramaanatha",
+      "name": "Ramaanatha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -1747,6 +3122,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "ramachandra_3",
+      "name": "Ramachandra Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramachandra_4",
+      "name": "Ramachandra Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramachandra_5",
+      "name": "Ramachandra Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "ramachandra_u",
       "name": "Ramachandra Tirtha",
       "titles": [],
@@ -1769,6 +3177,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "ramadhyana",
+      "name": "Ramadhyana Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramamadhava",
+      "name": "Ramamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "ramanatha",
       "name": "Ramanatha Tirtha (Puttige)",
       "titles": [],
@@ -1777,6 +3207,17 @@
       "death": null,
       "role": "12th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "ramchandra",
+      "name": "Ramchandra Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
       "confidence": "traditional"
     },
     {
@@ -1854,6 +3295,39 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "sathyakeerthi",
+      "name": "Sathyakeerthi Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "satya",
+      "name": "Satya Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "satya_2",
+      "name": "Satya Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
       "confidence": "traditional"
     },
     {
@@ -1943,6 +3417,17 @@
       "role": null,
       "matha": "uttaradi",
       "confidence": "high"
+    },
+    {
+      "id": "satyamadhava",
+      "name": "Satyamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
     },
     {
       "id": "satyanatha",
@@ -2134,6 +3619,28 @@
       "confidence": "high"
     },
     {
+      "id": "satyavrata",
+      "name": "Satyavrata Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "satyavrata_2",
+      "name": "Satyavrata Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "satyavrata_s",
       "name": "Satyavrata Tirtha",
       "titles": [],
@@ -2244,6 +3751,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "shrikantha",
+      "name": "Shrikantha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
       "id": "sode_cur",
       "name": "Vishwavallabha Tirtha (Sode)",
       "titles": [],
@@ -2332,6 +3850,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "srinidhi_3",
+      "name": "Srinidhi Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "srinidhi_4",
+      "name": "Srinidhi Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "srinivasa",
       "name": "Srinivasa Tirtha (Shirur)",
       "titles": [],
@@ -2351,6 +3891,17 @@
       "death": 1564,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "srinivasamadhava",
+      "name": "Srinivasamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
       "confidence": "traditional"
     },
     {
@@ -2625,6 +4176,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "sulabha",
+      "name": "Sulabha Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "sulabha_2",
+      "name": "Sulabha Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "sumatheendra_k",
       "name": "Sumatheendra Tirtha",
       "titles": [],
@@ -2657,6 +4230,17 @@
       "death": null,
       "role": "26th pontiff of Puttige Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "puttige",
+      "confidence": "traditional"
+    },
+    {
+      "id": "sumatinidhi",
+      "name": "Sumatinidhi Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
       "confidence": "traditional"
     },
     {
@@ -2745,6 +4329,17 @@
       "death": null,
       "role": "17th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "surottama",
+      "name": "Surottama Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
       "confidence": "traditional"
     },
     {
@@ -2862,6 +4457,50 @@
       "confidence": "traditional"
     },
     {
+      "id": "taponidhi_2",
+      "name": "Taponidhi Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "tejonidhi",
+      "name": "Tejonidhi Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "trailokyabhushana",
+      "name": "Trailokyabhushana Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "trailokyabhushana_2",
+      "name": "Trailokyabhushana Tirtha (Baligaru Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Baligaru Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "baligaru",
+      "confidence": "traditional"
+    },
+    {
       "id": "trailokyapavana",
       "name": "Trailokyapavana Tirtha (Shirur)",
       "titles": [],
@@ -2882,6 +4521,17 @@
       "role": null,
       "matha": "lay",
       "confidence": "medium"
+    },
+    {
+      "id": "trivikrama_2",
+      "name": "Trivikrama Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
     },
     {
       "id": "upendra1_k",
@@ -2936,6 +4586,39 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vaageesha",
+      "name": "Vaageesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vaamana",
+      "name": "Vaamana Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vaasudeva",
+      "name": "Vaasudeva Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -3040,6 +4723,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vaikuntavallabha",
+      "name": "Vaikuntavallabha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vaikuntharaja",
       "name": "Vaikuntharaja Tirtha (Adamaru)",
       "titles": [],
@@ -3059,6 +4753,28 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vakyadheesha",
+      "name": "Vakyadheesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vallabha",
+      "name": "Vallabha Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
       "confidence": "traditional"
     },
     {
@@ -3084,6 +4800,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vamana_3",
+      "name": "Vamana Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
+      "id": "varaaha",
+      "name": "Varaaha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "varadapati",
       "name": "Varadapati Tirtha (Kaniyooru)",
       "titles": [],
@@ -3092,6 +4830,17 @@
       "death": null,
       "role": "10th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "varadaraaja",
+      "name": "Varadaraaja Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -3137,6 +4886,17 @@
       "role": null,
       "matha": "kashi",
       "confidence": "medium"
+    },
+    {
+      "id": "varadesha",
+      "name": "Varadesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "21th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
     },
     {
       "id": "varaha",
@@ -3227,6 +4987,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "vasudeva_5",
+      "name": "Vasudeva Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vasudeva_6",
+      "name": "Vasudeva Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vasudevamadhava",
+      "name": "Vasudevamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "vasudhendra",
       "name": "Vasudhendra Tirtha",
       "titles": [],
@@ -3236,6 +5029,17 @@
       "role": null,
       "matha": "raghavendra",
       "confidence": "high"
+    },
+    {
+      "id": "vedaanthanidhi",
+      "name": "Vedaanthanidhi Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "23th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
     },
     {
       "id": "vedabhushana",
@@ -3304,6 +5108,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vedagarbha_5",
+      "name": "Vedagarbha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "16th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedagarbha_6",
+      "name": "Vedagarbha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "vedanga",
       "name": "Vedanga Tirtha (Sode)",
       "titles": [],
@@ -3359,6 +5185,28 @@
       "confidence": "medium"
     },
     {
+      "id": "vedanta",
+      "name": "Vedanta Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedanta_2",
+      "name": "Vedanta Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "vedapati",
       "name": "Vedapati Tirtha (Kaniyooru)",
       "titles": [],
@@ -3367,6 +5215,28 @@
       "death": null,
       "role": "13th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedapoojya",
+      "name": "Vedapoojya Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vedaraaja",
+      "name": "Vedaraaja Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "32th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -3458,6 +5328,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vedavyaasa",
+      "name": "Vedavyaasa Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vedavyasa",
       "name": "Vedavyasa Tirtha (Shirur)",
       "titles": [],
@@ -3502,6 +5383,17 @@
       "confidence": "medium"
     },
     {
+      "id": "vedesha",
+      "name": "Vedesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "18th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vedhanidhi",
       "name": "Vedhanidhi Tirtha (Adamaru)",
       "titles": [],
@@ -3521,6 +5413,28 @@
       "death": null,
       "role": "21th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "veeramadhava",
+      "name": "Veeramadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "20th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "venkatesha",
+      "name": "Venkatesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -3636,6 +5550,28 @@
       "confidence": "medium"
     },
     {
+      "id": "vibhudheesha",
+      "name": "Vibhudheesha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vibhudhesha",
+      "name": "Vibhudhesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vibudhadhiraja",
       "name": "Vibudhadhiraja Tirtha (Kaniyooru)",
       "titles": [],
@@ -3735,6 +5671,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidhyaavallabha",
+      "name": "Vidhyaavallabha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyabhaskara",
+      "name": "Vidhyabhaskara Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidhyadheesha",
       "name": "Vidhyadheesha Tirtha (Adamaru)",
       "titles": [],
@@ -3743,6 +5701,28 @@
       "death": null,
       "role": "4th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyadheesha_2",
+      "name": "Vidhyadheesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidhyadhisha",
+      "name": "Vidhyadhisha Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": 1995,
+      "death": null,
+      "role": "26th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -3812,6 +5792,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidhyavijaya",
+      "name": "Vidhyavijaya Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyaadheesha",
       "name": "Vidyaadheesha Tirtha (Krishnapura)",
       "titles": [],
@@ -3820,6 +5811,28 @@
       "death": null,
       "role": "32th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaadhipathi",
+      "name": "Vidyaadhipathi Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaadhiraaja",
+      "name": "Vidyaadhiraaja Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "19th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -3845,6 +5858,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyaanidhi_2",
+      "name": "Vidyaanidhi Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyaapathi",
       "name": "Vidyaapathi Tirtha (Krishnapura)",
       "titles": [],
@@ -3853,6 +5877,17 @@
       "death": null,
       "role": "31th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaapathi_2",
+      "name": "Vidyaapathi Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -3867,6 +5902,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyaapoorna_2",
+      "name": "Vidyaapoorna Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "34th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaaraaja",
+      "name": "Vidyaaraaja Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "33th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyaasamudra",
       "name": "Vidyaasamudra Tirtha (Krishnapura)",
       "titles": [],
@@ -3875,6 +5932,72 @@
       "death": null,
       "role": "30th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaasindhu",
+      "name": "Vidyaasindhu Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "37th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyabhooshana",
+      "name": "Vidyabhooshana Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "38th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyabhooshana_2",
+      "name": "Vidyabhooshana Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyadheesha",
+      "name": "Vidyadheesha Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyadheesha_2",
+      "name": "Vidyadheesha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyadheesha_3",
+      "name": "Vidyadheesha Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "4th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
       "confidence": "traditional"
     },
     {
@@ -3887,6 +6010,39 @@
       "role": null,
       "matha": "core",
       "confidence": "medium"
+    },
+    {
+      "id": "vidyadhiraja_2",
+      "name": "Vidyadhiraja Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyadhiraja_3",
+      "name": "Vidyadhiraja Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyadhiraja_4",
+      "name": "Vidyadhiraja Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
+      "confidence": "traditional"
     },
     {
       "id": "vidyadhisha",
@@ -3922,6 +6078,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyamanohara",
+      "name": "Vidyamanohara Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "11th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyamanohara_v",
       "name": "Vidyamanohara Tirtha",
       "titles": [],
@@ -3942,6 +6109,17 @@
       "role": "30th pontiff of Palimaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "palimaru",
       "confidence": "high"
+    },
+    {
+      "id": "vidyamanya_2",
+      "name": "Vidyamanya Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "30th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
     },
     {
       "id": "vidyamoorthi",
@@ -3985,6 +6163,39 @@
       "death": null,
       "role": "27th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyanidhi_3",
+      "name": "Vidyanidhi Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyanidhi_4",
+      "name": "Vidyanidhi Tirtha (Kudli Ārya Akṣobhya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Kudli Ārya Akṣobhya (Madhva/Dvaita lineage)",
+      "matha": "kudli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyanidhi_5",
+      "name": "Vidyanidhi Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "6th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
       "confidence": "traditional"
     },
     {
@@ -4054,6 +6265,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyapati_3",
+      "name": "Vidyapati Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyapayonidhi",
       "name": "Vidyapayonidhi Tirtha",
       "titles": [],
@@ -4073,6 +6295,17 @@
       "death": null,
       "role": null,
       "matha": "vyasaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaprasanna_2",
+      "name": "Vidyaprasanna Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "39th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -4109,6 +6342,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyaraja_3",
+      "name": "Vidyaraja Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyarathna",
       "name": "Vidyarathna Tirtha (Krishnapura)",
       "titles": [],
@@ -4131,6 +6375,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyarnava",
+      "name": "Vidyarnava Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyasagara",
       "name": "Vidyasagara Tirtha (Kaniyooru)",
       "titles": [],
@@ -4139,6 +6394,39 @@
       "death": null,
       "role": "23th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyasagara_2",
+      "name": "Vidyasagara Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyasagaramadhava",
+      "name": "Vidyasagaramadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "24th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyasampoorna",
+      "name": "Vidyasampoorna Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
       "confidence": "traditional"
     },
     {
@@ -4175,6 +6463,17 @@
       "confidence": "high"
     },
     {
+      "id": "vidyasindhumadhava",
+      "name": "Vidyasindhumadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyasridhara",
       "name": "Vidyasridhara Tirtha",
       "titles": [],
@@ -4208,6 +6507,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyataponidhi",
+      "name": "Vidyataponidhi Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyatma",
+      "name": "Vidyatma Tirtha (Madhva Prayāg)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Madhva Prayāg (Madhva/Dvaita lineage)",
+      "matha": "prayag",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyavachaspathi",
       "name": "Vidyavachaspathi Tirtha",
       "titles": [],
@@ -4227,6 +6548,17 @@
       "death": null,
       "role": "27th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyavallabha_2",
+      "name": "Vidyavallabha Tirtha (Madhva Prayāg)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Madhva Prayāg (Madhva/Dvaita lineage)",
+      "matha": "prayag",
       "confidence": "traditional"
     },
     {
@@ -4252,6 +6584,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyavaridhi_2",
+      "name": "Vidyavaridhi Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
+    },
+    {
       "id": "vidyavarinidhi",
       "name": "Vidyavarinidhi Tirtha (Kaniyooru)",
       "titles": [],
@@ -4260,6 +6603,17 @@
       "death": null,
       "role": "29th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vidyaviraja",
+      "name": "Vidyaviraja Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "9th pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
       "confidence": "traditional"
     },
     {
@@ -4296,6 +6650,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vidyesha_3",
+      "name": "Vidyesha Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "31th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
       "id": "vignananidhi",
       "name": "Vignananidhi Tirtha",
       "titles": [],
@@ -4304,6 +6669,17 @@
       "death": null,
       "role": null,
       "matha": "sripadaraja",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vihnanadheesha",
+      "name": "Vihnanadheesha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
       "confidence": "traditional"
     },
     {
@@ -4344,6 +6720,17 @@
       "confidence": "medium"
     },
     {
+      "id": "vijayamadhava",
+      "name": "Vijayamadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "22th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
+      "confidence": "traditional"
+    },
+    {
       "id": "vijayanidhi_s",
       "name": "Vijayanidhi Tirtha",
       "titles": [],
@@ -4366,6 +6753,50 @@
       "role": null,
       "matha": "raghavendra",
       "confidence": "high"
+    },
+    {
+      "id": "vijnaana",
+      "name": "Vijnaana Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vimalathma",
+      "name": "Vimalathma Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "14th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishnu",
+      "name": "Vishnu Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishnupriya",
+      "name": "Vishnupriya Tirtha (Hunasihole Kāṇva)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "2nd pontiff of Hunasihole Kāṇva (Madhva/Dvaita lineage)",
+      "matha": "hunasihole",
+      "confidence": "traditional"
     },
     {
       "id": "vishva",
@@ -4777,6 +7208,28 @@
       "confidence": "traditional"
     },
     {
+      "id": "vishwaadheesha_2",
+      "name": "Vishwaadheesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "29th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwaadhipathi",
+      "name": "Vishwaadhipathi Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "27th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vishwaadhiraja",
       "name": "Vishwaadhiraja Tirtha (Krishnapura)",
       "titles": [],
@@ -4785,6 +7238,17 @@
       "death": null,
       "role": "8th pontiff of Krishnapura Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "krishnapura",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwaanja",
+      "name": "Vishwaanja Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "36th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -4810,6 +7274,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "vishwabhoshana",
+      "name": "Vishwabhoshana Tirtha (Madhva-Nārāyaṇa Āśrama)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "1st pontiff of Madhva-Nārāyaṇa Āśrama (Madhva/Dvaita lineage)",
+      "matha": "aashrama",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwadeesha",
+      "name": "Vishwadeesha Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwadeesha_2",
+      "name": "Vishwadeesha Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "3rd pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "vishwadheesha",
       "name": "Vishwadheesha Tirtha (Adamaru)",
       "titles": [],
@@ -4821,6 +7318,50 @@
       "confidence": "traditional"
     },
     {
+      "id": "vishwamurthi",
+      "name": "Vishwamurthi Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwamurti",
+      "name": "Vishwamurti Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "7th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwapathi",
+      "name": "Vishwapathi Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "28th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwapathi_2",
+      "name": "Vishwapathi Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "8th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
       "id": "vishwapati",
       "name": "Vishwapati Tirtha (Adamaru)",
       "titles": [],
@@ -4829,6 +7370,28 @@
       "death": null,
       "role": "5th pontiff of Adamaru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "adamaru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwapoojaka",
+      "name": "Vishwapoojaka Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "12th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwapoojya",
+      "name": "Vishwapoojya Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "25th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
       "confidence": "traditional"
     },
     {
@@ -4898,6 +7461,17 @@
       "confidence": "traditional"
     },
     {
+      "id": "vishwavanddya",
+      "name": "Vishwavanddya Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "26th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
       "id": "vishwavandhya",
       "name": "Vishwavandhya Tirtha (Krishnapura)",
       "titles": [],
@@ -4942,6 +7516,39 @@
       "confidence": "traditional"
     },
     {
+      "id": "vishwesha_3",
+      "name": "Vishwesha Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwothama",
+      "name": "Vishwothama Tirtha (Bheemanakatte)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "13th pontiff of Bheemanakatte (Madhva/Dvaita lineage)",
+      "matha": "bheemanakatte",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vishwottama",
+      "name": "Vishwottama Tirtha (Bhandarakeri (Barkur))",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "15th pontiff of Bhandarakeri (Barkur) (Madhva/Dvaita lineage)",
+      "matha": "bhandarakeri",
+      "confidence": "traditional"
+    },
+    {
       "id": "vithala",
       "name": "Vithala Tirtha (Sode)",
       "titles": [],
@@ -4950,6 +7557,28 @@
       "death": null,
       "role": "17th pontiff of Sode Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "sode",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vyasa",
+      "name": "Vyasa Tirtha (Kukke Subramaṇya)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "35th pontiff of Kukke Subramaṇya (Madhva/Dvaita lineage)",
+      "matha": "kukke",
+      "confidence": "traditional"
+    },
+    {
+      "id": "vyasa_2",
+      "name": "Vyasa Tirtha (Gokarna Partagali)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "10th pontiff of Gokarna Partagali (Madhva/Dvaita lineage)",
+      "matha": "gokarna",
       "confidence": "traditional"
     },
     {
@@ -5053,6 +7682,28 @@
       "death": null,
       "role": "5th pontiff of Kaniyooru Maṭha (Udupi Aṣṭa Maṭha) in the Madhva succession",
       "matha": "kaniyooru",
+      "confidence": "traditional"
+    },
+    {
+      "id": "yashonidhi",
+      "name": "Yashonidhi Tirtha (Odampalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "5th pontiff of Odampalli (Madhva/Dvaita lineage)",
+      "matha": "odampalli",
+      "confidence": "traditional"
+    },
+    {
+      "id": "yogimadhava",
+      "name": "Yogimadhava Tirtha (Majjigehalli)",
+      "titles": [],
+      "period": "unknown",
+      "birth": null,
+      "death": null,
+      "role": "17th pontiff of Majjigehalli (Madhva/Dvaita lineage)",
+      "matha": "majjigehalli",
       "confidence": "traditional"
     },
     {
