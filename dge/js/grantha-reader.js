@@ -6,7 +6,7 @@
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
   window.DGE_VERSIONS['grantha-reader.js'] =
-    'v1.2 (3 Sep 2026 report: filterable sutra drawer (☰) grouped by adhikarana · per-card "sarvah vyakhyah" expansion loading every commentary for ONE sutra · chip double-click FOCUS shows only the refs a commentary actually glosses, auto-enabling its chain, jumping to its first pada when the current one is empty · ⚙ settings: what a sutra-list tap opens; v1.1: adhikarana select + dividers, wrapped chips; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
+    'v1.3 (mangala folded into the first pada as a collapsible section; 0.0 out of the pada dropdown so jijnasadhikarana is the first left-nav entry) · v1.2 (3 Sep 2026 report: filterable sutra drawer (☰) grouped by adhikarana · per-card "sarvah vyakhyah" expansion loading every commentary for ONE sutra · chip double-click FOCUS shows only the refs a commentary actually glosses, auto-enabling its chain, jumping to its first pada when the current one is empty · ⚙ settings: what a sutra-list tap opens; v1.1: adhikarana select + dividers, wrapped chips; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
 
   // v2 families available to this reader. Paths are relative to dge/.
   var REGISTRY = {
@@ -201,12 +201,18 @@
     return out;
   }
 
+  // the mangala pada (0.0) is NOT a pada of its own — it is folded into the
+  // first real pada as a collapsible section (renderPada), so it never appears
+  // in the pada dropdown or the ‹ › walk.
+  function navPadas() {
+    return state.padas.filter(function (p) { return p !== '0.0'; });
+  }
+
   function renderNav() {
     var sel = $('#g2Pada');
-    sel.innerHTML = state.padas.map(function (p) {
+    sel.innerHTML = navPadas().map(function (p) {
       var ap = p.split('.');
-      var label = ap[0] === '0' ? ADH_NAME[0]
-        : ADH_NAME[+ap[0]] + ' · ' + PAD_NAME[+ap[1]];
+      var label = ADH_NAME[+ap[0]] + ' · ' + PAD_NAME[+ap[1]];
       return '<option value="' + p + '"' + (p === state.pada ? ' selected' : '') + '>' +
         label + ' (' + p + ')</option>';
     }).join('');
@@ -226,8 +232,9 @@
     $('#g2Drawer').onclick = function () { state.drawer = !state.drawer; renderDrawer(); };
     $('#g2Cfg').onclick = openCfg;
     function step(d) {
-      var i = state.padas.indexOf(state.pada) + d;
-      if (i >= 0 && i < state.padas.length) gotoPada(state.padas[i]);
+      var np = navPadas();
+      var i = np.indexOf(state.pada) + d;
+      if (i >= 0 && i < np.length) gotoPada(np[i]);
     }
   }
 
@@ -398,17 +405,9 @@
         '</span> — तस्याः स्थानान्येव दृश्यन्ते (' + refs.length + ' अस्मिन् पादे)' +
         '<button id="g2FocusOff">✕ full view</button></div>';
     }
-    var lastAdhik = null;
-    main.innerHTML = banner + refs.map(function (ref) {
+    // one sutra card (base text + the commentary layers for this ref)
+    function cardHtml(ref) {
       var bu = base.byRef[ref] || [];
-      var adhik = bu.map(function (u) { return u.adhikarana || ''; }).filter(Boolean)[0] || '';
-      if (state.adhik && adhik !== state.adhik) return '';
-      var divider = '';
-      if (adhik && adhik !== lastAdhik) {
-        lastAdhik = adhik;
-        divider = '<div class="g2-adhik-head" lang="sa">' + esc(adhik) +
-          '<span class="n">' + esc(ref) + '–</span></div>';
-      }
       var topic = bu.map(function (u) { return u.topic || ''; }).filter(Boolean)[0];
       var expanded = !!state.cardAll[ref];
       // an expanded card shows EVERY layer that glosses this ref (loaded on
@@ -420,7 +419,7 @@
         '<button class="g2-expbtn' + (expanded ? ' on' : '') + '" data-expand="' + esc(ref) +
         '" title="' + (expanded ? 'Back to the selected commentaries' : 'Open every commentary on this sutra') + '" lang="sa">' +
         (expanded ? '⊖ चयनिताः' : '⊕ सर्वाः व्याख्याः') + '</button>';
-      return divider + '<article class="g2-card' + (ref === state.hlRef ? ' hl' : '') +
+      return '<article class="g2-card' + (ref === state.hlRef ? ' hl' : '') +
         '" id="ref-' + esc(ref) + '">' +
         '<header class="g2-chead"><span class="g2-ref">' + esc(ref) + '</span>' +
         (topic ? '<span class="g2-topic" lang="sa">' + esc(topic) + '</span>' : '') +
@@ -429,8 +428,43 @@
         (bu.length ? '<div class="g2-base" lang="sa">' + bu.map(function (u) {
           return esc(u.text).replace(/\n/g, '<br>');
         }).join('<br>') + '</div>' : '') +
-        blocks.map(function (L) { return layerBlock(L, ref); }).join('') +
-        '</article>';
+        blocks.map(function (L) { return layerBlock(L, ref); }).join('');
+    }
+
+    // The mangala (pada 0.0) is shown as a collapsible section at the very top
+    // of the FIRST real pada — not as a pada of its own. Built once here.
+    var mangalaHtml = '';
+    if (state.pada === (navPadas()[0] || '') && !state.adhik && !state.focus) {
+      var mRefs = [];
+      [state.base].concat(others.map(function (L) { return L.slug; })).forEach(function (slug) {
+        var Ld = state.loaded[slug];
+        if (!Ld) return;
+        Ld.order.forEach(function (r) {
+          if (r.indexOf('0.0.') === 0 && mRefs.indexOf(r) < 0) mRefs.push(r);
+        });
+      });
+      if (mRefs.length) {
+        mRefs.sort(function (a, b) { var ka = refKey(a), kb = refKey(b); return ka[2] - kb[2]; });
+        mangalaHtml = '<details class="g2-mangala"><summary lang="sa">मङ्गलाचरणम्' +
+          '<span class="n">' + mRefs.length + '</span></summary>' +
+          '<div class="g2-mangala-body">' +
+          mRefs.map(function (r) { return cardHtml(r) + '</article>'; }).join('') +
+          '</div></details>';
+      }
+    }
+
+    var lastAdhik = null;
+    main.innerHTML = banner + mangalaHtml + refs.map(function (ref) {
+      var bu = base.byRef[ref] || [];
+      var adhik = bu.map(function (u) { return u.adhikarana || ''; }).filter(Boolean)[0] || '';
+      if (state.adhik && adhik !== state.adhik) return '';
+      var divider = '';
+      if (adhik && adhik !== lastAdhik) {
+        lastAdhik = adhik;
+        divider = '<div class="g2-adhik-head" lang="sa">' + esc(adhik) +
+          '<span class="n">' + esc(ref) + '–</span></div>';
+      }
+      return divider + cardHtml(ref) + '</article>';
     }).join('') || '<div class="g2-empty">No units here.</div>';
     if (state.adhik && !main.querySelector('.g2-card')) {
       main.innerHTML = '<div class="g2-empty">इदम् अधिकरणम् अस्मिन् पादे नास्ति।</div>';
@@ -525,8 +559,11 @@
                 return ka[0] - kb[0] || ka[1] - kb[1];
               });
           renderChips();
-          var startPada = state.padas.indexOf(targetPada) >= 0 ? targetPada
-            : (state.padas[0] === '0.0' && state.padas.length > 1 ? state.padas[1] : state.padas[0]);
+          // 0.0 (mangala) is not a landing pada — it lives folded into the
+          // first real pada; a deep link into it opens that pada instead.
+          var firstReal = navPadas()[0] || state.padas[0];
+          var startPada = (targetPada && targetPada !== '0.0' &&
+            state.padas.indexOf(targetPada) >= 0) ? targetPada : firstReal;
           gotoPada(startPada, target ? target.split('.').slice(0, 3).join('.') : '');
         });
       })

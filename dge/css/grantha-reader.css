@@ -143,6 +143,25 @@
     background: var(--card-border); }
   .g2-adhik-head .n { font-size: 11px; color: var(--muted-text); font-weight: 400; }
 
+  /* Mangalacharana — collapsible section at the top of the first pada */
+  .g2-mangala { margin: 4px 2px 18px; border: 1px solid var(--card-border);
+    border-radius: 12px; background: var(--panel-bg, var(--card-bg)); overflow: hidden; }
+  .g2-mangala > summary { list-style: none; cursor: pointer; padding: 12px 16px;
+    display: flex; align-items: center; gap: 10px; color: var(--accent-gold);
+    font-family: var(--font-sanskrit); font-size: 15px; font-weight: 700;
+    user-select: none; }
+  .g2-mangala > summary::-webkit-details-marker { display: none; }
+  .g2-mangala > summary::before { content: "▸"; font-size: 12px; color: var(--muted-text);
+    transition: transform .15s ease; }
+  .g2-mangala[open] > summary::before { transform: rotate(90deg); }
+  .g2-mangala > summary .n { margin-left: auto; font-size: 11px; font-weight: 400;
+    color: var(--muted-text); border: 1px solid var(--card-border); border-radius: 999px;
+    padding: 1px 8px; }
+  .g2-mangala-body { padding: 0 12px 8px; border-top: 1px solid var(--card-border); }
+  .g2-mangala-body .g2-card { border: none; border-bottom: 1px dashed var(--card-border);
+    border-radius: 0; }
+  .g2-mangala-body .g2-card:last-child { border-bottom: none; }
+
   .g2-toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
     background: var(--panel-bg); color: var(--text-primary); font-size: 13px;
     border: 1px solid var(--card-border); border-radius: 999px; padding: 8px 18px;
