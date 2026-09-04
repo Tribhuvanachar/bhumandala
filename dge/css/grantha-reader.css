@@ -162,6 +162,23 @@
     border-radius: 0; }
   .g2-mangala-body .g2-card:last-child { border-bottom: none; }
 
+  /* Setu Tila edition: structural headings, footnotes, citations */
+  .g2-lheading { font-family: var(--font-sanskrit); color: var(--accent-gold);
+    font-weight: 700; margin: 10px 0 4px; }
+  .g2-lheading.l1 { font-size: 16px; }
+  .g2-lheading.l2 { font-size: 14px; color: var(--text-sanskrit, var(--text-primary));
+    opacity: .85; font-style: italic; }
+  .g2-colophon { color: var(--muted-text); font-style: italic; }
+  .g2-pramana { color: var(--accent-red, #c0552e); }
+  .g2-kutra { font-size: 11px; color: var(--muted-text); border: 1px solid var(--card-border);
+    border-radius: 6px; padding: 0 5px; margin: 0 2px; white-space: nowrap; }
+  sup.g2-fn { color: var(--accent-red, #c0552e); font-weight: 700; cursor: default;
+    font-size: 10px; padding: 0 1px; }
+  .g2-fnotes { margin: 6px 0 2px; padding: 6px 10px; border-left: 2px solid var(--card-border);
+    background: color-mix(in srgb, var(--muted-text) 6%, transparent); border-radius: 0 6px 6px 0; }
+  .g2-fnote { font-size: 12.5px; color: var(--muted-text); line-height: 1.5; margin: 2px 0; }
+  .g2-fnote sup { color: var(--accent-red, #c0552e); font-weight: 700; margin-right: 3px; }
+
   .g2-toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
     background: var(--panel-bg); color: var(--text-primary); font-size: 13px;
     border: 1px solid var(--card-border); border-radius: 999px; padding: 8px 18px;

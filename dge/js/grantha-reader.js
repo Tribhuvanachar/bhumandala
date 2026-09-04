@@ -6,7 +6,7 @@
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
   window.DGE_VERSIONS['grantha-reader.js'] =
-    'v1.3 (mangala folded into the first pada as a collapsible section; 0.0 out of the pada dropdown so jijnasadhikarana is the first left-nav entry) · v1.2 (3 Sep 2026 report: filterable sutra drawer (☰) grouped by adhikarana · per-card "sarvah vyakhyah" expansion loading every commentary for ONE sutra · chip double-click FOCUS shows only the refs a commentary actually glosses, auto-enabling its chain, jumping to its first pada when the current one is empty · ⚙ settings: what a sutra-list tap opens; v1.1: adhikarana select + dividers, wrapped chips; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
+    'v1.4 (bhashya layer = Setu Tila edition: structural headings, pathantara footnotes, pramana citations rendered) · v1.3 (mangala folded into the first pada as a collapsible section; 0.0 out of the pada dropdown so jijnasadhikarana is the first left-nav entry) · v1.2 (3 Sep 2026 report: filterable sutra drawer (☰) grouped by adhikarana · per-card "sarvah vyakhyah" expansion loading every commentary for ONE sutra · chip double-click FOCUS shows only the refs a commentary actually glosses, auto-enabling its chain, jumping to its first pada when the current one is empty · ⚙ settings: what a sutra-list tap opens; v1.1: adhikarana select + dividers, wrapped chips; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
 
   // v2 families available to this reader. Paths are relative to dge/.
   var REGISTRY = {
@@ -366,10 +366,25 @@
       '<div class="g2-lname"><span lang="sa">' + esc(L.title) + '</span>' +
       (L.author ? '<span class="au" lang="sa">' + esc(L.author) + '</span>' : '') + '</div>' +
       us.map(function (u) {
-        return '<p class="g2-para" id="u-' + esc(u.id) + '" lang="sa">' +
-          esc(u.text).replace(/\n/g, '<br>') +
+        // structural heading node (the edition's own adhyaya / upodghata etc.)
+        if (u.kind === 'heading') {
+          return '<div class="g2-lheading l' + (u.level || 2) + '" lang="sa">' +
+            esc(u.text) + '</div>';
+        }
+        // an edition that ships sanitised inline markup (Setu Tila: pramana
+        // citations, kutra cross-refs, pathantara footnotes) carries it in
+        // u.html — already escaped/whitelisted by the importer; otherwise the
+        // plain u.text is escaped here.
+        var bodyHtml = u.html ? u.html : esc(u.text).replace(/\n/g, '<br>');
+        var fnotes = (u.footnotes && u.footnotes.length)
+          ? '<div class="g2-fnotes">' + u.footnotes.map(function (nt, i) {
+              return '<div class="g2-fnote"><sup>' + (i + 1) + '</sup> ' + esc(nt) + '</div>';
+            }).join('') + '</div>'
+          : '';
+        return '<p class="g2-para' + (u.kind === 'colophon' ? ' g2-colophon' : '') +
+          '" id="u-' + esc(u.id) + '" lang="sa">' + bodyHtml +
           '<button class="g2-pid" data-copyid="' + esc(u.id) + '" title="Copy paragraph link">¶' +
-          esc(u.id.split('.').pop().slice(1)) + '</button></p>';
+          esc(u.id.split('.').pop().slice(1)) + '</button>' + fnotes + '</p>';
       }).join('') + '</section>';
   }
 
