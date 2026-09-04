@@ -785,6 +785,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // the section navigator (layer-stitch.js's dgeInitSectionNav)
         // groups on it. Absent everywhere else, and harmlessly null then.
         breadcrumb: Array.isArray(item.breadcrumb) ? item.breadcrumb : null,
+        // Kṣetra / deity heading a verse falls under (Tīrthaprabandha:
+        // "गङ्गा", "श्रीरङ्गम्", …). Drives the section navigator's
+        // dropdown-and-filter; empty for texts that group by breadcrumb
+        // structure alone. See layer-stitch.js dgeInitSectionNav.
+        category: typeof item.category === 'string' ? item.category : '',
         // Sanitized source-site markup for this unit (DvaitaVedanta
         // importer, 1 Sep 2026): class="shloka" headers, lang="HI" spans,
         // h3 layer banners — render.js offers a styled "source view" per
