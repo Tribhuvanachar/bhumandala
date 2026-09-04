@@ -61,6 +61,16 @@ function getFilteredIds() {
       const inR = (i >= rs && i <= re);
       if ((rm === 'include' && !inR) || (rm === 'exclude' && inR)) continue;
     }
+
+    // Section / category filter (layer-stitch.js's section navigator, when
+    // a grantha's items carry a `category` heading): show only the verses
+    // under the chosen heading. Keyed on that same category string, so one
+    // dropdown both lists the headings and filters to them.
+    if (window.dgeSectionFilterKey) {
+      const sh = stotraData.shlokas[i];
+      if (!sh || (sh.category || '') !== window.dgeSectionFilterKey) continue;
+    }
+
     ids.push(i);
   }
   return ids;

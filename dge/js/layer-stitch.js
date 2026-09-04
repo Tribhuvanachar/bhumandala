@@ -28,7 +28,7 @@
 // fields the importer already captures per item.
 // ============================================================
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['layer-stitch.js'] = 'v1.1 (auto-select the primary layer on load + dgeStitchedAvailableKeys for the per-card pill row; v1.0: manifest-gated load-time stitching of sibling mula/tika_* layers into commentaries{}, lineage strip, breadcrumb section navigator, standalone-tika banner)';
+window.DGE_VERSIONS['layer-stitch.js'] = 'v1.2 (section navigator gains a category FILTER mode: when items carry a `category` heading (Tīrthaprabandha kṣetra/deity), the dropdown filters the list to that heading via getFilteredIds instead of jumping, with per-heading counts and an "all" option; structural-breadcrumb texts keep the jump behaviour. v1.1: auto-select the primary layer on load + dgeStitchedAvailableKeys for the per-card pill row; v1.0: manifest-gated load-time stitching of sibling mula/tika_* layers into commentaries{}, lineage strip, breadcrumb section navigator, standalone-tika banner)';
 
 // Fetched once per page load, same cache-busting rationale as
 // dgeLibraryCatalogPromise (core.js): GitHub Pages' CDN happily serves a
@@ -320,11 +320,49 @@ window.dgeInitSectionNav = function() {
   if (!row || !select) return;
   row.style.display = 'none';
   select.innerHTML = '';
+  // A fresh grantha starts unfiltered; the flag says which of the two
+  // dropdown behaviours (filter vs jump) this text uses.
+  window.dgeSectionFilterKey = null;
+  window.dgeSectionNavIsFilter = false;
   if (!window.stotraData || !window.stotraData.shlokas) return;
 
+  const t = (s) => (typeof applyTransliteration === 'function' && window.activeScript)
+    ? applyTransliteration(s, window.activeScript) : s;
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const order = Object.keys(window.stotraData.shlokas).map(Number).sort((a, b) => a - b);
+
+  // MODE A — category headings (Tīrthaprabandha: kṣetra/deity like "गङ्गा",
+  // "श्रीरङ्गम्"). When items carry a `category`, the dropdown FILTERS to the
+  // chosen heading (the project lead's ask: "categories … in a drop-down and
+  // filterable"), showing only that heading's verses. One "all" option clears
+  // it. A count beside each heading makes the "8 ślokas under Gaṅgā" grouping
+  // legible at a glance.
+  const cats = [];      // [{key, count}] in reading order
+  const catSeen = {};
+  order.forEach(n => {
+    const c = window.stotraData.shlokas[n].category;
+    if (!c) return;
+    if (catSeen[c] === undefined) { catSeen[c] = cats.length; cats.push({ key: c, count: 0 }); }
+    cats[catSeen[c]].count++;
+  });
+  if (cats.length >= 2) {
+    window.dgeSectionNavIsFilter = true;
+    let html = `<option value="">${t('सर्वाणि')} (${order.length})</option>`;
+    cats.forEach(c => {
+      html += `<option value="${esc(c.key)}">${t(c.key)} (${c.count})</option>`;
+    });
+    select.innerHTML = html;
+    row.style.display = 'flex';
+    return;
+  }
+
+  // MODE B — structural breadcrumb sections (nyaya_sudha अध्याय > पाद >
+  // अधिकरण, gita_bhashya adhyaya): the dropdown JUMPS to a section's first
+  // verse, unchanged from the original navigator.
   const groups = []; // [{path:[...], firstN}], in reading order
   const seen = {};
-  Object.keys(window.stotraData.shlokas).map(Number).sort((a, b) => a - b).forEach(n => {
+  order.forEach(n => {
     const crumbs = window.stotraData.shlokas[n].breadcrumb;
     if (!Array.isArray(crumbs) || crumbs.length < 4) return;
     const path = crumbs.slice(2, -1).slice(0, 3);
@@ -336,9 +374,6 @@ window.dgeInitSectionNav = function() {
     }
   });
   if (groups.length < 2) return;
-
-  const t = (s) => (typeof applyTransliteration === 'function' && window.activeScript)
-    ? applyTransliteration(s, window.activeScript) : s;
 
   // <optgroup> per parent path (adhyaya · pada), one <option> per deepest
   // section — native, keyboard/mobile friendly, no new popup plumbing.
@@ -360,8 +395,23 @@ window.dgeInitSectionNav = function() {
 };
 
 window.dgeJumpToSection = function(value) {
+  if (!window.stotraData || !window.stotraData.shlokas) return;
+
+  // Filter mode (category texts): constrain the list to the chosen heading
+  // via the shared filter pipeline (getFilteredIds reads dgeSectionFilterKey)
+  // and re-render, rather than jumping. Empty value = show all.
+  if (window.dgeSectionNavIsFilter) {
+    window.dgeSectionFilterKey = value || null;
+    window.dgeListPage = 0;
+    if (typeof renderList === 'function') renderList();
+    const list = document.getElementById('shlokaList') || document.querySelector('.shloka-list');
+    if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  // Jump mode (structural sections): scroll to the section's first verse.
   const n = parseInt(value, 10);
-  if (!n || !window.stotraData || !window.stotraData.shlokas[n]) return;
+  if (!n || !window.stotraData.shlokas[n]) return;
   window.currentReadingId = n;
   if (window.viewMode !== 'single' && typeof getFilteredIds === 'function') {
     const fIds = getFilteredIds();
