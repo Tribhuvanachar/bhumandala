@@ -380,6 +380,10 @@
     "Trivikrama Panditacharya (lay)",
     "Akshobhya Tirtha (core)",
     "Padmanabha Tirtha (core)"
+   ],
+   "gps": [
+    13.27,
+    74.79
    ]
   },
   {
@@ -477,6 +481,10 @@
     "Trivikrama Panditacharya (lay)",
     "Madhvacharya (core)",
     "Lakshmidhara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    15.343,
+    76.472
    ]
   },
   {
@@ -515,6 +523,10 @@
     "Padmanabha Tirtha (core)",
     "Madhava Tirtha (core)",
     "Kavindra Tirtha (uttaradi)"
+   ],
+   "gps": [
+    13.34,
+    74.74
    ]
   },
   {
@@ -549,6 +561,10 @@
     "Jayatirtha (Tikacharya) (core)",
     "Lakshmidhara Tirtha (sripadaraja)",
     "Narahari Tirtha (core)"
+   ],
+   "gps": [
+    17.5,
+    76.95
    ]
   },
   {
@@ -586,6 +602,10 @@
     "Madhava Tirtha (core)",
     "Parashurama Tirtha (sripadaraja)",
     "Lakshmidhara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    17.19,
+    77.15
    ]
   },
   {
@@ -629,6 +649,10 @@
     "Madhava Tirtha (core)",
     "Satyavrata Tirtha (sripadaraja)",
     "Vidyadhiraja Tirtha (core)"
+   ],
+   "gps": [
+    17.19,
+    77.15
    ]
   },
   {
@@ -848,6 +872,10 @@
     "Vijayadhwaja Tirtha (pejawara)",
     "Raghunatha Tirtha (uttaradi)",
     "Satyavrata Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    10.862,
+    78.69
    ]
   },
   {
@@ -887,6 +915,10 @@
     "Narayana Tirtha (Gokarna Partagali) (gokarna)",
     "Brahmanya Tirtha (vyasaraja)",
     "Vadiraja Tirtha (sode)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -923,6 +955,10 @@
     "Narayana Tirtha (Gokarna Partagali) (gokarna)",
     "Raghuttama Tirtha (Bhavabodhacharya) (uttaradi)",
     "Brahmanya Tirtha (vyasaraja)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1961,6 +1997,10 @@
     "Parashurama Tirtha (sripadaraja)",
     "Vidyadhiraja Tirtha (core)",
     "Lakshmidhara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    15.348,
+    76.477
    ]
   },
   {
@@ -1985,7 +2025,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    15.343,
+    76.472
+   ]
   },
   {
    "id": "ramachandra_u",
@@ -2009,7 +2053,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    16.75,
+    77.14
+   ]
   },
   {
    "id": "vidyanidhi_u",
@@ -2033,7 +2081,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    16.75,
+    77.14
+   ]
   },
   {
    "id": "raghunatha_u",
@@ -2070,6 +2122,10 @@
     "Vadiraja Tirtha (sode)",
     "Purandara Dasa (haridasa)",
     "Swarnavarna Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    17.19,
+    77.15
    ]
   },
   {
@@ -2091,10 +2147,11 @@
     "commentary on Prameyaratnamalika",
     "Krishnastuti (Kannada)"
    ],
-   "contrib": null,
+   "contrib": "An early pontiff of the seat later known as the Uttaradi Matha, remembered for the tradition that the Bhimarathi river parted to let him cross while he carried the Moola Rama pooja-box on his shoulders — likened to the Yamuna giving way to Vasudeva bearing the infant Krishna. His vrindavana is in the Nava Brindavana at Anegundi.",
    "confidence": "medium",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-raghuvarya-tirtha"
+    "https://uttaradimath.org/parampara/sri-raghuvarya-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/raghuvarya-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2109,6 +2166,10 @@
     "Brahmanya Tirtha (vyasaraja)",
     "Vibudhendra Tirtha (raghavendra)",
     "Kanaka Dasa (haridasa)"
+   ],
+   "gps": [
+    15.343,
+    76.472
    ]
   },
   {
@@ -2150,6 +2211,10 @@
     "Satyanidhi Tirtha (uttaradi)",
     "Keshava(ndra) Tirtha (kashi)",
     "Vyasatirtha (Vyasaraja) (vyasaraja)"
+   ],
+   "gps": [
+    11.97,
+    79.22
    ]
   },
   {
@@ -2185,6 +2250,10 @@
     "Yadavendra Tirtha I (kashi)",
     "Vadiraja Tirtha (sode)",
     "Sudhindra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    14.08,
+    77.59
    ]
   },
   {
@@ -2211,7 +2280,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    11.967,
+    79.2
+   ]
   },
   {
    "id": "vedanidhi_u",
@@ -2246,6 +2319,10 @@
     "Uttanda Ramachandra Tirtha (sripadaraja)",
     "Yadavendra Tirtha I (kashi)",
     "Satyavrata Tirtha (uttaradi)"
+   ],
+   "gps": [
+    17.679,
+    75.33
    ]
   },
   {
@@ -2280,6 +2357,10 @@
     "Satyanidhi Tirtha (uttaradi)",
     "Raghavendra Tirtha (Rayaru) (raghavendra)",
     "Keshava(ndra) Tirtha (kashi)"
+   ],
+   "gps": [
+    16.8524,
+    74.5815
    ]
   },
   {
@@ -2288,7 +2369,7 @@
    "guru": "satyavrata_u",
    "matha": "uttaradi",
    "tag": "acharya",
-   "purva": "Kaulagi Raghunathacharya",
+   "purva": "Kaujalagi Raghupatyacharya",
    "titles": [],
    "period": "1638-1660",
    "b": 1580,
@@ -2299,12 +2380,14 @@
    "works": [
     "Bhedojjivana",
     "Vayu-Bharati Stotra",
-    "Vishnu-Sahasranama Vyakhyana"
+    "Vishnu-Sahasranama Vyakhyana",
+    "Vishnu Sahasranama Vyakhyana (lost)"
    ],
-   "contrib": null,
+   "contrib": "A contemporary of Raghavendra Tirtha, whom he once met at Kumbakonam. His vrindavana stood near the Nivriti Sangama, the confluence of the Krishna and Tungabhadra; when the original site was submerged by the Srisailam hydro-electric project it was rebuilt to the same design within the Uttaradi Matha premises at Kurnool.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyanidhi-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyanidhi-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyanidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2319,6 +2402,10 @@
     "Uttanda Ramachandra Tirtha (sripadaraja)",
     "Vedavyasa Tirtha (uttaradi)",
     "Gopalaswami Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    15.8281,
+    78.0373
    ]
   },
   {
@@ -2340,12 +2427,16 @@
    "works": [
     "Abhinava Chandrika (~12,500)",
     "Abhinava Tarka Tandava",
-    "Abhinava Gada (vs Appayya Dikshita)"
+    "Abhinava Gada (vs Appayya Dikshita)",
+    "Abhinava Chandrika",
+    "Gadatirtha",
+    "Tandava"
    ],
-   "contrib": "Major polemicist; extended Madhva influence into Bihar (Gayapala Brahmins).",
+   "contrib": "A major dialectician of the line, author of the Abhinava Chandrika and other polemical works celebrated in his dhyana-shloka. Initiated by Satyanidhi Tirtha, he held the seat 1660-1673 and entered his vrindavana at Veeracholapuram in Tamil Nadu on Gita Jayanti; the site also enshrines images of Ramachandra and Mukhyaprana.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyanatha-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyanatha-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyanatha-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2360,6 +2451,10 @@
     "Upendra Tirtha I (kashi)",
     "Lakshmi Manohara Tirtha (sripadaraja)",
     "Yogindra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    11.86,
+    79.12
    ]
   },
   {
@@ -2399,6 +2494,10 @@
     "Satyapriya Tirtha (uttaradi)",
     "Suryindra (Sooreendra) Tirtha (raghavendra)",
     "Upendra Tirtha I (kashi)"
+   ],
+   "gps": [
+    10.85,
+    79.26
    ]
   },
   {
@@ -2434,6 +2533,10 @@
     "Raghavendra Tirtha (Rayaru) (raghavendra)",
     "Raghunatha Tirtha (sripadaraja)",
     "Keshava(ndra) Tirtha (kashi)"
+   ],
+   "gps": [
+    16.705,
+    74.2433
    ]
   },
   {
@@ -2442,7 +2545,7 @@
    "guru": "satyapurna",
    "matha": "uttaradi",
    "tag": "acharya",
-   "purva": "Pandurangi Balacharya",
+   "purva": "Balacharya (Pandurangi family)",
    "titles": [],
    "period": "1726-1737",
    "b": null,
@@ -2451,10 +2554,11 @@
    "brindavana": "Satyavijayanagaram (Arani)",
    "place": "Satyavijayanagaram (Arani), Tiruvannamalai district, Tamil Nadu (bank of Kaveri)",
    "works": [],
-   "contrib": null,
+   "contrib": "Of the Pandurangi family, initiated by Satyapurna Tirtha. When his senior Satyapriya Tirtha could not be located during Satyapurna's final days, Satyavijaya was brought forward; he in turn later gave the seat to Satyapriya on his return from a long northern tour. His vrindavana is at Satyavijayanagara (Arani) in Tamil Nadu.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyavijaya-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyavijaya-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyavijaya-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2469,6 +2573,10 @@
     "Vadindra (Vadeendra) Tirtha (raghavendra)",
     "Jagannatha Dasa (haridasa)",
     "Satyasandha Tirtha (uttaradi)"
+   ],
+   "gps": [
+    12.67,
+    79.28
    ]
   },
   {
@@ -2510,6 +2618,10 @@
     "Gopala Dasa (haridasa)",
     "Lakshmikantha Tirtha (sripadaraja)",
     "Vadindra (Vadeendra) Tirtha (raghavendra)"
+   ],
+   "gps": [
+    9.67,
+    78.47
    ]
   },
   {
@@ -2548,6 +2660,10 @@
     "Yadavendra Tirtha II (kashi)",
     "Devendra Tirtha (kashi)",
     "Varadendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    14.97,
+    75.33
    ]
   },
   {
@@ -2588,6 +2704,10 @@
     "Varadendra Tirtha (raghavendra)",
     "Vijaya Dasa (haridasa)",
     "Yadavendra Tirtha III (kashi)"
+   ],
+   "gps": [
+    13.7,
+    75.13
    ]
   },
   {
@@ -2626,6 +2746,10 @@
     "Satyapriya Tirtha (uttaradi)",
     "Srinidhi Tirtha (sripadaraja)",
     "Yadavendra Tirtha II (kashi)"
+   ],
+   "gps": [
+    13.95,
+    77.5
    ]
   },
   {
@@ -2634,7 +2758,7 @@
    "guru": "satyavara",
    "matha": "uttaradi",
    "tag": "acharya",
-   "purva": "Navaratna Purushottamacharya",
+   "purva": "Purushottamacharya (Annayacharya, Navaratna family)",
    "titles": [],
    "period": "1797-1830",
    "b": 1743,
@@ -2647,10 +2771,11 @@
     "Kavikanthamani",
     "Yaduvara Charitamruta Lahari"
    ],
-   "contrib": "Pivotal reviver during the Mysore-Maratha-British transition; guru of Dewan Purnaiah of Mysore.",
+   "contrib": "A pontiff of the Navaratna family (1797-1830) who wrote a commentary on the Bhagavata. His vrindavana at Holehonnur is built so that the amshas of Jayatirtha, Vadiraja, Raghavendra and Satyabodha are held to be present there, with a Shiva-Bhagirathi sannidhana beside the garbhagudi.",
    "confidence": "high",
    "sources": [
-    "uttaradimath.org"
+    "uttaradimath.org",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyadharma-thirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2665,6 +2790,10 @@
     "Yadavendra Tirtha III (kashi)",
     "Upendra Tirtha II (kashi)",
     "Rajendra Tirtha (kashi)"
+   ],
+   "gps": [
+    13.92,
+    75.66
    ]
   },
   {
@@ -2682,10 +2811,11 @@
    "brindavana": "Mysore",
    "place": "Mysore, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Initiated by Satyadharma Tirtha of Holehonnur, he held the seat 1830-1841 and was succeeded by Satyasanthushta Tirtha. His vrindavana is at the Uttaradi Matha, Mysore.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyasankalpa-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyasankalpa-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satya-sankalparu/"
    ],
    "note": null,
    "role": null,
@@ -2700,6 +2830,10 @@
     "Sureendra Tirtha (kashi)",
     "Satyasanthushta Tirtha (uttaradi)",
     "Satyaparayana Tirtha (uttaradi)"
+   ],
+   "gps": [
+    12.2958,
+    76.6394
    ]
   },
   {
@@ -2735,6 +2869,10 @@
     "Sudharmendra Tirtha (raghavendra)",
     "Satyakama Tirtha (uttaradi)",
     "Varadendra Tirtha (kashi)"
+   ],
+   "gps": [
+    12.2958,
+    76.6394
    ]
   },
   {
@@ -2774,6 +2912,10 @@
     "Sudharmendra Tirtha (raghavendra)",
     "Satyasankalpa Tirtha (uttaradi)",
     "Satyakama Tirtha (uttaradi)"
+   ],
+   "gps": [
+    13.95,
+    77.5
    ]
   },
   {
@@ -2791,10 +2933,11 @@
    "brindavana": "Atkur (Krishna river)",
    "place": "Atkur, near Raichur, Karnataka (bank of Krishna)",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Satyaparayana Tirtha and guru of Satyeshti Tirtha, holding the seat 1863-1871. His vrindavana is at Atkur near Raichur, on the Krishna, alongside those of Satyeshti and Satyaprajna.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyakama-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyakama-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyakama-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2807,6 +2950,10 @@
     "Varadendra Tirtha (kashi)",
     "Satyeshti Tirtha (uttaradi)",
     "Satyaparayana Tirtha (uttaradi)"
+   ],
+   "gps": [
+    16.18,
+    77.36
    ]
   },
   {
@@ -2815,7 +2962,7 @@
    "guru": "satyakama",
    "matha": "uttaradi",
    "tag": "acharya",
-   "purva": "Hattimuttur Narasimhacharya",
+   "purva": "Hattimattur Narasimhacharya",
    "titles": [],
    "period": "1871-1872",
    "b": null,
@@ -2824,10 +2971,11 @@
    "brindavana": "Atkur",
    "place": "Atkur, near Raichur, Karnataka (bank of Krishna)",
    "works": [],
-   "contrib": null,
+   "contrib": "A short-tenured pontiff (1871-1872), disciple of Satyakama Tirtha and guru of Satyaparakrama Tirtha. His vrindavana is at Atkur on the Krishna.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-sathyestha-tirtha"
+    "https://uttaradimath.org/parampara/sri-sathyestha-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyesta-thirtharu/"
    ],
    "note": null,
    "role": null,
@@ -2842,6 +2990,10 @@
     "Satyaparakrama Tirtha (uttaradi)",
     "Satyakama Tirtha (uttaradi)",
     "Satyadhyana Tirtha (uttaradi)"
+   ],
+   "gps": [
+    16.18,
+    77.36
    ]
   },
   {
@@ -2850,7 +3002,7 @@
    "guru": "satyeshti",
    "matha": "uttaradi",
    "tag": "acharya",
-   "purva": "Vykar Srinivasacharya",
+   "purva": "Vaykar Srinivasacharya",
    "titles": [],
    "period": "1872-1879",
    "b": null,
@@ -2859,12 +3011,14 @@
    "brindavana": "Chittapur",
    "place": "Chittapur, Kalaburagi district, Karnataka (bank of Krishna)",
    "works": [
-    "Prameyamala"
+    "Prameyamala",
+    "Stotra on Satyavrata Tirtha"
    ],
-   "contrib": null,
+   "contrib": "Disciple of Satyeshti Tirtha, author of the Prameyamala and a stotra on Satyavrata Tirtha. He held the seat 1872-1879; his vrindavana is at Chittapur in the Kalaburagi region on the bank of the Krishna.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyaparakrama-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyaparakrama-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satya-parakrama/"
    ],
    "note": null,
    "role": null,
@@ -2878,6 +3032,10 @@
     "Sudharmendra Tirtha (raghavendra)",
     "Satyeshti Tirtha (uttaradi)",
     "Satyaveera Tirtha (uttaradi)"
+   ],
+   "gps": [
+    17.12,
+    77.08
    ]
   },
   {
@@ -2916,6 +3074,10 @@
     "Suprajnendra Tirtha (raghavendra)",
     "Satyaparakrama Tirtha (uttaradi)",
     "Satyadheera Tirtha (uttaradi)"
+   ],
+   "gps": [
+    15.3,
+    76.2
    ]
   },
   {
@@ -2924,7 +3086,7 @@
    "guru": "satyaveera",
    "matha": "uttaradi",
    "tag": "acharya",
-   "purva": "Korlahalli Jayacharya",
+   "purva": "Jayacharya",
    "titles": [],
    "period": "1886-1906",
    "b": null,
@@ -2933,10 +3095,11 @@
    "brindavana": "Atkur",
    "place": "Atkur, near Raichur, Karnataka (bank of Krishna)",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Satyaveera Tirtha and, in his purvashrama, the father of the great Satyadhyana Tirtha. He led the seat 1886-1906; his vrindavana is at Atkur on the Krishna.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyadheera-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyadheera-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyadheera-tirtha/"
    ],
    "note": null,
    "role": null,
@@ -2951,6 +3114,10 @@
     "Satyaveera Tirtha (uttaradi)",
     "Satyajnana Tirtha (uttaradi)",
     "Medhanidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    16.18,
+    77.36
    ]
   },
   {
@@ -2983,6 +3150,10 @@
     "Medhanidhi Tirtha (sripadaraja)",
     "Sudhinidhi Tirtha (sripadaraja)",
     "Satyadheera Tirtha (uttaradi)"
+   ],
+   "gps": [
+    17.0005,
+    81.804
    ]
   },
   {
@@ -3018,6 +3189,10 @@
     "Suprajnendra Tirtha (raghavendra)",
     "Sudhindra Tirtha (kashi)",
     "Dayanidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    17.679,
+    75.33
    ]
   },
   {
@@ -3052,6 +3227,10 @@
     "Dayanidhi Tirtha (sripadaraja)",
     "Satyadhyana Tirtha (uttaradi)",
     "Satyabhijna Tirtha (uttaradi)"
+   ],
+   "gps": [
+    16.18,
+    77.36
    ]
   },
   {
@@ -3069,10 +3248,11 @@
    "brindavana": "Ranebennur",
    "place": "Ranebennur (fort area), Haveri district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "The 40th pontiff of the Uttaradi Matha (1945-1948), disciple of Satyaprajna Tirtha and guru of the long-serving Satyapramoda Tirtha. His vrindavana is at Ranebennur.",
    "confidence": "high",
    "sources": [
-    "https://uttaradimath.org/parampara/sri-satyabhijna-tirtha"
+    "https://uttaradimath.org/parampara/sri-satyabhijna-tirtha",
+    "https://www.sumadhwaseva.com/yatigalu/uttaradi-mutt/satyabhijna-thirtharu/"
    ],
    "note": null,
    "role": null,
@@ -3085,6 +3265,10 @@
     "Satyapramoda Tirtha (uttaradi)",
     "Dayanidhi Tirtha (sripadaraja)",
     "Satyaprajna Tirtha (uttaradi)"
+   ],
+   "gps": [
+    14.62,
+    75.62
    ]
   },
   {
@@ -3124,6 +3308,10 @@
     "Satyanidhi Tirtha (sripadaraja)",
     "Satyatma Tirtha (uttaradi)",
     "Satyadhyana Tirtha (uttaradi)"
+   ],
+   "gps": [
+    11.97,
+    79.22
    ]
   },
   {
@@ -4449,7 +4637,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    16.75,
+    77.14
+   ]
   },
   {
    "id": "jayadhwaja",
@@ -4473,7 +4665,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    16.75,
+    77.14
+   ]
   },
   {
    "id": "purushottama_v",
@@ -4499,7 +4695,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.75,
+    77.13
+   ]
   },
   {
    "id": "brahmanya",
@@ -4537,6 +4737,10 @@
     "Raghunandana Tirtha (raghavendra)",
     "Hayagreeva Tirtha (sripadaraja)",
     "Surendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    12.75,
+    77.13
    ]
   },
   {
@@ -4582,6 +4786,10 @@
     "Surendra Tirtha (raghavendra)",
     "Sripadaraja (Lakshminarayana Tirtha) (sripadaraja)",
     "Kanaka Dasa (haridasa)"
+   ],
+   "gps": [
+    15.343,
+    76.472
    ]
   },
   {
@@ -4623,6 +4831,10 @@
     "Hayagreeva Tirtha (sripadaraja)",
     "Narayana Tirtha (Gokarna Partagali) (gokarna)",
     "Sripati Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    15.335,
+    76.46
    ]
   },
   {
@@ -4666,6 +4878,10 @@
     "Satyanidhi Tirtha (uttaradi)",
     "Sridhara Tirtha (sripadaraja)",
     "Hayagreeva Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    14.55,
+    75.63
    ]
   },
   {
@@ -4695,7 +4911,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    15.343,
+    76.472
+   ]
   },
   {
    "id": "rama_v",
@@ -4719,7 +4939,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    15.343,
+    76.472
+   ]
   },
   {
    "id": "lakshmikantha_v",
@@ -5441,6 +5665,10 @@
     "Sudhindra Tirtha (raghavendra)",
     "Vijayindra (Vijayeendra) Tirtha (raghavendra)",
     "Vedanidhi Tirtha (uttaradi)"
+   ],
+   "gps": [
+    13.985,
+    74.555
    ]
   },
   {
@@ -5476,6 +5704,10 @@
     "Uttanda Ramachandra Tirtha (sripadaraja)",
     "Raghunatha Tirtha (sripadaraja)",
     "Vedavyasa Tirtha (uttaradi)"
+   ],
+   "gps": [
+    13.63,
+    74.72
    ]
   },
   {
@@ -5510,6 +5742,10 @@
     "Raghavendra Tirtha (Rayaru) (raghavendra)",
     "Raghunatha Tirtha (sripadaraja)",
     "Keshava(ndra) Tirtha (kashi)"
+   ],
+   "gps": [
+    25.3176,
+    82.9739
    ]
   },
   {
@@ -5545,6 +5781,10 @@
     "Sumatindra Tirtha (raghavendra)",
     "Raghavendra Tirtha (kashi)",
     "Vadindra (Vadeendra) Tirtha (raghavendra)"
+   ],
+   "gps": [
+    13.78,
+    74.63
    ]
   },
   {
@@ -5580,6 +5820,10 @@
     "Satyapriya Tirtha (uttaradi)",
     "Raghunatha Tirtha (sripadaraja)",
     "Keshava(ndra) Tirtha (kashi)"
+   ],
+   "gps": [
+    25.3176,
+    82.9739
    ]
   },
   {
@@ -5615,6 +5859,10 @@
     "Vijaya Dasa (haridasa)",
     "Vasudhendra Tirtha (raghavendra)",
     "Vadindra (Vadeendra) Tirtha (raghavendra)"
+   ],
+   "gps": [
+    12.89,
+    75.03
    ]
   },
   {
@@ -5650,6 +5898,10 @@
     "Satyasandha Tirtha (uttaradi)",
     "Upendra Tirtha II (kashi)",
     "Bhuvanendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    18.95,
+    72.795
    ]
   },
   {
@@ -5674,7 +5926,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    19.9975,
+    73.7898
+   ]
   },
   {
    "id": "yadavendra3",
@@ -5709,6 +5965,10 @@
     "Dheerendra Tirtha (raghavendra)",
     "Srinidhi Tirtha (sripadaraja)",
     "Bhuvanendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    14.28,
+    74.44
    ]
   },
   {
@@ -5744,6 +6004,10 @@
     "Sujanendra Tirtha (raghavendra)",
     "Madhavendra Tirtha (kashi)",
     "Yadavendra Tirtha III (kashi)"
+   ],
+   "gps": [
+    25.3176,
+    82.9739
    ]
   },
   {
@@ -5779,6 +6043,10 @@
     "Subodhanidhi Tirtha (sripadaraja)",
     "Jagannatha Dasa (haridasa)",
     "Gunasaranidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    9.83,
+    76.32
    ]
   },
   {
@@ -5814,6 +6082,10 @@
     "Madhavendra Tirtha (kashi)",
     "Yadavendra Tirtha III (kashi)",
     "Sujanendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    9.498,
+    76.3388
    ]
   },
   {
@@ -5849,6 +6121,10 @@
     "Jagannatha Dasa (haridasa)",
     "Madhavendra Tirtha (kashi)",
     "Yadavendra Tirtha III (kashi)"
+   ],
+   "gps": [
+    12.72,
+    74.89
    ]
   },
   {
@@ -5884,6 +6160,10 @@
     "Dheerendra Tirtha (raghavendra)",
     "Sujnanendra Tirtha (raghavendra)",
     "Bhuvanendra Tirtha (kashi)"
+   ],
+   "gps": [
+    9.498,
+    76.3388
    ]
   },
   {
@@ -5943,6 +6223,10 @@
     "Satyadhyana Tirtha (uttaradi)",
     "Vairagyanidhi Tirtha (sripadaraja)",
     "Sugunendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    13.63,
+    74.72
    ]
   },
   {
@@ -5978,6 +6262,10 @@
     "Sukrathindra Tirtha (kashi)",
     "Sugunendra Tirtha (raghavendra)",
     "Sukrutheendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    18.95,
+    72.795
    ]
   },
   {
@@ -6013,6 +6301,10 @@
     "Varadendra Tirtha (kashi)",
     "Suyamindra Tirtha (raghavendra)",
     "Susheelendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    9.9312,
+    76.2673
    ]
   },
   {
@@ -6048,6 +6340,10 @@
     "Sushameendra Tirtha (raghavendra)",
     "Satyatma Tirtha (uttaradi)",
     "Vignananidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    29.9457,
+    78.1642
    ]
   },
   {
@@ -6081,6 +6377,10 @@
     "Vishvesha Tirtha (pejawara)",
     "Lakshmivara Tirtha (Shirur) (shirur)",
     "Sudhindra Tirtha (kashi)"
+   ],
+   "gps": [
+    25.3176,
+    82.9739
    ]
   },
   {
@@ -6117,6 +6417,10 @@
     "Vibudhendra Tirtha (raghavendra)",
     "Surendra Tirtha (raghavendra)",
     "Raghunandana Tirtha (raghavendra)"
+   ],
+   "gps": [
+    13.985,
+    74.555
    ]
   },
   {
@@ -6153,6 +6457,10 @@
     "Vadiraja Tirtha (sode)",
     "Yadavendra Tirtha I (kashi)",
     "Sridhara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.985,
+    74.555
    ]
   },
   {
@@ -6178,7 +6486,11 @@
    ],
    "note": "Skeleton: intermediate Partagali heads (to ~24th) omitted; interred in vrindavanas at Partagali.",
    "role": "present incumbent (Gokarna Partagali)",
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    14.97,
+    74.07
+   ]
   },
   {
    "id": "palimaru_h",
@@ -6210,6 +6522,10 @@
     "Akshobhya Tirtha (core)",
     "Padmanabha Tirtha (core)",
     "Lakshmidhara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.34,
+    74.75
    ]
   },
   {
@@ -6249,6 +6565,10 @@
     "Satyadhyana Tirtha (uttaradi)",
     "Satyanidhi Tirtha (sripadaraja)",
     "Satyatma Tirtha (uttaradi)"
+   ],
+   "gps": [
+    13.34,
+    74.75
    ]
   },
   {
@@ -6273,7 +6593,11 @@
    ],
    "note": null,
    "role": "present incumbent (Palimaru Matha)",
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.34,
+    74.75
+   ]
   },
   {
    "id": "adamaru_n",
@@ -6298,7 +6622,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.25,
+    74.82
+   ]
   },
   {
    "id": "vibudhapriya",
@@ -6322,7 +6650,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.12,
+    79.42
+   ]
   },
   {
    "id": "vishwapriya",
@@ -6357,6 +6689,10 @@
     "Lakshmivara Tirtha (Shirur) (shirur)",
     "Sujayindra Tirtha (raghavendra)",
     "Dayanidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.34,
+    74.75
    ]
   },
   {
@@ -6382,7 +6718,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.35,
+    74.74
+   ]
   },
   {
    "id": "krishnapura_cur",
@@ -6406,7 +6746,11 @@
    ],
    "note": "Medieval intermediate pontiffs thinly documented in open sources.",
    "role": "present incumbent (Krishnapura Matha)",
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.35,
+    74.74
+   ]
   },
   {
    "id": "puttige_u",
@@ -6431,7 +6775,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.34,
+    74.75
+   ]
   },
   {
    "id": "sugunendra_p",
@@ -6455,7 +6803,11 @@
    ],
    "note": null,
    "role": "present incumbent (Puttige Matha)",
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.34,
+    74.75
+   ]
   },
   {
    "id": "shirur_v",
@@ -6479,7 +6831,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.34,
+    74.75
+   ]
   },
   {
    "id": "shirur_cur",
@@ -6514,6 +6870,10 @@
     "Sujayindra Tirtha (raghavendra)",
     "Satyanidhi Tirtha (sripadaraja)",
     "Vishwapriya Tirtha (adamaru)"
+   ],
+   "gps": [
+    13.3409,
+    74.7421
    ]
   },
   {
@@ -6583,6 +6943,10 @@
     "Narayana Tirtha (Gokarna Partagali) (gokarna)",
     "Hayagreeva Tirtha (sripadaraja)",
     "Sripati Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    14.97,
+    74.7
    ]
   },
   {
@@ -6607,7 +6971,11 @@
    ],
    "note": "Skeleton: intermediate Sode pontiffs (incl. Vedavedya, Vishwadheesha) omitted.",
    "role": "present incumbent (Sode Matha)",
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.3409,
+    74.7421
+   ]
   },
   {
    "id": "kaniyooru_r",
@@ -6632,7 +7000,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.25,
+    74.95
+   ]
   },
   {
    "id": "kaniyooru_cur",
@@ -6656,7 +7028,11 @@
    ],
    "note": "Notable 20th-c. head: Vidyasamudra Tirtha.",
    "role": "present incumbent (Kaniyooru Matha)",
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.3409,
+    74.7421
+   ]
   },
   {
    "id": "pejawara_a",
@@ -6681,7 +7057,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.34,
+    74.75
+   ]
   },
   {
    "id": "vijayadhwaja",
@@ -6722,6 +7102,10 @@
     "Vidyadhiraja Tirtha (core)",
     "Adiraja Tirtha (sripadaraja)",
     "Vyasatirtha (Vyasaraja) (vyasaraja)"
+   ],
+   "gps": [
+    13.3409,
+    74.7421
    ]
   },
   {
@@ -6760,6 +7144,10 @@
     "Sushameendra Tirtha (raghavendra)",
     "Satyatma Tirtha (uttaradi)",
     "Vignananidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.3409,
+    74.7421
    ]
   },
   {
@@ -6791,6 +7179,10 @@
     "Subudhendra Tirtha (raghavendra)",
     "Keshavanidhi Tirtha (sripadaraja)",
     "Vishvesha Tirtha (pejawara)"
+   ],
+   "gps": [
+    13.05,
+    74.8
    ]
   },
   {
@@ -6815,7 +7207,11 @@
    ],
    "note": "Antiquity beyond ~15th c. undocumented; the Achyutapreksha descent is prestige tradition.",
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.3409,
+    74.7421
+   ]
   },
   {
    "id": "bhimanakatte",
@@ -6840,7 +7236,11 @@
    ],
    "note": "The ~5,035-year / Durvasa-Janamejaya antiquity claim is legend, not history.",
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.69,
+    75.24
+   ]
   },
   {
    "id": "balagaru",
@@ -6864,7 +7264,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.67,
+    75.2
+   ]
   },
   {
    "id": "kudli",
@@ -6889,7 +7293,11 @@
    ],
    "note": "Brindavana ambiguity: standard references place Akshobhya at Malkhed; the Kudli math centres him at Kudli - competing traditions.",
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    13.98,
+    75.64
+   ]
   },
   {
    "id": "subrahmanya",
@@ -6914,7 +7322,11 @@
    ],
    "note": null,
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    12.66,
+    75.62
+   ]
   },
   {
    "id": "vijayadasa",
@@ -6957,6 +7369,10 @@
     "Yadavendra Tirtha II (kashi)",
     "Jagannatha Dasa (haridasa)",
     "Lakshmi Manohara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    15.43,
+    77.1
    ]
   },
   {
@@ -6999,6 +7415,10 @@
     "Satyapriya Tirtha (uttaradi)",
     "Vadindra (Vadeendra) Tirtha (raghavendra)",
     "Srikantha Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    16.3,
+    77.1
    ]
   },
   {
@@ -7040,6 +7460,10 @@
     "Madhavendra Tirtha (kashi)",
     "Devendra Tirtha (kashi)",
     "Vijaya Dasa (haridasa)"
+   ],
+   "gps": [
+    15.99,
+    77.05
    ]
   },
   {
@@ -7119,7 +7543,11 @@
    ],
    "note": "Woman saint of the Dasakuta; precise dates not firmly documented.",
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    14.2,
+    75.75
+   ]
   },
   {
    "id": "prasanna_venkatadasa",
@@ -7151,7 +7579,11 @@
    ],
    "note": "Placed on the Purandara/Dasakuta stream for grouping; a firmly-documented dasa-diksha guru is not attested in accessible sources.",
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    16.18,
+    75.7
+   ]
   },
   {
    "id": "mahipatidasa",
@@ -7178,7 +7610,11 @@
    ],
    "note": "Independent 17th-c. Haridasa (Kakhandaki stream); shown on the Dasa branch for grouping — no documented dasa-diksha to Purandara.",
    "role": null,
-   "contemporaries": []
+   "contemporaries": [],
+   "gps": [
+    16.95,
+    75.95
+   ]
   }
  ],
  "brindavana_images": {
