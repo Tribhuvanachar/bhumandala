@@ -68,10 +68,17 @@ def run(pdf: Path | None, pdf_url: str | None, part_urls: list[str], start_page:
         exclude_pages: list[int], work_slug: str, canto: int, commentary_key: str, display_label: str,
         context_anchor: str, content_field: str, model: str, pages_per_gemini_batch: int,
         out_path: Path | None, dry_run: bool, do_merge: bool, sarga_dir: Path | None,
-        include_review: bool, include_unresolved: bool, force: bool) -> int:
+        include_review: bool, include_unresolved: bool, force: bool,
+        no_proofread: bool = False) -> int:
     api_key = os.environ.get("GEMINI_API_KEY")
     vision_key = os.environ.get("VISION_API_KEY")
-    if not dry_run and (not api_key or not vision_key):
+    # Vision-only mode (--no-proofread) stages the raw Vision OCR text and never
+    # calls Gemini, so it needs only VISION_API_KEY — the intended path when the
+    # Gemini credits are exhausted (the operator proofreads/aligns downstream).
+    if not dry_run and no_proofread and not vision_key:
+        print("error: VISION_API_KEY must be set for --no-proofread", file=sys.stderr)
+        return 1
+    if not dry_run and not no_proofread and (not api_key or not vision_key):
         print("error: GEMINI_API_KEY and VISION_API_KEY must both be set (pass --dry-run to test without them)",
               file=sys.stderr)
         return 1
@@ -100,12 +107,26 @@ def run(pdf: Path | None, pdf_url: str | None, part_urls: list[str], start_page:
             print(f"Running Vision OCR on {len(page_paths)} page(s) ...")
             page_texts = ocr_pages(page_paths, vision_key)
 
-        try:
-            shlokas = ocr_and_proofread(page_texts, model, context_anchor, pages_per_gemini_batch,
-                                         api_key, dry_run, usage_totals)
-        except GeminiError as e:
-            print(f"error: proofreading failed ({e.kind}): {e}", file=sys.stderr)
-            return 1
+        if no_proofread:
+            # Vision-only: stage one entry per page carrying the raw OCR text in
+            # the target field. No Gemini call; a human aligns these to the
+            # mula verses downstream. classification 'raw' keeps it out of any
+            # automatic merge (merge only ever takes accept/review/unresolved).
+            shlokas = [
+                {"number": None, "page": n,
+                 "sa": page_texts[n] if content_field == "sa" else "",
+                 "commentary": page_texts[n] if content_field == "commentary" else "",
+                 "classification": "raw",
+                 "note": "Vision-only OCR, no Gemini proofread — align to verses by hand"}
+                for n in sorted(page_texts)
+            ]
+        else:
+            try:
+                shlokas = ocr_and_proofread(page_texts, model, context_anchor, pages_per_gemini_batch,
+                                             api_key, dry_run, usage_totals)
+            except GeminiError as e:
+                print(f"error: proofreading failed ({e.kind}): {e}", file=sys.stderr)
+                return 1
 
     staged = {
         "source": {
@@ -175,6 +196,9 @@ def main(argv=None) -> int:
     p.add_argument("--out", type=Path, default=None,
                     help="Staged JSON output path (default: dge/data/ocr_staging/<work-slug>/<key>_canto<N>_pages<a>-<b>.json)")
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-proofread", action="store_true",
+                    help="Vision-only: stage raw Vision OCR per page and skip the Gemini proofread "
+                         "(needs only VISION_API_KEY; ₹0 Gemini). Align to verses downstream by hand.")
     p.add_argument("--merge", action="store_true",
                     help="Also run Stage 2 (merge into the corpus) immediately after staging")
     p.add_argument("--sarga-dir", type=Path, default=None, help="Required if --merge is given")
@@ -189,7 +213,8 @@ def main(argv=None) -> int:
     return run(args.pdf, args.pdf_url, part_urls, args.start_page, args.end_page, exclude_pages,
                args.work_slug, args.canto, args.commentary_key, args.display_label, args.context_anchor,
                args.content_field, args.model, args.pages_per_batch, args.out, args.dry_run, args.merge,
-               args.sarga_dir, args.include_review, args.include_unresolved, args.force)
+               args.sarga_dir, args.include_review, args.include_unresolved, args.force,
+               no_proofread=args.no_proofread)
 
 
 if __name__ == "__main__":

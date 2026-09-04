@@ -86,6 +86,11 @@ on:
         options:
           - gemini-flash-latest
           - gemini-flash-lite-latest
+      vision_only:
+        description: "Vision-only: stage raw Vision OCR and skip the Gemini proofread (needs only VISION_API_KEY; ₹0 Gemini). Use when Gemini credits are exhausted; align to verses by hand afterwards. Not compatible with also_merge (raw text is classified 'raw')."
+        required: true
+        default: false
+        type: boolean
       also_merge:
         description: "Also merge into the corpus immediately after staging (Stage 2) -- off by default, since staging alone is meant for review first"
         required: true
@@ -146,6 +151,7 @@ jobs:
                 --out staged.json)
           if [ -n "${{ inputs.exclude_pages }}" ]; then ARGS+=(--exclude-pages "${{ inputs.exclude_pages }}"); fi
           if [ -n "${{ inputs.context_anchor }}" ]; then ARGS+=(--context-anchor "${{ inputs.context_anchor }}"); fi
+          if [ "${{ inputs.vision_only }}" = "true" ]; then ARGS+=(--no-proofread); fi
 
           if [ -n "${{ inputs.pdf_url }}" ]; then
             ARGS+=(--pdf-url "${{ inputs.pdf_url }}")
