@@ -558,7 +558,7 @@
   }
 
   // ---- vyakarana reference sheets (no page navigation, ever) ---------------
-  var vyData = { sutra: null, dhatu: null };
+  var vyData = { sutra: null, dhatu: null, unadi: null };
   function sutraById() {
     vyData.sutra = vyData.sutra ||
       fetchJson('data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json').then(function (d) {
@@ -611,11 +611,36 @@
         '<button data-copy="' + esc(root + (artha ? ' (' + artha + ')' : '')) + '">⧉ Copy</button></div>');
     });
   }
+  function unadiData() {
+    vyData.unadi = vyData.unadi ||
+      fetchJson('data/vedanga/vyakarana/unadi/data.json').then(function (d) {
+        var by = {};
+        ((d && d.items) || []).forEach(function (it) { by[String(it.i)] = it; });
+        return by;
+      });
+    return vyData.unadi;
+  }
+  var DEVA_DIG = { '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9' };
   function unadiSheet(ref) {
-    popAt(null, '<h4>उणादिसूत्रम् · ' + esc(ref) + '</h4>' +
-      '<div class="body" lang="sa">उणादिसूत्रपाठः अस्माकं ग्रन्थालये अद्यापि योजितः नास्ति।</div>' +
-      '<div class="k2-note" style="margin-top:6px">The Unadi-sutra text is not in the library yet; this reference is shown as the dictionary printed it.</div>' +
-      '<div class="row"><button data-copy="' + esc('उ० ' + ref) + '">⧉ Copy reference</button></div>');
+    // "४-९८" -> id 4098 (pada*1000 + sutra) in the ashtadhyayi.com corpus
+    var ascii = String(ref).replace(/[०-९]/g, function (c) { return DEVA_DIG[c]; });
+    var mm = ascii.match(/^(\d)\s*[-–]\s*(\d{1,3})$/);
+    var id = mm ? mm[1] + String(+mm[2]).padStart(3, '0') : null;
+    popAt(null, '<h4>उणादिसूत्रम् · ' + esc(ref) + '</h4><div class="body">Loading…</div>');
+    unadiData().then(function (by) {
+      var s = id && by[id];
+      popAt(null, '<h4>उणादिसूत्रम् · ' + esc(ref) + '</h4>' +
+        (s ? '<div class="k2-sutra-text" lang="sa">' + esc(s.sutra) + '</div>' +
+          (s.pratyay ? '<div class="k2-note">प्रत्ययः</div><div class="body" lang="sa">' + esc(s.pratyay) + '</div>' : '') +
+          (s.sk ? '<div class="k2-note" style="margin-top:6px">वृत्तिः</div><div class="body" lang="sa">' + esc(s.sk).replace(/\[\[(\d+\.\d+\.\d+)\]\]/g, '<button class="k2-ref sutra" data-sutra="$1">$1</button>') + '</div>' : '')
+          : '<div class="body" lang="sa">इदं सूत्रं उणादिपाठे न लब्धम् (' + esc(ref) + ').</div>') +
+        '<div class="k2-note" style="margin-top:6px">उणादिपाठः: ashtadhyayi.com data · <a href="vyakarana/unadi.html" style="color:inherit">पूर्णसूची ↗</a></div>' +
+        '<div class="row"><button data-copy="' + esc('उ० ' + ref + (s ? ' ' + s.sutra : '')) + '">⧉ Copy</button></div>');
+      var pop = $('#k2Pop');
+      pop.querySelectorAll('[data-sutra]').forEach(function (b) {
+        b.onclick = function (e) { e.stopPropagation(); sutraSheet(b.dataset.sutra); };
+      });
+    });
   }
   // ---- ⚙ sheet: everything that is not content lives here -----------------
   function dictName(slug) {

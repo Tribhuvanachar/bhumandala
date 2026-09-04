@@ -40,6 +40,16 @@ for fp in sorted(glob.glob(os.path.join(DATA, '**', 'data.json'), recursive=True
         continue
     catalog += 1
     sc = d.get('schema')
+    if sc == 'vyakarana_corpus_v1':
+        # the small sutra-corpora imported from ashtadhyayi.com
+        # (tools/vyakarana/import_ashtadhyayi_corpora.py) keep the source's
+        # own field names verbatim ('i'/'ind'/'id' + corpus fields) plus a
+        # mandatory attribution block — that block IS the check here.
+        if not isinstance(d.get('items'), list) or not d['items']:
+            errors.append(f"{fp}: corpus has no items")
+        if not isinstance(d.get('attribution'), dict) or not d['attribution'].get('source_url'):
+            errors.append(f"{fp}: vyakarana corpus missing attribution.source_url")
+        continue
     if sc and sc not in SCHEMA_NAMES:
         warns.append(f"{fp}: unknown schema '{sc}'")
     items = d.get('items', [])

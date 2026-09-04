@@ -236,6 +236,10 @@
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/shabda.html'">🔤 Śabdapāṭha</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/rupasiddhi.html'">✨ Rūpasiddhi — derivation lab</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/chandas.html'">🎵 Chandas — metre analyzer</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/phitsutra.html'">🎼 Phiṭsūtras — accent rules</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/ganapatha.html'">🗂️ Gaṇapāṭha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/linganushasana.html'">⚖️ Liṅgānuśāsanam</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/unadi.html'">🧩 Uṇādisūtras</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya/index.html'">🪶 Kāvyāni</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa-sahitya/index.html'">🎶 Dasa Sahitya</div>
           </div>
@@ -1277,6 +1281,13 @@
      openActionsSheet it wraps for the shloka "More" action) and before
      ai.js (whose word/phrase tooltip it adds a taxonomy-extras row to). -->
 <script src="js/contextual-actions.js?v=1"></script>
+<!-- per-shloka chandas verification: the SAME analyzer as
+     vyakarana/chandas.html (chandas.js loads engine-only here — it finds
+     no #ch-go and builds no page UI), plus the contextual-menu action +
+     inline scansion panel (chandas-check.js). Local computation; the AI
+     cross-check inside the panel rides the existing BYOK Ask-Acharya. -->
+<script src="js/chandas.js?v=2" defer></script>
+<script src="js/chandas-check.js?v=1" defer></script>
 <script src="js/voice.js?v=4.60.6"></script>
 <script src="js/screenshot.js?v=4.60.7"></script>
 <script src="js/ai.js?v=4.72.4"></script>

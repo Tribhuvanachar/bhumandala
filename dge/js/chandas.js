@@ -266,6 +266,41 @@
     out.innerHTML = h;
   }
 
+  /* ---- shared engine API -------------------------------------------------
+     The reader's per-shloka "chandas check" (js/chandas-check.js) runs THIS
+     same analyzer — one scansion implementation for the whole site. Pure
+     functions only; loadDB(base) points at dge/ ("" from dge pages, "../"
+     from vyakarana/). */
+  window.DGEChandas = {
+    syllabify: syllabify,
+    pattern: pattern,
+    ganas: ganas,
+    toPadas: toPadas,
+    matchVrutta: matchVrutta,
+    jaatiName: jaatiName,
+    ready: function () { return !!DB; },
+    loadDB: function (base) {
+      if (DB) return Promise.resolve(DB);
+      return fetch((base || '') + 'data/vedanga/chandas/data.json')
+        .then(function (r) { return r.json(); })
+        .then(function (d) { DB = d; return d; });
+    },
+    analyzeText: function (txt) {
+      var lines = String(txt || '').split(/[\n।॥]+/)
+        .map(function (l) { return l.trim(); }).filter(Boolean);
+      var padas = toPadas(lines);
+      var pats = padas.map(pattern);
+      return {
+        padas: padas.map(function (sy) {
+          return { sylls: sy, pattern: pattern(sy), ganas: ganas(pattern(sy)),
+                   aksharas: sy.length,
+                   matras: pattern(sy).split('').reduce(function (m, c) { return m + (c === 'ग' ? 2 : 1); }, 0) };
+        }),
+        match: DB ? matchVrutta(pats) : null
+      };
+    }
+  };
+
   /* ---- boot ------------------------------------------------------------- */
   function boot() {
     var themeBtn = $('#themeBtn');
@@ -274,6 +309,7 @@
       var dark = document.body.classList.toggle('dark');
       localStorage.setItem('dge_vyakarana_dark', dark ? '1' : '0');
     });
+    if (!$('#ch-go')) return;   // engine-only load (the reader) — no page UI
     $('#ch-go').addEventListener('click', analyze);
     $('#ch-input').addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) analyze();
