@@ -17760,6 +17760,18 @@
    "facets": {
     "default_author": "व्यासतीर्थीया — भावपञ्चिका (श्रीव्यासतीर्थ)"
    }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_english_boray/data.json",
+   "populated": true,
+   "title": "गीताभाष्यम् — tika_english_boray",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://upanishat.com/"
+   },
+   "facets": {
+    "default_author": "Dr. Giridhar Boray"
+   }
   }
  ]
 }
