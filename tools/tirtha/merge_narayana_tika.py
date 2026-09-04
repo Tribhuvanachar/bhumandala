@@ -64,7 +64,8 @@ def clean_block(blk):
     vyakhya = text[m.end():].strip() if m else text
     if heading:
         vyakhya = heading + '\n' + vyakhya
-    vyakhya = re.sub(r'%(.*?)%', r'\1', vyakhya)   # unwrap pratīka markers
+    vyakhya = re.sub(r'%(.*?)%', r'\1', vyakhya, flags=re.S)   # unwrap pratīka markers
+    vyakhya = vyakhya.replace('%', '')             # drop any unpaired survivors
     vyakhya = re.sub(r'[ \t]+', ' ', vyakhya)
     vyakhya = re.sub(r'\n{3,}', '\n\n', vyakhya).strip()
     return vyakhya
