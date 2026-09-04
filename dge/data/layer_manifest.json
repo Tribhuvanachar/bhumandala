@@ -2052,6 +2052,20 @@
     }
    ]
   },
+  "darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya": {
+   "title": "Mula",
+   "author": "Sri Madhvacharya",
+   "mulaItems": 745,
+   "layers": [
+    {
+     "folder": "tika_english_boray",
+     "label": "English (Boray, on Rāghavendra Tīrtha'…",
+     "author": "Dr. Giridhar Boray",
+     "items": 652,
+     "matched": 652
+    }
+   ]
+  },
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana": {
    "title": "Mula",
    "author": "Sri Madhvacharya",
