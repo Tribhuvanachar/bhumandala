@@ -97,7 +97,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "bhuvanendra_k",
@@ -163,7 +163,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "durvasa",
@@ -345,7 +345,7 @@
       "death": 1492,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "jnananidhi",
@@ -865,8 +865,8 @@
       "id": "raghavendra",
       "name": "Raghavendra Tirtha (Rayaru)",
       "titles": [
-        "Sudha Parimalacharya",
-        "Guru Rayaru"
+        "Mahabhashyacharya",
+        "Parimalacharya"
       ],
       "period": "c.1595-1671; pontificate 1621-1671",
       "birth": 1595,
@@ -895,7 +895,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "raghunatha_s",
@@ -1507,7 +1507,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "subrahmanya",
@@ -1529,7 +1529,7 @@
       "death": null,
       "role": "present incumbent (Raghavendra Matha, Mantralaya)",
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "sudharmendra",
@@ -1540,18 +1540,20 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "sudhindra",
       "name": "Sudhindra Tirtha",
-      "titles": [],
+      "titles": [
+        "Rajaguru (Gwalior)"
+      ],
       "period": "pontificate 1614-1621",
       "birth": null,
       "death": 1621,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "sudhindra_k",
@@ -1606,7 +1608,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "sujanendra",
@@ -1617,7 +1619,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "sujayanidhi",
@@ -1633,13 +1635,15 @@
     {
       "id": "sujayindra",
       "name": "Sujayindra Tirtha",
-      "titles": [],
+      "titles": [
+        "Architect of Mantralaya"
+      ],
       "period": "1967-1986",
       "birth": null,
       "death": 1986,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "sujnananidhi",
@@ -1661,7 +1665,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "sukrathindra_k",
@@ -1683,7 +1687,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "sumatheendra_k",
@@ -1699,13 +1703,15 @@
     {
       "id": "sumatindra",
       "name": "Sumatindra Tirtha",
-      "titles": [],
+      "titles": [
+        "Vidyasuta of Raghavendra"
+      ],
       "period": "1692-1725",
       "birth": null,
       "death": 1725,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "suprajnendra",
@@ -1716,7 +1722,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "sureendra_k",
@@ -1738,7 +1744,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "suryindra",
@@ -1749,29 +1755,33 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "sushameendra",
       "name": "Sushameendra Tirtha",
-      "titles": [],
+      "titles": [
+        "Nadedaduva Rayaru"
+      ],
       "period": "1985-2009",
       "birth": null,
       "death": 2009,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "susheelendra",
       "name": "Susheelendra Tirtha",
-      "titles": [],
+      "titles": [
+        "Bala Chakravarti"
+      ],
       "period": "1912-1926",
       "birth": null,
       "death": 1926,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "suvratindra",
@@ -1782,7 +1792,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "suyamindra",
@@ -1793,7 +1803,7 @@
       "death": 1967,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "suyatindra",
@@ -1804,7 +1814,7 @@
       "death": 2014,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "swarnavarna",
@@ -1859,7 +1869,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "uttanda",
@@ -1881,7 +1891,7 @@
       "death": null,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "vadiraja",
@@ -1927,7 +1937,7 @@
       "death": 1785,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "varadendra_k",
@@ -1960,7 +1970,7 @@
       "death": 1761,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "id": "vedanidhi_u",
@@ -2028,7 +2038,7 @@
       "death": 1490,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     },
     {
       "id": "vidyadhiraja",
@@ -2323,7 +2333,9 @@
     {
       "id": "vijayindra",
       "name": "Vijayindra (Vijayeendra) Tirtha",
-      "titles": [],
+      "titles": [
+        "Sarvatantrasvatantra"
+      ],
       "period": "c.1517-1614; pontificate 1575-1614",
       "birth": 1517,
       "death": 1614,
@@ -2423,7 +2435,7 @@
       "death": 1688,
       "role": null,
       "matha": "raghavendra",
-      "confidence": "medium"
+      "confidence": "traditional"
     }
   ]
 }

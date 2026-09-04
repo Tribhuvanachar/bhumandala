@@ -59,6 +59,14 @@
       "gps": null
     },
     {
+      "id": "anegundi-karnataka",
+      "label": "Anegundi, Karnataka",
+      "people": [
+        "sudhindra"
+      ],
+      "gps": null
+    },
+    {
       "id": "atkur-near-raichur-karnataka-bank-of-krishna",
       "label": "Atkur, near Raichur, Karnataka (bank of Krishna)",
       "people": [
@@ -99,14 +107,6 @@
       "people": [
         "jeevottama",
         "yadavendra1"
-      ],
-      "gps": null
-    },
-    {
-      "id": "born-at-kurnool-andhra-pradesh-present-incumbent-at-mantralaya",
-      "label": "Born at Kurnool, Andhra Pradesh; present incumbent at Mantralaya",
-      "people": [
-        "subudhendra"
       ],
       "gps": null
     },
@@ -167,14 +167,6 @@
       "gps": null
     },
     {
-      "id": "hampi-anegundi-karnataka",
-      "label": "Hampi/Anegundi, Karnataka",
-      "people": [
-        "sudhindra"
-      ],
-      "gps": null
-    },
-    {
       "id": "hampi-karnataka",
       "label": "Hampi, Karnataka",
       "people": [
@@ -202,7 +194,14 @@
       "id": "hosaritti-karnataka",
       "label": "Hosaritti, Karnataka",
       "people": [
-        "dheerendra",
+        "dheerendra"
+      ],
+      "gps": null
+    },
+    {
+      "id": "hosaritti-near-savanur-karnataka",
+      "label": "Hosaritti, near Savanur, Karnataka",
+      "people": [
         "susheelendra"
       ],
       "gps": null
@@ -264,8 +263,8 @@
       "gps": null
     },
     {
-      "id": "kenchanagudda-karnataka",
-      "label": "Kenchanagudda, Karnataka",
+      "id": "kenchanagudda-near-siruguppa-karnataka",
+      "label": "Kenchanagudda, near Siruguppa, Karnataka",
       "people": [
         "vasudhendra"
       ],
@@ -329,6 +328,22 @@
       "gps": null
     },
     {
+      "id": "kumbakonam-tamil-nadu",
+      "label": "Kumbakonam, Tamil Nadu",
+      "people": [
+        "vijayindra"
+      ],
+      "gps": null
+    },
+    {
+      "id": "kurnool-andhra-pradesh-present-incumbent-mantralaya",
+      "label": "Kurnool, Andhra Pradesh (present incumbent, Mantralaya)",
+      "people": [
+        "subudhendra"
+      ],
+      "gps": null
+    },
+    {
       "id": "kurnool-district-andhra-pradesh-orig-nivrutti-sangama",
       "label": "Kurnool district, Andhra Pradesh (orig. Nivrutti Sangama)",
       "people": [
@@ -348,6 +363,7 @@
       "id": "madurai-tamil-nadu",
       "label": "Madurai, Tamil Nadu",
       "people": [
+        "surendra",
         "suryindra"
       ],
       "gps": null
@@ -377,23 +393,18 @@
       "gps": null
     },
     {
-      "id": "mantralaya-andhra-pradesh",
-      "label": "Mantralaya, Andhra Pradesh",
+      "id": "mantralaya-kurnool-district-andhra-pradesh",
+      "label": "Mantralaya, Kurnool district, Andhra Pradesh",
       "people": [
+        "raghavendra",
         "sudharmendra",
         "sujayindra",
+        "sujnanendra",
+        "sushameendra",
         "suvratindra",
         "suyamindra",
         "suyatindra",
         "vadindra"
-      ],
-      "gps": null
-    },
-    {
-      "id": "mantralaya-andhra-pradesh-born-at-nanjanagud",
-      "label": "Mantralaya, Andhra Pradesh (born at Nanjanagud)",
-      "people": [
-        "sushameendra"
       ],
       "gps": null
     },
@@ -436,16 +447,8 @@
       "people": [
         "subodhendra",
         "sujanendra",
-        "sujnanendra",
+        "sukrutheendra",
         "suprajnendra"
-      ],
-      "gps": null
-    },
-    {
-      "id": "nanjangud-karnataka-attained-hari-pada-at-opal",
-      "label": "Nanjangud, Karnataka (attained Hari Pada at Opal)",
-      "people": [
-        "sukrutheendra"
       ],
       "gps": null
     },
@@ -580,8 +583,8 @@
       "gps": null
     },
     {
-      "id": "rajoli-karnataka",
-      "label": "Rajoli, Karnataka",
+      "id": "rajoli-andhra-pradesh",
+      "label": "Rajoli, Andhra Pradesh",
       "people": [
         "bhuvanendra"
       ],
@@ -637,6 +640,15 @@
       "gps": null
     },
     {
+      "id": "srirangam-tamil-nadu",
+      "label": "Srirangam, Tamil Nadu",
+      "people": [
+        "sumatindra",
+        "upendra_r"
+      ],
+      "gps": null
+    },
+    {
       "id": "srirangam-tiruchirapalli-tamil-nadu",
       "label": "Srirangam (Tiruchirapalli), Tamil Nadu",
       "people": [
@@ -645,19 +657,9 @@
       "gps": null
     },
     {
-      "id": "tamil-nadu",
-      "label": "Tamil Nadu",
-      "people": [
-        "vijayindra"
-      ],
-      "gps": null
-    },
-    {
       "id": "tiruchirapalli-tamil-nadu",
       "label": "Tiruchirapalli, Tamil Nadu",
       "people": [
-        "sumatindra",
-        "upendra_r",
         "yogindra"
       ],
       "gps": null
@@ -668,14 +670,6 @@
       "people": [
         "jitamitra",
         "vibudhendra"
-      ],
-      "gps": null
-    },
-    {
-      "id": "tungabhadra-bank-adoni-taluk-kurnool-dist-andhra-pradesh",
-      "label": "Tungabhadra bank, Adoni taluk, Kurnool dist., Andhra Pradesh",
-      "people": [
-        "raghavendra"
       ],
       "gps": null
     },
