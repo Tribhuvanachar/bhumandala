@@ -730,14 +730,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srinagar, Kashmir",
+   "place": "Srinagar, Kashmir",
    "works": [],
-   "contrib": null,
+   "contrib": "An early pontiff of the Sripadaraja Matha line, disciple of Lakshmidhara Tirtha and guru of Parashurama Tirtha; tradition places his vrindavana at Srinagar in Kashmir, reached on a northern tour.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/sankarshana-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -748,6 +749,10 @@
     "Jayatirtha (Tikacharya) (core)",
     "Parashurama Tirtha (sripadaraja)",
     "Lakshmidhara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    34.0837,
+    74.7973
    ]
   },
   {
@@ -758,18 +763,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "c.1354-1364",
+   "period": "1354-1364",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srirangam",
+   "place": "Srirangam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Sankarshana Tirtha and guru of Adiraja Tirtha; his vrindavana is at the Chandrapushkarini gadde, Srirangam.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/sri-parashurama-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -779,6 +785,10 @@
     "Akshobhya Tirtha (core)",
     "Sankarshana Tirtha (sripadaraja)",
     "Adiraja Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    10.862,
+    78.69
    ]
   },
   {
@@ -789,18 +799,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "c.1364-1384",
+   "period": "1364-1384",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srirangam",
+   "place": "Srirangam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Parashurama Tirtha and guru of Satyavrata Tirtha; his vrindavana is at Srirangam.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/adiraja-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -811,6 +822,10 @@
     "Akshobhya Tirtha (core)",
     "Satyavrata Tirtha (sripadaraja)",
     "Parashurama Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    10.862,
+    78.69
    ]
   },
   {
@@ -821,18 +836,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "c.1384-1400",
+   "period": "1384-1408",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srirangam",
+   "place": "Srirangam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Adiraja Tirtha and guru of Swarnavarna Tirtha; his vrindavana is at Srirangam.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/satyavrata-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -843,6 +859,10 @@
     "Jayatirtha (Tikacharya) (core)",
     "Swarnavarna Tirtha (sripadaraja)",
     "Adiraja Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    10.862,
+    78.69
    ]
   },
   {
@@ -853,18 +873,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "c.1400-1420",
+   "period": "1400-1420",
    "b": null,
    "d": 1420,
    "pont": null,
    "brindavana": "Srirangam",
    "place": "Srirangam (Tiruchirapalli), Tamil Nadu",
    "works": [],
-   "contrib": "Guru of Sripadaraja.",
+   "contrib": "Disciple of Satyavrata Tirtha and the guru who initiated the great Sripadaraja (Lakshminarayana Tirtha); his vrindavana is at Srirangam.",
    "confidence": "traditional",
    "sources": [
     "https://madhwayati.blogspot.com/2019/06/a-14-sripadaraja-matha-mutt_14.html",
-    "https://madhwasakha.com/math-details/shri-sripadaraja-math/15"
+    "https://madhwasakha.com/math-details/shri-sripadaraja-math/15",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/swarnavarna-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -969,18 +990,19 @@
    "tag": "acharya",
    "purva": null,
    "titles": [],
-   "period": "1536-1571",
+   "period": "1571-1598",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Marandanahalli, near Mulbagal",
+   "place": "Marandanahalli, near Mulbagal, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Sridhara Tirtha and guru of Gopalaswami Tirtha; his vrindavana is at Marandanahalli near Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/sri-sripathi-theertharu/"
    ],
    "note": null,
    "role": null,
@@ -994,6 +1016,10 @@
     "Vyasatirtha (Vyasaraja) (vyasaraja)",
     "Sridhara Tirtha (sripadaraja)",
     "Hayagreeva Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    12.5,
+    78.2
    ]
   },
   {
@@ -1011,7 +1037,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Sripati Tirtha and guru of Sripati (the later) in the Sripadaraja Matha succession.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1047,7 +1073,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Sripati Tirtha and guru of Uttanda Ramachandra Tirtha in the Sripadaraja Matha line.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1083,7 +1109,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Uttanda Ramachandra Tirtha, disciple of Gopalaswami Tirtha and guru of Raghunatha Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1115,14 +1141,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Eragamballi",
+   "place": "Eragamballi, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Uttanda Ramachandra Tirtha and guru of Lakshmi Manohara Tirtha; his vrindavana is at Eragamballi.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/raghunatha-tirtharu-eragamballi/"
    ],
    "note": null,
    "role": null,
@@ -1137,6 +1164,10 @@
     "Uttanda Ramachandra Tirtha (sripadaraja)",
     "Upendra Tirtha I (kashi)",
     "Lakshmi Manohara Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.15,
+    78.3
    ]
   },
   {
@@ -1154,7 +1185,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Raghunatha Tirtha and guru of Lakshmipati Tirtha in the Sripadaraja Matha succession.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1190,7 +1221,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Lakshmi Manohara Tirtha and guru of Lakshminatha Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1226,7 +1257,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Lakshmipati Tirtha and guru of Lakshmikantha Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1259,14 +1290,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Vengarai",
+   "place": "Vengarai, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "The 18th pontiff of the Sripadaraja Matha, disciple of Lakshminatha Tirtha and guru of Srikantha Tirtha; his vrindavana is at Vengarai.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/lakshmikantha-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1281,6 +1313,10 @@
     "Yadavendra Tirtha II (kashi)",
     "Satyasandha Tirtha (uttaradi)",
     "Satyavijaya Tirtha (uttaradi)"
+   ],
+   "gps": [
+    11.35,
+    77.75
    ]
   },
   {
@@ -1298,7 +1334,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Lakshmikantha Tirtha and guru of Srinidhi Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1331,14 +1367,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Pallipalayam",
+   "place": "Pallipalayam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Srikantha Tirtha and guru of Vidyanidhi Tirtha; his vrindavana is at Pallipalayam.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/srinidhi-thirtha/"
    ],
    "note": null,
    "role": null,
@@ -1353,6 +1390,10 @@
     "Madhavendra Tirtha (kashi)",
     "Sureendra Tirtha (kashi)",
     "Devendra Tirtha (kashi)"
+   ],
+   "gps": [
+    11.36,
+    77.75
    ]
   },
   {
@@ -1368,13 +1409,14 @@
    "d": null,
    "pont": null,
    "brindavana": null,
-   "place": null,
+   "place": "Erode, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Of Erode, disciple of Srinidhi Tirtha and guru of Jnananidhi Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/vidyanidhi-tirtha/"
    ],
    "note": null,
    "role": null,
@@ -1389,6 +1431,10 @@
     "Satyasandha Tirtha (uttaradi)",
     "Dheerendra Tirtha (raghavendra)",
     "Bhuvanendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    11.341,
+    77.7172
    ]
   },
   {
@@ -1403,14 +1449,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Srirangapatna",
+   "place": "Srirangapatna, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vidyanidhi Tirtha and guru of Gunanidhi Tirtha; his vrindavana is at Srirangapatna.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/gnananidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1425,6 +1472,10 @@
     "Bhuvanendra Tirtha (raghavendra)",
     "Upendra Tirtha II (kashi)",
     "Satyavara Tirtha (uttaradi)"
+   ],
+   "gps": [
+    12.41,
+    76.69
    ]
   },
   {
@@ -1439,14 +1490,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Tayuru, near T. Narasipura",
+   "place": "Tayuru, near T. Narasipura, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Jnananidhi Tirtha and guru of Gunasaranidhi Tirtha; his vrindavana is at Tayuru near T. Narasipura.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/gunanidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1461,6 +1513,10 @@
     "Dheerendra Tirtha (raghavendra)",
     "Yadavendra Tirtha III (kashi)",
     "Subodhendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    12.21,
+    76.9
    ]
   },
   {
@@ -1475,10 +1531,10 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Gunanidhi Tirtha and guru of Prajnanidhi Tirtha; his vrindavana is at Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1497,6 +1553,10 @@
     "Sujanendra Tirtha (raghavendra)",
     "Jagannatha Dasa (haridasa)",
     "Subodhendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1511,14 +1571,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Narasimha Tirtha, Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Gunasaranidhi Tirtha and guru of Subodhanidhi Tirtha; his vrindavana is at the Narasimha Tirtha, Mulbagal, the matha's principal seat.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/prajnanidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1533,6 +1594,10 @@
     "Dheerendra Tirtha (raghavendra)",
     "Subodhanidhi Tirtha (sripadaraja)",
     "Gunasaranidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1547,14 +1612,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Prajnanidhi Tirtha and guru of Vairagyanidhi Tirtha; his vrindavana is at Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/subodhanidhi/"
    ],
    "note": null,
    "role": null,
@@ -1569,6 +1635,10 @@
     "Upendra Tirtha II (kashi)",
     "Sujnanendra Tirtha (raghavendra)",
     "Bhuvanendra Tirtha (kashi)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1583,10 +1653,10 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Subodhanidhi Tirtha and guru of Sujnananidhi Tirtha; his vrindavana is at Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1603,6 +1673,10 @@
     "Satyasankalpa Tirtha (uttaradi)",
     "Sujnananidhi Tirtha (sripadaraja)",
     "Subodhanidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1617,14 +1691,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vairagyanidhi Tirtha and guru of Sugunanidhi Tirtha; his vrindavana is at Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/sujnananidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1639,6 +1714,10 @@
     "Sudharmendra Tirtha (raghavendra)",
     "Sujnanendra Tirtha (raghavendra)",
     "Satyakama Tirtha (uttaradi)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1653,14 +1732,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Bhavani",
+   "place": "Bhavani, Erode district, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Sujnananidhi Tirtha and guru of Sudhinidhi Tirtha; his vrindavana is at Bhavani.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/sri-sugunanidhi-theertharu/"
    ],
    "note": null,
    "role": null,
@@ -1675,6 +1755,10 @@
     "Satyakama Tirtha (uttaradi)",
     "Satyaparayana Tirtha (uttaradi)",
     "Satyaparakrama Tirtha (uttaradi)"
+   ],
+   "gps": [
+    11.445,
+    77.682
    ]
   },
   {
@@ -1683,20 +1767,21 @@
    "guru": "sugunanidhi",
    "matha": "sripadaraja",
    "tag": "acharya",
-   "purva": null,
+   "purva": "Hariyappacharya",
    "titles": [],
-   "period": "1881-1906",
+   "period": "1888-1908",
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Erode",
+   "place": "Erode, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Born Hariyappacharya, he took sannyasa in 1888 and entered his vrindavana at Erode in 1908; guru of Medhanidhi Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/sudhinidhi-theertharu/"
    ],
    "note": null,
    "role": null,
@@ -1711,6 +1796,10 @@
     "Bhuvanendra Tirtha (kashi)",
     "Sugunanidhi Tirtha (sripadaraja)",
     "Sukrutheendra Tirtha (raghavendra)"
+   ],
+   "gps": [
+    11.341,
+    77.7172
    ]
   },
   {
@@ -1725,14 +1814,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Pallipalayam",
+   "place": "Pallipalayam, Tamil Nadu",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Sudhinidhi Tirtha and guru of Dayanidhi Tirtha; his vrindavana is at Pallipalayam.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/medhanidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1747,6 +1837,10 @@
     "Satyajnana Tirtha (uttaradi)",
     "Suvratindra Tirtha (raghavendra)",
     "Sudhinidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    11.36,
+    77.75
    ]
   },
   {
@@ -1761,14 +1855,15 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "A law graduate who served as a sub-registrar before renouncing, he led the Sripadaraja Matha for 46 years (1926-1962) and was noted for his learning. Disciple of Medhanidhi Tirtha and guru of Satyanidhi Tirtha; his vrindavana is at Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/dayanidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1783,6 +1878,10 @@
     "Suvratindra Tirtha (raghavendra)",
     "Satyanidhi Tirtha (sripadaraja)",
     "Vishwapriya Tirtha (adamaru)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1797,10 +1896,10 @@
    "b": null,
    "d": null,
    "pont": null,
-   "brindavana": null,
-   "place": null,
+   "brindavana": "Mulbagal",
+   "place": "Mulbagal, Kolar district, Karnataka",
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Dayanidhi Tirtha and guru of Vijayanidhi Tirtha; his vrindavana is at Mulbagal.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
@@ -1819,6 +1918,10 @@
     "Suyamindra Tirtha (raghavendra)",
     "Satyatma Tirtha (uttaradi)",
     "Dayanidhi Tirtha (sripadaraja)"
+   ],
+   "gps": [
+    13.166,
+    78.393
    ]
   },
   {
@@ -1836,11 +1939,12 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Satyanidhi Tirtha (sannyasa 1980) and guru of Vignananidhi Tirtha.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/vijayanidhi-theertharu/"
    ],
    "note": null,
    "role": null,
@@ -1863,7 +1967,7 @@
    "guru": "vijayanidhi_s",
    "matha": "sripadaraja",
    "tag": "acharya",
-   "purva": null,
+   "purva": "Bheemachar",
    "titles": [],
    "period": "1987-2010",
    "b": null,
@@ -1872,11 +1976,12 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "The 35th pontiff of the Sripadaraja Matha, born Bheemachar. Disciple of Vijayanidhi Tirtha and guru of Keshavanidhi Tirtha, he installed a Sripadaraja mrittika vrindavana at Rajarajeshwari Nagar, Bengaluru.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",
-    "madhwayati.blogspot.com"
+    "madhwayati.blogspot.com",
+    "https://www.sumadhwaseva.com/yatigalu/sripadaraja-mutt/vijnananidhi-tirtharu/"
    ],
    "note": null,
    "role": null,
@@ -1908,7 +2013,7 @@
    "brindavana": null,
    "place": null,
    "works": [],
-   "contrib": null,
+   "contrib": "Disciple of Vignananidhi Tirtha in the Sripadaraja Matha succession.",
    "confidence": "traditional",
    "sources": [
     "madhwasakha.com",

@@ -111,6 +111,14 @@
       "gps": null
     },
     {
+      "id": "bhavani-erode-district-tamil-nadu",
+      "label": "Bhavani, Erode district, Tamil Nadu",
+      "people": [
+        "sugunanidhi"
+      ],
+      "gps": null
+    },
+    {
       "id": "born-at-pajaka-near-udupi-seat-at-udupi-sri-krishna-matha",
       "label": "Born at Pajaka, near Udupi; seat at Udupi Sri Krishna Matha",
       "people": [
@@ -155,6 +163,23 @@
       "label": "Doorvasapuram, near Thirthahalli (Tunga river)",
       "people": [
         "bhimanakatte"
+      ],
+      "gps": null
+    },
+    {
+      "id": "eragamballi-karnataka",
+      "label": "Eragamballi, Karnataka",
+      "people": [
+        "raghunatha_s"
+      ],
+      "gps": null
+    },
+    {
+      "id": "erode-tamil-nadu",
+      "label": "Erode, Tamil Nadu",
+      "people": [
+        "sudhinidhi",
+        "vidyanidhi_s"
       ],
       "gps": null
     },
@@ -419,6 +444,28 @@
       "gps": null
     },
     {
+      "id": "marandanahalli-near-mulbagal-karnataka",
+      "label": "Marandanahalli, near Mulbagal, Karnataka",
+      "people": [
+        "sripati"
+      ],
+      "gps": null
+    },
+    {
+      "id": "mulbagal-kolar-district-karnataka",
+      "label": "Mulbagal, Kolar district, Karnataka",
+      "people": [
+        "dayanidhi",
+        "gunasaranidhi",
+        "prajnanidhi_s",
+        "satyanidhi_s",
+        "subodhanidhi",
+        "sujnananidhi",
+        "vairagyanidhi"
+      ],
+      "gps": null
+    },
+    {
       "id": "mulbagal-mulabagilu-kolar-dist-karnataka",
       "label": "Mulbagal (Mulabagilu), Kolar dist., Karnataka",
       "people": [
@@ -524,6 +571,15 @@
       "people": [
         "palimaru_cur",
         "palimaru_h"
+      ],
+      "gps": null
+    },
+    {
+      "id": "pallipalayam-tamil-nadu",
+      "label": "Pallipalayam, Tamil Nadu",
+      "people": [
+        "medhanidhi",
+        "srinidhi"
       ],
       "gps": null
     },
@@ -673,10 +729,21 @@
       "gps": null
     },
     {
+      "id": "srinagar-kashmir",
+      "label": "Srinagar, Kashmir",
+      "people": [
+        "sankarshana"
+      ],
+      "gps": null
+    },
+    {
       "id": "srirangam-tamil-nadu",
       "label": "Srirangam, Tamil Nadu",
       "people": [
+        "adiraja",
         "lakshminatha_v",
+        "parashurama",
+        "satyavrata_s",
         "sumatindra",
         "upendra_r",
         "vidyasridhara",
@@ -689,6 +756,22 @@
       "label": "Srirangam (Tiruchirapalli), Tamil Nadu",
       "people": [
         "swarnavarna"
+      ],
+      "gps": null
+    },
+    {
+      "id": "srirangapatna-karnataka",
+      "label": "Srirangapatna, Karnataka",
+      "people": [
+        "jnananidhi_s"
+      ],
+      "gps": null
+    },
+    {
+      "id": "tayuru-near-t-narasipura-karnataka",
+      "label": "Tayuru, near T. Narasipura, Karnataka",
+      "people": [
+        "gunanidhi"
       ],
       "gps": null
     },
@@ -750,6 +833,14 @@
       "label": "Veeracholapuram, Villupuram district, Tamil Nadu (bank of South Pennar)",
       "people": [
         "satyanatha"
+      ],
+      "gps": null
+    },
+    {
+      "id": "vengarai-tamil-nadu",
+      "label": "Vengarai, Tamil Nadu",
+      "people": [
+        "lakshmikantha_s"
       ],
       "gps": null
     },
