@@ -150,7 +150,7 @@
     // reads from the same place; the old local-sample manifest only ever
     // covered 10 of ~1046 real buckets, so this page was showing an
     // almost-empty dictionary list.
-    var KOSHA_BASE = "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@373e7794ef6826606e74e4d954bc06799a727b49/data/koshas";
+    var KOSHA_BASE = "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@54072a8d40d4907df588d722b3796afe06ec2568/data/koshas";
     // Bump ?v= whenever the corpus is rebuilt — jsDelivr caches branch files
     // for ~12h, so without it this page keeps showing the previous manifest.
     fetch(KOSHA_BASE + "/_index/manifest.json?v=1.5").then(function(r){return r.json();})
