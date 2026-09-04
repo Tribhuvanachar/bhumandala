@@ -610,6 +610,125 @@
     }
    ]
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya": {
+   "title": "महाभारततात्पर्यनिर्णयः",
+   "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+   "mulaItems": 32,
+   "layers": [
+    {
+     "folder": "tika_vyasatirtha",
+     "label": "व्यासतीर्थीया — भावपञ्चिका (श्रीव्यासत…",
+     "author": "व्यासतीर्थीया — भावपञ्चिका (श्रीव्यासतीर्थ)",
+     "items": 19,
+     "matched": 19
+    },
+    {
+     "folder": "tika_chatti",
+     "label": "चट्टी / जम्बुखण्डी (श्रीलक्ष्मीनृसिंहा…",
+     "author": "चट्टी / जम्बुखण्डी (श्रीलक्ष्मीनृसिंहाचार्य)",
+     "items": 18,
+     "matched": 18
+    },
+    {
+     "folder": "tika_janardana",
+     "label": "जनार्दनीया (श्रीजनार्दनभट्ट)",
+     "author": "जनार्दनीया (श्रीजनार्दनभट्ट)",
+     "items": 18,
+     "matched": 18
+    },
+    {
+     "folder": "tika_varadaraja",
+     "label": "वरदराजीया (श्रीवरदराजाचार्य)",
+     "author": "वरदराजीया (श्रीवरदराजाचार्य)",
+     "items": 18,
+     "matched": 18
+    },
+    {
+     "folder": "tika_bharatshri",
+     "label": "भारतश्री",
+     "author": "भारतश्री",
+     "items": 17,
+     "matched": 17
+    },
+    {
+     "folder": "tika_tamraparni",
+     "label": "ताम्रपर्णीया",
+     "author": "ताम्रपर्णीया",
+     "items": 17,
+     "matched": 17
+    },
+    {
+     "folder": "tika_vadiraja",
+     "label": "वादिराजतीर्थीया (श्रीवादिराजतीर्थ)",
+     "author": "वादिराजतीर्थीया (श्रीवादिराजतीर्थ)",
+     "items": 17,
+     "matched": 17
+    },
+    {
+     "folder": "tika_anantabhatta",
+     "label": "अनन्तभट्टीया (श्रीअनन्तभट्ट)",
+     "author": "अनन्तभट्टीया (श्रीअनन्तभट्ट)",
+     "items": 16,
+     "matched": 16
+    },
+    {
+     "folder": "tika_vedangatirtha",
+     "label": "वेदाङ्गतीर्थीया",
+     "author": "वेदाङ्गतीर्थीया",
+     "items": 16,
+     "matched": 16
+    },
+    {
+     "folder": "tika_bhavachandrika",
+     "label": "भावचन्द्रिका",
+     "author": "भावचन्द्रिका",
+     "items": 15,
+     "matched": 15
+    },
+    {
+     "folder": "tika_madhusudana",
+     "label": "मधुसूदनीया (श्रीमधुसूदन)",
+     "author": "मधुसूदनीया (श्रीमधुसूदन)",
+     "items": 15,
+     "matched": 15
+    },
+    {
+     "folder": "tika_bhavavivrti",
+     "label": "भावविवृतिः",
+     "author": "भावविवृतिः",
+     "items": 14,
+     "matched": 14
+    },
+    {
+     "folder": "tika_satyabhinava",
+     "label": "सत्याभिनवतीर्थीया — दुर्घटार्थप्रकाशिका",
+     "author": "सत्याभिनवतीर्थीया — दुर्घटार्थप्रकाशिका",
+     "items": 14,
+     "matched": 14
+    },
+    {
+     "folder": "tika_satyadharma",
+     "label": "सत्यधर्मीया",
+     "author": "सत्यधर्मीया",
+     "items": 3,
+     "matched": 3
+    },
+    {
+     "folder": "tika_sangraha",
+     "label": "टीकासङ्ग्रहः",
+     "author": "टीकासङ्ग्रहः",
+     "items": 2,
+     "matched": 2
+    },
+    {
+     "folder": "tika_kanthakoddhara",
+     "label": "कण्ठकोद्धारः",
+     "author": "कण्ठकोद्धारः",
+     "items": 1,
+     "matched": 1
+    }
+   ]
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhedojjivana": {
    "title": "भेदोज्जीवनम्",
    "author": "श्रीव्यासतीर्थः",
