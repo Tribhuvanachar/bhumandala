@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
+     back to the vandana at the site root. Must stay the first script here. -->
+<script src="../dge/js/vandana-guard.js?v=1"></script>
+<!-- Passkeys come from admin/config/keys.json, not from this page. -->
+<script src="js/keys.js?v=1"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repository Map · DGE (super-admin)</title>
+<link rel="stylesheet" href="css/repo-map.css?v=1">
+<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+</head>
+<body>
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🔐 Repository Map</div>
+  <div class="muted">Super-admin only. Enter the passkey.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:420px;font-size:12px">This is a client-side gate for convenience, not real security — the page itself is public in the repo. Never rely on it alone to protect anything sensitive.</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🗺️ Repository Map</div>
+    <span class="spacer"></span>
+    <button class="icon" id="theme" title="Light / dark">◐</button>
+    <button class="btn" id="refresh" title="Re-fetch branches, workflows, and recent runs">↻ Refresh</button>
+    <button class="btn gh" id="opengh" title="Open the repo on GitHub">GitHub ↗</button>
+    <button class="btn" id="tokbtn" title="Set the GitHub token used for delete/run actions">🔑 Token</button>
+  </div>
+</header>
+
+<main id="app" style="display:none">
+  <div class="modebar" id="modebar"></div>
+
+  <div class="totals" id="totals"></div>
+
+  <div class="tabs">
+    <div class="tab on" data-tab="branches">🌿 Branches</div>
+    <div class="tab" data-tab="workflows">⚙️ Workflows</div>
+  </div>
+
+  <section id="pane-branches">
+    <div class="toolbar">
+      <input type="search" id="bsearch" placeholder="Search branches by name or purpose…">
+      <span class="chip on" data-cat="all">All</span>
+      <span class="chip" data-cat="open-pr-needs-decision">Needs decision</span>
+      <span class="chip" data-cat="review-needed">Review</span>
+      <span class="chip" data-cat="merged-safe-delete">Safe to delete</span>
+      <span class="chip" data-cat="stale-superseded">Stale/superseded</span>
+      <span class="chip" data-cat="runtime-dist">Runtime data</span>
+      <span class="chip" data-cat="current-work">Current work</span>
+    </div>
+    <div class="hint" id="bulkhint" style="display:none"></div>
+    <div id="branch-groups"></div>
+  </section>
+
+  <section id="pane-workflows" style="display:none">
+    <div class="toolbar">
+      <input type="search" id="wsearch" placeholder="Search workflows by name or purpose…">
+      <span class="chip on" data-wcat="all">All</span>
+      <span class="chip" data-wcat="content-import">Content import</span>
+      <span class="chip" data-wcat="enrichment">Gemini enrichment</span>
+      <span class="chip" data-wcat="ocr">OCR</span>
+      <span class="chip" data-wcat="search-index">Search index</span>
+      <span class="chip" data-wcat="sync-maintenance">Sync / maintenance</span>
+      <span class="chip" data-wcat="probe-oneoff">One-off probes</span>
+      <span class="chip" data-wcat="ci">CI</span>
+    </div>
+    <div id="workflow-groups"></div>
+  </section>
+</main>
+
+<footer id="foot" style="display:none">
+  Branch/workflow purpose text comes from <code>admin/config/repo-map.json</code> (hand-maintained — update it when a branch's role changes). Ahead/behind and last-commit numbers are baked in as of the last analysis and can be refreshed live per branch. Deleting a branch does <b>not</b> delete its pull-request history — GitHub keeps a closed PR's title, diff, and comments forever, so nothing is lost by cleaning up branches whose PRs are already closed.
+</footer>
+
+<dialog id="confirmDlg">
+  <div class="dhead" id="cdTitle">Confirm</div>
+  <div class="dbody" id="cdBody"></div>
+  <div class="dfoot">
+    <button class="btn" id="cdCancel">Cancel</button>
+    <button class="btn danger" id="cdOk">Confirm</button>
+  </div>
+</dialog>
+
+<dialog id="tokenDlg">
+  <div class="dhead">GitHub token</div>
+  <div class="dbody">
+    <p>A personal access token with <code>repo</code> and <code>workflow</code> scope, used only from your browser to delete branches and dispatch workflows. Stored in this browser's <code>localStorage</code> only (the same key <code>admin/library.html</code>'s content editor uses — set it once, both pages share it). Never sent anywhere but <code>api.github.com</code>.</p>
+    <input type="password" id="tokInput" placeholder="ghp_…" style="width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);font:inherit">
+  </div>
+  <div class="dfoot">
+    <button class="btn" id="tokClear">Clear</button>
+    <button class="btn pri" id="tokSave">Save</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  'use strict';
+
+  var OWNER = "Tribhuvanachar", REPO = "bhumandala";
+  var API = "https://api.github.com/repos/" + OWNER + "/" + REPO;
+  var GATE = "superadmin";
+  var TOK_KEY = "github_admin_pat"; // shared with dge/js/admin-editor.js
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function esc(s){ var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  // ---- gate ---------------------------------------------------------
+  if (sessionStorage.getItem("dge.admin.ok") === "1" || localStorage.getItem("is_superadmin") === "true") start();
+  else {
+    $("#gate").style.display = "flex";
+    var tryK = function(){
+      window.dgeCheckKey(GATE, $("#gk").value).then(function(ok){
+        if (ok) { sessionStorage.setItem("dge.admin.ok", "1"); location.reload(); }
+        else { $("#gk").value = ""; $("#gk").placeholder = "wrong — try again"; }
+      });
+    };
+    $("#gbtn").onclick = tryK;
+    $("#gk").addEventListener("keydown", function(e){ if (e.key === "Enter") tryK(); });
+    $("#gk").focus();
+  }
+
+  // ---- state ----------------------------------------------------------
+  var MANIFEST = null;          // admin/config/repo-map.json
+  var LIVE_BRANCHES = null;     // GitHub API branch list (name -> {sha, protected})
+  var LIVE_RUNS = {};           // workflow file -> most recent run object
+  var LIVE_OVERRIDE = {};       // branch -> {ahead, behind, merged, checkedAt} from on-demand refresh
+  var selectedBranches = {};
+  var CAT_ORDER = ["open-pr-needs-decision","review-needed","merged-safe-delete","stale-superseded","runtime-dist","current-work"];
+  var CAT_LABEL = {
+    "open-pr-needs-decision": "🔴 Needs a decision (open PR, stale content)",
+    "review-needed": "🟡 Review needed (unmerged, not obviously stale)",
+    "merged-safe-delete": "🟢 Safe to delete (fully merged into main)",
+    "stale-superseded": "🟢 Safe to delete (superseded — content already on main another way)",
+    "runtime-dist": "🔵 Runtime data branch — do not delete",
+    "current-work": "🔵 Current work — do not delete"
+  };
+  var CAT_BADGE = {
+    "open-pr-needs-decision": "decision", "review-needed": "review",
+    "merged-safe-delete": "delete", "stale-superseded": "delete",
+    "runtime-dist": "keep", "current-work": "keep"
+  };
+  var WCAT_LABEL = {
+    "content-import": "📥 Content import", "enrichment": "✨ Gemini enrichment", "ocr": "🔎 OCR",
+    "search-index": "🔍 Search index", "sync-maintenance": "🔄 Sync / maintenance",
+    "probe-oneoff": "🧪 One-off probes (kept as a record, not for re-running)", "ci": "✅ CI"
+  };
+
+  function token(){ return localStorage.getItem(TOK_KEY) || ""; }
+  function ghHeaders(){
+    var h = { "Accept": "application/vnd.github+json" };
+    var t = token();
+    if (t) h["Authorization"] = "token " + t;
+    return h;
+  }
+  function isLive(){ return !!token(); }
+
+  async function gh(path, opts){
+    opts = opts || {};
+    opts.headers = Object.assign({}, ghHeaders(), opts.headers || {});
+    var r = await fetch(API + path, opts);
+    return r;
+  }
+
+  // ---- start ------------------------------------------------------------
+  async function start(){
+    if (sessionStorage.getItem("dge.admin.ok") !== "1" && localStorage.getItem("is_superadmin") !== "true") return;
+    $("#gate").style.display = "none";
+    $("#hdr").style.display = ""; $("#app").style.display = ""; $("#foot").style.display = "";
+
+    if (localStorage.getItem("dge.repomap.dark") === "1") document.body.classList.add("dark");
+    $("#theme").onclick = function(){
+      document.body.classList.toggle("dark");
+      localStorage.setItem("dge.repomap.dark", document.body.classList.contains("dark") ? "1" : "0");
+    };
+    $("#opengh").onclick = function(){ window.open("https://github.com/" + OWNER + "/" + REPO, "_blank"); };
+    $("#refresh").onclick = function(){ loadLive(true); };
+    $("#tokbtn").onclick = function(){ $("#tokInput").value = token(); $("#tokenDlg").showModal(); };
+    $("#tokSave").onclick = function(){ localStorage.setItem(TOK_KEY, $("#tokInput").value.trim()); $("#tokenDlg").close(); renderModebar(); loadLive(true); };
+    $("#tokClear").onclick = function(){ localStorage.removeItem(TOK_KEY); $("#tokInput").value=""; $("#tokenDlg").close(); renderModebar(); };
+
+    $$(".tab").forEach(function(t){
+      t.onclick = function(){
+        $$(".tab").forEach(function(x){ x.classList.remove("on"); });
+        t.classList.add("on");
+        $("#pane-branches").style.display = t.dataset.tab === "branches" ? "" : "none";
+        $("#pane-workflows").style.display = t.dataset.tab === "workflows" ? "" : "none";
+      };
+    });
+    $$("[data-cat]").forEach(function(c){
+      c.onclick = function(){ $$("[data-cat]").forEach(function(x){x.classList.remove("on");}); c.classList.add("on"); renderBranches(); };
+    });
+    $$("[data-wcat]").forEach(function(c){
+      c.onclick = function(){ $$("[data-wcat]").forEach(function(x){x.classList.remove("on");}); c.classList.add("on"); renderWorkflows(); };
+    });
+    $("#bsearch").oninput = renderBranches;
+    $("#wsearch").oninput = renderWorkflows;
+    $("#cdCancel").onclick = function(){ $("#confirmDlg").close(); };
+
+    var r = await fetch("config/repo-map.json?t=" + Date.now(), { cache: "no-store" });
+    MANIFEST = await r.json();
+
+    renderModebar();
+    renderTotals();
+    renderBranches();
+    renderWorkflows();
+    loadLive(false);
+  }
+
+  function renderModebar(){
+    var mb = $("#modebar");
+    if (isLive()) {
+      mb.innerHTML = '<b>🟢 Live mode</b> — a GitHub token is set. Delete and Run buttons act for real. Reads use your token (5,000 req/hr); nothing else on this page changes.';
+    } else {
+      mb.innerHTML = '<b>⚪ Read-only mode</b> — no GitHub token set. You can see everything (unauthenticated GitHub API, capped around 60 requests/hour), but Delete and Run buttons open GitHub for you to act manually instead of acting from here. Click 🔑 Token to enable in-page actions.';
+    }
+  }
+
+  // ---- live data ----------------------------------------------------------
+  async function loadLive(forceAllBranchCompare){
+    try {
+      var br = await gh("/branches?per_page=100");
+      if (br.ok) {
+        var arr = await br.json();
+        LIVE_BRANCHES = {};
+        arr.forEach(function(b){ LIVE_BRANCHES[b.name] = b; });
+      }
+    } catch (e) {}
+
+    try {
+      var runs = await gh("/actions/runs?per_page=100");
+      if (runs.ok) {
+        var d = await runs.json();
+        LIVE_RUNS = {};
+        (d.workflow_runs || []).forEach(function(run){
+          var file = (run.path || "").split("/").pop();
+          if (!file) return;
+          if (!LIVE_RUNS[file] || new Date(run.created_at) > new Date(LIVE_RUNS[file].created_at)) LIVE_RUNS[file] = run;
+        });
+      }
+    } catch (e) {}
+
+    // Only do the N-branch compare sweep automatically when a token raises
+    // the rate limit past the 55-branch cost; otherwise this stays opt-in
+    // per branch (the "↻" button on each card) so casual page loads never
+    // risk exhausting the shared 60/hr unauthenticated budget.
+    if (forceAllBranchCompare && isLive() && MANIFEST) {
+      var names = Object.keys(MANIFEST.branches).filter(function(n){ return n !== "main"; });
+      for (var i = 0; i < names.length; i++) { await refreshCompare(names[i]); }
+    }
+
+    renderTotals();
+    renderBranches();
+    renderWorkflows();
+  }
+
+  async function refreshCompare(name){
+    try {
+      var r = await gh("/compare/main..." + encodeURIComponent(name));
+      if (!r.ok) return null;
+      var d = await r.json();
+      LIVE_OVERRIDE[name] = {
+        ahead: d.behind_by,          // GitHub's compare is base...head: behind_by = commits base is behind head = "ahead of main"
+        behind: d.ahead_by,          // ahead_by = commits base is ahead of head = "behind main"
+        checkedAt: new Date().toISOString()
+      };
+      return LIVE_OVERRIDE[name];
+    } catch (e) { return null; }
+  }
+
+  function snapshotFor(name){
+    var b = MANIFEST.branches[name] || {};
+    var s = Object.assign({}, b.snapshot || {});
+    var live = LIVE_OVERRIDE[name];
+    if (live) { s.ahead_of_main = live.ahead; s.behind_main = live.behind; s._live = true; }
+    var lb = LIVE_BRANCHES && LIVE_BRANCHES[name];
+    s._existsOnGithub = LIVE_BRANCHES ? !!lb : null;
+    s._protected = lb ? lb.protected : null;
+    return s;
+  }
+
+  // ---- totals -------------------------------------------------------------
+  function renderTotals(){
+    var names = Object.keys(MANIFEST.branches);
+    var counts = {};
+    names.forEach(function(n){ var c = MANIFEST.branches[n].category; counts[c] = (counts[c]||0)+1; });
+    var wnames = Object.keys(MANIFEST.workflows);
+    var t = $("#totals");
+    t.innerHTML = [
+      stat(names.length, "branches"),
+      stat((counts["merged-safe-delete"]||0) + (counts["stale-superseded"]||0), "safe to delete"),
+      stat(counts["review-needed"]||0, "need review"),
+      stat(counts["open-pr-needs-decision"]||0, "need a decision"),
+      stat(wnames.length, "workflows"),
+      stat(wnames.filter(function(w){return MANIFEST.workflows[w].keep;}).length, "active workflows")
+    ].join("");
+  }
+  function stat(n, label){ return '<div class="stat"><b>'+esc(n)+'</b><span>'+esc(label)+'</span></div>'; }
+
+  // ---- branches -------------------------------------------------------------
+  function renderBranches(){
+    var q = ($("#bsearch").value || "").toLowerCase();
+    var activeCat = ($(".tab") && $("[data-cat].on")) ? $("[data-cat].on").dataset.cat : "all";
+    var host = $("#branch-groups");
+    host.innerHTML = "";
+
+    CAT_ORDER.forEach(function(cat){
+      if (activeCat !== "all" && activeCat !== cat) return;
+      var names = Object.keys(MANIFEST.branches).filter(function(n){
+        var b = MANIFEST.branches[n];
+        if (b.category !== cat) return false;
+        if (!q) return true;
+        return n.toLowerCase().indexOf(q) >= 0 || (b.purpose||"").toLowerCase().indexOf(q) >= 0;
+      }).sort();
+      if (!names.length) return;
+
+      var canBulkDelete = (cat === "merged-safe-delete" || cat === "stale-superseded");
+      var group = document.createElement("div");
+      group.className = "group";
+      group.innerHTML = '<h2>' + CAT_LABEL[cat] + ' <span class="pill">' + names.length + '</span>' +
+        (canBulkDelete ? ' <button class="btn" data-bulkcat="'+cat+'" style="margin-left:8px;font-size:11px;padding:3px 9px">Select all</button>' : '') +
+        '</h2><div class="cards">' + names.map(function(n){ return branchCard(n, cat); }).join("") + '</div>';
+      host.appendChild(group);
+    });
+
+    if (!host.children.length) host.innerHTML = '<div class="empty">No branches match.</div>';
+
+    $$("[data-bulkcat]").forEach(function(b){
+      b.onclick = function(){
+        var cat = b.dataset.bulkcat;
+        Object.keys(MANIFEST.branches).forEach(function(n){
+          if (MANIFEST.branches[n].category === cat) selectedBranches[n] = true;
+        });
+        renderBranches();
+      };
+    });
+    $$("[data-selbranch]").forEach(function(cb){
+      cb.onchange = function(){
+        if (cb.checked) selectedBranches[cb.dataset.selbranch] = true;
+        else delete selectedBranches[cb.dataset.selbranch];
+        renderBulkHint();
+      };
+    });
+    $$("[data-delbranch]").forEach(function(b){ b.onclick = function(){ confirmDeleteBranches([b.dataset.delbranch]); }; });
+    $$("[data-refreshbranch]").forEach(function(b){
+      b.onclick = async function(){
+        b.textContent = "…";
+        await refreshCompare(b.dataset.refreshbranch);
+        renderBranches();
+      };
+    });
+    renderBulkHint();
+  }
+
+  function branchCard(name, cat){
+    var b = MANIFEST.branches[name];
+    var s = snapshotFor(name);
+    var badge = CAT_BADGE[cat];
+    var canDelete = (cat === "merged-safe-delete" || cat === "stale-superseded" || cat === "review-needed");
+    var canSelect = (cat === "merged-safe-delete" || cat === "stale-superseded");
+    var aheadPill = (s.ahead_of_main != null) ? '<span class="pill ahead">'+s.ahead_of_main+' ahead of main</span>' : '';
+    var behindPill = (s.behind_main != null) ? '<span class="pill behind">'+s.behind_main+' behind</span>' : '';
+    var livePill = s._live ? '<span class="pill" style="color:var(--accent2)">live-checked</span>' : '<span class="pill">baked-in snapshot</span>';
+    var existsPill = (s._existsOnGithub === false) ? '<span class="pill" style="color:var(--bad)">no longer exists on GitHub</span>' : '';
+
+    return '<div class="card selectable">'
+      + (canSelect ? '<input type="checkbox" data-selbranch="'+esc(name)+'" '+(selectedBranches[name]?'checked':'')+'>' : '<span style="width:16px;display:inline-block"></span>')
+      + '<div class="body">'
+      + '<div class="top"><span class="name">'+esc(name)+'</span><span class="badge '+badge+'">'+esc(b.recommendation||cat)+'</span></div>'
+      + '<div class="purpose">'+esc(b.purpose||"")+'</div>'
+      + (b.notes ? '<div class="notes">'+esc(b.notes)+'</div>' : '')
+      + '<div class="meta">' + aheadPill + behindPill + livePill + existsPill
+        + (s.last_commit_date ? '<span><b>'+esc(s.last_commit_date)+'</b> · '+esc(s.last_author||"")+' · '+esc(s.last_commit_subject||"")+'</span>' : '')
+      + '</div>'
+      + '<div class="actions">'
+        + '<button class="btn" onclick="window.open(\'https://github.com/'+OWNER+'/'+REPO+'/compare/main...'+encodeURIComponent(name)+'\',\'_blank\')">Compare on GitHub</button>'
+        + '<button class="btn" data-refreshbranch="'+esc(name)+'" title="Live compare against main right now (one API call)">↻ Refresh live</button>'
+        + (canDelete ? '<button class="btn danger" data-delbranch="'+esc(name)+'">🗑 Delete branch</button>' : '')
+      + '</div>'
+      + '</div></div>';
+  }
+
+  function renderBulkHint(){
+    var n = Object.keys(selectedBranches).length;
+    var hint = $("#bulkhint");
+    if (!n) { hint.style.display = "none"; return; }
+    hint.style.display = "block";
+    hint.innerHTML = n + ' branch(es) selected. <button class="btn danger" id="bulkDeleteBtn" style="font-size:12px;padding:4px 10px">🗑 Delete selected</button> <button class="btn" id="bulkClearBtn" style="font-size:12px;padding:4px 10px">Clear selection</button>';
+    $("#bulkDeleteBtn").onclick = function(){ confirmDeleteBranches(Object.keys(selectedBranches)); };
+    $("#bulkClearBtn").onclick = function(){ selectedBranches = {}; renderBranches(); };
+  }
+
+  function confirmDeleteBranches(names){
+    if (!isLive()) {
+      window.open("https://github.com/" + OWNER + "/" + REPO + "/branches", "_blank");
+      return;
+    }
+    $("#cdTitle").textContent = "Delete " + names.length + " branch" + (names.length>1?"es":"") + "?";
+    $("#cdBody").innerHTML = '<p>This deletes the branch ref on GitHub. It does <b>not</b> delete any pull request made from it — closed PRs keep their full title, diff, and comments forever. This cannot bring the branch ref itself back once gone (though the commits stay reachable via the PR/any other ref referencing them for a while).</p><ul>' +
+      names.map(function(n){ return '<li><code>'+esc(n)+'</code></li>'; }).join('') + '</ul>';
+    $("#cdOk").onclick = async function(){
+      $("#cdOk").disabled = true; $("#cdOk").textContent = "Deleting…";
+      var results = [];
+      for (var i = 0; i < names.length; i++) {
+        var n = names[i];
+        try {
+          var r = await gh("/git/refs/heads/" + encodeURIComponent(n), { method: "DELETE" });
+          results.push(n + ": " + (r.ok ? "deleted" : ("failed (" + r.status + ")")));
+        } catch (e) { results.push(n + ": failed (" + e.message + ")"); }
+      }
+      $("#confirmDlg").close();
+      $("#cdOk").disabled = false; $("#cdOk").textContent = "Confirm";
+      selectedBranches = {};
+      if (LIVE_BRANCHES) names.forEach(function(n){ delete LIVE_BRANCHES[n]; });
+      alert(results.join("\n"));
+      renderBranches();
+    };
+    $("#confirmDlg").showModal();
+  }
+
+  // ---- workflows -------------------------------------------------------------
+  var WCAT_ORDER = ["content-import","enrichment","ocr","search-index","sync-maintenance","ci","probe-oneoff"];
+
+  function renderWorkflows(){
+    var q = ($("#wsearch").value || "").toLowerCase();
+    var activeCat = $("[data-wcat].on") ? $("[data-wcat].on").dataset.wcat : "all";
+    var host = $("#workflow-groups");
+    host.innerHTML = "";
+
+    WCAT_ORDER.forEach(function(cat){
+      if (activeCat !== "all" && activeCat !== cat) return;
+      var files = Object.keys(MANIFEST.workflows).filter(function(f){
+        var w = MANIFEST.workflows[f];
+        if (w.category !== cat) return false;
+        if (!q) return true;
+        return f.toLowerCase().indexOf(q) >= 0 || (w.purpose||"").toLowerCase().indexOf(q) >= 0;
+      }).sort();
+      if (!files.length) return;
+
+      var group = document.createElement("div");
+      group.className = "group";
+      group.innerHTML = '<h2>' + WCAT_LABEL[cat] + ' <span class="pill">' + files.length + '</span></h2><div class="cards">'
+        + files.map(workflowCard).join("") + '</div>';
+      host.appendChild(group);
+    });
+
+    if (!host.children.length) host.innerHTML = '<div class="empty">No workflows match.</div>';
+
+    $$("[data-runwf]").forEach(function(b){
+      b.onclick = function(){ runWorkflow(b.dataset.runwf); };
+    });
+  }
+
+  function workflowCard(file){
+    var w = MANIFEST.workflows[file];
+    var run = LIVE_RUNS[file];
+    var runInfo = run
+      ? '<span><b>' + esc(run.conclusion || run.status) + '</b> · ' + esc(new Date(run.created_at).toLocaleString()) + ' · '
+        + '<a href="' + run.html_url + '" target="_blank" style="color:var(--accent2)">view run ↗</a></span>'
+      : '<span>no run in the last 100 repo-wide runs</span>';
+    var keepBadge = w.keep ? '<span class="badge keep">active</span>' : '<span class="badge review">kept as a record only</span>';
+    return '<div class="card"><div class="body">'
+      + '<div class="top"><span class="name">' + esc(file) + '</span>' + keepBadge + '</div>'
+      + '<div class="purpose">' + esc(w.purpose||"") + '</div>'
+      + '<div class="notes">Trigger: ' + esc(w.trigger||"") + (w.notes ? ' — ' + esc(w.notes) : '') + '</div>'
+      + '<div class="meta">' + runInfo + '</div>'
+      + '<div class="actions">'
+        + '<button class="btn gh" data-runwf="' + esc(file) + '">▶ Run</button>'
+        + '<button class="btn" onclick="window.open(\'https://github.com/' + OWNER + '/' + REPO + '/actions/workflows/' + esc(file) + '\',\'_blank\')">View all runs ↗</button>'
+      + '</div>'
+      + '</div></div>';
+  }
+
+  async function runWorkflow(file){
+    if (!isLive()) {
+      window.open("https://github.com/" + OWNER + "/" + REPO + "/actions/workflows/" + file, "_blank");
+      return;
+    }
+    $("#cdTitle").textContent = "Run " + file + "?";
+    $("#cdBody").innerHTML = '<p>Dispatches this workflow on <code>main</code> with its default inputs. For workflows that take meaningful inputs (page ranges, source ids, etc.), use <a href="workflows.html" target="_blank">Run a workflow ↗</a> instead, which has a proper input form for the curated set.</p>';
+    $("#cdOk").onclick = async function(){
+      $("#cdOk").disabled = true; $("#cdOk").textContent = "Dispatching…";
+      try {
+        var r = await gh("/actions/workflows/" + encodeURIComponent(file) + "/dispatches", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ref: "main", inputs: {} })
+        });
+        $("#confirmDlg").close();
+        if (r.ok) { window.open("https://github.com/" + OWNER + "/" + REPO + "/actions/workflows/" + file, "_blank"); }
+        else { alert("Dispatch failed (" + r.status + "). The workflow may require inputs — try Run a workflow instead, or open it on GitHub."); }
+      } catch (e) { alert("Dispatch failed: " + e.message); }
+      $("#cdOk").disabled = false; $("#cdOk").textContent = "Confirm";
+    };
+    $("#confirmDlg").showModal();
+  }
+
+  start();
+})();
+</script>
+</body>
+</html>
