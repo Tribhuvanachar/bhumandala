@@ -5790,6 +5790,18 @@
    }
   },
   {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula_kannada/data.json",
+   "populated": true,
+   "title": "ಜಯಂತೀ ನಿರ್ಣಯ (Jayantī Nirṇaya) — Kannada edition (anvaya + tātparya)",
+   "addedAt": "2026-09-05",
+   "source": {
+    "source": "Śrīpādarāja Maṭha, Muḷabāgilu edition (Kannada script), with the Kannada anvaya & tātparya of Śrī Agrahāra Nārāyaṇa Tantri; user-supplied transcription."
+   },
+   "facets": {
+    "default_author": "Sri Madhvacharya"
+   }
+  },
+  {
    "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/tika_jayatirtha/data.json",
    "populated": false,
    "title": "Tika Jayatirtha",

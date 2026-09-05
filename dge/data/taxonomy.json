@@ -1164,6 +1164,10 @@
        },
        "tippani": {
         "_schema": "grantha_tippani_text"
+       },
+       "mula_kannada": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Sri Madhvacharya"
        }
       },
       "nyasa_paddhati": {
