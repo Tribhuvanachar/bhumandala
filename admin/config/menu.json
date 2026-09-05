@@ -44,7 +44,7 @@
       { "id": "guruParampara", "icon": "🪷", "label": "Guru Parampara",   "href": "guru-parampara/index.html", "enabled": true },
       { "id": "tirtha",        "icon": "🛕", "label": "Tirtha Prabandha", "href": "tirtha/index.html",         "enabled": true },
       { "id": "ashtadhyayi",   "icon": "📖", "label": "Aṣṭādhyāyī",       "href": "vyakarana/ashtadhyayi/index.html", "enabled": true },
-      { "id": "dhatupatha",    "icon": "📚", "label": "Dhātupāṭha",       "href": "vyakarana/dhatu.html",      "enabled": true },
+      { "id": "dhatupatha",    "icon": "📚", "label": "Dhātupāṭha",       "href": "vyakarana/dhatu/index.html", "enabled": true },
       { "id": "shabda",        "icon": "🔤", "label": "Śabdapāṭha",       "href": "vyakarana/shabda/index.html", "enabled": true },
       { "id": "kavya",         "icon": "🪶", "label": "Kāvyāni",          "href": "kavya/index.html",          "enabled": true },
       { "id": "dasaSahitya",   "icon": "🎶", "label": "Dasa Sahitya",     "href": "dasa-sahitya/views/index.html", "enabled": true }
