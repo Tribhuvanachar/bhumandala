@@ -178,6 +178,54 @@ branch  main     →  Firebase project dge-prod      →  sarvamula.org
 deploy-only mirrors that are force-pushed by CI and never committed to by hand. Say the
 word and I'll write that instead — but the promotion guarantees are weaker.
 
+### 3.3 URLs — why this needs one repo, not three
+
+The stated reason for wanting several repositories was the **URL**: today it reads
+`tribhuvanachar.github.io/bhumandala/dge/index.html?path=darshana/vedanta/...`, and the goal
+is `sarvamula.org/darshana/vedanta/...`. That is three independent layers, and **none of them
+is solved by having more repositories**:
+
+| What shows in the URL | Why | Fix | Cost |
+|---|---|---|---|
+| `bhumandala` (repo name) | It is a GitHub Pages **project** site, so the repo name is the path prefix | **Attach the custom domain.** The repo name disappears the moment the site is served from `sarvamula.org` | none — **no rename needed** |
+| `dge/` | A real directory | **Host rewrites** (below) — the visitor never sees it | none — **no file moves** |
+| `?path=darshana/...` | The reader routes from `URLSearchParams` (`core.js:864`) | Catch-all rewrite + a small `location.pathname` router | the only real work |
+
+**Renaming the repository is optional.** It changes nothing about the public URL once the
+domain is attached (GitHub also auto-redirects the old name), so rename it for tidiness if
+you like, but not for this.
+
+**The rewrite.** GitHub Pages cannot do this — it has no rewrite support (only a `404.html`
+hack, and there is no `404.html` today). Firebase Hosting can, and `firebase.json` is already
+present. Keep `"public": "../.."` (the repo root, so `/admin/**` and the root landing page
+keep working) and add:
+
+```jsonc
+"rewrites": [
+  { "source": "**", "destination": "/dge/index.html" }
+]
+```
+
+Firebase serves **real files first**, so `/admin/…`, `/dge/js/…`, `/dge/data/…` and the root
+`index.html` all continue to resolve untouched; only paths that match no file fall through to
+the reader. `cleanUrls: true` is already set, so `/vyakarana/shabda` works without `.html`.
+
+**The router.** `core.js` reads its route from `window.location.search`. It gains a
+`location.pathname` branch: if the path is not a real asset prefix, treat it as a library
+slug. Scope is bounded — **29 `?path=` occurrences across 12 files**. Crucially, `?path=`
+must keep working **forever** as a redirect: external bookmarks and academic citations depend
+on today's URLs, and `core.js` already has the proven mechanism for exactly this
+(`DGE_LEGACY_SLUGS` + `dgeUpgradeLegacySlug()`). URL restructuring is the single
+hardest-to-undo change in this whole plan; it is sequenced late and never breaks an old link.
+
+**One honest limitation.** Rewrites clean up the **page** URLs a visitor sees and shares.
+Asset and data URLs still read `/dge/data/…`, because a Firebase rewrite targets a file, not a
+directory remap. If you want those clean too, `dge/**` has to physically move to the repo
+root — a large diff that also breaks the `^dge/` prefix convention baked into `library.json`
+and `dgeLibraryPathToFetchPath()`. My recommendation: **take the rewrite now** (immediate,
+zero-risk, gets every visible URL right) and fold the physical move into Phase 3, when the
+licensed corpora are being relocated and large paths are changing anyway.
+
 ### 3.2 Gates
 
 | Gate | Who | Passes when |
@@ -385,12 +433,19 @@ Phase 0 is worth doing this week regardless of everything else.
 
 ## 8. Decisions I need from you
 
-1. **One repo + three environments, or three repos?** (I recommend the former; §3.)
+1. ~~One repo + three environments, or three repos?~~ **RESOLVED (§3.3): one repo.** The
+   multi-repo request was about URLs, and URLs are fixed by the custom domain + host
+   rewrites, not by splitting the repository. Still to confirm: whether you also want the
+   repository *renamed* (optional, cosmetic) and whether to do the physical `dge/` → root
+   move in Phase 3.
 2. **Firebase project IDs** for test / staging / prod — the repo currently has no `.firebaserc`.
 3. **Which corpora are `restricted` vs merely `search_hidden`?** My read: DvaitaVedanta,
    Advaita Sharada and SetuTila → `restricted`; SarvaMula needs per-entry triage because it
    mixes Madhva's own mūla with Anandamakaranda material.
-4. **Who may read `restricted` content** — `subscriber` and above, or `admin` only?
+4. ~~Who may read `restricted` content?~~ **DECIDED (5 Sep 2026): `admin` only.** Anonymous
+   and signed-in `basic`/`subscriber`/`sponsor` users get the **search teaser only** — grantha
+   and category, never the text. Update §2.1's table accordingly: the `restricted` row grants
+   full text to `admin`+ and teaser to everyone else.
 5. **Sign-off on the auto-apply boundary** in §6.4 (it is deliberately narrow).
 6. **Intake mailbox** — same address as today, or a dedicated one? (`appConfig.contactEmail`
    is already configurable without touching any page.)
