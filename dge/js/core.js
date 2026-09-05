@@ -574,6 +574,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     sayana_sukta: 'सायणभाष्यम् — Sāyaṇa (introduction to the sūkta)',
     wilson: 'Wilson (English Translation, after Sāyaṇa)',
     artha: 'Translation',
+    // Word-by-word Kannada anvaya-artha printed under each verse in the
+    // Śrīpādarāja Maṭha (Muḷabāgilu) edition of Madhva's Jayantī Nirṇaya —
+    // by Śrī Agrahāra Nārāyaṇa Tantri. A Kannada gloss, not a translation,
+    // so it gets its own key/label (cf. narayana_vyakhya above).
+    kannada_anvaya: 'ಅನ್ವಯಾರ್ಥ — Kannada anvaya (Agrahāra Nārāyaṇa Tantri)',
     // OCR'd from a published book (tools/link_english_commentary.py), not
     // hand-typed -- attributed to its actual translator like griffith/wilson
     // above, not a generic "English Translation" label.
