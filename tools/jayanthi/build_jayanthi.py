@@ -27,9 +27,14 @@ Item layout (24 items):
   JN_T1 … JN_T9          the nine tātparya prose sections                 9
   JN_COL                 colophon                                         1
 
-The existing anandamakaranda.in Devanagari `mula/` (a different, 16-verse
-recension) is left untouched; this Kannada edition is written to a sibling
-folder `mula_kannada/` so both survive for the lead to reconcile at merge.
+STAGE 1 OF 2. The project lead's decision (5 Sep 2026) is that this Kannada
+edition belongs on the EXISTING Jayantī Nirṇaya — which already carries the
+Devanagari mula and the Jayatirtha tika slot — as a *commentary layer*, not as
+a second mula. So this script no longer writes into the library tree: it emits
+the parsed edition to tools/jayanthi/jayanthi_kannada_parsed.json, and
+tools/jayanthi/build_jayanthi_tika.py (stage 2) re-keys that onto the mula's
+own verse ids to produce tika_kannada/. Library + taxonomy entries belong to
+stage 2's placement and are not written here.
 
 Run with --write to apply.
 """
@@ -38,12 +43,9 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DEST_REL = ('dge/data/darshana/vedanta/dvaita/SarvaMula/'
-            'achara_and_ancillary_granthas/jayanti_nirnaya/mula_kannada')
+DEST_REL = 'tools/jayanthi'
 DEST = os.path.join(ROOT, DEST_REL)
-LIB = os.path.join(ROOT, 'dge/data/library.json')
-TAX = os.path.join(ROOT, 'dge/data/taxonomy.json')
-DATA_REL = DEST_REL + '/data.json'
+DATA_REL = DEST_REL + '/jayanthi_kannada_parsed.json'
 
 DEFAULT_SRC = os.path.join(
     ROOT, '..',  # not used; real default passed on CLI
@@ -183,43 +185,11 @@ def main():
         'items': items,
     }
     os.makedirs(DEST, exist_ok=True)
-    with open(os.path.join(DEST, 'data.json'), 'w', encoding='utf-8') as fh:
+    with open(os.path.join(ROOT, DATA_REL), 'w', encoding='utf-8') as fh:
         json.dump(data, fh, ensure_ascii=False, indent=1)
         fh.write('\n')
-    print('  wrote %s' % os.path.join(DEST_REL, 'data.json'))
-
-    # library.json entry (indent=1, matching the file on disk)
-    lib = json.load(open(LIB, encoding='utf-8'))
-    paths = {e['path'] for e in lib['granthas']}
-    if DATA_REL not in paths:
-        lib['granthas'].append({
-            'path': DATA_REL,
-            'populated': True,
-            'title': TITLE,
-            'addedAt': '2026-09-05',
-            'source': {'source': SOURCE_LINE},
-            'facets': {'default_author': DEFAULT_AUTHOR},
-        })
-        lib['granthas'].sort(key=lambda e: e['path'])
-        with open(LIB, 'w', encoding='utf-8') as fh:
-            json.dump(lib, fh, ensure_ascii=False, indent=1)
-        print('  library.json: entry added')
-    else:
-        print('  library.json: entry already present (left as-is)')
-
-    # taxonomy.json node under jayanti_nirnaya (indent=1)
-    tax = json.load(open(TAX, encoding='utf-8'))
-    node = (tax['darshana']['vedanta']['dvaita']['SarvaMula']
-            ['achara_and_ancillary_granthas']['jayanti_nirnaya'])
-    if 'mula_kannada' not in node:
-        node['mula_kannada'] = {'_schema': 'grantha_mula_text',
-                                '_default_author': DEFAULT_AUTHOR}
-        with open(TAX, 'w', encoding='utf-8') as fh:
-            json.dump(tax, fh, ensure_ascii=False, indent=1)
-            fh.write('\n')
-        print('  taxonomy.json: node added')
-    else:
-        print('  taxonomy.json: node already present (left as-is)')
+    print('  wrote %s' % DATA_REL)
+    print('  next: python3 tools/jayanthi/build_jayanthi_tika.py  (stage 2)')
 
 
 if __name__ == '__main__':

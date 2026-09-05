@@ -2052,6 +2052,20 @@
     }
    ]
   },
+  "darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya": {
+   "title": "ಜಯಂತೀ ನಿರ್ಣಯ (Jayantī Nirṇaya)",
+   "author": "Sri Madhvacharya",
+   "mulaItems": 16,
+   "layers": [
+    {
+     "folder": "tika_kannada",
+     "label": "ಕನ್ನಡ ಅನ್ವಯಾರ್ಥ — ಶ್ರೀ ಅಗ್ರಹಾರ ನಾರಾಯಣ…",
+     "author": "ಶ್ರೀ ಅಗ್ರಹಾರ ನಾರಾಯಣ ತಂತ್ರಿ",
+     "items": 16,
+     "matched": 16
+    }
+   ]
+  },
   "darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya": {
    "title": "Mula",
    "author": "Sri Madhvacharya",

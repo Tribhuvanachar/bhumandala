@@ -1165,9 +1165,9 @@
        "tippani": {
         "_schema": "grantha_tippani_text"
        },
-       "mula_kannada": {
-        "_schema": "grantha_mula_text",
-        "_default_author": "Sri Madhvacharya"
+       "tika_kannada": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "ದಿ|| ಶ್ರೀ ಅಗ್ರಹಾರ ನಾರಾಯಣ ತಂತ್ರಿಗಳು (Śrī Agrahāra Nārāyaṇa Tantri)"
        }
       },
       "nyasa_paddhati": {

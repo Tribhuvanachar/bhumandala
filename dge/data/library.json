@@ -3283,6 +3283,198 @@
    }
   },
   {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_anantabhatta/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_anantabhatta",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "अनन्तभट्टीया (श्रीअनन्तभट्ट)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bharatshri/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_bharatshri",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "भारतश्री"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavachandrika/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_bhavachandrika",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "भावचन्द्रिका"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavavivrti/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_bhavavivrti",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "भावविवृतिः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_chatti/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_chatti",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "चट्टी / जम्बुखण्डी (श्रीलक्ष्मीनृसिंहाचार्य)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_janardana/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_janardana",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "जनार्दनीया (श्रीजनार्दनभट्ट)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_kanthakoddhara/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_kanthakoddhara",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "कण्ठकोद्धारः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_madhusudana/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_madhusudana",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "मधुसूदनीया (श्रीमधुसूदन)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_sangraha/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_sangraha",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "टीकासङ्ग्रहः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyabhinava/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_satyabhinava",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "सत्याभिनवतीर्थीया — दुर्घटार्थप्रकाशिका"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyadharma/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_satyadharma",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "सत्यधर्मीया"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_tamraparni/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_tamraparni",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "ताम्रपर्णीया"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vadiraja/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_vadiraja",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "वादिराजतीर्थीया (श्रीवादिराजतीर्थ)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_varadaraja/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_varadaraja",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "वरदराजीया (श्रीवरदराजाचार्य)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vedangatirtha/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_vedangatirtha",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "वेदाङ्गतीर्थीया"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vyasatirtha/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः — tika_vyasatirtha",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
+   },
+   "facets": {
+    "default_author": "व्यासतीर्थीया — भावपञ्चिका (श्रीव्यासतीर्थ)"
+   }
+  },
+  {
    "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/yamaka_bharata/mula/data.json",
    "populated": true,
    "title": "यमकभारतम् — mula",
@@ -3524,6 +3716,16 @@
    },
    "facets": {
     "default_author": "सिद्धान्तेऽदूषणस्याप्यप्रसिद्धविशेषणत्वस्यासिद्धिसङ्कीर्णतादशायां दोषत्वोपपत्तिरिति उपपादनपूर्वकं प्र"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/krishnacharitra_manjari/mula/data.json",
+   "populated": true,
+   "title": "श्रीकृष्णचरित्रमञ्जरी — mula",
+   "addedAt": "2026-09-04",
+   "source": {},
+   "facets": {
+    "default_author": "श्रीराघवेन्द्रतीर्थः"
    }
   },
   {
@@ -5780,22 +5982,10 @@
   {
    "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula/data.json",
    "populated": true,
-   "title": "Mula",
+   "title": "ಜಯಂತೀ ನಿರ್ಣಯ (Jayantī Nirṇaya) — मूलम्",
    "addedAt": "2026-08-24",
    "source": {
     "source_url": "https://anandamakaranda.in/index.php?title=Jayantinirnaya"
-   },
-   "facets": {
-    "default_author": "Sri Madhvacharya"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula_kannada/data.json",
-   "populated": true,
-   "title": "ಜಯಂತೀ ನಿರ್ಣಯ (Jayantī Nirṇaya) — Kannada edition (anvaya + tātparya)",
-   "addedAt": "2026-09-05",
-   "source": {
-    "source": "Śrīpādarāja Maṭha, Muḷabāgilu edition (Kannada script), with the Kannada anvaya & tātparya of Śrī Agrahāra Nārāyaṇa Tantri; user-supplied transcription."
    },
    "facets": {
     "default_author": "Sri Madhvacharya"
@@ -5808,6 +5998,18 @@
    "addedAt": "2026-08-24",
    "facets": {
     "default_author": "Sri Jayatirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/tika_kannada/data.json",
+   "populated": true,
+   "title": "ಕನ್ನಡ ಅನ್ವಯಾರ್ಥ ಮತ್ತು ತಾತ್ಪರ್ಯ — ಶ್ರೀ ಅಗ್ರಹಾರ ನಾರಾಯಣ ತಂತ್ರಿ (Kannada anvaya & tātparya)",
+   "addedAt": "2026-09-05",
+   "source": {
+    "source": "Śrīpādarāja Maṭha, Muḷabāgilu edition (Kannada script), with the Kannada anvaya & tātparya of Śrī Agrahāra Nārāyaṇa Tantri; user-supplied transcription."
+   },
+   "facets": {
+    "default_author": "ದಿ|| ಶ್ರೀ ಅಗ್ರಹಾರ ನಾರಾಯಣ ತಂತ್ರಿಗಳು (Śrī Agrahāra Nārāyaṇa Tantri)"
    }
   },
   {
@@ -6447,6 +6649,30 @@
    }
   },
   {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_english_boray/data.json",
+   "populated": true,
+   "title": "गीताभाष्यम् — tika_english_boray",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://upanishat.com/"
+   },
+   "facets": {
+    "default_author": "Dr. Giridhar Boray"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_english_nadgouda/data.json",
+   "populated": true,
+   "title": "गीताभाष्यम् — tika_english_nadgouda",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source_url": "https://srimadhvyasa.wordpress.com/"
+   },
+   "facets": {
+    "default_author": "Prof. Gururao V. Nadgouda & Smt. Indira Nadgouda"
+   }
+  },
+  {
    "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_jayatirtha/data.json",
    "populated": false,
    "title": "Tika Jayatirtha",
@@ -6555,6 +6781,62 @@
    "addedAt": "2026-08-24",
    "facets": {
     "default_author": "Sri Madhvacharya"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/dakshina_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — दक्षिणप्रबन्धः (दक्षिणदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/paschima_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — पश्चिमप्रबन्धः (पश्चिमदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/purva_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — पूर्वप्रबन्धः (पूर्वदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/uttara_prabandha/data.json",
+   "populated": true,
+   "title": "तीर्थप्रबन्धः — उत्तरप्रबन्धः (उत्तरदिक्)",
+   "addedAt": "2026-09-04",
+   "source": {
+    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
+    "source_url": "https://tirthaprabandha.wordpress.com/",
+    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
+   },
+   "facets": {
+    "default_author": "Sri Vadiraja Tirtha"
    }
   },
   {
@@ -7008,6 +7290,617 @@
    "addedAt": "2026-08-24",
    "facets": {
     "default_author": "Sri Madhvacharya"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/jayanti_kalpa/data.json",
+   "populated": true,
+   "title": "जयन्तीकल्पः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/jayanti-kalpa/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/krishnamruta_maharnava/data.json",
+   "populated": true,
+   "title": "कृष्णामृतमहार्णवः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/krishnamruta-maharnava/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/nyasa_paddhati/data.json",
+   "populated": true,
+   "title": "न्यासपद्धतिः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/nyasa-paddhati/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/sadacharasmriti/data.json",
+   "populated": true,
+   "title": "सदाचारस्मृतिः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/sadacharasmriti/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/tantrasara/data.json",
+   "populated": true,
+   "title": "तन्त्रसारसङ्ग्रहः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/tantrasara/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/yati_pranava_kalpa/data.json",
+   "populated": true,
+   "title": "यतिप्रणवकल्पः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/yati-pranava-kalpa/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/karma_nirnaya/data.json",
+   "populated": true,
+   "title": "कर्मनिर्णयः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/karma-nirnaya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/katha_lakshana/data.json",
+   "populated": true,
+   "title": "कथालक्षणम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/katha-lakshana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/mayavada_khandana/data.json",
+   "populated": true,
+   "title": "मायावादखण्डनम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/mayavada-khandana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/pramana_lakshana/data.json",
+   "populated": true,
+   "title": "प्रमाणलक्षणम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/pramana-lakshana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/prapancha_mithyatva_anumana_khandana/data.json",
+   "populated": true,
+   "title": "प्रपञ्चमिथ्यात्वानुमानखण्डनम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/prapancha-mithyatva-anumana-khandana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvasankhyana/data.json",
+   "populated": true,
+   "title": "तत्त्वसङ्ख्यानम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/tattvasankhyana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvaviveka/data.json",
+   "populated": true,
+   "title": "तत्त्वविवेकः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/tattvaviveka/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvodyota/data.json",
+   "populated": true,
+   "title": "तत्त्वोद्योतः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/tattvodyota/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/upadhi_khandhana/data.json",
+   "populated": true,
+   "title": "उपाधिखण्डनम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/upadhi-khandhana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/vishnu_tattva_nirnaya/data.json",
+   "populated": true,
+   "title": "विष्णुतत्त्वनिर्णयः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/vishnu-tattva-nirnaya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/gita_prasthana/gita_bhashya/data.json",
+   "populated": true,
+   "title": "भगवद्गीताभाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/gita-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/gita_prasthana/gita_tatparya/data.json",
+   "populated": true,
+   "title": "भगवद्गीतातात्पर्यनिर्णयः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/gita-tatparya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/itihasa_prasthana/mahabharata_tatparya_nirnaya/data.json",
+   "populated": true,
+   "title": "महाभारततात्पर्यनिर्णयः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/mahabharata-tatparya-nirnaya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/itihasa_prasthana/yamaka_bharata/data.json",
+   "populated": true,
+   "title": "यमकभारतम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/yamaka-bharata/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/atharvana/data.json",
+   "populated": true,
+   "title": "आथर्वणोपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/atharvana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/gita/data.json",
+   "populated": true,
+   "title": "भगवद्गीता",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/gita/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/isha/data.json",
+   "populated": true,
+   "title": "ईशवास्योपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/isha/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/kathaka/data.json",
+   "populated": true,
+   "title": "कठोपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/kathaka/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/manduka/data.json",
+   "populated": true,
+   "title": "माण्डूकोपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/manduka/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/prashna/data.json",
+   "populated": true,
+   "title": "प्रश्नोपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/prashna/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/sutra/data.json",
+   "populated": true,
+   "title": "ब्रह्मसूत्राणि",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/sutra/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/taittiriya/data.json",
+   "populated": true,
+   "title": "तैत्तिरीयोपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/taittiriya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/talavakara/data.json",
+   "populated": true,
+   "title": "तलवकारोपनिषत्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/talavakara/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/purana_prasthana/bhagavata_tatparya_nirnaya/data.json",
+   "populated": true,
+   "title": "भागवततात्पर्यनिर्णयः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/bhagavata-tatparya-nirnaya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/shruti_prasthana/rg_bhashya/data.json",
+   "populated": true,
+   "title": "ऋग्भाष्यं",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/rg-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/stotra_granthas/dvadasha_stotra/data.json",
+   "populated": true,
+   "title": "द्वादशस्तोत्रम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/dvadasha-stotra/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/stotra_granthas/nakhastuti_kandukastuti_more/data.json",
+   "populated": true,
+   "title": "नखस्तुतिः, कन्दुकस्तुतिः इत्यादयः",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/nakhastuti-kandukastuti-more/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/anu_bhashya/data.json",
+   "populated": true,
+   "title": "ब्रह्मसूत्राणुभाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/anu-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/anuvyakhyana/data.json",
+   "populated": true,
+   "title": "ब्रह्मसूत्रानुव्याख्यानम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/anuvyakhyana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/brahmasutra_bhashya/data.json",
+   "populated": true,
+   "title": "ब्रह्मसूत्रभाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/brahmasutra-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/nyaya_vivarana/data.json",
+   "populated": true,
+   "title": "ब्रह्मसूत्रानुव्याख्यान-न्यायविवरणम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/nyaya-vivarana/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/aitareya_bhashya/data.json",
+   "populated": true,
+   "title": "महैतरेयोपनिषद्भाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/aitareya-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/atharvana_bhashya/data.json",
+   "populated": true,
+   "title": "आथर्वणोपनिषद्भाष्यम्‌",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/atharvana-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/brihad_bhashya/data.json",
+   "populated": true,
+   "title": "बृहदारण्कोपनिषद्भाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/brihad-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/chhaandogyopnishdbhaashym/data.json",
+   "populated": true,
+   "title": "छान्दोग्योपनिषद्भाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/%e0%a4%9b%e0%a4%be%e0%a4%a8%e0%a5%8d%e0%a4%a6%e0%a5%8b%e0%a4%97%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%aa%e0%a4%a8%e0%a4%bf%e0%a4%b7%e0%a4%a6%e0%a5%8d%e0%a4%ad%e0%a4%be%e0%a4%b7%e0%a5%8d%e0%a4%af%e0%a4%ae/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/ishavasya_bhashya/data.json",
+   "populated": true,
+   "title": "ईशावास्योपनिषद्भाष्यम्",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/ishavasya-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/kathaka_bhashya/data.json",
+   "populated": true,
+   "title": "काठकोपनिषद्भाष्यम्‌",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/kathaka-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/manduka_bhashya/data.json",
+   "populated": true,
+   "title": "माण्डूकोपनिषद्भाष्यम्‌",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/manduka-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/shatprashna_bhashya/data.json",
+   "populated": true,
+   "title": "षट्प्रश्नोपनिषद्भाष्यम्‌",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/shatprashna-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/taittiriya_bhashya/data.json",
+   "populated": true,
+   "title": "तैत्तिरीयोपनिषद्भाष्यम्‌",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/taittiriya-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/talavakara_bhashya/data.json",
+   "populated": true,
+   "title": "तलवकारोपनिषद्भाष्यम्‌",
+   "addedAt": "2026-09-04",
+   "hidden": true,
+   "source": {
+    "source_url": "https://setutila.in/talavakara-bhashya/"
+   },
+   "facets": {
+    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
    }
   },
   {
@@ -16912,899 +17805,6 @@
    "title": "Isha Upanishad",
    "facets": {
     "default_author": "Apaurusheya (traditionally unauthored / eternally revealed; rishi per mantra may be noted in the item's own 'rishi' field)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/krishnamruta_maharnava/data.json",
-   "populated": true,
-   "title": "कृष्णामृतमहार्णवः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/krishnamruta-maharnava/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/sadacharasmriti/data.json",
-   "populated": true,
-   "title": "सदाचारस्मृतिः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/sadacharasmriti/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/tantrasara/data.json",
-   "populated": true,
-   "title": "तन्त्रसारसङ्ग्रहः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/tantrasara/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/yati_pranava_kalpa/data.json",
-   "populated": true,
-   "title": "यतिप्रणवकल्पः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/yati-pranava-kalpa/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/karma_nirnaya/data.json",
-   "populated": true,
-   "title": "कर्मनिर्णयः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/karma-nirnaya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/katha_lakshana/data.json",
-   "populated": true,
-   "title": "कथालक्षणम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/katha-lakshana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/mayavada_khandana/data.json",
-   "populated": true,
-   "title": "मायावादखण्डनम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/mayavada-khandana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/pramana_lakshana/data.json",
-   "populated": true,
-   "title": "प्रमाणलक्षणम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/pramana-lakshana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/prapancha_mithyatva_anumana_khandana/data.json",
-   "populated": true,
-   "title": "प्रपञ्चमिथ्यात्वानुमानखण्डनम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/prapancha-mithyatva-anumana-khandana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvasankhyana/data.json",
-   "populated": true,
-   "title": "तत्त्वसङ्ख्यानम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/tattvasankhyana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvaviveka/data.json",
-   "populated": true,
-   "title": "तत्त्वविवेकः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/tattvaviveka/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/tattvodyota/data.json",
-   "populated": true,
-   "title": "तत्त्वोद्योतः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/tattvodyota/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/upadhi_khandhana/data.json",
-   "populated": true,
-   "title": "उपाधिखण्डनम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/upadhi-khandhana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/dasha_prakarana_granthas/vishnu_tattva_nirnaya/data.json",
-   "populated": true,
-   "title": "विष्णुतत्त्वनिर्णयः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/vishnu-tattva-nirnaya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/gita_prasthana/gita_bhashya/data.json",
-   "populated": true,
-   "title": "भगवद्गीताभाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/gita-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/gita_prasthana/gita_tatparya/data.json",
-   "populated": true,
-   "title": "भगवद्गीतातात्पर्यनिर्णयः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/gita-tatparya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/itihasa_prasthana/mahabharata_tatparya_nirnaya/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/mahabharata-tatparya-nirnaya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/itihasa_prasthana/yamaka_bharata/data.json",
-   "populated": true,
-   "title": "यमकभारतम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/yamaka-bharata/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/atharvana/data.json",
-   "populated": true,
-   "title": "आथर्वणोपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/atharvana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/gita/data.json",
-   "populated": true,
-   "title": "भगवद्गीता",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/gita/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/manduka/data.json",
-   "populated": true,
-   "title": "माण्डूकोपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/manduka/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/prashna/data.json",
-   "populated": true,
-   "title": "प्रश्नोपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/prashna/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/sutra/data.json",
-   "populated": true,
-   "title": "ब्रह्मसूत्राणि",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/sutra/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/taittiriya/data.json",
-   "populated": true,
-   "title": "तैत्तिरीयोपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/taittiriya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/talavakara/data.json",
-   "populated": true,
-   "title": "तलवकारोपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/talavakara/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/purana_prasthana/bhagavata_tatparya_nirnaya/data.json",
-   "populated": true,
-   "title": "भागवततात्पर्यनिर्णयः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/bhagavata-tatparya-nirnaya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/shruti_prasthana/rg_bhashya/data.json",
-   "populated": true,
-   "title": "ऋग्भाष्यं",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/rg-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/stotra_granthas/dvadasha_stotra/data.json",
-   "populated": true,
-   "title": "द्वादशस्तोत्रम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/dvadasha-stotra/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/stotra_granthas/nakhastuti_kandukastuti_more/data.json",
-   "populated": true,
-   "title": "नखस्तुतिः, कन्दुकस्तुतिः इत्यादयः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/nakhastuti-kandukastuti-more/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/anu_bhashya/data.json",
-   "populated": true,
-   "title": "ब्रह्मसूत्राणुभाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/anu-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/anuvyakhyana/data.json",
-   "populated": true,
-   "title": "ब्रह्मसूत्रानुव्याख्यानम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/anuvyakhyana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/brahmasutra_bhashya/data.json",
-   "populated": true,
-   "title": "ब्रह्मसूत्रभाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/brahmasutra-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/nyaya_vivarana/data.json",
-   "populated": true,
-   "title": "ब्रह्मसूत्रानुव्याख्यान-न्यायविवरणम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/nyaya-vivarana/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/aitareya_bhashya/data.json",
-   "populated": true,
-   "title": "महैतरेयोपनिषद्भाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/aitareya-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/atharvana_bhashya/data.json",
-   "populated": true,
-   "title": "आथर्वणोपनिषद्भाष्यम्‌",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/atharvana-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/brihad_bhashya/data.json",
-   "populated": true,
-   "title": "बृहदारण्कोपनिषद्भाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/brihad-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/chhaandogyopnishdbhaashym/data.json",
-   "populated": true,
-   "title": "छान्दोग्योपनिषद्भाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/%e0%a4%9b%e0%a4%be%e0%a4%a8%e0%a5%8d%e0%a4%a6%e0%a5%8b%e0%a4%97%e0%a5%8d%e0%a4%af%e0%a5%8b%e0%a4%aa%e0%a4%a8%e0%a4%bf%e0%a4%b7%e0%a4%a6%e0%a5%8d%e0%a4%ad%e0%a4%be%e0%a4%b7%e0%a5%8d%e0%a4%af%e0%a4%ae/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/ishavasya_bhashya/data.json",
-   "populated": true,
-   "title": "ईशावास्योपनिषद्भाष्यम्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/ishavasya-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/kathaka_bhashya/data.json",
-   "populated": true,
-   "title": "काठकोपनिषद्भाष्यम्‌",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/kathaka-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/manduka_bhashya/data.json",
-   "populated": true,
-   "title": "माण्डूकोपनिषद्भाष्यम्‌",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/manduka-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/shatprashna_bhashya/data.json",
-   "populated": true,
-   "title": "षट्प्रश्नोपनिषद्भाष्यम्‌",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/shatprashna-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/taittiriya_bhashya/data.json",
-   "populated": true,
-   "title": "तैत्तिरीयोपनिषद्भाष्यम्‌",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/taittiriya-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/upanishat_prasthana/talavakara_bhashya/data.json",
-   "populated": true,
-   "title": "तलवकारोपनिषद्भाष्यम्‌",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/talavakara-bhashya/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/jayanti_kalpa/data.json",
-   "populated": true,
-   "title": "जयन्तीकल्पः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/jayanti-kalpa/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/nyasa_paddhati/data.json",
-   "populated": true,
-   "title": "न्यासपद्धतिः",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/nyasa-paddhati/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/isha/data.json",
-   "populated": true,
-   "title": "ईशवास्योपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/isha/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/kathaka/data.json",
-   "populated": true,
-   "title": "कठोपनिषत्",
-   "addedAt": "2026-09-04",
-   "hidden": true,
-   "source": {
-    "source_url": "https://setutila.in/kathaka/"
-   },
-   "facets": {
-    "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/paschima_prabandha/data.json",
-   "populated": true,
-   "title": "तीर्थप्रबन्धः — पश्चिमप्रबन्धः (पश्चिमदिक्)",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
-    "source_url": "https://tirthaprabandha.wordpress.com/",
-    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
-   },
-   "facets": {
-    "default_author": "Sri Vadiraja Tirtha"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/uttara_prabandha/data.json",
-   "populated": true,
-   "title": "तीर्थप्रबन्धः — उत्तरप्रबन्धः (उत्तरदिक्)",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
-    "source_url": "https://tirthaprabandha.wordpress.com/",
-    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
-   },
-   "facets": {
-    "default_author": "Sri Vadiraja Tirtha"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/purva_prabandha/data.json",
-   "populated": true,
-   "title": "तीर्थप्रबन्धः — पूर्वप्रबन्धः (पूर्वदिक्)",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
-    "source_url": "https://tirthaprabandha.wordpress.com/",
-    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
-   },
-   "facets": {
-    "default_author": "Sri Vadiraja Tirtha"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/kavya/tirtha_prabandha/dakshina_prabandha/data.json",
-   "populated": true,
-   "title": "तीर्थप्रबन्धः — दक्षिणप्रबन्धः (दक्षिणदिक्)",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source": "tirthaprabandha.wordpress.com (verse-by-verse Devanāgarī transcription of the mūla)",
-    "source_url": "https://tirthaprabandha.wordpress.com/",
-    "licence": "Mūla text is public domain (Śrī Vādirāja Tīrtha, 16th c.); only the ślokas are reproduced, none of the transcriber’s own notes/translation."
-   },
-   "facets": {
-    "default_author": "Sri Vadiraja Tirtha"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_anantabhatta/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_anantabhatta",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "अनन्तभट्टीया (श्रीअनन्तभट्ट)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bharatshri/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_bharatshri",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "भारतश्री"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavachandrika/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_bhavachandrika",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "भावचन्द्रिका"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavavivrti/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_bhavavivrti",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "भावविवृतिः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_chatti/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_chatti",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "चट्टी / जम्बुखण्डी (श्रीलक्ष्मीनृसिंहाचार्य)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_janardana/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_janardana",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "जनार्दनीया (श्रीजनार्दनभट्ट)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_kanthakoddhara/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_kanthakoddhara",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "कण्ठकोद्धारः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_madhusudana/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_madhusudana",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "मधुसूदनीया (श्रीमधुसूदन)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_sangraha/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_sangraha",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "टीकासङ्ग्रहः"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyabhinava/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_satyabhinava",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "सत्याभिनवतीर्थीया — दुर्घटार्थप्रकाशिका"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyadharma/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_satyadharma",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "सत्यधर्मीया"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_tamraparni/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_tamraparni",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "ताम्रपर्णीया"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vadiraja/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_vadiraja",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "वादिराजतीर्थीया (श्रीवादिराजतीर्थ)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_varadaraja/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_varadaraja",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "वरदराजीया (श्रीवरदराजाचार्य)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vedangatirtha/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_vedangatirtha",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "वेदाङ्गतीर्थीया"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vyasatirtha/data.json",
-   "populated": true,
-   "title": "महाभारततात्पर्यनिर्णयः — tika_vyasatirtha",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://archive.org/details/mahabharata-tatparya-nirnaya-1-3-adhyaya-10-tippani-vol-1"
-   },
-   "facets": {
-    "default_author": "व्यासतीर्थीया — भावपञ्चिका (श्रीव्यासतीर्थ)"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_english_boray/data.json",
-   "populated": true,
-   "title": "गीताभाष्यम् — tika_english_boray",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://upanishat.com/"
-   },
-   "facets": {
-    "default_author": "Dr. Giridhar Boray"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_english_nadgouda/data.json",
-   "populated": true,
-   "title": "गीताभाष्यम् — tika_english_nadgouda",
-   "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://srimadhvyasa.wordpress.com/"
-   },
-   "facets": {
-    "default_author": "Prof. Gururao V. Nadgouda & Smt. Indira Nadgouda"
-   }
-  },
-  {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/krishnacharitra_manjari/mula/data.json",
-   "populated": true,
-   "title": "श्रीकृष्णचरित्रमञ्जरी — mula",
-   "addedAt": "2026-09-04",
-   "source": {},
-   "facets": {
-    "default_author": "श्रीराघवेन्द्रतीर्थः"
    }
   }
  ]
