@@ -1,0 +1,77 @@
+{
+ "generated_at": "06 Sep 2026, 12:58 AM IST",
+ "external_sources": {
+  "sources": 10,
+  "accessible": 6,
+  "blocked": 4,
+  "listable_files": 972,
+  "listable_audio_files": 971
+ },
+ "total_audio_files": 2544,
+ "total_duration": "22h 08m 51s",
+ "total_duration_seconds": 79731.2,
+ "mapped_recordings": 1985,
+ "unmatched_recordings": 559,
+ "unmatched_corpus_texts": 836,
+ "high_confidence_mappings(>=0.90)": 1576,
+ "needing_review": 409,
+ "usable_training_examples": 969,
+ "usable_validation_examples": 107,
+ "usable_reference_examples": 40,
+ "unique_works": 5,
+ "unique_metres": 40,
+ "unique_syllable_patterns": 803,
+ "speaker_count": "unknown — no speaker metadata in any source (folders used as proxy: 24)",
+ "sample_rate_distribution": {
+  "44100": 521,
+  "48000": 1034,
+  "11025": 989
+ },
+ "channel_distribution": {
+  "2": 1549,
+  "1": 995
+ },
+ "codec_distribution": {
+  "mp3": 2135,
+  "aac": 409
+ },
+ "duration_distribution_seconds": {
+  "20–40": 179,
+  "10–20": 1676,
+  "40–60": 112,
+  "5–10": 113,
+  "0–5": 32,
+  "120–300": 115,
+  "60–120": 316,
+  "≥300": 1
+ },
+ "audio_quality_failures": {
+  "hot_peaks": 394,
+  "clipping": 520,
+  "noisy_low_snr": 44,
+  "broadband_noise_floor": 5,
+  "long_internal_silence": 6,
+  "long_leading_silence": 6,
+  "exact_duplicate": 46,
+  "low_volume": 2,
+  "long_trailing_silence": 12,
+  "extension_mismatch": 3
+ },
+ "quality_grades": {
+  "A": 637,
+  "B": 1382,
+  "D": 520,
+  "C": 5
+ },
+ "clipping": 520,
+ "excessive_silence": 24,
+ "exact_duplicates": 46,
+ "likely_duplicates": 0,
+ "decode_errors": 0,
+ "measurement_notes": [
+  "loudness is RMS-based dBFS, not LUFS (no K-weighting implemented)",
+  "SNR is a percentile estimate (90th − 10th percentile frame energy), not a speech/noise separation",
+  "duplicates: exact = identical bytes; likely = identical coarse energy-envelope fingerprint",
+  "no ASR/forced alignment was run"
+ ]
+}
