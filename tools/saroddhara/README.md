@@ -14,6 +14,15 @@ C  build        python3 tools/saroddhara/build_saroddhara.py --work <dir> --writ
                 → <dir>/build_report.json
 D  verify       open verify_queue.html (offline), answer, Export answers.json → verify_output/
 E  apply        python3 tools/saroddhara/apply_verified.py verify_output/answers.json   (idempotent; then re-run validators + safe-merge)
+
+D′ chat path   python3 tools/saroddhara/make_chat_batch.py --work <dir> --print 10
+               → dge/data/ocr_staging/bhagavata_saroddhara/verify_input/batch_01_critical.json (+ _chunkN.json)
+               the critical items only (verses the printed index has but OCR missed, mismatches and near-matches
+               against the DGE Madhva mūla) with both OCR readings, the DGE candidate, PDF page and, for missing
+               verses, the neighbours + raw OCR lines between them — sized for pasting into a Gemini *chat*
+               (no API credits needed; works from a phone).
+E′ chat apply  python3 tools/saroddhara/apply_chat_answers.py pasted_reply.txt
+               parses the chat's JSON (fences/prose tolerated), merges into verify_output/answers.json, runs E.
 ```
 
 Rules: every verse is matched to the Madhva Bhāgavata already in DGE (`bhagavata_purana_madhva`) by its printed
