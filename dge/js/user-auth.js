@@ -382,7 +382,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   dgeAuth.onAuthStateChanged(async (user) => {
     window.dgeCurrentUser = user;
     if (user) {
-      const profile = await dgeEnsureUserProfile(user);
+      // Sign-in must survive a missing profile store: until the Firestore database exists in the
+      // console (FIREBASE_SETUP.md §3 step 3) the users/<uid> read/write fails with a permission or
+      // "API not enabled" error. The person is still signed in; they just get the default role.
+      let profile = null;
+      try {
+        profile = await dgeEnsureUserProfile(user);
+      } catch (e) {
+        console.warn('[Auth] signed in, but the profile store is not available yet:', e && e.message);
+        dgeToast('Signed in as ' + (user.displayName || user.email || 'user') + '. Profile storage is not set up yet, so roles are unavailable for now.');
+      }
       window.dgeCurrentUserProfile = profile;
       window.dgeCurrentUserRole = profile ? profile.role : 'basic';
     } else {
