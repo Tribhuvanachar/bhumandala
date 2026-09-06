@@ -1,0 +1,15 @@
+{
+ "_readme": "Speaker attribution for the recordings (Kamadhenu). Keys are folder prefixes under incoming_audio/; the longest matching prefix wins. `consent` records the reciter's permission to train a synthetic voice from these recordings. Decided by the project lead on 6 Sep 2026.",
+ "speakers": {
+  "3BHU1": {"name": "3BHU1 (the project lead, Tribhuvanachar)", "consent_to_train_voice": true, "consent_recorded": "6 Sep 2026, in the Claude Code session, by the lead himself", "role": "Kamadhenu voice"}
+ },
+ "by_folder": {
+  "drive/Bhagavata Saroddhara": "3BHU1",
+  "drive/Gita Shlokas": "3BHU1",
+  "drive/Vayu Stuti": "3BHU1",
+  "drive/Audio": "3BHU1",
+  "dge_linked/PrahladaKrutaNarasimha": "3BHU1",
+  "dge_linked/sumadhva_vijaya": "unattributed (public DGE audio repo — confirm whether this is 3BHU1)",
+  "dge_linked/raghavendra_vijaya": "unattributed (archive.org — confirm whether this is 3BHU1)"
+ }
+}

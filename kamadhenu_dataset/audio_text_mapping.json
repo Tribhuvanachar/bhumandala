@@ -1,7 +1,7 @@
 {
  "_readme": "audio ↔ DGE-text mapping. See summary.note. Overrides: kamadhenu_dataset/mapping_overrides.json {audio_path: {text_id, confidence, verified, note}}.",
  "summary": {
-  "generated_at": "06 Sep 2026, 3:35 PM IST",
+  "generated_at": "06 Sep 2026, 4:02 PM IST",
   "audio_files": 2544,
   "bands": {
    "1.00 exact": 1562,

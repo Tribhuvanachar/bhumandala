@@ -6,6 +6,20 @@ from .common import DS, write_json, read_json, write_csv, write_jsonl, log, now_
 SUBSETS = ["dataset_all", "dataset_verified", "dataset_high_quality", "dataset_reference_bank", "dataset_training", "dataset_validation", "dataset_review", "dataset_unmatched_audio", "dataset_unmatched_text"]
 
 
+_SPK = None
+
+
+def speaker_for(folder):
+    """kamadhenu_dataset/speakers.json: longest matching folder prefix → speaker id; else '<folder> (unattributed)'."""
+    global _SPK
+    if _SPK is None:
+        _SPK = read_json(DS / "speakers.json", {}).get("by_folder", {})
+    best = max((k for k in _SPK if folder.startswith(k)), key=len, default=None)
+    if best: return _SPK[best]
+    parts = folder.split("/")
+    return parts[0] + ":" + (parts[1] if len(parts) > 1 else "") + " (unattributed)"
+
+
 def record(r, inv, u):
     ca = (u or {}).get("chandas_analysis") or {}
     return {
@@ -14,7 +28,7 @@ def record(r, inv, u):
         "work": r.get("work") or r.get("work_guess"), "section": r.get("section") or r.get("section_guess"), "chapter": (u or {}).get("chapter"), "verse_id": r.get("verse_id") or r.get("verse_guess"),
         "part": r.get("part"), "chandas": ca.get("chandas_inferred") or ca.get("chandas_normalized") or "", "chandas_engine_verdict": ca.get("chandas", ""), "chandas_confidence": ca.get("confidence"),
         "pada_count": ca.get("pada_count"), "syllable_count": ca.get("syllable_count"), "laghu_guru": ca.get("laghu_guru", ""), "gana": ca.get("gana", ""), "yati": ca.get("yati", []),
-        "speaker": inv.get("folder", "").split("/")[0] + ":" + (inv.get("folder", "").split("/")[1] if "/" in inv.get("folder", "") else "") + " (unattributed)",
+        "speaker": speaker_for(inv.get("folder", "")),
         "duration_seconds": inv.get("duration_seconds"), "sample_rate": inv.get("sample_rate"), "channels": inv.get("channels"), "bit_depth": inv.get("bit_depth"), "codec": inv.get("codec"),
         "audio_quality": inv.get("quality_grade"), "qc_flags": inv.get("flags", []), "snr_db_est": inv.get("snr_db_est"),
         "mapping_confidence": r.get("confidence", 0.0), "mapping_signal": r.get("signal"), "duration_check": r.get("duration_check"), "review_status": r.get("review_status"), "review_reason": r.get("review_reason", ""),

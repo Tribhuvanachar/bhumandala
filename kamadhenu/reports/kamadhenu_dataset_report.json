@@ -1,897 +1,645 @@
 {
- "generated_at": "06 Sep 2026, 03:38 PM IST",
+ "generated_at": "06 Sep 2026, 04:02 PM IST",
  "inputs": [
   "kamadhenu/data/pilot/manifest.jsonl"
  ],
  "records": 126,
  "records_clean_or_only_unattributed": 125,
  "issue_counts": {
-  "speaker_unattributed": 126,
   "text_non_devanagari_chars": 1
  },
  "per_record": [
   {
    "id": "km_01ecd8334421",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.10.SBS323.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_029a95279163",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS23.6.SBS337.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_03bbae42f01b",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.11.SBS11.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_03cc2b0772eb",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.6.SBS356.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_047d138f0845",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS14.6.SBS190.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_054a25f94732",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.70.SBS306.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_0875898a663e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS30.2.SBS363.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_0aae1df98883",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS26.1.SBS347.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_0b66396f4644",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.8.SBS129.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_0d82201feb08",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.4.SBS20.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_0dea9dae4258",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.1.SBS147.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_10c978e698b3",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS9.5.SBS137.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_13caa83f1f2e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS22.8.SBS331.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_15cd19684eaa",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.14.SBS14.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_16226aabd7a9",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.8.SBS24.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_166a4cbd0c4c",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.7.SBS7.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_16adcd8c8940",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.8.SBS216.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_1a3114406b69",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS31.2.SBS366.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_1cf06fe28c1d",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.27.SBS263.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_1fe0540fbf83",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.10.SBS26.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_201c266a7650",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.77.SBS313.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_216f2f572b42",
    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/PrahladaKrutaNarasimha/NS9.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_2349cab4e47a",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.1.SBS344.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_24aafac6278a",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS13.5.SBS182.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_25bebc440772",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS24.6.SBS343.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_27471c985d49",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.30.SBS266.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_277365464963",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.66.SBS302.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_2970ce5192a6",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.9.SBS9.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_2d7cb6e70018",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.18.SBS254.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_34bbef2940ca",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.5.SBS126.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_35163c068217",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS24.5.SBS342.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_375494334cc9",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.72.SBS308.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_38ad7b080196",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.36.SBS92.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_39af27f1eada",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.10.SBS231.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_3af39d29c499",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.61.SBS297.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_3e428ecc64d8",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.2.SBS18.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_40b0294e290e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.2.SBS2.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_40d57ea467c7",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.1.SBS314.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_442036bbc277",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.36.SBS272.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_45b1cef3dcc6",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.24.SBS80.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_48d81bc9c189",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.9.SBS130.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_49870ee5b2b5",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.7.SBS228.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_5394b7c3cd98",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.69.SBS305.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_541c282d4f16",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.8.SBS8.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_560c20534e32",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS31.1.SBS365.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_59b34e3a8fa7",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.74.SBS310.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_5c0eaa23348d",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.9.SBS322.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_5c967a036393",
    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/PrahladaKrutaNarasimha/NS7.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_60f5ebe064ed",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS14.4.SBS188.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_61c91d0fa862",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS22.4.SBS327.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_632e2b36ab75",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.15.SBS15.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_6360b874b5d7",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.9.SBS51.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_682942d279a0",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.13.SBS13.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_694cb8c6764a",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.9.SBS359.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_6b4a0d92be48",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.2.SBS345.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_6cec238b7859",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.6.SBS48.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_6d12ec2b7bfb",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.55.SBS291.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_6dbd9b847ee3",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.62.SBS298.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_6e39a9f2de99",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.16.SBS16.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_71e783dc41c9",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.2.SBS223.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_74350a3622e1",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS22.6.SBS329.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_743e958e2dbe",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.7.SBS357.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_79995f4a9e00",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.42.SBS98.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_79f86acf4d2c",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.23.SBS169.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_7c329e866986",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.59.SBS295.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_7c33f166381c",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.1.SBS209.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_7c7b28489bbb",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.5.SBS5.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_7d50630dee76",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.9.SBS120.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_7e89447701ce",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.2.SBS139.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_8307b380b67d",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.10.SBS10.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_84b2d334b746",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.33.SBS89.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_8567909ce2f6",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS30.1.SBS362.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_87e26126d06c",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.71.SBS307.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_88fe8a905234",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.7.SBS215.mp3",
    "flags": [
-    "text_non_devanagari_chars",
-    "speaker_unattributed"
+    "text_non_devanagari_chars"
    ]
   },
   {
    "id": "km_8b46d30e4b06",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.7.SBS320.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_8ba5a0e50eb4",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.25.SBS81.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_8c8d3b869852",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.1.SBS1.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_91e37c5efb9e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.8.SBS358.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_93589344b42e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.4.SBS46.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_9704e175ae81",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.6.SBS214.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_99f28bbae757",
    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/PrahladaKrutaNarasimha/NS1.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_9a25cd473fd4",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.3.SBS19.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_9ae4571fff04",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.3.SBS104.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_9c09e21fcb8b",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.2.SBS315.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_9c58cad1c17c",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.7.SBS118.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_a102cc6eb9f8",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.7.SBS23.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_a2c2593b8278",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.76.SBS312.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_a7418f54dcd9",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.58.SBS294.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_a901e304fbe4",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.1.SBS102.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_a96ae85c716b",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.2.SBS103.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_ac127e45374d",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.3.SBS3.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_ac3eb4987bd5",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.1.SBS112.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_aca26fb23c57",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS17.5.SBS204.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_ae83120f77bb",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.44.SBS280.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_afa3faf19bc7",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.68.SBS304.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_b13e30b99a39",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.22.SBS168.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_b76f9a177e73",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.1.SBS138.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_b7d7d47c6793",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.1.SBS351.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_b9ab4ac20d10",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.21.SBS77.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_bbd1ddd45967",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.12.SBS12.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_c2b30a72cebf",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.53.SBS289.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_c33543da6a19",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.15.SBS71.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_c5a4cc58e00c",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.3.SBS59.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_cd742b97aeee",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.2.SBS58.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_cf75a06cdbe9",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.1.SBS43.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d093f22fa59b",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS23.2.SBS333.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d34cc0cebca2",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.3.SBS316.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d4a9a4a68268",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.44.SBS100.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d5cce737c291",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.4.SBS212.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d5dd5e313938",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.10.SBS66.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d65d1ba431f5",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.15.SBS251.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_d66e064a95b9",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.3.SBS346.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_dc4b0af35577",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.67.SBS303.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_dd82bf61c4f0",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.29.SBS85.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_e0a82ee6ea1f",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS22.1.SBS324.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_e285fef9746e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.41.SBS277.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_e488b579e22e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.57.SBS293.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_e664c9429c22",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS22.3.SBS326.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_e714575794b2",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.4.SBS60.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_eb914c0458c0",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.4.SBS354.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_ed799bb1205b",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.1.SBS17.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_f452d4359d7d",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.11.SBS67.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_f5e4096127cc",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS3.1.SBS31.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_f7e3bf74b449",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS23.3.SBS334.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_fc1b3382587e",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS17.6.SBS205.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   },
   {
    "id": "km_fd9f0b30dde1",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.6.SBS62.mp3",
-   "flags": [
-    "speaker_unattributed"
-   ]
+   "flags": []
   }
  ]
 }

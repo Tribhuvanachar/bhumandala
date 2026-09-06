@@ -1,6 +1,6 @@
 # KAMADHENU_STATUS
 
-Updated 6 Sep 2026, 5:55 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
+Updated 6 Sep 2026, 6:25 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
 
 CURRENT PHASE: 7 done → 8 (training pipeline scaffold) next
 
@@ -21,7 +21,7 @@ IN PROGRESS:
 - 🟠 Phase 13 evaluation script + HUMAN_REVIEW.csv — not started
 
 BLOCKED:
-- 🔴 Speaker decision — pilot is 123 Sāroddhāra + 3 Narasiṃha files from one unnamed reciter; a name and consent are needed before that voice is trained
+- 🟢 Speaker decided 6 Sep 2026: **3BHU1** (the project lead), consent to train the voice given; recorded in `kamadhenu_dataset/speakers.json`, applied to every Drive-sourced file and the Narasiṃha files. Still unattributed: Sumadhva Vijaya (audio repo) and Rāghavendra Vijaya (archive.org) — confirm whether those are 3BHU1 too
 - 🔴 Tīrthaprabandha recordings — Drive folders not shared
 - 🔴 ZeroGPU hosting on `SarvamulaOrg` — from 6 Oct 2026; deploy needs GitHub secret `HF_TOKEN`
 - 🔴 Any GPU training — none approved; none proposed yet
@@ -29,9 +29,10 @@ BLOCKED:
 NEXT ACTION: Phase 8 — write the IndicF5 fine-tune configuration and data exporter (pilot → F5 metadata format, 24 kHz), dry-run on CPU (no training), then present the Experiment A cost card.
 
 HUMAN ACTION REQUIRED:
-1. Confirm the voice: the Sāroddhāra reciter (best audio we have) — who is it, and is there consent to train a voice from it?
-2. `HF_TOKEN` secret (write token from SarvamulaOrg) for the Space deploy.
-3. Listen to 2 Gītā + 2 'vsn' files (see kamadhenu_dataset/WHAT_I_NEED_TO_DO.md §A).
+1. Say whether the Sumadhva Vijaya and Rāghavendra Vijaya recordings are also 3BHU1.
+2. Make the three untitled Drive folders + one file public (links in the chat of 6 Sep, 6:25 pm) so the Tīrthaprabandha recordings can be fetched.
+3. `HF_TOKEN` secret (write token from SarvamulaOrg) for the Space deploy.
+4. Listen to 2 Gītā + 2 'vsn' files (see kamadhenu_dataset/WHAT_I_NEED_TO_DO.md §A).
 
 GPU REQUIRED: none yet. Experiment A will need one 16–24 GB GPU for roughly 1–2 hours (card to be presented for approval).
 ESTIMATED COST: ₹0 GPU spent. Experiment A estimate will be given before launch (order of ₹100–300 on a rented T4/L4-class card).

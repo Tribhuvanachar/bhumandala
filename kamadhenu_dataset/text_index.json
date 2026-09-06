@@ -1,6 +1,6 @@
 {
  "_readme": "Canonical DGE text units for audio mapping. text = cleaned Devanagari (HTML/verse numbers/daṇḍas removed); slp1/phonetic_key use the same folds as dge/search_toolkit_pkg so matching agrees with site search. dge_audio_url = the URL the DGE player itself would use for this verse (null when DGE links no audio).",
- "generated_at": "06 Sep 2026, 3:35 PM IST",
+ "generated_at": "06 Sep 2026, 4:02 PM IST",
  "counts": {
   "bhagavad_gita": 701,
   "sumadhva_vijaya": 992,
@@ -417648,7 +417648,7 @@
   }
  ],
  "chandas_summary": {
-  "generated_at": "06 Sep 2026, 3:35 PM IST",
+  "generated_at": "06 Sep 2026, 4:02 PM IST",
   "by_classification": {
    "anushtubh_rule": 2509,
    "unknown": 2553,

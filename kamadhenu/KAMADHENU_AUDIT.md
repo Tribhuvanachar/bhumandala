@@ -48,7 +48,7 @@ gap-closure, ZeroGPU deployment reference, Space scaffold and the HF account on 
 
 ## 3. What is incomplete
 
-* Speaker identity: not recorded anywhere; every file is "unattributed". A TTS voice needs one consenting reciter.
+* Speaker identity: decided 6 Sep 2026 — the Drive recordings and the Narasiṃha files are **3BHU1** (the project lead, consent given, `kamadhenu_dataset/speakers.json`); Sumadhva Vijaya / Rāghavendra Vijaya still unattributed.
 * Human verification: 0 reference recordings listened to; the review queue (405 Gītā files, 106 'vsn' files) is
   unanswered.
 * 989 Sumadhva Vijaya files are 11 kHz / 16 kbps MP3 and 46 files are byte-identical pairs (wrong verse served).
