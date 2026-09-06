@@ -1,156 +1,153 @@
-{"id": "km_c87931539314", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv01.37.mp3", "text_id": "raghavendra_vijaya:sarga_1:37"}
-{"id": "km_c2b45393775d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv04.01.mp3", "text_id": "raghavendra_vijaya:sarga_4:1"}
+{"id": "km_d76626ce53a4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv03.54.mp3", "text_id": "raghavendra_vijaya:sarga_3:54"}
 {"id": "km_143289a648f8", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv04.49.mp3", "text_id": "raghavendra_vijaya:sarga_4:49"}
-{"id": "km_9675f39628be", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.20.mp3", "text_id": "raghavendra_vijaya:sarga_6:20"}
+{"id": "km_d8ecf3d0ee05", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.13.mp3", "text_id": "raghavendra_vijaya:sarga_6:13"}
 {"id": "km_2f8fa08a776c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.26.mp3", "text_id": "raghavendra_vijaya:sarga_6:26"}
-{"id": "km_48e75ca4e405", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.31.mp3", "text_id": "raghavendra_vijaya:sarga_6:31"}
-{"id": "km_7615e53cb887", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.62.mp3", "text_id": "raghavendra_vijaya:sarga_6:62"}
-{"id": "km_7d18ec485ce3", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.74.mp3", "text_id": "raghavendra_vijaya:sarga_6:74"}
-{"id": "km_90a13a1b811d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv08.35.mp3", "text_id": "raghavendra_vijaya:sarga_8:35"}
-{"id": "km_9eb023073727", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv10.35.mp3", "text_id": "raghavendra_vijaya:sarga_10:35"}
-{"id": "km_8a97dab76ae8", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv10.45.mp3", "text_id": "raghavendra_vijaya:sarga_10:45"}
-{"id": "km_4155e03f7060", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.1.mp3", "text_id": "sumadhva_vijaya:sarga_1:1"}
-{"id": "km_fd9e84c6714e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.12.mp3", "text_id": "sumadhva_vijaya:sarga_1:12"}
-{"id": "km_fd9e84c6714e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.16.mp3", "text_id": "sumadhva_vijaya:sarga_1:16"}
-{"id": "km_77713c889c95", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.18.mp3", "text_id": "sumadhva_vijaya:sarga_1:18"}
-{"id": "km_cdc531a53b81", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.20.mp3", "text_id": "sumadhva_vijaya:sarga_1:20"}
+{"id": "km_dd80f21fca09", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.34.mp3", "text_id": "raghavendra_vijaya:sarga_6:34"}
+{"id": "km_74588b086a65", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.48.mp3", "text_id": "raghavendra_vijaya:sarga_6:48"}
+{"id": "km_af031060f45d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.52.mp3", "text_id": "raghavendra_vijaya:sarga_6:52"}
+{"id": "km_69c4cd63dde7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.54.mp3", "text_id": "raghavendra_vijaya:sarga_6:54"}
+{"id": "km_3b964815c0f1", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.56.mp3", "text_id": "raghavendra_vijaya:sarga_6:56"}
+{"id": "km_a1f8089a9c52", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.63.mp3", "text_id": "raghavendra_vijaya:sarga_6:63"}
+{"id": "km_eee3c15840b2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv10.60.mp3", "text_id": "raghavendra_vijaya:sarga_10:60"}
+{"id": "km_70aab53860de", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv10.61.mp3", "text_id": "raghavendra_vijaya:sarga_10:61"}
 {"id": "km_208ed7b27e8c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.24.mp3", "text_id": "sumadhva_vijaya:sarga_1:24"}
-{"id": "km_5b8b9a4912fc", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.29.mp3", "text_id": "sumadhva_vijaya:sarga_1:29"}
-{"id": "km_6a11037ab3d5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.34.mp3", "text_id": "sumadhva_vijaya:sarga_1:34"}
-{"id": "km_a642256c013a", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.35.mp3", "text_id": "sumadhva_vijaya:sarga_1:35"}
-{"id": "km_ecd3bab84b82", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.40.mp3", "text_id": "sumadhva_vijaya:sarga_1:40"}
-{"id": "km_b5b5d39ffefb", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.46.mp3", "text_id": "sumadhva_vijaya:sarga_1:46"}
-{"id": "km_38a80026329c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.50.mp3", "text_id": "sumadhva_vijaya:sarga_1:50"}
+{"id": "km_a0549e583888", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.4.mp3", "text_id": "sumadhva_vijaya:sarga_1:4"}
+{"id": "km_637436bb122b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.49.mp3", "text_id": "sumadhva_vijaya:sarga_1:49"}
+{"id": "km_fa8eedd03102", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv1.5.mp3", "text_id": "sumadhva_vijaya:sarga_1:5"}
+{"id": "km_eac9c0a844e4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.11.mp3", "text_id": "sumadhva_vijaya:sarga_10:11"}
+{"id": "km_99469a42655c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.25.mp3", "text_id": "sumadhva_vijaya:sarga_10:25"}
 {"id": "km_0810f511fdeb", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.37.mp3", "text_id": "sumadhva_vijaya:sarga_10:37"}
-{"id": "km_a087530395b7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.42.mp3", "text_id": "sumadhva_vijaya:sarga_10:42"}
-{"id": "km_4a0e5377e6f8", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.47.mp3", "text_id": "sumadhva_vijaya:sarga_10:47"}
-{"id": "km_55ddd69522c2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.2.mp3", "text_id": "sumadhva_vijaya:sarga_11:2"}
-{"id": "km_6b423d55aad3", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.20.mp3", "text_id": "sumadhva_vijaya:sarga_11:20"}
-{"id": "km_dff1ba87b9c1", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.23.mp3", "text_id": "sumadhva_vijaya:sarga_11:23"}
-{"id": "km_9d77430baf0d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.26.mp3", "text_id": "sumadhva_vijaya:sarga_11:26"}
+{"id": "km_b1290bd21379", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.55.mp3", "text_id": "sumadhva_vijaya:sarga_10:55"}
+{"id": "km_775e9b3cb774", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.1.mp3", "text_id": "sumadhva_vijaya:sarga_11:1"}
+{"id": "km_687dbc3a66bc", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.25.mp3", "text_id": "sumadhva_vijaya:sarga_11:25"}
+{"id": "km_4aee51b010f1", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.27.mp3", "text_id": "sumadhva_vijaya:sarga_11:27"}
+{"id": "km_9649e242f131", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.29.mp3", "text_id": "sumadhva_vijaya:sarga_11:29"}
 {"id": "km_1065f71dec73", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.31.mp3", "text_id": "sumadhva_vijaya:sarga_11:31"}
-{"id": "km_3a159107f80c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.36.mp3", "text_id": "sumadhva_vijaya:sarga_11:36"}
-{"id": "km_d1aecf06ebde", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.45.mp3", "text_id": "sumadhva_vijaya:sarga_11:45"}
+{"id": "km_f3dcb75ad70d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.50.mp3", "text_id": "sumadhva_vijaya:sarga_11:50"}
+{"id": "km_49dce01b03d4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.51.mp3", "text_id": "sumadhva_vijaya:sarga_11:51"}
 {"id": "km_1da74b439c63", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.52.mp3", "text_id": "sumadhva_vijaya:sarga_11:52"}
-{"id": "km_f14dd5703f19", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.54.mp3", "text_id": "sumadhva_vijaya:sarga_11:54"}
 {"id": "km_1c9a17009ec0", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.57.mp3", "text_id": "sumadhva_vijaya:sarga_11:57"}
 {"id": "km_1c9a17009ec0", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.58.mp3", "text_id": "sumadhva_vijaya:sarga_11:58"}
-{"id": "km_bcb7f0598749", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.67.mp3", "text_id": "sumadhva_vijaya:sarga_11:67"}
-{"id": "km_addb1c15ba9c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.75.mp3", "text_id": "sumadhva_vijaya:sarga_11:75"}
-{"id": "km_4706ee382ec9", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.17.mp3", "text_id": "sumadhva_vijaya:sarga_12:17"}
+{"id": "km_dfe70b8ff2e9", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.12.mp3", "text_id": "sumadhva_vijaya:sarga_12:12"}
 {"id": "km_0f3455358fc2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.26.mp3", "text_id": "sumadhva_vijaya:sarga_12:26"}
-{"id": "km_4f06ae53ece2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.50.mp3", "text_id": "sumadhva_vijaya:sarga_12:50"}
-{"id": "km_5d317f843648", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.9.mp3", "text_id": "sumadhva_vijaya:sarga_12:9"}
-{"id": "km_61cdc4ba52cd", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.20.mp3", "text_id": "sumadhva_vijaya:sarga_13:20"}
-{"id": "km_c02d4b21048b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.28.mp3", "text_id": "sumadhva_vijaya:sarga_13:28"}
-{"id": "km_79659a8bcecb", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.4.mp3", "text_id": "sumadhva_vijaya:sarga_13:4"}
+{"id": "km_45a29b922887", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.29.mp3", "text_id": "sumadhva_vijaya:sarga_12:29"}
+{"id": "km_c00c510f8c1d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.30.mp3", "text_id": "sumadhva_vijaya:sarga_12:30"}
+{"id": "km_9e8eb8d2d0c5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.5.mp3", "text_id": "sumadhva_vijaya:sarga_12:5"}
+{"id": "km_fec4e7610048", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.10.mp3", "text_id": "sumadhva_vijaya:sarga_13:10"}
+{"id": "km_792254982c5a", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.29.mp3", "text_id": "sumadhva_vijaya:sarga_13:29"}
+{"id": "km_8fb52fecd87f", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.36.mp3", "text_id": "sumadhva_vijaya:sarga_13:36"}
+{"id": "km_30dcdc825df9", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.38.mp3", "text_id": "sumadhva_vijaya:sarga_13:38"}
 {"id": "km_12d35cfef470", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.40.mp3", "text_id": "sumadhva_vijaya:sarga_13:40"}
-{"id": "km_d4f86a715810", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.51.mp3", "text_id": "sumadhva_vijaya:sarga_13:51"}
-{"id": "km_d37be54b0eb7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.54.mp3", "text_id": "sumadhva_vijaya:sarga_13:54"}
-{"id": "km_7ea28886f4ce", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.6.mp3", "text_id": "sumadhva_vijaya:sarga_13:6"}
-{"id": "km_68820f50a427", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.62.mp3", "text_id": "sumadhva_vijaya:sarga_13:62"}
+{"id": "km_afe043f69b18", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.41.mp3", "text_id": "sumadhva_vijaya:sarga_13:41"}
+{"id": "km_41272969563c", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.55.mp3", "text_id": "sumadhva_vijaya:sarga_13:55"}
 {"id": "km_29fb10204816", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.7.mp3", "text_id": "sumadhva_vijaya:sarga_13:7"}
-{"id": "km_880e7946f5f4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.25.mp3", "text_id": "sumadhva_vijaya:sarga_14:25"}
+{"id": "km_39c472fa4cff", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.12.mp3", "text_id": "sumadhva_vijaya:sarga_14:12"}
+{"id": "km_dc0505bd65c5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.23.mp3", "text_id": "sumadhva_vijaya:sarga_14:23"}
+{"id": "km_b6c6f4a83bb2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.24.mp3", "text_id": "sumadhva_vijaya:sarga_14:24"}
 {"id": "km_06710060a193", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.36.mp3", "text_id": "sumadhva_vijaya:sarga_14:36"}
 {"id": "km_06710060a193", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.37.mp3", "text_id": "sumadhva_vijaya:sarga_14:37"}
-{"id": "km_35a42b2e967a", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.42.mp3", "text_id": "sumadhva_vijaya:sarga_14:42"}
-{"id": "km_bbe4358ea304", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.48.mp3", "text_id": "sumadhva_vijaya:sarga_14:48"}
-{"id": "km_933195989136", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.5.mp3", "text_id": "sumadhva_vijaya:sarga_14:5"}
-{"id": "km_6d181267d863", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.53.mp3", "text_id": "sumadhva_vijaya:sarga_14:53"}
-{"id": "km_fbd805fc23d8", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.1.mp3", "text_id": "sumadhva_vijaya:sarga_15:1"}
+{"id": "km_32c9a9e7ea64", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.46.mp3", "text_id": "sumadhva_vijaya:sarga_14:46"}
+{"id": "km_55dc71462aa4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.47.mp3", "text_id": "sumadhva_vijaya:sarga_14:47"}
 {"id": "km_15ae60c8e953", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.108.mp3", "text_id": "sumadhva_vijaya:sarga_15:108"}
 {"id": "km_15ae60c8e953", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.109.mp3", "text_id": "sumadhva_vijaya:sarga_15:109"}
-{"id": "km_72921114ea27", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.115.mp3", "text_id": "sumadhva_vijaya:sarga_15:115"}
-{"id": "km_affde2aee09d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.134.mp3", "text_id": "sumadhva_vijaya:sarga_15:134"}
+{"id": "km_e568650ba523", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.112.mp3", "text_id": "sumadhva_vijaya:sarga_15:112"}
 {"id": "km_0a724e05afd3", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.137.mp3", "text_id": "sumadhva_vijaya:sarga_15:137"}
-{"id": "km_8686fb98c715", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.141.mp3", "text_id": "sumadhva_vijaya:sarga_15:141"}
-{"id": "km_33c13a140f0e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.20.mp3", "text_id": "sumadhva_vijaya:sarga_15:20"}
-{"id": "km_606e8714458d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.28.mp3", "text_id": "sumadhva_vijaya:sarga_15:28"}
-{"id": "km_85566ea85f43", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.46.mp3", "text_id": "sumadhva_vijaya:sarga_15:46"}
-{"id": "km_e605fe231f3b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.53.mp3", "text_id": "sumadhva_vijaya:sarga_15:53"}
-{"id": "km_eaf78da4a518", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.56.mp3", "text_id": "sumadhva_vijaya:sarga_15:56"}
-{"id": "km_ed82a83fafe0", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.58.mp3", "text_id": "sumadhva_vijaya:sarga_15:58"}
-{"id": "km_d90500294ab2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.76.mp3", "text_id": "sumadhva_vijaya:sarga_15:76"}
-{"id": "km_aba05fc81971", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.84.mp3", "text_id": "sumadhva_vijaya:sarga_15:84"}
-{"id": "km_a787a66d612e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.87.mp3", "text_id": "sumadhva_vijaya:sarga_15:87"}
-{"id": "km_534119ddc556", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.90.mp3", "text_id": "sumadhva_vijaya:sarga_15:90"}
-{"id": "km_f5f3058a48e7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.92.mp3", "text_id": "sumadhva_vijaya:sarga_15:92"}
-{"id": "km_be62c5793168", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.96.mp3", "text_id": "sumadhva_vijaya:sarga_15:96"}
+{"id": "km_6e8b192db058", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.17.mp3", "text_id": "sumadhva_vijaya:sarga_15:17"}
+{"id": "km_b3990738e2d4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.19.mp3", "text_id": "sumadhva_vijaya:sarga_15:19"}
+{"id": "km_eca6ebf9d8f5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.24.mp3", "text_id": "sumadhva_vijaya:sarga_15:24"}
+{"id": "km_c849a0efea9d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.31.mp3", "text_id": "sumadhva_vijaya:sarga_15:31"}
+{"id": "km_d629c5e0532e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.34.mp3", "text_id": "sumadhva_vijaya:sarga_15:34"}
+{"id": "km_f8195edcffe2", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.59.mp3", "text_id": "sumadhva_vijaya:sarga_15:59"}
+{"id": "km_ac4350c7faca", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.67.mp3", "text_id": "sumadhva_vijaya:sarga_15:67"}
+{"id": "km_f0ae5622dd4e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.75.mp3", "text_id": "sumadhva_vijaya:sarga_15:75"}
+{"id": "km_80282e5aec72", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv15.95.mp3", "text_id": "sumadhva_vijaya:sarga_15:95"}
+{"id": "km_e2264a3f9bbf", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.10.mp3", "text_id": "sumadhva_vijaya:sarga_16:10"}
+{"id": "km_46ea654144d3", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.15.mp3", "text_id": "sumadhva_vijaya:sarga_16:15"}
+{"id": "km_a8514c007be7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.22.mp3", "text_id": "sumadhva_vijaya:sarga_16:22"}
+{"id": "km_cb1c1a7b5a77", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.23.mp3", "text_id": "sumadhva_vijaya:sarga_16:23"}
+{"id": "km_57681ea3c838", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.25.mp3", "text_id": "sumadhva_vijaya:sarga_16:25"}
 {"id": "km_1972af62d422", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.31.mp3", "text_id": "sumadhva_vijaya:sarga_16:31"}
-{"id": "km_c47075b156ac", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.33.mp3", "text_id": "sumadhva_vijaya:sarga_16:33"}
-{"id": "km_b4778ac67f3b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.34.mp3", "text_id": "sumadhva_vijaya:sarga_16:34"}
+{"id": "km_862a6906cde5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.32.mp3", "text_id": "sumadhva_vijaya:sarga_16:32"}
+{"id": "km_f5ef00ae10cb", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.35.mp3", "text_id": "sumadhva_vijaya:sarga_16:35"}
+{"id": "km_728e4775e878", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.36.mp3", "text_id": "sumadhva_vijaya:sarga_16:36"}
 {"id": "km_1ac03a288604", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.42.mp3", "text_id": "sumadhva_vijaya:sarga_16:42"}
-{"id": "km_66b3160d4c4f", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.53.mp3", "text_id": "sumadhva_vijaya:sarga_16:53"}
-{"id": "km_9b233e18f6ef", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.12.mp3", "text_id": "sumadhva_vijaya:sarga_2:12"}
-{"id": "km_4050d11bd509", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.19.mp3", "text_id": "sumadhva_vijaya:sarga_2:19"}
-{"id": "km_a4ed8d45a271", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.20.mp3", "text_id": "sumadhva_vijaya:sarga_2:20"}
-{"id": "km_a4ed8d45a271", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.21.mp3", "text_id": "sumadhva_vijaya:sarga_2:21"}
-{"id": "km_a25ba466d50b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.33.mp3", "text_id": "sumadhva_vijaya:sarga_2:33"}
-{"id": "km_551631367f37", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.4.mp3", "text_id": "sumadhva_vijaya:sarga_2:4"}
-{"id": "km_a87e7d8d1e22", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.47.mp3", "text_id": "sumadhva_vijaya:sarga_2:47"}
-{"id": "km_cb318bf1162e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.9.mp3", "text_id": "sumadhva_vijaya:sarga_2:9"}
-{"id": "km_8c2fc906d798", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.11.mp3", "text_id": "sumadhva_vijaya:sarga_3:11"}
-{"id": "km_7c02ae8e8d8e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.13.mp3", "text_id": "sumadhva_vijaya:sarga_3:13"}
-{"id": "km_5776048eb19b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.23.mp3", "text_id": "sumadhva_vijaya:sarga_3:23"}
-{"id": "km_8db65c720dd0", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.48.mp3", "text_id": "sumadhva_vijaya:sarga_3:48"}
-{"id": "km_3d6d3e404f32", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.51.mp3", "text_id": "sumadhva_vijaya:sarga_3:51"}
-{"id": "km_373c8e893c85", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv4.3.mp3", "text_id": "sumadhva_vijaya:sarga_4:3"}
-{"id": "km_b9d6a4dc1c98", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.1.mp3", "text_id": "sumadhva_vijaya:sarga_5:1"}
-{"id": "km_919e46d02f18", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.2.mp3", "text_id": "sumadhva_vijaya:sarga_5:2"}
+{"id": "km_8a09196bf75d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.46.mp3", "text_id": "sumadhva_vijaya:sarga_16:46"}
+{"id": "km_e405644dc605", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.6.mp3", "text_id": "sumadhva_vijaya:sarga_16:6"}
+{"id": "km_5e72caaca5ee", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.18.mp3", "text_id": "sumadhva_vijaya:sarga_2:18"}
+{"id": "km_88044c27eb02", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.43.mp3", "text_id": "sumadhva_vijaya:sarga_2:43"}
+{"id": "km_c469bb5707c5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv2.48.mp3", "text_id": "sumadhva_vijaya:sarga_2:48"}
+{"id": "km_33be80417105", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.14.mp3", "text_id": "sumadhva_vijaya:sarga_3:14"}
+{"id": "km_7e9ef89c4809", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.2.mp3", "text_id": "sumadhva_vijaya:sarga_3:2"}
+{"id": "km_b812435bd263", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.20.mp3", "text_id": "sumadhva_vijaya:sarga_3:20"}
+{"id": "km_fd809e199215", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.30.mp3", "text_id": "sumadhva_vijaya:sarga_3:30"}
+{"id": "km_a77a44e5cca5", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.36.mp3", "text_id": "sumadhva_vijaya:sarga_3:36"}
+{"id": "km_91754740d3b4", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.37.mp3", "text_id": "sumadhva_vijaya:sarga_3:37"}
+{"id": "km_e8ca17de2651", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.55.mp3", "text_id": "sumadhva_vijaya:sarga_3:55"}
+{"id": "km_d37577e7791e", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv4.40.mp3", "text_id": "sumadhva_vijaya:sarga_4:40"}
+{"id": "km_3f67e4fdd9cc", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.19.mp3", "text_id": "sumadhva_vijaya:sarga_5:19"}
+{"id": "km_606523068e35", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.28.mp3", "text_id": "sumadhva_vijaya:sarga_5:28"}
+{"id": "km_d00de1eb3d01", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.29.mp3", "text_id": "sumadhva_vijaya:sarga_5:29"}
 {"id": "km_01cb2082d696", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.37.mp3", "text_id": "sumadhva_vijaya:sarga_5:37"}
-{"id": "km_6ecbe2c539dd", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.7.mp3", "text_id": "sumadhva_vijaya:sarga_5:7"}
-{"id": "km_a9a74033da1a", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.9.mp3", "text_id": "sumadhva_vijaya:sarga_5:9"}
-{"id": "km_af099d14f055", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.11.mp3", "text_id": "sumadhva_vijaya:sarga_6:11"}
-{"id": "km_f8872f033230", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.14.mp3", "text_id": "sumadhva_vijaya:sarga_6:14"}
-{"id": "km_30e744592f2a", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.21.mp3", "text_id": "sumadhva_vijaya:sarga_6:21"}
-{"id": "km_c9e249fc37aa", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.24.mp3", "text_id": "sumadhva_vijaya:sarga_6:24"}
-{"id": "km_d657ed35ee4d", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.3.mp3", "text_id": "sumadhva_vijaya:sarga_6:3"}
+{"id": "km_a5cecca698de", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.5.mp3", "text_id": "sumadhva_vijaya:sarga_5:5"}
+{"id": "km_5acf0f873e76", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.51.mp3", "text_id": "sumadhva_vijaya:sarga_5:51"}
+{"id": "km_c5de26594aea", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv5.6.mp3", "text_id": "sumadhva_vijaya:sarga_5:6"}
 {"id": "km_2c65d0d8db9b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.32.mp3", "text_id": "sumadhva_vijaya:sarga_6:32"}
+{"id": "km_3d53373b3a18", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.47.mp3", "text_id": "sumadhva_vijaya:sarga_6:47"}
 {"id": "km_25c61e910e63", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.16.mp3", "text_id": "sumadhva_vijaya:sarga_7:16"}
 {"id": "km_25c61e910e63", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.17.mp3", "text_id": "sumadhva_vijaya:sarga_7:17"}
-{"id": "km_717ac112dfb6", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.28.mp3", "text_id": "sumadhva_vijaya:sarga_7:28"}
-{"id": "km_e8dd3ec17459", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.39.mp3", "text_id": "sumadhva_vijaya:sarga_7:39"}
-{"id": "km_e8dd3ec17459", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.40.mp3", "text_id": "sumadhva_vijaya:sarga_7:40"}
-{"id": "km_f770c4872647", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.1.mp3", "text_id": "sumadhva_vijaya:sarga_8:1"}
+{"id": "km_952750c9372b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.18.mp3", "text_id": "sumadhva_vijaya:sarga_7:18"}
+{"id": "km_fb9a814d4165", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.56.mp3", "text_id": "sumadhva_vijaya:sarga_7:56"}
+{"id": "km_7cc6d88b29a7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.8.mp3", "text_id": "sumadhva_vijaya:sarga_7:8"}
+{"id": "km_38450b8bc17b", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.19.mp3", "text_id": "sumadhva_vijaya:sarga_8:19"}
+{"id": "km_d19d4073b055", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.32.mp3", "text_id": "sumadhva_vijaya:sarga_8:32"}
 {"id": "km_17efa57eb249", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.34.mp3", "text_id": "sumadhva_vijaya:sarga_8:34"}
-{"id": "km_32e0e7844f26", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.42.mp3", "text_id": "sumadhva_vijaya:sarga_8:42"}
-{"id": "km_dc0d1707b7aa", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.47.mp3", "text_id": "sumadhva_vijaya:sarga_8:47"}
-{"id": "km_747e73e01307", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.50.mp3", "text_id": "sumadhva_vijaya:sarga_8:50"}
-{"id": "km_d020cc130d29", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.16.mp3", "text_id": "sumadhva_vijaya:sarga_9:16"}
-{"id": "km_b8741864b592", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.23.mp3", "text_id": "sumadhva_vijaya:sarga_9:23"}
-{"id": "km_8068622b2d91", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.25.mp3", "text_id": "sumadhva_vijaya:sarga_9:25"}
-{"id": "km_ac54b215a7b1", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.39.mp3", "text_id": "sumadhva_vijaya:sarga_9:39"}
-{"id": "km_516f2f2b93c7", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.53.mp3", "text_id": "sumadhva_vijaya:sarga_9:53"}
-{"id": "km_8307b380b67d", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.10.SBS10.mp3", "text_id": "bhagavata_saroddhara:BS_P01_V010"}
+{"id": "km_8c1a5495a8e9", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.40.mp3", "text_id": "sumadhva_vijaya:sarga_8:40"}
+{"id": "km_ab7331f3b56f", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.20.mp3", "text_id": "sumadhva_vijaya:sarga_9:20"}
+{"id": "km_4ebc57003f09", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.33.mp3", "text_id": "sumadhva_vijaya:sarga_9:33"}
+{"id": "km_adb3eb2c9861", "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.34.mp3", "text_id": "sumadhva_vijaya:sarga_9:34"}
 {"id": "km_03bbae42f01b", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.11.SBS11.mp3", "text_id": "bhagavata_saroddhara:BS_P01_V011"}
-{"id": "km_b13e30b99a39", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.22.SBS168.mp3", "text_id": "bhagavata_saroddhara:BS_P11_V168"}
-{"id": "km_f3fc0762794f", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS12.5.SBS176.mp3", "text_id": "bhagavata_saroddhara:BS_P12_V176"}
+{"id": "km_bbd1ddd45967", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.12.SBS12.mp3", "text_id": "bhagavata_saroddhara:BS_P01_V012"}
+{"id": "km_7612f486e5de", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.6.SBS143.mp3", "text_id": "bhagavata_saroddhara:BS_P10_V143"}
+{"id": "km_441f92d27727", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.8.SBS145.mp3", "text_id": "bhagavata_saroddhara:BS_P10_V145"}
+{"id": "km_5ce2d64fa387", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.10.SBS156.mp3", "text_id": "bhagavata_saroddhara:BS_P11_V156"}
+{"id": "km_d4bc6b03d6eb", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.14.SBS160.mp3", "text_id": "bhagavata_saroddhara:BS_P11_V160"}
+{"id": "km_79f86acf4d2c", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.23.SBS169.mp3", "text_id": "bhagavata_saroddhara:BS_P11_V169"}
+{"id": "km_7be55f0351f7", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.8.SBS154.mp3", "text_id": "bhagavata_saroddhara:BS_P11_V154"}
+{"id": "km_f7548cdaac45", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS12.4.SBS175.mp3", "text_id": "bhagavata_saroddhara:BS_P12_V175"}
 {"id": "km_24aafac6278a", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS13.5.SBS182.mp3", "text_id": "bhagavata_saroddhara:BS_P13_V182"}
-{"id": "km_7a24ddbb9416", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS14.8.SBS192.mp3", "text_id": "bhagavata_saroddhara:BS_P14_V192"}
-{"id": "km_e4148629bc51", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS15.1.SBS194.mp3", "text_id": "bhagavata_saroddhara:BS_P15_V194"}
-{"id": "km_b6eac910c79d", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS17.4.SBS203.mp3", "text_id": "bhagavata_saroddhara:BS_P17_V203"}
-{"id": "km_c65f5214a8c3", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.9.SBS217.mp3", "text_id": "bhagavata_saroddhara:BS_P18_V217"}
-{"id": "km_9762f2f089cd", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.11.SBS232.mp3", "text_id": "bhagavata_saroddhara:BS_P19_V232"}
+{"id": "km_37236a746605", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS17.1.SBS200.mp3", "text_id": "bhagavata_saroddhara:BS_P17_V200"}
+{"id": "km_a4ca7c35add0", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.13.SBS221.mp3", "text_id": "bhagavata_saroddhara:BS_P18_V221"}
+{"id": "km_530303d87fb1", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.5.SBS213.mp3", "text_id": "bhagavata_saroddhara:BS_P18_V213"}
+{"id": "km_359e56e7b537", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.15.SBS236.mp3", "text_id": "bhagavata_saroddhara:BS_P19_V236"}
+{"id": "km_ed799bb1205b", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.1.SBS17.mp3", "text_id": "bhagavata_saroddhara:BS_P02_V017"}
 {"id": "km_0d82201feb08", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.4.SBS20.mp3", "text_id": "bhagavata_saroddhara:BS_P02_V020"}
-{"id": "km_5ec9b109bbee", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.6.SBS22.mp3", "text_id": "bhagavata_saroddhara:BS_P02_V022"}
-{"id": "km_63c8c15683de", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.1.SBS237.mp3", "text_id": "bhagavata_saroddhara:BS_P19_V237"}
+{"id": "km_8da8955c817d", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.9.SBS25.mp3", "text_id": "bhagavata_saroddhara:BS_P02_V025"}
 {"id": "km_2d7cb6e70018", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.18.SBS254.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V254"}
-{"id": "km_42e1716b6a2e", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.3.SBS239.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V239"}
+{"id": "km_9b1b331344ab", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.29.SBS265.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V265"}
 {"id": "km_27471c985d49", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.30.SBS266.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V266"}
-{"id": "km_442036bbc277", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.36.SBS272.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V272"}
-{"id": "km_e285fef9746e", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.41.SBS277.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V277"}
-{"id": "km_4b00c995c398", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.45.SBS281.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V281"}
+{"id": "km_c2b30a72cebf", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.53.SBS289.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V289"}
+{"id": "km_6d12ec2b7bfb", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.55.SBS291.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V291"}
 {"id": "km_2372c0d090ca", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.56.SBS292.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V292"}
-{"id": "km_59b34e3a8fa7", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.74.SBS310.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V310"}
+{"id": "km_61cd727f90f5", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.73.SBS309.mp3", "text_id": "bhagavata_saroddhara:BS_P20_V309"}
 {"id": "km_029a95279163", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS23.6.SBS337.mp3", "text_id": "bhagavata_saroddhara:BS_P23_V337"}
-{"id": "km_3ba81b10a050", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.7.SBS49.mp3", "text_id": "bhagavata_saroddhara:BS_P04_V049"}
-{"id": "km_45b1cef3dcc6", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.24.SBS80.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V080"}
-{"id": "km_dd82bf61c4f0", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.29.SBS85.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V085"}
-{"id": "km_9533ad194c0e", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.38.SBS94.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V094"}
-{"id": "km_ef2c42f7ffd4", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.39.SBS95.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V095"}
+{"id": "km_b58844d41e1f", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS24.2.SBS339.mp3", "text_id": "bhagavata_saroddhara:BS_P24_V339"}
+{"id": "km_bcae3c2e3ef4", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS28.1.SBS350.mp3", "text_id": "bhagavata_saroddhara:BS_P28_V350"}
+{"id": "km_42ccad84cd7f", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.5.SBS355.mp3", "text_id": "bhagavata_saroddhara:BS_P29_V355"}
+{"id": "km_9d0abdd017c9", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS3.10.SBS40.mp3", "text_id": "bhagavata_saroddhara:BS_P03_V040"}
+{"id": "km_852bd49f891e", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.12.SBS54.mp3", "text_id": "bhagavata_saroddhara:BS_P04_V054"}
+{"id": "km_cd742b97aeee", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.2.SBS58.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V058"}
+{"id": "km_b9ab4ac20d10", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.21.SBS77.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V077"}
+{"id": "km_930e39e9e3fe", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.27.SBS83.mp3", "text_id": "bhagavata_saroddhara:BS_P05_V083"}
+{"id": "km_a96ae85c716b", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.2.SBS103.mp3", "text_id": "bhagavata_saroddhara:BS_P06_V103"}
 {"id": "km_0c66cc363569", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.5.SBS106.mp3", "text_id": "bhagavata_saroddhara:BS_P06_V106"}
-{"id": "km_d79a40410457", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.8.SBS109.mp3", "text_id": "bhagavata_saroddhara:BS_P06_V109"}
 {"id": "km_11a22601058b", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.6.SBS117.mp3", "text_id": "bhagavata_saroddhara:BS_P07_V117"}
-{"id": "km_fa984355e2bd", "audio": "kamadhenu_dataset/incoming_audio/drive/Prahlada Narasimha Stotra/NS28.aac", "text_id": "bhagavata_7:9.35"}
-{"id": "km_995803f28117", "audio": "kamadhenu_dataset/incoming_audio/drive/Prahlada Narasimha Stotra/NS41.aac", "text_id": "bhagavata_7:9.48"}
-{"id": "km_fece0f10bca2", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.9.tp9.mp3", "text_id": "tirtha_prabandha:TP_DAK_009"}
+{"id": "km_6644ea2ab380", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.11.SBS132.mp3", "text_id": "bhagavata_saroddhara:BS_P08_V132"}
+{"id": "km_6b2ba6930f79", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.2.SBS123.mp3", "text_id": "bhagavata_saroddhara:BS_P08_V123"}
+{"id": "km_596065ebd47f", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.4.SBS125.mp3", "text_id": "bhagavata_saroddhara:BS_P08_V125"}
+{"id": "km_82d8dbd825b5", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.7.SBS128.mp3", "text_id": "bhagavata_saroddhara:BS_P08_V128"}
+{"id": "km_48d81bc9c189", "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.9.SBS130.mp3", "text_id": "bhagavata_saroddhara:BS_P08_V130"}
+{"id": "km_c9d0edc6e3d1", "audio": "kamadhenu_dataset/incoming_audio/drive/Prahlada Narasimha Stotra/NS13.aac", "text_id": "bhagavata_7:9.20"}
+{"id": "km_551494961d6a", "audio": "kamadhenu_dataset/incoming_audio/drive/Prahlada Narasimha Stotra/NS35.aac", "text_id": "bhagavata_7:9.42"}
+{"id": "km_51169a69e9a6", "audio": "kamadhenu_dataset/incoming_audio/drive/Prahlada Narasimha Stotra/NS36.aac", "text_id": "bhagavata_7:9.43"}
+{"id": "km_bdbd5195b12b", "audio": "kamadhenu_dataset/incoming_audio/drive/Prahlada Narasimha Stotra/NS37.aac", "text_id": "bhagavata_7:9.44"}
+{"id": "km_9754fc3d3f9a", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.6.tp6.mp3", "text_id": "tirtha_prabandha:TP_DAK_006"}

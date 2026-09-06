@@ -3,8 +3,8 @@
 # Assembles tools/kamadhenu/space/ + Vāgdhenu src at the pinned commit (build_space.sh) and uploads it to
 # the Space named below. Needs the HF_TOKEN repository secret: a *write* token from the DGE Hugging Face
 # account (SarvamulaOrg → Settings → Access Tokens → New token → Write). Nothing else is required.
-# After the first upload, open the Space on huggingface.co → Settings → Hardware → ZeroGPU (available to
-# the account from 6 Oct 2026, 30 days after it was created) and set appConfig.kamadhenuSpaceUrl in
+# After the first upload, open the Space on huggingface.co → Settings → Hardware → ZeroGPU (the account is
+# PRO since 6 Sep 2026, so this is available immediately) and set appConfig.kamadhenuSpaceUrl in
 # dge/js/config.js to https://sarvamulaorg-kamadhenu.hf.space . Re-run to redeploy after code changes.
 name: Deploy — Kamadhenu Space (Hugging Face)
 

@@ -94,9 +94,9 @@ Two things the DGE side does differently from the demo:
 
 ## 4a. The DGE account (done 6 Sep 2026)
 
-Hugging Face user **`SarvamulaOrg`** (created 6 Sep 2026, 12:49 pm IST; free tier). It may host ZeroGPU Spaces from
-**6 Oct 2026** (HF requires the account to be 30 days old). Until then the Space can be created and code uploaded
-on free CPU hardware; synthesis only works once Hardware → ZeroGPU is switched on. Deploy from GitHub Actions:
+Hugging Face user **`SarvamulaOrg`** (created 6 Sep 2026, 12:49 pm IST; **PRO since 6 Sep 2026 evening**). With PRO the
+30-day wait for ZeroGPU does not apply: the Space can be created now and Hardware → ZeroGPU switched on immediately
+(PRO also raises the ZeroGPU quota from 5 to 40 GPU-minutes a day). Synthesis only works once that hardware is on. Deploy from GitHub Actions:
 `Deploy — Kamadhenu Space` (workflow_dispatch) with the `HF_TOKEN` repository secret (a write token from that
 account). Space URL once live: `https://sarvamulaorg-kamadhenu.hf.space`.
 

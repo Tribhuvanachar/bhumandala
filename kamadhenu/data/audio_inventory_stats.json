@@ -1,23 +1,24 @@
 {
- "files": 2719,
- "hours_total": 22.57,
- "hours_grade_A": 6.71,
- "hours_grade_AB": 18.93,
- "pairs_conf70": 2412,
- "hours_pairs_conf70": 17.84,
- "pairs_conf90": 1999,
- "hours_pairs_conf90": 8.89,
- "usable_for_training": 1454,
- "hours_usable": 6.02,
- "pct_pairs_with_meter": 86.2,
+ "files": 3892,
+ "hours_total": 37.83,
+ "hours_grade_A": 8.78,
+ "hours_grade_AB": 33.12,
+ "pairs_conf70": 2472,
+ "hours_pairs_conf70": 19.22,
+ "pairs_conf90": 2030,
+ "hours_pairs_conf90": 8.95,
+ "usable_for_training": 1475,
+ "hours_usable": 6.07,
+ "pct_pairs_with_meter": 85.4,
  "pct_pairs_with_laghu_guru": 100.0,
- "unmatched_audio": 307,
- "long_teaching_files": 0,
+ "unmatched_audio": 1420,
+ "long_teaching_files": 35,
  "exact_duplicates": 46,
  "sample_rates": {
-  "44100": 542,
-  "48000": 1188,
-  "11025": 989
+  "44100": 576,
+  "48000": 2326,
+  "11025": 989,
+  "null": 1
  },
  "by_folder_top": {
   "dge_linked": {
@@ -25,8 +26,8 @@
    "hours": 6.9
   },
   "drive": {
-   "files": 1142,
-   "hours": 15.67
+   "files": 2315,
+   "hours": 30.93
   }
  }
 }

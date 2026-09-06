@@ -37,6 +37,51 @@ def rules(rec):
         if m and work == "PrahladaKrutaNarasimha":
             return dict(work=work, section=work, verse=str(int(m.group(1))), part="full", signal="dge_linked", note="DGE player already serves this file for this verse")
         return dict(work=work, section=None, verse=None, part="full", signal="dge_linked_unparsed", note="in a DGE-linked folder but name not understood")
+    if top == "drive" and folder.split("/")[1].lower().startswith("hks"):      # HKS/<nn> <Sandhi name>/hks.<sandhi>.<n>.aac
+        m = re.match(r"hks\.(\d+)\.(\d+)$", stem, re.I)
+        if m:
+            return dict(work="harikathamrutasara", section=f"sandhi_{int(m.group(1)):02d}", verse=str(int(m.group(2))), part="full", signal="filename",
+                        note="hks.<sandhi>.<verse> in the Drive 'HKS' folder → Harikathāmṛtasāra (Kannada ṣaṭpadi; DGE text folded to Devanagari for the engine)")
+        return dict(work="harikathamrutasara", section=None, verse=None, part="full", signal="folder", note="in the HKS folder but name not understood")
+    if "ashtadhyayi" in folder.lower():                # NN Paaraayanam Adhyaaya A Paada P.mp3 — one whole pāda per file
+        m = re.search(r"adhyaaya\s*(\d+)\s*paada\s*(\d+)", stem, re.I)
+        if m:
+            return dict(work="ashtadhyayi", section=f"adhyaya_{int(m.group(1))}_pada_{int(m.group(2))}", verse=None, part="long_form", signal="long_form",
+                        note=f"whole-pāda sūtra pārāyaṇa (Aṣṭādhyāyī {m.group(1)}.{m.group(2)}); needs segmentation into sūtras before it can pair with DGE sutrapatha units")
+        if re.search(r"maaheshwara|maheshvara|shiva\s*sutra", stem, re.I):
+            return dict(work="ashtadhyayi", section="maheshvara_sutra", verse=None, part="long_form", signal="long_form", note="the 14 Māheśvara sūtras recited as one file")
+        return dict(work="ashtadhyayi", section=None, verse=None, part="long_form", signal="long_form", note="in the Aṣṭādhyāyī pārāyaṇa folder but name not understood")
+    if top == "drive" and folder.split("/")[1].lower().startswith("brahmasutra"):   # BS<adhyāya>.<pāda>.aac — one whole pāda per file
+        m = re.match(r"BS(\d+)\.(\d+)$", stem, re.I)
+        if m:
+            return dict(work="brahma_sutra", section=f"adhyaya_{int(m.group(1))}_pada_{int(m.group(2))}", verse=None, part="long_form", signal="long_form",
+                        note=f"whole-pāda Brahmasūtra pārāyaṇa ({m.group(1)}.{m.group(2)}); needs segmentation into sūtras before pairing with DGE brahma_sutra_bhashya/mula")
+        return dict(work="brahma_sutra", section=None, verse=None, part="long_form", signal="long_form", note="in the Brahmasutra folder but name not understood")
+    if "seva sangha" in folder.lower():
+        if re.search(r"namavali", stem, re.I):
+            return dict(work="sripadaraja_namavali", section=None, verse=None, part="long_form", signal="long_form",
+                        note="Śrīpādarāja Aṣṭottara-śata-nāmāvali recited as one video; the 108-name text is not in DGE yet (lead to supply) — then segment per name")
+        return dict(work="event_video", section=None, verse=None, part="long_form", signal="long_form", note="Seva Saṅgha event video (Kṣīrābhiṣeka) — not a recitation unit; excluded from training")
+    if top == "drive" and "/smv" in folder.lower():   # single-file/smv/SMV/SMV.<sarga>.<verse>.<pāda>.m4a (+ 1,072 unnamed 'New recording N' takes)
+        m = re.match(r"SMV\.(\d+)\.(\d+)\.(\d+)$", stem, re.I)
+        if m:
+            return dict(work="sumadhva_vijaya", section=f"sarga_{int(m.group(1))}", verse=str(int(m.group(2))), part=f"pada_{int(m.group(3))}", signal="filename",
+                        note="SMV.<sarga>.<verse>.<pāda> in smv.zip (lead's pāda-level Sumadhva Vijaya takes, 2 Aug 2025 export)")
+        m = re.match(r"SMV\.(\d+)\.(\d+)$", stem, re.I)
+        if m:
+            return dict(work="sumadhva_vijaya", section=f"sarga_{int(m.group(1))}", verse=str(int(m.group(2))), part="full", signal="filename", note="SMV.<sarga>.<verse> in smv.zip")
+        m = re.match(r"SMV\.(\d+)\.E$", stem, re.I)
+        if m:
+            return dict(work="sumadhva_vijaya", section=f"sarga_{int(m.group(1))}", verse=None, part="full", signal="folder", note="sarga end / phala-śruti clip (SMV.<sarga>.E) — no single verse")
+        if re.match(r"New recording", stem, re.I):
+            return dict(work="sumadhva_vijaya", section=None, verse=None, part="pada", signal="folder",
+                        note="unnamed phone take from smv.zip ('New recording N'); 48 kHz AAC pāda-length clip — identify by listening or by audio alignment against the DGE-linked verse files (same reciter)")
+        return dict(work="sumadhva_vijaya", section=None, verse=None, part="full", signal="folder", note="in smv.zip but name not understood")
+    if top == "drive" and folder.split("/")[1] == "single-file":
+        if re.search(r"gadya", name, re.I):
+            return dict(work="vedavyasa_gadya", section=None, verse=None, part="long_form", signal="long_form",
+                        note="'Vedavyasa Gadya' prose recitation (the same recording as the unreachable YouTube link); no DGE text yet — prose, not verse")
+        return dict(work=None, section=None, verse=None, part="full", signal="none", note="single Drive file; identify by listening")
     if "gita" in folder.lower():
         m = re.match(r"G\.(\d+)\.(\d+)(?:\.(\d+))?$", stem)
         if m:
@@ -146,6 +191,8 @@ def run():
                 row["confidence"] = 0.0; row["review_reason"] = f"work identified from filename ({r['work']}) but it does not exist in DGE — add the text to DGE first"
             elif r["work"] == "unknown_vsn":
                 row["confidence"] = 0.0; row["review_reason"] = "work cannot be identified from the filename; lead must name the 'vsn' series"
+            elif r["signal"] == "long_form":
+                row["confidence"] = 0.3; row["review_reason"] = "long-form recording (whole pāda / whole stotra / video): segment into units before it can enter the dataset"
             elif r["work"] and not r["verse"]:
                 row["confidence"] = 0.3; row["review_reason"] = "work known from folder, verse not parseable from filename"
             elif r["work"] and r["verse"]:

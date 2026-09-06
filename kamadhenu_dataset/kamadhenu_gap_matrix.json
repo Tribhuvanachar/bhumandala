@@ -1,5 +1,5 @@
 {
- "generated_at": "06 Sep 2026, 4:55 PM IST",
+ "generated_at": "06 Sep 2026, 5:41 PM IST",
  "rows": [
   {
    "component": "Sanskrit normalization",
@@ -72,7 +72,7 @@
    "dge": "none (ARCHITECTURE.md §MVP-5 plan only)",
    "vagdhenu": "bank.json + 27 wavs, 16 metres, Prathosh's voice, half-reference rule",
    "status": "🟡 PARTIAL",
-   "evidence": "reference_bank.json: 38 metres with a structurally safe candidate, 0 human-verified",
+   "evidence": "reference_bank.json: 37 metres with a structurally safe candidate, 0 human-verified",
    "required_for_kamadhenu": "per-metre clean references in the lead's voice, human-verified text=audio",
    "file_or_path": "kamadhenu_dataset/reference_bank.html",
    "what_is_missing": "human listen-check on every candidate; clean 24 kHz+ takes for metres with only low-rate audio",
@@ -94,7 +94,7 @@
    "dge": "0 h in repo (2 orphan files); ~1,000 SMV clips at 11 kHz/16 kbps on the audio-data repo",
    "vagdhenu": "3.02 h Prathosh + 5 h pilot (not shared)",
    "status": "🟡 PARTIAL",
-   "evidence": "audio_inventory.json: 2719 files, 22.6 h fetched; 1999 high-confidence mappings; grades {'A': 730, 'B': 1454, 'D': 521, 'C': 14}",
+   "evidence": "audio_inventory.json: 3892 files, 37.8 h fetched; 2030 high-confidence mappings; grades {'A': 757, 'B': 2045, 'D': 1074, 'C': 15, 'F': 1}",
    "required_for_kamadhenu": "≥1 h clean single-speaker aligned pairs for adaptation",
    "file_or_path": "kamadhenu_dataset/metadata.jsonl, subsets/",
    "what_is_missing": "verified text=audio; speaker attribution; most audio is lossy/low-rate",
@@ -160,7 +160,7 @@
    "dge": "audio-detect.js (browser boundary detection); tools/audio_admin (Demucs, needs torch)",
    "vagdhenu": "MFA gates dropped; duration gate kept",
    "status": "🟢 DONE",
-   "evidence": "inventory.py measured 2719 files: flags {'likely_duplicate': 20, 'hot_peaks': 469, 'clipping': 521, 'noisy_low_snr': 54, 'broadband_noise_floor': 5, 'long_internal_silence': 6, 'long_leading_silence': 6, 'exact_duplicate': 46, 'low_volume': 2, 'long_trailing_silence': 12, 'extension_mismatch': 3}",
+   "evidence": "inventory.py measured 3892 files: flags {'likely_duplicate': 20, 'hot_peaks': 1039, 'clipping': 1073, 'noisy_low_snr': 56, 'broadband_noise_floor': 5, 'long_internal_silence': 21, 'long_leading_silence': 12, 'exact_duplicate': 46, 'low_volume': 2, 'long_trailing_silence': 29, 'extension_mismatch': 3, 'decode_error': 1, 'mostly_silence': 1}",
    "required_for_kamadhenu": "format/level/silence/clipping/duplicate QC + duration gate",
    "file_or_path": "tools/kamadhenu/inventory.py, audio_inventory.json",
    "what_is_missing": "LUFS (RMS used), no ASR check",

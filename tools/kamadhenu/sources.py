@@ -15,9 +15,20 @@ KNOWN_SOURCES = [
     ("gdrive_folder", "https://drive.google.com/drive/folders/1wOOrLOfr7wWWpE1xRW90FNsDk54V5M81"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1qs6Tdi6RSVM6gnUt9S6-muvvuqc8eHFF"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1bSqIOnPb1888H26gGnyzeZ3YTQM9TTBz"),
+    # Added 6 Sep 2026 (lead shared 9 more public folders, all recited by 3BHU1).
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1K0bgabRjoXnB4vc4RwT155li8CZImiag"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1Oto4dcJzZNG_5e9zr82FMMTNgsu8riA_"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1n3dIUJBLAoq8hdU1CkNRirdTpNil8khh"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/18jaJVJnDx_tORG0mEKJCriLK9n-BMaIn"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1o5-yqK_jT-wg-8Augp1XwOyMFJKtyOyU"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1wEfVW2-A39v3kbhSQ6MhLzEyzIf38c-H"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1-716NX8boMumr_Gyyq67veWKezjK3rez"),
+    ("gdrive_folder", "https://drive.google.com/drive/folders/1bSiaUPAHGCGpl-D8nHkNGHyKCH0BLsNt"),
     ("youtube", "https://youtu.be/lgaxTgliOCo"),
     ("youtube", "https://youtu.be/54EPwW-xJoI"),
     ("gdrive_file", "https://drive.google.com/file/d/1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03/view?usp=drivesdk"),
+    ("gdrive_file", "https://drive.google.com/file/d/1oNILSgEAe4PQuCS00_SoQ5WLFIcVJ3GA/view?usp=drivesdk"),   # "Vedavyasa Gadya.mp3" (shared 6 Sep 2026; same recitation as the unreachable YouTube link)
 ]
 
 BLOCKED = "BLOCKED_EXTERNAL_ACCESS"
@@ -48,7 +59,13 @@ def clean_name(n):
 
 def list_drive_folder(fid):
     """Public-folder listing via the embeddedfolderview endpoint (no auth). Returns (ok, entries)."""
-    body, err, code, eff = _curl(f"https://drive.google.com/embeddedfolderview?id={fid}#list")
+    # Drive's public listing endpoint is flaky (an occasional sign-in redirect or empty page for a folder
+    # that is public); retry a few times so a transient failure never silently shrinks the manifest.
+    for attempt in range(4):
+        body, err, code, eff = _curl(f"https://drive.google.com/embeddedfolderview?id={fid}#list")
+        if body and code == "200" and 'id="entry-' in body:
+            break
+        time.sleep(2 * (attempt + 1))
     if body is None or code != "200":
         return False, [], f"HTTP {code} {err}"
     ents = re.findall(r'id="entry-([A-Za-z0-9_-]+)"', body)
@@ -97,9 +114,21 @@ def probe_all(previous=None):
                                what_could_be_inspected="file names, folder structure, Drive file ids; individual files are downloadable with fetch.py (verified on a sample)",
                                file_count=len(files), audio_file_count=n_audio,
                                what_you_need_to_provide="nothing for listing; run `python3 tools/kamadhenu_audit.py --fetch` to download the audio locally (disk permitting)")
+                    # The same Drive file can be reachable from several shared folders (a parent folder shared
+                    # later than its sub-folder). Keep the first-seen entry so local paths stay stable and the
+                    # dataset never counts one recording twice.
+                    seen_ids = {f["id"] for f in manifest_files}
+                    dup = 0
                     for f in files:
+                        if f["id"] in seen_ids:
+                            dup += 1
+                            continue
+                        seen_ids.add(f["id"])
                         f["source_url"] = url; f["source_title"] = title
-                    manifest_files.extend(files)
+                        manifest_files.append(f)
+                    if dup:
+                        rec["duplicate_of_earlier_source"] = dup
+                        rec["result"] += f"; {dup} of them already listed under an earlier source (skipped)"
                 else:
                     body, err, code, eff = _curl(url)
                     signin = "accounts.google.com" in (eff or "") or code in ("401", "403")
@@ -110,9 +139,14 @@ def probe_all(previous=None):
             else:
                 body, err, code, eff = _curl(f"https://drive.google.com/uc?export=download&id={fid}", head=True)
                 if code == "200":
-                    rec.update(accessibility="PUBLIC_DOWNLOADABLE", result="file responds 200 to a direct download request",
-                               what_could_be_inspected="headers only until fetched")
-                    manifest_files.append({"id": fid, "name": f"{fid}", "folder": "single-file", "ext": "", "is_audio_by_name": True,
+                    # the /view page carries the real file name (og:title) so the local copy keeps its name + extension
+                    vbody, _, vcode, _ = _curl(f"https://drive.google.com/file/d/{fid}/view", timeout=20)
+                    tm = re.search(r'og:title" content="([^"]+)"', vbody or "") if vcode == "200" else None
+                    fname = clean_name(tm.group(1)) if tm else fid
+                    fext = ("." + fname.rsplit(".", 1)[-1].lower()) if "." in fname else ""
+                    rec.update(accessibility="PUBLIC_DOWNLOADABLE", result=f"file responds 200 to a direct download request ({fname})", title=fname,
+                               what_could_be_inspected="file name from the view page; headers only until fetched")
+                    manifest_files.append({"id": fid, "name": fname, "folder": "single-file", "ext": fext, "is_audio_by_name": (fext in AUDIO_EXT) or fext == ".zip" or not fext,   # .zip = archive of recordings, fetch.py extracts it
                                            "download_url": f"https://drive.google.com/uc?export=download&id={fid}", "source_url": url, "source_title": "single-file"})
                 else:
                     rec.update(accessibility=BLOCKED, result=f"HTTP {code} on direct download (needs sign-in)",
@@ -155,6 +189,21 @@ def run(offline=False):
         log("offline: keeping previous external_audio_sources.json")
         return prev, read_json(man_path, {})
     sources, files = probe_all()
+    # Drive rate-limits repeated anonymous listings (a public folder then answers with a sign-in redirect).
+    # A folder that listed fine in the previous run is not "blocked" because of that: keep its previous
+    # listing and say so, so the manifest never shrinks on a transient failure.
+    prev_by_url = {s.get("url"): s for s in (prev or {}).get("sources", [])}
+    prev_man = (read_json(man_path, {}) or {}).get("files", [])
+    have_ids = {f["id"] for f in files}
+    for rec in sources:
+        p = prev_by_url.get(rec["url"])
+        if rec["accessibility"] == BLOCKED and p and p.get("accessibility") == "PUBLIC_LISTABLE":
+            kept = [dict(f) for f in prev_man if f.get("source_url") == rec["url"] and f["id"] not in have_ids]
+            rec.update(accessibility="PUBLIC_LISTABLE", listing="from_previous_run", title=p.get("title", ""),
+                       file_count=p.get("file_count"), audio_file_count=p.get("audio_file_count"),
+                       result=f"listing failed this run ({rec['result']}) — most likely Drive rate-limiting; kept the {len(kept)} files listed on {p.get('probed_at', 'the previous run')}",
+                       what_could_be_inspected=p.get("what_could_be_inspected", ""), what_you_need_to_provide="nothing unless this persists across runs")
+            files.extend(kept); have_ids.update(f["id"] for f in kept)
     summary = {
         "_readme": ["Every external audio source the project lead listed, probed from the Claude Code environment.",
                     "accessibility: PUBLIC_LISTABLE (folder listing readable without sign-in; files downloadable), ",

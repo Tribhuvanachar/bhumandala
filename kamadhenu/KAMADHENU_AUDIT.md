@@ -24,7 +24,7 @@ is `tools/kamadhenu/space/`, the analysis toolkit `tools/kamadhenu/`, and the re
 | Chandas coverage | per-metre audio coverage: 37 of 256 metres have any recording | `kamadhenu_dataset/chandas_coverage.*` | 🟢 measured |
 | Vāgdhenu comparison | metre tables, frontend, text fixes, licence notes | `kamadhenu_dataset/chandas_comparison.md`, `frontend_gap_report.md` | 🟢 |
 | Deployment reference | how Vāgdhenu is really served (ZeroGPU Space), quotas, costs, two-mode architecture | `kamadhenu_dataset/DEPLOYMENT_REFERENCE.md`, `dge/tts/ARCHITECTURE.md` v1.2 | 🟢 |
-| Space scaffold | API-first Gradio app, DGE metre → bank map, build/deploy script, GitHub Action, measurement script | `tools/kamadhenu/space/`, `.github/workflows/deploy-kamadhenu-space.yml` | 🟡 not deployed (needs HF_TOKEN; ZeroGPU eligible 6 Oct 2026) |
+| Space scaffold | API-first Gradio app, DGE metre → bank map, build/deploy script, GitHub Action, measurement script | `tools/kamadhenu/space/`, `.github/workflows/deploy-kamadhenu-space.yml` | 🟡 not deployed (needs HF_TOKEN; ZeroGPU available now — account PRO since 6 Sep 2026) |
 | Reader client | "Generate this verse" call to the Space | `dge/js/kamadhenu.js`, `appConfig.kamadhenuSpaceUrl` | 🟡 not wired to a page |
 | Hugging Face account | `SarvamulaOrg`, created 6 Sep 2026 | — | 🟢 |
 | Recording plan | 249 targeted recording requests by metre and priority | `kamadhenu_dataset/RECORDING_REQUESTS.csv` | 🟡 nothing recorded yet |
@@ -66,19 +66,21 @@ gap-closure, ZeroGPU deployment reference, Space scaffold and the HF account on 
 
 | | |
 |---|---|
-| audio files reachable | 2,719 (1.3 GB, git-ignored, re-fetchable with `--fetch`; Drive folders now public) |
-| total duration | 22.57 h |
-| grade A (clean) | 6.52 h · grade A+B 18.52 h · grade D 3.6 h |
-| text↔audio pairs, confidence ≥ 0.7 | 1,985 files, 15.81 h |
-| text↔audio pairs, confidence ≥ 0.9 | 1,999 files, 8.89 h |
-| **usable for training now** (grade A/B, confidence ≥ 0.9, plausible duration, not a duplicate) | **1,454 files, 6.02 h** |
-| pairs with a named metre | 88.6 % of the ≥0.7 pairs |
-| pairs with laghu/guru string | 100 % of the ≥0.7 pairs (engine output; the 11.4 % without a metre name still have scans) |
-| unmatched audio (no confident text) | 307 files (110 of them the Nāmāvali, text not in DGE) |
-| sample rates | 48 kHz 1,034 · 44.1 kHz 521 · 11.025 kHz 989 |
+| audio files reachable | 3,892 (2.5 GB, git-ignored, re-fetchable with `--fetch`; 16 Drive sources public, 2 still private) |
+| total duration | 37.83 h |
+| grade A (clean) | 8.78 h · grade A+B 33.12 h · grade C/D/F 4.71 h |
+| text↔audio pairs, confidence ≥ 0.7 | 2,472 files, 19.22 h |
+| text↔audio pairs, confidence ≥ 0.9 | 2,030 files, 8.95 h |
+| **usable for training now** (grade A/B, confidence ≥ 0.9, plausible duration, not a duplicate) | **1,475 files, 6.07 h** |
+| pairs with a named metre | 85.4 % of the ≥0.7 pairs |
+| pairs with laghu/guru string | 100 % of the ≥0.7 pairs (engine output; the 14.6 % without a metre name still have scans) |
+| unmatched audio (no confident text) | 1,420 files (1,072 unnamed `smv.zip` pāda takes, 110 Nāmāvali clips, 34 long-form pārāyaṇa files, the rest as before) |
+| sample rates | 48 kHz 2,326 · 44.1 kHz 576 · 11.025 kHz 989 |
 
-Sources: DGE-linked (Sumadhva Vijaya 989, Rāghavendra Vijaya 576, Prahlāda-Narasiṃha 11) 6.9 h; Drive (Bhāgavata
-Sāroddhāra 436, Bhagavad Gītā 7 adhyāyas 406, Hari Vāyu Stuti 20, 'vsn' 106) 15.25 h.
+Sources: DGE-linked (Sumadhva Vijaya 989, Rāghavendra Vijaya 577, Prahlāda-Narasiṃha 11) 6.9 h; Drive (Bhāgavata
+Sāroddhāra 436, Bhagavad Gītā 7 adhyāyas 406, Hari Vāyu Stuti 20, 'vsn' 106, Tīrthaprabandha 21, Prahlāda-stuti 43,
+Nāmāvali 110 + video, `smv.zip` pāda takes 1,106, Aṣṭādhyāyī pārāyaṇa 32, Harikathāmṛtasāra 31, Brahmasūtra 2,
+Vedavyāsa Gadya 1) 30.9 h.
 
 Caveats the owner should know: the Gītā recordings run 46–120 s per verse (5–8× a single rendition) and must be
 segmented before use; the Sāroddhāra recordings (2.1 h, grade A) are the best audio we have and their text was

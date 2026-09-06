@@ -10,6 +10,7 @@ from .common import ROOT, DGE, DS, write_json, read_json, log, now_ist, rel
 sys.path.insert(0, str(DGE))
 from search_toolkit_pkg.translit import to_slp1            # noqa: E402
 from search_toolkit_pkg.normalize import phonetic_key, coarse_key  # noqa: E402
+from build_search_index import fold_indic_to_devanagari  # noqa: E402  (Kannada/Telugu/Malayalam → Devanagari code-point fold)
 
 _HTML = re.compile(r"<[^>]+>")
 _ZW = re.compile("[​‌‍﻿]")
@@ -32,6 +33,7 @@ WORKS = [
     ("bhagavata_7", "data/purana/maha_purana/bhagavata_purana_madhva/skandha_07/data.json", "gita", "Bhāgavata Purāṇa (Madhva) skandha 7"),   # 7.9.8–50 = Prahlāda-stuti recordings
     ("mahabharata_tatparya_nirnaya", "data/darshana/vedanta/dvaita/SarvaMula/*/mahabharata_tatparya_nirnaya/mula/data.json", "items", "Mahābhārata Tātparya Nirṇaya"),
     ("stotra_misc", "data/stotra/*/data.json", "auto", "Stotra (misc)"),
+    ("harikathamrutasara", "data/dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara/data.json", "hks", "Harikathāmṛtasāra (Jagannātha Dāsa, Kannada)"),   # hks.<sandhi>.<n>.aac recordings
 ]
 
 
@@ -94,6 +96,20 @@ def load_work(work, pattern, kind, label):
                 work_id = work
         else:
             work_id = work
+        if k == "hks":
+            # Kannada ṣaṭpadi verses: items {id: hks-<sandhi>-<n>, sa: Kannada text, sandhi_number, sandhi_title}.
+            # The Chandas engine and SLP1 path are Devanagari-only, so the text is folded code-point-wise
+            # (same fold as dge/build_search_index.py); the Kannada original is kept as text_kannada.
+            for it in d.get("items", []):
+                m = re.match(r"hks-(\d+)-(\d+)$", str(it.get("id", "")))
+                if not m or not it.get("sa"):
+                    continue
+                sn, n = int(m.group(1)), int(m.group(2))
+                kn = re.sub(r"\s*\|\|\s*|\s*\|\s*", "\n", it["sa"])   # the app text marks pāda breaks with | and || → one pāda per line
+                rec = unit_record(work_id, label, f"sandhi_{sn:02d}", sn, n, fold_indic_to_devanagari(kn), f"{work_id}:{it['id']}", p,
+                                  extra={"text_kannada": it["sa"], "text_script": "kannada", "language": "kn", "sandhi_title": it.get("sandhi_title", "")})
+                out.append(rec)
+            continue
         if k == "gita":
             for it in d.get("items", []):
                 adh = int(re.sub(r"\D", "", it.get("id", "0")) or 0)

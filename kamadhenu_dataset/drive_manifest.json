@@ -1,6 +1,6 @@
 {
  "_readme": "Files listed in publicly readable Drive folders. Populated by sources.py; sizes/local paths added by fetch.py.",
- "listed_at": "06 Sep 2026, 4:50 PM IST",
+ "listed_at": "06 Sep 2026, 5:24 PM IST",
  "files": [
   {
    "id": "1WClBSL646WMVDTtUdayPJ3yrAkgre0o6",
@@ -11453,13 +11453,643 @@
    "source_title": "Audio"
   },
   {
+   "id": "1PB6inFbCYzqQFYrzQqkul4JI2nZdFJU2",
+   "name": "BS1.1.aac",
+   "folder": "Brahmasutra",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1PB6inFbCYzqQFYrzQqkul4JI2nZdFJU2",
+   "source_url": "https://drive.google.com/drive/folders/1Oto4dcJzZNG_5e9zr82FMMTNgsu8riA_",
+   "source_title": "Brahmasutra"
+  },
+  {
+   "id": "1PIdg41LdiRmnesGFBc0l80qQmqcllhhI",
+   "name": "BS1.2.aac",
+   "folder": "Brahmasutra",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1PIdg41LdiRmnesGFBc0l80qQmqcllhhI",
+   "source_url": "https://drive.google.com/drive/folders/1Oto4dcJzZNG_5e9zr82FMMTNgsu8riA_",
+   "source_title": "Brahmasutra"
+  },
+  {
+   "id": "16lTPPkTwUw-fQZU6KaqNjI2VsBHcdwdB",
+   "name": "GitaMahatmyaPadmaPurana.pdf",
+   "folder": "Gita/Docs",
+   "ext": ".pdf",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=16lTPPkTwUw-fQZU6KaqNjI2VsBHcdwdB",
+   "source_url": "https://drive.google.com/drive/folders/1n3dIUJBLAoq8hdU1CkNRirdTpNil8khh",
+   "source_title": "Gita"
+  },
+  {
+   "id": "1kDLi2If-lghRvoUO_MybV0gnr16NgPau",
+   "name": "GitaMahatmyaSkandaVaraha.pdf",
+   "folder": "Gita/Docs",
+   "ext": ".pdf",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1kDLi2If-lghRvoUO_MybV0gnr16NgPau",
+   "source_url": "https://drive.google.com/drive/folders/1n3dIUJBLAoq8hdU1CkNRirdTpNil8khh",
+   "source_title": "Gita"
+  },
+  {
+   "id": "1C761EkZKt8IYZfLBW8IhBoVrpZidrkYT",
+   "name": "GitaSaraAgniPurana.pdf",
+   "folder": "Gita/Docs",
+   "ext": ".pdf",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1C761EkZKt8IYZfLBW8IhBoVrpZidrkYT",
+   "source_url": "https://drive.google.com/drive/folders/1n3dIUJBLAoq8hdU1CkNRirdTpNil8khh",
+   "source_title": "Gita"
+  },
+  {
+   "id": "1C0ocOn78D22fa-pbxn324kDzdrQIV46_",
+   "name": "Grammatical Analysis of Bhagavad Gita.pdf",
+   "folder": "Gita/Docs",
+   "ext": ".pdf",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1C0ocOn78D22fa-pbxn324kDzdrQIV46_",
+   "source_url": "https://drive.google.com/drive/folders/1n3dIUJBLAoq8hdU1CkNRirdTpNil8khh",
+   "source_title": "Gita"
+  },
+  {
+   "id": "1xkEeJgSmsAUQSdvTLYOOCLspCXkO4xh0",
+   "name": "hks.14.1.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1xkEeJgSmsAUQSdvTLYOOCLspCXkO4xh0",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1y1jorSCNvRVoSE5-OKysISsgRo2SZOAT",
+   "name": "hks.14.2.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1y1jorSCNvRVoSE5-OKysISsgRo2SZOAT",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1yOeqDcQyYMsgZCAefkoln4DcP0OIbGIw",
+   "name": "hks.14.3.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1yOeqDcQyYMsgZCAefkoln4DcP0OIbGIw",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1yWUBJZrloK-ogBoh9b5l9Jnx-XVAcSoL",
+   "name": "hks.14.4.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1yWUBJZrloK-ogBoh9b5l9Jnx-XVAcSoL",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "12dzvHDWM_FIHcs8YCOLQjqlKBHOwMh8I",
+   "name": "hks.14.5.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=12dzvHDWM_FIHcs8YCOLQjqlKBHOwMh8I",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "12y07AMx4E6TOT0kUos2M8qN09I3uu_Nn",
+   "name": "hks.14.6.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=12y07AMx4E6TOT0kUos2M8qN09I3uu_Nn",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "16uxc59BtkCd9Oq6lHcRg8Jiyg9FkvO6Y",
+   "name": "hks.14.7.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=16uxc59BtkCd9Oq6lHcRg8Jiyg9FkvO6Y",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "13hKIQ3jhsIwby9MuPFoT0Yn-3-MYkBzt",
+   "name": "hks.14.8.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=13hKIQ3jhsIwby9MuPFoT0Yn-3-MYkBzt",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "16uyNmX7xSWhlxcPlfKac4pz8_1yRmqvr",
+   "name": "hks.14.9.aac",
+   "folder": "HKS/14 Pitru Gana Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=16uyNmX7xSWhlxcPlfKac4pz8_1yRmqvr",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vAJmLiCBBXFeELJB8BqZsfUTSwX7E1eB",
+   "name": "1661169203816.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vAJmLiCBBXFeELJB8BqZsfUTSwX7E1eB",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vHP28omFGz6nd-crAMjACkgaJeqpTeag",
+   "name": "1661169203833.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vHP28omFGz6nd-crAMjACkgaJeqpTeag",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vKuyhFxQX-B0cERZm109CEbqnuIR4oMU",
+   "name": "1661169203850.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vKuyhFxQX-B0cERZm109CEbqnuIR4oMU",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vaeOXYMz3YzOEgHIi_aBMbeEU4i_w4Lw",
+   "name": "1661169203867.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vaeOXYMz3YzOEgHIi_aBMbeEU4i_w4Lw",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vdPZP-VQtxp_Gr7zZ18rtt2oQZAd7_Rq",
+   "name": "1661169203884.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vdPZP-VQtxp_Gr7zZ18rtt2oQZAd7_Rq",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1viYsplkeeYUdRQ8eIlPx1X-DhUbgRB4k",
+   "name": "1661169203904.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1viYsplkeeYUdRQ8eIlPx1X-DhUbgRB4k",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vsKPwNLFBwIwBHGCOumdznYCfgP1sLCX",
+   "name": "1661169203922.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vsKPwNLFBwIwBHGCOumdznYCfgP1sLCX",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vskem__oWVA2K9K6ljizdsJAlqfBxiod",
+   "name": "1661169203943.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vskem__oWVA2K9K6ljizdsJAlqfBxiod",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vtUczXqyTR3mBM4H3ErNWSOA3SnK8l0s",
+   "name": "1661169203964.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vtUczXqyTR3mBM4H3ErNWSOA3SnK8l0s",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1vwdsvfxG-9UeswqIxBkYvC86JPcEDL4w",
+   "name": "1661169203989.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1vwdsvfxG-9UeswqIxBkYvC86JPcEDL4w",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1w-wMF8yTDA3_esigR2Vbo2YIZZpZ9nay",
+   "name": "1661169204009.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1w-wMF8yTDA3_esigR2Vbo2YIZZpZ9nay",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1w4OSsPptGuvVdec8QT_G_9_VpLPBf5Uh",
+   "name": "1661169204027.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1w4OSsPptGuvVdec8QT_G_9_VpLPBf5Uh",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1w6RAbWVARgUet7F1iOrvA6cLw1B28glP",
+   "name": "1661169204050.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1w6RAbWVARgUet7F1iOrvA6cLw1B28glP",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wA-E6XeU9C29n5hF2DM0H_65yXpFAwqM",
+   "name": "1661169204076.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wA-E6XeU9C29n5hF2DM0H_65yXpFAwqM",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wABimh-fw_XKieMqDKfEvtSNRh9mEzUP",
+   "name": "1661169204101.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wABimh-fw_XKieMqDKfEvtSNRh9mEzUP",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wC1wTsbRINwqQp-t0FdotLS0rveO1Vy0",
+   "name": "1661169204121.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wC1wTsbRINwqQp-t0FdotLS0rveO1Vy0",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wD3EWglAA9vnw0fkakbB8JDixkGkjRqk",
+   "name": "1661169204142.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wD3EWglAA9vnw0fkakbB8JDixkGkjRqk",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wFEtWX_eiWQfC2_HwTIdkWP9alIl07zH",
+   "name": "1661169204159.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wFEtWX_eiWQfC2_HwTIdkWP9alIl07zH",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wHfzkT1R8Wr-aGHi2n8UJBfnUiR1HFq_",
+   "name": "1661169204180.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wHfzkT1R8Wr-aGHi2n8UJBfnUiR1HFq_",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wJv5uxytFi20AURwTyphB74L-NO75my8",
+   "name": "1661169204201.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wJv5uxytFi20AURwTyphB74L-NO75my8",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wPWEIkV0mZCu5765tl4u9JRqHcHDgvDb",
+   "name": "1661169204222.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wPWEIkV0mZCu5765tl4u9JRqHcHDgvDb",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wQGc9YqpBcqs5rqGWSjSoANAvZ8ICseP",
+   "name": "1661169204242.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wQGc9YqpBcqs5rqGWSjSoANAvZ8ICseP",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1wQibeiYotTr97TIxPVJwsUOoOwlOiX3W",
+   "name": "1661169204261.jpg",
+   "folder": "HKS/28 Ganapati Sandhi/Text",
+   "ext": ".jpg",
+   "is_audio_by_name": false,
+   "download_url": "https://drive.google.com/uc?export=download&id=1wQibeiYotTr97TIxPVJwsUOoOwlOiX3W",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rjGHCCcHyIz8E4adEJ2Qjd3jVbpooT-8",
+   "name": "hks.28.10.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rjGHCCcHyIz8E4adEJ2Qjd3jVbpooT-8",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1riSrY-hDjUGjymWV691FtBdm4Bmca9Sp",
+   "name": "hks.28.11.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1riSrY-hDjUGjymWV691FtBdm4Bmca9Sp",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rgyj7GCLRg-xc4B5D3jme03VT3Eng9MA",
+   "name": "hks.28.12.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rgyj7GCLRg-xc4B5D3jme03VT3Eng9MA",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rf34557a0lde3CqLPByDjpImS1sWSe5r",
+   "name": "hks.28.13.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rf34557a0lde3CqLPByDjpImS1sWSe5r",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1reWP6ZmZvdDOJf2IuvG1wi7_QgxDvULk",
+   "name": "hks.28.14.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1reWP6ZmZvdDOJf2IuvG1wi7_QgxDvULk",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rcFFQ8PSiPjPoPeOc8qA4A5Wu-l5jspz",
+   "name": "hks.28.15.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rcFFQ8PSiPjPoPeOc8qA4A5Wu-l5jspz",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rXRZhUMv2fmUAuJtYzwtmumlE1UYF796",
+   "name": "hks.28.16.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rXRZhUMv2fmUAuJtYzwtmumlE1UYF796",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rTQFcOebekpFsxOanbe7tB4SvgBNKlH2",
+   "name": "hks.28.17.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rTQFcOebekpFsxOanbe7tB4SvgBNKlH2",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rSRK_kAeUhHMeY6tExDO1Msg-VzvVIaf",
+   "name": "hks.28.18.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rSRK_kAeUhHMeY6tExDO1Msg-VzvVIaf",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rR15_CPtb6m60nmkjZhIP4-G2lK2KGdU",
+   "name": "hks.28.19.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rR15_CPtb6m60nmkjZhIP4-G2lK2KGdU",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sRDqT58K6EmXMGnoeN1n5FLgGAh9sF7K",
+   "name": "hks.28.1.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sRDqT58K6EmXMGnoeN1n5FLgGAh9sF7K",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rR0iWTOyDaRrwihAx6ghwruat4IZ1cMd",
+   "name": "hks.28.20.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rR0iWTOyDaRrwihAx6ghwruat4IZ1cMd",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1t7iBxRCBAgODlScbn1Q2VwBIh9Dkxkog",
+   "name": "hks.28.21.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1t7iBxRCBAgODlScbn1Q2VwBIh9Dkxkog",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1s9vRF84ISMzRtj8SwBNxHDfEy479sjlJ",
+   "name": "hks.28.2.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1s9vRF84ISMzRtj8SwBNxHDfEy479sjlJ",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sBQnQRpy45k86S4s6vNA2S0gBtwpfZ-i",
+   "name": "hks.28.3.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sBQnQRpy45k86S4s6vNA2S0gBtwpfZ-i",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sDO_HUhtM_S5ENzaIOS7ZZpND6oMVx1e",
+   "name": "hks.28.4.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sDO_HUhtM_S5ENzaIOS7ZZpND6oMVx1e",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sEDALjtod67z5MuQ68wmZ5Xdg47YAPxs",
+   "name": "hks.28.5.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sEDALjtod67z5MuQ68wmZ5Xdg47YAPxs",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sGQ35afH_nFh1SkTtDyo56Sx5HSgRRoc",
+   "name": "hks.28.6.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sGQ35afH_nFh1SkTtDyo56Sx5HSgRRoc",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sMgvdZwSt7vDSfReBwbhrIXOVU2bmXmi",
+   "name": "hks.28.7.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sMgvdZwSt7vDSfReBwbhrIXOVU2bmXmi",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1s89CX1j7rNa5GImUuwbRuuymNXClIdax",
+   "name": "hks.28.8.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1s89CX1j7rNa5GImUuwbRuuymNXClIdax",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1rxH3kMU_-ZuQrWIoP-lVQd3NmnY-e0HU",
+   "name": "hks.28.9.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1rxH3kMU_-ZuQrWIoP-lVQd3NmnY-e0HU",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1sU81PxNPUarR5rEA8Q5wLvVhlV41i8jd",
+   "name": "hks.aac",
+   "folder": "HKS/28 Ganapati Sandhi",
+   "ext": ".aac",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1sU81PxNPUarR5rEA8Q5wLvVhlV41i8jd",
+   "source_url": "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3",
+   "source_title": "HKS"
+  },
+  {
+   "id": "1NtRlvZTOtZeNcPvd3udIZAwf_efb73jP",
+   "name": "AshTottara Shata Namavali.mp4",
+   "folder": "Sripadaraja Seva Sangha",
+   "ext": ".mp4",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1NtRlvZTOtZeNcPvd3udIZAwf_efb73jP",
+   "source_url": "https://drive.google.com/drive/folders/18jaJVJnDx_tORG0mEKJCriLK9n-BMaIn",
+   "source_title": "Sripadaraja Seva Sangha"
+  },
+  {
+   "id": "19ZsXO5GwTVn7Ln4nVoH8tA5YGnk5P8df",
+   "name": "Kshirabhishekha To Sripadarajaru.mp4",
+   "folder": "Sripadaraja Seva Sangha",
+   "ext": ".mp4",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=19ZsXO5GwTVn7Ln4nVoH8tA5YGnk5P8df",
+   "source_url": "https://drive.google.com/drive/folders/18jaJVJnDx_tORG0mEKJCriLK9n-BMaIn",
+   "source_title": "Sripadaraja Seva Sangha"
+  },
+  {
    "id": "1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03",
-   "name": "1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03",
+   "name": "smv.zip",
    "folder": "single-file",
-   "ext": "",
+   "ext": ".zip",
    "is_audio_by_name": true,
    "download_url": "https://drive.google.com/uc?export=download&id=1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03",
    "source_url": "https://drive.google.com/file/d/1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03/view?usp=drivesdk",
+   "source_title": "single-file"
+  },
+  {
+   "id": "1oNILSgEAe4PQuCS00_SoQ5WLFIcVJ3GA",
+   "name": "Vedavyasa Gadya.mp3",
+   "folder": "single-file",
+   "ext": ".mp3",
+   "is_audio_by_name": true,
+   "download_url": "https://drive.google.com/uc?export=download&id=1oNILSgEAe4PQuCS00_SoQ5WLFIcVJ3GA",
+   "source_url": "https://drive.google.com/file/d/1oNILSgEAe4PQuCS00_SoQ5WLFIcVJ3GA/view?usp=drivesdk",
    "source_title": "single-file"
   }
  ]
