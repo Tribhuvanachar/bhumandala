@@ -8,7 +8,7 @@ sdk_version: 5.49.1
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: Metre-aware Sanskrit chant TTS for the Sarvamūla Digital Library (Vāgdhenu backbone)
+short_description: Metre-aware Sanskrit chant TTS for the Sarvamula Library
 ---
 
 # Kamadhenu Space (ZeroGPU)
