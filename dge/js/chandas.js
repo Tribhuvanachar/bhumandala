@@ -35,10 +35,10 @@
   //   matras      \u093E-\u094C (+ vocalic \u0962 \u0963)
   //   marks       \u0901 candrabindu, \u0902 anusvara, \u0903 visarga
   //   virama      \u094D; independent vowels \u0904-\u0914 + \u0960 \u0961 + \u0950 om
-  var AK = /(?:[\u0915-\u0939\u0958-\u095F]\u094D)*[\u0915-\u0939\u0958-\u095F][\u093E-\u094C\u0962\u0963]?[\u0901-\u0903]?\u094D?|[\u0904-\u0914\u0950\u0960\u0961][\u0901-\u0903]?/g;
+  var AK = /(?:[\u0915-\u0939\u0958-\u095F]\u094D)*[\u0915-\u0939\u0958-\u095F][\u093E-\u094C\u0962\u0963]?[\u0901-\u0903\u1CF2\u1CF3\u1CF5\u1CF6]?\u094D?|[\u0904-\u0914\u0950\u0960\u0961][\u0901-\u0903\u1CF2\u1CF3\u1CF5\u1CF6]?/g;
   var ONSET = /[\u0915-\u0939\u0958-\u095F]\u094D/g;
   var LONG_M = 'ािीुूृॄेैोौ';           // matras; ा ी ू ॄ े ै ो ौ long, ि ु ृ short
-  var LONG_MATRA = 'ाीूॄेैोौ';
+  var LONG_MATRA = 'ाीूॄॣेैोौ';
   var LONG_INDEP = 'आईऊॠॡएऐओऔॐ';
   function syllabify(line) {
     // strip everything that is not devanagari text (dandas, digits, spaces)
@@ -55,7 +55,7 @@
       for (var c = 0; c < ak.length; c++) {
         if (LONG_MATRA.indexOf(ak[c]) !== -1) long_ = true;
       }
-      var nasal = /[ंः]/.test(ak);
+      var nasal = /[\u0901\u0902\u0903\u1CF2\u1CF3\u1CF5\u1CF6]/.test(ak); // anusvāra, visarga, candrabindu, jihvāmūlīya, upadhmānīya all close the syllable
       out.push({ text: ak, long: long_, nasal: nasal, coda: '' });
     }
     // weight: long, nasal, or followed by a consonant cluster
@@ -116,16 +116,46 @@
     return j ? j.jaati : '';
   }
   function matchAnushtup(pats) {
+    // Classical śloka rules (Vṛttaratnākara / Chandomañjarī, "vaktra" family):
+    //   every pāda: 8 akṣaras; 2nd and 3rd not both laghu;
+    //   even pādas (2, 4): 5–7 = ल ग ल (ja-gaṇa) — always;
+    //   odd pādas (1, 3): pathyā 5–7 = ल ग ग (ya-gaṇa); or a vipulā —
+    //     na-vipulā ल ल ल · bha-vipulā ग ल ल · ma-vipulā ग ग ग · ra-vipulā ग ल ग
+    //     (with the 4th akṣara guru for ma/ra, laghu or guru otherwise);
+    //   the 8th akṣara is anceps everywhere.
     if (pats.length !== 4 || pats.some(function (p) { return p.length !== 8; })) return null;
+    var VIP = { 'लगग': 'पथ्या', 'ललल': 'न-विपुला', 'गलल': 'भ-विपुला', 'गगग': 'म-विपुला', 'गलग': 'र-विपुला' };
+    var forms = [], problems = [];
     for (var i = 0; i < 4; i++) {
-      if (pats[i][4] !== 'ल' || pats[i][5] !== 'ग') return null;
+      var p = pats[i];
+      if (p[1] === 'ल' && p[2] === 'ल') problems.push('पादे ' + (i + 1) + ' द्वितीयतृतीये लघू');
+      var g = p.substr(4, 3);
+      if (i % 2 === 1) {                       // even pāda: ja-gaṇa at 5–7
+        if (g !== 'लगल') problems.push('पादे ' + (i + 1) + ' पञ्चम-सप्तमेषु ' + g + ' (अपेक्षितं लगल)');
+      } else {
+        var f = VIP[g];
+        if (!f) problems.push('पादे ' + (i + 1) + ' पञ्चम-सप्तमेषु ' + g + ' (न पथ्या, न विपुला)');
+        else if (f !== 'पथ्या') forms.push(f + ' (पादे ' + (i + 1) + ')');
+      }
     }
-    var pathya = pats[1][6] === 'ल' && pats[3][6] === 'ल';
+    var name, detail;
+    if (problems.length) {
+      name = 'अनुष्टुप् (श्लोकः) — अनियतम् (सन्दिग्धम्)';
+      detail = '8 अक्षराणि प्रतिपादम् · नियमभङ्गः: ' + problems.join('; ');
+    } else if (forms.length) {
+      name = 'अनुष्टुप् (श्लोकः) — ' + forms.join(', ');
+      detail = '8 अक्षराणि प्रतिपादम् · विषमपादयोः विपुला, समपादयोः पञ्चम-सप्तमेषु लगल';
+    } else {
+      name = 'अनुष्टुप् (श्लोकः) — पथ्या';
+      detail = '8 अक्षराणि प्रतिपादम् · पञ्चमं लघु, षष्ठं गुरु, सम-पादयोः सप्तमं लघु';
+    }
     return {
-      names: ['अनुष्टुप् (श्लोकः)' + (pathya ? ' — पथ्या' : ' — विपुला/अन्यथा')],
+      names: [name],
       kind: 'छन्दः',
       lakshana: 'श्लोके षष्ठं गुरु ज्ञेयं सर्वत्र लघु पञ्चमम् ।\nद्विचतुष्पादयोर्ह्रस्वं सप्तमं दीर्घमन्ययोः ॥',
-      detail: '8 अक्षराणि प्रतिपादम् · पञ्चमं लघु, षष्ठं गुरु' + (pathya ? ', सम-पादयोः सप्तमं लघु' : '')
+      detail: detail,
+      vipula: forms,
+      irregular: problems.length ? problems : undefined
     };
   }
   function matchVrutta(pats) {
@@ -159,6 +189,23 @@
         });
       });
       if (res) return { names: res.vrutta_names, kind: 'उपजातिः' };
+      // any mix of two sibling sama-vṛttas pāda by pāda is an upajāti even when the 14 named
+      // combinations do not list it (the table lacks e.g. the U-I-U-U order)
+      var MIX = [['इन्द्रवज्रा', 'उपेन्द्रवज्रा'], ['वंशस्थ', 'इन्द्रवंशा'], ['वंशस्थ', 'उपेन्द्रवज्रा']];
+      for (var mi = 0; mi < MIX.length; mi++) {
+        var pair = MIX[mi].map(function (nm) { return DB.sama_vrutta.find(function (v) { return v.vrutta_names.indexOf(nm) !== -1; }); });
+        if (pair[0] && pair[1]) {
+          var code = '';
+          var okMix = pats.every(function (p) {
+            if (padaMatches(p, pair[0].lakshana, true)) { code += MIX[mi][0][0]; return true; }
+            if (padaMatches(p, pair[1].lakshana, true)) { code += MIX[mi][1][0]; return true; }
+            return false;
+          });
+          if (okMix && code.split('').some(function (c) { return c !== code[0]; })) {
+            return { names: ['उपजाति (' + MIX[mi][0] + '-' + MIX[mi][1] + ' मिश्रम्: ' + code + ')'], kind: 'उपजातिः', mix: code };
+          }
+        }
+      }
       res = DB.vishama_vrutta.find(function (v) {
         return v.padas.length === 4 && pats.every(function (p, i) {
           return padaMatches(p, v.padas[i].lakshana_raw, true);
@@ -203,18 +250,73 @@
     return { names: [], kind: 'अज्ञातम्' };
   }
 
-  /* ---- pada assembly ---------------------------------------------------- */
-  function toPadas(lines) {
-    var sy = lines.map(syllabify).filter(function (s) { return s.length; });
-    if (sy.length === 2) {
-      // a half-verse per line: split each at the midpoint (even counts only)
-      if (sy[0].length % 2 === 0 && sy[1].length % 2 === 0 &&
-          sy[0].length === sy[1].length) {
-        var h = sy[0].length / 2;
-        return [sy[0].slice(0, h), sy[0].slice(h), sy[1].slice(0, h), sy[1].slice(h)];
-      }
+  /* ---- script fold ------------------------------------------------------ */
+  // Kannada, Telugu and Malayalam blocks mirror the Devanagari block layout, so a
+  // code-point shift is a faithful (letter-for-letter) transliteration for Sanskrit
+  // text in those scripts (the same fold dge/build_search_index.py uses). Vedic
+  // svara marks (U+0951/0952) and zero-width joiners are dropped.
+  function foldScript(t) {
+    var out = '';
+    for (var i = 0; i < t.length; i++) {
+      var c = t.charCodeAt(i);
+      if (c >= 0x0C80 && c <= 0x0CFF) c -= 0x0C80 - 0x0900;        // Kannada
+      else if (c >= 0x0C00 && c <= 0x0C7F) c -= 0x0C00 - 0x0900;   // Telugu
+      else if (c >= 0x0D00 && c <= 0x0D7F) c -= 0x0D00 - 0x0900;   // Malayalam
+      if (c === 0x0951 || c === 0x0952 || c === 0x200C || c === 0x200D) continue;
+      out += String.fromCharCode(c);
     }
-    return sy;
+    // nukta: ृ+़ is a typing of ॄ (long vocalic r, e.g. पितॄन्); consonant+़
+    // (क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़) is metrically the plain consonant.
+    return out.replace(/\u0943\u093C/g, '\u0944').replace(/\u093C/g, '');
+  }
+
+  /* ---- pada assembly ---------------------------------------------------- */
+  // The text rarely arrives as four clean pādas: a verse is often one line, or two
+  // half-verse lines. Build every plausible pāda split and let the database decide:
+  //   1 line   → 4 equal pādas · ardhasama a+b+a+b · 2 equal halves
+  //   2 lines  → each line = 2 equal pādas (sama) · each line = a+b (ardhasama, from the DB)
+  //   n lines  → as given
+  // The first split that names a vṛtta wins; otherwise the plainest split is kept.
+  function splitSylls(sy, cuts) {
+    var out = [], at = 0;
+    for (var i = 0; i < cuts.length; i++) { out.push(sy.slice(at, at + cuts[i])); at += cuts[i]; }
+    return out;
+  }
+  function ardhasamaShapes() {
+    if (!DB) return [];
+    return DB.ardhasama_vrutta.filter(function (v) { return v.padas && v.padas.length >= 2; })
+      .map(function (v) { return [v.padas[0].akshara_sankhya, v.padas[1].akshara_sankhya]; })
+      .filter(function (ab) { return ab[0] && ab[1]; });
+  }
+  function padaCandidates(lines) {
+    var sy = lines.map(syllabify).filter(function (s) { return s.length; });
+    var cands = [];
+    if (sy.length === 1) {
+      var T = sy[0].length;
+      if (T % 4 === 0 && T >= 16) cands.push(splitSylls(sy[0], [T / 4, T / 4, T / 4, T / 4]));
+      ardhasamaShapes().forEach(function (ab) {
+        if (2 * (ab[0] + ab[1]) === T) cands.push(splitSylls(sy[0], [ab[0], ab[1], ab[0], ab[1]]));
+      });
+      if (T % 2 === 0 && T >= 16) cands.push(splitSylls(sy[0], [T / 2, T / 2]));
+    } else if (sy.length === 2 && sy[0].length === sy[1].length) {
+      var L = sy[0].length;
+      if (L % 2 === 0) cands.push(splitSylls(sy[0], [L / 2, L / 2]).concat(splitSylls(sy[1], [L / 2, L / 2])));
+      ardhasamaShapes().forEach(function (ab) {
+        if (ab[0] + ab[1] === L) cands.push(splitSylls(sy[0], ab).concat(splitSylls(sy[1], ab)));
+      });
+    }
+    cands.push(sy);                                 // as given (always last: the honest fallback)
+    return cands;
+  }
+  function toPadas(lines) {
+    var c = padaCandidates(lines);
+    if (!DB) return c[c.length - 1];
+    for (var i = 0; i < c.length; i++) {
+      var m = matchVrutta(c[i].map(pattern));
+      if (m && m.names && m.names.length && !m.irregular) return c[i];
+    }
+    // no candidate names a metre: prefer the plain midpoint/as-given split
+    return c[c.length - 1];
   }
 
   /* ---- render ----------------------------------------------------------- */
@@ -233,7 +335,7 @@
       nums + row + marks + '</div>';
   }
   function analyze() {
-    var txt = $('#ch-input').value || '';
+    var txt = foldScript($('#ch-input').value || '');   // Kannada/Telugu/Malayalam input, nukta, Vedic accents
     var lines = txt.split(/[\n।॥]+/).map(function (l) { return l.trim(); })
       .filter(Boolean);
     var out = $('#ch-out');
@@ -286,7 +388,8 @@
         .then(function (d) { DB = d; return d; });
     },
     analyzeText: function (txt) {
-      var lines = String(txt || '').split(/[\n।॥]+/)
+      txt = foldScript(String(txt || ''));
+      var lines = txt.split(/[\n।॥]+/)
         .map(function (l) { return l.trim(); }).filter(Boolean);
       var padas = toPadas(lines);
       var pats = padas.map(pattern);

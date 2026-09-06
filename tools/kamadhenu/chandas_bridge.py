@@ -52,10 +52,16 @@ def summarise(res):
         "classification": {"छन्दः": "anushtubh_rule", "समवृत्तम्": "sama", "अर्धसमवृत्तम्": "ardhasama", "उपजातिः": "upajati", "विषमवृत्तम्": "vishama", "मात्रावृत्तम् (जातिः)": "matra_jati", "अज्ञातम्": "unknown"}.get(kind, "unknown"),
         "near_matches": m.get("near") or [],
         "partial": bool(m.get("partial")),
+        "anushtubh_irregular": list(m.get("irregular") or []),
+        "upajati_mix": m.get("mix") or "",
     }
     n = set(out["syllables_per_pada"])
     out["confidence"] = (1.0 if out["classification"] in ("anushtubh_rule", "sama", "ardhasama", "upajati", "vishama") and not out["partial"]
                          else 0.8 if out["classification"] == "matra_jati" else 0.6 if out["partial"] else (0.3 if out["near_matches"] else 0.0))
+    if out["anushtubh_irregular"]:
+        out["confidence"] = 0.5      # 4×8 but breaks a pāda rule even allowing the four vipulās — text needs a look
+    elif out["upajati_mix"]:
+        out["confidence"] = 0.9      # generic indra/upendra-family mix, not one of the 42 named rows
     out["equal_padas"] = len(n) == 1 and out["pada_count"] >= 2
     refine(out)
     return out
@@ -69,32 +75,31 @@ def _pada_ok(p, t):
 
 
 def refine(out):
-    """Kamadhenu-side fallback labels when the DGE engine returns अज्ञातम्. The engine's verdict is kept
-    untouched in `chandas`; the fallback goes into `chandas_inferred` with a lower confidence and a reason, so
-    nothing here competes with DGE — it only names the two documented engine gaps (strict anuṣṭubh rule;
-    upajāti table missing the U-I-U-U combination) until dge/js/chandas.js itself is extended."""
+    """Kamadhenu-side reasons when the DGE engine returns अज्ञातम् (or a doubtful anuṣṭubh). The engine's verdict is
+    kept untouched in `chandas`; `chandas_inferred` carries a lower-confidence fallback label and `inferred_reason`
+    says why, so the review queue can be sorted. Since Sep 2026 the engine itself names the four anuṣṭubh vipulās,
+    every indra/upendra upajāti mix, ardhasama verses given as one or two lines, and Kannada/Telugu/Malayalam
+    input, so the reasons left here are text-side: unequal pādas, defective syllable counts, prose."""
     out["chandas_inferred"] = out["chandas_normalized"]
     out["inferred_reason"] = ""
+    if out["anushtubh_irregular"]:
+        out["inferred_reason"] = "4×8 syllables, but a pāda breaks the anuṣṭubh rules even allowing na/bha/ma/ra-vipulā: " + "; ".join(out["anushtubh_irregular"])
+        return
     if out["classification"] != "unknown":
         return
     padas = out["laghu_guru"].split("|") if out["laghu_guru"] else []
-    if len(padas) == 4 and all(len(p) == 8 for p in padas):
-        out["chandas_inferred"] = "अनुष्टुप् (vipulā/irregular — unverified)"
-        out["inferred_reason"] = "4×8 syllables but the DGE pathyā rule (5th laghu, 6th guru in every pāda) fails — vipulā or textual irregularity; needs human check"
-        out["confidence"] = 0.6
-    elif len(padas) == 4 and all(len(p) == 11 for p in padas) and all(_pada_ok(p, INDRA) or _pada_ok(p, UPENDRA) for p in padas):
-        mix = "".join("I" if _pada_ok(p, INDRA) else "U" for p in padas)
-        out["chandas_inferred"] = "उपजाति"
-        out["inferred_reason"] = f"every pāda is indravajrā/upendravajrā ({mix}) but this combination is absent from the DGE upajāti table"
-        out["confidence"] = 0.7
-    elif out["equal_padas"] and out["near_matches"]:
+    if out["equal_padas"] and out["near_matches"]:
         out["inferred_reason"] = "equal pādas, no exact vṛtta; nearest DGE candidates listed in near_matches"
+    elif out["equal_padas"]:
+        out["inferred_reason"] = f"equal pādas of {len(padas[0]) if padas else 0} akṣaras, no vṛtta of that length matches — metre missing from the DB or text defect"
     elif not out["equal_padas"] and out["pada_count"] >= 2:
         out["inferred_reason"] = "unequal pāda syllable counts — suspected text defect (typo, missing/extra akṣara, wrong line split) or prose"
+    elif out["pada_count"] < 2:
+        out["inferred_reason"] = "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
 
 
 def analyse_texts(texts, batch=400):
-    cache_p = PROCESSED / "chandas_cache_v2.json"
+    cache_p = PROCESSED / "chandas_cache_v5.json"
     cache = read_json(cache_p, {}) or {}
     todo = [t for t in dict.fromkeys(texts) if t and _hash(t) not in cache]
     for i in range(0, len(todo), batch):

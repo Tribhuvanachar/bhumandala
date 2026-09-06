@@ -55,8 +55,11 @@ def unit_record(work, label, section, chapter, verse_id, raw, uid, path, audio_u
     # drop speaker headers like "धृतराष्ट्र उवाच" from the metrical text but keep them in raw
     metrical = []
     for l in lines:
-        if re.search(r"उवाच\s*$", l) or re.fullmatch(r"(ॐ|ओम्|श्री|हरिः ॐ|ॐ तत्सत्|श्रीः)[ ।॥]*", l):
-            continue   # speaker headers / praṇava / auspicious marks are not part of the metre
+        if re.search(r"(उवाच|नुवाच|ोवाच|ावाच|युवाच)\s*$", l) and len(l.split()) <= 3:
+            continue   # speaker headers (श्रीभगवानुवाच, अर्जुन उवाच, सञ्जय उवाच …) are not part of the metre
+        if re.fullmatch(r"(ॐ|ओम्|श्री|हरिः ॐ|ॐ तत्सत्|श्रीः)[ ।॥]*", l):
+            continue   # praṇava / auspicious marks
+        l = re.sub(r"^(?:श्री\s*)?\S{0,14}?(?:उवाच|नुवाच|ोवाच|ावाच|युवाच)(?=\S)", "", l)   # "अर्जुन उवाचएवं…" glued to the verse
         l = re.sub(r"\([^)]*\)", "", l)          # editorial variant readings "(भा)" are not recited
         l = re.sub(r"\s+", " ", l).strip()
         if l:
