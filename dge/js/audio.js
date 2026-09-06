@@ -2,7 +2,7 @@
 // js/audio.js
 // Maps to F-004 (Audio Engine) & F-013 (Offline Cache)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['audio.js'] = 'v3.1 (Speed memory, resume, progress, swipe nav, long-press word lookup, zero-padded filenames)';
+window.DGE_VERSIONS['audio.js'] = 'v3.2 (read-along highlight and swipe/long-press live on the active list card; the separate reading card is gone. v3.1: Speed memory, resume, progress, swipe nav, long-press word lookup, zero-padded filenames)';
 
 function formatTime(s) { 
   if (isNaN(s)) return "0:00.000"; 
@@ -21,10 +21,11 @@ function updateRepeatDisplay() {
 
 function updatePlayUI() {
   const playBtn = document.getElementById('playBtn');
-  const readingCard = document.getElementById('readingCard');
-
   if (playBtn) playBtn.innerHTML = isPlaying ? '⏸' : '▶';
-  if (activeId && readingCard) readingCard.classList.toggle('highlight', isPlaying);
+  // 7 Sep 2026: no separate reading card any more -- the active verse's own
+  // list card carries the playing state (main.css .shloka-card.playing).
+  document.querySelectorAll('.shloka-card.playing').forEach(c => { if (!isPlaying || c.id !== `shloka-${activeId}`) c.classList.remove('playing'); });
+  if (activeId && isPlaying) { const ac = document.getElementById(`shloka-${activeId}`); if (ac) ac.classList.add('playing'); }
   dgeUpdateBottomPlayerVisibility();
 }
 
@@ -96,8 +97,8 @@ function dgeUpdateProgressIndicator(id, total) {
 }
 window.dgeUpdateProgressIndicator = dgeUpdateProgressIndicator;
 
-// On load, shows the last-played verse's text in the reading-card (and
-// updates the track label / progress bar) WITHOUT auto-playing audio —
+// On load, points the track label / progress bar at the last-played verse
+// WITHOUT auto-playing audio —
 // autoplay is broadly blocked by browsers anyway, and starting sound
 // unexpectedly on load is poor manners even where it isn't. This just
 // picks up the reading experience where it left off; tapping play then
@@ -112,17 +113,13 @@ function dgeRestoreLastVerse() {
   contextShlokaId = saved;
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
   const trackLabel = document.getElementById('trackLabel');
-  const readingCard = document.getElementById('readingCard');
   if (trackLabel) trackLabel.innerText = `${saved}/${total}`;
   dgeUpdateProgressIndicator(saved, total);
-  if (readingCard && typeof getText === 'function') {
-    readingCard.innerHTML = getText(saved);
-    if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync();
-  }
 }
-// Long-press a word in the reading-card to select it and go straight to
-// Word-level Ask Acharya analysis, without needing to manually drag-select
-// on a touchscreen. Cancels itself if the finger moves (treating it as a
+// Long-press a word in a verse card (#shlokaList .shloka-text) to select it
+// and go straight to Word-level Ask Acharya analysis, without needing to
+// manually drag-select on a touchscreen. (Until 7 Sep 2026 this was bound
+// to the separate reading card, since removed.) Cancels itself if the finger moves (treating it as a
 // scroll/selection-drag instead) or lifts before the hold threshold.
 (function dgeSetupLongPressWordLookup() {
   let pressTimer = null;
@@ -160,11 +157,12 @@ function dgeRestoreLastVerse() {
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const card = document.getElementById('readingCard');
+    const card = document.getElementById('shlokaList');
     if (!card) return;
 
     card.addEventListener('touchstart', (e) => {
       if (!e.touches || !e.touches.length) return;
+      if (!(e.target && e.target.closest && e.target.closest('.shloka-text'))) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
       const touchX = startX, touchY = startY;
@@ -199,27 +197,29 @@ function dgeRestoreLastVerse() {
 
 window.dgeRestoreLastVerse = dgeRestoreLastVerse;
 
-// Swipe left/right on the reading-card to go to the next/previous verse.
-// Scoped to just this card (not the whole page) so it never fights with
-// normal list scrolling. Distinguishes a real swipe from a text-selection
+// Swipe left/right on the ACTIVE verse card to go to the next/previous
+// verse. Scoped to that one card (not the whole list) so it never fights
+// with normal list scrolling. (Until 7 Sep 2026: the separate reading card.) Distinguishes a real swipe from a text-selection
 // drag by requiring a reasonably fast, mostly-horizontal gesture — a
 // slow drag (typical of selecting text) won't cross the speed threshold.
 (function dgeSetupSwipeNav() {
   let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
 
   document.addEventListener('DOMContentLoaded', () => {
-    const card = document.getElementById('readingCard');
+    const card = document.getElementById('shlokaList');
     if (!card) return;
 
     card.addEventListener('touchstart', (e) => {
       if (!e.touches || !e.touches.length) return;
+      touchStartTime = 0;
+      if (!(e.target && e.target.closest && e.target.closest('.shloka-card.active'))) return;
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
       touchStartTime = Date.now();
     }, { passive: true });
 
     card.addEventListener('touchend', (e) => {
-      if (!e.changedTouches || !e.changedTouches.length) return;
+      if (!e.changedTouches || !e.changedTouches.length || !touchStartTime) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       const dy = e.changedTouches[0].clientY - touchStartY;
       const dt = Date.now() - touchStartTime;
@@ -290,15 +290,11 @@ async function loadShloka(id) {
 
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
   const trackLabel = document.getElementById('trackLabel');
-  const readingCard = document.getElementById('readingCard');
   const timeDisplay = document.getElementById('timeDisplay');
 
   if (trackLabel) trackLabel.innerText = `${id}/${total}`;
   if (typeof dgeUpdateProgressIndicator === 'function') dgeUpdateProgressIndicator(id, total);
-  if (readingCard && typeof getText === 'function') {
-    readingCard.innerHTML = getText(id);
-    if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync();
-  }
+  if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync(id);
   if (timeDisplay) timeDisplay.innerText = "0:00.000 / 0:00.000";
 
   currentAudio.src = await resolveAudioSrc(id);
@@ -590,65 +586,65 @@ document.addEventListener('DOMContentLoaded', () => {
 // division was visibly outrunning the audio on longer words. This is
 // still an approximation, not true karaoke-style sync — real word-level
 // sync would need timestamped audio data, which isn't available.
-function wrapReadingCardWordsForSync() {
-  const readingCard = document.getElementById('readingCard');
-  if (!readingCard) return;
-  const text = readingCard.textContent || '';
-  const tokens = text.split(/(\s+)/);
-  let html = '';
-  let wordIndex = 0;
-  const wordLengths = [];
+// 7 Sep 2026: the words are wrapped IN PLACE inside the active verse's own
+// list card (#shloka-<id> .shloka-text) -- the separate reading card is
+// gone. Only text nodes are touched, so footnote markers, search
+// highlights, pada line breaks and intellisense spans in the card survive;
+// renderList() rebuilds the card wholesale on script/theme changes, and
+// updateReadingCardSyncHighlight() re-wraps lazily when it finds the
+// active card unwrapped.
+function dgeSyncTextEl(id) {
+  const card = document.getElementById(`shloka-${id || activeId}`);
+  return card ? card.querySelector('.shloka-text') : null;
+}
 
-  tokens.forEach(tok => {
-    if (tok.trim().length === 0) { html += tok; return; }
-    html += `<span class="sync-word" data-widx="${wordIndex}">${tok}</span>`;
-    wordLengths.push(Math.max(tok.length, 2)); // floor so short words still get a fair minimum
-    wordIndex++;
-  });
-
-  window._dgeSyncWordCount = wordIndex;
-
+function wrapReadingCardWordsForSync(id) {
+  const el = dgeSyncTextEl(id);
+  if (!el) return;
+  if (!el.querySelector('.sync-word')) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    let wordIndex = 0;
+    nodes.forEach(node => {
+      if (!node.nodeValue || !node.nodeValue.trim()) return;
+      if (node.parentNode && node.parentNode.closest && node.parentNode.closest('.dge-fn-marker, sup, .search-match')) return;
+      const frag = document.createDocumentFragment();
+      node.nodeValue.split(/(\s+)/).forEach(tok => {
+        if (!tok) return;
+        if (!tok.trim()) { frag.appendChild(document.createTextNode(tok)); return; }
+        const sp = document.createElement('span');
+        sp.className = 'sync-word'; sp.dataset.widx = String(wordIndex++); sp.textContent = tok;
+        frag.appendChild(sp);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+  const words = Array.from(el.querySelectorAll('.sync-word'));
+  const wordLengths = words.map(w => Math.max((w.textContent || '').length, 2)); // floor so short words still get a fair minimum
+  window._dgeSyncWordCount = words.length;
   const totalWeight = wordLengths.reduce((a, b) => a + b, 0) || 1;
   let cumulative = 0;
-  window._dgeSyncWordBoundaries = wordLengths.map(len => {
-    cumulative += len;
-    return cumulative / totalWeight;
-  });
-
-  readingCard.innerHTML = html;
+  window._dgeSyncWordBoundaries = wordLengths.map(len => { cumulative += len; return cumulative / totalWeight; });
 }
 
 function updateReadingCardSyncHighlight() {
-  if (!window._dgeSyncWordCount || !window._dgeSyncWordBoundaries || !currentAudio || isNaN(currentAudio.duration) || currentAudio.duration <= 0) return;
+  if (!activeId || !currentAudio || isNaN(currentAudio.duration) || currentAudio.duration <= 0) return;
+  const el = dgeSyncTextEl(activeId);
+  if (!el) return;
+  if (!el.querySelector('.sync-word')) wrapReadingCardWordsForSync(activeId);   // card was re-rendered since
+  if (!window._dgeSyncWordCount || !window._dgeSyncWordBoundaries) return;
 
   const frac = Math.min(1, Math.max(0, currentAudio.currentTime / currentAudio.duration));
   const boundaries = window._dgeSyncWordBoundaries;
   let activeIdx = boundaries.findIndex(b => frac <= b);
   if (activeIdx === -1) activeIdx = boundaries.length - 1;
 
-  const readingCard = document.getElementById('readingCard');
-  if (!readingCard) return;
-
-  const prev = readingCard.querySelector('.sync-word.active');
+  const prev = el.querySelector('.sync-word.active');
   if (prev && parseInt(prev.dataset.widx, 10) === activeIdx) return;
   if (prev) prev.classList.remove('active');
-
-  const next = readingCard.querySelector(`.sync-word[data-widx="${activeIdx}"]`);
-  if (next) {
-    next.classList.add('active');
-
-    // When minimized (a short fixed-height strip with overflow hidden),
-    // the highlighted word can end up several lines down and clipped out
-    // of view. Scroll the card's own content so it stays visible instead
-    // of only ever showing the first line.
-    const wrap = document.getElementById('readingCardWrap');
-    if (wrap && wrap.classList.contains('minimized')) {
-      const cardRect = readingCard.getBoundingClientRect();
-      const wordRect = next.getBoundingClientRect();
-      const delta = (wordRect.top - cardRect.top) - (readingCard.clientHeight / 2) + (wordRect.height / 2);
-      readingCard.scrollTo({ top: Math.max(0, readingCard.scrollTop + delta), behavior: 'smooth' });
-    }
-  }
+  const next = el.querySelector(`.sync-word[data-widx="${activeIdx}"]`);
+  if (next) next.classList.add('active');
 }
 window.wrapReadingCardWordsForSync = wrapReadingCardWordsForSync;
 window.updateReadingCardSyncHighlight = updateReadingCardSyncHighlight;

@@ -27,6 +27,13 @@ first stage.
 
 ## 2. ZeroGPU economics (from HF docs, 6 Sep 2026)
 
+**Quota accounting (measured 7 Sep 2026):** the `spaces` client (0.51.3) multiplies `@spaces.GPU(duration=N)` by the
+hardware's `duration_factor` before asking the quota server — 1.5 on the sm_120 Blackwell cards this Space gets — so
+`duration=120` showed up to visitors as *"180s requested vs. 166s left"* and refused calls that would have used 5–14 GPU s.
+Since the 7 Sep deploy `app.py` asks for `KAMADHENU_GPU_SECONDS` (default 60 → a 90 s request); the worst measured cold
+start is 23 GPU s. Visitors calling from the DGE site are on the anonymous per-IP quota; signing in to Hugging Face on
+the Space page itself uses the visitor's own quota.
+
 | | |
 |---|---|
 | Hosting | free personal accounts (email verified, > 30 days old) may host **2 ZeroGPU Spaces**; PRO: 10 |

@@ -5,8 +5,6 @@ window.DGE_VERSIONS['config.js'] = 'v6.3 (SCRIPT_OPTIONS: added Hindi/Marathi --
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
-  designedBy: "- 3BU1 -",
-  showDesignedBy: true, // set false to hide the credit line entirely instead of just changing its text
   // The Mahabharata Kannada translation + Madhvacharya's Tatparya Nirnaya
   // excerpts interleaved in it carry no license anywhere (extracted from a
   // Pejawar Matha Android app's asset bundle) -- see core.js's

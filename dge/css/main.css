@@ -33,7 +33,6 @@ body.modal-open { overflow: hidden !important; }
 }
 
 /* Dynamic Font Switching for Non-Devanagari Scripts */
-body.non-devanagari .reading-card,
 body.non-devanagari .shloka-text,
 body.non-devanagari .commentary-block { font-family: var(--font-ui) !important; }
 
@@ -42,7 +41,18 @@ body.non-devanagari .commentary-block { font-family: var(--font-ui) !important; 
 
 /* Top App Bar (frosted glass on themes that opt in via --glass-blur) */
 .top-bar { position: fixed; top: 0; left: 0; right: 0; height: calc(50px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); background: var(--top-bar-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding-left: 6px; padding-right: 6px; box-shadow: var(--shadow-xs); box-sizing: border-box; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
-.top-bar-title { font-size: 14px; font-weight: 700; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-right: auto; padding-left: 4px; transition: color var(--t-med) var(--ease); }
+/* 7 Sep 2026: Library is an icon-only button (name on hover via title) and
+   the search row sits in the bar between it and the ☰ menu. */
+.top-bar-title { font-size: 15px; font-weight: 700; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; padding: 4px 6px 4px 4px; background: transparent; border: none; border-radius: var(--radius-xs); display: flex; align-items: center; gap: 2px; line-height: 1; transition: color var(--t-med) var(--ease), background var(--t-fast) var(--ease); }
+.top-bar-title:hover { background: var(--card-active); }
+.top-bar-title-icon { font-size: 16px; }
+.top-bar-search { flex: 1 1 auto; min-width: 0; margin: 0 4px; gap: 4px; align-items: center; }
+.top-bar-search .btn-lang { padding: 5px 7px; font-size: 11px; max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.top-bar-search .search-input { padding: 7px 54px 7px 10px; font-size: 12px; }
+.top-bar-search .mic-btn { right: 26px; width: 22px; height: 22px; font-size: 11px; }
+.top-bar-search .clear-search-btn { right: 6px; font-size: 12px; }
+.top-bar-search .char-palette-toggle { width: 30px; height: 30px; border-radius: 50%; font-size: 13px; }
+@media (max-width: 359px) { .top-bar-search .char-palette-toggle { display: none; } }
 /* NOTE: do NOT add overflow-x here to handle crowding. The dropdowns are
    position:absolute children of this row, and any overflow value creates
    a clipping context that hides them — the same bug that broke the admin
@@ -61,20 +71,21 @@ body.non-devanagari .commentary-block { font-family: var(--font-ui) !important; 
 body.is-authorized .advanced-feature { display: flex !important; }
 
 /* Theme picker swatches — fixed, literal colors per theme (independent of
-   whichever theme is currently active) so the picker always shows all 4. */
+   whichever theme is currently active) so the picker always shows both. */
 .theme-swatch { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.4); }
 .theme-swatch-vandana { background: linear-gradient(135deg, #0B0907, #E8B24D); }
 .theme-swatch-traditional { background: linear-gradient(135deg, #AE231F, #B9821F); }
-.theme-swatch-minimal { background: linear-gradient(135deg, #4A4A46, #C9C9C3); }
-.theme-swatch-vibrant { background: linear-gradient(135deg, #E0431F, #D9A521); }
-.theme-swatch-darkglass { background: linear-gradient(135deg, #14110F, #E8B24D); }
 
 /* Header & Search Bar */
-.header { text-align: center; padding: 10px 0 14px; }
+/* 7 Sep 2026: compact header -- the verse list starts as high as possible.
+   One title row (title + 🔢 jump button), no credit line, no rule. */
+.header { text-align: center; padding: 4px 0 6px; }
+.title-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.title-toc-btn { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 /* 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa nav (library.js's
    dgeInitChapterNav/dgeRenderChapterNav) -- placed first inside .header so
    it sits above the title, per the project lead's explicit ask. */
-.chapter-nav-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.chapter-nav-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
 .chapter-nav-btn {
   background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-pill);
   padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer;
@@ -84,13 +95,11 @@ body.is-authorized .advanced-feature { display: flex !important; }
 .chapter-nav-btn:hover { background: var(--card-active); }
 .chapter-nav-btn:active { transform: scale(0.95); }
 .chapter-nav-position { font-size: 10px; color: var(--muted-text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; flex-shrink: 0; white-space: nowrap; }
-.header h1 { margin: 0; font-family: var(--font-sanskrit); font-size: 24px; color: var(--accent-red); font-weight: 700; transition: color var(--t-med) var(--ease); }
-.header .author { font-size: 11px; color: var(--muted-text); text-transform: uppercase; font-weight: 600; letter-spacing: 0.6px; margin-top: 4px; }
-.header .rule { width: 64px; height: 2px; margin: 8px auto 0; background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); opacity: 0.8; }
+.header h1 { margin: 0; font-family: var(--font-sanskrit); font-size: 20px; line-height: 1.3; color: var(--accent-red); font-weight: 700; transition: color var(--t-med) var(--ease); }
 .support-project-btn { margin: 12px auto 0; display: block; padding: 8px 18px; border-radius: var(--radius-pill); border: 1.5px solid var(--accent-red); background: transparent; color: var(--accent-red); font-weight: 700; font-size: 13px; cursor: pointer; transition: all var(--t-fast) var(--ease); }
 .support-project-btn:active { transform: scale(0.96); background: var(--accent-glow); }
 
-.search-box-group { display: flex; gap: 6px; margin-bottom: 12px; }
+.search-box-group { display: flex; gap: 6px; }
 .char-palette-toggle { flex-shrink: 0; width: 38px; border-radius: var(--radius-md); border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-primary); font-weight: 700; font-style: italic; cursor: pointer; }
 .char-palette-panel { display: none; position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 160; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 8px; margin-bottom: 12px; box-shadow: var(--shadow-md); }
 .char-palette-panel.show { display: block; }
@@ -112,29 +121,15 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .search-nav-btn { background: none; border: none; font-size: 14px; cursor: pointer; color: var(--accent-red); padding: 4px; display: flex; align-items: center; justify-content: center; }
 
 /* Reading & List Cards */
-.reading-card-wrap { position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 150; background: var(--bg-main); padding-top: 2px; }
-.reading-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.reading-card-toggle { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform var(--t-fast) var(--ease); flex-shrink: 0; }
-.reading-card-toc-btn { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-/* Minimized collapses to just the header row (toc + expand buttons) — the
-   shloka text itself is hidden rather than clipped to a couple of lines,
-   so the card comes down to a thin strip instead of still eating a chunk
-   of the screen, and the shloka list underneath starts rendering higher. */
-.reading-card-wrap.minimized .reading-card { min-height: 0; padding: 6px 14px; margin-bottom: 8px; }
-.reading-card-wrap.minimized .reading-card-header { margin-bottom: 0; }
-.reading-card-wrap.minimized #readingCard { display: none; }
-.reading-card-wrap.minimized .reading-card::before, .reading-card-wrap.minimized .reading-card::after { display: none; }
-.reading-card-wrap.minimized .reading-card-toggle { transform: rotate(180deg); }
-
-.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 16px 18px 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), max-height var(--t-med) var(--ease), padding var(--t-med) var(--ease); -webkit-touch-callout: none; }
-.reading-card.highlight { border-color: var(--accent-red); box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-sm); }
-.reading-card::before, .reading-card::after { content: "❈"; display: block; font-size: 12px; color: var(--accent-gold); opacity: 0.6; margin-bottom: 6px; font-family: var(--font-ui); }
-.reading-card::after { margin-bottom: 0; margin-top: 6px; }
+/* 7 Sep 2026: the reading card itself is gone; this wrap only holds the
+   single-view / list-view navigator rows (empty and zero-height otherwise). */
+.reading-card-wrap { position: sticky; top: calc(50px + env(safe-area-inset-top)); z-index: 150; background: var(--bg-main); }
+.shloka-card.playing { box-shadow: 0 0 0 3px var(--accent-glow); }
 .sync-word { transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease); border-radius: 5px; padding: 0 2px; }
 .sync-word.active { background: var(--accent-red); color: #fff; box-shadow: 0 0 0 2px var(--accent-red); }
 
 .shloka-list { display: flex; flex-direction: column; gap: 10px; overflow-anchor: none; }
-.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-left: 3px solid transparent; border-radius: var(--radius-md); padding: 11px 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 150px); }
+.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-left: 3px solid transparent; border-radius: var(--radius-md); padding: 11px 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 10px); }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left-color: var(--accent-red); border-left-width: 4px; }
 .shloka-card:active { background: var(--card-active); }
 /* Primary reading-progress state = border color only (section 4/17) —
@@ -462,6 +457,17 @@ body:has(.popup-sheet.show)::after {
 @keyframes dgeSheetFadeIn { from { opacity: 0; } to { opacity: 1; } }
 .popup-label { font-size: 10px; color: #8a7a63; text-transform: uppercase; letter-spacing: 0.04em; }
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
+/* 7 Sep 2026: accordion sections in the Display sheet (utils.js dgeInitAccordions) */
+.dge-acc { display: flex; flex-direction: column; gap: 4px; }
+.dge-acc-head { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 10px; background: transparent; border: 1px solid var(--card-border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; text-align: left; font: inherit; }
+.dge-acc-head:hover { background: var(--card-border); }
+.dge-acc-title { font-size: 10.5px; font-weight: 800; color: #8a7a63; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.dge-acc-current { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--accent-red); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55%; }
+.dge-acc-arrow { flex-shrink: 0; font-size: 11px; color: var(--muted-text); }
+.dge-acc-arrow::before { content: "▾"; }
+.dge-acc.open .dge-acc-arrow::before { content: "▴"; }
+.dge-acc-body { display: none; flex-direction: column; gap: 4px; padding-left: 4px; }
+.dge-acc.open .dge-acc-body { display: flex; }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
 
 /* 24 Aug 2026: live-preview Shloka Image Composer (#shareImagePreviewSheet) */

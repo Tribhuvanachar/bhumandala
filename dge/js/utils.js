@@ -1,16 +1,20 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v2.4 (new window.dgeMakeFloatingDraggable(el, storageKey) -- shared drag-to-reposition + collapse-to-a-dot for position:fixed floating buttons, used by the कोश and global-search FABs)';
+window.DGE_VERSIONS['utils.js'] = 'v2.5 (two themes + aliases for the removed ones; dgeInitAccordions for the Display sheet; reading-card minimize gone. v2.4: new window.dgeMakeFloatingDraggable(el, storageKey) -- shared drag-to-reposition + collapse-to-a-dot for position:fixed floating buttons, used by the कोश and global-search FABs)';
 
-window.DGE_THEMES = ['vandana', 'traditional', 'minimal', 'vibrant', 'darkglass'];
+// 7 Sep 2026: two themes only, per the project lead ("is so many display
+// themes required? keep only two"): Vandana (dark, the landing-page palette)
+// and Traditional (light, cream with the classic red and gold). Minimal,
+// Vibrant and Dark Glass are gone; a saved preference for one of them maps
+// to the nearest survivor so nobody's page flips from light to dark.
+window.DGE_THEMES = ['vandana', 'traditional'];
+window.DGE_THEME_ALIASES = { minimal: 'traditional', vibrant: 'traditional', darkglass: 'vandana' };
 window.DGE_THEME_META_COLORS = {
   vandana: '#0B0907',
-  traditional: '#FFFDF9',
-  minimal: '#FBFBFA',
-  vibrant: '#FFF6E8',
-  darkglass: '#0E0C0B'
+  traditional: '#FFFDF9'
 };
 
 window.applyTheme = function(theme) {
+  theme = window.DGE_THEME_ALIASES[theme] || theme;
   if (window.DGE_THEMES.indexOf(theme) === -1) theme = 'vandana';
   window.activeTheme = theme;
 
@@ -19,7 +23,7 @@ window.applyTheme = function(theme) {
 
   // 'dark-mode' is kept as an alias so the couple of legacy selectors that
   // still key off it (search highlight, commentary block tint) stay correct.
-  document.body.classList.toggle('dark-mode', theme === 'darkglass' || theme === 'vandana');
+  document.body.classList.toggle('dark-mode', theme === 'vandana');
 
   // Mirrored onto <html> too, alongside body, so tokens.css's html.theme-X
   // rules (see dge/js/theme-guard.js, which sets this on <html> before
@@ -27,7 +31,7 @@ window.applyTheme = function(theme) {
   // pre-paint one.
   window.DGE_THEMES.forEach(t => document.documentElement.classList.remove('theme-' + t));
   document.documentElement.classList.add('theme-' + theme);
-  document.documentElement.classList.toggle('dark-mode', theme === 'darkglass' || theme === 'vandana');
+  document.documentElement.classList.toggle('dark-mode', theme === 'vandana');
 
   document.querySelectorAll('#displayPopup .pop-item[data-theme]').forEach(el => {
     el.classList.toggle('active', el.dataset.theme === theme);
@@ -46,10 +50,10 @@ window.setTheme = function(theme, el) {
 // Legacy aliases kept so nothing that still calls these (or a bookmarked
 // console command) throws — they now just map onto the theme system.
 window.applyDarkMode = function(isDark) {
-  window.applyTheme(isDark ? 'darkglass' : 'traditional');
+  window.applyTheme(isDark ? 'vandana' : 'traditional');
 };
 window.toggleDarkMode = function() {
-  window.setTheme(window.activeTheme === 'darkglass' ? 'traditional' : 'darkglass');
+  window.setTheme(window.activeTheme === 'vandana' ? 'traditional' : 'vandana');
 };
 
 window.applyFontSize = function(px) {
@@ -145,26 +149,69 @@ window.showToast = function(msg) {
   }
 };
 
-// Reading-card minimize — it's now pinned (sticky) at the top of the
-// scrolling list, so this lets it be collapsed to a slim strip instead of
-// permanently taking up a big block of vertical space.
-window.toggleReadingCardMinimize = function() {
-  const wrap = document.getElementById('readingCardWrap');
-  const btn = document.getElementById('readingCardToggleBtn');
-  if (!wrap) return;
-  const isMin = wrap.classList.toggle('minimized');
-  if (btn) btn.innerText = isMin ? '⌃' : '⌄';
-  localStorage.setItem('readingCardMinimized', isMin ? 'true' : 'false');
-};
+// (7 Sep 2026: the sticky reading card and its minimize toggle are gone --
+// the active verse is marked and read-along highlighted in its own list
+// card instead; see audio.js.)
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('readingCardMinimized') === 'true') {
-    const wrap = document.getElementById('readingCardWrap');
-    const btn = document.getElementById('readingCardToggleBtn');
-    if (wrap) wrap.classList.add('minimized');
-    if (btn) btn.innerText = '⌃';
-  }
-});
+// 7 Sep 2026: the Display sheet's sections (Layout, Genie Selection Mode,
+// Reading Script, Reading Size, Reading View, Appearance) are accordions --
+// each .popup-label becomes a header with a ▾/▴ arrow, its items fold
+// away, and the header shows the current choice so a folded section still
+// tells you what is set. The lead's ask: "can each of the menu items be
+// made accordion drops with up and down arrows". Open state is remembered
+// per section. The markup (ids, data-* attributes, .pop-item children) is
+// untouched, so setScript/setFontSize/setTheme/... keep working.
+window.dgeInitAccordions = function(rootSel, storageKey) {
+  const root = document.querySelector(rootSel);
+  if (!root || root.dataset.accordions === '1') return;
+  root.dataset.accordions = '1';
+  let open = {};
+  try { open = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (e) { open = {}; }
+  const labels = Array.from(root.querySelectorAll('.popup-label'));
+  labels.forEach((label, idx) => {
+    const key = (label.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') || String(idx);
+    const body = document.createElement('div');
+    body.className = 'dge-acc-body';
+    let n = label.nextSibling;
+    while (n && !(n.nodeType === 1 && (n.tagName === 'HR' || n.classList.contains('popup-label')))) {
+      const next = n.nextSibling; body.appendChild(n); n = next;
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'dge-acc' + (open[key] ? ' open' : '');
+    wrap.dataset.accKey = key;
+    const head = document.createElement('button');
+    head.type = 'button'; head.className = 'dge-acc-head';
+    head.setAttribute('aria-expanded', open[key] ? 'true' : 'false');
+    head.innerHTML = `<span class="dge-acc-title"></span><span class="dge-acc-current"></span><span class="dge-acc-arrow" aria-hidden="true"></span>`;
+    head.querySelector('.dge-acc-title').textContent = (label.textContent || '').trim();
+    label.parentNode.insertBefore(wrap, label);
+    wrap.appendChild(head); wrap.appendChild(body);
+    label.remove();
+    head.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrap.classList.toggle('open');
+      head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      open[key] = isOpen;
+      try { localStorage.setItem(storageKey, JSON.stringify(open)); } catch (err) {}
+    });
+  });
+  // Current-choice summary in each header (the active item's own label,
+  // minus its trailing hint), refreshed whenever the sheet changes.
+  const refresh = () => {
+    root.querySelectorAll('.dge-acc').forEach(w => {
+      const act = w.querySelector('.pop-item.active');
+      const cur = w.querySelector('.dge-acc-current');
+      if (!cur) return;
+      if (!act) { cur.textContent = ''; return; }
+      const clone = act.cloneNode(true);
+      clone.querySelectorAll('span[style*="margin-left:auto"]').forEach(x => x.remove());
+      cur.textContent = (clone.textContent || '').replace(/\s+/g, ' ').trim();
+    });
+  };
+  refresh();
+  new MutationObserver(refresh).observe(root, { subtree: true, attributes: true, attributeFilter: ['class'] });
+};
+document.addEventListener('DOMContentLoaded', () => { window.dgeInitAccordions('#displayPopup .popup-sheet-scroll', 'dge_display_acc'); });
 
 // --- DYNAMIC DEV LOGGER WITH COPY / MINIMIZE / CLOSE ---
 (function initDevLogger() {
@@ -282,9 +329,12 @@ document.addEventListener('DOMContentLoaded', () => {
     reopenBtn.innerText = '🐞 Logs';
     reopenBtn.style.cssText = 'display:block; position: fixed; top: 8px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
 
-    // Docked next to the "‹ Library" title rather than top-center — centering
-    // put it right on top of the commentary selector and other action-row
-    // popups, which is what a reader mistook for the tool being broken.
+    // Docked just under the Library button (left edge, below the top bar)
+    // rather than top-center — centering put it right on top of the
+    // commentary selector and other action-row popups, which is what a
+    // reader mistook for the tool being broken; and since 7 Sep 2026 the
+    // search row occupies the bar to the right of the Library button, so
+    // the pill hangs below the bar instead of beside the title.
     // Recentered on every popup open (see togglePopup in modals.js) — manual
     // drags are honoured until the next popup open snaps it back. Pages with
     // no top-bar title fall back to the old top-center placement.
@@ -292,12 +342,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleEl = document.querySelector('.top-bar-title');
         const titleRect = titleEl && titleEl.getBoundingClientRect();
         if (titleRect && titleRect.width) {
-            reopenBtn.style.left = Math.min(
-                window.innerWidth - reopenBtn.offsetWidth - 8,
-                titleRect.right + 8
-            ) + 'px';
-            reopenBtn.style.top = Math.max(4,
-                titleRect.top + (titleRect.height - reopenBtn.offsetHeight) / 2) + 'px';
+            reopenBtn.style.left = Math.max(4, titleRect.left) + 'px';
+            reopenBtn.style.top = Math.round(titleRect.bottom + 12) + 'px';
         } else {
             reopenBtn.style.left = Math.max(8, (window.innerWidth - reopenBtn.offsetWidth) / 2) + 'px';
             reopenBtn.style.top = '8px';

@@ -1223,6 +1223,32 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, ~12:05 am IST — reader page decluttered on the lead's phone-screenshot review.** Five direct asks,
+  all shipped in one pass (`dge/index.html` 4.65.0, `main.css`/`tokens.css`, `audio.js` v3.2, `utils.js` v2.5, `core.js`,
+  `theme-guard.js`, `config.js`, `config-editor.js`, `transliteration.js`, `intellisense.js`; Playwright 390 px
+  screenshots in both themes before merging):
+  1. **The sticky "reading card" under the search row is gone** ("why in the world is that text box below search box
+     useful"). The active verse is marked in its own list card (`.shloka-card.active` + `.playing` glow) and the
+     approximate read-along word highlight now wraps text nodes **inside that card's `.shloka-text`** (footnote
+     markers, search matches and pada breaks survive; re-wraps lazily after any `renderList()`). Long-press word
+     lookup and left/right swipe moved with it (list-delegated; swipe only on the active card). The 🔢 jump button
+     sits beside the title.
+  2. **Search row moved into the top bar** between an **icon-only Library button** (name on hover via `title`) and the
+     ☰ menu; scope button reads "All / Shloka / Notes"; the Ω toggle hides under 360 px. The dev 🐞 Logs pill now
+     hangs under the bar instead of beside the title.
+  3. **"DESIGNED BY" credit line removed for good**, with `appConfig.designedBy` / `showDesignedBy` and their Site
+     Settings fields. (The About modal's own "Designed By" paragraph, fed by `SITE_CONFIG.about`, is untouched.)
+  4. **Compact header**: title row + chapter prev/next only, no gold rule; the first verse card starts ≈145 px from
+     the top on a phone instead of ≈415 px.
+  5. **Display sheet: every section is an accordion** (`dgeInitAccordions`, header shows the current choice, ▾/▴,
+     open state remembered) and **only two themes remain — Vandana (dark, default) and Traditional (light)**. Minimal,
+     Vibrant and Dark Glass are removed from the picker, `tokens.css`, the swatches and the sibling pages'
+     inline palettes (guru-parampara tracker/lineage, tirtha.css, kamadhenu.html); a saved preference for a removed
+     theme maps to the nearest survivor (minimal/vibrant → traditional, darkglass → vandana), so nobody's page flips
+     from light to dark.
+  Not done / to watch: the word highlight is still the character-length estimate (no timestamps); `appFooter`'s
+  "v4.57.0" string is stale and was left alone.
+
 - **6 Sep 2026, ~10:15 pm IST — session handoff.** The long session ends; `HANDOFF.md` at the repo root
   carries the paste-ready prompt, the standing rules and the priority-ordered pending list for the next session.
 

@@ -29,7 +29,8 @@
 (function () {
   'use strict';
 
-  var THEMES = ['vandana', 'traditional', 'minimal', 'vibrant', 'darkglass'];
+  var THEMES = ['vandana', 'traditional'];
+  var ALIASES = { minimal: 'traditional', vibrant: 'traditional', darkglass: 'vandana' };   // removed 7 Sep 2026
 
   var theme;
   try {
@@ -39,7 +40,7 @@
     } else {
       // Same one-time migration restorePrefs() performs for a visitor who
       // has the legacy plain dark-mode flag but no app_theme yet.
-      theme = localStorage.getItem('app_darkMode') === 'true' ? 'darkglass' : 'vandana';
+      theme = 'vandana';   // the default (the legacy app_darkMode flag also landed on a dark theme)
     }
   } catch (e) {
     // Storage inaccessible (private-mode quirk, etc.) -- tokens.css's bare
@@ -48,9 +49,10 @@
     return;
   }
 
+  theme = ALIASES[theme] || theme;
   if (THEMES.indexOf(theme) === -1) theme = 'vandana';
 
   var html = document.documentElement;
   html.classList.add('theme-' + theme);
-  html.classList.toggle('dark-mode', theme === 'darkglass' || theme === 'vandana');
+  html.classList.toggle('dark-mode', theme === 'vandana');
 })();
