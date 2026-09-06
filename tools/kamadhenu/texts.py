@@ -29,6 +29,7 @@ WORKS = [
     ("dvadasha_stotra", "data/darshana/vedanta/dvaita/SarvaMula/dvadasha_stotra/mula/data.json", "items", "Dvādaśa Stotra"),
     ("vishnu_sahasranama", "data/darshana/vedanta/dvaita/SarvaMula/stotra/vishnu_sahasranama/mula/data.json", "items", "Viṣṇu Sahasranāma Stotra"),
     ("bhagavata_saroddhara", "data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/mula/data.json", "items", "Bhāgavata Sāroddhāra (Viṣṇutīrtha)"),
+    ("bhagavata_7", "data/purana/maha_purana/bhagavata_purana_madhva/skandha_07/data.json", "gita", "Bhāgavata Purāṇa (Madhva) skandha 7"),   # 7.9.8–50 = Prahlāda-stuti recordings
     ("mahabharata_tatparya_nirnaya", "data/darshana/vedanta/dvaita/SarvaMula/*/mahabharata_tatparya_nirnaya/mula/data.json", "items", "Mahābhārata Tātparya Nirṇaya"),
     ("stotra_misc", "data/stotra/*/data.json", "auto", "Stotra (misc)"),
 ]
@@ -98,7 +99,8 @@ def load_work(work, pattern, kind, label):
                 adh = int(re.sub(r"\D", "", it.get("id", "0")) or 0)
                 for sh in it.get("shlokas", []):
                     n = sh.get("number")
-                    out.append(unit_record(work_id, label, section, adh, n, sh.get("sanskrit_text", ""), f"gita:{adh}.{n}", p))
+                    prefix = "gita" if work == "bhagavad_gita" else work_id
+                    out.append(unit_record(work_id, label, f"adhyaya_{adh:02d}", adh, n, sh.get("sanskrit_text", ""), f"{prefix}:{adh}.{n}", p))
         elif k == "legacy":
             m = d.get("metadata", {}); shl = d.get("shlokas", {})
             base, pre, ext, width = m.get("archiveBaseUrl"), m.get("filePrefix", ""), m.get("fileExtension", ".mp3"), m.get("fileNumberWidth")

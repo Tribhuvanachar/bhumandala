@@ -1,6 +1,6 @@
 # Audio inventory (Kamadhenu Phase 1)
 
-Built 6 Sep 2026 by `kamadhenu/scripts/build_audio_inventory.py` from the per-file measurements in
+Built 6 Sep 2026 (refreshed 7:05 pm IST after the Drive folders were shared) by `kamadhenu/scripts/build_audio_inventory.py` from the per-file measurements in
 `kamadhenu_dataset/audio_inventory.json` and the text mapping in `kamadhenu_dataset/metadata.jsonl`. The CSV is
 `kamadhenu/data/audio_inventory.csv` (one row per file, 31 columns). No audio was copied.
 
@@ -8,12 +8,12 @@ Built 6 Sep 2026 by `kamadhenu/scripts/build_audio_inventory.py` from the per-fi
 
 | | files | hours |
 |---|---|---|
-| everything reachable | 2,544 | 22.15 |
+| everything reachable | 2,719 | 22.57 |
 | grade A (clean, no clipping, SNR good) | 637 | 6.52 |
 | grade B (usable) | 1,382 | 12.00 |
 | grade C/D (clipped, noisy, or very low bitrate) | 525 | 3.63 |
-| paired with a text at confidence ≥ 0.9 | 1,576 | 6.90 |
-| **usable for training today** | **1,032** | **4.03** |
+| paired with a text at confidence ≥ 0.9 | 1,999 | 8.89 |
+| **usable for training today** | **1,454** | **6.02** |
 
 "Usable" = grade A or B, text confidence ≥ 0.9, duration plausible for the text, not a byte-identical duplicate.
 
@@ -28,12 +28,14 @@ Built 6 Sep 2026 by `kamadhenu/scripts/build_audio_inventory.py` from the per-fi
 | drive/Gita Shlokas (7 adhyāyas) | 406 | 8.82 | mostly A/B | 44.1/48 kHz | 46–120 s per file: repeated/teaching style, needs segmentation |
 | drive/Audio* ('vsn' series) | 106 | 3.86 | B, some D | 48 kHz | Viṣṇu Sahasranāma, mapped at 0.55 confidence, unconfirmed |
 | drive/Vayu Stuti | 20 | 0.45 | 18 A | 44.1 kHz | pāda-level files, text not yet in DGE |
+| drive/Shlokas (Tīrthaprabandha) | 21 | 0.09 | 19 A | 48 kHz | Dakṣiṇa-prabandha verses 1–19 + 2 intro clips; mapped |
+| drive/Prahlada Narasimha Stotra | 43 | 0.21 | 6 A, 37 B | 48 kHz | Bhāgavata 7.9.8–50, one verse per file; mapped |
+| drive/Sripadaraja AshTottara Shatanamavali | 110 | 0.12 | 68 A | 48 kHz | one name per clip; text not in DGE yet |
 
 ## Text, metre and laghu/guru association
 
 Of the 1,985 files paired at confidence ≥ 0.7: 88.6 % carry a metre name from the DGE Chandas engine, 100 %
-carry a laghu/guru scan and pāda count, 11.3 % of metres have an exact pāda-level reference recording. Speaker
-is "unattributed" for every file: the sources record no reciter name.
+carry a laghu/guru scan and pāda count, 11.3 % of metres have an exact pāda-level reference recording. Speaker: every file is **3BHU1** (the project lead; consent to train the voice recorded 6 Sep 2026).
 
 ## Known defects (marked, not deleted)
 

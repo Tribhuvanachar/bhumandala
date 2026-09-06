@@ -1,7 +1,12 @@
 {
- "_readme": "Speaker attribution for the recordings (Kamadhenu). Keys are folder prefixes under incoming_audio/; the longest matching prefix wins. `consent` records the reciter's permission to train a synthetic voice from these recordings. Decided by the project lead on 6 Sep 2026.",
+ "_readme": "Speaker attribution for the recordings (Kamadhenu). Keys are folder prefixes under incoming_audio/; the longest matching prefix wins. `consent` records the reciter's permission to train a synthetic voice from these recordings. Decided by the project lead on 6 Sep 2026. 6 Sep 2026, 6:35 pm IST: the lead confirmed that the Sumadhva Vijaya and Rāghavendra Vijaya recordings are also his — every reachable recording is 3BHU1.",
  "speakers": {
-  "3BHU1": {"name": "3BHU1 (the project lead, Tribhuvanachar)", "consent_to_train_voice": true, "consent_recorded": "6 Sep 2026, in the Claude Code session, by the lead himself", "role": "Kamadhenu voice"}
+  "3BHU1": {
+   "name": "3BHU1 (the project lead, Tribhuvanachar)",
+   "consent_to_train_voice": true,
+   "consent_recorded": "6 Sep 2026, in the Claude Code session, by the lead himself",
+   "role": "Kamadhenu voice"
+  }
  },
  "by_folder": {
   "drive/Bhagavata Saroddhara": "3BHU1",
@@ -9,7 +14,11 @@
   "drive/Vayu Stuti": "3BHU1",
   "drive/Audio": "3BHU1",
   "dge_linked/PrahladaKrutaNarasimha": "3BHU1",
-  "dge_linked/sumadhva_vijaya": "unattributed (public DGE audio repo — confirm whether this is 3BHU1)",
-  "dge_linked/raghavendra_vijaya": "unattributed (archive.org — confirm whether this is 3BHU1)"
+  "dge_linked/sumadhva_vijaya": "3BHU1",
+  "dge_linked/raghavendra_vijaya": "3BHU1",
+  "drive/Shlokas": "3BHU1",
+  "drive/Prahlada Narasimha Stotra": "3BHU1",
+  "drive/Sripadaraja AshTottara Shatanamavali": "3BHU1",
+  "drive/single-file": "3BHU1"
  }
 }

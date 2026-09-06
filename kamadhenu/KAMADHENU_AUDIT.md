@@ -48,7 +48,7 @@ gap-closure, ZeroGPU deployment reference, Space scaffold and the HF account on 
 
 ## 3. What is incomplete
 
-* Speaker identity: decided 6 Sep 2026 — the Drive recordings and the Narasiṃha files are **3BHU1** (the project lead, consent given, `kamadhenu_dataset/speakers.json`); Sumadhva Vijaya / Rāghavendra Vijaya still unattributed.
+* Speaker identity: decided 6 Sep 2026 — the Drive recordings and the Narasiṃha files are **3BHU1** (the project lead, consent given, `kamadhenu_dataset/speakers.json`); Sumadhva Vijaya / Rāghavendra Vijaya confirmed as 3BHU1 at 6:35 pm — every recording is his.
 * Human verification: 0 reference recordings listened to; the review queue (405 Gītā files, 106 'vsn' files) is
   unanswered.
 * 989 Sumadhva Vijaya files are 11 kHz / 16 kbps MP3 and 46 files are byte-identical pairs (wrong verse served).
@@ -58,7 +58,7 @@ gap-closure, ZeroGPU deployment reference, Space scaffold and the HF account on 
 ## 4. What is missing
 
 * Any recording of 219 of the 256 metres in the database; only 16 metres have good coverage.
-* Tīrthaprabandha recordings (287 expected) — in Drive folders that are not shared.
+* Tīrthaprabandha recordings: the shared folder holds only Dakṣiṇa-prabandha 1–19 (19 files); the ~287 the lead remembers are elsewhere.
 * 48 kHz masters of a decided voice; the recording protocol exists, nothing has been recorded to it.
 * A pilot model, an evaluation harness, a HUMAN_REVIEW.csv workflow.
 
@@ -66,15 +66,15 @@ gap-closure, ZeroGPU deployment reference, Space scaffold and the HF account on 
 
 | | |
 |---|---|
-| audio files reachable | 2,544 (1.2 GB, git-ignored, re-fetchable with `--fetch` except the Drive part) |
-| total duration | 22.15 h |
+| audio files reachable | 2,719 (1.3 GB, git-ignored, re-fetchable with `--fetch`; Drive folders now public) |
+| total duration | 22.57 h |
 | grade A (clean) | 6.52 h · grade A+B 18.52 h · grade D 3.6 h |
 | text↔audio pairs, confidence ≥ 0.7 | 1,985 files, 15.81 h |
-| text↔audio pairs, confidence ≥ 0.9 | 1,576 files, 6.90 h |
-| **usable for training now** (grade A/B, confidence ≥ 0.9, plausible duration, not a duplicate) | **1,032 files, 4.03 h** |
+| text↔audio pairs, confidence ≥ 0.9 | 1,999 files, 8.89 h |
+| **usable for training now** (grade A/B, confidence ≥ 0.9, plausible duration, not a duplicate) | **1,454 files, 6.02 h** |
 | pairs with a named metre | 88.6 % of the ≥0.7 pairs |
 | pairs with laghu/guru string | 100 % of the ≥0.7 pairs (engine output; the 11.4 % without a metre name still have scans) |
-| unmatched audio (no confident text) | 559 files |
+| unmatched audio (no confident text) | 307 files (110 of them the Nāmāvali, text not in DGE) |
 | sample rates | 48 kHz 1,034 · 44.1 kHz 521 · 11.025 kHz 989 |
 
 Sources: DGE-linked (Sumadhva Vijaya 989, Rāghavendra Vijaya 576, Prahlāda-Narasiṃha 11) 6.9 h; Drive (Bhāgavata

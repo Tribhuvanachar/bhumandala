@@ -505,6 +505,10 @@
 {"id": "km_8ad52c56b242", "audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 7/G.7.7.aac", "text_id": "gita:7.7"}
 {"id": "km_acccac87bf47", "audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 7/G.7.8.aac", "text_id": "gita:7.8"}
 {"id": "km_465dffc2718d", "audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 7/G.7.9.aac", "text_id": "gita:7.9"}
+{"id": "km_328c75c318ee", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.11.tp11.mp3", "text_id": "tirtha_prabandha:TP_DAK_011"}
+{"id": "km_45b5f37e01dd", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.12.tp12.mp3", "text_id": "tirtha_prabandha:TP_DAK_012"}
+{"id": "km_98e07a987e84", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.18.tp18.mp3", "text_id": "tirtha_prabandha:TP_DAK_018"}
+{"id": "km_373505cec1f1", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.8.tp8.mp3", "text_id": "tirtha_prabandha:TP_DAK_008"}
 {"id": "km_14b20ff94903", "audio": "kamadhenu_dataset/incoming_audio/drive/Vayu Stuti/vs.ns.1.1.mp3", "text_id": "nakha_stuti:NNS_C01_V01"}
 {"id": "km_d0203c42303c", "audio": "kamadhenu_dataset/incoming_audio/drive/Vayu Stuti/vs.ns.1.2.mp3", "text_id": "nakha_stuti:NNS_C01_V01"}
 {"id": "km_18d427eb4c9d", "audio": "kamadhenu_dataset/incoming_audio/drive/Vayu Stuti/vs.ns.1.3.mp3", "text_id": "nakha_stuti:NNS_C01_V01"}
