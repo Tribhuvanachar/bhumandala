@@ -1,66 +1,31 @@
 {
- "measured_at": "06 Sep 2026, 07:17 PM IST",
+ "measured_at": "06 Sep 2026, 07:36 PM IST",
  "space": "https://sarvamulaorg-kamadhenu.hf.space",
- "calls": 14,
- "rtf_mean": null,
- "gpu_seconds_per_verse_mean": null,
- "cold_start_wall_seconds": null,
+ "hardware": "zero-a10g (ZeroGPU, SarvamulaOrg PRO)",
+ "how": "two /synthesize calls from a GitHub Actions runner (workflow kamadhenu-space-logs.yml, run 34038096835): Gītā 1.1, dge_chandas अनुष्टुप्, seed 60. The Claude sandbox's egress gets `event: error / data: null` from ZeroGPU, so measure.py must be run from elsewhere (a browser, or that workflow).",
+ "calls": 2,
  "rows": [
   {
    "chandas": "अनुष्टुप्",
-   "error": "None"
+   "bank_meter": "anuṣṭubh",
+   "meter_resolved_by": "dge_name",
+   "audio_seconds": 9.63,
+   "gpu_seconds": 23.22,
+   "cold": true,
+   "note": "first call after deploy: weight download + load included"
   },
   {
-   "chandas": "इन्द्रवंशा",
-   "error": "None"
-  },
-  {
-   "chandas": "इन्द्रवज्रा",
-   "error": "None"
-  },
-  {
-   "chandas": "उपेन्द्रवज्रा",
-   "error": "None"
-  },
-  {
-   "chandas": "द्रुतविलम्बित",
-   "error": "None"
-  },
-  {
-   "chandas": "प्रमाणिका",
-   "error": "None"
-  },
-  {
-   "chandas": "भुजङ्गप्रयात",
-   "error": "None"
-  },
-  {
-   "chandas": "मालिनी",
-   "error": "None"
-  },
-  {
-   "chandas": "रथोद्धता",
-   "error": "None"
-  },
-  {
-   "chandas": "वंशस्थ",
-   "error": "None"
-  },
-  {
-   "chandas": "वसन्ततिलका",
-   "error": "None"
-  },
-  {
-   "chandas": "शार्दूलविक्रीडित",
-   "error": "None"
-  },
-  {
-   "chandas": "शालिनी",
-   "error": "None"
-  },
-  {
-   "chandas": "स्रग्धरा",
-   "error": "None"
+   "chandas": "अनुष्टुप्",
+   "bank_meter": "anuṣṭubh",
+   "meter_resolved_by": "dge_name",
+   "audio_seconds": 9.63,
+   "gpu_seconds": 4.3,
+   "cold": false
   }
- ]
+ ],
+ "rtf_warm": 0.447,
+ "gpu_seconds_per_verse_warm": 4.3,
+ "cold_start_gpu_seconds": 23.22,
+ "quota_note": "PRO account: 40 ZeroGPU-minutes/day for the owner's own calls; anonymous visitors draw on the free per-IP quota (~5 min/day) — at 4.3 GPU s per anuṣṭubh verse that is ~70 verses per visitor per day; the Space's own KAMADHENU_DAILY_LIMIT (10/IP) is the tighter cap.",
+ "todo": "per-metre table (14 bank metres) via measure.py from a browser-side run or an extended workflow"
 }

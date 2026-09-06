@@ -92,7 +92,10 @@ Two things the DGE side does differently from the demo:
 2. **The voice is a parameter.** The Space reads `VAGDHENU_HF`/`VAGDHENU_VOICE`; when Kamadhenu has its own
    fine-tuned voice (Stage 2) the same Space serves it by changing two environment variables.
 
-## 4a. The DGE account (done 6 Sep 2026)
+## 4a. The DGE account (done 6 Sep 2026) — Space live the same evening
+
+**Status 6 Sep 2026, 7:36 pm IST:** `SarvamulaOrg/kamadhenu` is deployed and running on ZeroGPU. First measurements in `space_measurements.json`: 4.3 GPU s per anuṣṭubh verse warm (RTF 0.45), 23 GPU s cold. Deploy = the `Deploy — Kamadhenu Space` workflow; diagnostics = `Kamadhenu Space — logs + API probe`.
+
 
 Hugging Face user **`SarvamulaOrg`** (created 6 Sep 2026, 12:49 pm IST; **PRO since 6 Sep 2026 evening**). With PRO the
 30-day wait for ZeroGPU does not apply: the Space can be created now and Hardware → ZeroGPU switched on immediately
