@@ -161,8 +161,19 @@
   function matchVrutta(pats) {
     if (!DB || !pats.length) return null;
     var an = matchAnushtup(pats);
-    if (an) return an;
+    // 4×8 that obeys the śloka rules is anuṣṭubh; 4×8 that breaks them may be a sama vṛtta of
+    // eight akṣaras (प्रमाणिका, चित्रपदा, विद्युन्माला …) — try the table before calling it irregular
+    if (an && !an.irregular) return an;
     var res;
+    if (an && pats.length === 4) {
+      res = DB.sama_vrutta.find(function (v) {
+        return v.akshara_sankhya === 8 && pats.every(function (p) { return padaMatches(p, v.lakshana, true); });
+      });
+      if (res) return { names: res.vrutta_names, kind: 'समवृत्तम्', gana: res.gana,
+                        yati: res.yati, aksh: res.akshara_sankhya, matra: res.matra };
+      return an;
+    }
+    if (an) return an;
     // sama: every pada the same vrutta
     if (pats.every(function (p) { return p.length === pats[0].length; })) {
       res = DB.sama_vrutta.find(function (v) {

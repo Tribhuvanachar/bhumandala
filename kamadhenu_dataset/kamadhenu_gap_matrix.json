@@ -1,5 +1,5 @@
 {
- "generated_at": "06 Sep 2026, 11:06 AM IST",
+ "generated_at": "06 Sep 2026, 3:35 PM IST",
  "rows": [
   {
    "component": "Sanskrit normalization",
@@ -72,7 +72,7 @@
    "dge": "none (ARCHITECTURE.md §MVP-5 plan only)",
    "vagdhenu": "bank.json + 27 wavs, 16 metres, Prathosh's voice, half-reference rule",
    "status": "🟡 PARTIAL",
-   "evidence": "reference_bank.json: 37 metres with a structurally safe candidate, 0 human-verified",
+   "evidence": "reference_bank.json: 38 metres with a structurally safe candidate, 0 human-verified",
    "required_for_kamadhenu": "per-metre clean references in the lead's voice, human-verified text=audio",
    "file_or_path": "kamadhenu_dataset/reference_bank.html",
    "what_is_missing": "human listen-check on every candidate; clean 24 kHz+ takes for metres with only low-rate audio",
@@ -94,7 +94,7 @@
    "dge": "0 h in repo (2 orphan files); ~1,000 SMV clips at 11 kHz/16 kbps on the audio-data repo",
    "vagdhenu": "3.02 h Prathosh + 5 h pilot (not shared)",
    "status": "🟡 PARTIAL",
-   "evidence": "audio_inventory.json: 2544 files, 22.1 h fetched; 1576 high-confidence mappings; grades {'A': 637, 'B': 1382, 'D': 520, 'C': 5}",
+   "evidence": "audio_inventory.json: 2544 files, 22.1 h fetched; 1940 high-confidence mappings; grades {'A': 637, 'B': 1382, 'D': 520, 'C': 5}",
    "required_for_kamadhenu": "≥1 h clean single-speaker aligned pairs for adaptation",
    "file_or_path": "kamadhenu_dataset/metadata.jsonl, subsets/",
    "what_is_missing": "verified text=audio; speaker attribution; most audio is lossy/low-rate",

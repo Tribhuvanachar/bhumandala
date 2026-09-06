@@ -45,8 +45,12 @@ def rules(rec):
         return dict(work="bhagavad_gita", section=None, verse=None, part="full", signal="folder", note="in the Gita folder but name not understood")
     if "saroddhara" in folder.lower():
         m = re.match(r"SBS(\d+)\.(\w+)(?:\.SBS(\d+))?$", stem)
-        return dict(work="bhagavata_saroddhara", section=f"adhyaya_{m.group(1)}" if m else None, verse=(m.group(2) if m else None), part="full", signal="filename",
-                    note="Bhāgavata Sāroddhāra — this work is NOT in the DGE corpus, so no canonical text exists to map to", running_no=(m.group(3) if m else None))
+        # SBS<prakaraṇa>.<n>.SBS<running verse>.mp3 — the running number is the Sāroddhāra verse_no used by the DGE
+        # import (dge/data/.../bhagavata_saroddhara/mula, ids BS_Pxx_Vnnn); SBS<p>.0 / SBS<p>.E are prakaraṇa intro/end
+        return dict(work="bhagavata_saroddhara", section=None, verse=(str(int(m.group(3))) if m and m.group(3) else None), part="full",
+                    signal="filename" if m and m.group(3) else "folder",
+                    note="SBS<prakaraṇa>.<n>.SBS<verse> → Sāroddhāra verse (text imported and verified 6 Sep 2026)" if m and m.group(3) else "prakaraṇa intro/summary or end clip — no single verse",
+                    running_no=(m.group(3) if m else None))
     if "vayu stuti" in folder.lower():
         m = re.match(r"vs\.ns\.(\d+)\.(\d+)$", stem)
         if m:

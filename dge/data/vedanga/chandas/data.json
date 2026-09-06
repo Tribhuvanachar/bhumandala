@@ -381,7 +381,13 @@
    "akshara_sankhya": 8,
    "matra": 12,
    "yati": [],
-   "examples": []
+   "examples": [],
+   "verified_examples": [
+    {
+     "text": "वासवदत्तनयेयं\nसा मयि संप्रति रक्ता\nपश्य सखे मम भाग्यं\nयाति दिशं दयिता मे",
+     "source": "Chandomañjarī 2.15"
+    }
+   ]
   },
   {
    "vrutta_names": [
@@ -424,7 +430,13 @@
     6,
     6
    ],
-   "examples": []
+   "examples": [],
+   "verified_examples": [
+    {
+     "text": "धराधरनितम्बसङ्गततनुः\nस्फुरद्दशनदीधितिर्हतमदः\nहरिर्मृगयुवा यथा विजयते\nतथा रिपुबलं जलोद्धतगतिः",
+     "source": "Chandomañjarī 2.72"
+    }
+   ]
   },
   {
    "vrutta_names": [
@@ -754,7 +766,13 @@
     4,
     4
    ],
-   "examples": []
+   "examples": [],
+   "verified_examples": [
+    {
+     "text": "न संशयो ममास्ति यत्\nभवन्त्यमी गुणास्तव\nअचिन्तनीयरूपधृग्\nहरे सदा प्रसीद मे",
+     "source": "Chandomañjarī 2.16"
+    }
+   ]
   },
   {
    "vrutta_names": [

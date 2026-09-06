@@ -69,6 +69,14 @@ def test_anushtubh_speaker_line_is_not_a_pada():
     assert len(r["padas"]) == 4
 
 
+def test_eight_syllable_sama_vrutta_beats_irregular_anushtubh():
+    # Chandomañjarī examples (Gemini, 6 Sep 2026): 4×8 that break the śloka rules but fit a sama table row
+    (p, c) = analyse("न संशयो ममास्ति यत्\nभवन्त्यमी गुणास्तव\nअचिन्तनीयरूपधृग्\nहरे सदा प्रसीद मे",
+                     "वासवदत्तनयेयं\nसा मयि संप्रति रक्ता\nपश्य सखे मम भाग्यं\nयाति दिशं दयिता मे")
+    assert [x[:7] for x in lg(p)] == ["LGLGLGL"] * 4 and has_name(p, "प्रमाणिका") and p["match"]["kind"] == "समवृत्तम्"
+    assert lg(c) == ["GLLGLLGG"] * 4 and has_name(c, "चित्रपदा")
+
+
 # ------------------------------------------------------------------ upajāti
 SMV_1_4 = ("तमोनुदानन्दमवाप लोकस्तत्वप्रदीपाकृतिगोगणेन ।\n"
            "यदास्यशीतांशुभुवा गुरूंस्तान् त्रिविक्रमार्यान् प्रणमामि वर्यान् ॥")

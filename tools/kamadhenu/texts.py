@@ -28,6 +28,7 @@ WORKS = [
     ("kanduka_stuti", "data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/kanduka_stuti/mula/data.json", "items", "Kanduka Stuti"),
     ("dvadasha_stotra", "data/darshana/vedanta/dvaita/SarvaMula/dvadasha_stotra/mula/data.json", "items", "Dvādaśa Stotra"),
     ("vishnu_sahasranama", "data/darshana/vedanta/dvaita/SarvaMula/stotra/vishnu_sahasranama/mula/data.json", "items", "Viṣṇu Sahasranāma Stotra"),
+    ("bhagavata_saroddhara", "data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/mula/data.json", "items", "Bhāgavata Sāroddhāra (Viṣṇutīrtha)"),
     ("mahabharata_tatparya_nirnaya", "data/darshana/vedanta/dvaita/SarvaMula/*/mahabharata_tatparya_nirnaya/mula/data.json", "items", "Mahābhārata Tātparya Nirṇaya"),
     ("stotra_misc", "data/stotra/*/data.json", "auto", "Stotra (misc)"),
 ]
