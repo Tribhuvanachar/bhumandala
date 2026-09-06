@@ -6,7 +6,7 @@ broadcasts, tightened the security rules, and — for the first time —
 tests. 204 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
-## 0. Where this stands (6 Sep 2026, 7:35 pm IST)
+## 0. Where this stands (6 Sep 2026, 9:45 pm IST)
 
 The lead created the Firebase project **`sarvamula-org`** and pasted its web config; it is now in
 `dge/js/config.js` (`FIREBASE_CONFIG`) and `AUTH_CONFIG.enabled` is **true**. The three identifiers are
@@ -19,9 +19,9 @@ Probed from the public endpoints the same evening:
 | Console step (§3) | State |
 |---|---|
 | Authorized domains | ✅ `tribhuvanachar.github.io`, `sarvamula.org`, `madhvacharya.in`, `sanatanavidyagurukulam.com`, the `*.web.app`/`*.firebaseapp.com` hosts, `localhost` |
-| Google sign-in provider | ❌ **not enabled** (Authentication → Sign-in method → Google → Enable) — until then the 👤 button reports "Sign-in failed: … operation-not-allowed" |
-| Firestore database | ❌ **not created** (the Firestore API is off) — create in **production mode**, then publish `dge/firebase/firestore.rules`; without it the first sign-in cannot write `users/<uid>` |
-| Hosting deploy | workflow ready (`Deploy — Firebase Hosting`, manual dispatch, `preview` or `live` channel); needs the **`FIREBASE_SERVICE_ACCOUNT`** secret (Project settings → Service accounts → Generate new private key, paste the JSON). GitHub Pages stays the live origin until the DNS cutover in the lead's migration guide |
+| Google sign-in provider | ✅ enabled by the lead (6 Sep 2026, ~9:40 pm IST) |
+| Firestore database | ❌ **not created yet** (lead: "later on") — sign-in still works: `user-auth.js` now treats a failed profile read/write as "signed in, default role" and says so in a toast. Create in **production mode**, then publish `dge/firebase/firestore.rules`, and roles come alive |
+| Hosting deploy | `FIREBASE_SERVICE_ACCOUNT` secret added by the lead (firebase-adminsdk service account, 6 Sep 2026); `Deploy — Firebase Hosting` workflow dispatched the same evening (preview channel first). GitHub Pages stays the live origin until the DNS cutover in the lead's migration guide |
 
 ## 1. What this is
 
