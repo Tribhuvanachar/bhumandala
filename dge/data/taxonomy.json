@@ -1252,6 +1252,16 @@
        "purva_prabandha": {},
        "dakshina_prabandha": {}
       }
+     },
+     "stotra": {
+      "_schema": "grantha_mula_text",
+      "_readme": "Stotras kept under SarvaMūla for the Mādhva pārāyaṇa corpus (alongside dvadasha_stotra); the flat top-level 'stotra' node stays the home for other stotras.",
+      "vishnu_sahasranama": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Maharshi Veda Vyasa (Mahābhārata, Anuśāsana Parva 149)"
+       }
+      }
      }
     },
     "DvaitaVedanta": {

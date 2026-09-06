@@ -1,10 +1,10 @@
 chandas,kind,syllables_per_pada,lg,exists_in_dge,texts_in_dge_corpus,audio_examples,unique_texts_with_audio,padas_with_audio,high_confidence_audio,quality_A_or_B,speaker_groups,has_strong_reference,reference_human_verified,coverage_status
-अनुष्टुप्,anushtubh_rule,8,"rule: 5th L, 6th G; 7th L in even pādas (pathyā)",True,2848,548,396,1584,181,499,13,True,False,🟢 GOOD COVERAGE
+अनुष्टुप्,anushtubh_rule,8,"rule: 5th L, 6th G; 7th L in even pādas (pathyā)",True,3028,548,396,1584,181,499,13,True,False,🟢 GOOD COVERAGE
 स्वागता,sama,11,GLGLLLGLLGG,True,158,157,157,628,157,60,2,True,False,🟢 GOOD COVERAGE
-उपजाति,inferred/label,,,False,424,135,135,540,133,95,3,False,,🟢 GOOD COVERAGE
-शालिनी,sama,11,GGGGGLGGLGG,True,98,96,96,384,96,80,2,True,False,🟢 GOOD COVERAGE
+उपजाति,inferred/label,,,False,426,135,135,540,133,95,3,False,,🟢 GOOD COVERAGE
+शालिनी,sama,11,GGGGGLGGLGG,True,99,96,96,384,96,80,2,True,False,🟢 GOOD COVERAGE
 मञ्जुभाषिणी,sama,13,LLGLGLLLGLGLG,True,88,88,88,352,88,54,2,True,False,🟢 GOOD COVERAGE
-वंशस्थ,sama,12,LGLGGLLGLGLG,True,143,81,81,324,81,48,2,True,False,🟢 GOOD COVERAGE
+वंशस्थ,sama,12,LGLGGLLGLGLG,True,144,81,81,324,81,48,2,True,False,🟢 GOOD COVERAGE
 रथोद्धता,sama,11,GLGLLLGLGLG,True,96,77,77,308,77,40,2,True,False,🟢 GOOD COVERAGE
 प्रमिताक्षरा,sama,12,LLGLGLLLGLLG,True,70,69,69,276,69,69,1,True,False,🟢 GOOD COVERAGE
 वसन्ततिलका,sama,14,GGLGLLLGLLGLGG,True,717,67,67,268,67,64,3,True,False,🟢 GOOD COVERAGE
@@ -15,7 +15,7 @@ chandas,kind,syllables_per_pada,lg,exists_in_dge,texts_in_dge_corpus,audio_examp
 शार्दूलविक्रीडित,sama,19,GGGLLGLGLLLGGGLGGLG,True,49,19,16,64,15,9,3,True,False,🟢 GOOD COVERAGE
 उपेन्द्रवज्रा,sama,11,LGLGGLLGLGG,True,48,12,12,48,12,4,2,True,False,🟢 GOOD COVERAGE
 मात्रासमक,matra,,,True,5,5,5,20,5,2,2,True,False,🟡 LIMITED COVERAGE
-स्रग्धरा,sama,21,GGGGLGGLLLLLLGGLGGLGG,True,19,4,4,16,4,2,2,True,False,🟡 LIMITED COVERAGE
+स्रग्धरा,sama,21,GGGGLGGLLLLLLGGLGGLGG,True,21,4,4,16,4,2,2,True,False,🟡 LIMITED COVERAGE
 इन्द्रवंशा,sama,12,GGLGGLLGLGLG,True,7,4,4,16,4,4,1,True,False,🟡 LIMITED COVERAGE
 तोटक,sama,12,LLGLLGLLGLLG,True,15,3,3,12,3,3,1,True,False,🟡 LIMITED COVERAGE
 पृथ्वी,sama,17,LGLLLGLGLLLGLGGLG,True,6,3,3,12,3,3,1,True,False,🟡 LIMITED COVERAGE

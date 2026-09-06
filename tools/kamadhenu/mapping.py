@@ -56,8 +56,11 @@ def rules(rec):
             return dict(work="vayu_stuti", section="mula", verse=m.group(1), part=f"pada_{m.group(2)}", signal="filename", note="vs<verse>.<pāda> — Hari Vāyu Stuti pāda-level recording; the work is NOT in the DGE corpus yet")
     if re.match(r"vsn\d*(\.\d+)?$", stem):
         m = re.match(r"vsn(\d*)(?:\.(\d+))?$", stem)
-        return dict(work="unknown_vsn", section=None, verse=(m.group(2) or m.group(1) or None), part="full", signal="filename",
-                    note="'vsn' series in the 'Audio' Drive folder (vsn1..16 + vsn1.1..1.91) — work not identifiable from the name alone (Viṣṇu Sahasranāma? Vāyu Stuti with Nakha?) — needs the lead to name it")
+        if m.group(2):   # vsn1.<N> → Viṣṇu Sahasranāma stotram verse N (working assumption from the prefix; needs one listen to confirm)
+            return dict(work="vishnu_sahasranama", section="stotram", verse=m.group(2), part="full", signal="filename_guess",
+                        note="'vsn1.<N>' read as Viṣṇu Sahasranāma stotram verse N (the DGE text was imported 6 Sep 2026); unconfirmed until one file is heard")
+        return dict(work="vishnu_sahasranama", section="purva_pithika", verse=m.group(1) or None, part="full", signal="filename_guess",
+                    note="'vsn<N>' in the 'Starting…' folders read as the opening (pūrva-pīṭhikā) verses N; unconfirmed — could equally be dhyāna verses")
     if top == "youtube":
         return dict(work="youtube", section=None, verse=None, part="full", signal="folder", note="YouTube audio supplied manually; map by title")
     return None
@@ -113,6 +116,8 @@ def run():
                 conf = 1.0 if chk == "plausible" else 0.92
             elif r["signal"] == "filename":
                 conf = 0.95 if chk == "plausible" else (0.8 if chk == "too_long" else 0.75)
+            elif r["signal"] == "filename_guess":
+                conf = 0.65 if chk == "plausible" else 0.55
                 if str(r["part"]).startswith("half") or str(r["part"]).startswith("pada"):
                     conf = min(conf, 0.88 if chk == "plausible" else 0.72)
             else:

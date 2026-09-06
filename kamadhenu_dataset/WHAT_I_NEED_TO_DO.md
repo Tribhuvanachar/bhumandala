@@ -11,7 +11,7 @@ Open `kamadhenu_dataset/KAMADHENU_STATUS.html` first. Everything below is derive
    - https://drive.google.com/drive/folders/1wOOrLOfr7wWWpE1xRW90FNsDk54V5M81
    - and the single file https://drive.google.com/file/d/1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03/view
    If you prefer not to share them publicly, download each as a zip and follow §B.
-3. **Tell Claude what the "vsn" recordings are** (106 files named `vsn1.aac … vsn16.aac` and `vsn1.1.aac … vsn1.91.aac` in the Drive folder called "Audio"). Viṣṇu Sahasranāma? Vāyu Stuti? Something else? One sentence is enough.
+3. **Confirm the "vsn" recordings** (106 files, `vsn1.aac … vsn16.aac` and `vsn1.1.aac … vsn1.91.aac` in the Drive folder "Audio"). The Viṣṇu Sahasranāma text is now in DGE (SarvaMūla › stotra) and the pipeline maps `vsn1.<N>` to stotram verse N at 0.55 confidence; play `vsn1.1.aac` and `vsn5.aac` once and say whether that reading is right (and what the `vsn1..16` "Starting" files are — pūrva-pīṭhikā? dhyāna?). Each file runs ~2 min, so these are teaching-style renditions too.
 4. **Listen to two Gītā files and describe them.** Every Gītā recording (401 files) is 46–120 seconds long, 5–8× longer than one verse takes. Play `incoming_audio/drive/Gita Shlokas__Adhyaya 2/G.2.10.aac` and `…/Adhyaya 15/G.15.1.1.mp3` and tell Claude what happens inside (verse repeated? meaning spoken? two voices?). That answer decides how 400 files get segmented.
 
 ## B. PROVIDE FILES (put these under `kamadhenu_dataset/incoming_audio/`)
