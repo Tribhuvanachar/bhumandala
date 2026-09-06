@@ -707,7 +707,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads यदाह; DGE master reading स चाह retained.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_03",
@@ -725,7 +725,7 @@
     "verse": "4"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.93,
     "dge_key": [
      3,
@@ -735,7 +735,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads यदाह; DGE master reading स चाह retained.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "प्रोक्तं किलैतद्भगवत्तमेन निवृत्तधर्माऽभिरताय तेन । सनत्कुमाराय यदाह पृष्टः साङ्ख्यायनायांग धृतव्रताय",
@@ -835,7 +842,7 @@
     "verse": "24"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.963,
     "dge_key": [
      8,
@@ -845,7 +852,14 @@
     "numbering": "sequence (printed 14 rejected)",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in trailing verse index इति १५.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "उत्थायापररात्रान्ते प्रयताः सुसमाहिताः । स्मरन्ति मम रूपाणि मुच्यन्ते तेंऽहसोऽखिलात्” इति ॥ १४ ॥ १५ ॥ १६ ॥",
@@ -1054,7 +1068,7 @@
     "verse": "32"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.974,
     "dge_key": [
      1,
@@ -1064,7 +1078,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Orthographic variation (anusvara दंभः vs ligature दम्भः); OCR noise.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "त्वां वर्तमानं नरदेव देहेष्वनुप्रवृत्तोऽयमधर्मयूथः । लोभोऽनृतं चौर्यमनार्यमोहो ज्येष्ठा च माया कलहश्च दंभः ॥ २० ॥",
@@ -1531,7 +1552,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads देवा; DGE master reading वेदा retained.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_01",
@@ -1549,7 +1570,7 @@
     "verse": "24"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.973,
     "dge_key": [
      1,
@@ -1559,7 +1580,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads देवा; DGE master reading वेदा retained.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "समागताः सर्वत एव सर्वे देवा यथा मूर्तिधरास्त्रिपृष्ठे । नेहाथवाऽमुत्र च कश्चनार्थ ऋते परानुग्रहमात्मशीलाः",
@@ -2402,7 +2430,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads पशुघ्नात्; DGE master retains विनाऽतिमुग्धान्. [DGE numbering 10.1.4; chat said None]",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_10",
@@ -2420,7 +2448,7 @@
     "verse": "4"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.909,
     "dge_key": [
      10,
@@ -2430,7 +2458,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads पशुघ्नात्; DGE master retains विनाऽतिमुग्धान्. [DGE numbering 10.1.4; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "निवृत्ततर्षैरुपगीयमानाद्भवौषधाच्छ्रोतृमनोभिरामात् । क उत्तमश्लोकगुणानुवादात् पुमान् विरज्येत विना पशुघ्नात् ॥ ४५ ॥",
@@ -2475,7 +2510,7 @@
     "verse": "52"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.977,
     "dge_key": [
      4,
@@ -2485,7 +2520,14 @@
     "numbering": "sequence (printed 45 rejected)",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in trailing commentary token इति.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "‘‘आस्तीर्य दर्भैः प्रागग्रैः कार्त्स्न्येन क्षितिमण्डलम् । ततो बृहद्वधान्मानी कर्म नावैषि यत्परमि' 'ति ॥ ४५ ॥",
@@ -2529,7 +2571,7 @@
     "verse": "52"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.984,
     "dge_key": [
      3,
@@ -2543,7 +2585,14 @@
      3,
      15,
      52
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR clipped आपीय to अपी.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "को नाम लोके पुरुषार्थसारवित् पुराकथानां भगवत्कथासुधाम् । अपी कर्णाञ्जलिभिर्भवापहामहो विरज्येत विना नरेतरम् ॥ ४६ ॥",
@@ -4089,7 +4138,7 @@
     "verse": "56"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.975,
     "dge_key": [
      10,
@@ -4099,7 +4148,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped word मन्ये.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "'ममानुग्रह ईश ते कृतो राज्यानुबन्धापगमो यदृच्छया । यः प्रार्थ्यते साधुभिरेकचर्यया वनं विविक्षुद्भिरखण्डभूमिपैः ॥ ७५ ॥",
@@ -4437,7 +4493,7 @@
     "verse": "40"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.958,
     "dge_key": [
      7,
@@ -4447,7 +4503,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR misread ligatures in कर्मशक्तिर्बह्व्यः सपत्न्यः.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "जिह्वैकतो ऽच्युत विकर्षति मावितृप्ता शिश्नोऽन्यतस्त्वगुदरं श्रवणं कुतश्चित् । घ्राणोऽन्यतश्चपलदृक् क्व च कर्मशक्ति- : सपत्य इव गेहपतिं लुनन्ति ॥ ८१ ॥",
@@ -6580,7 +6643,7 @@
     "verse": "6"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.885,
     "dge_key": [
      3,
@@ -6590,7 +6653,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped line 1a. [DGE numbering 3.17.6; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "सद्यः पुनाति जगदाश्वपचं विकुण्ठः । सोऽहं भवद्भ्य उपलब्धसुतीर्थकीर्ति श्छिन्द्यां स्वबाहुमपि वः प्रतिकूलवृत्तिम्",
@@ -7044,7 +7114,7 @@
     "verse": "19"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.977,
     "dge_key": [
      4,
@@ -7054,7 +7124,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in page number १२४.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "१२४ ॥ तथारिभिर्न प्रधने शिलीमुखैः शेतेऽर्दिताङ्गो हृदयेन दूयता । स्वानां यथा वक्रधियां दुरुक्तिभिर्दिवानिशं तप्यति मर्मताडितः ॥ १२५ ॥",
@@ -7488,7 +7565,7 @@
     "verse": "19"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.985,
     "dge_key": [
      4,
@@ -7498,7 +7575,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR ligature confusion for मे स्तव.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "हे सूत हे मागध सौम्य बन्दिन् लोकेऽधुनाऽस्पष्टगुणस्य मे स्यात् । किमाश्रयो वस्तव एष 'योज्यतां मा मय्यभूवन् वितथा गिरो वः ॥",
@@ -7708,7 +7792,7 @@
     "verse": "70"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.873,
     "dge_key": [
      7,
@@ -7718,7 +7802,14 @@
     "numbering": "sequence (printed 16 rejected)",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in printed reference number ७/१६.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "(७/१६ । ३९ ) ॥ रूपपेशलमाधुर्यसौगन्ध्यप्रियदर्शनः । स्त्रीणां प्रियतमो नित्यमतस्तत्प्रियलम्पटः (७ । १६ । ७०) ॥",
@@ -7738,7 +7829,7 @@
   },
   {
    "id": "BS_P10_V138",
-   "reference": "इन्द्रियजयप्रकरणम् · श्लोकः 138 · भा. 9.7.52",
+   "reference": "इन्द्रियजयप्रकरणम् · श्लोकः 138 · भा. 9.7.51",
    "sanskrit_text": "सङ्गं त्यजेत मिथुनव्रजिनान्मुमुक्षुः सर्वात्मना न विसृजेद् बहिरिन्द्रियाणि। एकश्चरन् रहसि चित्तमनन्त ईशे युञ्जीत तद्रतिषु साधुषु चेत् प्रसङ्गः॥",
    "tags": [
     "verse",
@@ -7759,10 +7850,10 @@
    "bhagavata_ref": {
     "skandha": 9,
     "adhyaya": 7,
-    "verse": "52"
+    "verse": "51"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.829,
     "dge_key": [
      9,
@@ -7772,7 +7863,15 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped line 1a. [DGE numbering 9.7.51; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "सर्वात्मना न विसृजेत् बहिरिन्द्रियाणि । एकश्वरन् रहसि चित्तमनन्त ईशे युञ्जीत तद्रतिषु साधुषु चेत्प्रसङ्गः ॥ १३८ ॥",
@@ -8722,7 +8821,7 @@
     "verse": "36"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.981,
     "dge_key": [
      2,
@@ -8732,7 +8831,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Sandhi difference (विदुः न vs विदुर्न); identical in pronunciation.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "नाहं न यूयं बत तद्गतिं विदुर्न वामदेवः किमुतापरे सुराः । यन्मायया मोहितबुद्धयस्त्विदं विनिर्मितं स्वात्मसमं विचक्ष्महे 11",
@@ -8777,7 +8883,7 @@
     "verse": "42"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.934,
     "dge_key": [
      2,
@@ -8787,7 +8893,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR clipped leading padas ते वै विदन्त्यतितरन्ति.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "येषां स एव भगवान्दययेदनन्तः सर्वात्मनाऽऽतिपदो यदि निर्व्यलीकम् । त्यतितरन्ति च देवमायां नैषां ममाहमिति धीः श्वसृगालभक्ष्ये",
@@ -9214,7 +9327,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads च (क्वचिच्चिरायुर्न च); DGE master retains हि.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_08",
@@ -9232,7 +9345,7 @@
     "verse": "21"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.973,
     "dge_key": [
      8,
@@ -9242,7 +9355,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads च (क्वचिच्चिरायुर्न च); DGE master retains हि.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "क्वचिच्चिरायुर्न च शीलमङ्गलं क्वचित्तदप्यस्ति न वेद्यमायुषः । यत्रोभयं कुत्र च सोऽप्यमङ्गलः सुमङ्गलः कश्चन कांक्षते हि माम् ॥",
@@ -9458,7 +9578,7 @@
     "verse": "36"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.899,
     "dge_key": [
      1,
@@ -9468,7 +9588,14 @@
     "numbering": "sequence (printed 168 rejected)",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped अपरे and swept in trailing index २ इति.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "वसुदेवस्य देवक्यां याचितोऽभ्यगात् । अजस्त्वमस्य क्षेमाय वधाय च सुरद्विषाम्” ॥ १ । २ । ३६ ॥ इति ॥ १६८ ॥",
@@ -9512,7 +9639,7 @@
     "verse": "20"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.97,
     "dge_key": [
      10,
@@ -9522,7 +9649,14 @@
     "numbering": "sequence (printed 169 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR visual misreading of गुणैः as जनैः.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "त्वत्तोऽस्य जन्मस्थितिसंयमान्विभो वदन्त्यनीहादगुणादविक्रियात् । त्वयीश्वरे ब्रह्मणि नो विरुध्यते तदाश्रयत्वादुपचर्यसे जनैः ॥ १६९ ॥",
@@ -10617,7 +10751,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads सूक्तस्य; DGE master retains दत्तस्य.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_05",
@@ -10635,7 +10769,7 @@
     "verse": "17"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.963,
     "dge_key": [
      5,
@@ -10649,7 +10783,14 @@
      5,
      19,
      17
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads सूक्तस्य; DGE master retains दत्तस्य.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यद्यत्र नः स्वर्गसुखावशेषितं स्विष्टस्य सूक्तस्य कृतस्य शोभनम् । तेनाब्जनाभस्मृति जन्म नः स्याद्वर्षे हरिर्भजतां शं तनोति ॥ १८९ ॥",
@@ -11146,7 +11287,7 @@
     "verse": "25"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.976,
     "dge_key": [
      5,
@@ -11156,7 +11297,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped word ते.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "प्राप्ता नृजातिं त्विह ये च जन्तवो ज्ञानक्रियाद्रव्यकलापसंभृताः । न चेद्यतेरन्नपुनर्भवाय भूयो वनौका इव यान्ति बन्धनम् ॥ १९८ ॥",
@@ -11258,7 +11406,7 @@
     "verse": "44"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.977,
     "dge_key": [
      5,
@@ -11272,7 +11420,14 @@
      4,
      24,
      44
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped word वपुः.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "'भूद्वीपवर्षसरिदद्रिनभः समुद्रपातालदिङ् नरकभागणलोकसंस्थम् । गीतं मया तव नृपाऽद्भुतमीश्वरस्य स्थूलं 'सकलजीवनिकायधाम्नः ॥ २०० ॥",
@@ -11319,7 +11474,7 @@
     "verse": "17"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.958,
     "dge_key": [
      4,
@@ -11329,7 +11484,14 @@
     "numbering": "sequence (printed 209 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR corrupted ligature बद्धासनो into बवासनं.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "तस्या विशुद्धकरणः शिववार्विगाह्य बवासनं जितमरुन्मनसाऽहृताक्षः । स्थूले दधार भगवत्प्रतिरूप एत- द्वयायंस्तदव्यवहितो व्यसृजत्समाधौ ॥ २०९ ॥",
@@ -11431,7 +11593,7 @@
     "verse": "9"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.975,
     "dge_key": [
      2,
@@ -11441,7 +11603,14 @@
     "numbering": "printed",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in verse reference numbers २२९ ४.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "'केचित्स्वदेहान्तर्हृदयावकाशे प्रादेशमात्रं पुरुषं वसन्तम् । चतुर्भुजं कञ्जरथाङ्गशङ्खगदाधरं धारणया स्मरन्ति ॥ २०३ ॥ २२९ ॥ ( ४ )",
@@ -11595,7 +11764,7 @@
     "verse": "12"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.759,
     "dge_key": [
      2,
@@ -11605,7 +11774,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped line 2b. [DGE numbering 2.2.12; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "विभूषितं मेखलयाङ्गुलीयकै 'र्महाधनैर्नूपुरकङ्कणादिभिः । स्निग्धामलैः ಸದಿ ಯಮನು ಗಾಯನ ॥",
@@ -11705,7 +11881,7 @@
     "verse": "14"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.945,
     "dge_key": [
      2,
@@ -11715,7 +11891,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Orthographic variation (शुद्धयति vs शुध्यति).",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "एकैकशोंऽगानि धिया विभावयेत् पादादि यावद्धसितं गदाभृतः । जितं जितं स्थानमपोह्य धारयेत्परं परं शुद्धयति धीर्यथा यथा ॥",
@@ -11760,7 +11943,7 @@
     "verse": "9"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.977,
     "dge_key": [
      11,
@@ -11770,7 +11953,14 @@
     "numbering": "printed",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in printed reference number ११२६/९ १.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "शुद्धिर्नृणां न तु तथेड्य दुराशयानां विद्याश्रुताध्ययनदानतपः क्रियाभिः । सत्त्वात्मनामृषभ ते यशसि प्रवृद्ध- सच्छ्रद्धया श्रवणसंभृतया यथा स्यात् ॥ २०९ ॥ ११२६/९ (१)",
@@ -11988,7 +12178,7 @@
     "verse": "53"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.987,
     "dge_key": [
      11,
@@ -11998,7 +12188,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped pronoun स.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "त्रिभुवनविभवहेतुभिर्विकुण्ठस्मृतिभिरजेशसुरादिभिर्विमृग्यात् । न चलति भगवत्पदारविन्दाल्लुवनिमिषार्धमपि स्म वैष्णवाग्र्यः",
@@ -12489,7 +12686,7 @@
     "verse": "44"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.933,
     "dge_key": [
      1,
@@ -12499,7 +12696,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR typo नत्स्वं for नस्त्वं.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "भवाय नत्स्वं भव विश्वभावन त्वमेव मातात्मसुहृत्पतिः पिता । त्वं सद्गुरुर्नः परमं च दैवतं यस्यानुवृत्त्या कृतिनो बभूविम ॥ २२२ ॥",
@@ -12755,7 +12959,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads त्वयैवाद्य तदेव; DGE master retains तदेवाद्य तथैव.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_08",
@@ -12773,7 +12977,7 @@
     "verse": "16"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.954,
     "dge_key": [
      8,
@@ -12787,7 +12991,14 @@
      8,
      21,
      16
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads त्वयैवाद्य तदेव; DGE master retains तदेवाद्य तथैव.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "त्वयैव दत्तं पदमैन्द्रमूर्जितं हृतं त्वयैवाद्य तदेव शोभनम् । मन्ये महानस्य कृतोऽप्यनुग्रहो विभ्रंशितो यच्छ्रिय आत्ममोहनात् ॥",
@@ -12894,7 +13105,7 @@
     "verse": "23"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.947,
     "dge_key": [
      8,
@@ -12908,7 +13119,14 @@
      8,
      21,
      23
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR scan noise adding stray repha (सर्ती for सतीं).",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यत्पादयोरवशधीः ३ सलिलं प्रदाय दूर्वा कुरैरपि विधाय सर्ती सपर्याम् । अत्युत्तमां गतिमसौ भजते त्रिलोकीं दत्वा न विक्लवमनाः कथमार्तिमृच्छेत्",
@@ -13409,7 +13627,7 @@
     "verse": "24"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.975,
     "dge_key": [
      3,
@@ -13419,7 +13637,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR broken conjunct (यथाअसा for यथाञ्जसा).",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "पानेन ते देव कथासुधायाः प्रवृद्धभक्त्या विशदाशया ये । वैराग्यसारं प्रतिलभ्य बोधं यथाअसा 'त्वापुरकुण्ठधिष्ण्यम् ॥ २३७ ॥",
@@ -13556,7 +13781,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads यदा भवान्; DGE master retains यदाह.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_06",
@@ -13574,7 +13799,7 @@
     "verse": "40"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.945,
     "dge_key": [
      6,
@@ -13584,7 +13809,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads यदा भवान्; DGE master retains यदाह.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "जितमजित तदा भवता यदा भवान् भागवतं धर्ममनवद्यम् । निष्किञ्चना ये मुनय आत्मारामा यमुपासतेऽपवर्गाय",
@@ -14168,7 +14400,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads तत्; DGE master retains हि.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_05",
@@ -14186,7 +14418,7 @@
     "verse": "27"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.974,
     "dge_key": [
      5,
@@ -14196,7 +14428,14 @@
     "numbering": "sequence (printed 259 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads तत्; DGE master retains हि.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "मनोवचोदृक्करणैर्हि तस्य साक्षात्कृतं मे परिबर्हणं तत् । विना पुमान्येन महाविमोहकृतान्तपाशान्न विमोक्तुमीशः ॥ २५९ ॥",
@@ -14461,7 +14700,7 @@
     "verse": "11"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.961,
     "dge_key": [
      7,
@@ -14471,7 +14710,14 @@
     "numbering": "sequence (printed 256 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped ending words कुतः परे.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "दस्यून्पुरं षण्णविजित्य लुम्पतो मन्यन्त एके स्वजिता दिशो दश । जितात्मनोज्ञस्य समस्य देहिनां साधोः स्वमोहप्रभवाः",
@@ -14571,7 +14817,7 @@
     "verse": "50"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.865,
     "dge_key": [
      7,
@@ -14581,7 +14827,14 @@
     "numbering": "sequence (printed 258 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped line 1a. [DGE numbering 7.9.50; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "वाक्कर्मणि ह्यपि करौ श्रवणं कथायाम् । संसेवया त्वयि विनेति षडङ्गया किं भक्तिं जनः परमहंसगतौ लभेत ॥ २५८ ॥",
@@ -14802,7 +15055,7 @@
     "verse": "6"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.99,
     "dge_key": [
      9,
@@ -14816,7 +15069,14 @@
      1,
      6,
      6
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Sandhi variation (करौ हरेर्मन्दिर- vs करो हरेर्मन्दिर-).",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "स वै मनः कृष्णपदारविन्दयोर्वचांसि वैकुण्ठगुणानुवर्णने । करौ हरेर्मन्दिरमार्जनादिषु श्रुतिं चकाराच्युतसत्कथोदये ॥ २६२ ॥",
@@ -15026,7 +15286,7 @@
     "verse": "20"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.995,
     "dge_key": [
      2,
@@ -15036,7 +15296,14 @@
     "numbering": "sequence (printed 266 rejected)",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Stray OCR noise character म.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "बिले बतोरुक्रमविक्रमान्ये न म शृण्वतः कर्णपुटे नरस्य । जिह्वाऽसती दार्दुरिकेव सूत न चेत्प्रगायत्युरुगायगाथाम् ॥ २६६ ॥",
@@ -15428,7 +15695,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads देहिनां; DGE master retains चैहिकास्तानीश.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_04",
@@ -15446,7 +15713,7 @@
     "verse": "24"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.957,
     "dge_key": [
      4,
@@ -15456,7 +15723,14 @@
     "numbering": "printed (gap before)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads देहिनां; DGE master retains चैहिकास्तानीश.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "वरान्विभो त्वद्वरदेश्वराद्बुधः कथं वृणीते गुणविक्रियात्मनाम् । ये नारकाणामपि सन्ति देहिनां तानीश कैवल्यपतेर्वृणीत कः ॥ २७५ ॥",
@@ -15674,7 +15948,7 @@
     "verse": "48"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.98,
     "dge_key": [
      3,
@@ -15684,7 +15958,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR anusvara typo for conjunct ङ्ग in येङ्ग.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "नात्यन्तिकं विगणयत्यपि ते प्रसादं किंचान्यदर्पितभयं भ्रुव उन्नयैस्ते । येंऽग त्वदङ्घ्रिशरणा भवतः कथायाः कीर्तन्यतीर्थयशसः कुशला रसज्ञाः ॥ २७९ ॥",
@@ -15798,7 +16079,7 @@
     "verse": "57"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.97,
     "dge_key": [
      10,
@@ -15808,7 +16089,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped leading particle न.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "कामयेऽन्यं तव पादसेवनादकिञ्चनप्रार्थ्यतमाद्वरं विभो । आराध्य कस्त्वामपवर्गदं हरे वृणीत आर्यो वरमात्मबन्धनम् ॥ २८१ ॥",
@@ -16216,7 +16504,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads सात्विकैः... आत्मविद्भिः... यः; DGE master reading retained; variant recorded.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_11",
@@ -16234,7 +16522,7 @@
     "verse": "10"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.919,
     "dge_key": [
      11,
@@ -16244,7 +16532,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads सात्विकैः... आत्मविद्भिः... यः; DGE master reading retained; variant recorded.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "स्यान्नस्तवान्घ्रिरशुभाशयधूमकेतुः क्षेमाय यो मुनिभिरार्द्रहृदोह्यमानः । यः सात्विकैः समविभूतिभिरात्मविद्भि- र्व्यूह्यार्चितः सवनशः समविक्रमैर्यः ॥ २८९ ॥",
@@ -16632,7 +16927,7 @@
     "verse": "10"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.876,
     "dge_key": [
      5,
@@ -16642,7 +16937,14 @@
     "numbering": "printed",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in commentary prose and trailing reference numbers.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "मेतदभिसंराधनमात्रं भवितुमर्हति ॥ ९ ॥ अथ कथञ्चित्स्खलन- क्षुत्पतनजृम्भणदुरवस्थानादिषु विवशानां नः श्रीमच्चरणारविन्द - स्मरणाय ज्वरमरणदशायामपि सकलकश्मलनिरसनानि तव गुणकृतनामधेयानि वचनगोचराणि भवन्तु ॥ २९६ ॥ १३ ॥ (६०) ॥",
@@ -16743,7 +17045,7 @@
     "verse": "46"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.873,
     "dge_key": [
      10,
@@ -16753,7 +17055,14 @@
     "numbering": "sequence (printed 297 rejected)",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in trailing quotation marker and reference इति १० ४६.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "(१० । ९१ । ४४) ॥ तस्माद्ब्रह्मऋषीनेतान् ब्रह्मज्ञान् श्रद्धयाऽर्च्चय । एवंविदार्चि- तोऽस्म्यद्धा नान्यथा सुविभूतिभिरिति ॥ (१० । ९१ । ४६) ॥ २९७ ॥",
@@ -18224,7 +18533,7 @@
     "verse": "60"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.853,
     "dge_key": [
      4,
@@ -18234,7 +18543,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped line 1a. [DGE numbering 4.11.60; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "आनन्दमात्र उपपन्नसमस्तशक्तौ । भक्तिं विधाय परमां शनकैरविद्या- ग्रन्थिं विभेत्स्यसि ममाहमिति प्ररूढाम्",
@@ -18337,7 +18653,7 @@
     "verse": "32"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.947,
     "dge_key": [
      7,
@@ -18347,7 +18663,14 @@
     "numbering": "printed",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in verse reference numbers ७७६ २.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "धर्मार्थकाम इति यो विहितस्त्रिवर्ग क्षात्रयी नयमौ विविधा ' च वार्ता । मन्ये तदेतदखिलं निगमस्य सत्यं स्वात्मार्पणं स्वसुहृदः परमस्य पुंसः ॥ ३२५ ॥ ७७६ । ३२ । (२)",
@@ -18657,7 +18980,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads प्राणोपहाराच्च; DGE master retains प्राणोपहारोऽत्र.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_04",
@@ -18675,7 +18998,7 @@
     "verse": "14"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.96,
     "dge_key": [
      4,
@@ -18685,7 +19008,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads प्राणोपहाराच्च; DGE master retains प्राणोपहारोऽत्र.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यथा तरोर्मूलनिषेचनेन तृप्यन्ति तत्स्कन्धभुजोपशाखाः । प्राणोपहाराच्च यथेन्द्रियाणां तथैव सर्वार्हणमच्युतेज्या",
@@ -19541,7 +19871,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads कृतमृद्धमुदः; DGE master retains नतमूर्द्ध सदा.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_11",
@@ -19559,7 +19889,7 @@
     "verse": "6"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.942,
     "dge_key": [
      11,
@@ -19569,7 +19899,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads कृतमृद्धमुदः; DGE master retains नतमूर्द्ध सदा.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "नैवोपयान्त्यपचितिं कवयस्तवेश ब्रह्मादयोऽपि 'कृतमृद्धमुदः स्मरन्तः । योऽन्तर्बहिस्तनुभृतामशुभं विधुन्व- न्नाचार्यचैत्यवपुषा स्वगतिं व्यनंक्षि ॥ ३४७ ॥",
@@ -19931,7 +20268,7 @@
   {
    "id": "BS_P29_V354",
    "reference": "नामप्रशंसाप्रकरणम् · श्लोकः 354 · भा. 6.3.25",
-   "sanskrit_text": "त्रय्यां जडीकृतमतिर्मधुपुष्पितायां वैतानिके महति कर्मणि युज्यमानः ॥ ॥",
+   "sanskrit_text": "प्रायेण वेद तदिदं न महाजनोऽयं देव्या विमोहितमतिर्बत माययाऽलम्। त्रय्यां जडीकृतमतिर्मधुपुष्पितायां वैतानिके महति कर्मणि युज्यमानः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -19954,7 +20291,7 @@
     "verse": "25"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.689,
     "dge_key": [
      6,
@@ -19964,7 +20301,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Printed verse is 6.3.25; Vision OCR dropped line 1; matches DGE master.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "त्रय्यां जडीकृतमतिर्मधुपुष्पितायां वैतानिके महति कर्मणि युज्यमानः ॥ ३५४ ॥",
@@ -20176,7 +20520,7 @@
     "verse": "29"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.798,
     "dge_key": [
      6,
@@ -20186,7 +20530,14 @@
     "numbering": "printed",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped line 1a and swept in commentary markers.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "चेतश्च न स्मरति तच्चरणारविन्दम् । ಇರ न स्मरत १ [ कृष्णाय नो नमति यच्चिर. एकदापि तानानयध्वमसतोऽकृतविष्णुकृत्यान् ॥ ३५८ ॥ ६ ३ २९ । ( ७ )",
@@ -20209,7 +20560,7 @@
   {
    "id": "BS_P29_V359",
    "reference": "नामप्रशंसाप्रकरणम् · श्लोकः 359 · भा. 6.3.31",
-   "sanskrit_text": "स्वानामहो न विदुषां रचिताञ्जलीनां क्षान्तिर्वरीयसि नमः पुरुषाय भूम्रे ॥ ॥",
+   "sanskrit_text": "तत् क्षम्यतां स भगवान् पुरुषः पुराणो नारायणः स्वपुरुषैर्यदसत्कृतं नः। स्वानामहो न विदुषां रचिताञ्जलीनां क्षान्तिर्वरीयसि नमः पुरुषाय भूम्ने॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -20232,7 +20583,7 @@
     "verse": "31"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.663,
     "dge_key": [
      6,
@@ -20242,7 +20593,14 @@
     "numbering": "sequence (printed 159 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Printed verse is 6.3.31; Vision OCR dropped line 1; typo १५९ for ३५९ in print.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "स्वानामहो न विदुषां रचिताञ्जलीनां क्षान्तिर्वरीयसि नमः पुरुषाय भूम्रे ॥ १५९ ॥",
@@ -20351,7 +20709,7 @@
     "verse": "7"
    },
    "verification": {
-    "status": "mula_near",
+    "status": "human_verified",
     "dge_similarity": 0.914,
     "dge_key": [
      3,
@@ -20361,7 +20719,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Vision OCR dropped तुभ्यम् and added typo in तेपुस्तपस्ते. [DGE numbering 3.34.7; chat said None]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "अहो बत श्वपचोऽतो गरीयान् यज्जिह्वाग्रे वर्तते नाम' तेपुस्तंपस्ते जुहुवुः सुराद्यान्ब्रह्मानूचुर्नाम गृणन्ति ये ते",
@@ -20463,7 +20828,7 @@
     "verse": "50"
    },
    "verification": {
-    "status": "recovered_by_text",
+    "status": "human_verified",
     "dge_similarity": 0.952,
     "dge_key": [
      4,
@@ -20473,7 +20838,14 @@
     "numbering": "printed",
     "detected_by": "recovered",
     "ref_printed": false,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR swept in printed reference number ४ ४९ २.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यैरीदृशी भगवतो गतिरात्मवाद एकान्ततो निगमिभिः प्रतिपादिता नः । तुष्यन्त्वदभ्रकरुणाः स्वकृतेन नित्यं को नाम तत्प्रतिकरोति विनोदपात्रम् ॥ ३६३ । ४ । २२ । ४९ (२)",
