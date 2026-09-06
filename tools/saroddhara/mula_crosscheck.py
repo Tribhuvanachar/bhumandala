@@ -89,6 +89,8 @@ def write_batches(rows, per, exclude, outdir):
     for r in rows:
         if r["bucket"] != "unified_print_word_diffs" or r["id"] in exclude or (r["book_ref"] or "") in exclude:
             continue
+        if r["status"] in ("human_verified", "human_supplied"):      # already adjudicated through answers.json
+            continue
         dw, pw = words(r["dge_mula_text"]), words(r["print_ocr_vision"])
         sm = difflib.SequenceMatcher(None, pw, dw, autojunk=False)
         for op, i1, i2, j1, j2 in sm.get_opcodes():
@@ -97,14 +99,21 @@ def write_batches(rows, per, exclude, outdir):
             if pa and pb and ratio(pa, pb) >= 0.8: continue          # ocr_noise pairs are not worth a chat turn
             items.append({"id": r["id"], "ref": r["book_ref"], "pdf_page": r["pdf_page"], "dge_word": pb or None, "print_word": pa or None,
                           "context": snippet(dw, j1, j2) if pb else snippet(pw, i1, i2), "kind": "word"})
+    # append-only: batches already written (and possibly already handed to a chat) keep their items and numbering
+    seen, existing = set(), sorted(outdir.glob("diffs_batch_*.json"))
+    for f in existing:
+        for it in json.load(open(f, encoding="utf-8")).get("items", []):
+            seen.add((it["id"], it.get("dge_word"), it.get("print_word")))
+    items = [it for it in items if (it["id"], it["dge_word"], it["print_word"]) not in seen]
+    start = len(existing)
     n = -(-len(items) // per) if items else 0
     for k in range(n):
         chunk = items[k * per:(k + 1) * per]
-        f = outdir / f"diffs_batch_{k + 1:02d}.json"
+        f = outdir / f"diffs_batch_{start + k + 1:02d}.json"
         json.dump({"_how_to_answer": "One JSON list, one object per id: {id, decision: 'dge'|'printed'|'unsure', verified_text (full verse only when printed), note}. 'dge' with a note = keep the master text and record the print's reading as a footnote on the Sāroddhāra verse.",
-                   "batch": f"{k + 1} of {n}", "items": chunk}, open(f, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+                   "batch": f"{start + k + 1}", "items": chunk}, open(f, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
         print(f"  {f.relative_to(ROOT)}: {len(chunk)} items")
-    print(f"word-diff items {len(items)} in {n} batches (excluded {len(exclude)} adjudicated refs)")
+    print(f"new word-diff items {len(items)} → {n} new batch file(s) after {start} existing (excluded {len(exclude)} adjudicated refs)")
 
 
 if __name__ == "__main__":

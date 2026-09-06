@@ -229,7 +229,7 @@
   {
    "id": "BS_P01_V005",
    "reference": "भागवतागतिप्रकरणम् · श्लोकः 5 · भा. 1.5.13",
-   "sanskrit_text": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतवतः। उरुक्रमस्याखिलबन्धमुक्तये समाधिनाऽनुस्मर यद्विचेष्टितम्॥",
+   "sanskrit_text": "अस्त्येव मे सर्वमिदं त्वयोक्तं तथापि नात्मा परितुष्यते मे। तन्मूलमव्यक्तमगाधबोधं पृच्छामहे त्वाऽऽत्मभवात्मभूतम्॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -252,7 +252,7 @@
     "verse": "5"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.939,
     "dge_key": [
      1,
@@ -266,7 +266,14 @@
      1,
      5,
      5
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Restored verse 5 (1.5.5), which was overwritten when OCR assigned verse 6 here.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतव्रतः । उरुक्रमस्याखिलधर्मगुप्तये समाधिनानुस्मर यद्विचेष्टितम्",
@@ -281,6 +288,42 @@
     "भागवतागतिप्रकरणम्",
     "5"
    ],
+   "source": {
+    "pdf_page": 103
+   }
+  },
+  {
+   "id": "BS_P01_V006",
+   "reference": "भागवतागतिप्रकरणम् · श्लोकः 6 · भा. 1.5.13",
+   "sanskrit_text": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतवतः। उरुक्रमस्याखिलबन्धमुक्तये समाधिनाऽनुस्मर यद्विचेष्टितम्॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_01",
+     "unit_id": "adhyaya_05",
+     "note": "cites Bhāgavata 1.5.13"
+    }
+   ],
+   "audio": [],
+   "category": "भागवतागतिप्रकरणम्",
+   "prakarana_no": 1,
+   "verse_no": 6,
+   "bhagavata_ref": {
+    "skandha": 1,
+    "adhyaya": 5,
+    "verse": "13"
+   },
+   "verification": {
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 6 is 1.5.13; printed ref 1.5.5 is a typo; print reads धर्मगुप्तये for बन्धमुक्तये."
+    }
+   },
    "source": {
     "pdf_page": 103
    }
@@ -397,6 +440,42 @@
     "भागवतागतिप्रकरणम्",
     "8"
    ],
+   "source": {
+    "pdf_page": 105
+   }
+  },
+  {
+   "id": "BS_P01_V009",
+   "reference": "भागवतागतिप्रकरणम् · श्लोकः 9 · भा. 1.7.11",
+   "sanskrit_text": "हरेर्गुणाक्षिप्तमतिर्भगवान् बादरायणिः। अध्यगान्महदाख्यानं नित्यं विष्णुजनप्रियम्॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_01",
+     "unit_id": "adhyaya_07",
+     "note": "cites Bhāgavata 1.7.11"
+    }
+   ],
+   "audio": [],
+   "category": "भागवतागतिप्रकरणम्",
+   "prakarana_no": 1,
+   "verse_no": 9,
+   "bhagavata_ref": {
+    "skandha": 1,
+    "adhyaya": 7,
+    "verse": "11"
+   },
+   "verification": {
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 9 is 1.7.11; printed ref 1.7.11 was misread as 2.3.25; OCR dropped first line."
+    }
+   },
    "source": {
     "pdf_page": 105
    }
@@ -1777,6 +1856,42 @@
    }
   },
   {
+   "id": "BS_P03_V035",
+   "reference": "शुकागमप्रकरणम् · श्लोकः 35 · भा. 1.20.3",
+   "sanskrit_text": "निगूढजत्रुं पृथुतुङ्गवक्षसम् आवर्तनाभिं वलिवल्गूदरञ्च। दिगम्बरं वक्रविकीर्णकेशं प्रलम्बबाहुं स्वमरोत्तमाभम्॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_01",
+     "unit_id": "adhyaya_20",
+     "note": "cites Bhāgavata 1.20.3"
+    }
+   ],
+   "audio": [],
+   "category": "शुकागमप्रकरणम्",
+   "prakarana_no": 3,
+   "verse_no": 35,
+   "bhagavata_ref": {
+    "skandha": 1,
+    "adhyaya": 20,
+    "verse": "3"
+   },
+   "verification": {
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 35 is 1.20.3, between 1.20.2 (v34) and 1.20.4 (v36); omitted in OCR text."
+    }
+   },
+   "source": {
+    "pdf_page": 123
+   }
+  },
+  {
    "id": "BS_P03_V036",
    "reference": "शुकागमप्रकरणम् · श्लोकः 36 · भा. 1.20.4",
    "sanskrit_text": "श्यामं सदाऽऽपीच्यवयोङ्गलक्ष्म्या स्त्रीणां मनोज्ञं रुचिरस्मितेन। प्रत्युत्थिता मुनयश्चासनेभ्यः तल्लक्षणज्ञा अपि गूढवर्चसम्॥",
@@ -2108,7 +2223,7 @@
   {
    "id": "BS_P03_V042",
    "reference": "शुकागमप्रकरणम् · श्लोकः 42 · भा. 10.1.14",
-   "sanskrit_text": "प्रत्यर्च्य कृष्णचरितं कलिकल्मषघ्नं व्याहर्तुमारभत भागवतप्रधानः ॥ ॥",
+   "sanskrit_text": "एवं निशम्य भृगुनन्दन साधुवादं वैयासकिः स भगवानथ विष्णुरातम्। प्रत्यर्च्य कृष्णचरितं कलिकल्मषघ्नं व्याहर्तुमारभत भागवतप्रधानः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -2131,7 +2246,7 @@
     "verse": "14"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.694,
     "dge_key": [
      10,
@@ -2141,7 +2256,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 10.1.14; OCR missed line 1; confirmed identical to DGE text.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "प्रत्यर्च्य कृष्णचरितं कलिकल्मषघ्नं व्याहर्तुमारभत भागवतप्रधानः ॥ ४२ ॥",
@@ -3007,8 +3129,8 @@
   },
   {
    "id": "BS_P05_V058",
-   "reference": "वैराग्यप्रकरणम् · श्लोकः 58 · भा. 3.32.19",
-   "sanskrit_text": "इच्छन्नितो विवसितुं गणयन् स्वमासान्निर्वास्यते कृपणधीर्भवता ॥ ॥",
+   "reference": "वैराग्यप्रकरणम् · श्लोकः 58 · भा. 3.32.18",
+   "sanskrit_text": "देह्यन्यदेहविवरे जठराग्निनासृग्विण्मूत्रकूपपतितो भृशतप्तदेहः। इच्छन्नितो विवसितुं गणयन् स्वमासान् निर्वास्यते कृपणधीर्भवता कदा नु॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -3028,10 +3150,10 @@
    "bhagavata_ref": {
     "skandha": 3,
     "adhyaya": 32,
-    "verse": "19"
+    "verse": "18"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.636,
     "dge_key": [
      3,
@@ -3041,7 +3163,15 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 3.32.19; OCR dropped line 1 and concluding words; confirmed identical to DGE text. [DGE numbering 3.32.18; chat said 3.32.19]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "इच्छन्नितो विवसितुं गणयन् स्वमासान्निर्वास्यते कृपणधीर्भवता ॥ ५८ ॥",
@@ -3561,7 +3691,70 @@
   },
   {
    "id": "BS_P05_V068",
-   "reference": "वैराग्यप्रकरणम् · श्लोकः 68 · भा. 10.54.53",
+   "reference": "वैराग्यप्रकरणम् · श्लोकः 68 · भा. 7.6.23",
+   "sanskrit_text": "यतो न कश्चित्क्वच कुत्र विद्वान् दीनं स्वमात्मानमलं समर्थः। विमोचितुं वामदृशां विहारक्रीडामृगो यन्निगडोऽक्षिसर्गः॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_07",
+     "unit_id": "adhyaya_06",
+     "note": "cites Bhāgavata 7.6.23"
+    }
+   ],
+   "audio": [],
+   "category": "वैराग्यप्रकरणम्",
+   "prakarana_no": 5,
+   "verse_no": 68,
+   "bhagavata_ref": {
+    "skandha": 7,
+    "adhyaya": 6,
+    "verse": "23"
+   },
+   "verification": {
+    "status": "human_verified",
+    "dge_similarity": 0.985,
+    "dge_key": [
+     7,
+     6,
+     23
+    ],
+    "numbering": "sequence",
+    "detected_by": "tag",
+    "ref_printed": true,
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 68 = 7.6.23: the ॥६८॥ line on p.148 is its second half (विमोचितुं वामदृशां…) and the ref line । ७ । ६ । २३ । (१२) stands beside it; the 10.54.53 text formerly here is verse 69.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
+   },
+   "ocr": {
+    "vision": "निर्जित्य दिक्चक्रमभूतविग्रहो वरासनस्थः समराजवन्दितः । गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते",
+    "agreement": [
+     "B",
+     "B",
+     "C"
+    ]
+   },
+   "breadcrumb": [
+    "भागवतसारोद्धारः",
+    "वैराग्यप्रकरणम्",
+    "68"
+   ],
+   "source": {
+    "pdf_page": 148
+   }
+  },
+  {
+   "id": "BS_P05_V069",
+   "reference": "वैराग्यप्रकरणम् · श्लोकः 69 · भा. 10.54.53",
    "sanskrit_text": "निर्जित्य दिक्चक्रमभूतविग्रहो परासनस्थः समराजवन्दितः। गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते॥",
    "tags": [
     "verse",
@@ -3578,38 +3771,19 @@
    "audio": [],
    "category": "वैराग्यप्रकरणम्",
    "prakarana_no": 5,
-   "verse_no": 68,
+   "verse_no": 69,
    "bhagavata_ref": {
     "skandha": 10,
     "adhyaya": 54,
     "verse": "53"
    },
    "verification": {
-    "status": "mula_verified",
-    "dge_similarity": 0.985,
-    "dge_key": [
-     10,
-     54,
-     53
-    ],
-    "numbering": "sequence",
-    "detected_by": "tag",
-    "ref_printed": true,
-    "printed_ref_as_read": null
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 69 is 10.54.53 on p.148, previously misplaced into BS_V068."
+    }
    },
-   "ocr": {
-    "vision": "निर्जित्य दिक्चक्रमभूतविग्रहो वरासनस्थः समराजवन्दितः । गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते",
-    "agreement": [
-     "B",
-     "B",
-     "C"
-    ]
-   },
-   "breadcrumb": [
-    "भागवतसारोद्धारः",
-    "वैराग्यप्रकरणम्",
-    "68"
-   ],
    "source": {
     "pdf_page": 148
    }
@@ -4116,7 +4290,7 @@
   {
    "id": "BS_P05_V079",
    "reference": "वैराग्यप्रकरणम् · श्लोकः 79 · भा. 5.1.38",
-   "sanskrit_text": "वैराग्यप्रकरणम् हरिविहारानुभवः भगवतो नारदस्य पदवीं अनुससार ॥ ॥",
+   "sanskrit_text": "परदेवताप्रसादाधिगतात्मप्रत्यवमर्शनपरिनिर्वृतः स्वपुत्रेभ्य इमां गां यथादायं विभज्य भुक्तभोगां च महिषीं मृतकमिव स ह महाविभूतिमपहाय स्वयं निहितनिर्वेदो हृदि गृहीतरुचिरहरिविहारानुभावो भगवतो नारदस्य पदवीमनुससार॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -4139,7 +4313,7 @@
     "verse": "38"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.364,
     "dge_key": [
      5,
@@ -4149,7 +4323,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed text is the full prose passage of 5.1.38 across pp. 56-57; OCR captured only the concluding line on p. 57; confirmed dge.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "वैराग्यप्रकरणम् हरिविहारानुभवः भगवतो नारदस्य पदवीं अनुससार ॥ ७९ ॥",
@@ -4171,12 +4352,12 @@
   {
    "id": "BS_P05_V080",
    "reference": "वैराग्यप्रकरणम् · श्लोकः 80 · भा. 7.9.25",
-   "sanskrit_text": "निर्विद्यते न तु जनो यदपीति विद्वान् कामानलं सुखलवैः शमयन् दुरापैः ॥ ॥",
+   "sanskrit_text": "कुत्राशिषः श्रुतिसुखा मृगतृष्णरूपाः क्वेदं कलेवरमशेषरुजां विरोहम्। निर्विद्यते न तु जनो यदपीह विद्वान् कामानलं मधुलवैः शमयन् दुरापैः॥",
    "tags": [
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Printed verse is 7.9.25; OCR dropped line 1; confirmed dge (print reads सुखलवैः as a variant for मधुलवैः).",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_07",
@@ -4194,7 +4375,7 @@
     "verse": "25"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.614,
     "dge_key": [
      7,
@@ -4204,7 +4385,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Printed verse is 7.9.25; OCR dropped line 1; confirmed dge (print reads सुखलवैः as a variant for मधुलवैः).",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "निर्विद्यते न तु जनो यदपीति विद्वान् कामानलं सुखलवैः शमयन् दुरापैः ॥ ८० ॥",
@@ -4282,8 +4470,8 @@
   },
   {
    "id": "BS_P05_V082",
-   "reference": "वैराग्यप्रकरणम् · श्लोकः 82 · भा. 8.21.9",
-   "sanskrit_text": "किमात्मना तेन जहाति यो मुदं किं रिक्थहारैः स्वजनाख्यदस्युभिः । किं जायया संसृतिहेतुभूतया मर्त्यस्य गेहैर्यदिहायुषो व्ययः ॥ ॥",
+   "reference": "वैराग्यप्रकरणम् · श्लोकः 82 · भा. 8.20.42",
+   "sanskrit_text": "किमात्मनाऽनेन जहाति यो मुदं किं रिक्थहारैः स्वजनाख्यदस्युभिः। किं जायया संसृतिहेतुभूतया मर्त्यस्य गेहैः किमिहायुषो व्ययः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -4292,8 +4480,8 @@
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_08",
-     "unit_id": "adhyaya_21",
-     "note": "cites Bhāgavata 8.21.12"
+     "unit_id": "adhyaya_20",
+     "note": "cites Bhāgavata 8.20.42"
     }
    ],
    "audio": [],
@@ -4302,21 +4490,29 @@
    "verse_no": 82,
    "bhagavata_ref": {
     "skandha": 8,
-    "adhyaya": 21,
-    "verse": "9"
+    "adhyaya": 20,
+    "verse": "42"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.286,
     "dge_key": [
      8,
-     21,
-     12
+     20,
+     42
     ],
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR verse किमात्मना तेन जहाति यो मुदं… is DGE 8.20.42; printed ref 8.21.9 misread.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "किमात्मना तेन जहाति यो मुदं किं रिक्थहारैः स्वजनाख्यदस्युभिः । किं जायया संसृतिहेतुभूतया मर्त्यस्य गेहैर्यदिहायुषो व्ययः ॥ ८२ ॥",
@@ -4504,8 +4700,8 @@
   },
   {
    "id": "BS_P05_V086",
-   "reference": "वैराग्यप्रकरणम् · श्लोकः 86 · भा. 10.81.12",
-   "sanskrit_text": "घ्नन्तः प्रजाः स्वा अपि निर्घृणाः प्रभो मृत्युं परं त्वामगणय्य दुर्मदाः ॥ ॥",
+   "reference": "वैराग्यप्रकरणम् · श्लोकः 86 · भा. 10.83.12",
+   "sanskrit_text": "वयं पुरा श्रीमदनष्टबुद्धयो जिहीर्षयाऽस्या इतरेतरस्पृधः। घ्नन्तः प्रजाः स्वा अपि निर्घृणाः प्रभो मृत्युं परं त्वामगणय्य दुर्मदाः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -4514,8 +4710,8 @@
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_10",
-     "unit_id": "adhyaya_81",
-     "note": "cites Bhāgavata 10.81.12"
+     "unit_id": "adhyaya_83",
+     "note": "cites Bhāgavata 10.83.12"
     }
    ],
    "audio": [],
@@ -4524,21 +4720,29 @@
    "verse_no": 86,
    "bhagavata_ref": {
     "skandha": 10,
-    "adhyaya": 81,
+    "adhyaya": 83,
     "verse": "12"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.377,
     "dge_key": [
      10,
-     81,
+     83,
      12
     ],
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR line घ्नन्तः प्रजाः स्वा अपि… is the second half of DGE 10.83.12 (printed 10.81.12: the print's skandha-10 adhyāya count runs two behind DGE here); OCR dropped line 1.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "घ्नन्तः प्रजाः स्वा अपि निर्घृणाः प्रभो मृत्युं परं त्वामगणय्य दुर्मदाः ॥ ८६ ॥",
@@ -5228,7 +5432,7 @@
   {
    "id": "BS_P05_V099",
    "reference": "वैराग्यप्रकरणम् · श्लोकः 99 · भा. 4.29.54",
-   "sanskrit_text": "पृष्ठतः परोक्षं अनुप्रवृत्तः लुब्धकः कृतान्तः शरेण यं इह पराविध्यति तमिमं आत्मानं अहो राजन् भिन्नहृदयं द्रष्टुमर्हसीति यथा मृगयुहतं मृगमिति ॥ ॥",
+   "sanskrit_text": "पृष्ठतः परोक्षमनुप्रवृत्तः लुब्धकः कृतान्तः शरेण यमिह पराविध्यति तमिममात्मानमहो राजन् भिन्नहृदयं द्रष्टुमर्हसीति यथा मृगयुहतं मृगम्॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -5251,7 +5455,7 @@
     "verse": "54"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.258,
     "dge_key": [
      4,
@@ -5261,7 +5465,14 @@
     "numbering": "sequence (printed 98 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print carries Narada's prose allegorical resolution of 4.29.54; differs from DGE candidate 4.29.51.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "पृष्ठतः परोक्षं अनुप्रवृत्तः लुब्धकः कृतान्तः शरेण यं इह पराविध्यति तमिमं आत्मानं अहो राजन् भिन्नहृदयं द्रष्टुमर्हसीति यथा मृगयुहतं मृगमिति ॥",
@@ -6401,8 +6612,8 @@
   },
   {
    "id": "BS_P07_V119",
-   "reference": "महत्सेवाप्रशंसाप्रकरणम् · श्लोकः 119 · भा. 3.17.22",
-   "sanskrit_text": "तुष्यद्धृदः स्मितसुधोक्षितपद्मवक्त्राः । वाण्यानुरागकलयात्मजवद्गृणन्तः सम्बोधयन्त्यहमिवाहमुपाकृतस्तैः ॥ ॥",
+   "reference": "महत्सेवाप्रशंसाप्रकरणम् · श्लोकः 119 · भा. 3.17.11",
+   "sanskrit_text": "ये ब्राह्मणान् मयि धिया क्षिपतोऽर्चयन्ति तुष्यद्धृदः स्मितसुधोक्षितपद्मवक्त्राः। वाण्यानुरागकलयात्मजवद्गृणन्तः सम्बोधयन्त्यहमिवाहमुपाकृतस्तैः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -6412,7 +6623,7 @@
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_03",
      "unit_id": "adhyaya_17",
-     "note": "cites Bhāgavata 3.17.19"
+     "note": "cites Bhāgavata 3.17.11"
     }
    ],
    "audio": [],
@@ -6422,20 +6633,28 @@
    "bhagavata_ref": {
     "skandha": 3,
     "adhyaya": 17,
-    "verse": "22"
+    "verse": "11"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.318,
     "dge_key": [
      3,
      17,
-     19
+     11
     ],
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Composite verse from 3.16.13-14 praising Brahmanas; printed ref misread as 3.17.22; confirmed dge. [DGE numbering 3.17.11; chat said 3.16.13]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "तुष्यद्धृदः स्मितसुधोक्षितपद्मवक्त्राः । वाण्यानुरागकलयात्मजवद्गृणन्तः सम्बोधयन्त्यहमिवाहमुपाकृतस्तैः ॥ ११९ ॥",
@@ -6457,8 +6676,8 @@
   },
   {
    "id": "BS_P07_V120",
-   "reference": "महत्सेवाप्रशंसाप्रकरणम् · श्लोकः 120 · भा. 10.93.15",
-   "sanskrit_text": "ब्रह्मवादिनाम् । स्वानुभूतमशेषेण राजन् भृगुरवर्णयत् । तन्निशम्याथ मुनयो विस्मिता मुक्तसंशयाः । भूयः संश्रद्दधुर्विष्णुं यतः शान्तिर्यतोऽभय” मिति ॥ ॥",
+   "reference": "महत्सेवाप्रशंसाप्रकरणम् · श्लोकः 120 · भा. 10.95.16",
+   "sanskrit_text": "तं निशम्याथ मुनयो विस्मिता मुक्तसंशयाः। भूयांसं श्रद्दधुर्विष्णुं यतः शान्तिर्यतोऽभयम्॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -6467,8 +6686,8 @@
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_10",
-     "unit_id": "adhyaya_93",
-     "note": "cites Bhāgavata 10.93.12"
+     "unit_id": "adhyaya_95",
+     "note": "cites Bhāgavata 10.95.16"
     }
    ],
    "audio": [],
@@ -6477,21 +6696,29 @@
    "verse_no": 120,
    "bhagavata_ref": {
     "skandha": 10,
-    "adhyaya": 93,
-    "verse": "15"
+    "adhyaya": 95,
+    "verse": "16"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.315,
     "dge_key": [
      10,
-     93,
-     12
+     95,
+     16
     ],
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print quotes 10.95.15cd–16 (Bhṛgu at Sarasvatī) as one item; master text of 10.95.16 taken; printed ref 10.93.15 two adhyāyas behind DGE.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "ब्रह्मवादिनाम् । स्वानुभूतमशेषेण राजन् भृगुरवर्णयत् । तन्निशम्याथ मुनयो विस्मिता मुक्तसंशयाः । भूयः संश्रद्दधुर्विष्णुं यतः शान्तिर्यतोऽभय” मिति ॥",
@@ -7568,7 +7795,7 @@
   {
    "id": "BS_P10_V139",
    "reference": "इन्द्रियजयप्रकरणम् · श्लोकः 139 · भा. 10.5.38",
-   "sanskrit_text": "यथेन्द्रियग्राम उपेक्षितस्तथा रिपुर्महान् लब्धबलो न चाल्यते ॥ ॥",
+   "sanskrit_text": "यथाऽऽमयोऽङ्गे समुपेक्षितो नृभिर्न शक्यते रूढपदश्चिकित्सितुम्। यथेन्द्रियग्राम उपेक्षितस्तथा रिपुर्महान् लब्धबलो न चाल्यते॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -7591,7 +7818,7 @@
     "verse": "38"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.659,
     "dge_key": [
      10,
@@ -7601,7 +7828,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 10.5.38; OCR dropped line 1; confirmed identical to DGE text.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यथेन्द्रियग्राम उपेक्षितस्तथा रिपुर्महान् लब्धबलो न चाल्यते ॥ १३९ ॥",
@@ -9421,7 +9655,7 @@
   {
    "id": "BS_P12_V172",
    "reference": "प्रवृत्तकर्मत्यागप्रकरणम् · श्लोकः 172 · भा. 3.10.8",
-   "sanskrit_text": "कामाग्निनाऽच्युत रुषा च सुदुर्भरण सम्पश्यतो मन उरुक्रम सीदते मे ॥ ॥",
+   "sanskrit_text": "क्षुत्तृट्त्रिधातुभिरिमा मुहुरर्द्यमानाः शीतोष्णवातवर्षैरितरेतराच्च। कामाग्निनाऽच्युत रुषा च सुदुर्भरेण संपश्यतो मन उरुक्रम सीदते मे॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -9444,7 +9678,7 @@
     "verse": "8"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.607,
     "dge_key": [
      3,
@@ -9454,7 +9688,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 3.10.8; OCR dropped line 1; confirmed identical to DGE text.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "कामाग्निनाऽच्युत रुषा च सुदुर्भरण सम्पश्यतो मन उरुक्रम सीदते मे ॥ १७२ ॥",
@@ -10030,7 +10271,7 @@
   {
    "id": "BS_P13_V183",
    "reference": "निवृत्तकर्मकरणप्रकरणम् · श्लोकः 183 · भा. 5.5.14",
-   "sanskrit_text": "पुत्रांश्च शिष्यांश्च पिता गुरुर्वा मल्लोककामो मदनुग्रहार्थः । इत्थं विमन्युरनुशिष्यादतज्ज्ञान् न योजयेत्कर्मसु कर्ममूढान् ॥ ॥",
+   "sanskrit_text": "पुत्रांश्च शिष्यांश्च पिता गुरुर्वा मल्लोककामो मदनुग्रहार्थः। इत्थं विमन्युरनुशिष्यादतज्ज्ञान् न योजयेत्कर्मसु कर्ममूढान्॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -10053,7 +10294,7 @@
     "verse": "14-15"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.523,
     "dge_key": [
      5,
@@ -10063,7 +10304,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print pairs 5.5.14 with 5.5.15ab as a 4-pada verse, omitting 5.5.15cd.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "पुत्रांश्च शिष्यांश्च पिता गुरुर्वा मल्लोककामो मदनुग्रहार्थः । इत्थं विमन्युरनुशिष्यादतज्ज्ञान् न योजयेत्कर्मसु कर्ममूढान् ॥ १८३ ॥",
@@ -12272,8 +12520,8 @@
   },
   {
    "id": "BS_P19_V223",
-   "reference": "अध्यात्मप्रकरणम् · श्लोकः 223 · भा. 10.80.6",
-   "sanskrit_text": "संसेवया सुरतरोरिव ते प्रसादः सेवानुरूप उदयो न विपर्ययोऽत्र ॥ ॥",
+   "reference": "अध्यात्मप्रकरणम् · श्लोकः 223 · भा. 10.82.6",
+   "sanskrit_text": "न ब्रह्मणः स्वपरभेदमतिस्तव स्यात् सर्वात्मनः समदृशः स्वसुखानुभूतेः। संसेवया सुरतरोरिव ते प्रसादः सेवानुरूप उदयो न विपर्ययोऽत्र॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -12282,8 +12530,8 @@
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_10",
-     "unit_id": "adhyaya_80",
-     "note": "cites Bhāgavata 10.80.7"
+     "unit_id": "adhyaya_82",
+     "note": "cites Bhāgavata 10.82.6"
     }
    ],
    "audio": [],
@@ -12292,21 +12540,29 @@
    "verse_no": 223,
    "bhagavata_ref": {
     "skandha": 10,
-    "adhyaya": 80,
+    "adhyaya": 82,
     "verse": "6"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.389,
     "dge_key": [
      10,
-     80,
-     7
+     82,
+     6
     ],
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR line संसेवया सुरतरोरिव… is the second half of DGE 10.82.6 (printed 10.80.6, two adhyāyas behind DGE); OCR dropped line 1.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "संसेवया सुरतरोरिव ते प्रसादः सेवानुरूप उदयो न विपर्ययोऽत्र ॥ २२३ ॥",
@@ -12552,8 +12808,8 @@
   },
   {
    "id": "BS_P19_V228",
-   "reference": "अध्यात्मप्रकरणम् · श्लोकः 228 · भा. 8.21.27",
-   "sanskrit_text": "'जन्मादीनां समन्ततः । सर्वश्रेयः प्रतीपानां यो न मुह्येत्स मत्पर\" इति ॥ ॥",
+   "reference": "अध्यात्मप्रकरणम् · श्लोकः 228 · भा. 8.20.60",
+   "sanskrit_text": "मानस्तम्भनिमित्तानां जन्मादीनां समन्ततः। सर्वश्रेयःप्रतीपानां हन्त मुह्येन्न मत्परः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -12562,8 +12818,8 @@
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_08",
-     "unit_id": "adhyaya_21",
-     "note": "cites Bhāgavata 8.21.24"
+     "unit_id": "adhyaya_20",
+     "note": "cites Bhāgavata 8.20.60"
     }
    ],
    "audio": [],
@@ -12572,21 +12828,29 @@
    "verse_no": 228,
    "bhagavata_ref": {
     "skandha": 8,
-    "adhyaya": 21,
-    "verse": "27"
+    "adhyaya": 20,
+    "verse": "60"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.294,
     "dge_key": [
      8,
-     21,
-     24
+     20,
+     60
     ],
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR जन्मादीनां समन्ततः… is the second half of DGE 8.20.60 (printed 8.21.27 misread); OCR dropped line 1.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "'जन्मादीनां समन्ततः । सर्वश्रेयः प्रतीपानां यो न मुह्येत्स मत्पर\" इति ॥",
@@ -12839,7 +13103,7 @@
   {
    "id": "BS_P19_V233",
    "reference": "अध्यात्मप्रकरणम् · श्लोकः 233 · भा. 10.47.27",
-   "sanskrit_text": "सर्वान् ददाति सुहृदो भजतोऽपि कामा- नात्मानमप्युपचयापचयौ न यस्य ॥ ॥",
+   "sanskrit_text": "कः पण्डितस्त्वदपरं शरणं समीयात् भक्तप्रियादृतगिरः सुहृदः कृतज्ञात्। सर्वान् ददाति सुहृदो भजतोऽभिकामानात्मानमप्युपचयापचयौ न यस्य॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -12862,7 +13126,7 @@
     "verse": "27"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.632,
     "dge_key": [
      10,
@@ -12872,7 +13136,14 @@
     "numbering": "sequence (printed 232 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 10.48.26 (VJ 10.47.27); OCR dropped line 1; confirmed dge. [DGE numbering 10.47.27; chat said 10.48.26]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "सर्वान् ददाति सुहृदो भजतोऽपि कामा- नात्मानमप्युपचयापचयौ न यस्य ॥ २३२ ॥",
@@ -13830,7 +14101,7 @@
   {
    "id": "BS_P20_V251",
    "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 251 · भा. 6.4.13",
-   "sanskrit_text": "तदेव । अर्हणं पूजा । मत्पूजया तु अपेक्षितसिद्धिरिति । यथाहुः — “ अन्तर्देहेषु भूतानामात्मास्ते हरिरव्ययः । सर्वं तद्धिष्ण्यमीक्षध्वमेवं वस्तोषितो ह्यसाविति ॥",
+   "sanskrit_text": "अन्तर्देहेषु भूतानाम् आत्माऽऽस्ते हरिरीश्वरः। सर्वं तद्धिष्ण्यमीक्षध्वमेवं वस्तोषितो ह्यसौ॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -13853,7 +14124,7 @@
     "verse": "13"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.679,
     "dge_key": [
      6,
@@ -13863,7 +14134,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 251 is 6.4.13; OCR merged commentary intro; confirmed dge.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "तदेव । अर्हणं पूजा । मत्पूजया तु अपेक्षितसिद्धिरिति । यथाहुः — “ अन्तर्देहेषु भूतानामात्मास्ते हरिरव्ययः । सर्वं तद्धिष्ण्यमीक्षध्वमेवं वस्तोषितो ह्यसाविति",
@@ -15107,6 +15385,42 @@
    }
   },
   {
+   "id": "BS_P20_V274",
+   "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 274 · भा. 6.16.38",
+   "sanskrit_text": "विषयतृषो नरपशवो य उपासते विभूतीर्न परं त्वाम्। तेषामाशिष ईश तदनु विनश्यन्ति यथाऽराजकुलम्॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_06",
+     "unit_id": "adhyaya_16",
+     "note": "cites Bhāgavata 6.16.38"
+    }
+   ],
+   "audio": [],
+   "category": "धर्मोपदेशप्रकरणम्",
+   "prakarana_no": 20,
+   "verse_no": 274,
+   "bhagavata_ref": {
+    "skandha": 6,
+    "adhyaya": 16,
+    "verse": "38"
+   },
+   "verification": {
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 274 = printed ref । ६ । १६ । ३८ । (३८) on p.344 next to ॥ २७४ ॥; master text of 6.16.38 (विषयतृषो नरपशवो…) supplied; OCR lost the verse lines."
+    }
+   },
+   "source": {
+    "pdf_page": 344
+   }
+  },
+  {
    "id": "BS_P20_V275",
    "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 275 · भा. 4.20.24",
    "sanskrit_text": "वरान् विभो त्वद् वरदेश्वराद् बुधः कथं वृणीते गुणविक्रियात्मनाम्। ये नारकाणामपि सन्ति चैहिकास्तानीश कैवल्यपतेर्वृणीत कः॥",
@@ -15217,8 +15531,8 @@
   },
   {
    "id": "BS_P20_V277",
-   "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 277 · भा. 10.75.57",
-   "sanskrit_text": "स्यु ॥",
+   "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 277 · भा. 10.75.54",
+   "sanskrit_text": "यं यं कामयसे कामं मयि कामय कामिनि। सन्ति ह्येकान्तभक्तायास्तव कल्याणि नित्यदा॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -15238,10 +15552,10 @@
    "bhagavata_ref": {
     "skandha": 10,
     "adhyaya": 75,
-    "verse": "57"
+    "verse": "54"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.083,
     "dge_key": [
      10,
@@ -15251,7 +15565,15 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "ref_reidentified": true,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 10.75.57; OCR failed completely, capturing only stray 'स्यु'; confirmed dge. [DGE numbering 10.75.54; chat said 10.75.57]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "स्यु",
@@ -16005,7 +16327,7 @@
   {
    "id": "BS_P20_V291",
    "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 291 · भा. 4.10.6",
-   "sanskrit_text": "अन्यांश्च हस्तचरणश्रवणत्वगादीन् प्राणान्नमो भगवते पुरुषाय तुभ्यम् ॥ ॥",
+   "sanskrit_text": "योऽन्तः प्रविश्य मम वाचमिमां प्रसुप्तां संजीवयत्यखिलशक्तिधरः स्वधाम्ना। अन्यांश्च हस्तचरणश्रवणत्वगादीन् प्राणान् नमो भगवते पुरुषाय तुभ्यम्॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -16028,7 +16350,7 @@
     "verse": "6"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.652,
     "dge_key": [
      4,
@@ -16038,7 +16360,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is Dhruva's prayer in 4.9.6 (VJ 4.10.6); OCR dropped line 1; confirmed dge. [DGE numbering 4.10.6; chat said 4.9.6]",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "अन्यांश्च हस्तचरणश्रवणत्वगादीन् प्राणान्नमो भगवते पुरुषाय तुभ्यम् ॥ २९१ ॥",
@@ -16830,7 +17159,7 @@
   {
    "id": "BS_P20_V306",
    "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 306 · भा. 11.11.18",
-   "sanskrit_text": "तु नास्त्येवेति प्रागेवोक्तमिति भावः । यथाहु:-- “ शब्दब्रह्मणि निष्णातो न निष्णीयात्परे यदि ॥ श्रमस्तस्य भ्रमफलो ह्यधेनुमिव रक्षत\" इति ॥ ॥",
+   "sanskrit_text": "शब्दब्रह्मणि निष्णातो न निष्णायात् परे यदि। श्रमस्तत्र भ्रमफलो ह्यधेनुमिव रक्षतः॥",
    "tags": [
     "verse",
     "bhagavata"
@@ -16853,7 +17182,7 @@
     "verse": "18"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.724,
     "dge_key": [
      11,
@@ -16863,7 +17192,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "The printed verse is 11.11.18; OCR merged commentary intro; confirmed dge.",
+     "accepted_vision": false,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "तु नास्त्येवेति प्रागेवोक्तमिति भावः । यथाहु:-- “ शब्दब्रह्मणि निष्णातो न निष्णीयात्परे यदि ॥ श्रमस्तस्य भ्रमफलो ह्यधेनुमिव रक्षत\" इति ॥",
@@ -17330,6 +17666,61 @@
    }
   },
   {
+   "id": "BS_P21_V314",
+   "reference": "बिम्बोपदेशप्रकरणम् · श्लोकः 314 · भा. 11.2.33",
+   "sanskrit_text": "मन्येऽकुतश्चिद्भयमच्युतस्य पादाम्बुजोपासनमत्र नित्यम्। उद्विग्नबुद्धेरसदात्मभावाद् विश्वात्मना यत्र निवर्तते भीः॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_11",
+     "unit_id": "adhyaya_02",
+     "note": "cites Bhāgavata 11.2.33"
+    }
+   ],
+   "audio": [],
+   "category": "बिम्बोपदेशप्रकरणम्",
+   "prakarana_no": 21,
+   "verse_no": 314,
+   "bhagavata_ref": {
+    "skandha": 11,
+    "adhyaya": 2,
+    "verse": "33"
+   },
+   "verification": {
+    "status": "mula_verified",
+    "dge_similarity": 1.0,
+    "dge_key": [
+     11,
+     2,
+     33
+    ],
+    "numbering": "printed",
+    "detected_by": "tag",
+    "ref_printed": true,
+    "printed_ref_as_read": null
+   },
+   "ocr": {
+    "vision": "मन्येऽकुतश्चिद्भयमच्युतस्य पादाम्बुजोपासनमत्र नित्यम् । उद्विग्नबुद्धेरसदात्मभावाद्विश्वात्मना यत्र निवर्तते भीः ॥ ३१४ ॥",
+    "agreement": [
+     "B",
+     "A",
+     "A"
+    ]
+   },
+   "breadcrumb": [
+    "भागवतसारोद्धारः",
+    "बिम्बोपदेशप्रकरणम्",
+    "314"
+   ],
+   "source": {
+    "pdf_page": 382
+   }
+  },
+  {
    "id": "BS_P20_V315",
    "reference": "धर्मोपदेशप्रकरणम् · श्लोकः 315 · भा. 2.2.5",
    "sanskrit_text": "चीराणि किं पथि न सन्ति दिशन्ति भिक्षां नो वाऽङ्घ्रिपाः परभृतः सरितोऽप्यशुष्यन्। रुद्धा गुहाः किमवधूतसुहृन्न कृष्णः कस्माद्भजन्ति कवयो धनदुर्मदान्धान्॥",
@@ -17384,61 +17775,6 @@
    ],
    "source": {
     "pdf_page": 381
-   }
-  },
-  {
-   "id": "BS_P21_V314",
-   "reference": "बिम्बोपदेशप्रकरणम् · श्लोकः 314 · भा. 11.2.33",
-   "sanskrit_text": "मन्येऽकुतश्चिद्भयमच्युतस्य पादाम्बुजोपासनमत्र नित्यम्। उद्विग्नबुद्धेरसदात्मभावाद् विश्वात्मना यत्र निवर्तते भीः॥",
-   "tags": [
-    "verse",
-    "bhagavata"
-   ],
-   "notes": "",
-   "references": [
-    {
-     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_11",
-     "unit_id": "adhyaya_02",
-     "note": "cites Bhāgavata 11.2.33"
-    }
-   ],
-   "audio": [],
-   "category": "बिम्बोपदेशप्रकरणम्",
-   "prakarana_no": 21,
-   "verse_no": 314,
-   "bhagavata_ref": {
-    "skandha": 11,
-    "adhyaya": 2,
-    "verse": "33"
-   },
-   "verification": {
-    "status": "mula_verified",
-    "dge_similarity": 1.0,
-    "dge_key": [
-     11,
-     2,
-     33
-    ],
-    "numbering": "printed",
-    "detected_by": "tag",
-    "ref_printed": true,
-    "printed_ref_as_read": null
-   },
-   "ocr": {
-    "vision": "मन्येऽकुतश्चिद्भयमच्युतस्य पादाम्बुजोपासनमत्र नित्यम् । उद्विग्नबुद्धेरसदात्मभावाद्विश्वात्मना यत्र निवर्तते भीः ॥ ३१४ ॥",
-    "agreement": [
-     "B",
-     "A",
-     "A"
-    ]
-   },
-   "breadcrumb": [
-    "भागवतसारोद्धारः",
-    "बिम्बोपदेशप्रकरणम्",
-    "314"
-   ],
-   "source": {
-    "pdf_page": 382
    }
   },
   {
@@ -17549,6 +17885,42 @@
    ],
    "source": {
     "pdf_page": 383
+   }
+  },
+  {
+   "id": "BS_P21_V317",
+   "reference": "बिम्बोपदेशप्रकरणम् · श्लोकः 317 · भा. 11.2.42",
+   "sanskrit_text": "भक्तिः परे स्वेऽनुभवो विरक्तिरन्यत्र तत्त्रिकमेककालः। प्रपद्यमानस्य यथाऽश्नतः स्युस्तुष्टिः पुष्टिः क्षुदपायोऽनुघासम्॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_11",
+     "unit_id": "adhyaya_02",
+     "note": "cites Bhāgavata 11.2.42"
+    }
+   ],
+   "audio": [],
+   "category": "बिम्बोपदेशप्रकरणम्",
+   "prakarana_no": 21,
+   "verse_no": 317,
+   "bhagavata_ref": {
+    "skandha": 11,
+    "adhyaya": 2,
+    "verse": "42"
+   },
+   "verification": {
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 317 is 11.2.42; printed ref 11.2.42 (4) on p.384."
+    }
+   },
+   "source": {
+    "pdf_page": 384
    }
   },
   {
@@ -18053,7 +18425,7 @@
   {
    "id": "BS_P22_V327",
    "reference": "बिम्बोपासनापरपर्यायात्मसमर्पणप्रकरणम् · श्लोकः 327 · भा. 10.99.34",
-   "sanskrit_text": "किश्चित्करोत्युर्वपि यत्स्वदत्तं सुहृत्कृतं फल्वपि भूरिकारि । मयोपनीतं पृथुकैकमुष्टिं प्रत्यग्रहीत्प्रीतियुतो महात्मा ॥",
+   "sanskrit_text": "किश्चित्करोत्युर्वपि यत्स्वदत्तं सुहृत्कृतं फल्वपि भूरिकारि । मयोपनीतं पृथुकैकमुष्टिं प्रत्यग्रहीत्प्रीतियुतो महात्मा",
    "tags": [
     "verse",
     "bhagavata"
@@ -18076,7 +18448,7 @@
     "verse": "34"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.126,
     "dge_key": [
      10,
@@ -18086,7 +18458,14 @@
     "numbering": "sequence",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Sudāmā's verse किञ्चित्करोत्युर्वपि… is not present in the DGE Madhva Bhāgavata (printed ref 10.99.34 has no text); clean OCR kept; DGE gap to fill.",
+     "accepted_vision": true,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "किश्चित्करोत्युर्वपि यत्स्वदत्तं सुहृत्कृतं फल्वपि भूरिकारि । मयोपनीतं पृथुकैकमुष्टिं प्रत्यग्रहीत्प्रीतियुतो महात्मा",
@@ -19324,7 +19703,7 @@
   {
    "id": "BS_P28_V350",
    "reference": "गुणनिवृत्तिप्रकरणम् · श्लोकः 350 · भा. 11.2.38",
-   "sanskrit_text": "अविद्यमानोऽप्यवभाति हि द्वयो ध्यातुर्धिया स्वप्नमनोरथो यथा । तत्कर्म सङ्कल्पविकल्पकं मनो बुधो निदध्यादभयं ततः स्यात् 11 ॥",
+   "sanskrit_text": "अविद्यमानोऽप्यवभाति हि द्वयो ध्यातुर्धिया स्वप्नमनोरथो यथा । तत्कर्म सङ्कल्पविकल्पकं मनो बुधो निदध्यादभयं ततः स्यात् 11",
    "tags": [
     "verse",
     "bhagavata"
@@ -19347,7 +19726,7 @@
     "verse": "38"
    },
    "verification": {
-    "status": "mismatch",
+    "status": "human_verified",
     "dge_similarity": 0.641,
     "dge_key": [
      11,
@@ -19357,7 +19736,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print gives अविद्यमानोऽप्यवभाति… + तत्कर्म सङ्कल्प… as one verse; the DGE master holds the first half as an unnumbered stray line in 11.2 and only the second half under 11.2.38 — a DGE data-split defect, so the clean OCR text is kept here.",
+     "accepted_vision": true,
+     "text_changed": true,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "अविद्यमानोऽप्यवभाति हि द्वयो ध्यातुर्धिया स्वप्नमनोरथो यथा । तत्कर्म सङ्कल्पविकल्पकं मनो बुधो निदध्यादभयं ततः स्यात् 11",
@@ -20160,6 +20546,42 @@
    ],
    "source": {
     "pdf_page": 436
+   }
+  },
+  {
+   "id": "BS_P31_V365",
+   "reference": "उपसंहारः · श्लोकः 365 · भा. 12.4.40",
+   "sanskrit_text": "संसारसिन्धुमतिदुस्तरमुत्तितीर्षोर्नान्यः प्लवो भगवतः पुरुषोत्तमस्य। लीलाकथारसनिषेवणमन्तरेण पुंसो भवेद् विविधदुःखदवार्दितस्य॥",
+   "tags": [
+    "verse",
+    "bhagavata"
+   ],
+   "notes": "",
+   "references": [
+    {
+     "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_12",
+     "unit_id": "adhyaya_04",
+     "note": "cites Bhāgavata 12.4.40"
+    }
+   ],
+   "audio": [],
+   "category": "उपसंहारः",
+   "prakarana_no": 31,
+   "verse_no": 365,
+   "bhagavata_ref": {
+    "skandha": 12,
+    "adhyaya": 4,
+    "verse": "40"
+   },
+   "verification": {
+    "status": "human_supplied",
+    "human": {
+     "date": "2026-09-06",
+     "note": "Verse 365 is 12.12.66, serial (1) of Upasamhara, preceding 12.12.67 (v366). [DGE numbering 12.4.40; chat said 12.12.66]"
+    }
+   },
+   "source": {
+    "pdf_page": 437
    }
   },
   {
