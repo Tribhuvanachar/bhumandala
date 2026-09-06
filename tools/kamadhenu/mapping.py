@@ -222,7 +222,14 @@ def run():
             u = uid[o["text_id"]]; ca = u.get("chandas_analysis") or {}
             row.update(text_id=u["id"], text=u["metrical_text"] or u["text"], chandas=ca.get("chandas_inferred") or ca.get("chandas_normalized"), syllable_count=ca.get("syllable_count"),
                        work=u["work"], section=u["section"], chapter=u["chapter"], verse_id=u["verse_id"], confidence=float(o.get("confidence", 1.0)),
-                       signal="manual_override", signal_note=o.get("note", "manual"), review_status="verified_by_human" if o.get("verified") else "auto_accepted", band="1.00 exact" if float(o.get("confidence", 1.0)) >= 1 else row["band"])
+                       signal="manual_override", signal_note=o.get("note", "manual"), review_status="verified_by_human" if o.get("verified") else ("auto_accepted" if float(o.get("confidence", 1.0)) >= 0.9 else "review"),
+                       band="1.00 exact" if float(o.get("confidence", 1.0)) >= 1 else ("0.90–0.99 very strong" if float(o.get("confidence", 1.0)) >= 0.9 else "0.70–0.89 probable"),
+                       part=o.get("part", row["part"]), work_guess=u["work"], section_guess=u["section"], verse_guess=u["verse_id"])
+            if o.get("part", "").startswith("pada_"):
+                k = int(o["part"].split("_")[1]) - 1; pats = (u.get("metrical_text") or "").split("\n")
+                if k < len(pats):
+                    row["text"] = pats[k]; row["part_text_basis"] = f"line {k+1} of {len(pats)} (override)"
+            chk, note = plausibility(row.get("duration_seconds"), ca.get("syllable_count"), row["part"]); row["duration_check"], row["duration_note"] = chk, note
     # per-text audio counts (for unmatched-text listing)
     have = defaultdict(list)
     for row in rows:
