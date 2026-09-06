@@ -82,3 +82,7 @@ dge/data/kosha_r/
 
 # Tesseract language models (downloaded on demand by the OCR tools)
 tools/tessdata/
+
+# OCR staging bulk (regenerable): Upaniṣad ṭippaṇī blocks + prompt files
+dge/data/ocr_staging/upanishad_tippani/*/blocks.json
+dge/data/ocr_staging/upanishad_tippani/prompts/
