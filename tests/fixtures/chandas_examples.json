@@ -430,6 +430,32 @@
    "verified": "06 Sep 2026, 11:11 AM IST"
   },
   {
+   "vrutta": "चित्रपदा",
+   "text": "वासवदत्तनयेयं\nसा मयि संप्रति रक्ता\nपश्य सखे मम भाग्यं\nयाति दिशं दयिता मे",
+   "source": "Chandomañjarī 2.15",
+   "origin": "gemini",
+   "scan": [
+    "GLLGLLGG",
+    "GLLGLLGG",
+    "GLLGLLGG",
+    "GLLGLLGG"
+   ],
+   "verified": "06 Sep 2026, 03:35 PM IST"
+  },
+  {
+   "vrutta": "जलोद्धतगति",
+   "text": "धराधरनितम्बसङ्गततनुः\nस्फुरद्दशनदीधितिर्हतमदः\nहरिर्मृगयुवा यथा विजयते\nतथा रिपुबलं जलोद्धतगतिः",
+   "source": "Chandomañjarī 2.72",
+   "origin": "gemini",
+   "scan": [
+    "LGLLLGLGLLLG",
+    "LGLLLGLGLLLG",
+    "LGLLLGLGLLLG",
+    "LGLLLGLGLLLG"
+   ],
+   "verified": "06 Sep 2026, 03:34 PM IST"
+  },
+  {
    "vrutta": "तोटक",
    "text": "बहुसत्त्वगणं सविकं समहा विषमोक्षमहाहिमवन्तमयम्\nविषमोक्षमहा हिमवन्तमयन् नगमैक्षत फुल्लदृगस्तभयः",
    "source": "Sumadhva Vijaya 6.55",
@@ -469,17 +495,6 @@
    "verified": "06 Sep 2026, 11:11 AM IST"
   },
   {
-   "vrutta": "पञ्चचामर",
-   "text": "सगोपिकाम्बिकाग्रजः सुहृज्जनैस्समन्वितैः\nउपाविशत्सुपूजितो मुदैव कन्यकापदम्",
-   "source": "Rāghavendra Vijaya 4.48",
-   "origin": "dge_corpus",
-   "scan": [
-    "LGLGLGLGLGLGLGLG",
-    "LGLGLGLGLGLGLGLG"
-   ],
-   "verified": "06 Sep 2026, 11:11 AM IST"
-  },
-  {
    "vrutta": "पृथ्वी",
    "text": "प्रणम्य गुरुमादरादथ नियोगतो योग्यतः\nस तस्य जगतां हितं विदधतो गतः सानुगः\nमहिष्ठहृदयो महामहिमसिन्धुरानन्दतो\nनिजैरभिगतोऽनमद् रजतपीठवासं हरिम्",
    "source": "Sumadhva Vijaya 9.55",
@@ -491,6 +506,19 @@
     "LGLLLGLGLLLGLGGLG"
    ],
    "verified": "06 Sep 2026, 11:11 AM IST"
+  },
+  {
+   "vrutta": "प्रमाणिका",
+   "text": "न संशयो ममास्ति यत्\nभवन्त्यमी गुणास्तव\nअचिन्तनीयरूपधृग्\nहरे सदा प्रसीद मे",
+   "source": "Chandomañjarī 2.16",
+   "origin": "gemini",
+   "scan": [
+    "LGLGLGLG",
+    "LGLGLGLL",
+    "LGLGLGLG",
+    "LGLGLGLG"
+   ],
+   "verified": "06 Sep 2026, 03:35 PM IST"
   },
   {
    "vrutta": "प्रमिताक्षरा",

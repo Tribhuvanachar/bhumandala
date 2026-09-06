@@ -1,9 +1,11 @@
 # Chandas — Gemini/corpus ingest report
 
-Generated 06 Sep 2026, 11:11 AM IST by `tools/chandas/apply_gemini_chandas.py`.
+Generated 06 Sep 2026, 03:35 PM IST by `tools/chandas/apply_gemini_chandas.py`.
 
-* accepted examples: 59 (engine named the claimed vṛtta)
+* accepted examples: 3 (engine named the claimed vṛtta)
 * rejected examples: 0
 
-* mode: `--seed-from-corpus` (verses already identified in kamadhenu_dataset/text_index.json + vendor examples)
 
+## Part A — vṛttas Gemini could not exemplify (47)
+
+अतिरेखा, अतिशायिनी, अद्रितनया, अपराजिता, अपवाह, असम्बाधा, उज्ज्वला, उपस्थित, ऋषभगजविलसित, कलहंस, कुमारललिता, कुसुमविचित्रा, कुसुमितलतावेल्लिता, क्षमा, गजगति, गीतिका, चन्द्रलेखा, चन्द्रवर्त्म, चित्र, चित्रलेखा, जलधरमाला, तन्वी, तामरस, तारका, तूणक, त्वरितगति, नन्दन, नर्दटक, नवमालिनी, पञ्चकावली, पणव, पथ्या, पुट, प्रभा, प्रमदा, प्रहरणकलिका, भद्रिका २, भुजगशिशुभृता, भुजङ्गविजृम्भित, भुजङ्गसङ्गता, भ्रमरविलसित, मणिमध्य, मत्तमयूर, मत्तविलासिनी, मत्ता, मत्ताक्रीडा, मत्तेभविक्रीडित

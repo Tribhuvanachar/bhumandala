@@ -1,0 +1,32 @@
+{
+ "files": 2544,
+ "hours_total": 22.15,
+ "hours_grade_A": 6.52,
+ "hours_grade_AB": 18.52,
+ "pairs_conf70": 1985,
+ "hours_pairs_conf70": 15.81,
+ "pairs_conf90": 1576,
+ "hours_pairs_conf90": 6.9,
+ "usable_for_training": 1032,
+ "hours_usable": 4.03,
+ "pct_pairs_with_meter": 88.6,
+ "pct_pairs_with_laghu_guru": 100.0,
+ "unmatched_audio": 559,
+ "long_teaching_files": 0,
+ "exact_duplicates": 46,
+ "sample_rates": {
+  "44100": 521,
+  "48000": 1034,
+  "11025": 989
+ },
+ "by_folder_top": {
+  "dge_linked": {
+   "files": 1576,
+   "hours": 6.9
+  },
+  "drive": {
+   "files": 968,
+   "hours": 15.25
+  }
+ }
+}
