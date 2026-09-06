@@ -31,7 +31,7 @@ const appConfig = {
   audioBaseUrl: "https://archive.org/download/",
   // Kamadhenu ZeroGPU Space for "Generate this verse" (dge/js/kamadhenu.js). Empty = feature off.
   // Deploy with tools/kamadhenu/space/build_space.sh, then set "https://sarvamulaorg-kamadhenu.hf.space" (HF user SarvamulaOrg).
-  kamadhenuSpaceUrl: "",
+  kamadhenuSpaceUrl: "https://sarvamulaorg-kamadhenu.hf.space",   // live since 6 Sep 2026, 7:35 pm IST (ZeroGPU, PRO account)
   // Full ~1.65M-headword, 63-dictionary Kosha corpus, built and published
   // to the "dist" branch of the separate Tribhuvanachar/bhumandala-kosha-data
   // repo (too large for this repo's 1GB budget). Served over jsDelivr's
