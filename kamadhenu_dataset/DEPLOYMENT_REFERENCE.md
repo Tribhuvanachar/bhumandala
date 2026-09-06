@@ -68,7 +68,7 @@ below burns GPU minutes.
 ```
 GitHub Pages (static)                     Hugging Face (free tier)
 ──────────────────────                    ────────────────────────────────────
-dge/index.html                            Space  <dge-account>/kamadhenu   (ZeroGPU, Gradio)
+dge/index.html                            Space  SarvamulaOrg/kamadhenu     (ZeroGPU, Gradio)
 dge/js/chandas.js   ── metre name ──┐        app.py           tools/kamadhenu/space/app.py
 dge/js/kamadhenu.js ── verse text ──┼──►     src/             Vāgdhenu src @ c18927a8 (Apache-2.0)
 dge/js/audio.js     ◄── wav url ────┘        reference_bank/  Vāgdhenu bank (later: Kamadhenu voice)
@@ -91,6 +91,14 @@ Two things the DGE side does differently from the demo:
    Vāgdhenu's own `tts_meter.py` (13 metres, 4 wrong templates — see `chandas_comparison.md`) is bypassed.
 2. **The voice is a parameter.** The Space reads `VAGDHENU_HF`/`VAGDHENU_VOICE`; when Kamadhenu has its own
    fine-tuned voice (Stage 2) the same Space serves it by changing two environment variables.
+
+## 4a. The DGE account (done 6 Sep 2026)
+
+Hugging Face user **`SarvamulaOrg`** (created 6 Sep 2026, 12:49 pm IST; free tier). It may host ZeroGPU Spaces from
+**6 Oct 2026** (HF requires the account to be 30 days old). Until then the Space can be created and code uploaded
+on free CPU hardware; synthesis only works once Hardware → ZeroGPU is switched on. Deploy from GitHub Actions:
+`Deploy — Kamadhenu Space` (workflow_dispatch) with the `HF_TOKEN` repository secret (a write token from that
+account). Space URL once live: `https://sarvamulaorg-kamadhenu.hf.space`.
 
 ## 5. What to measure before deciding anything bigger
 
