@@ -21,11 +21,21 @@
    "audio_seconds": 9.63,
    "gpu_seconds": 4.3,
    "cold": false
+  },
+  {
+   "engine": "indicf5-zero-shot",
+   "chandas": "अनुष्टुप्",
+   "reference": "tp_anushtubh_19 (3BHU1, 11.15 s)",
+   "audio_seconds": 11.51,
+   "gpu_seconds": 13.94,
+   "cold": true,
+   "note": "first call: gated IndicF5 weights downloaded + loaded inside the GPU window; probe run 34041879895, 8:49 pm IST"
   }
  ],
  "rtf_warm": 0.447,
  "gpu_seconds_per_verse_warm": 4.3,
  "cold_start_gpu_seconds": 23.22,
  "quota_note": "PRO account: 40 ZeroGPU-minutes/day for the owner's own calls; anonymous visitors draw on the free per-IP quota (~5 min/day) — at 4.3 GPU s per anuṣṭubh verse that is ~70 verses per visitor per day; the Space's own KAMADHENU_DAILY_LIMIT (10/IP) is the tighter cap.",
- "todo": "per-metre table (14 bank metres) via measure.py from a browser-side run or an extended workflow"
+ "todo": "per-metre table (14 bank metres) via measure.py from a browser-side run or an extended workflow",
+ "trial_engine": "IndicF5 (ai4bharat/IndicF5, MIT) zero-shot with the lead's reference clips: first (cold) anuṣṭubh verse 11.5 s audio in 13.9 GPU s; warm figure not yet measured"
 }
