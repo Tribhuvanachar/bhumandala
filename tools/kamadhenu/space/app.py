@@ -104,19 +104,32 @@ def _render(text, bank_key, seed):
 
 
 def synthesize(text, dge_chandas, seed, request: gr.Request):
+    # Every failure is raised as gr.Error so the /synthesize API returns a message instead of `data: null`
+    # (Gradio hides other exception types from clients). The stage name says where it broke.
     text = (text or "").strip()
     if not text:
         raise gr.Error("empty verse")
-    msg = limits.validate_one_shloka(text)
+    try:
+        msg = limits.validate_one_shloka(text)
+    except Exception as e:
+        raise gr.Error(f"validate: {type(e).__name__}: {e}")
     if msg:
         raise gr.Error(msg)
-    if not limits.check_and_count(limits.client_ip(request)):
+    try:
+        ip = limits.client_ip(request) if request is not None else "unknown"
+        allowed = limits.check_and_count(ip)
+    except Exception as e:
+        raise gr.Error(f"quota: {type(e).__name__}: {e}")
+    if not allowed:
         raise gr.Error(f"daily limit of {limits.DAILY_LIMIT} verses reached from this network")
-    bank_key, how = resolve_meter(text, dge_chandas)
+    try:
+        bank_key, how = resolve_meter(text, dge_chandas)
+    except Exception as e:
+        raise gr.Error(f"meter: {type(e).__name__}: {e}")
     try:
         sr, audio, gpu_s = _render(text, bank_key, seed)
     except Exception as e:                                  # surfaces ZeroGPU quota errors verbatim
-        raise gr.Error(f"rendering failed: {e}")
+        raise gr.Error(f"rendering failed: {type(e).__name__}: {e}")
     meta = {"dge_chandas": dge_chandas or None, "bank_meter": bank_key, "meter_resolved_by": how,
             "seed": int(seed), "sample_rate": sr, "audio_seconds": round(len(audio) / sr, 2), "gpu_seconds": gpu_s,
             "voice": f"{WEIGHTS_REPO}/{VOICE_FILE}", "engine": "vagdhenu@c18927a8"}
@@ -139,4 +152,4 @@ with gr.Blocks(title="Kamadhenu — DGE Sanskrit chant") as demo:
     btn.click(synthesize, inputs=[txt, chandas, seed], outputs=[out, meta], api_name="synthesize")
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(show_error=True)

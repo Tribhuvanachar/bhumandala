@@ -584,13 +584,18 @@ window.dgeParseQuickSearchQuery = function(text) {
 // secret — Firebase's own docs are explicit that this object is safe to
 // ship in client code, since access control is enforced by Firestore
 // security rules (see dge/firebase/firestore.rules), not by hiding this.
+// Project "sarvamula-org", created by the lead 6 Sep 2026 (web app config pasted from the Firebase
+// console). The same three identifiers also live in the GitHub secrets FIREBASE_API_KEY /
+// FIREBASE_AUTH_DOMAIN / FIREBASE_PROJECT_ID for the hosting-deploy workflow; they are public
+// identifiers, not credentials (see the note above), so keeping them here is correct.
 const FIREBASE_CONFIG = {
-  apiKey: "REPLACE_WITH_YOUR_FIREBASE_API_KEY",
-  authDomain: "REPLACE_WITH_YOUR_PROJECT.firebaseapp.com",
-  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
-  appId: "REPLACE_WITH_YOUR_APP_ID"
+  apiKey: "AIzaSyC_mvK6f4CS91B51iEvx2B6wlk_9A-lVCw",
+  authDomain: "sarvamula-org.firebaseapp.com",
+  projectId: "sarvamula-org",
+  storageBucket: "sarvamula-org.firebasestorage.app",
+  messagingSenderId: "1005094356690",
+  appId: "1:1005094356690:web:f2e196c0ad9bc299b14f0b",
+  measurementId: "G-YB411NKZLE"
 };
 window.FIREBASE_CONFIG = FIREBASE_CONFIG;
 
@@ -598,8 +603,10 @@ window.FIREBASE_CONFIG = FIREBASE_CONFIG;
 // stays inert (no Firebase network calls, no Account button shown) on
 // any deployment that hasn't gone through the FIREBASE_SETUP.md steps.
 const AUTH_CONFIG = {
-  // Flip true only after FIREBASE_CONFIG above holds real values.
-  enabled: false,
+  // Flipped true 6 Sep 2026 (FIREBASE_CONFIG holds the sarvamula-org project). Sign-in works only once
+  // the console steps in FIREBASE_SETUP.md §3 are done: Google provider enabled, Firestore created in
+  // production mode with dge/firebase/firestore.rules published.
+  enabled: true,
 
   // Google Sign-In: free at any volume, no billing plan needed at all.
   enableGoogleSignIn: true,

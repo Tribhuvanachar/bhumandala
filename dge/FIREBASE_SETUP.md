@@ -6,6 +6,23 @@ broadcasts, tightened the security rules, and — for the first time —
 tests. 204 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
+## 0. Where this stands (6 Sep 2026, 7:35 pm IST)
+
+The lead created the Firebase project **`sarvamula-org`** and pasted its web config; it is now in
+`dge/js/config.js` (`FIREBASE_CONFIG`) and `AUTH_CONFIG.enabled` is **true**. The three identifiers are
+also GitHub secrets (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`) — harmless, but
+only `FIREBASE_PROJECT_ID` is used by a workflow (`deploy-firebase-hosting.yml`); the web config is public
+by design (§4).
+
+Probed from the public endpoints the same evening:
+
+| Console step (§3) | State |
+|---|---|
+| Authorized domains | ✅ `tribhuvanachar.github.io`, `sarvamula.org`, `madhvacharya.in`, `sanatanavidyagurukulam.com`, the `*.web.app`/`*.firebaseapp.com` hosts, `localhost` |
+| Google sign-in provider | ❌ **not enabled** (Authentication → Sign-in method → Google → Enable) — until then the 👤 button reports "Sign-in failed: … operation-not-allowed" |
+| Firestore database | ❌ **not created** (the Firestore API is off) — create in **production mode**, then publish `dge/firebase/firestore.rules`; without it the first sign-in cannot write `users/<uid>` |
+| Hosting deploy | workflow ready (`Deploy — Firebase Hosting`, manual dispatch, `preview` or `live` channel); needs the **`FIREBASE_SERVICE_ACCOUNT`** secret (Project settings → Service accounts → Generate new private key, paste the JSON). GitHub Pages stays the live origin until the DNS cutover in the lead's migration guide |
+
 ## 1. What this is
 
 User accounts, per-person roles (basic / subscriber / sponsor / admin /
