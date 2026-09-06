@@ -12,8 +12,8 @@
   "verses": 371,
   "identical_to_dge": 69,
   "unified_print_noise_only": 211,
-  "unified_print_word_diffs": 77,
-  "not_unified": 14
+  "unified_print_word_diffs": 84,
+  "not_unified": 7
  },
  "items": [
   {
@@ -35,62 +35,6 @@
      "kind": "ocr_noise"
     }
    ],
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
-  },
-  {
-   "id": "BS_V006",
-   "verse_num": 6,
-   "prakarana": "भागवतागतिप्रकरणम्",
-   "pdf_page": 103,
-   "book_ref": "1.5.13",
-   "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतवतः। उरुक्रमस्याखिलबन्धमुक्तये समाधिनाऽनुस्मर यद्विचेष्टितम्॥",
-   "print_ocr_vision": null,
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
-  },
-  {
-   "id": "BS_V009",
-   "verse_num": 9,
-   "prakarana": "भागवतागतिप्रकरणम्",
-   "pdf_page": 105,
-   "book_ref": "1.7.11",
-   "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "हरेर्गुणाक्षिप्तमतिर्भगवान् बादरायणिः। अध्यगान्महदाख्यानं नित्यं विष्णुजनप्रियम्॥",
-   "print_ocr_vision": null,
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
-  },
-  {
-   "id": "BS_V035",
-   "verse_num": 35,
-   "prakarana": "शुकागमप्रकरणम्",
-   "pdf_page": 123,
-   "book_ref": "1.20.3",
-   "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "निगूढजत्रुं पृथुतुङ्गवक्षसम् आवर्तनाभिं वलिवल्गूदरञ्च। दिगम्बरं वक्रविकीर्णकेशं प्रलम्बबाहुं स्वमरोत्तमाभम्॥",
-   "print_ocr_vision": null,
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
-  },
-  {
-   "id": "BS_V069",
-   "verse_num": 69,
-   "prakarana": "वैराग्यप्रकरणम्",
-   "pdf_page": 148,
-   "book_ref": "10.54.53",
-   "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "निर्जित्य दिक्चक्रमभूतविग्रहो परासनस्थः समराजवन्दितः। गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते॥",
-   "print_ocr_vision": null,
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
    "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
   },
   {
@@ -175,20 +119,6 @@
    "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
   },
   {
-   "id": "BS_V274",
-   "verse_num": 274,
-   "prakarana": "धर्मोपदेशप्रकरणम्",
-   "pdf_page": 344,
-   "book_ref": "6.16.38",
-   "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "विषयतृषो नरपशवो य उपासते विभूतीर्न परं त्वाम्। तेषामाशिष ईश तदनु विनश्यन्ति यथाऽराजकुलम्॥",
-   "print_ocr_vision": null,
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
-  },
-  {
    "id": "BS_V287",
    "verse_num": 287,
    "prakarana": "धर्मोपदेशप्रकरणम्",
@@ -198,20 +128,6 @@
    "bucket": "not_unified",
    "current_text": "तस्यैव मे सौहृदसख्यमैत्री दास्यं पुनर्जन्मनि जन्मनि स्यात् । महानुभावेन गुणालयेन विषज्जतस्तत्पुरुषप्रसङ्गः ॥",
    "print_ocr_vision": "तस्यैव मे सौहृदसख्यमैत्री दास्यं पुनर्जन्मनि जन्मनि स्यात् । महानुभावेन गुणालयेन विषज्जतस्तत्पुरुषप्रसङ्गः",
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
-  },
-  {
-   "id": "BS_V317",
-   "verse_num": 317,
-   "prakarana": "बिम्बोपदेशप्रकरणम्",
-   "pdf_page": 384,
-   "book_ref": "11.2.42",
-   "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "भक्तिः परे स्वेऽनुभवो विरक्तिरन्यत्र तत्त्रिकमेककालः। प्रपद्यमानस्य यथाऽश्नतः स्युस्तुष्टिः पुष्टिः क्षुदपायोऽनुघासम्॥",
-   "print_ocr_vision": null,
    "dge_mula_text": null,
    "differences_print_vs_dge": null,
    "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
@@ -259,18 +175,46 @@
    "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
   },
   {
-   "id": "BS_V365",
-   "verse_num": 365,
-   "prakarana": "उपसंहारः",
-   "pdf_page": 437,
-   "book_ref": "12.4.40",
+   "id": "BS_V006",
+   "verse_num": 6,
+   "prakarana": "भागवतागतिप्रकरणम्",
+   "pdf_page": 103,
+   "book_ref": "1.5.13",
    "status": "human_supplied",
-   "bucket": "not_unified",
-   "current_text": "संसारसिन्धुमतिदुस्तरमुत्तितीर्षोर्नान्यः प्लवो भगवतः पुरुषोत्तमस्य। लीलाकथारसनिषेवणमन्तरेण पुंसो भवेद् विविधदुःखदवार्दितस्य॥",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतवतः। उरुक्रमस्याखिलबन्धमुक्तये समाधिनाऽनुस्मर यद्विचेष्टितम्॥",
    "print_ocr_vision": null,
-   "dge_mula_text": null,
-   "differences_print_vs_dge": null,
-   "question": "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question."
+   "dge_mula_text": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतवतः। उरुक्रमस्याखिलबन्धमुक्तये समाधिनाऽनुस्मर यद्विचेष्टितम्॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "अतो महाभाग भवानमोघदृक् शुचिश्रवाः सत्यरतो धृतवतः उरुक्रमस्याखिलबन्धमुक्तये समाधिनानुस्मर यद्विचेष्टितम्",
+     "similarity": 0.0,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+  },
+  {
+   "id": "BS_V009",
+   "verse_num": 9,
+   "prakarana": "भागवतागतिप्रकरणम्",
+   "pdf_page": 105,
+   "book_ref": "1.7.11",
+   "status": "human_supplied",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "हरेर्गुणाक्षिप्तमतिर्भगवान् बादरायणिः। अध्यगान्महदाख्यानं नित्यं विष्णुजनप्रियम्॥",
+   "print_ocr_vision": null,
+   "dge_mula_text": "हरेर्गुणाक्षिप्तमतिर्भगवान् बादरायणिः। अध्यगान्महदाख्यानं नित्यं विष्णुजनप्रियम्॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "हरेर्गुणाक्षिप्तमतिर्भगवान् बादरायणिः अध्यगान्महदाख्यानं नित्यं विष्णुजनप्रियम्",
+     "similarity": 0.0,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
   },
   {
    "id": "BS_V014",
@@ -375,6 +319,27 @@
      "print": "देवा",
      "dge": "वेदा",
      "similarity": 0.5,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+  },
+  {
+   "id": "BS_V035",
+   "verse_num": 35,
+   "prakarana": "शुकागमप्रकरणम्",
+   "pdf_page": 123,
+   "book_ref": "1.20.3",
+   "status": "human_supplied",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "निगूढजत्रुं पृथुतुङ्गवक्षसम् आवर्तनाभिं वलिवल्गूदरञ्च। दिगम्बरं वक्रविकीर्णकेशं प्रलम्बबाहुं स्वमरोत्तमाभम्॥",
+   "print_ocr_vision": null,
+   "dge_mula_text": "निगूढजत्रुं पृथुतुङ्गवक्षसम् आवर्तनाभिं वलिवल्गूदरञ्च। दिगम्बरं वक्रविकीर्णकेशं प्रलम्बबाहुं स्वमरोत्तमाभम्॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "निगूढजत्रुं पृथुतुङ्गवक्षसम् आवर्तनाभिं वलिवल्गूदरञ्च दिगम्बरं वक्रविकीर्णकेशं प्रलम्बबाहुं स्वमरोत्तमाभम्",
+     "similarity": 0.0,
      "kind": "word"
     }
    ],
@@ -519,6 +484,27 @@
      "print": "निर्जित्य दिक्चक्रमभूतविग्रहो वरासनस्थः समराजवन्दितः गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते",
      "dge": "यतो न कश्चित्क्वच कुत्र विद्वान् दीनं स्वमात्मानमलं समर्थः विमोचितुं वामदृशां विहारक्रीडामृगो यन्निगडोक्षिसर्गः",
      "similarity": 0.35,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+  },
+  {
+   "id": "BS_V069",
+   "verse_num": 69,
+   "prakarana": "वैराग्यप्रकरणम्",
+   "pdf_page": 148,
+   "book_ref": "10.54.53",
+   "status": "human_supplied",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "निर्जित्य दिक्चक्रमभूतविग्रहो परासनस्थः समराजवन्दितः। गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते॥",
+   "print_ocr_vision": null,
+   "dge_mula_text": "निर्जित्य दिक्चक्रमभूतविग्रहो परासनस्थः समराजवन्दितः। गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "निर्जित्य दिक्चक्रमभूतविग्रहो परासनस्थः समराजवन्दितः गृहेषु मैथुन्यपरेषु योषितां क्रीडामृगः पूरुष ईश गीयते",
+     "similarity": 0.0,
      "kind": "word"
     }
    ],
@@ -1812,6 +1798,27 @@
    "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
   },
   {
+   "id": "BS_V274",
+   "verse_num": 274,
+   "prakarana": "धर्मोपदेशप्रकरणम्",
+   "pdf_page": 344,
+   "book_ref": "6.16.38",
+   "status": "human_supplied",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "विषयतृषो नरपशवो य उपासते विभूतीर्न परं त्वाम्। तेषामाशिष ईश तदनु विनश्यन्ति यथाऽराजकुलम्॥",
+   "print_ocr_vision": null,
+   "dge_mula_text": "विषयतृषो नरपशवो य उपासते विभूतीर्न परं त्वाम्। तेषामाशिष ईश तदनु विनश्यन्ति यथाऽराजकुलम्॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "विषयतृषो नरपशवो य उपासते विभूतीर्न परं त्वाम् तेषामाशिष ईश तदनु विनश्यन्ति यथाराजकुलम्",
+     "similarity": 0.0,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+  },
+  {
    "id": "BS_V275",
    "verse_num": 275,
    "prakarana": "धर्मोपदेशप्रकरणम्",
@@ -2118,6 +2125,27 @@
    "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
   },
   {
+   "id": "BS_V317",
+   "verse_num": 317,
+   "prakarana": "बिम्बोपदेशप्रकरणम्",
+   "pdf_page": 384,
+   "book_ref": "11.2.42",
+   "status": "human_supplied",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "भक्तिः परे स्वेऽनुभवो विरक्तिरन्यत्र तत्त्रिकमेककालः। प्रपद्यमानस्य यथाऽश्नतः स्युस्तुष्टिः पुष्टिः क्षुदपायोऽनुघासम्॥",
+   "print_ocr_vision": null,
+   "dge_mula_text": "भक्तिः परे स्वेऽनुभवो विरक्तिरन्यत्र तत्त्रिकमेककालः। प्रपद्यमानस्य यथाऽश्नतः स्युस्तुष्टिः पुष्टिः क्षुदपायोऽनुघासम्॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "भक्तिः परे स्वेनुभवो विरक्तिरन्यत्र तत्त्रिकमेककालः प्रपद्यमानस्य यथाश्नतः स्युस्तुष्टिः पुष्टिः क्षुदपायोनुघासम्",
+     "similarity": 0.0,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+  },
+  {
    "id": "BS_V323",
    "verse_num": 323,
    "prakarana": "बिम्बोपदेशप्रकरणम्",
@@ -2399,6 +2427,27 @@
     {
      "print": "४ ४९ २",
      "dge": null,
+     "similarity": 0.0,
+     "kind": "word"
+    }
+   ],
+   "question": "Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+  },
+  {
+   "id": "BS_V365",
+   "verse_num": 365,
+   "prakarana": "उपसंहारः",
+   "pdf_page": 437,
+   "book_ref": "12.4.40",
+   "status": "human_supplied",
+   "bucket": "unified_print_word_diffs",
+   "current_text": "संसारसिन्धुमतिदुस्तरमुत्तितीर्षोर्नान्यः प्लवो भगवतः पुरुषोत्तमस्य। लीलाकथारसनिषेवणमन्तरेण पुंसो भवेद् विविधदुःखदवार्दितस्य॥",
+   "print_ocr_vision": null,
+   "dge_mula_text": "संसारसिन्धुमतिदुस्तरमुत्तितीर्षोर्नान्यः प्लवो भगवतः पुरुषोत्तमस्य। लीलाकथारसनिषेवणमन्तरेण पुंसो भवेद् विविधदुःखदवार्दितस्य॥",
+   "differences_print_vs_dge": [
+    {
+     "print": null,
+     "dge": "संसारसिन्धुमतिदुस्तरमुत्तितीर्षोर्नान्यः प्लवो भगवतः पुरुषोत्तमस्य लीलाकथारसनिषेवणमन्तरेण पुंसो भवेद् विविधदुःखदवार्दितस्य",
      "similarity": 0.0,
      "kind": "word"
     }

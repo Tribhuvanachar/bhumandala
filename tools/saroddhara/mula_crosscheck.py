@@ -48,7 +48,10 @@ def main():
     rows = []; stats = {"verses": 0, "identical_to_dge": 0, "unified_print_noise_only": 0, "unified_print_word_diffs": 0, "not_unified": 0}
     for it in mula["items"]:
         stats["verses"] += 1
-        v = it["verification"]; key = tuple(v.get("dge_key") or []); dge = bhp.get(key, {}).get("text") if key else None
+        v = it["verification"]; key = tuple(v.get("dge_key") or [])
+        if not key and it.get("bhagavata_ref"):                       # verses supplied by hand carry only bhagavata_ref
+            r = it["bhagavata_ref"]; key = (int(r["skandha"]), int(r["adhyaya"]), int(re.findall(r"\d+", str(r["verse"]))[0]))
+        dge = bhp.get(key, {}).get("text") if key else None
         ocr = (it.get("ocr") or {}).get("vision") or ""
         cur = it["sanskrit_text"]
         unified = bool(dge) and words(cur) == words(dge)
