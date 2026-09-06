@@ -22,12 +22,12 @@ def save(sub, d): json.dump(d, open(BASE / sub / "data.json", "w", encoding="utf
 def main(files):
     answers = {}
     for f in files: answers.update(json.load(open(f, encoding="utf-8")))
-    mula, tika, tipp = load("mula"), load("tika_vishnutirtha"), load("tippani")
+    mula, tika, tipp = load("mula"), load("tika_vishnutirtha"), load("tika_tippani")
     by_n = {it["verse_no"]: it for it in mula["items"]}
     tby = {it["id"]: it for it in tika["items"]}; fby = {it["id"]: it for it in tipp["items"]}
     stamp = datetime.date.today().isoformat(); n_applied = 0; log = []
     for qid, a in answers.items():
-        if not isinstance(a, dict): continue
+        if not isinstance(a, dict) or qid.startswith("_"): continue     # "_unsure" etc. are bookkeeping
         m = re.match(r"BS_V(\d+)(?:_C_p(\d+)_y(\d+)|_F(\d+)_p(\d+))?$", qid)
         if not m: log.append(f"skip {qid}: unknown id shape"); continue
         n = int(m.group(1)); it = by_n.get(n)
@@ -74,7 +74,7 @@ def main(files):
                 it["sanskrit_text"] = re.sub(r"\s*(?:॥|\|\||।।)\s*[०-९]{1,3}\s*(?:॥|\|\||।।)\s*$", " ॥", txt).strip()
             it["verification"]["human"] = {"date": stamp, "note": a.get("note"), "accepted_vision": bool(a.get("accept_vision")), "text_changed": bool(txt)}
             it["verification"]["status"] = "human_verified"; n_applied += 1
-    save("mula", mula); save("tika_vishnutirtha", tika); save("tippani", tipp)
+    save("mula", mula); save("tika_vishnutirtha", tika); save("tika_tippani", tipp)
     print(f"applied {n_applied} answers; {len(log)} skipped"); [print("  ", l) for l in log[:20]]
 
 
