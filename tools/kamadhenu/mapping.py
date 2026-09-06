@@ -43,6 +43,18 @@ def rules(rec):
             part = {None: "full", "1": "half_1", "2": "half_2"}.get(m.group(3), f"part_{m.group(3)}")
             return dict(work="bhagavad_gita", section=f"adhyaya_{int(m.group(1)):02d}", verse=str(int(m.group(2))), part=part, signal="filename", note="G.<adhyāya>.<verse>[.<half>] convention in the 'Gita Shlokas' Drive folder")
         return dict(work="bhagavad_gita", section=None, verse=None, part="full", signal="folder", note="in the Gita folder but name not understood")
+    if folder.lower().endswith("/shlokas"):            # Drive 'Shlokas' = Tīrthaprabandha: tp<prabandha>.<n>.tp<running>.mp3
+        m = re.match(r"tp(\d+)\.(\d+)(?:\.tp(\d+))?$", stem)
+        sec = {1: "dakshina_prabandha", 2: "paschima_prabandha", 3: "uttara_prabandha", 4: "purva_prabandha"}.get(int(m.group(1)) if m else 0)
+        if m and int(m.group(2)) > 0 and sec:
+            return dict(work="tirtha_prabandha", section=sec, verse=str(int(m.group(2))), part="full", signal="filename",
+                        note="tp<prabandha>.<verse>.tp<running> in the Drive 'Shlokas' folder (Dakṣiṇa=1, Paścima=2, Uttara=3, Pūrva=4)")
+        return dict(work="tirtha_prabandha", section=sec, verse=None, part="full", signal="folder", note="prabandha intro clip (tp<p>.0) — no single verse")
+    if "prahlada narasimha stotra" in folder.lower():   # NS<n>.aac = Bhāgavata 7.9.(n+7): the Prahlāda-stuti, 43 verses 7.9.8–50
+        m = re.match(r"NS(\d+)$", stem)
+        if m:
+            return dict(work="bhagavata_7", section="adhyaya_09", verse=str(int(m.group(1)) + 7), part="full", signal="filename",
+                        note="NS<n> → Bhāgavata 7.9.(n+7); the 11-verse DGE 'PrahladaKrutaNarasimha' is the same text's opening (verse 1 = 7.9.8)")
     if "saroddhara" in folder.lower():
         m = re.match(r"SBS(\d+)\.(\w+)(?:\.SBS(\d+))?$", stem)
         # SBS<prakaraṇa>.<n>.SBS<running verse>.mp3 — the running number is the Sāroddhāra verse_no used by the DGE

@@ -1,12 +1,13 @@
 {
- "generated_at": "06 Sep 2026, 04:02 PM IST",
+ "generated_at": "06 Sep 2026, 04:55 PM IST",
  "inputs": [
   "kamadhenu/data/pilot/manifest.jsonl"
  ],
- "records": 126,
- "records_clean_or_only_unattributed": 125,
+ "records": 136,
+ "records_clean_or_only_unattributed": 134,
  "issue_counts": {
-  "text_non_devanagari_chars": 1
+  "text_non_devanagari_chars": 1,
+  "too_fast_for_text": 1
  },
  "per_record": [
   {
@@ -52,6 +53,11 @@
   {
    "id": "km_0b66396f4644",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.8.SBS129.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_0cce12abd22c",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.13.tp13.mp3",
    "flags": []
   },
   {
@@ -112,11 +118,6 @@
   {
    "id": "km_201c266a7650",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.77.SBS313.mp3",
-   "flags": []
-  },
-  {
-   "id": "km_216f2f572b42",
-   "audio": "kamadhenu_dataset/incoming_audio/dge_linked/PrahladaKrutaNarasimha/NS9.mp3",
    "flags": []
   },
   {
@@ -185,6 +186,11 @@
    "flags": []
   },
   {
+   "id": "km_3c13022a3175",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.19.tp19.mp3",
+   "flags": []
+  },
+  {
    "id": "km_3e428ecc64d8",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.2.SBS18.mp3",
    "flags": []
@@ -197,6 +203,11 @@
   {
    "id": "km_40d57ea467c7",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.1.SBS314.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_4273f570d634",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.4.tp4.mp3",
    "flags": []
   },
   {
@@ -245,11 +256,6 @@
    "flags": []
   },
   {
-   "id": "km_5c967a036393",
-   "audio": "kamadhenu_dataset/incoming_audio/dge_linked/PrahladaKrutaNarasimha/NS7.mp3",
-   "flags": []
-  },
-  {
    "id": "km_60f5ebe064ed",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS14.4.SBS188.mp3",
    "flags": []
@@ -267,6 +273,11 @@
   {
    "id": "km_6360b874b5d7",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.9.SBS51.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_647eed5bad74",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.2.tp2.mp3",
    "flags": []
   },
   {
@@ -355,6 +366,11 @@
    "flags": []
   },
   {
+   "id": "km_810b0421e79e",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.16.tp16.mp3",
+   "flags": []
+  },
+  {
    "id": "km_8307b380b67d",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.10.SBS10.mp3",
    "flags": []
@@ -367,6 +383,11 @@
   {
    "id": "km_8567909ce2f6",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS30.1.SBS362.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_85903d0b15ec",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.10.SBS121.mp3",
    "flags": []
   },
   {
@@ -412,8 +433,8 @@
    "flags": []
   },
   {
-   "id": "km_99f28bbae757",
-   "audio": "kamadhenu_dataset/incoming_audio/dge_linked/PrahladaKrutaNarasimha/NS1.mp3",
+   "id": "km_9754fc3d3f9a",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.6.tp6.mp3",
    "flags": []
   },
   {
@@ -467,6 +488,13 @@
    "flags": []
   },
   {
+   "id": "km_ac304716f8bc",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.1.tp1.mp3",
+   "flags": [
+    "too_fast_for_text"
+   ]
+  },
+  {
    "id": "km_ac3eb4987bd5",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.1.SBS112.mp3",
    "flags": []
@@ -492,6 +520,11 @@
    "flags": []
   },
   {
+   "id": "km_b48fde5ef4f8",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.4.SBS141.mp3",
+   "flags": []
+  },
+  {
    "id": "km_b76f9a177e73",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.1.SBS138.mp3",
    "flags": []
@@ -499,6 +532,11 @@
   {
    "id": "km_b7d7d47c6793",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.1.SBS351.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_b930f00d0aa9",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.10.tp10.mp3",
    "flags": []
   },
   {
@@ -577,6 +615,11 @@
    "flags": []
   },
   {
+   "id": "km_dce1c0080937",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.7.tp7.mp3",
+   "flags": []
+  },
+  {
    "id": "km_dd82bf61c4f0",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.29.SBS85.mp3",
    "flags": []
@@ -604,6 +647,11 @@
   {
    "id": "km_e714575794b2",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.4.SBS60.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_e7fe6bc75269",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.43.SBS279.mp3",
    "flags": []
   },
   {
@@ -639,6 +687,11 @@
   {
    "id": "km_fd9f0b30dde1",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.6.SBS62.mp3",
+   "flags": []
+  },
+  {
+   "id": "km_fece0f10bca2",
+   "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.9.tp9.mp3",
    "flags": []
   }
  ]
