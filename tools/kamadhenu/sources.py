@@ -15,15 +15,14 @@ KNOWN_SOURCES = [
     ("gdrive_folder", "https://drive.google.com/drive/folders/1wOOrLOfr7wWWpE1xRW90FNsDk54V5M81"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1qs6Tdi6RSVM6gnUt9S6-muvvuqc8eHFF"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1bSqIOnPb1888H26gGnyzeZ3YTQM9TTBz"),
-    # Added 6 Sep 2026 (lead shared 9 more public folders, all recited by 3BHU1).
+    # Added 6 Sep 2026 (lead shared 9 more folders; two of them — 1o5-yqK_… and 1-716NX8… — were someone else's and
+    # were dropped again on the lead's word; the Aṣṭādhyāyī folder is kept for the record but its reciters are not the lead).
     ("gdrive_folder", "https://drive.google.com/drive/folders/1K0bgabRjoXnB4vc4RwT155li8CZImiag"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1Oto4dcJzZNG_5e9zr82FMMTNgsu8riA_"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1n3dIUJBLAoq8hdU1CkNRirdTpNil8khh"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1rIB8XGM36ztO8dkFwhtTLOqQzmXN1ud3"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/18jaJVJnDx_tORG0mEKJCriLK9n-BMaIn"),
-    ("gdrive_folder", "https://drive.google.com/drive/folders/1o5-yqK_jT-wg-8Augp1XwOyMFJKtyOyU"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1wEfVW2-A39v3kbhSQ6MhLzEyzIf38c-H"),
-    ("gdrive_folder", "https://drive.google.com/drive/folders/1-716NX8boMumr_Gyyq67veWKezjK3rez"),
     ("gdrive_folder", "https://drive.google.com/drive/folders/1bSiaUPAHGCGpl-D8nHkNGHyKCH0BLsNt"),
     ("youtube", "https://youtu.be/lgaxTgliOCo"),
     ("youtube", "https://youtu.be/54EPwW-xJoI"),

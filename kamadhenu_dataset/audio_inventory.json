@@ -1,10 +1,10 @@
 {
  "_readme": "Measured properties of every audio file under kamadhenu_dataset/incoming_audio/. Produced by tools/kamadhenu/inventory.py. 'flags' are automatic QC findings; quality_grade A–F is derived from them (A = clean ≥22.05 kHz, B = usable with caveats, C = noisy/quiet, D = clipped/silent/too short, F = undecodable).",
  "summary": {
-  "generated_at": "06 Sep 2026, 5:41 PM IST",
+  "generated_at": "06 Sep 2026, 6:58 PM IST",
   "ffmpeg": "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2",
   "files": 3892,
-  "new_this_run": 1106,
+  "new_this_run": 0,
   "total_duration_seconds": 136182.4,
   "decode_errors": 1,
   "by_folder": {

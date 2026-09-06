@@ -28,13 +28,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install "huggingface_hub[cli]"
+      - run: pip install "huggingface_hub>=0.25"
       - name: Assemble and upload
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           test -n "$HF_TOKEN" || { echo "HF_TOKEN secret is not set (Settings → Secrets and variables → Actions)"; exit 1; }
-          huggingface-cli repo create "${{ inputs.space }}" --type space --space_sdk gradio -y 2>/dev/null || true
           bash tools/kamadhenu/space/build_space.sh "${{ inputs.space }}"
       - name: Report
         run: |

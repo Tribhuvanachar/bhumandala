@@ -33,6 +33,7 @@ WORKS = [
     ("bhagavata_7", "data/purana/maha_purana/bhagavata_purana_madhva/skandha_07/data.json", "gita", "Bhāgavata Purāṇa (Madhva) skandha 7"),   # 7.9.8–50 = Prahlāda-stuti recordings
     ("mahabharata_tatparya_nirnaya", "data/darshana/vedanta/dvaita/SarvaMula/*/mahabharata_tatparya_nirnaya/mula/data.json", "items", "Mahābhārata Tātparya Nirṇaya"),
     ("stotra_misc", "data/stotra/*/data.json", "auto", "Stotra (misc)"),
+    ("vedavyasa_gadya", "data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vedavyasa_gadya/mula/data.json", "items", "Vedavyāsa Gadyam (Yādavārya, prose)"),   # one item per epithet; recorded as one 9.7-min file
     ("harikathamrutasara", "data/dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara/data.json", "hks", "Harikathāmṛtasāra (Jagannātha Dāsa, Kannada)"),   # hks.<sandhi>.<n>.aac recordings
 ]
 

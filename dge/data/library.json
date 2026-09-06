@@ -4591,6 +4591,22 @@
    }
   },
   {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vedavyasa_gadya/mula/data.json",
+   "populated": true,
+   "title": "श्रीवेदव्यासगद्यम् (Vedavyāsa Gadyam, Yādavārya) — मूलम्",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Sanskrit Documents (sanskritdocuments.org), Devanāgarī edition 'vedavyAsagadyam' encoded and proofread by Krishnananda Achar",
+    "source_url": "https://sanskritdocuments.org/doc_deities_misc/vedavyAsagadyam.html",
+    "licence": "sanskritdocuments.org standard usage terms (free non-commercial use, source credited); the text (17th c.) is public domain"
+   },
+   "facets": {
+    "default_author": "Yādavārya (यादवार्यः)",
+    "deity": "Vedavyāsa",
+    "genre": "gadya (prose stotra)"
+   }
+  },
+  {
    "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/purana_prasthana/bhagavata_tatparya_nirnaya/mula/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — mula",

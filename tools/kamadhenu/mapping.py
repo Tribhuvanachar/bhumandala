@@ -80,13 +80,14 @@ def rules(rec):
     if top == "drive" and folder.split("/")[1] == "single-file":
         if re.search(r"gadya", name, re.I):
             return dict(work="vedavyasa_gadya", section=None, verse=None, part="long_form", signal="long_form",
-                        note="'Vedavyasa Gadya' prose recitation (the same recording as the unreachable YouTube link); no DGE text yet — prose, not verse")
+                        note="'Vedavyasa Gadya' prose recitation (the same recording as the unreachable YouTube link); text imported 6 Sep 2026 (later_acharyas/vedavyasa_gadya, 100 epithet units) — segment the 9.7-min file per epithet before pairing")
         return dict(work=None, section=None, verse=None, part="full", signal="none", note="single Drive file; identify by listening")
     if "gita" in folder.lower():
         m = re.match(r"G\.(\d+)\.(\d+)(?:\.(\d+))?$", stem)
         if m:
             part = {None: "full", "1": "half_1", "2": "half_2"}.get(m.group(3), f"part_{m.group(3)}")
-            return dict(work="bhagavad_gita", section=f"adhyaya_{int(m.group(1)):02d}", verse=str(int(m.group(2))), part=part, signal="filename", note="G.<adhyāya>.<verse>[.<half>] convention in the 'Gita Shlokas' Drive folder")
+            return dict(work="bhagavad_gita", section=f"adhyaya_{int(m.group(1)):02d}", verse=str(int(m.group(2))), part=part, signal="filename",
+                        note="G.<adhyāya>.<verse>[.<half>] convention in the 'Gita Shlokas' Drive folder; lead (6 Sep 2026): recited pāda by pāda with some words repeated twice — segment per pāda and drop the repeats before training")
         return dict(work="bhagavad_gita", section=None, verse=None, part="full", signal="folder", note="in the Gita folder but name not understood")
     if folder.lower().endswith("/shlokas"):            # Drive 'Shlokas' = Tīrthaprabandha: tp<prabandha>.<n>.tp<running>.mp3
         m = re.match(r"tp(\d+)\.(\d+)(?:\.tp(\d+))?$", stem)
@@ -175,6 +176,9 @@ def run():
             row["duration_check"], row["duration_note"] = chk, note
             if r["signal"] == "dge_linked":
                 conf = 1.0 if chk == "plausible" else 0.92
+            elif r["signal"] == "filename" and r["work"] == "harikathamrutasara":
+                conf = 0.95   # lead confirmed 6 Sep 2026: each HKS file is the plain verse, sung at ṣaṭpadi pace (no meaning) — the Sanskrit chant band does not apply
+                row["duration_note"] = "Kannada ṣaṭpadi singing pace; lead confirmed plain recitation (6 Sep 2026)"
             elif r["signal"] == "filename":
                 conf = 0.95 if chk == "plausible" else (0.8 if chk == "too_long" else 0.75)
             elif r["signal"] == "filename_guess":

@@ -4279,6 +4279,13 @@
        "upodghata": {
         "_schema": "grantha_mula_text"
        }
+      },
+      "vedavyasa_gadya": {
+       "_default_author": "Yādavārya (यादवार्यः)",
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Yādavārya (यादवार्यः)"
+       }
       }
      },
      "sruti_prasthana": {

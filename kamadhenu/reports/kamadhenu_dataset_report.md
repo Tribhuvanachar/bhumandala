@@ -1,6 +1,6 @@
 # Kamadhenu dataset validation
 
-06 Sep 2026, 05:44 PM IST · inputs: /home/user/bhumandala/kamadhenu_dataset/metadata.jsonl
+06 Sep 2026, 06:59 PM IST · inputs: /home/user/bhumandala/kamadhenu_dataset/metadata.jsonl
 
 * records: **3892**
 * clean (or only 'speaker unattributed'): **0**

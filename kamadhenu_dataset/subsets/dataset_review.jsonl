@@ -505,35 +505,6 @@
 {"id": "km_8ad52c56b242", "audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 7/G.7.7.aac", "text_id": "gita:7.7"}
 {"id": "km_acccac87bf47", "audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 7/G.7.8.aac", "text_id": "gita:7.8"}
 {"id": "km_465dffc2718d", "audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 7/G.7.9.aac", "text_id": "gita:7.9"}
-{"id": "km_ebc9b2630ddf", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.1.aac", "text_id": "harikathamrutasara:hks-14-1"}
-{"id": "km_c4c97f56b55c", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.2.aac", "text_id": "harikathamrutasara:hks-14-2"}
-{"id": "km_0e858d5a1e56", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.3.aac", "text_id": "harikathamrutasara:hks-14-3"}
-{"id": "km_f4d555575397", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.4.aac", "text_id": "harikathamrutasara:hks-14-4"}
-{"id": "km_a72193f10168", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.5.aac", "text_id": "harikathamrutasara:hks-14-5"}
-{"id": "km_70fb7b4b166b", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.6.aac", "text_id": "harikathamrutasara:hks-14-6"}
-{"id": "km_4bb1be50c383", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.7.aac", "text_id": "harikathamrutasara:hks-14-7"}
-{"id": "km_1c674a08a9a3", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.8.aac", "text_id": "harikathamrutasara:hks-14-8"}
-{"id": "km_12496b4ebf0c", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__14 Pitru Gana Sandhi/hks.14.9.aac", "text_id": "harikathamrutasara:hks-14-9"}
-{"id": "km_8467da463dea", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.1.aac", "text_id": "harikathamrutasara:hks-28-1"}
-{"id": "km_3e4e97eb3a27", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.10.aac", "text_id": "harikathamrutasara:hks-28-10"}
-{"id": "km_15e265216d8a", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.11.aac", "text_id": "harikathamrutasara:hks-28-11"}
-{"id": "km_c26e7b59d4da", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.12.aac", "text_id": "harikathamrutasara:hks-28-12"}
-{"id": "km_b3077df474e6", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.13.aac", "text_id": "harikathamrutasara:hks-28-13"}
-{"id": "km_bd74dfaa3d19", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.14.aac", "text_id": "harikathamrutasara:hks-28-14"}
-{"id": "km_d529388edb13", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.15.aac", "text_id": "harikathamrutasara:hks-28-15"}
-{"id": "km_4875e406bac5", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.16.aac", "text_id": "harikathamrutasara:hks-28-16"}
-{"id": "km_238762d00fd1", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.17.aac", "text_id": "harikathamrutasara:hks-28-17"}
-{"id": "km_078e4e9e239d", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.18.aac", "text_id": "harikathamrutasara:hks-28-18"}
-{"id": "km_350514133326", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.19.aac", "text_id": "harikathamrutasara:hks-28-19"}
-{"id": "km_e86f2a7ad6f9", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.2.aac", "text_id": "harikathamrutasara:hks-28-2"}
-{"id": "km_9c66a7d1b6ec", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.20.aac", "text_id": "harikathamrutasara:hks-28-20"}
-{"id": "km_3d9bd5503d45", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.21.aac", "text_id": "harikathamrutasara:hks-28-21"}
-{"id": "km_b8f26cba2b44", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.3.aac", "text_id": "harikathamrutasara:hks-28-3"}
-{"id": "km_0fbac6059e92", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.4.aac", "text_id": "harikathamrutasara:hks-28-4"}
-{"id": "km_b9e2a5abac81", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.5.aac", "text_id": "harikathamrutasara:hks-28-5"}
-{"id": "km_56cca4e22a17", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.6.aac", "text_id": "harikathamrutasara:hks-28-6"}
-{"id": "km_b46616c966a4", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.7.aac", "text_id": "harikathamrutasara:hks-28-7"}
-{"id": "km_8f3e094df148", "audio": "kamadhenu_dataset/incoming_audio/drive/HKS__28 Ganapati Sandhi/hks.28.9.aac", "text_id": "harikathamrutasara:hks-28-9"}
 {"id": "km_328c75c318ee", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.11.tp11.mp3", "text_id": "tirtha_prabandha:TP_DAK_011"}
 {"id": "km_45b5f37e01dd", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.12.tp12.mp3", "text_id": "tirtha_prabandha:TP_DAK_012"}
 {"id": "km_98e07a987e84", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.18.tp18.mp3", "text_id": "tirtha_prabandha:TP_DAK_018"}

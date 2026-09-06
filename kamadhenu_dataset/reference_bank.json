@@ -1,7 +1,7 @@
 {
  "_readme": "Best/alternative recordings per metre. safe_as_reference is structural; text_matches_audio_verified is only true after a human override (mapping_overrides.json verified:true).",
  "summary": {
-  "generated_at": "06 Sep 2026, 5:41 PM IST",
+  "generated_at": "06 Sep 2026, 6:58 PM IST",
   "metres_with_candidate": 39,
   "metres_safe_reference": 37,
   "metres_human_verified": 0,
@@ -4605,9 +4605,9 @@
    "pada_boundaries_known": false,
    "safe_as_reference": false,
    "text_matches_audio_verified": false,
-   "status": "🔴 BLOCKED",
+   "status": "🔴 NOT STARTED",
    "what_is_missing": [
-    "no recording mapped to any text of this metre AND no text of this metre in the indexed DGE works — needs a text before a recording"
+    "no recording mapped to any text of this metre"
    ]
   },
   "भुजङ्गविजृम्भित": {
@@ -4641,9 +4641,9 @@
    "pada_boundaries_known": false,
    "safe_as_reference": false,
    "text_matches_audio_verified": false,
-   "status": "🔴 BLOCKED",
+   "status": "🔴 NOT STARTED",
    "what_is_missing": [
-    "no recording mapped to any text of this metre AND no text of this metre in the indexed DGE works — needs a text before a recording"
+    "no recording mapped to any text of this metre"
    ]
   },
   "भ्रमरविलसित": {

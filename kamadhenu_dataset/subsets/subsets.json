@@ -1,17 +1,17 @@
 {
  "summary": {
-  "generated_at": "06 Sep 2026, 5:41 PM IST",
+  "generated_at": "06 Sep 2026, 6:58 PM IST",
   "records": 3892,
   "subset_sizes": {
    "dataset_all": 3892,
-   "dataset_verified": 2030,
+   "dataset_verified": 2059,
    "dataset_high_quality": 1499,
    "dataset_reference_bank": 157,
    "dataset_training": 1350,
    "dataset_validation": 149,
-   "dataset_review": 548,
-   "dataset_unmatched_audio": 1314,
-   "dataset_unmatched_text": 2558
+   "dataset_review": 519,
+   "dataset_unmatched_audio": 1282,
+   "dataset_unmatched_text": 2658
   },
   "notes": {
    "dataset_training/validation": "deterministic 90/10 split of dataset_high_quality (validation = every 10th by sorted id). Training has NOT been run.",
@@ -5856,7 +5856,36 @@
    "km_5d51daa3ff9f",
    "km_a4ff3232a9bd",
    "km_10c978e698b3",
+   "km_ebc9b2630ddf",
+   "km_c4c97f56b55c",
+   "km_0e858d5a1e56",
+   "km_f4d555575397",
+   "km_a72193f10168",
+   "km_70fb7b4b166b",
+   "km_4bb1be50c383",
+   "km_1c674a08a9a3",
+   "km_12496b4ebf0c",
+   "km_8467da463dea",
+   "km_3e4e97eb3a27",
+   "km_15e265216d8a",
+   "km_c26e7b59d4da",
+   "km_b3077df474e6",
+   "km_bd74dfaa3d19",
+   "km_d529388edb13",
+   "km_4875e406bac5",
+   "km_238762d00fd1",
+   "km_078e4e9e239d",
+   "km_350514133326",
+   "km_e86f2a7ad6f9",
+   "km_9c66a7d1b6ec",
+   "km_3d9bd5503d45",
+   "km_b8f26cba2b44",
+   "km_0fbac6059e92",
+   "km_b9e2a5abac81",
+   "km_56cca4e22a17",
+   "km_b46616c966a4",
    "km_3079d4f4a77a",
+   "km_8f3e094df148",
    "km_8579abc4ff9f",
    "km_2cc985de55dd",
    "km_916ee1816189",
@@ -9617,35 +9646,6 @@
    "km_8ad52c56b242",
    "km_acccac87bf47",
    "km_465dffc2718d",
-   "km_ebc9b2630ddf",
-   "km_c4c97f56b55c",
-   "km_0e858d5a1e56",
-   "km_f4d555575397",
-   "km_a72193f10168",
-   "km_70fb7b4b166b",
-   "km_4bb1be50c383",
-   "km_1c674a08a9a3",
-   "km_12496b4ebf0c",
-   "km_8467da463dea",
-   "km_3e4e97eb3a27",
-   "km_15e265216d8a",
-   "km_c26e7b59d4da",
-   "km_b3077df474e6",
-   "km_bd74dfaa3d19",
-   "km_d529388edb13",
-   "km_4875e406bac5",
-   "km_238762d00fd1",
-   "km_078e4e9e239d",
-   "km_350514133326",
-   "km_e86f2a7ad6f9",
-   "km_9c66a7d1b6ec",
-   "km_3d9bd5503d45",
-   "km_b8f26cba2b44",
-   "km_0fbac6059e92",
-   "km_b9e2a5abac81",
-   "km_56cca4e22a17",
-   "km_b46616c966a4",
-   "km_8f3e094df148",
    "km_328c75c318ee",
    "km_45b5f37e01dd",
    "km_98e07a987e84",
@@ -9660,38 +9660,6 @@
    "km_fbef738012f0"
   ],
   "dataset_unmatched_audio": [
-   "km_c0f066657e35",
-   "km_125bdc53f9b0",
-   "km_99f30b272069",
-   "km_db2c0aa832e4",
-   "km_9f0300799798",
-   "km_c6138aea8348",
-   "km_6535cf299bc3",
-   "km_f3671aab1330",
-   "km_5ee2085b0827",
-   "km_64125cd7b6e0",
-   "km_6e01e4b14499",
-   "km_01a23ffea63a",
-   "km_573f597aaf1b",
-   "km_1fa1b1d66f56",
-   "km_d821a2cf9aeb",
-   "km_b657db8e3d54",
-   "km_766df05d6880",
-   "km_0c67a1353585",
-   "km_955008d2d8a2",
-   "km_cae928eb6fe0",
-   "km_7a7de33373d5",
-   "km_9ea1f23d91d2",
-   "km_b5e3b8f9b552",
-   "km_1dc2df0730c1",
-   "km_73785bbb8e92",
-   "km_5a6d80630bd0",
-   "km_f52eee95651b",
-   "km_d1dd4123c122",
-   "km_83684c5a97ef",
-   "km_d323dcb94e9b",
-   "km_90af9b9ce15e",
-   "km_797e1aedf5c8",
    "km_49c963646c2d",
    "km_e52a70d057c1",
    "km_2d138d62ebb9",
@@ -12617,6 +12585,106 @@
    "bhagavata_7:15.78",
    "bhagavata_7:15.79",
    "bhagavata_7:15.80",
+   "vedavyasa_gadya:VG_G001",
+   "vedavyasa_gadya:VG_G002",
+   "vedavyasa_gadya:VG_G003",
+   "vedavyasa_gadya:VG_G004",
+   "vedavyasa_gadya:VG_G005",
+   "vedavyasa_gadya:VG_G006",
+   "vedavyasa_gadya:VG_G007",
+   "vedavyasa_gadya:VG_G008",
+   "vedavyasa_gadya:VG_G009",
+   "vedavyasa_gadya:VG_G010",
+   "vedavyasa_gadya:VG_G011",
+   "vedavyasa_gadya:VG_G012",
+   "vedavyasa_gadya:VG_G013",
+   "vedavyasa_gadya:VG_G014",
+   "vedavyasa_gadya:VG_G015",
+   "vedavyasa_gadya:VG_G016",
+   "vedavyasa_gadya:VG_G017",
+   "vedavyasa_gadya:VG_G018",
+   "vedavyasa_gadya:VG_G019",
+   "vedavyasa_gadya:VG_G020",
+   "vedavyasa_gadya:VG_G021",
+   "vedavyasa_gadya:VG_G022",
+   "vedavyasa_gadya:VG_G023",
+   "vedavyasa_gadya:VG_G024",
+   "vedavyasa_gadya:VG_G025",
+   "vedavyasa_gadya:VG_G026",
+   "vedavyasa_gadya:VG_G027",
+   "vedavyasa_gadya:VG_G028",
+   "vedavyasa_gadya:VG_G029",
+   "vedavyasa_gadya:VG_G030",
+   "vedavyasa_gadya:VG_G031",
+   "vedavyasa_gadya:VG_G032",
+   "vedavyasa_gadya:VG_G033",
+   "vedavyasa_gadya:VG_G034",
+   "vedavyasa_gadya:VG_G035",
+   "vedavyasa_gadya:VG_G036",
+   "vedavyasa_gadya:VG_G037",
+   "vedavyasa_gadya:VG_G038",
+   "vedavyasa_gadya:VG_G039",
+   "vedavyasa_gadya:VG_G040",
+   "vedavyasa_gadya:VG_G041",
+   "vedavyasa_gadya:VG_G042",
+   "vedavyasa_gadya:VG_G043",
+   "vedavyasa_gadya:VG_G044",
+   "vedavyasa_gadya:VG_G045",
+   "vedavyasa_gadya:VG_G046",
+   "vedavyasa_gadya:VG_G047",
+   "vedavyasa_gadya:VG_G048",
+   "vedavyasa_gadya:VG_G049",
+   "vedavyasa_gadya:VG_G050",
+   "vedavyasa_gadya:VG_G051",
+   "vedavyasa_gadya:VG_G052",
+   "vedavyasa_gadya:VG_G053",
+   "vedavyasa_gadya:VG_G054",
+   "vedavyasa_gadya:VG_G055",
+   "vedavyasa_gadya:VG_G056",
+   "vedavyasa_gadya:VG_G057",
+   "vedavyasa_gadya:VG_G058",
+   "vedavyasa_gadya:VG_G059",
+   "vedavyasa_gadya:VG_G060",
+   "vedavyasa_gadya:VG_G061",
+   "vedavyasa_gadya:VG_G062",
+   "vedavyasa_gadya:VG_G063",
+   "vedavyasa_gadya:VG_G064",
+   "vedavyasa_gadya:VG_G065",
+   "vedavyasa_gadya:VG_G066",
+   "vedavyasa_gadya:VG_G067",
+   "vedavyasa_gadya:VG_G068",
+   "vedavyasa_gadya:VG_G069",
+   "vedavyasa_gadya:VG_G070",
+   "vedavyasa_gadya:VG_G071",
+   "vedavyasa_gadya:VG_G072",
+   "vedavyasa_gadya:VG_G073",
+   "vedavyasa_gadya:VG_G074",
+   "vedavyasa_gadya:VG_G075",
+   "vedavyasa_gadya:VG_G076",
+   "vedavyasa_gadya:VG_G077",
+   "vedavyasa_gadya:VG_G078",
+   "vedavyasa_gadya:VG_G079",
+   "vedavyasa_gadya:VG_G080",
+   "vedavyasa_gadya:VG_G081",
+   "vedavyasa_gadya:VG_G082",
+   "vedavyasa_gadya:VG_G083",
+   "vedavyasa_gadya:VG_G084",
+   "vedavyasa_gadya:VG_G085",
+   "vedavyasa_gadya:VG_G086",
+   "vedavyasa_gadya:VG_G087",
+   "vedavyasa_gadya:VG_G088",
+   "vedavyasa_gadya:VG_G089",
+   "vedavyasa_gadya:VG_G090",
+   "vedavyasa_gadya:VG_G091",
+   "vedavyasa_gadya:VG_G092",
+   "vedavyasa_gadya:VG_G093",
+   "vedavyasa_gadya:VG_G094",
+   "vedavyasa_gadya:VG_G095",
+   "vedavyasa_gadya:VG_G096",
+   "vedavyasa_gadya:VG_G097",
+   "vedavyasa_gadya:VG_G098",
+   "vedavyasa_gadya:VG_G099",
+   "vedavyasa_gadya:VG_G100",
    "harikathamrutasara:hks-1-1",
    "harikathamrutasara:hks-1-2",
    "harikathamrutasara:hks-1-3",
@@ -13539,6 +13607,134 @@
  "exclusions": {
   "dataset_all": [],
   "dataset_verified": [
+   {
+    "id": "km_c0f066657e35",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_125bdc53f9b0",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_99f30b272069",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_db2c0aa832e4",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_9f0300799798",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_c6138aea8348",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_6535cf299bc3",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_f3671aab1330",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_5ee2085b0827",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_64125cd7b6e0",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_6e01e4b14499",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_01a23ffea63a",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_573f597aaf1b",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_1fa1b1d66f56",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_d821a2cf9aeb",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_b657db8e3d54",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_766df05d6880",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_0c67a1353585",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_955008d2d8a2",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_cae928eb6fe0",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_7a7de33373d5",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_9ea1f23d91d2",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_b5e3b8f9b552",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_1dc2df0730c1",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_73785bbb8e92",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_5a6d80630bd0",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_f52eee95651b",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_d1dd4123c122",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_83684c5a97ef",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_d323dcb94e9b",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_90af9b9ce15e",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
+   {
+    "id": "km_797e1aedf5c8",
+    "reason": "speaker EXTERNAL: not the Kamadhenu voice, no consent — excluded from every subset"
+   },
    {
     "id": "km_b95aeed26c23",
     "reason": "review_status=review: 123.8s is 8.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
@@ -15566,122 +15762,6 @@
    {
     "id": "km_465dffc2718d",
     "reason": "review_status=review: 115.0s is 8.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_ebc9b2630ddf",
-    "reason": "review_status=review: 234.4s is 6.8× the single-rendition upper bound (34.3s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_c4c97f56b55c",
-    "reason": "review_status=review: 172.0s is 5.1× the single-rendition upper bound (33.4s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_0e858d5a1e56",
-    "reason": "review_status=review: 161.4s is 4.6× the single-rendition upper bound (34.8s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_f4d555575397",
-    "reason": "review_status=review: 189.6s is 5.5× the single-rendition upper bound (34.8s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_a72193f10168",
-    "reason": "review_status=review: 186.5s is 5.2× the single-rendition upper bound (35.6s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_70fb7b4b166b",
-    "reason": "review_status=review: 175.4s is 5.0× the single-rendition upper bound (34.8s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_4bb1be50c383",
-    "reason": "review_status=review: 147.1s is 4.3× the single-rendition upper bound (33.9s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_1c674a08a9a3",
-    "reason": "review_status=review: 139.7s is 4.1× the single-rendition upper bound (34.3s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_12496b4ebf0c",
-    "reason": "review_status=review: 157.9s is 4.8× the single-rendition upper bound (33.0s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_8467da463dea",
-    "reason": "review_status=review: 175.9s is 5.3× the single-rendition upper bound (33.0s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_3e4e97eb3a27",
-    "reason": "review_status=review: 176.3s is 5.3× the single-rendition upper bound (33.0s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_15e265216d8a",
-    "reason": "review_status=review: 141.5s is 4.2× the single-rendition upper bound (33.9s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_c26e7b59d4da",
-    "reason": "review_status=review: 142.7s is 4.3× the single-rendition upper bound (33.0s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_b3077df474e6",
-    "reason": "review_status=review: 121.5s is 3.6× the single-rendition upper bound (33.9s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_bd74dfaa3d19",
-    "reason": "review_status=review: 170.2s is 5.1× the single-rendition upper bound (33.4s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_d529388edb13",
-    "reason": "review_status=review: 133.4s is 3.8× the single-rendition upper bound (35.2s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_4875e406bac5",
-    "reason": "review_status=review: 180.2s is 5.1× the single-rendition upper bound (35.2s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_238762d00fd1",
-    "reason": "review_status=review: 186.9s is 5.9× the single-rendition upper bound (31.7s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_078e4e9e239d",
-    "reason": "review_status=review: 157.0s is 4.2× the single-rendition upper bound (37.4s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_350514133326",
-    "reason": "review_status=review: 200.4s is 5.7× the single-rendition upper bound (35.2s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_e86f2a7ad6f9",
-    "reason": "review_status=review: 136.3s is 4.0× the single-rendition upper bound (34.3s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_9c66a7d1b6ec",
-    "reason": "review_status=review: 166.0s is 4.5× the single-rendition upper bound (37.0s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_3d9bd5503d45",
-    "reason": "review_status=review: 168.1s is 5.0× the single-rendition upper bound (33.4s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_b8f26cba2b44",
-    "reason": "review_status=review: 154.5s is 4.4× the single-rendition upper bound (34.8s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_0fbac6059e92",
-    "reason": "review_status=review: 138.9s is 4.2× the single-rendition upper bound (33.4s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_b9e2a5abac81",
-    "reason": "review_status=review: 144.0s is 4.1× the single-rendition upper bound (34.8s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_56cca4e22a17",
-    "reason": "review_status=review: 161.2s is 4.8× the single-rendition upper bound (33.9s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_b46616c966a4",
-    "reason": "review_status=review: 202.7s is 5.7× the single-rendition upper bound (35.6s) — likely repeats, teaching pauses or explanation included"
-   },
-   {
-    "id": "km_8f3e094df148",
-    "reason": "review_status=review: 143.3s is 4.1× the single-rendition upper bound (35.2s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_328c75c318ee",
@@ -19767,119 +19847,119 @@
    },
    {
     "id": "km_ebc9b2630ddf",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_c4c97f56b55c",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_0e858d5a1e56",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_f4d555575397",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_a72193f10168",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_70fb7b4b166b",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_4bb1be50c383",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_1c674a08a9a3",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_12496b4ebf0c",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_8467da463dea",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_3e4e97eb3a27",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_15e265216d8a",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_c26e7b59d4da",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_b3077df474e6",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_bd74dfaa3d19",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_d529388edb13",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_4875e406bac5",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_238762d00fd1",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_078e4e9e239d",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_350514133326",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_e86f2a7ad6f9",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_9c66a7d1b6ec",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_3d9bd5503d45",
-    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+    "reason": "audio_quality=D (clipping); duration too_long"
    },
    {
     "id": "km_b8f26cba2b44",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_0fbac6059e92",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_b9e2a5abac81",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_56cca4e22a17",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_b46616c966a4",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_8f3e094df148",
-    "reason": "duration too_long; not verified"
+    "reason": "duration too_long"
    },
    {
     "id": "km_328c75c318ee",
