@@ -1,6 +1,6 @@
 # Audio inventory (Kamadhenu Phase 1)
 
-Built 6 Sep 2026 (refreshed 5:50 pm IST after nine more Drive folders and the `smv.zip` archive arrived) by `kamadhenu/scripts/build_audio_inventory.py` from the per-file measurements in
+Built 6 Sep 2026 (refreshed 8:45 pm IST: smv.zip takes identified) by `kamadhenu/scripts/build_audio_inventory.py` from the per-file measurements in
 `kamadhenu_dataset/audio_inventory.json` and the text mapping in `kamadhenu_dataset/metadata.jsonl`. The CSV is
 `kamadhenu/data/audio_inventory.csv` (one row per file, 31 columns). No audio was copied.
 
@@ -12,8 +12,8 @@ Built 6 Sep 2026 (refreshed 5:50 pm IST after nine more Drive folders and the `s
 | grade A (clean, no clipping, SNR good) | 757 | 8.78 |
 | grade B (usable) | 2,045 | 24.34 |
 | grade C/D/F (clipped, noisy, very low bitrate, or unreadable) | 1,090 | 4.71 |
-| paired with a text at confidence ≥ 0.9 | 2,030 | 8.95 |
-| **usable for training today** | **1,475** | **6.07** |
+| paired with a text at confidence ≥ 0.9 | 2,530 | 11.02 |
+| **usable for training today** | **1,721** | **6.46** |
 
 "Usable" = grade A or B, text confidence ≥ 0.9, duration plausible for the text, not a byte-identical duplicate.
 
@@ -31,7 +31,7 @@ Built 6 Sep 2026 (refreshed 5:50 pm IST after nine more Drive folders and the `s
 | drive/Shlokas (Tīrthaprabandha) | 21 | 0.09 | 19 A | 48 kHz | Dakṣiṇa-prabandha verses 1–19 + 2 intro clips; mapped |
 | drive/Prahlada Narasimha Stotra | 43 | 0.21 | 6 A, 37 B | 48 kHz | Bhāgavata 7.9.8–50, one verse per file; mapped |
 | drive/Sripadaraja AshTottara Shatanamavali | 110 | 0.12 | 68 A | 48 kHz | one name per clip; text not in DGE yet |
-| drive/single-file/smv (`smv.zip`, shared 6 Sep) | 1,106 | 9.86 | 554 B, 552 D | 48 kHz AAC | the lead's phone takes of Sumadhva Vijaya at **pāda** level (4–7 s each): 34 named `SMV.<sarga>.<verse>.<pāda>` (30 mapped, exact), 1,072 unnamed `New recording N` — lead says they should be sequential, one per pāda (being verified by speech-to-text); same reciter, higher fidelity than the 11 kHz site files, but half clip (peak > 0 dBFS) |
+| drive/single-file/smv (`smv.zip`, shared 6 Sep) | 1,106 | 9.86 | 554 B, 552 D | 48 kHz AAC | the lead's phone takes of Sumadhva Vijaya at **pāda** level (4–7 s each): 34 named `SMV.<sarga>.<verse>.<pāda>` (30 mapped, exact), 1,058 numbered `New recording N` identified by Whisper + the sequential-pāda rule (909 assigned, 149 to listen, `smv_takes_listen_list.csv`), 51 dated hour-long session files (long-form); same reciter, higher fidelity than the 11 kHz site files, but half clip (peak > 0 dBFS) |
 | drive/single-file/Vedavyasa Gadya.mp3 | 1 | 0.16 | B | 44.1 kHz | prose recitation of Yādavārya's Vedavyāsa Gadyam; text imported 6 Sep (100 epithet units) — needs per-epithet segmentation |
 | drive/AShThAdhyAyi (pārāyaṇa) | 32 | 3.89 | 13 A, 19 B | 44.1 kHz | whole-pāda Aṣṭādhyāyī pārāyaṇa by **other reciters (not the lead, no consent)** — kept in the inventory, excluded from every training subset (`speakers.json` → EXTERNAL) |
 | drive/Brahmasutra | 2 | 0.08 | B | 48 kHz | Brahmasūtra 1.1 and 1.2 recited whole; long-form |

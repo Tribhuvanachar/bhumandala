@@ -70,6 +70,36 @@ def run(jsonl):
                     ov[f"{TAKES}/{o['take']}"] = {"text_id": u["id"], "part": f"pada_{want[2]}", "confidence": 0.7, "verified": False,
                                                  "note": f"Whisper transcript weak (score {c[0]:.2f}) but the next take is {sec} v{v} pāda {li}; lead: takes are sequential pādas"}
                 break
+    # interpolation: between two identified numbered takes, if the number of takes in the gap equals the number
+    # of pādas between the two positions (same sarga), assign them by arithmetic — the lead's stated structure
+    # (one take per pāda, in order). Marked confidence 0.6 = "listen once"; never applied across a sarga change.
+    order = [(i, int(m.group(1))) for i, o in enumerate(out) if (m := re.match(r"New recording (\d+)\.m4a$", o["take"]))]
+    def pos(o):
+        m = re.match(r"(\S+) verse (\d+) pāda (\d+)$", o.get("decision") or ""); return (m.group(1), int(m.group(2)), int(m.group(3))) if m else None
+    def linear(sec, v, li):   # (sarga, verse, line) → running pāda index within the sarga
+        return sum(n_lines.get((sec, k), 4) for k in range(1, v)) + (li - 1)
+    def from_linear(sec, idx):
+        v = 1
+        while idx >= n_lines.get((sec, v), 4) and (sec, v + 1) in n_lines: idx -= n_lines.get((sec, v), 4); v += 1
+        return v, idx + 1
+    anchors = [(i, n) for i, n in order if pos(out[i])]
+    filled = 0
+    for (ia, na), (ib, nb) in zip(anchors, anchors[1:]):
+        gap = [(i, n) for i, n in order if na < n < nb and not pos(out[i])]
+        if not gap or nb - na != len(gap) + 1:
+            continue
+        pa, pb = pos(out[ia]), pos(out[ib])
+        if pa[0] != pb[0] or linear(pb[0], pb[1], pb[2]) - linear(pa[0], pa[1], pa[2]) != nb - na:
+            continue
+        for k, (i, n) in enumerate(gap, start=1):
+            v, li = from_linear(pa[0], linear(pa[0], pa[1], pa[2]) + k); u = units.get((pa[0], v))
+            if not u: continue
+            out[i].update(decision=f"{pa[0]} verse {v} pāda {li}", text_id=u["id"], part=f"pada_{li}", confidence=0.6,
+                          why=f"interpolated between takes {na} ({pa[1]}.{pa[2]}) and {nb} ({pb[1]}.{pb[2]}) — listen once")
+            ov[f"{TAKES}/{out[i]['take']}"] = {"text_id": u["id"], "part": f"pada_{li}", "confidence": 0.6, "verified": False,
+                                                "note": f"interpolated from the take order between {pa[0]} {pa[1]}.{pa[2]} and {pb[1]}.{pb[2]} (lead: one take per pāda, sequential); transcript alone was weak"}
+            filled += 1
+    log(f"smv takes: {filled} gap takes assigned by interpolation (confidence 0.6)")
     n_ok = sum(1 for o in out if o.get("decision"))
     write_json(DS / "mapping_overrides.json", ov)
     write_json(DS / "smv_takes_check.json", {"generated_at": now_ist(), "method": __doc__.strip(), "takes": len(out), "identified": n_ok, "unresolved": len(out) - n_ok, "decisions": out})
