@@ -61,18 +61,29 @@ Decision: **ONE authoritative Chandas layer = DGE (`dge/js/chandas.js` + `dge/da
 
 * Vāgdhenu's production build (`build_mbtn_adh_v2.py`, per TECH_REPORT §10) "self-calibrated L/G signatures from bank refs" — i.e. a *third* table that lives outside the repo. Not inspectable here.
 
-## 3. DGE gaps exposed by running it over 7,696 corpus units
+## 3. DGE gaps exposed by running it over the corpus — and their closure (6 Sep 2026)
 
-| gap | evidence | effect | fix |
+Measured on the 2,851 non-MBTN verse units (Gītā, Sumadhva Vijaya, Rāghavendra Vijaya, Tīrthaprabandha, Dvādaśa Stotra, Viṣṇu Sahasranāma, stutis):
+
+| | before (5 Sep) | after (6 Sep) |
+|---|---|---|
+| verses the engine names | 1,969 | **2,467** |
+| अज्ञातम् | 579 | **384** (+3 anuṣṭubh flagged अनियतम्) |
+| ardhasama verses recognised | 0 | 175 |
+| named anuṣṭubh vipulās | 0 | na 120 · bha 71 · ma 70 · ra 60 |
+
+| gap | evidence | fix (all in `dge/js/chandas.js` unless noted) | status |
 |---|---|---|---|
-| Strict anuṣṭubh rule: 5th laghu + 6th guru required in **every** pāda | Gītā: 131 of 701 verses (e.g. 1.5, 1.9, 1.25) → अज्ञातम्; Tīrthaprabandha 37; Sumadhva Vijaya 61 | classical vipulās (na-, bha-, ma-, ra-vipulā) are reported unknown; Kamadhenu labels them `अनुष्टुप् (vipulā/irregular — unverified)` at 0.6 confidence | add the four vipulā classes to `matchAnushtup` and name them |
-| Upajāti table lacks the U-I-U-U mix (row `ऋद्धि` duplicates `वाणी` = I-U-I-I) | `data.json upajati_vrutta`; Sumadhva Vijaya 1.4 unmatched | valid upajāti verses → अज्ञातम्; Kamadhenu labels them `उपजाति` at 0.7 | fix the `ऋद्धि` row; add a generic "any indra/upendra mix" fallback in `matchVrutta` |
-| Candrabindu / explicit jihvāmūlīya-upadhmānīya not heavy | `frontend_gap_report.json` cases "candrabindu", "explicit jihvāmūlīya" | wrong L/G on Vedic-extension text | change the nasal test at `chandas.js:58` to `/[ँंःᳵᳶ]/` |
-| Devanagari only | Kannada input → `padas: []`, silently | Kannada-script granthas cannot be scanned on the site | transliterate upstream (Kamadhenu `texts.py` does; the site page does not) |
-| Pāda split = syllable midpoint of a 2-line verse | `toPadas()` | wrong for ardhasama/viṣama stored as two lines | store 4-line pāda text for reference-bank verses |
-| No tests | — | regressions invisible | add `tests/test_chandas_engine.py` driving `chandas_runner.js` with the 22 probe cases + 10 known verses |
+| Strict anuṣṭubh rule: 5th laghu + 6th guru required in **every** pāda | Gītā 131/701 → अज्ञातम् | `matchAnushtup` now applies the classical per-pāda rules — even pādas 5–7 = लगल, odd pādas pathyā (लगग) or न/भ/म/र-विपुला, 2nd–3rd never both laghu — and names the result (`अनुष्टुप् (श्लोकः) — र-विपुला (पादे 1)`); anything else is `अनियतम् (सन्दिग्धम्)` with the broken rule listed | ✅ |
+| Upajāti table: `ऋद्धि` row duplicated `वाणी` (I-U-I-I); no fallback for unnamed mixes | Sumadhva Vijaya 1.4 | `data.json`: ऋद्धि = U-I-U-U (prastāra order, `_note` asks for Vṛttaratnākara confirmation); generic `उपजाति (X-Y मिश्रम्: code)` for any indra/upendra, vaṃśastha/indravaṃśā, vaṃśastha/upendravajrā mix not in the 42 rows | ✅ |
+| Candrabindu / jihvāmūlīya / upadhmānīya / ardhavisarga not heavy; ॣ not long | frontend_gap_report cases | syllable regex + nasal test cover U+0901–0903, U+1CF2/1CF3/1CF5/1CF6; ॣ added to long mātrās | ✅ |
+| Devanagari only | Kannada Gītā → `padas: []` | `foldScript()` maps Kannada/Telugu/Malayalam code points to Devanagari, drops Vedic accents/ZWJ, folds nukta (ृ़ → ॄ); applied in `analyzeText()` and the page's `analyze()` | ✅ |
+| Pāda split = syllable midpoint of a 2-line verse; single-line verses unsplit | ardhasama (वियोगिनी, पुष्पिताग्रा) never matched; SMV sarga 7 single-line verses | `padaCandidates()` tries 4-equal, ardhasama a+b+a+b, and two-halves splits for 1- and 2-line input and keeps the first that names a metre | ✅ |
+| Speaker lines (`श्रीभगवानुवाच`) counted as a pāda | Gītā 3-line units | `tools/kamadhenu/texts.py` strips all उवाच forms incl. glued (`…नुवाच`, `…ोवाच`) | ✅ |
+| No tests | — | `tests/test_chandas_engine.py` (22 cases incl. DB gaṇa↔lakṣaṇa consistency) + `tests/test_chandas_examples.py` replaying `tests/fixtures/chandas_examples.json` (59 engine-verified verses, one per vṛtta seen in the corpus) | ✅ |
+| 186 of 245 vṛttas have no example verse; 387 verses still unresolved | `GEMINI_CHANDAS_TASK.md` | brief for Gemini at one raw URL (`dge/data/vedanga/chandas/GEMINI_CHANDAS_TASK.md`, built by `tools/chandas/build_gemini_task.py`); answers ingested by `tools/chandas/apply_gemini_chandas.py`, which accepts an example only when the engine agrees | 🟡 waiting on Gemini |
 
-Corpus-side defects that surface as metre failures (not engine bugs): unequal half-verse syllable counts (e.g. Sumadhva Vijaya 1.17: 23/22), typos (`सिधुः` for `सिन्धुः`, Tīrthaprabandha TP_DAK_003), hyphenated compounds broken across lines. These belong in the DGE correction workflow (`text_index.json` → `chandas_analysis.inferred_reason` lists them).
+What is left in the 384 (from `text_index.json` `inferred_reason`): 231 verses with **unequal pāda counts** (text defects — typos, dropped akṣaras, hyphenation, wrong line breaks — in Rāghavendra Vijaya 70, Dvādaśa Stotra 57, Sumadhva Vijaya 49, Tīrthaprabandha 23, Gītā 13), ~120 verses whose pādas are equal but match **no vṛtta of that length** (22-syllable half-verses in Rāghavendra Vijaya 33, Dvādaśa Stotra mātrā/irregular metres, Gītā's loose triṣṭubh in 2.5–2.8, 11.15–11.50), and a handful of colophons/prose. These are Part C of the Gemini brief; the corrected texts go through the normal DGE correction workflow, never straight into the granthas.
 
 ## 4. Special cases
 * **Anuṣṭubh**: DGE distinguishes pathyā vs "अन्यथा" only; Vāgdhenu does not distinguish at all (32 syllables ⇒ anuṣṭubh, which also swallows 8-syllable sama metres like प्रमाणिका/विद्युन्माला when they are not in its table).

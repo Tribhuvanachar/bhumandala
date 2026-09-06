@@ -1,5 +1,5 @@
 {
- "generated_at": "06 Sep 2026, 9:47 AM IST",
+ "generated_at": "06 Sep 2026, 11:06 AM IST",
  "vagdhenu_available": true,
  "cases": [
   {
@@ -36,7 +36,7 @@
    "dge_search_slp1": "duᳵKam",
    "dge_phonetic_key": "duᳵKan",
    "dge_subanta_slp1": "duᳵKam",
-   "dge_chandas_syllables": "दु ख̲",
+   "dge_chandas_syllables": "दुᳵ̲ ख̲",
    "vag_model_text_kannada": "ದುᳵಖಮ್",
    "vag_model_text_sandhi": "ದುᳵಖಮ್",
    "vag_mfa_text": "दुᳵखम्",
@@ -50,7 +50,7 @@
    "dge_search_slp1": "antaᳶpuram",
    "dge_phonetic_key": "antaᳶpuran",
    "dge_subanta_slp1": "antaᳶpuram",
-   "dge_chandas_syllables": "अ̲ न्त पु र̲",
+   "dge_chandas_syllables": "अ̲ न्तᳶ̲ पु र̲",
    "vag_model_text_kannada": "ಅನ್ತᳶಪುರಮ್",
    "vag_model_text_sandhi": "ಅನ್ತᳶಪುರಮ್",
    "vag_mfa_text": "अन्तᳶपुरम्",
@@ -64,7 +64,7 @@
    "dge_search_slp1": "sa~yogaH",
    "dge_phonetic_key": "sanyoga",
    "dge_subanta_slp1": "sa~yogaH",
-   "dge_chandas_syllables": "सँ यो̲ गः̲",
+   "dge_chandas_syllables": "सँ̲ यो̲ गः̲",
    "vag_model_text_kannada": "ಸಁಯೋಗಃ",
    "vag_model_text_sandhi": "ಸಁಯೋಗಹ",
    "vag_mfa_text": "सँयोगः",
@@ -162,7 +162,7 @@
    "dge_search_slp1": "k‍za k‌za",
    "dge_phonetic_key": "k‍sa k‌sa",
    "dge_subanta_slp1": "kza kza",
-   "dge_chandas_syllables": "क् ष̲ ष",
+   "dge_chandas_syllables": "क्ष̲ क्ष",
    "vag_model_text_kannada": "ಕ್ಷ ಕ್ಷ",
    "vag_model_text_sandhi": "ಕ್ಷ ಕ್ಷ",
    "vag_mfa_text": "क्ष क्ष",
@@ -232,7 +232,7 @@
    "dge_search_slp1": "ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ",
    "dge_phonetic_key": "ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ",
    "dge_subanta_slp1": "ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ",
-   "dge_chandas_syllables": "",
+   "dge_chandas_syllables": "ध̲ र्म̲ क्षे̲ त्रे̲ कु रु̲ क्षे̲ त्रे̲",
    "vag_model_text_kannada": "ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ",
    "vag_model_text_sandhi": "ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ",
    "vag_mfa_text": "धर्मक्षेत्रे कुरुक्षेत्रे",
@@ -337,14 +337,6 @@
    "fix": "fold to plain visarga before Kannada routing (Vāgdhenu does this only in the phonetic_mfa kannada_safe arm)"
   },
   {
-   "severity": "medium",
-   "component": "DGE chandas.js",
-   "case": "candrabindu",
-   "problem": "candrabindu does not make the syllable guru (only ं/ः are tested)",
-   "evidence": "सँ यो̲ गः̲",
-   "fix": "extend the nasal test at chandas.js:58 to /[ँंः]/"
-  },
-  {
    "severity": "low",
    "component": "Vāgdhenu prep_text.phonetic_mfa",
    "case": "anusvāra before y",
@@ -367,14 +359,6 @@
    "problem": "Kannada input is not transliterated by the Devanagari path; build_search_index folds Kannada→Devanagari by code-point shift first, texts.py must do the same before Chandas",
    "evidence": "ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ",
    "fix": "always run fold_indic_to_devanagari() before to_slp1/Chandas"
-  },
-  {
-   "severity": "high",
-   "component": "DGE chandas.js",
-   "case": "Kannada script input",
-   "problem": "Kannada-script verse yields zero syllables (engine is Devanagari-only, silent)",
-   "evidence": "padas: []",
-   "fix": "transliterate to Devanagari upstream (kamadhenu texts.py does; the site page does not)"
   },
   {
    "severity": "low",

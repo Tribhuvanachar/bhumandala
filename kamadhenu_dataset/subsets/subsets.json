@@ -1,12 +1,12 @@
 {
  "summary": {
-  "generated_at": "06 Sep 2026, 9:47 AM IST",
+  "generated_at": "06 Sep 2026, 11:06 AM IST",
   "records": 2544,
   "subset_sizes": {
    "dataset_all": 2544,
    "dataset_verified": 1576,
    "dataset_high_quality": 1076,
-   "dataset_reference_bank": 140,
+   "dataset_reference_bank": 147,
    "dataset_training": 969,
    "dataset_validation": 107,
    "dataset_review": 515,
@@ -5233,13 +5233,21 @@
    "km_7718b090dce2",
    "km_b660f9e7b733",
    "km_e89ee4648af2",
-   "km_c87931539314",
    "km_98671e1fc23e",
    "km_bc0c87440a21",
    "km_f03ac96f8524",
+   "km_d816d8f8f4bc",
+   "km_87ef8c21bbcc",
+   "km_3112279e288b",
+   "km_d76626ce53a4",
+   "km_21fc0c885a54",
    "km_143289a648f8",
    "km_779ff98923c1",
    "km_c485cb9c94e7",
+   "km_4d1f6b9f0e4b",
+   "km_03d91f0ae55e",
+   "km_805e8291a816",
+   "km_7f2aaf0a38e2",
    "km_7995ab89cf49",
    "km_4901133bd8ae",
    "km_dd80f21fca09",
@@ -5278,13 +5286,9 @@
    "km_48f7964f2d2d",
    "km_0e1cdac9326b",
    "km_00b734bee676",
-   "km_f59e1c9137bc",
-   "km_68cb373387a5",
    "km_99469a42655c",
    "km_518a72c2acd4",
    "km_961c7f119b6e",
-   "km_3bf449f6357f",
-   "km_67cc43e86cbc",
    "km_2ff7cf6a510a",
    "km_3eb704cb6f01",
    "km_1f25c6cb579a",
@@ -5311,19 +5315,16 @@
    "km_da959c5e288c",
    "km_f2f0521547f1",
    "km_322f7dde1f6c",
+   "km_fc29f34f608a",
+   "km_0fc665196db3",
    "km_6515ae16c3c5",
    "km_34ee153d827b",
    "km_a4251e196149",
    "km_6d181267d863",
    "km_2f77050fb11c",
    "km_43e012a6e595",
-   "km_da9a6bb0753d",
    "km_0f8d44d4c3a3",
-   "km_69a846da6bc9",
-   "km_c4d01989156d",
    "km_f8195edcffe2",
-   "km_b092b5a5e8db",
-   "km_88d52561c7da",
    "km_5bc28f5775d2",
    "km_4e4ac9035d8e",
    "km_9e4bbb4863e8",
@@ -5350,9 +5351,15 @@
    "km_5acf0f873e76",
    "km_d4a2934b32ac",
    "km_f68de3bdbb83",
+   "km_743909735f52",
    "km_0c84a1f26843",
    "km_57d84e2ae113",
+   "km_f780b16bc8b7",
+   "km_2c6d9fe3be4b",
+   "km_118190fbe640",
    "km_fb9a814d4165",
+   "km_56b99dc6fdf3",
+   "km_15648bfd0283",
    "km_55d9c7ffbaed",
    "km_32e0e7844f26",
    "km_df4f32c01ff9",
@@ -8778,11 +8785,11 @@
    },
    {
     "id": "km_e1f0de4bb942",
-    "reason": "review_status=review: 60.2s is 7.0× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 60.2s is 8.6× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_0e9a563fc37f",
-    "reason": "review_status=review: 51.6s is 6.0× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 51.6s is 7.3× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_d683b0e20917",
@@ -8938,11 +8945,11 @@
    },
    {
     "id": "km_372836273f5f",
-    "reason": "review_status=review: 52.8s is 6.2× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 52.8s is 7.5× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_448715806565",
-    "reason": "review_status=review: 55.7s is 6.5× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 55.7s is 7.9× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_8e4cebe55f9a",
@@ -9514,7 +9521,7 @@
    },
    {
     "id": "km_3b0c4877c3a2",
-    "reason": "review_status=review: 120.8s is 7.0× the single-rendition upper bound (17.2s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 120.8s is 8.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_202cdf0b864e",
@@ -9550,7 +9557,7 @@
    },
    {
     "id": "km_0193c47d361a",
-    "reason": "review_status=review: 131.9s is 7.7× the single-rendition upper bound (17.2s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 131.9s is 9.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_3841fd673c63",
@@ -9750,11 +9757,11 @@
    },
    {
     "id": "km_16cbaf33eb55",
-    "reason": "review_status=review: 52.1s is 6.1× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 52.1s is 7.4× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_e03941792842",
-    "reason": "review_status=review: 63.1s is 7.4× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 63.1s is 9.0× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_46324597c702",
@@ -9890,11 +9897,11 @@
    },
    {
     "id": "km_541551d6b08b",
-    "reason": "review_status=review: 50.1s is 5.8× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 50.1s is 7.1× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_f9b2c94741f2",
-    "reason": "review_status=review: 68.6s is 8.0× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 68.6s is 9.7× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_d2ac756313ec",
@@ -10114,11 +10121,11 @@
    },
    {
     "id": "km_15eee89cd407",
-    "reason": "review_status=review: 56.2s is 6.6× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 56.2s is 8.0× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_fd33da8eda8b",
-    "reason": "review_status=review: 67.8s is 7.9× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 67.8s is 9.6× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_5e048ccc9bf4",
@@ -10162,11 +10169,11 @@
    },
    {
     "id": "km_266d6facb374",
-    "reason": "review_status=review: 66.2s is 7.7× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 66.2s is 9.4× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_ee07cb202eea",
-    "reason": "review_status=review: 79.8s is 9.3× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 79.8s is 11.3× the single-rendition upper bound (7.0s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_c7e5d549c7b8",
@@ -10262,7 +10269,7 @@
    },
    {
     "id": "km_bf2012b01300",
-    "reason": "review_status=review: 133.7s is 7.8× the single-rendition upper bound (17.2s) — likely repeats, teaching pauses or explanation included"
+    "reason": "review_status=review: 133.7s is 9.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
    },
    {
     "id": "km_ebe113c1dcb8",
