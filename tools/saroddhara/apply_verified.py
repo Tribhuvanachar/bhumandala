@@ -70,6 +70,12 @@ def main(files):
                 continue
             if it.get("verification", {}).get("human"): continue
             if a.get("accept_vision") and not txt: txt = it.get("ocr", {}).get("vision", "").strip()
+            parts = [int(x) for x in re.findall(r"\d+", a.get("bhagavata_ref") or "")][:3]
+            if len(parts) == 3 and parts != [int(x) for x in re.findall(r"\d+", str((it.get("bhagavata_ref") or {}).get("skandha", "")) + "." + str((it.get("bhagavata_ref") or {}).get("adhyaya", "")) + "." + str((it.get("bhagavata_ref") or {}).get("verse", "")))][:3]:
+                it["bhagavata_ref"] = {"skandha": parts[0], "adhyaya": parts[1], "verse": str(parts[2])}
+                it["reference"] = re.sub(r" · भा\. [\d.\-]+$", "", it["reference"]) + f" · भा. {parts[0]}.{parts[1]}.{parts[2]}"
+                it["references"] = [{"target": f"purana/maha_purana/bhagavata_purana_madhva/skandha_{parts[0]:02d}", "unit_id": f"adhyaya_{parts[1]:02d}", "note": f"cites Bhāgavata {parts[0]}.{parts[1]}.{parts[2]}"}]
+                it["verification"]["dge_key"] = parts; it["verification"]["ref_reidentified"] = True
             if txt:
                 it["sanskrit_text"] = re.sub(r"\s*(?:॥|\|\||।।)\s*[०-९]{1,3}\s*(?:॥|\|\||।।)\s*$", " ॥", txt).strip()
             it["verification"]["human"] = {"date": stamp, "note": a.get("note"), "accepted_vision": bool(a.get("accept_vision")), "text_changed": bool(txt), "via": a.get("via", "verify_queue")}

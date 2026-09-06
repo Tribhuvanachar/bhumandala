@@ -23,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "saroddhara"))
 import apply_verified  # noqa: E402
+from build_saroddhara import load_bhp, ngram_index, find_in_bhp, ratio  # noqa: E402
 STAGING = ROOT / "dge/data/ocr_staging/bhagavata_saroddhara"
 ANSWERS = STAGING / "verify_output/answers.json"
 MULA = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/mula/data.json"
@@ -75,6 +76,40 @@ def batch_index():
     return idx
 
 
+class Master:
+    """The DGE Madhva Bhāgavata as a text index, so a chat answer is never trusted on its own: every verse a
+    reply names is located in the master by text (Gemini quotes verses from memory and in standard numbering;
+    DGE uses the printed/Vijayadhvaja numbering), and the master's text at the located key is what gets written."""
+    def __init__(self):
+        self.bhp = load_bhp(); self.idx = ngram_index(self.bhp)
+
+    def key_of(self, ref):
+        try:
+            k = tuple(int(x) for x in re.findall(r"\d+", ref or "")[:3])
+        except Exception:
+            return None
+        return k if len(k) == 3 and k in self.bhp else None
+
+    def locate(self, text, ref=None, ocr=None, ocr_free=False):
+        """→ (key, ratio, how). Order: the given ref if its text agrees ≥0.8; whole-Bhāgavata text search ≥0.8;
+        the item's OCR ≥0.8 (only when the OCR was never matched before, ocr_free); else best guess with ratio."""
+        k = self.key_of(ref)
+        if k and text and ratio(text, self.bhp[k]["text"]) >= 0.8:
+            return k, round(ratio(text, self.bhp[k]["text"]), 3), "ref"
+        k1, r1 = find_in_bhp(self.bhp, self.idx, text, min_ratio=0.6) if text else (None, 0.0)
+        if k1 and r1 >= 0.8:
+            return k1, r1, "text_search"
+        if ocr and ocr_free:
+            k2, r2 = find_in_bhp(self.bhp, self.idx, ocr, min_ratio=0.6)
+            if k2 and r2 >= 0.8:
+                return k2, r2, "ocr_search"
+        best = max([(k, round(ratio(text, self.bhp[k]["text"]), 3)) for k in (k, k1) if k and text] or [(None, 0.0)], key=lambda x: x[1])
+        return best[0], best[1], "unresolved"
+
+    def text(self, key):
+        return self.bhp[key]["text"]
+
+
 def to_answer(ans, batch, present):
     """Chat answer → apply_verified.py answer. Returns (answer or None, reason)."""
     qid = ans["id"].strip(); dec = (ans.get("decision") or "").strip().lower()
@@ -117,7 +152,10 @@ def main():
     ap.add_argument("--sync-bhagavata", action="store_true", help="decision=printed also rewrites the master Bhāgavata shloka")
     a = ap.parse_args()
     batch = batch_index()
-    present = {it["verse_no"] for it in json.load(open(MULA, encoding="utf-8"))["items"]}
+    mula_items = json.load(open(MULA, encoding="utf-8"))["items"]
+    present = {it["verse_no"] for it in mula_items}
+    by_n = {it["verse_no"]: it for it in mula_items}
+    master = Master()
     answers = json.load(open(ANSWERS, encoding="utf-8")) if ANSWERS.exists() else {}
     stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     n_new = 0; skipped = []
@@ -129,9 +167,35 @@ def main():
                 skipped.append((ans["id"], why))
                 if why == "unsure": answers.setdefault("_unsure", {})[ans["id"]] = {"note": ans.get("note"), "at": stamp}
                 continue
+            # guard: locate the verse in the master before anything is written
+            n = int(ans["id"][4:]); it = by_n.get(n); ocr = (it or {}).get("ocr", {}).get("vision", "") if it else ""
+            if conv.get("decision") == "dge" and conv.get("verified_text"):
+                cur_key = tuple(it["verification"].get("dge_key") or []) if it else ()
+                same_text = bool(it) and ratio(conv["verified_text"], it["sanskrit_text"]) >= 0.95
+                if same_text and it["verification"]["status"] not in ("mismatch", "mula_near", "ref_not_in_dge"):
+                    pass                                          # a confirmation of an already-unified verse
+                else:
+                    key, r, how = master.locate(conv["verified_text"], conv.get("bhagavata_ref"), ocr,
+                                                ocr_free=not it or it["verification"]["status"] in ("mismatch", "mula_near", "ref_not_in_dge"))
+                    if how == "unresolved":
+                        skipped.append((ans["id"], f"not located in the DGE Bhāgavata (best {key} at {r}) — held for review"))
+                        answers.setdefault("_held", {})[ans["id"]] = dict(ans, best_key=list(key) if key else None, best_ratio=r, at=stamp)
+                        continue
+                    conv["verified_text"] = master.text(key); conv["bhagavata_ref"] = ".".join(map(str, key))
+                    conv["located_by"] = how; conv["located_ratio"] = r
+                    if conv["bhagavata_ref"] != (ans.get("bhagavata_ref") or ""):
+                        conv["note"] = ((conv.get("note") or "") + f" [DGE numbering {conv['bhagavata_ref']}; chat said {ans.get('bhagavata_ref')}]").strip()
+            elif conv.get("decision") == "printed":
+                r_ocr = ratio(conv["verified_text"], ocr) if ocr else 0.0
+                if r_ocr < 0.6:
+                    skipped.append((ans["id"], f"'printed' text does not match the scan's OCR (ratio {round(r_ocr, 2)}) — held for review"))
+                    answers.setdefault("_held", {})[ans["id"]] = dict(ans, ocr_ratio=round(r_ocr, 2), at=stamp)
+                    continue
             conv["answered_at"] = stamp; conv["via"] = "gemini_chat"
             conv = {k: v for k, v in conv.items() if v is not None}
             answers[ans["id"]] = conv; n_new += 1
+            for bucket in ("_held", "_unsure"):                     # a later, resolvable answer clears an earlier hold
+                (answers.get(bucket) or {}).pop(ans["id"], None)
     ANSWERS.parent.mkdir(parents=True, exist_ok=True)
     json.dump(answers, open(ANSWERS, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"answers.json: {n_new} answers merged ({len([k for k in answers if not k.startswith('_')])} total); skipped {len(skipped)}")
