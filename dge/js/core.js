@@ -389,7 +389,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.64.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.65.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -845,7 +845,6 @@ document.addEventListener('DOMContentLoaded', () => {
     trackLabel: document.getElementById('trackLabel'),
     timeDisplay: document.getElementById('timeDisplay'),
     repeatCounter: document.getElementById('repeatCounter'),
-    readingCard: document.getElementById('readingCard'),
     filterBtn: document.getElementById('filterBtn'),
     searchInput: document.getElementById('searchInput'),
     clearSearchBtn: document.getElementById('clearSearchBtn'),
@@ -979,7 +978,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (entry && entry.populated === false) {
       const titleEl = document.getElementById('stotraTitle');
-      const cardEl = document.getElementById('readingCard');
+      const cardEl = document.getElementById('shlokaList');
       if (titleEl) titleEl.innerText = 'Not Yet Available';
       if (cardEl) cardEl.innerText = "This text hasn't been added to the library yet — check back soon.";
       return;
@@ -997,7 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
                        localStorage.getItem('is_superadmin') === 'true';
       if (!isAdmin) {
         const titleEl = document.getElementById('stotraTitle');
-        const cardEl = document.getElementById('readingCard');
+        const cardEl = document.getElementById('shlokaList');
         if (titleEl) titleEl.innerText = 'Restricted';
         if (cardEl) cardEl.innerText = 'This section is not available.';
         return;
@@ -1086,7 +1085,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => {
         console.error("DGE Fetch Error:", err);
         const titleEl = document.getElementById('stotraTitle');
-        const cardEl = document.getElementById('readingCard');
+        const cardEl = document.getElementById('shlokaList');
         if (titleEl) titleEl.innerText = "Data Not Found";
         if (cardEl) cardEl.innerText = `Error: Please ensure ${window.jsonFileName} is available in the repository.`;
       });
@@ -1334,17 +1333,9 @@ function initAuthAndBranding() {
   if (ciEditItem) ciEditItem.style.display = isSuperadmin ? 'flex' : 'none';
   if (logoutItem) logoutItem.style.display = (isAuthorized || isSuperadmin) ? 'flex' : 'none';
 
-  const authorEl = document.getElementById('stotraAuthor');
-  const showDesignedBy = !(window.appConfig && window.appConfig.showDesignedBy === false);
-  if (authorEl) {
-    if (!showDesignedBy) {
-      authorEl.style.display = 'none';
-    } else {
-      const designedBy = (window.appConfig && window.appConfig.designedBy) ? window.appConfig.designedBy : 'TRIBHUVAN ACHAR';
-      authorEl.innerText = `DESIGNED BY ${designedBy.toUpperCase()}`;
-    }
-  }
-  
+  // (7 Sep 2026: the "DESIGNED BY" credit line under the title is gone for
+  // good, with its appConfig keys -- the project lead's ask.)
+
   const emailDisplay = document.getElementById('contactEmailDisplay');
   const contactEmail = (window.appConfig && window.appConfig.contactEmail) ? window.appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';
   if(emailDisplay) emailDisplay.innerText = contactEmail;
@@ -1368,8 +1359,7 @@ function restorePrefs() {
     applyTheme(savedTheme);
   } else if (typeof applyTheme === 'function') {
     // One-time migration: honor a previously saved plain dark-mode flag.
-    const wasDark = localStorage.getItem('app_darkMode') === 'true';
-    applyTheme(wasDark ? 'darkglass' : 'vandana');
+    applyTheme('vandana');   // the default; the legacy app_darkMode flag also landed on a dark theme
   }
 
   const savedFont = parseInt(localStorage.getItem('app_fontSize'), 10);

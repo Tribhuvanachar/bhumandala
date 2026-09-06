@@ -9,7 +9,7 @@
      exists, so the very first paint uses the visitor's actual saved theme
      instead of the unscoped default -- see dge/js/theme-guard.js. Must load
      right after vandana-guard.js, before main.css/tokens.css. -->
-<script src="js/theme-guard.js?v=1"></script>
+<script src="js/theme-guard.js?v=4.78.0"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" id="themeColorMeta" content="#0B0907">
@@ -40,7 +40,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.77.0">
+<link rel="stylesheet" href="css/main.css?v=4.78.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -87,9 +87,35 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.64.0">
+<meta name="dge-html-version" content="4.65.0">
+<!-- 7 Sep 2026: the search row (scope picker, search box with mic, Ω
+     special characters) lives in the top bar between the Library button
+     and the ☰ menu -- the project lead's direct ask, together with an
+     icon-only Library button (its name shows on hover / long-press via
+     title) -- so the reading page opens on the verse itself, not on a
+     stack of chrome. Same element ids as before, so search.js,
+     char-palette.js, modals.js's togglePopup and the voice-input code
+     keep working untouched. -->
 <div class="top-bar">
-  <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
+  <button type="button" class="top-bar-title" id="libraryBtn" onclick="window.openLibraryModal()" title="Library" aria-label="Library">❮ <span class="top-bar-title-icon" aria-hidden="true">📚</span></button>
+  <div class="search-box-group top-bar-search">
+    <div class="popup-container" style="position:relative;">
+      <button class="btn-lang" id="searchScopeBtn" onclick="window.togglePopup('searchScopePopup')" title="Search scope">All</button>
+      <div class="popup popup-top-left" id="searchScopePopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Search Scope</div>
+        <div class="pop-item active" data-scope="all" onclick="window.setSearchScope('all', 'All', this)">Search All</div>
+        <div class="pop-item" data-scope="mula" onclick="window.setSearchScope('mula', 'Shloka', this)">Shloka Only</div>
+        <div class="pop-item" data-scope="notes" onclick="window.setSearchScope('notes', 'Notes', this)">My Notes Only</div>
+        <div id="searchScopeDynamicList"></div>
+      </div>
+    </div>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="window.handleSearch()">
+      <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
+      <button class="clear-search-btn" id="clearSearchBtn" onclick="window.clearSearch()">✖</button>
+    </div>
+    <button class="char-palette-toggle" onclick="window.toggleCharPalette()" title="Special characters (ā, ḥ, ॐ, etc.)">Ω</button>
+  </div>
   <button class="btn-top" onclick="window.openModal('actionsDrawer')" title="Menu: Commentary, Display, Explore, About, Access">☰</button>
 </div>
 
@@ -353,9 +379,6 @@
   <div class="popup-label">Appearance</div>
   <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
   <div class="pop-item" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
-  <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
-  <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
-  <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
   </div>
 </div>
 
@@ -425,50 +448,36 @@
          its stitched grantha. Hidden unless dgeRenderStitchChrome has
          something real to show. -->
     <div id="lineageStrip" class="lineage-strip" style="display:none;"></div>
-    <h1 id="stotraTitle">Loading...</h1>
-    <div class="author" id="stotraAuthor">...</div>
+    <!-- 7 Sep 2026: one compact title row -- the 🔢 jump-to-shloka button
+         (formerly on the removed reading card) sits beside the title. The
+         "DESIGNED BY" credit line under the title is gone for good (the
+         lead's ask), together with its appConfig keys. -->
+    <div class="title-row">
+      <h1 id="stotraTitle">Loading...</h1>
+      <button type="button" class="title-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka" aria-label="Jump to a shloka">🔢</button>
+    </div>
     <!-- Section navigator (layer-stitch.js): adhyaya > pada > adhikarana
          picker derived from each item's imported breadcrumb. Hidden for
          any text without breadcrumb structure. -->
     <div id="sectionNavRow" class="section-nav-row" style="display:none;">
       <select id="sectionNavSelect" class="section-nav-select" onchange="window.dgeJumpToSection(this.value)"></select>
     </div>
-    <div class="rule"></div>
-  </div>
-
-  <div class="search-box-group">
-    <div class="popup-container" style="position:relative;">
-      <button class="btn-lang" id="searchScopeBtn" onclick="window.togglePopup('searchScopePopup')" style="max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;">Search All</button>
-      <div class="popup popup-top-left" id="searchScopePopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Search Scope</div>
-        <div class="pop-item active" data-scope="all" onclick="window.setSearchScope('all', 'Search All', this)">Search All</div>
-        <div class="pop-item" data-scope="mula" onclick="window.setSearchScope('mula', 'Shloka Only', this)">Shloka Only</div>
-        <div class="pop-item" data-scope="notes" onclick="window.setSearchScope('notes', 'My Notes Only', this)">My Notes Only</div>
-        <div id="searchScopeDynamicList"></div>
-      </div>
-    </div>
-    <div class="search-container">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="window.handleSearch()">
-      <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
-      <button class="clear-search-btn" id="clearSearchBtn" onclick="window.clearSearch()">✖</button>
-    </div>
-    <button class="char-palette-toggle" onclick="window.toggleCharPalette()" title="Special characters (ā, ḥ, ॐ, etc.)">Ω</button>
   </div>
 
   <div id="charPalettePanel" class="char-palette-panel">
     <div id="charPaletteGrid" class="char-palette-grid"></div>
   </div>
 
+  <!-- 7 Sep 2026: the sticky "reading card" that echoed the selected verse
+       above the list is gone (the lead: "why in the world is that text box
+       below search box useful"). The active verse is now marked, and
+       read-along highlighted, inside its own card in #shlokaList
+       (audio.js: wrapReadingCardWordsForSync / updateReadingCardSyncHighlight
+       now target .shloka-card.active .shloka-text). The single/list view
+       navigators keep their mount points. -->
   <div class="reading-card-wrap" id="readingCardWrap">
     <div id="singleViewNav" style="display:none; align-items:center; justify-content:space-between; gap:10px; padding:0 4px 8px;"></div>
     <div id="listViewNav" style="display:none; align-items:center; justify-content:space-between; gap:10px; padding:0 4px 8px;"></div>
-    <div class="reading-card" id="readingCardBox">
-      <div class="reading-card-header">
-        <button class="reading-card-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka">🔢</button>
-        <button class="reading-card-toggle" id="readingCardToggleBtn" onclick="window.toggleReadingCardMinimize()" title="Minimize / Expand">⌄</button>
-      </div>
-      <div id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
-    </div>
   </div>
   <!-- Just below the shloka display, not up in the page header, so the
        toggle sits next to the content it edits. -->
@@ -1263,24 +1272,24 @@
 <!-- ?v=4.60.6 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.75.10"></script>
+<script src="js/config.js?v=4.78.0"></script>
 <script src="js/kamadhenu.js?v=1.2"></script>
 <script src="js/state.js?v=4.60.6"></script>
 <!-- Canonical state accessor layer (section 33) over the globals state.js
      seeds above — read-only, additive, defines no new storage. -->
 <script src="js/reader-state.js?v=1"></script>
 <script src="js/dev.js?v=4.60.6"></script>
-<script src="js/utils.js?v=4.60.6"></script>
+<script src="js/utils.js?v=4.78.0"></script>
 <script src="js/modals.js?v=4.60.6"></script>
 <!-- Must load, and register its selectionchange listener, before ai.js --
      see selection-modes.js's own header comment for why. -->
 <script src="js/selection-modes.js?v=1"></script>
-<script src="js/transliteration.js?v=4.60.6"></script>
+<script src="js/transliteration.js?v=4.78.0"></script>
 <script src="js/onboarding.js?v=1"></script>
 <script src="js/gemini.js?v=4.60.6"></script>
 <script src="js/kosha.js?v=4.71.2"></script>
 <script src="js/kosha-citations.js?v=4.65.0"></script>
-<script src="js/audio.js?v=4.74.0"></script>
+<script src="js/audio.js?v=4.78.0"></script>
 <script src="js/filter.js?v=4.61.0"></script>
 <script src="js/search.js?v=4.60.6"></script>
 <script src="js/markers.js?v=4.60.6"></script>
@@ -1317,7 +1326,7 @@
      before render.js, which calls into it. Additive: a commentary without
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
-<script src="js/render.js?v=4.74.0"></script>
+<script src="js/render.js?v=4.78.0"></script>
 <script src="js/legal-content.js?v=1.0"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
@@ -1338,10 +1347,10 @@
      abbreviation routing it was first noticed against) never run. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" async></script>
 <script src="js/admin-editor.js?v=4.61.5"></script>
-<script src="js/config-editor.js?v=4.60.6"></script>
+<script src="js/config-editor.js?v=4.78.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.76.0"></script>
+<script src="js/core.js?v=4.78.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
@@ -1349,7 +1358,7 @@
 <!-- Sūtra intellisense: makes citations in the text tappable and identifies
      a rule from a half-remembered name. Fetches nothing until a page turns
      out to cite one. -->
-<script src="js/intellisense.js?v=4.71.1"></script>
+<script src="js/intellisense.js?v=4.78.0"></script>
 <script src="js/entity-linker.js?v=1.0.0"></script>
 <!-- Marks each verse that other texts discuss, from the backlinks index.
      Fetches one small index and stops if this grantha is not cited. -->

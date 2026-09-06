@@ -95,9 +95,8 @@ window.setScript = function(code, el) {
             window.renderList();
         }
         
-        if (window.activeId && window.els && window.els.readingCard && typeof window.getText === 'function') {
-            window.els.readingCard.innerHTML = window.getText(window.activeId);
-            if (typeof window.wrapReadingCardWordsForSync === 'function') window.wrapReadingCardWordsForSync();
+        if (window.activeId && typeof window.wrapReadingCardWordsForSync === 'function') {
+            window.wrapReadingCardWordsForSync(window.activeId);   // renderList() above rebuilt the active card
         }
 
         // The library browser builds its labels in the active script too,

@@ -811,7 +811,7 @@
     const sel = (document.body && document.body.dataset.intellisenseRoots || '').trim();
     const roots = sel
       ? sel.split(',').map(s => document.querySelector(s.trim())).filter(Boolean)
-      : [document.getElementById('shlokaList'), document.getElementById('readingCard')];
+      : [document.getElementById('shlokaList')];
     // renderList() rebuilds the list wholesale on every script change, theme
     // change and navigation, so a one-off pass would only ever mark up the
     // first render. Debounced because a rebuild fires many mutations.
