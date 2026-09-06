@@ -25,20 +25,20 @@ Built 6 Sep 2026 (refreshed 5:50 pm IST after nine more Drive folders and the `s
 | dge_linked/raghavendra_vijaya | 576 | 3.20 | 486 D, 85 B | 48 kHz | one file per verse; most clipped |
 | dge_linked/PrahladaKrutaNarasimha | 11 | 0.06 | A/B | 44.1 kHz | vasantatilakā stotra |
 | drive/Bhagavata Saroddhara | 436 | 2.13 | 425 A | 44.1 kHz | one file per verse; best audio we have; text verified 6 Sep 2026 |
-| drive/Gita Shlokas (7 adhyāyas) | 406 | 8.82 | mostly A/B | 44.1/48 kHz | 46–120 s per file: repeated/teaching style, needs segmentation |
+| drive/Gita Shlokas (7 adhyāyas) | 406 | 8.82 | mostly A/B | 44.1/48 kHz | 46–120 s per file: lead (6 Sep) — recited pāda by pāda with some words repeated twice; segment per pāda, drop repeats |
 | drive/Audio* ('vsn' series) | 106 | 3.86 | B, some D | 48 kHz | Viṣṇu Sahasranāma, mapped at 0.55 confidence, unconfirmed |
 | drive/Vayu Stuti | 20 | 0.45 | 18 A | 44.1 kHz | pāda-level files, text not yet in DGE |
 | drive/Shlokas (Tīrthaprabandha) | 21 | 0.09 | 19 A | 48 kHz | Dakṣiṇa-prabandha verses 1–19 + 2 intro clips; mapped |
 | drive/Prahlada Narasimha Stotra | 43 | 0.21 | 6 A, 37 B | 48 kHz | Bhāgavata 7.9.8–50, one verse per file; mapped |
 | drive/Sripadaraja AshTottara Shatanamavali | 110 | 0.12 | 68 A | 48 kHz | one name per clip; text not in DGE yet |
-| drive/single-file/smv (`smv.zip`, shared 6 Sep) | 1,106 | 9.86 | 554 B, 552 D | 48 kHz AAC | the lead's phone takes of Sumadhva Vijaya at **pāda** level (4–7 s each): 34 named `SMV.<sarga>.<verse>.<pāda>` (30 mapped, exact), 1,072 unnamed `New recording N` — same reciter, higher fidelity than the 11 kHz site files, but half of them clip (peak > 0 dBFS) and none can be paired until identified |
-| drive/single-file/Vedavyasa Gadya.mp3 | 1 | 0.16 | B | 44.1 kHz | prose recitation; no DGE text; not a verse unit |
-| drive/AShThAdhyAyi (pārāyaṇa) | 32 | 3.89 | 13 A, 19 B | 44.1 kHz | one **whole pāda** of the Aṣṭādhyāyī per file (3–12 min) + the Māheśvara sūtras; long-form, needs sūtra-level segmentation before it can pair with `sutrapatha` |
+| drive/single-file/smv (`smv.zip`, shared 6 Sep) | 1,106 | 9.86 | 554 B, 552 D | 48 kHz AAC | the lead's phone takes of Sumadhva Vijaya at **pāda** level (4–7 s each): 34 named `SMV.<sarga>.<verse>.<pāda>` (30 mapped, exact), 1,072 unnamed `New recording N` — lead says they should be sequential, one per pāda (being verified by speech-to-text); same reciter, higher fidelity than the 11 kHz site files, but half clip (peak > 0 dBFS) |
+| drive/single-file/Vedavyasa Gadya.mp3 | 1 | 0.16 | B | 44.1 kHz | prose recitation of Yādavārya's Vedavyāsa Gadyam; text imported 6 Sep (100 epithet units) — needs per-epithet segmentation |
+| drive/AShThAdhyAyi (pārāyaṇa) | 32 | 3.89 | 13 A, 19 B | 44.1 kHz | whole-pāda Aṣṭādhyāyī pārāyaṇa by **other reciters (not the lead, no consent)** — kept in the inventory, excluded from every training subset (`speakers.json` → EXTERNAL) |
 | drive/Brahmasutra | 2 | 0.08 | B | 48 kHz | Brahmasūtra 1.1 and 1.2 recited whole; long-form |
-| drive/HKS (Harikathāmṛtasāra) | 31 | 1.34 | 14 A, 16 B, 1 D | 48 kHz | Kannada ṣaṭpadi, one verse per file but 1.5–2.5 min each (teaching style); mapped to `hks-<sandhi>-<n>` at 0.8, review |
+| drive/HKS (Harikathāmṛtasāra) | 31 | 1.34 | 14 A, 16 B, 1 D | 48 kHz | Kannada ṣaṭpadi, one verse per file, 1.5–2.5 min each — lead confirmed plain full recitation (sung pace, no meaning); mapped to `hks-<sandhi>-<n>` and accepted |
 | drive/Sripadaraja Seva Sangha | 1 | 0.07 | C | video | Aṣṭottara-śata-nāmāvali sung in one video (mp4); the 108-name text is still missing. The second file in that folder (Kṣīrābhiṣeka, 400 MB event video) was downloaded, judged not a recitation, and the local copy removed |
 
-Not reachable: two of the nine new folders (`1o5-yqK_…`, `1-716NX8…`) still redirect to Google sign-in — not shared publicly.
+Two of the nine new folders (`1o5-yqK_…`, `1-716NX8…`) redirect to Google sign-in; the lead says they are someone else's, so they were dropped from the source list.
 The seven others overlap heavily with folders shared earlier (the Gītā, Tīrthaprabandha and Viṣṇu Sahasranāma folders are
 parents/duplicates of ones already fetched); the pipeline now de-duplicates by Drive file id, so nothing is counted twice.
 

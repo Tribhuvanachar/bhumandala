@@ -343273,5 +343273,2861 @@
   "equal_padas": false,
   "chandas_inferred": "",
   "inferred_reason": "unequal pāda syllable counts — suspected text defect (typo, missing/extra akṣara, wrong line split) or prose"
+ },
+ "2c28fc6247a6399a269e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   40
+  ],
+  "syllable_count": 40,
+  "matras_per_pada": [
+   63
+  ],
+  "laghu_guru": "GGGGLGGLLLLLLGGLGLGGGGGGGGGLGLGLLGLLGLGL",
+  "gana": "मरभनयजमममजभभरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "c4de200674c4eee7c99c": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अनुष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   8
+  ],
+  "syllable_count": 8,
+  "matras_per_pada": [
+   13
+  ],
+  "laghu_guru": "GLGGLGGL",
+  "gana": "ररगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "176cf660fd5c016f1dce": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "जगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   12
+  ],
+  "syllable_count": 12,
+  "matras_per_pada": [
+   19
+  ],
+  "laghu_guru": "GLGGLGLGLGGL",
+  "gana": "ररजत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "009a68c418f0440c8425": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   28
+  ],
+  "syllable_count": 28,
+  "matras_per_pada": [
+   44
+  ],
+  "laghu_guru": "LGGGLGGGLLGGGGLLGLGGLGLLGLGL",
+  "gana": "यरतयतजतभरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "85231c9fb7272e012c9c": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "विकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   23
+  ],
+  "syllable_count": 23,
+  "matras_per_pada": [
+   36
+  ],
+  "laghu_guru": "LGGLGGGLLGLLGGGGLLGLGLG",
+  "gana": "ययभभमभरलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "bf004999a445bfc073cd": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   14
+  ],
+  "laghu_guru": "LGLGLGGGL",
+  "gana": "जरत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "cc028c77806d64e14865": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   29
+  ],
+  "syllable_count": 29,
+  "matras_per_pada": [
+   44
+  ],
+  "laghu_guru": "LGGLGGGLLLLGLLGLGLGLGGLGGLGGL",
+  "gana": "ययभससजरररगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "af158881fab9451e3e67": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   56
+  ],
+  "syllable_count": 56,
+  "matras_per_pada": [
+   86
+  ],
+  "laghu_guru": "GLGLGGGGLGGLLLLLLLGLLLGLGGLGGLLGGGGGLLGGLLLLGGGGLGLGGLGG",
+  "gana": "रयततननभजततयमसभसमजतगग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "ce8e6ba6f54187234f1d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   42
+  ],
+  "syllable_count": 42,
+  "matras_per_pada": [
+   63
+  ],
+  "laghu_guru": "LGLLGGLGLGGLGGLGLLGGLLGLGGLGLLGLGLLGLGLGGL",
+  "gana": "जयजततभतजतभरसजत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "d23f94b080e87801d593": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   34
+  ],
+  "syllable_count": 34,
+  "matras_per_pada": [
+   58
+  ],
+  "laghu_guru": "LGLGLGGGLGLGGGGLGGGGGGGGLGGLGGGLGL",
+  "gana": "जरतरमयममययरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "75995d0d42695136d9be": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "सुप्रतिष्ठा",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   5
+  ],
+  "syllable_count": 5,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "GGGLG",
+  "gana": "मलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "मन्दा (1 भेदौ)",
+   "प्रिया (2 भेदौ)",
+   "प्रीति (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "47e459c35894cb843823": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिजगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   13
+  ],
+  "syllable_count": 13,
+  "matras_per_pada": [
+   23
+  ],
+  "laghu_guru": "LLGGGGGGGGLGG",
+  "gana": "सममरग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "3138233d7ded82725ca6": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   66
+  ],
+  "syllable_count": 66,
+  "matras_per_pada": [
+   101
+  ],
+  "laghu_guru": "LLLLGGGLGLGGLLGGGLGLGGGGLLGLGGGGLLGLGLGLLGGGGLLGLLGLGGGLGLGLGLLLGL",
+  "gana": "नयरयसतरमसयतजरसमससयरजभज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "166308922feebb5eb029": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   36
+  ],
+  "syllable_count": 36,
+  "matras_per_pada": [
+   58
+  ],
+  "laghu_guru": "LGLGGLLLGLGLGGLGGGGGGLGGLLGGGLGGLGGL",
+  "gana": "जतसजतममयसततत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "1b5d24acd4cd39f6ef43": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   29
+  ],
+  "laghu_guru": "LGGGGLLGGLGLGGLGGL",
+  "gana": "यतयजतत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "ed15b222f25b90afde7d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   30
+  ],
+  "laghu_guru": "LGLGGGGLGGGLGGLGGL",
+  "gana": "जमरततत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "45a75e2d3db6b031bc5d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "प्रकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   21
+  ],
+  "syllable_count": 21,
+  "matras_per_pada": [
+   31
+  ],
+  "laghu_guru": "LGLGGLGGGLGGLGLLLLLGL",
+  "gana": "जतमयजनज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "469692b91cac3986f2ce": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   40
+  ],
+  "syllable_count": 40,
+  "matras_per_pada": [
+   61
+  ],
+  "laghu_guru": "GGLGGLGLGLGLLGLLGLGLLGGLGGLLGLGGGGLLGLGL",
+  "gana": "ततरजजजभततजमभरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "47325ce9df024b1191ad": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   41
+  ],
+  "syllable_count": 41,
+  "matras_per_pada": [
+   63
+  ],
+  "laghu_guru": "GGLGLGLGGLLGGLGGLLLGLGGLGLLGGGLLGGLGGLLGL",
+  "gana": "तरयसरभजतभमसरभगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "c5daef27848db9f2ee26": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   37
+  ],
+  "syllable_count": 37,
+  "matras_per_pada": [
+   59
+  ],
+  "laghu_guru": "GGLGLGLGGGLGLGLGGLLGGGGGLLGGLGGGLLLGL",
+  "gana": "तरयरजतयमसरतसल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "32a2aa9e7e0aee8bfff9": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अनुष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   8
+  ],
+  "syllable_count": 8,
+  "matras_per_pada": [
+   14
+  ],
+  "laghu_guru": "GGGLGLGG",
+  "gana": "मजगग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "हंसरुत (1 भेदौ)",
+   "विद्युन्माला (2 भेदौ)",
+   "समानिका (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "5cb446eab9be91941d3a": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   199
+  ],
+  "syllable_count": 199,
+  "matras_per_pada": [
+   326
+  ],
+  "laghu_guru": "LLGGGLLGGLGGLGLGGGGGGGLGLGGGLGLGLGGGLGGGGLGGLGLGLLLGGLLLLGLGLLGGLGGGLLGGLGLGGLGGLGLGLGGGGGGGLGGGLGGGGLGGLLLLLGGGGGGGGGGLGGGLGGLGLLGLGLGGGGGLGLGGGGGLGLLLLGGGLGGGGGGGLGLLLLGGGLGLGGGLGGGGGLLGGLGGGGLLLGG",
+  "gana": "सतययजममरयरजमयततरनतनरसरतयजततरयमतमयततनयममतमयजजरमरयमजनमयमतभसतरतमतययतसग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "8671bb687b0bb886b19a": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिशक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   15
+  ],
+  "syllable_count": 15,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "GGGGLGGGLLGLGGL",
+  "gana": "मरतजत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "0baf646b358b87c78c5d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अत्यष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   17
+  ],
+  "syllable_count": 17,
+  "matras_per_pada": [
+   26
+  ],
+  "laghu_guru": "LLLLGGGGGGGLLLGGL",
+  "gana": "नयमतसगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "691610e66d8434a36ebc": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिशक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   15
+  ],
+  "syllable_count": 15,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "GGGLLGGGLGGLGGL",
+  "gana": "मसततत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "4c2b92b1395126b0ba4d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "प्रकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   21
+  ],
+  "syllable_count": 21,
+  "matras_per_pada": [
+   33
+  ],
+  "laghu_guru": "GGGGLGGLLLGLLGLGLGLGG",
+  "gana": "मरभजजरय",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "9ec74d484a0ffe51898a": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "विकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   23
+  ],
+  "syllable_count": 23,
+  "matras_per_pada": [
+   37
+  ],
+  "laghu_guru": "GLGLLGGLGGGGLLGLGLGGLGG",
+  "gana": "रसरमसजतगग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "d943fa92c901d39622dc": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "आकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   22
+  ],
+  "syllable_count": 22,
+  "matras_per_pada": [
+   37
+  ],
+  "laghu_guru": "GLGLGLGGLGGGGLGGGGGLGL",
+  "gana": "रजतमरमरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "6ec984e2bf07989b9887": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "पङ्क्तिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   10
+  ],
+  "syllable_count": 10,
+  "matras_per_pada": [
+   16
+  ],
+  "laghu_guru": "GLGGLLGGGL",
+  "gana": "रभमल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "5bb73b90395c7c1d519f": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   30
+  ],
+  "syllable_count": 30,
+  "matras_per_pada": [
+   44
+  ],
+  "laghu_guru": "GLGLLGLGLGLGLLGLLGLLGLGLGGLGGL",
+  "gana": "रसजरसससजतत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "a8e07349e6ed5d6f907e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   37
+  ],
+  "syllable_count": 37,
+  "matras_per_pada": [
+   59
+  ],
+  "laghu_guru": "GGLLGGLGLLLGGLGGGLGLLGLGGGGGGLLGGLGLG",
+  "gana": "तयजसरतभरमतयजग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "1163fbcd81036565109a": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिशक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   15
+  ],
+  "syllable_count": 15,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "LGGGLGGLGGGLGGL",
+  "gana": "यररतत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "faf0d0f0d210e0e04079": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिधृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   19
+  ],
+  "syllable_count": 19,
+  "matras_per_pada": [
+   29
+  ],
+  "laghu_guru": "GLGLGGLGLLGGGLLLGGL",
+  "gana": "रयजयभयल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "f0643a0b99515ce3d51d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "विकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   23
+  ],
+  "syllable_count": 23,
+  "matras_per_pada": [
+   36
+  ],
+  "laghu_guru": "GLGLGGLGGGLGLGLGLLGGLGL",
+  "gana": "रययरजभतगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "7d4a709b1d7bdc1321a6": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   33
+  ],
+  "syllable_count": 33,
+  "matras_per_pada": [
+   49
+  ],
+  "laghu_guru": "GGLLLGLGGLGGGLLGGLLGGLLGLLLLGGLGL",
+  "gana": "तसययभतयसनयज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "eb00d472e31d534aece9": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   30
+  ],
+  "laghu_guru": "GLGGLLGGGLGGGGGLGL",
+  "gana": "रभमयमज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "df9605bb284487077c50": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिजगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   13
+  ],
+  "syllable_count": 13,
+  "matras_per_pada": [
+   19
+  ],
+  "laghu_guru": "LLLGGGLLGLGLG",
+  "gana": "नमसजग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "मञ्जुहासिनी (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "9d15559a04fb68106cf1": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अनुष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   8
+  ],
+  "syllable_count": 8,
+  "matras_per_pada": [
+   12
+  ],
+  "laghu_guru": "GGLLLGLG",
+  "gana": "तसलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "नाराचिका (1 भेदौ)",
+   "प्रमाणिका (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "bd0c09db0ea14a0f6293": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   15
+  ],
+  "laghu_guru": "GGGLGLGLG",
+  "gana": "मजर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "भुजङ्गसङ्गता (2 भेदौ)",
+   "भद्रिका १ (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "4b217a5fa91e1fad622b": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   57
+  ],
+  "syllable_count": 57,
+  "matras_per_pada": [
+   80
+  ],
+  "laghu_guru": "LLLGGGLLLLGGLLLLGLGLLLLLLGLGLGGLGGGLGLGLGLLLLGLLGLLGGLGGL",
+  "gana": "नमनयनजभनजररतरजनभभतत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "ede585e0e6b7e5e6b601": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "जगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   12
+  ],
+  "syllable_count": 12,
+  "matras_per_pada": [
+   19
+  ],
+  "laghu_guru": "GLGLLGGLGGGL",
+  "gana": "रसरत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "47381b2a2fbfac855bc9": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "शक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   14
+  ],
+  "syllable_count": 14,
+  "matras_per_pada": [
+   20
+  ],
+  "laghu_guru": "GGLLLLGGLLLGLG",
+  "gana": "तनतसलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "4e600abe4fb7935049ca": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिशक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   15
+  ],
+  "syllable_count": 15,
+  "matras_per_pada": [
+   23
+  ],
+  "laghu_guru": "GLGLLGGGLLGLGLG",
+  "gana": "रसतजर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "9dd55c03e5752b39fab8": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अनुष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   8
+  ],
+  "syllable_count": 8,
+  "matras_per_pada": [
+   11
+  ],
+  "laghu_guru": "LGLLLGLG",
+  "gana": "जसलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "प्रमाणिका (1 भेदौ)",
+   "नाराचिका (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "844a78ba798e746e74ef": {
+  "chandas": "भुजङ्गसङ्गता",
+  "chandas_normalized": "भुजङ्गसङ्गता",
+  "chandas_alternatives": [],
+  "kind": "समवृत्तम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   13
+  ],
+  "laghu_guru": "LLGLGLGLG",
+  "gana": "सजर",
+  "yati": [
+   3,
+   6
+  ],
+  "anushtubh_variant": "",
+  "classification": "sama",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 1.0,
+  "equal_padas": false,
+  "chandas_inferred": "भुजङ्गसङ्गता",
+  "inferred_reason": ""
+ },
+ "e1815a73dc1fbcce1752": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   36
+  ],
+  "syllable_count": 36,
+  "matras_per_pada": [
+   51
+  ],
+  "laghu_guru": "LLGGLGLGLLGLGGGLGLGLLGLGLLLLLGLLLGLG",
+  "gana": "सरजजमजभरनसनर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "95beccc072195a6a4047": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "गायत्री",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   6
+  ],
+  "syllable_count": 6,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "GLGLGL",
+  "gana": "रज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "c523f15af9a40b9dea0c": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   42
+  ],
+  "syllable_count": 42,
+  "matras_per_pada": [
+   62
+  ],
+  "laghu_guru": "GLLGLLLGLGGGLLGLGLGLLGGGGLGGGLGLLGLGLLLLGL",
+  "gana": "भभजमसजभमरतभरनज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "74b8ff687d7d19b1fe64": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   11
+  ],
+  "laghu_guru": "GLLLLLLGL",
+  "gana": "भनज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "बृहती (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "dd7a34a75ac6fd11b5e7": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   66
+  ],
+  "syllable_count": 66,
+  "matras_per_pada": [
+   100
+  ],
+  "laghu_guru": "GGLGGGLLLLLLLGLGLLGGLGGLGGLLLLGLLLLLLGGGLGLGGGGLLGGGGGGGLGGLGGLLGL",
+  "gana": "तमननजभतततनभनयरयतयमतततज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "233d4bb4ff73d0b0e06b": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "गायत्री",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   6
+  ],
+  "syllable_count": 6,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "GLLGGL",
+  "gana": "भत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "d1025730ec2970e98e1d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "सुप्रतिष्ठा",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   5
+  ],
+  "syllable_count": 5,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "GGGGL",
+  "gana": "मगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "प्रीति (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "0dea0f888a75563dc985": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "उष्णिक्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   7
+  ],
+  "syllable_count": 7,
+  "matras_per_pada": [
+   12
+  ],
+  "laghu_guru": "GGGGLGL",
+  "gana": "मरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "मदलेखा (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "4a35a9795507c09f006b": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिजगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   13
+  ],
+  "syllable_count": 13,
+  "matras_per_pada": [
+   23
+  ],
+  "laghu_guru": "GGGGGGLGLGLGG",
+  "gana": "ममजरग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "8fe25f50d006f8a62c9e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "पङ्क्तिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   10
+  ],
+  "syllable_count": 10,
+  "matras_per_pada": [
+   15
+  ],
+  "laghu_guru": "LGLGGLLLGG",
+  "gana": "जतसग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "16610bfb158f7e8673e0": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   14
+  ],
+  "laghu_guru": "GLGLGGLGL",
+  "gana": "रयज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "5a4bd969f698f562979e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   16
+  ],
+  "syllable_count": 16,
+  "matras_per_pada": [
+   26
+  ],
+  "laghu_guru": "GGLLGLGLGGGLGGLG",
+  "gana": "तजरततग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "11b6a504c668d4c763a6": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "प्रतिष्ठा",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   4
+  ],
+  "syllable_count": 4,
+  "matras_per_pada": [
+   6
+  ],
+  "laghu_guru": "LGGL",
+  "gana": "यल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "कन्या (2 भेदौ)",
+   "लासिनी (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "74ceb04602c913e0a86b": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "गायत्री",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   6
+  ],
+  "syllable_count": 6,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "GLGLLG",
+  "gana": "रस",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "रमणी (1 भेदौ)",
+   "मुकुल (1 भेदौ)",
+   "नदी १ (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "962c39b0aef06557dac0": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   25
+  ],
+  "syllable_count": 25,
+  "matras_per_pada": [
+   31
+  ],
+  "laghu_guru": "GGLLLGGLLLLLGLLLLLLLLLLGL",
+  "gana": "तसभनभननसल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "b8b7618240b48b0eed6e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   27
+  ],
+  "syllable_count": 27,
+  "matras_per_pada": [
+   42
+  ],
+  "laghu_guru": "GGLLGGGLGGLGGLGGLGLLLGLLGLG",
+  "gana": "तयररररनभर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "1f33e906124b59fcde23": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अत्यष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   17
+  ],
+  "syllable_count": 17,
+  "matras_per_pada": [
+   28
+  ],
+  "laghu_guru": "GGLGGLLGLGGGGLGGL",
+  "gana": "ततजमरगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "ab6c03a51a8b5e59dc5a": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   29
+  ],
+  "syllable_count": 29,
+  "matras_per_pada": [
+   45
+  ],
+  "laghu_guru": "LGGLGGGGLGLGGLGGLLLLLGLGGLGGL",
+  "gana": "ययतररभनररगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "fb3212487c852e101275": {
+  "chandas": "भुजगशिशुभृता",
+  "chandas_normalized": "भुजगशिशुभृता",
+  "chandas_alternatives": [],
+  "kind": "समवृत्तम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   11
+  ],
+  "laghu_guru": "LLLLLLGGL",
+  "gana": "ननत",
+  "yati": [
+   7,
+   2
+  ],
+  "anushtubh_variant": "",
+  "classification": "sama",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 1.0,
+  "equal_padas": false,
+  "chandas_inferred": "भुजगशिशुभृता",
+  "inferred_reason": ""
+ },
+ "5c4ea672251fac76b1c7": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "GLGGLGGLLLLLLLLGGL",
+  "gana": "ररभननत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "8172f8fbbfcdc183c612": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "त्रिष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   11
+  ],
+  "syllable_count": 11,
+  "matras_per_pada": [
+   16
+  ],
+  "laghu_guru": "GLGLLGGLLGL",
+  "gana": "रसभगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "स्वागता (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "1a5ca04b1be5fa6814fe": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "उष्णिक्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   7
+  ],
+  "syllable_count": 7,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "LLLGLGL",
+  "gana": "नरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "हंसमाला (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "1ad01a100546837d7228": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "शक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   14
+  ],
+  "syllable_count": 14,
+  "matras_per_pada": [
+   20
+  ],
+  "laghu_guru": "LLLLGLGLGGLGGL",
+  "gana": "नजररगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "a630d201018650110661": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   16
+  ],
+  "syllable_count": 16,
+  "matras_per_pada": [
+   23
+  ],
+  "laghu_guru": "LLLLLLGGGLGGLGGL",
+  "gana": "ननमययल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "43228e79f320ca70c432": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "जगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   12
+  ],
+  "syllable_count": 12,
+  "matras_per_pada": [
+   18
+  ],
+  "laghu_guru": "GGLLLGLGLLGG",
+  "gana": "तसजय",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "जलोद्धतगति (2 भेदौ)",
+   "मणिमाला (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "eed7f9f5aa949f32edb9": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   15
+  ],
+  "laghu_guru": "GGGGLGLGL",
+  "gana": "मरज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "916a0088409729dfac80": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "पङ्क्तिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   10
+  ],
+  "syllable_count": 10,
+  "matras_per_pada": [
+   13
+  ],
+  "laghu_guru": "LGLGLLLLGL",
+  "gana": "जभसल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "a40845b847e1a6e5367e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   45
+  ],
+  "syllable_count": 45,
+  "matras_per_pada": [
+   66
+  ],
+  "laghu_guru": "GGLLLLGLLLGGGLGLGGLLLGLLGLGLGLGGLLLLGLGGGLGGL",
+  "gana": "तनभयरयनभरजतनरतत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "4e2ce5a9c58234a54279": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   12
+  ],
+  "laghu_guru": "LLGLLGLGL",
+  "gana": "ससज",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "2fa1b4e5b4345a52565d": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "LLGGLLGLLLLGGLLGLG",
+  "gana": "सभभसभर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "283dfac300c78db563ed": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "बृहती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   9
+  ],
+  "syllable_count": 9,
+  "matras_per_pada": [
+   13
+  ],
+  "laghu_guru": "LLGGLLGGL",
+  "gana": "सभत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "96e2abb80c2e5c39cd8e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   16
+  ],
+  "syllable_count": 16,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "LGLGGGLLGLGGGLGL",
+  "gana": "जमसयरल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "47574eaf4e21a180a3a7": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   25
+  ],
+  "syllable_count": 25,
+  "matras_per_pada": [
+   35
+  ],
+  "laghu_guru": "LLLGLLGLGLGLLLGLGLGLGLGGL",
+  "gana": "नभरजसजरयल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "28a971063d1c9b77c6b7": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "LLGLGLGLGLLLLGLGLG",
+  "gana": "सजरनजर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "48314f1dee0e919cc43e": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   25
+  ],
+  "syllable_count": 25,
+  "matras_per_pada": [
+   41
+  ],
+  "laghu_guru": "GLGGGLGGGGGGLLGLLGGGLLGGL",
+  "gana": "रतममससतयल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "2d01e7ef5f968e24cad1": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   16
+  ],
+  "syllable_count": 16,
+  "matras_per_pada": [
+   27
+  ],
+  "laghu_guru": "GGGLGGGGLLGGLGLG",
+  "gana": "मयतयजग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "f7622cbb1ef3d4ea5e37": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "विकृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   23
+  ],
+  "syllable_count": 23,
+  "matras_per_pada": [
+   33
+  ],
+  "laghu_guru": "LGGGGLLLLGLGLLLGLGLGLGL",
+  "gana": "यतनरनरजगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "8b2204d630b05147b977": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "सङ्कृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   24
+  ],
+  "syllable_count": 24,
+  "matras_per_pada": [
+   35
+  ],
+  "laghu_guru": "LGLLGLGLLLGLLGLGGLGLGGGL",
+  "gana": "जजभजजतरत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "0e4edbf778352fc2a9d9": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   37
+  ],
+  "syllable_count": 37,
+  "matras_per_pada": [
+   49
+  ],
+  "laghu_guru": "GLGLLLLLGLLLLLGLLLGGLGLLLLLLGGGLGLLLG",
+  "gana": "रनसनसनतभनयरनग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "8a563db7cb3ccabcf2e3": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "जगती",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   12
+  ],
+  "syllable_count": 12,
+  "matras_per_pada": [
+   18
+  ],
+  "laghu_guru": "LGLLGGLGLGLG",
+  "gana": "जयजर",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "जलोद्धतगति (2 भेदौ)",
+   "मालती (2 भेदौ)",
+   "वंशस्थ (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "4c21b576a6e3e56beefe": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "उष्णिक्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   7
+  ],
+  "syllable_count": 7,
+  "matras_per_pada": [
+   12
+  ],
+  "laghu_guru": "GLGGGLG",
+  "gana": "रतग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "09daba124ecfe775d362": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   16
+  ],
+  "syllable_count": 16,
+  "matras_per_pada": [
+   22
+  ],
+  "laghu_guru": "LLLLLGLLGLGGLGGL",
+  "gana": "नससययल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "ca5cbd0834d81e562be2": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अत्यष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   17
+  ],
+  "syllable_count": 17,
+  "matras_per_pada": [
+   24
+  ],
+  "laghu_guru": "LLGLLLLGLGGLGGLGL",
+  "gana": "सनजततगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "1c955aa1b6dc50c32ae4": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   35
+  ],
+  "syllable_count": 35,
+  "matras_per_pada": [
+   52
+  ],
+  "laghu_guru": "LGGGLGLLGGLLGGGLGLGGLLLLGLLGLGLLGGL",
+  "gana": "यरसभमजतनभरसगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "90f71f8f323d21b29cc3": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   34
+  ],
+  "syllable_count": 34,
+  "matras_per_pada": [
+   47
+  ],
+  "laghu_guru": "LGLLLGLLLGLGLGLGLLGGLLLLGLLGLGLGGL",
+  "gana": "जसनरजभतनभरयल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "2c661fdacc3794f9a22b": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "शक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   14
+  ],
+  "syllable_count": 14,
+  "matras_per_pada": [
+   20
+  ],
+  "laghu_guru": "LLLGLLGLGGGLGL",
+  "gana": "नभरतगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "283b7d24eb1263d6980f": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "त्रिष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   11
+  ],
+  "syllable_count": 11,
+  "matras_per_pada": [
+   16
+  ],
+  "laghu_guru": "LGLGLGGLLGL",
+  "gana": "जरभगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "d4833ee5eedeb059b86b": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "गायत्री",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   6
+  ],
+  "syllable_count": 6,
+  "matras_per_pada": [
+   9
+  ],
+  "laghu_guru": "LGLGGL",
+  "gana": "जत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "58bc00020d613dba200c": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "कृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   20
+  ],
+  "syllable_count": 20,
+  "matras_per_pada": [
+   28
+  ],
+  "laghu_guru": "GGGLGLGLLLLGGLLLLLLG",
+  "gana": "मजभसभनलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "8aa81ac909adda8d5344": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "धृतिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   18
+  ],
+  "syllable_count": 18,
+  "matras_per_pada": [
+   28
+  ],
+  "laghu_guru": "GGLGLLGLGGGLLGLGGL",
+  "gana": "तभरतजत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "f703f1967c28350b1a06": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अत्यष्टिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   17
+  ],
+  "syllable_count": 17,
+  "matras_per_pada": [
+   25
+  ],
+  "laghu_guru": "LGLGLGLGLLLGLGGGL",
+  "gana": "जरजसयगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "900eb57b00a199d1a153": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "त्रिष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   11
+  ],
+  "syllable_count": 11,
+  "matras_per_pada": [
+   16
+  ],
+  "laghu_guru": "LGLGGLLGLLG",
+  "gana": "जतजलग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "उपेन्द्रवज्रा (1 भेदौ)",
+   "इन्द्रवज्रा (2 भेदौ)",
+   "सुमुखी (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "e98c1eb88e246c3a0c30": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "त्रिष्टुप्",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   11
+  ],
+  "syllable_count": 11,
+  "matras_per_pada": [
+   14
+  ],
+  "laghu_guru": "LGLLLLLGLGL",
+  "gana": "जनजगल",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "d50045b7e995ae84eea9": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "अतिशक्वरी",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   15
+  ],
+  "syllable_count": 15,
+  "matras_per_pada": [
+   21
+  ],
+  "laghu_guru": "LGLGLLLLGGLLGGL",
+  "gana": "जभसभत",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.0,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
+ },
+ "fe21e9cdbc2e23d5a49a": {
+  "chandas": "",
+  "chandas_normalized": "",
+  "chandas_alternatives": [],
+  "kind": "अज्ञातम्",
+  "vrutta_family": "पङ्क्तिः",
+  "pada_count": 1,
+  "syllables_per_pada": [
+   10
+  ],
+  "syllable_count": 10,
+  "matras_per_pada": [
+   17
+  ],
+  "laghu_guru": "GGGGGLLGLG",
+  "gana": "मतजग",
+  "yati": [],
+  "anushtubh_variant": "",
+  "classification": "unknown",
+  "near_matches": [
+   "हंसी २ (2 भेदौ)",
+   "उपस्थिता (2 भेदौ)"
+  ],
+  "partial": false,
+  "anushtubh_irregular": [],
+  "upajati_mix": "",
+  "confidence": 0.3,
+  "equal_padas": false,
+  "chandas_inferred": "",
+  "inferred_reason": "fewer than two pādas — prose, colophon, fragment, or a single line the splitter could not divide"
  }
 }

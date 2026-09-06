@@ -41,6 +41,8 @@ chandas,kind,syllables_per_pada,lg,exists_in_dge,texts_in_dge_corpus,audio_examp
 औपच्छन्दसिक,matra,,,True,2,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 क्रौञ्चपदा,sama,25,GLLGGGLLGGLLLLLLLLLLLLLLG,True,2,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 प्रमाणिका,sama,8,LGLGLGLG,True,1,0,0,0,0,0,0,False,False,🔴 NO AUDIO
+भुजगशिशुभृता,sama,9,LLLLLLGGG,True,1,0,0,0,0,0,0,False,False,🔴 NO AUDIO
+भुजङ्गसङ्गता,sama,9,LLGLGLGLG,True,1,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 वैतालीय,matra,,,True,1,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 अतिरेखा,sama,15,LLLLGLGLLLGLGLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 अतिशायिनी,sama,17,LLGLLGLGLGLLLGLGG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
@@ -169,9 +171,7 @@ chandas,kind,syllables_per_pada,lg,exists_in_dge,texts_in_dge_corpus,audio_examp
 भद्रक,sama,22,GLLGLGLLLGLGLLLGLGLLLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 भद्रिका १,sama,9,GLGLLLGLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 भद्रिका २,sama,11,LLLLLLGLGLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
-भुजगशिशुभृता,sama,9,LLLLLLGGG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 भुजङ्गविजृम्भित,sama,26,GGGGGGGGLLLLLLLLLLGLGLLGLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
-भुजङ्गसङ्गता,sama,9,LLGLGLGLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 भ्रमरविलसित,sama,11,GGGGLLLLLLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 मङ्गलमहश्री,sama,26,GLLLGLLLGLLLGLLLGLLLGLLLGG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 मञ्जुहासिनी,sama,13,LGLGGLLLGLGLG,True,0,0,0,0,0,0,0,False,False,🔴 NO AUDIO

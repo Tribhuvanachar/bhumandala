@@ -1,5 +1,5 @@
 {
- "generated_at": "06 Sep 2026, 5:41 PM IST",
+ "generated_at": "06 Sep 2026, 6:58 PM IST",
  "rows": [
   {
    "component": "Sanskrit normalization",
@@ -94,7 +94,7 @@
    "dge": "0 h in repo (2 orphan files); ~1,000 SMV clips at 11 kHz/16 kbps on the audio-data repo",
    "vagdhenu": "3.02 h Prathosh + 5 h pilot (not shared)",
    "status": "🟡 PARTIAL",
-   "evidence": "audio_inventory.json: 3892 files, 37.8 h fetched; 2030 high-confidence mappings; grades {'A': 757, 'B': 2045, 'D': 1074, 'C': 15, 'F': 1}",
+   "evidence": "audio_inventory.json: 3892 files, 37.8 h fetched; 2059 high-confidence mappings; grades {'A': 757, 'B': 2045, 'D': 1074, 'C': 15, 'F': 1}",
    "required_for_kamadhenu": "≥1 h clean single-speaker aligned pairs for adaptation",
    "file_or_path": "kamadhenu_dataset/metadata.jsonl, subsets/",
    "what_is_missing": "verified text=audio; speaker attribution; most audio is lossy/low-rate",

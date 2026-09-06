@@ -27,6 +27,8 @@ P2,तोटक,sumadhva_vijaya:sarga_10:45,जननं समये-समय�
 P2,तोटक,sumadhva_vijaya:sarga_10:7,यमशेष-भव-प्रभवः स्मरता / मसुखाब्धिरपैति न चित्रमिदम् / मरुतीदृशि भान्ति हि यत्-स्तवने / यम-शेष-भव-प्रभवः स्म रताः,full śloka,2,≈16s,"training (natural pārāyaṇa pace, full śloka, one take)",only 3 recording(s) across 3 text(s); training-grade coverage wants ≥10 across ≥3 texts
 P2,दोधक,dvadasha_stotra:DDS_C06_V02,सूकररूपक दानवशत्रो भूमिविधारक यज्ञवराङ्ग / देव नृसिंह हिरण्यकशत्रो सर्वभयान्तक दैवतबन्धो,full śloka,2,≈15s,"training (natural pārāyaṇa pace, full śloka, one take)",only 1 recording(s) across 1 text(s); training-grade coverage wants ≥10 across ≥3 texts
 P2,दोधक,sumadhva_vijaya:sarga_10:16,अप्लव देव नदी-तरणं ते / हन्त कथं च चिकीर्षसि किं त्वम् / तं निगदन्तमिति प्रभृतीह / स्माह महा-पुरुषोत्तम-दासः,full śloka,2,≈15s,"training (natural pārāyaṇa pace, full śloka, one take)",only 1 recording(s) across 1 text(s); training-grade coverage wants ≥10 across ≥3 texts
+P2,भुजगशिशुभृता,vedavyasa_gadya:VG_G064,शुभमरकत वर्णाय,verse as written,2,≈3s,"training (natural pārāyaṇa pace, full śloka, one take)",no audio at all for this metre
+P2,भुजङ्गसङ्गता,vedavyasa_gadya:VG_G045,अजिताद्यनन्तरूपिणे,verse as written,2,≈3s,"training (natural pārāyaṇa pace, full śloka, one take)",no audio at all for this metre
 P2,मणिमाला,sumadhva_vijaya:sarga_10:21,अन्यत्र च चोरान् धन्य-प्रवरोऽसौ / शूरान् शत-सङ्ख्यान् प्राप्तान् स्व-जिघांसून् / एकेन तु शिष्येणाऽकृष्ट-कुठारान् / निस्ताडित-यूध्यानद्रावयत द्राक्,full śloka,2,≈16s,"training (natural pārāyaṇa pace, full śloka, one take)",only 1 recording(s) across 1 text(s); training-grade coverage wants ≥10 across ≥3 texts
 P2,मृगेन्द्रमुख,bhagavata_saroddhara:BS_P01_V011,कलिमलसंसृतिकालनोऽखिलेशो हरिरितरत्र न गीयते ह्यभीक्ष्णम् / इह तु पुनर्भगवानशेषमूर्तिः परिपठितोऽनुपदं कथाप्रसङ्गैः,full śloka,2,≈17s,"training (natural pārāyaṇa pace, full śloka, one take)",only 1 recording(s) across 1 text(s); training-grade coverage wants ≥10 across ≥3 texts
 P2,रुचिरा,bhagavata_saroddhara:BS_P04_V043,पिबन्ति ये भगवत आत्मनः सतां कथामृतं श्रवणपुटेषु सम्भृतम् / पुनन्ति ते विषयविदूषिताशयं व्रजन्ति तच्चरणसरोरुहान्तिकम्,full śloka,2,≈17s,"training (natural pārāyaṇa pace, full śloka, one take)",only 2 recording(s) across 2 text(s); training-grade coverage wants ≥10 across ≥3 texts
@@ -160,9 +162,7 @@ P3,बृहती,—,—,—,0,—,none yet — provide text first,no text of 
 P3,भद्रक,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
 P3,भद्रिका १,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
 P3,भद्रिका २,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
-P3,भुजगशिशुभृता,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
 P3,भुजङ्गविजृम्भित,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
-P3,भुजङ्गसङ्गता,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
 P3,भ्रमरविलसित,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
 P3,मङ्गलमहश्री,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording
 P3,मञ्जुहासिनी,—,—,—,0,—,none yet — provide text first,no text of this metre in the indexed DGE works; a text must be added to DGE before any recording

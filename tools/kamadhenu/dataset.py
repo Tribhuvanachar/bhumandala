@@ -45,8 +45,11 @@ def run():
     write_jsonl(DS / "metadata.jsonl", rows)
     write_csv(DS / "metadata.csv", rows)
     sub = {k: [] for k in SUBSETS}; excl = {k: [] for k in SUBSETS}
+    spk = read_json(DS / "speakers.json", {}).get("speakers", {})
     for r in rows:
         sub["dataset_all"].append(r["id"])
+        if spk.get(r["speaker"], {}).get("consent_to_train_voice") is False:
+            excl["dataset_verified"].append({"id": r["id"], "reason": f"speaker {r['speaker']}: not the Kamadhenu voice, no consent — excluded from every subset"}); continue
         mapped = bool(r["text_id"]) and r["mapping_confidence"] >= 0.5
         if not mapped:
             sub["dataset_unmatched_audio"].append(r["id"]); continue

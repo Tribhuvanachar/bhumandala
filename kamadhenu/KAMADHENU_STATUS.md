@@ -1,6 +1,6 @@
 # KAMADHENU_STATUS
 
-Updated 6 Sep 2026, 5:50 pm IST (the previous version was mis-stamped 7:05 pm). Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
+Updated 6 Sep 2026, 7:00 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
 
 CURRENT PHASE: 7 done → 8 (training pipeline scaffold) next
 
@@ -22,8 +22,8 @@ IN PROGRESS:
 
 BLOCKED:
 - 🟢 Speaker decided 6 Sep 2026: **3BHU1** (the project lead), consent to train the voice given; every one of the 3,892 recordings is attributed to him (`kamadhenu_dataset/speakers.json`)
-- 🟡 Drive, evening batch 6 Sep 2026 (+1,173 files, +15.3 h): `smv.zip` = 1,106 pāda-level Sumadhva Vijaya phone takes (34 named → 30 mapped exactly; 1,072 unnamed `New recording N` need identification; 551 clip); Aṣṭādhyāyī pārāyaṇa 32 whole-pāda files (3.9 h, long-form); Harikathāmṛtasāra 31 verses (Kannada, teaching-length, mapped for review); Brahmasūtra 1.1–1.2 whole; Vedavyāsa Gadya (prose, no text); Nāmāvali video. Two folders (`1o5-yqK_…`, `1-716NX8…`) are still private. Earlier gaps stand: Tīrthaprabandha only Dakṣiṇa 1–19; Nāmāvali 110 clips + video have no text in DGE
-- 🟡 ZeroGPU hosting on `SarvamulaOrg` — **available now** (PRO enabled 6 Sep 2026 evening; 40 GPU-min/day quota); the only remaining step is the GitHub secret `HF_TOKEN`, then dispatch `Deploy — Kamadhenu Space` and switch Hardware → ZeroGPU
+- 🟡 Drive, evening batch 6 Sep 2026 (+1,173 files, +15.3 h), lead's answers applied 7:00 pm IST: `smv.zip` = 1,106 pāda-level Sumadhva Vijaya takes (34 named → 30 mapped exactly; 1,072 unnamed `New recording N` — lead: "should be incremental", one take per pāda; being checked by local Whisper spot-transcription); Harikathāmṛtasāra 31 verses — lead confirmed plain full recitations → accepted; Gītā files are pāda-wise with some words repeated (segmentation plan); Vedavyāsa Gadya text imported (Yādavārya, 100 epithet units) → the 9.7-min file needs per-epithet segmentation; **Aṣṭādhyāyī pārāyaṇa (32 files, 3.9 h) is NOT the lead's voice → excluded**; Kṣīrābhiṣeka video ignored; the two private folders were someone else's and are dropped. Earlier gaps stand: Tīrthaprabandha only Dakṣiṇa 1–19; Nāmāvali 110 clips + video have no text in DGE
+- 🟠 ZeroGPU Space on `SarvamulaOrg` — PRO active, `HF_TOKEN` secret confirmed present (6 Sep 2026, first deploy run reached the upload step). First run failed because huggingface_hub 1.x removed the `huggingface-cli` binary; build script switched to the Python API (+ automatic ZeroGPU hardware request) and redeployed — see the run log / Space page for the outcome
 - 🔴 Any GPU training — none approved; none proposed yet
 
 NEXT ACTION: Phase 8 — write the IndicF5 fine-tune configuration and data exporter (pilot → F5 metadata format, 24 kHz), dry-run on CPU (no training), then present the Experiment A cost card.
@@ -31,11 +31,11 @@ NEXT ACTION: Phase 8 — write the IndicF5 fine-tune configuration and data expo
 HUMAN ACTION REQUIRED:
 1. Where are the other Tīrthaprabandha recordings (only Dakṣiṇa 1–19 were in the shared folder)? If they exist, share that folder too.
 2. The Śrīpādarāja Aṣṭottara-śatanāmāvalī text (108 names, Devanagari) — then the 110 clips map by number.
-3. `smv.zip` (the single Drive file, now fetched): 1,072 of its takes are unnamed `New recording N.m4a`. Are they in recording order (sarga 1 verse 1 pāda 1 onwards)? If you can say which sarga/verse the numbered runs start at, they map by arithmetic; otherwise Claude will try audio alignment against the site's per-verse files (free, CPU) before asking you to listen.
-4. `HF_TOKEN` secret (write token from SarvamulaOrg → Settings → Access Tokens → Write) added to GitHub → Settings → Secrets → Actions. That unblocks the ZeroGPU Space today.
+3. ~~smv.zip order~~ — lead (6 Sep): takes should be incremental, one per pāda; verify by speech-to-text. Local Whisper spot-check running; result goes into `kamadhenu_dataset/smv_takes_check.json`.
+4. ~~`HF_TOKEN`~~ — done by the lead 6 Sep 2026 (verified: the deploy workflow found it).
 5. Listen to 2 Gītā + 2 'vsn' files (see kamadhenu_dataset/WHAT_I_NEED_TO_DO.md §A).
-6. Share the two still-private folders (`1o5-yqK_jT-wg-8Augp1XwOyMFJKtyOyU`, `1-716NX8boMumr_Gyyq67veWKezjK3rez`) as *Anyone with the link: Viewer*, or say what they contain.
-7. The Harikathāmṛtasāra files run 1.5–2.5 min per verse — is each a plain recitation repeated, or recitation + meaning? (decides segmentation, same question as the Gītā files).
+6. ~~two private folders~~ — not the lead's; dropped.
+7. ~~HKS content~~ — plain full recitation (lead, 6 Sep); accepted.
 
 GPU REQUIRED: none yet. Experiment A will need one 16–24 GB GPU for roughly 1–2 hours (card to be presented for approval).
 ESTIMATED COST: ₹0 GPU spent. Experiment A estimate will be given before launch (order of ₹100–300 on a rented T4/L4-class card).

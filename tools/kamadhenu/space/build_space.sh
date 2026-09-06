@@ -2,7 +2,7 @@
 # Assemble and upload the Kamadhenu ZeroGPU Space.
 #   bash tools/kamadhenu/space/build_space.sh <hf-account>/kamadhenu [--no-upload]
 # Pulls Vāgdhenu (Apache-2.0) at the pinned commit for src/ + reference_bank/, adds DGE's app.py,
-# meter_map.json and requirements.txt, and uploads the result with huggingface-cli. Nothing from the
+# meter_map.json and requirements.txt, and uploads the result with the huggingface_hub Python API. Nothing from the
 # vagdhenu checkout is committed to this repository.
 set -euo pipefail
 SPACE="${1:?usage: build_space.sh <hf-account>/kamadhenu [--no-upload]}"
@@ -21,6 +21,21 @@ Kamadhenu-specific files (app.py, meter_map.json) © Sarvamūla Digital Library,
 N
 echo "assembled $DIST ($(du -sh "$DIST" | cut -f1))"
 if [ "${2:-}" != "--no-upload" ]; then
-  huggingface-cli upload "$SPACE" "$DIST" . --repo-type space
-  echo "uploaded → https://huggingface.co/spaces/$SPACE  (set Hardware → ZeroGPU in the Space settings)"
+  # huggingface_hub ≥ 1.0 removed the `huggingface-cli` binary; the Python API is stable across versions.
+  # Creates the Space if needed, uploads dist/, then asks for ZeroGPU hardware (works on a PRO account;
+  # on a free account the request is refused and the Space stays on CPU — set it by hand in Settings).
+  python3 - "$SPACE" "$DIST" <<'PY'
+import sys, os
+from huggingface_hub import HfApi
+space, dist = sys.argv[1], sys.argv[2]
+api = HfApi(token=os.environ.get("HF_TOKEN"))
+api.create_repo(space, repo_type="space", space_sdk="gradio", exist_ok=True)
+api.upload_folder(repo_id=space, repo_type="space", folder_path=dist, path_in_repo=".", commit_message="deploy from bhumandala build_space.sh")
+print(f"uploaded → https://huggingface.co/spaces/{space}")
+try:
+    api.request_space_hardware(repo_id=space, hardware="zero-a10g")
+    print("hardware: ZeroGPU (zero-a10g) requested")
+except Exception as e:   # not fatal: the upload is done; hardware can be set in the Space settings
+    print(f"hardware request failed ({e.__class__.__name__}: {str(e)[:200]}) — set Hardware → ZeroGPU in the Space settings")
+PY
 fi
