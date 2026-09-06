@@ -67,6 +67,7 @@
     }).then(function (r) { return r.text(); }).then(function (txt) {
       var data = parseSSE(txt);
       if (!data) throw new Error('no result from the Space');
+      if (data[1] && data[1].error) throw new Error(data[1].error);   // the Space returns failures as data
       var url = fileUrl(space, data[0]);
       if (!url) throw new Error('Space returned no audio');
       say('done');
