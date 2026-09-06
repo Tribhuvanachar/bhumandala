@@ -21,9 +21,19 @@ D′ chat path   python3 tools/saroddhara/make_chat_batch.py --work <dir> --prin
                against the DGE Madhva mūla) with both OCR readings, the DGE candidate, PDF page and, for missing
                verses, the neighbours + raw OCR lines between them — sized for pasting into a Gemini *chat*
                (no API credits needed; works from a phone).
-E′ chat apply  python3 tools/saroddhara/apply_chat_answers.py pasted_reply.txt
+E′ chat apply  python3 tools/saroddhara/apply_chat_answers.py pasted_reply.txt [--sync-bhagavata]
                parses the chat's JSON (fences/prose tolerated), merges into verify_output/answers.json, runs E.
+F  cross-check python3 tools/saroddhara/mula_crosscheck.py
+               → dge/data/ocr_staging/bhagavata_saroddhara/verify_input/mula_crosscheck.json
+               every verse whose printed text (Vision OCR) differs word-by-word from the DGE Bhāgavata master,
+               bucketed: not_unified / unified_print_word_diffs / unified_print_noise_only.
 ```
+
+**One text, not two.** The DGE Madhva Bhāgavata (`purana/maha_purana/bhagavata_purana_madhva`) is the master
+copy of every verse the Sāroddhāra quotes; a verified Sāroddhāra verse carries that text verbatim and keeps the
+print's OCR in `ocr`. A human decision of `dge` re-confirms that; a decision of `printed` (a genuine variant
+reading in Viṣṇutīrtha's edition) rewrites the Sāroddhāra verse and, with `--sync-bhagavata`, the master shloka
+too (old text kept in `previous_text` + `revision`), so the two never drift apart.
 
 Rules: every verse is matched to the Madhva Bhāgavata already in DGE (`bhagavata_purana_madhva`) by its printed
 reference (±3) and, when that fails, by text search over the whole Bhāgavata; verified matches take the DGE text as
