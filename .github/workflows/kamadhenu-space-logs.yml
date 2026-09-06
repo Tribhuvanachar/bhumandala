@@ -46,6 +46,12 @@ jobs:
           echo "event: $EV"
           ID=$(echo "$EV" | python3 -c 'import sys,json; print(json.load(sys.stdin)["event_id"])')
           timeout 300 curl -sS -N -H "Authorization: Bearer $HF_TOKEN" "$HOST/gradio_api/call/synthesize/$ID" | head -c 3000; echo
+          echo "==== Kamadhenu trial engine (IndicF5 zero-shot, ref tp_anushtubh_19) ===="
+          BODY2='{"data":["धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥","tp_anushtubh_19",60]}'
+          EV3=$(curl -sS -H "Authorization: Bearer $HF_TOKEN" -H "Content-Type: application/json" -d "$BODY2" "$HOST/gradio_api/call/synthesize_kamadhenu")
+          echo "event: $EV3"
+          ID3=$(echo "$EV3" | python3 -c 'import sys,json; print(json.load(sys.stdin).get("event_id",""))')
+          [ -n "$ID3" ] && timeout 600 curl -sS -N -H "Authorization: Bearer $HF_TOKEN" "$HOST/gradio_api/call/synthesize_kamadhenu/$ID3" | head -c 3000; echo
           echo "==== anonymous call for comparison ===="
           EV2=$(curl -sS -H "Content-Type: application/json" -d "$BODY" "$HOST/gradio_api/call/synthesize")
           ID2=$(echo "$EV2" | python3 -c 'import sys,json; print(json.load(sys.stdin)["event_id"])')
