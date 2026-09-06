@@ -73,6 +73,9 @@ def rules(rec):
         m = re.match(r"SMV\.(\d+)\.E$", stem, re.I)
         if m:
             return dict(work="sumadhva_vijaya", section=f"sarga_{int(m.group(1))}", verse=None, part="full", signal="folder", note="sarga end / phala-śruti clip (SMV.<sarga>.E) — no single verse")
+        if re.match(r"New recording \d{8} \d{6}$", stem, re.I):   # dated phone sessions (up to an hour) — not pāda takes
+            return dict(work="sumadhva_vijaya", section=None, verse=None, part="long_form", signal="long_form",
+                        note="dated session recording from smv.zip ('New recording yyyymmdd hhmmss', minutes to an hour long) — a whole sitting, not a pāda take; segment before use")
         if re.match(r"New recording", stem, re.I):
             return dict(work="sumadhva_vijaya", section=None, verse=None, part="pada", signal="folder",
                         note="unnamed phone take from smv.zip ('New recording N'); 48 kHz AAC pāda-length clip — identify by listening or by audio alignment against the DGE-linked verse files (same reciter)")

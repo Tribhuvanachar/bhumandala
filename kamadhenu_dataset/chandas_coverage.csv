@@ -1,43 +1,43 @@
 chandas,kind,syllables_per_pada,lg,exists_in_dge,texts_in_dge_corpus,audio_examples,unique_texts_with_audio,padas_with_audio,high_confidence_audio,quality_A_or_B,speaker_groups,has_strong_reference,reference_human_verified,coverage_status
-अनुष्टुप्,anushtubh_rule,8,"rule: 5th L, 6th G; 7th L in even pādas (pathyā)",True,3086,584,426,1704,199,536,15,True,False,🟢 GOOD COVERAGE
-उपजाति,inferred/label,,,False,664,292,288,1156,290,248,5,False,,🟢 GOOD COVERAGE
-वसन्ततिलका,sama,14,GGLGLLLGLLGLGG,True,827,171,171,684,171,168,5,True,False,🟢 GOOD COVERAGE
-स्वागता,sama,11,GLGLLLGLLGG,True,158,158,158,632,158,60,2,True,False,🟢 GOOD COVERAGE
-शालिनी,sama,11,GGGGGLGGLGG,True,100,113,97,404,113,97,4,True,False,🟢 GOOD COVERAGE
-वसन्तमालिका,ardhasama,11,LLGLLGLGLGG|LLGGLLGLGLGG,True,112,112,112,448,112,78,2,True,False,🟢 GOOD COVERAGE
-वंशस्थ,sama,12,LGLGGLLGLGLG,True,163,92,92,368,92,59,3,True,False,🟢 GOOD COVERAGE
-मञ्जुभाषिणी,sama,13,LLGLGLLLGLGLG,True,90,88,88,352,88,54,2,True,False,🟢 GOOD COVERAGE
-रथोद्धता,sama,11,GLGLLLGLGLG,True,96,77,77,308,77,40,2,True,False,🟢 GOOD COVERAGE
-प्रमिताक्षरा,sama,12,LLGLGLLLGLLG,True,70,70,69,277,70,69,2,True,False,🟢 GOOD COVERAGE
-द्रुतविलम्बित,sama,12,LLLGLLGLLGLG,True,66,64,64,256,64,55,3,True,False,🟢 GOOD COVERAGE
-"वियोगिनी, वैतालीय, सुन्दरी",ardhasama,10,LLGLLGLGLG|LLGGLLGLGLG,True,55,55,55,220,55,55,1,True,False,🟢 GOOD COVERAGE
-मालिनी,sama,15,LLLLLLGGGLGGLGG,True,58,54,50,204,54,52,5,True,False,🟢 GOOD COVERAGE
-प्रहर्षिणी,sama,13,GGGLLLLGLGLGG,True,53,53,52,209,53,50,3,True,False,🟢 GOOD COVERAGE
-इन्द्रवज्रा,sama,11,GGLGGLLGLGG,True,64,29,27,108,25,20,4,True,False,🟢 GOOD COVERAGE
-शार्दूलविक्रीडित,sama,19,GGGLLGLGLLLGGGLGGLG,True,51,22,19,76,18,12,5,True,False,🟢 GOOD COVERAGE
-उपेन्द्रवज्रा,sama,11,LGLGGLLGLGG,True,53,17,17,68,17,9,4,True,False,🟢 GOOD COVERAGE
-"औपच्छन्दसिक, पुष्पिताग्रा",ardhasama,12,LLLLLLGLGLGG|LLLLGLLGLGLGG,True,12,12,12,48,12,6,3,True,False,🟢 GOOD COVERAGE
-इन्द्रवंशा,sama,12,GGLGGLLGLGLG,True,11,7,7,28,7,7,2,True,False,🟡 LIMITED COVERAGE
-आर्या,matra,,,True,2,6,2,12,6,3,2,False,False,🟡 LIMITED COVERAGE
-स्रग्धरा,sama,21,GGGGLGGLLLLLLGGLGGLGG,True,21,5,5,20,4,3,3,True,False,🟡 LIMITED COVERAGE
-मात्रासमक,matra,,,True,5,5,5,20,5,2,2,True,False,🟡 LIMITED COVERAGE
-तोटक,sama,12,LLGLLGLLGLLG,True,15,3,3,12,3,3,1,True,False,🟡 LIMITED COVERAGE
-पृथ्वी,sama,17,LGLLLGLGLLLGLGGLG,True,6,3,3,12,3,3,1,True,False,🟡 LIMITED COVERAGE
-शिखरिणी,sama,17,LGGGGGLLLLLGGLLLG,True,4,3,3,12,3,3,1,True,False,🟡 LIMITED COVERAGE
-भुजङ्गप्रयात,sama,12,LGGLGGLGGLGG,True,5,2,2,8,2,2,2,True,False,🟠 NEEDS MORE EXAMPLES
+अनुष्टुप्,anushtubh_rule,8,"rule: 5th L, 6th G; 7th L in even pādas (pathyā)",True,3086,607,426,1727,213,547,16,True,False,🟢 GOOD COVERAGE
+उपजाति,inferred/label,,,False,664,340,288,1204,322,283,5,False,,🟢 GOOD COVERAGE
+प्रमिताक्षरा,sama,12,LLGLGLLLGLLG,True,70,287,69,494,179,170,2,True,False,🟢 GOOD COVERAGE
+प्रहर्षिणी,sama,13,GGGLLLLGLGLGG,True,53,237,52,393,165,157,3,True,False,🟢 GOOD COVERAGE
+मालिनी,sama,15,LLLLLLGGGLGGLGG,True,58,209,50,359,137,117,5,True,False,🟢 GOOD COVERAGE
+वसन्ततिलका,sama,14,GGLGLLLGLLGLGG,True,827,178,171,691,174,170,6,True,False,🟢 GOOD COVERAGE
+स्वागता,sama,11,GLGLLLGLLGG,True,158,162,158,636,162,61,3,True,False,🟢 GOOD COVERAGE
+शालिनी,sama,11,GGGGGLGGLGG,True,100,117,97,408,115,98,4,True,False,🟢 GOOD COVERAGE
+वसन्तमालिका,ardhasama,11,LLGLLGLGLGG|LLGGLLGLGLGG,True,112,116,112,452,115,80,3,True,False,🟢 GOOD COVERAGE
+मञ्जुभाषिणी,sama,13,LLGLGLLLGLGLG,True,90,100,88,364,96,59,3,True,False,🟢 GOOD COVERAGE
+वंशस्थ,sama,12,LGLGGLLGLGLG,True,163,96,92,372,95,60,4,True,False,🟢 GOOD COVERAGE
+रथोद्धता,sama,11,GLGLLLGLGLG,True,96,80,77,311,79,42,3,True,False,🟢 GOOD COVERAGE
+द्रुतविलम्बित,sama,12,LLLGLLGLLGLG,True,66,68,64,260,67,57,4,True,False,🟢 GOOD COVERAGE
+"वियोगिनी, वैतालीय, सुन्दरी",ardhasama,10,LLGLLGLGLG|LLGGLLGLGLG,True,55,63,55,228,61,58,2,True,False,🟢 GOOD COVERAGE
+इन्द्रवज्रा,sama,11,GGLGGLLGLGG,True,64,35,27,114,26,22,5,True,False,🟢 GOOD COVERAGE
+शार्दूलविक्रीडित,sama,19,GGGLLGLGLLLGGGLGGLG,True,51,26,19,80,18,15,6,True,False,🟢 GOOD COVERAGE
+उपेन्द्रवज्रा,sama,11,LGLGGLLGLGG,True,53,21,17,72,20,13,5,True,False,🟢 GOOD COVERAGE
+"औपच्छन्दसिक, पुष्पिताग्रा",ardhasama,12,LLLLLLGLGLGG|LLLLGLLGLGLGG,True,12,16,12,52,15,9,4,True,False,🟢 GOOD COVERAGE
+इन्द्रवंशा,sama,12,GGLGGLLGLGLG,True,11,13,7,34,9,10,3,True,False,🟢 GOOD COVERAGE
+तोटक,sama,12,LLGLLGLLGLLG,True,15,11,3,20,8,9,2,True,False,🟢 GOOD COVERAGE
+आर्या,matra,,,True,2,10,2,16,9,4,2,False,False,🟡 LIMITED COVERAGE
+मात्रासमक,matra,,,True,5,9,5,24,9,4,3,True,False,🟡 LIMITED COVERAGE
+शिखरिणी,sama,17,LGGGGGLLLLLGGLLLG,True,4,9,3,18,6,6,2,True,False,🟡 LIMITED COVERAGE
+स्रग्धरा,sama,21,GGGGLGGLLLLLLGGLGGLGG,True,21,7,5,22,4,5,4,True,False,🟡 LIMITED COVERAGE
+पृथ्वी,sama,17,LGLLLGLGLLLGLGGLG,True,6,7,3,16,4,5,2,True,False,🟡 LIMITED COVERAGE
+इन्दुवदना,sama,14,GLLLGLLLGLLLGG,True,2,6,2,12,3,1,3,True,False,🟡 LIMITED COVERAGE
+दोधक,sama,11,GLLGLLGLLGG,True,4,5,1,8,3,3,2,True,False,🟡 LIMITED COVERAGE
+रुचिरा,sama,13,LGLGLLLLGLGLG,True,2,5,2,11,2,4,3,True,False,🟡 LIMITED COVERAGE
+अन्यविधोद्गता,vishama,10,LLGLGLLLGL|LLLLLGLGLG|GLLLLLGLLG|LLGLGLLLGLGLG,True,1,5,1,8,4,5,2,True,False,🟡 LIMITED COVERAGE
+वातोर्मी,sama,11,GGGGLLGGLGG,True,1,5,1,8,4,4,2,True,False,🟡 LIMITED COVERAGE
+स्रग्विणी,sama,12,GLGGLGGLGGLG,True,1,5,1,8,3,3,2,True,False,🟡 LIMITED COVERAGE
+आर्यागीति,matra,,,True,1,4,1,7,3,2,2,True,False,🟡 LIMITED COVERAGE
+हरिणी,sama,17,LLLLLGGGGGLGLLGLG,True,1,4,1,7,1,4,2,True,False,🟡 LIMITED COVERAGE
+भुजङ्गप्रयात,sama,12,LGGLGGLGGLGG,True,5,3,2,9,2,3,3,True,False,🟡 LIMITED COVERAGE
+मणिमाला,sama,12,GGLLGGGGLLGG,True,1,3,1,6,3,2,2,True,False,🟡 LIMITED COVERAGE
 मन्दाक्रान्ता,sama,17,GGGGLLLLLGGLGGLGG,True,3,2,2,8,2,2,1,True,False,🟠 NEEDS MORE EXAMPLES
-इन्दुवदना,sama,14,GLLLGLLLGLLLGG,True,2,2,2,8,2,1,2,True,False,🟠 NEEDS MORE EXAMPLES
-रुचिरा,sama,13,LGLGLLLLGLGLG,True,2,2,2,8,2,2,2,True,False,🟠 NEEDS MORE EXAMPLES
+उपगीति,matra,,,True,1,2,1,5,1,1,2,True,False,🟠 NEEDS MORE EXAMPLES
 पञ्चचामर,sama,16,LGLGLGLGLGLGLGLG,True,549,1,1,2,1,1,1,False,False,🟠 NEEDS MORE EXAMPLES
-दोधक,sama,11,GLLGLLGLLGG,True,4,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-अन्यविधोद्गता,vishama,10,LLGLGLLLGL|LLLLLGLGLG|GLLLLLGLLG|LLGLGLLLGLGLG,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-आर्यागीति,matra,,,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-उपगीति,matra,,,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-मणिमाला,sama,12,GGLLGGGGLLGG,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
 मृगेन्द्रमुख,sama,13,LLLLGLLGLGLGG,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-वातोर्मी,sama,11,GGGGLLGGLGG,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-स्रग्विणी,sama,12,GLGGLGGLGGLG,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
-हरिणी,sama,17,LLLLLGGGGGLGLLGLG,True,1,1,1,4,1,1,1,True,False,🟠 NEEDS MORE EXAMPLES
 औपच्छन्दसिक,matra,,,True,2,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 क्रौञ्चपदा,sama,25,GLLGGGLLGGLLLLLLLLLLLLLLG,True,2,0,0,0,0,0,0,False,False,🔴 NO AUDIO
 प्रमाणिका,sama,8,LGLGLGLG,True,1,0,0,0,0,0,0,False,False,🔴 NO AUDIO

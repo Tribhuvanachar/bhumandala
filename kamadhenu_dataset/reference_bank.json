@@ -1,7 +1,7 @@
 {
  "_readme": "Best/alternative recordings per metre. safe_as_reference is structural; text_matches_audio_verified is only true after a human override (mapping_overrides.json verified:true).",
  "summary": {
-  "generated_at": "06 Sep 2026, 6:58 PM IST",
+  "generated_at": "06 Sep 2026, 8:35 PM IST",
   "metres_with_candidate": 39,
   "metres_safe_reference": 37,
   "metres_human_verified": 0,
@@ -66,12 +66,12 @@
      "text_id": "bhagavata_saroddhara:BS_P01_V016"
     }
    ],
-   "recordings": 584,
+   "recordings": 607,
    "lg_pattern": "LLGLLGGG|LLGGLGLL|LLGLLGGL|LLGGLGLG",
    "syllable_count": 32,
    "pada_count": 4,
    "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Gita Shlokas__Adhyaya 1__31 to 40/G.1.34.1.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 22.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -138,7 +138,7 @@
      "text_id": "bhagavata_saroddhara:BS_P02_V019"
     }
    ],
-   "recordings": 292,
+   "recordings": 340,
    "lg_pattern": "LGLGGLLGLGLG|LGLGGLLGLGLG|LGLGGLLGLGLG|GGLGGLLGLGLG",
    "syllable_count": 48,
    "pada_count": 4,
@@ -151,6 +151,230 @@
    "what_is_missing": [
     "human confirmation that the audio speaks exactly this text (listen once)",
     "yati not in DGE DB for this metre (no pause guidance)"
+   ]
+  },
+  "प्रमिताक्षरा": {
+   "chandas": "प्रमिताक्षरा",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.63.mp3",
+    "text_id": "sumadhva_vijaya:sarga_11:63",
+    "text": "मणि-राजि-राजित-महा-मकुटं शिति-कान्त-कुन्तल-सहस्र-तयम्\nअलिकार्द्ध-चन्द्र-विलसत्-तिलकं श्रवणोल्लसन्मकर-कुण्डल-युक्",
+    "score": 20.86,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 12.225,
+    "sample_rate": 11025,
+    "snr_db_est": 28.6,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.64.mp3",
+     "score": 20.59,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 12.434,
+     "text_id": "sumadhva_vijaya:sarga_11:64"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.53.mp3",
+     "score": 20.5,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 10.971,
+     "text_id": "sumadhva_vijaya:sarga_8:53"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.52.mp3",
+     "score": 20.47,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 13.479,
+     "text_id": "sumadhva_vijaya:sarga_11:52"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.61.mp3",
+     "score": 20.47,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 12.069,
+     "text_id": "sumadhva_vijaya:sarga_11:61"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.54.mp3",
+     "score": 20.42,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 12.905,
+     "text_id": "sumadhva_vijaya:sarga_11:54"
+    }
+   ],
+   "recordings": 287,
+   "lg_pattern": "LLGLGLLLGLLG|LLGLGLLLGLLG|LLGLGLLLGLLG|LLGLGLLLGLLG",
+   "syllable_count": 48,
+   "pada_count": 4,
+   "yati": [
+    5,
+    7
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 585.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "प्रहर्षिणी": {
+   "chandas": "प्रहर्षिणी",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.34.mp3",
+    "text_id": "sumadhva_vijaya:sarga_16:34",
+    "text": "लेखिन्यां मुहुरपि-नह्य कृष्यमाणं\nनाप्येकं तनु-रुहमस्य तूदपाटि\nनासाग्रे मृदुनि कृतैश्च मुष्टि-घातै\nर्नस्येन्दोरति-बलिभिः प्रसन्नताऽऽसि",
+    "score": 20.73,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 16.509,
+    "sample_rate": 11025,
+    "snr_db_est": 27.3,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.21.mp3",
+     "score": 20.58,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 14.733,
+     "text_id": "sumadhva_vijaya:sarga_16:21"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.12.mp3",
+     "score": 20.57,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 14.994,
+     "text_id": "sumadhva_vijaya:sarga_16:12"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.18.mp3",
+     "score": 20.51,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 13.218,
+     "text_id": "sumadhva_vijaya:sarga_16:18"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.5.mp3",
+     "score": 20.51,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 15.151,
+     "text_id": "sumadhva_vijaya:sarga_16:5"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.31.mp3",
+     "score": 20.48,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 15.883,
+     "text_id": "sumadhva_vijaya:sarga_16:31"
+    }
+   ],
+   "recordings": 237,
+   "lg_pattern": "GGGLLLLGLGLGG|GGGLLLLGLGLGL|GGGLLLLGLGLGG|GGGLLLLGLGLGL",
+   "syllable_count": 52,
+   "pada_count": 4,
+   "yati": [
+    3,
+    10
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 345.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "मालिनी": {
+   "chandas": "मालिनी",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.2.tp2.mp3",
+    "text_id": "tirtha_prabandha:TP_DAK_002",
+    "text": "श्रुतिशतपरिगीतः शुद्धभावैर्गृहीतः\nकमलनिलयतातः कंजनेत्रः प्रतीतः\nसकलजगदतीतः सर्वसंपत्समेतः\nप्रविशतु मम चेतः प्रत्यहं रंगनाथः",
+    "score": 23.5,
+    "confidence": 0.95,
+    "quality": "A",
+    "duration_seconds": 12.8,
+    "sample_rate": 44100,
+    "snr_db_est": 44.0,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.7.SBS7.mp3",
+     "score": 22.85,
+     "confidence": 0.95,
+     "quality": "A",
+     "duration_seconds": 20.193,
+     "text_id": "bhagavata_saroddhara:BS_P01_V007"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.44.mp3",
+     "score": 20.77,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 16.823,
+     "text_id": "sumadhva_vijaya:sarga_10:44"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.16.mp3",
+     "score": 20.64,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 16.771,
+     "text_id": "sumadhva_vijaya:sarga_14:16"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.52.mp3",
+     "score": 20.61,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 16.562,
+     "text_id": "sumadhva_vijaya:sarga_14:52"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.50.mp3",
+     "score": 20.57,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 17.816,
+     "text_id": "sumadhva_vijaya:sarga_14:50"
+    }
+   ],
+   "recordings": 209,
+   "lg_pattern": "LLLLLLGGGLGGLGG|LLLLLLGGGLGGLGG|LLLLLLGGGLGGLGG|LLLLLLGGGLGGLGG",
+   "syllable_count": 60,
+   "pada_count": 4,
+   "yati": [
+    8,
+    7
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 894.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)"
    ]
   },
   "वसन्ततिलका": {
@@ -210,7 +434,7 @@
      "text_id": "PrahladaKrutaNarasimha:PrahladaKrutaNarasimha:1"
     }
    ],
-   "recordings": 171,
+   "recordings": 178,
    "lg_pattern": "GGLGLLLGLLGLGG|GGLGLLLGLLGLGG|GGLGLLLGLLGLGG|GGLGLLLGLLGLGG",
    "syllable_count": 56,
    "pada_count": 4,
@@ -218,7 +442,7 @@
     8,
     6
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.24.SBS80.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 79.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -284,7 +508,7 @@
      "text_id": "sumadhva_vijaya:sarga_6:6"
     }
    ],
-   "recordings": 158,
+   "recordings": 162,
    "lg_pattern": "GLGLLLGLLGG|GLGLLLGLLGG|GLGLLLGLLGG|GLGLLLGLLGG",
    "syllable_count": 44,
    "pada_count": 4,
@@ -292,7 +516,7 @@
     3,
     8
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv6.6.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 53.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -358,7 +582,7 @@
      "text_id": "raghavendra_vijaya:sarga_6:34"
     }
    ],
-   "recordings": 113,
+   "recordings": 117,
    "lg_pattern": "GGGGGLGGLGG|GGGGGLGGLGG|GGGGGLGGLGG|GGGGGLGGLGG",
    "syllable_count": 44,
    "pada_count": 4,
@@ -432,12 +656,12 @@
      "text_id": "raghavendra_vijaya:sarga_3:17"
     }
    ],
-   "recordings": 112,
+   "recordings": 116,
    "lg_pattern": "LLGLLGLGLGG|LLGGLLGLGLGG|LLGLLGLGLGG|LLGGLLGLGLGG",
    "syllable_count": 46,
    "pada_count": 4,
    "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv13.43.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 19.m4a",
    "pada_boundaries_known": false,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -446,80 +670,6 @@
     "human confirmation that the audio speaks exactly this text (listen once)",
     "≥24 kHz source (this one is 11025 Hz)",
     "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "वंशस्थ": {
-   "chandas": "वंशस्थ",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.2.SBS18.mp3",
-    "text_id": "bhagavata_saroddhara:BS_P02_V018",
-    "text": "यदा परीक्षित्कुरुजाङ्गले वसन् कलिं प्रविष्टं निजचक्रवर्तिते\nनिशम्य वार्तामनतिप्रियां ततः शरासनं संयुगरोचिराददे",
-    "score": 22.96,
-    "confidence": 0.95,
-    "quality": "A",
-    "duration_seconds": 15.7,
-    "sample_rate": 44100,
-    "snr_db_est": 34.6,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.15.SBS71.mp3",
-     "score": 22.77,
-     "confidence": 0.95,
-     "quality": "A",
-     "duration_seconds": 18.26,
-     "text_id": "bhagavata_saroddhara:BS_P05_V071"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.66.SBS302.mp3",
-     "score": 22.69,
-     "confidence": 0.95,
-     "quality": "A",
-     "duration_seconds": 15.856,
-     "text_id": "bhagavata_saroddhara:BS_P20_V302"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.1.SBS344.mp3",
-     "score": 22.54,
-     "confidence": 0.95,
-     "quality": "A",
-     "duration_seconds": 15.856,
-     "text_id": "bhagavata_saroddhara:BS_P25_V344"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.27.SBS263.mp3",
-     "score": 22.53,
-     "confidence": 0.95,
-     "quality": "A",
-     "duration_seconds": 18.416,
-     "text_id": "bhagavata_saroddhara:BS_P20_V263"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.8.SBS216.mp3",
-     "score": 22.45,
-     "confidence": 0.95,
-     "quality": "A",
-     "duration_seconds": 16.17,
-     "text_id": "bhagavata_saroddhara:BS_P18_V216"
-    }
-   ],
-   "recordings": 92,
-   "lg_pattern": "LGLGGLLGLGLG|LGLGGLLGLGLG|LGLGGLLGLGLG|LGLGGLLGLGLG",
-   "syllable_count": 48,
-   "pada_count": 4,
-   "yati": [
-    5,
-    7
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.9.SBS245.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)"
    ]
   },
   "मञ्जुभाषिणी": {
@@ -579,7 +729,7 @@
      "text_id": "sumadhva_vijaya:sarga_8:42"
     }
    ],
-   "recordings": 88,
+   "recordings": 100,
    "lg_pattern": "LLGLGLLLGLGLG|LLGLGLLLGLGLL|LLGLGLLLGLGLG|LLGLGLLLGLGLG",
    "syllable_count": 52,
    "pada_count": 4,
@@ -587,7 +737,7 @@
     6,
     7
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.53.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 48.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -595,6 +745,80 @@
    "what_is_missing": [
     "human confirmation that the audio speaks exactly this text (listen once)",
     "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "वंशस्थ": {
+   "chandas": "वंशस्थ",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.2.SBS18.mp3",
+    "text_id": "bhagavata_saroddhara:BS_P02_V018",
+    "text": "यदा परीक्षित्कुरुजाङ्गले वसन् कलिं प्रविष्टं निजचक्रवर्तिते\nनिशम्य वार्तामनतिप्रियां ततः शरासनं संयुगरोचिराददे",
+    "score": 22.96,
+    "confidence": 0.95,
+    "quality": "A",
+    "duration_seconds": 15.7,
+    "sample_rate": 44100,
+    "snr_db_est": 34.6,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.15.SBS71.mp3",
+     "score": 22.77,
+     "confidence": 0.95,
+     "quality": "A",
+     "duration_seconds": 18.26,
+     "text_id": "bhagavata_saroddhara:BS_P05_V071"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.66.SBS302.mp3",
+     "score": 22.69,
+     "confidence": 0.95,
+     "quality": "A",
+     "duration_seconds": 15.856,
+     "text_id": "bhagavata_saroddhara:BS_P20_V302"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.1.SBS344.mp3",
+     "score": 22.54,
+     "confidence": 0.95,
+     "quality": "A",
+     "duration_seconds": 15.856,
+     "text_id": "bhagavata_saroddhara:BS_P25_V344"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.27.SBS263.mp3",
+     "score": 22.53,
+     "confidence": 0.95,
+     "quality": "A",
+     "duration_seconds": 18.416,
+     "text_id": "bhagavata_saroddhara:BS_P20_V263"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.8.SBS216.mp3",
+     "score": 22.45,
+     "confidence": 0.95,
+     "quality": "A",
+     "duration_seconds": 16.17,
+     "text_id": "bhagavata_saroddhara:BS_P18_V216"
+    }
+   ],
+   "recordings": 96,
+   "lg_pattern": "LGLGGLLGLGLG|LGLGGLLGLGLG|LGLGGLLGLGLG|LGLGGLLGLGLG",
+   "syllable_count": 48,
+   "pada_count": 4,
+   "yati": [
+    5,
+    7
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 169.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)"
    ]
   },
   "रथोद्धता": {
@@ -654,7 +878,7 @@
      "text_id": "sumadhva_vijaya:sarga_5:51"
     }
    ],
-   "recordings": 77,
+   "recordings": 80,
    "lg_pattern": "GLGLLLGLGLG|GLGLLLGLGLG|GLGLLLGLGLG|GLGLLLGLGLG",
    "syllable_count": 44,
    "pada_count": 4,
@@ -662,88 +886,13 @@
     3,
     8
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.72.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 57.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
    "status": "🟡 PARTIAL",
    "what_is_missing": [
     "human confirmation that the audio speaks exactly this text (listen once)"
-   ]
-  },
-  "प्रमिताक्षरा": {
-   "chandas": "प्रमिताक्षरा",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.63.mp3",
-    "text_id": "sumadhva_vijaya:sarga_11:63",
-    "text": "मणि-राजि-राजित-महा-मकुटं शिति-कान्त-कुन्तल-सहस्र-तयम्\nअलिकार्द्ध-चन्द्र-विलसत्-तिलकं श्रवणोल्लसन्मकर-कुण्डल-युक्",
-    "score": 20.86,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 12.225,
-    "sample_rate": 11025,
-    "snr_db_est": 28.6,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.64.mp3",
-     "score": 20.59,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 12.434,
-     "text_id": "sumadhva_vijaya:sarga_11:64"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv8.53.mp3",
-     "score": 20.5,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 10.971,
-     "text_id": "sumadhva_vijaya:sarga_8:53"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.52.mp3",
-     "score": 20.47,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 13.479,
-     "text_id": "sumadhva_vijaya:sarga_11:52"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.61.mp3",
-     "score": 20.47,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 12.069,
-     "text_id": "sumadhva_vijaya:sarga_11:61"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.54.mp3",
-     "score": 20.42,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 12.905,
-     "text_id": "sumadhva_vijaya:sarga_11:54"
-    }
-   ],
-   "recordings": 70,
-   "lg_pattern": "LLGLGLLLGLLG|LLGLGLLLGLLG|LLGLGLLLGLLG|LLGLGLLLGLLG",
-   "syllable_count": 48,
-   "pada_count": 4,
-   "yati": [
-    5,
-    7
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.11.1.1.m4a",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
    ]
   },
   "द्रुतविलम्बित": {
@@ -803,7 +952,7 @@
      "text_id": "sumadhva_vijaya:sarga_3:30"
     }
    ],
-   "recordings": 64,
+   "recordings": 68,
    "lg_pattern": "LLLGLLGLLGLG|LLLGLLGLLGLG|LLLGLLGLLGLG|LLLGLLGLLGLG",
    "syllable_count": 48,
    "pada_count": 4,
@@ -811,7 +960,7 @@
     4,
     8
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.22.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 63.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -877,12 +1026,12 @@
      "text_id": "sumadhva_vijaya:sarga_7:44"
     }
    ],
-   "recordings": 55,
+   "recordings": 63,
    "lg_pattern": "LLGLLGLGLG|LLGGLLGLGLG|LLGLLGLGLG|LLGGLLGLGLG",
    "syllable_count": 42,
    "pada_count": 4,
    "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv7.12.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 997.m4a",
    "pada_boundaries_known": false,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -891,155 +1040,6 @@
     "human confirmation that the audio speaks exactly this text (listen once)",
     "≥24 kHz source (this one is 11025 Hz)",
     "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "मालिनी": {
-   "chandas": "मालिनी",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.2.tp2.mp3",
-    "text_id": "tirtha_prabandha:TP_DAK_002",
-    "text": "श्रुतिशतपरिगीतः शुद्धभावैर्गृहीतः\nकमलनिलयतातः कंजनेत्रः प्रतीतः\nसकलजगदतीतः सर्वसंपत्समेतः\nप्रविशतु मम चेतः प्रत्यहं रंगनाथः",
-    "score": 23.5,
-    "confidence": 0.95,
-    "quality": "A",
-    "duration_seconds": 12.8,
-    "sample_rate": 44100,
-    "snr_db_est": 44.0,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.7.SBS7.mp3",
-     "score": 22.85,
-     "confidence": 0.95,
-     "quality": "A",
-     "duration_seconds": 20.193,
-     "text_id": "bhagavata_saroddhara:BS_P01_V007"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.44.mp3",
-     "score": 20.77,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 16.823,
-     "text_id": "sumadhva_vijaya:sarga_10:44"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.16.mp3",
-     "score": 20.64,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 16.771,
-     "text_id": "sumadhva_vijaya:sarga_14:16"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.52.mp3",
-     "score": 20.61,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 16.562,
-     "text_id": "sumadhva_vijaya:sarga_14:52"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv14.50.mp3",
-     "score": 20.57,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 17.816,
-     "text_id": "sumadhva_vijaya:sarga_14:50"
-    }
-   ],
-   "recordings": 54,
-   "lg_pattern": "LLLLLLGGGLGGLGG|LLLLLLGGGLGGLGG|LLLLLLGGGLGGLGG|LLLLLLGGGLGGLGG",
-   "syllable_count": 60,
-   "pada_count": 4,
-   "yati": [
-    8,
-    7
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.16.58.4.m4a",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)"
-   ]
-  },
-  "प्रहर्षिणी": {
-   "chandas": "प्रहर्षिणी",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.34.mp3",
-    "text_id": "sumadhva_vijaya:sarga_16:34",
-    "text": "लेखिन्यां मुहुरपि-नह्य कृष्यमाणं\nनाप्येकं तनु-रुहमस्य तूदपाटि\nनासाग्रे मृदुनि कृतैश्च मुष्टि-घातै\nर्नस्येन्दोरति-बलिभिः प्रसन्नताऽऽसि",
-    "score": 20.73,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 16.509,
-    "sample_rate": 11025,
-    "snr_db_est": 27.3,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.21.mp3",
-     "score": 20.58,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 14.733,
-     "text_id": "sumadhva_vijaya:sarga_16:21"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.12.mp3",
-     "score": 20.57,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 14.994,
-     "text_id": "sumadhva_vijaya:sarga_16:12"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.18.mp3",
-     "score": 20.51,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 13.218,
-     "text_id": "sumadhva_vijaya:sarga_16:18"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.5.mp3",
-     "score": 20.51,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 15.151,
-     "text_id": "sumadhva_vijaya:sarga_16:5"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.31.mp3",
-     "score": 20.48,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 15.883,
-     "text_id": "sumadhva_vijaya:sarga_16:31"
-    }
-   ],
-   "recordings": 53,
-   "lg_pattern": "GGGLLLLGLGLGG|GGGLLLLGLGLGL|GGGLLLLGLGLGG|GGGLLLLGLGLGL",
-   "syllable_count": 52,
-   "pada_count": 4,
-   "yati": [
-    3,
-    10
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.16.1.1.m4a",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
    ]
   },
   "इन्द्रवज्रा": {
@@ -1099,7 +1099,7 @@
      "text_id": "bhagavata_saroddhara:BS_P23_V337"
     }
    ],
-   "recordings": 29,
+   "recordings": 35,
    "lg_pattern": "GGLGGLLGLGG|GGLGGLLGLGL|GGLGGLLGLGG|GGLGGLLGLGG",
    "syllable_count": 44,
    "pada_count": 4,
@@ -1107,7 +1107,7 @@
     5,
     6
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv08.73.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 777.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1173,7 +1173,7 @@
      "text_id": "sumadhva_vijaya:sarga_12:53"
     }
    ],
-   "recordings": 22,
+   "recordings": 26,
    "lg_pattern": "GGGLLGLGLLLGGGLGGLG|GGGLLGLGLLLGGGLGGLG|GGGLLGLGLLLGGGLGGLG|GGGLLGLGLLLGGGLGGLG",
    "syllable_count": 76,
    "pada_count": 4,
@@ -1181,7 +1181,7 @@
     12,
     7
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.1.tp1.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 226.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1247,7 +1247,7 @@
      "text_id": "sumadhva_vijaya:sarga_1:25"
     }
    ],
-   "recordings": 17,
+   "recordings": 21,
    "lg_pattern": "LGLGGLLGLGL|LGLGGLLGLGL|LGLGGLLGLGG|LGLGGLLGLGL",
    "syllable_count": 44,
    "pada_count": 4,
@@ -1255,7 +1255,7 @@
     5,
     6
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.5.tp5.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 109.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1321,12 +1321,12 @@
      "text_id": "sumadhva_vijaya:sarga_10:55"
     }
    ],
-   "recordings": 12,
+   "recordings": 16,
    "lg_pattern": "LLLLLLGLGLGG|LLLLGLLGLGLGG|LLLLLLGLGLGG|LLLLGLLGLGLGL",
    "syllable_count": 50,
    "pada_count": 4,
    "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS31.2.SBS366.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 234.m4a",
    "pada_boundaries_known": false,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1393,7 +1393,7 @@
      "text_id": "sumadhva_vijaya:sarga_10:43"
     }
    ],
-   "recordings": 7,
+   "recordings": 13,
    "lg_pattern": "GGLGGLLGLGLG|GGLGGLLGLGLG|GGLGGLLGLGLG|GGLGGLLGLGLG",
    "syllable_count": 48,
    "pada_count": 4,
@@ -1401,211 +1401,7 @@
     5,
     7
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.58.SBS294.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)"
-   ]
-  },
-  "आर्या": {
-   "chandas": "आर्या",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.4.m4a",
-    "text_id": "sumadhva_vijaya:sarga_10:1",
-    "text": "ताप-करः पाप-पान्थानाम्",
-    "score": 20.5,
-    "confidence": 0.95,
-    "quality": "B",
-    "duration_seconds": 6.357,
-    "sample_rate": 48000,
-    "snr_db_est": 51.2,
-    "part": "pada_4",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.47.mp3",
-     "score": 20.38,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 10.815,
-     "text_id": "sumadhva_vijaya:sarga_10:47"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.1.mp3",
-     "score": 20.06,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 10.658,
-     "text_id": "sumadhva_vijaya:sarga_10:1"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.1.m4a",
-     "score": 15.5,
-     "confidence": 0.95,
-     "quality": "D",
-     "duration_seconds": 4.821,
-     "text_id": "sumadhva_vijaya:sarga_10:1"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.2.m4a",
-     "score": 15.5,
-     "confidence": 0.95,
-     "quality": "D",
-     "duration_seconds": 6.464,
-     "text_id": "sumadhva_vijaya:sarga_10:1"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.3.m4a",
-     "score": 15.5,
-     "confidence": 0.95,
-     "quality": "D",
-     "duration_seconds": 4.629,
-     "text_id": "sumadhva_vijaya:sarga_10:1"
-    }
-   ],
-   "recordings": 6,
-   "lg_pattern": "LLLLGLLLLG|GLLLLGLGLGLLG|LLLLLLGGG|GLLGGLGGG",
-   "syllable_count": 41,
-   "pada_count": 4,
-   "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.2.m4a",
-   "pada_boundaries_known": false,
-   "safe_as_reference": false,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "a full-verse (or clean hemistich) take; only a part is available",
-    "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "मात्रासमक": {
-   "chandas": "मात्रासमक",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv08.35.mp3",
-    "text_id": "raghavendra_vijaya:sarga_8:35",
-    "text": "वैरिचन्द्रगुणप्रथणभीत्या चक्रवाकमिथुनं परिशुष्यत्\nआतपत्रविलसद्बिससेभ्यः पारितोषिकमदात्परिणाहम्",
-    "score": 20.89,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 17.448,
-    "sample_rate": 48000,
-    "snr_db_est": 18.9,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.42.mp3",
-     "score": 20.25,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 12.434,
-     "text_id": "sumadhva_vijaya:sarga_11:42"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv08.53.mp3",
-     "score": 15.91,
-     "confidence": 1.0,
-     "quality": "D",
-     "duration_seconds": 17.688,
-     "text_id": "raghavendra_vijaya:sarga_8:53"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv09.48.mp3",
-     "score": 15.71,
-     "confidence": 1.0,
-     "quality": "D",
-     "duration_seconds": 16.584,
-     "text_id": "raghavendra_vijaya:sarga_9:48"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv09.51.mp3",
-     "score": 15.66,
-     "confidence": 1.0,
-     "quality": "D",
-     "duration_seconds": 17.136,
-     "text_id": "raghavendra_vijaya:sarga_9:51"
-    }
-   ],
-   "recordings": 5,
-   "lg_pattern": "GLGLLGLLLGG|GLGLLLGLLGG|GLGLLLGLLGG|GLGLLLGLLGG",
-   "syllable_count": 44,
-   "pada_count": 4,
-   "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.42.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "स्रग्धरा": {
-   "chandas": "स्रग्धरा",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.75.mp3",
-    "text_id": "raghavendra_vijaya:sarga_6:75",
-    "text": "आचार्ये राजमाना श्रुतिशिखरकला राज्यलक्ष्मीः सुधीन्द्रे मुक्त्वा तं तुङ्गभद्रातटभुवि गुरुभिर्भ्राजमानं तपोभिः\nराजन्तं कुम्भघोणे रघुपतिचरणासेवनासक्तचित्तं विद्वांसं वर्धमानं गुणगणजलधिं संश्रिता राघवेन्द्रम्",
-    "score": 20.69,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 42.0,
-    "sample_rate": 48000,
-    "snr_db_est": 16.9,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.50.mp3",
-     "score": 20.28,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 25.548,
-     "text_id": "sumadhva_vijaya:sarga_10:50"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.18.tp18.mp3",
-     "score": 18.5,
-     "confidence": 0.75,
-     "quality": "A",
-     "duration_seconds": 12.617,
-     "text_id": "tirtha_prabandha:TP_DAK_018"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv05.22.mp3",
-     "score": 16.06,
-     "confidence": 1.0,
-     "quality": "D",
-     "duration_seconds": 38.568,
-     "text_id": "raghavendra_vijaya:sarga_5:22"
-    },
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv09.52.mp3",
-     "score": 11.97,
-     "confidence": 0.92,
-     "quality": "D",
-     "duration_seconds": 59.208,
-     "text_id": "raghavendra_vijaya:sarga_9:52"
-    }
-   ],
-   "recordings": 5,
-   "lg_pattern": "GGGGLGGLLLLLLGGLGGLGG|GGGGLGGLLLLLLGGLGGLGG|GGGGLGGLLLLLLGGLGGLGG|GGGGLGGLLLLLLGGLGGLGG",
-   "syllable_count": 84,
-   "pada_count": 4,
-   "yati": [
-    7,
-    7,
-    7
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.18.tp18.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 173.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1645,9 +1441,33 @@
      "quality": "B",
      "duration_seconds": 14.054,
      "text_id": "sumadhva_vijaya:sarga_10:7"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 181.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.608,
+     "text_id": "sumadhva_vijaya:sarga_10:45"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 183.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.608,
+     "text_id": "sumadhva_vijaya:sarga_10:45"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 32.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 5.568,
+     "text_id": "sumadhva_vijaya:sarga_10:7"
     }
    ],
-   "recordings": 3,
+   "recordings": 11,
    "lg_pattern": "LLGLLGLLGLLG|LLGLLGLLGLLG|LLGLLGLLGLLG|LLGLLGLLGLLG",
    "syllable_count": 48,
    "pada_count": 4,
@@ -1655,7 +1475,227 @@
     6,
     6
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.45.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 31.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "आर्या": {
+   "chandas": "आर्या",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.4.m4a",
+    "text_id": "sumadhva_vijaya:sarga_10:1",
+    "text": "ताप-करः पाप-पान्थानाम्",
+    "score": 20.5,
+    "confidence": 0.95,
+    "quality": "B",
+    "duration_seconds": 6.357,
+    "sample_rate": 48000,
+    "snr_db_est": 51.2,
+    "part": "pada_4",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.47.mp3",
+     "score": 20.38,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 10.815,
+     "text_id": "sumadhva_vijaya:sarga_10:47"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.1.mp3",
+     "score": 20.06,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 10.658,
+     "text_id": "sumadhva_vijaya:sarga_10:1"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 189.m4a",
+     "score": 18.57,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 3.115,
+     "text_id": "sumadhva_vijaya:sarga_10:47"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.1.m4a",
+     "score": 15.5,
+     "confidence": 0.95,
+     "quality": "D",
+     "duration_seconds": 4.821,
+     "text_id": "sumadhva_vijaya:sarga_10:1"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.2.m4a",
+     "score": 15.5,
+     "confidence": 0.95,
+     "quality": "D",
+     "duration_seconds": 6.464,
+     "text_id": "sumadhva_vijaya:sarga_10:1"
+    }
+   ],
+   "recordings": 10,
+   "lg_pattern": "LLLLGLLLLG|GLLLLGLGLGLLG|LLLLLLGGG|GLLGGLGGG",
+   "syllable_count": 41,
+   "pada_count": 4,
+   "yati": [],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 191.m4a",
+   "pada_boundaries_known": false,
+   "safe_as_reference": false,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "a full-verse (or clean hemistich) take; only a part is available",
+    "yati not in DGE DB for this metre (no pause guidance)"
+   ]
+  },
+  "मात्रासमक": {
+   "chandas": "मात्रासमक",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv08.35.mp3",
+    "text_id": "raghavendra_vijaya:sarga_8:35",
+    "text": "वैरिचन्द्रगुणप्रथणभीत्या चक्रवाकमिथुनं परिशुष्यत्\nआतपत्रविलसद्बिससेभ्यः पारितोषिकमदात्परिणाहम्",
+    "score": 20.89,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 17.448,
+    "sample_rate": 48000,
+    "snr_db_est": 18.9,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv11.42.mp3",
+     "score": 20.25,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 12.434,
+     "text_id": "sumadhva_vijaya:sarga_11:42"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 636.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.437,
+     "text_id": "sumadhva_vijaya:sarga_11:42"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 638.m4a",
+     "score": 18.65,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.16,
+     "text_id": "sumadhva_vijaya:sarga_11:42"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv08.53.mp3",
+     "score": 15.91,
+     "confidence": 1.0,
+     "quality": "D",
+     "duration_seconds": 17.688,
+     "text_id": "raghavendra_vijaya:sarga_8:53"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv09.48.mp3",
+     "score": 15.71,
+     "confidence": 1.0,
+     "quality": "D",
+     "duration_seconds": 16.584,
+     "text_id": "raghavendra_vijaya:sarga_9:48"
+    }
+   ],
+   "recordings": 9,
+   "lg_pattern": "GLGLLGLLLGG|GLGLLLGLLGG|GLGLLLGLLGG|GLGLLLGLLGG",
+   "syllable_count": 44,
+   "pada_count": 4,
+   "yati": [],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 636.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "yati not in DGE DB for this metre (no pause guidance)"
+   ]
+  },
+  "शिखरिणी": {
+   "chandas": "शिखरिणी",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.20.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:20",
+    "text": "कदाचिच्चोराणां निकरमवलोक्याभि-पतताम्\nअवस्थाप्य स्वीयान् कर-ग-पट-पिण्डार्थ-मति-कृत्\nचरन्नेतेष्वेतानथ मिथ इहाघातयदहो\nविभुः सम्मोह्य प्राग् विजय इव संशप्तक-गणान्",
+    "score": 20.19,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 17.189,
+    "sample_rate": 11025,
+    "snr_db_est": 21.9,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.57.mp3",
+     "score": 20.09,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 15.308,
+     "text_id": "sumadhva_vijaya:sarga_16:57"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 462.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 6.955,
+     "text_id": "sumadhva_vijaya:sarga_16:57"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 84.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 7.445,
+     "text_id": "sumadhva_vijaya:sarga_10:20"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.56.mp3",
+     "score": 19.75,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 21.159,
+     "text_id": "sumadhva_vijaya:sarga_3:56"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 83.m4a",
+     "score": 18.0,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 7.317,
+     "text_id": "sumadhva_vijaya:sarga_10:20"
+    }
+   ],
+   "recordings": 9,
+   "lg_pattern": "LGGGGGLLLLLGGLLLG|LGGGGGLLLLLGGLLLG|LGGGGGLLLLLGGLLLG|LGGGGGLLLLLGGLLLG",
+   "syllable_count": 68,
+   "pada_count": 4,
+   "yati": [
+    6,
+    11
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 84.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1690,15 +1730,39 @@
      "text_id": "sumadhva_vijaya:sarga_10:52"
     },
     {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 217.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 3.307,
+     "text_id": "sumadhva_vijaya:sarga_10:52"
+    },
+    {
      "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv9.55.mp3",
      "score": 19.97,
      "confidence": 1.0,
      "quality": "B",
      "duration_seconds": 14.838,
      "text_id": "sumadhva_vijaya:sarga_9:55"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 216.m4a",
+     "score": 18.0,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 4.309,
+     "text_id": "sumadhva_vijaya:sarga_10:52"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 214.m4a",
+     "score": 13.0,
+     "confidence": 0.7,
+     "quality": "D",
+     "duration_seconds": 4.395,
+     "text_id": "sumadhva_vijaya:sarga_10:52"
     }
    ],
-   "recordings": 3,
+   "recordings": 7,
    "lg_pattern": "LGLLLGLGLLLGLGGLG|LGLLLGLGLLLGLGGLG|LGLLLGLGLLLGLGGLG|LGLLLGLGLLLGLGGLG",
    "syllable_count": 68,
    "pada_count": 4,
@@ -1706,7 +1770,7 @@
     8,
     9
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv12.51.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 217.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1716,55 +1780,79 @@
     "≥24 kHz source (this one is 11025 Hz)"
    ]
   },
-  "शिखरिणी": {
-   "chandas": "शिखरिणी",
+  "स्रग्धरा": {
+   "chandas": "स्रग्धरा",
    "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.20.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:20",
-    "text": "कदाचिच्चोराणां निकरमवलोक्याभि-पतताम्\nअवस्थाप्य स्वीयान् कर-ग-पट-पिण्डार्थ-मति-कृत्\nचरन्नेतेष्वेतानथ मिथ इहाघातयदहो\nविभुः सम्मोह्य प्राग् विजय इव संशप्तक-गणान्",
-    "score": 20.19,
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv06.75.mp3",
+    "text_id": "raghavendra_vijaya:sarga_6:75",
+    "text": "आचार्ये राजमाना श्रुतिशिखरकला राज्यलक्ष्मीः सुधीन्द्रे मुक्त्वा तं तुङ्गभद्रातटभुवि गुरुभिर्भ्राजमानं तपोभिः\nराजन्तं कुम्भघोणे रघुपतिचरणासेवनासक्तचित्तं विद्वांसं वर्धमानं गुणगणजलधिं संश्रिता राघवेन्द्रम्",
+    "score": 20.69,
     "confidence": 1.0,
     "quality": "B",
-    "duration_seconds": 17.189,
-    "sample_rate": 11025,
-    "snr_db_est": 21.9,
+    "duration_seconds": 42.0,
+    "sample_rate": 48000,
+    "snr_db_est": 16.9,
     "part": "full",
     "duration_check": "plausible"
    },
    "alternatives": [
     {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv16.57.mp3",
-     "score": 20.09,
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.50.mp3",
+     "score": 20.28,
      "confidence": 1.0,
      "quality": "B",
-     "duration_seconds": 15.308,
-     "text_id": "sumadhva_vijaya:sarga_16:57"
+     "duration_seconds": 25.548,
+     "text_id": "sumadhva_vijaya:sarga_10:50"
     },
     {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.56.mp3",
-     "score": 19.75,
-     "confidence": 1.0,
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 205.m4a",
+     "score": 19.0,
+     "confidence": 0.8,
      "quality": "B",
-     "duration_seconds": 21.159,
-     "text_id": "sumadhva_vijaya:sarga_3:56"
+     "duration_seconds": 4.416,
+     "text_id": "sumadhva_vijaya:sarga_10:50"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.18.tp18.mp3",
+     "score": 18.5,
+     "confidence": 0.75,
+     "quality": "A",
+     "duration_seconds": 12.617,
+     "text_id": "tirtha_prabandha:TP_DAK_018"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 204.m4a",
+     "score": 16.6,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 6.251,
+     "text_id": "sumadhva_vijaya:sarga_10:50"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/raghavendra_vijaya/rv05.22.mp3",
+     "score": 16.06,
+     "confidence": 1.0,
+     "quality": "D",
+     "duration_seconds": 38.568,
+     "text_id": "raghavendra_vijaya:sarga_5:22"
     }
    ],
-   "recordings": 3,
-   "lg_pattern": "LGGGGGLLLLLGGLLLG|LGGGGGLLLLLGGLLLG|LGGGGGLLLLLGGLLLG|LGGGGGLLLLLGGLLLG",
-   "syllable_count": 68,
+   "recordings": 7,
+   "lg_pattern": "GGGGLGGLLLLLLGGLGGLGG|GGGGLGGLLLLLLGGLGGLGG|GGGGLGGLLLLLLGGLGGLGG|GGGGLGGLLLLLLGGLGGLGG",
+   "syllable_count": 84,
    "pada_count": 4,
    "yati": [
-    6,
-    11
+    7,
+    7,
+    7
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv3.56.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 205.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
    "status": "🟡 PARTIAL",
    "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
+    "human confirmation that the audio speaks exactly this text (listen once)"
    ]
   },
   "इन्दुवदना": {
@@ -1790,9 +1878,41 @@
      "quality": "D",
      "duration_seconds": 28.008,
      "text_id": "raghavendra_vijaya:sarga_5:12"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 44.m4a",
+     "score": 15.0,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 5.995,
+     "text_id": "sumadhva_vijaya:sarga_10:10"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 41.m4a",
+     "score": 13.0,
+     "confidence": 0.7,
+     "quality": "D",
+     "duration_seconds": 5.717,
+     "text_id": "sumadhva_vijaya:sarga_10:10"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 42.m4a",
+     "score": 13.0,
+     "confidence": 0.7,
+     "quality": "D",
+     "duration_seconds": 5.803,
+     "text_id": "sumadhva_vijaya:sarga_10:10"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 43.m4a",
+     "score": 13.0,
+     "confidence": 0.7,
+     "quality": "D",
+     "duration_seconds": 5.504,
+     "text_id": "sumadhva_vijaya:sarga_10:10"
     }
    ],
-   "recordings": 2,
+   "recordings": 6,
    "lg_pattern": "GLLLGLLLGLLLGG|GLLLGLLLGLLLGG|GLLLGLLLGLLLGG|GLLLGLLLGLLLGG",
    "syllable_count": 56,
    "pada_count": 4,
@@ -1800,7 +1920,456 @@
     9,
     5
    ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.10.mp3",
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 41.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "अन्यविधोद्गता": {
+   "chandas": "अन्यविधोद्गता",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.53.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:53",
+    "text": "अयमेव गो-विषयतोऽपि\nसदसि जनतार्थितो जवात्\nपुष्पमुत फलमो विदधे\nजन-सुप्तिदानुपम-गान-सम्पदा",
+    "score": 20.29,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 13.27,
+    "sample_rate": 11025,
+    "snr_db_est": 22.9,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 222.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.565,
+     "text_id": "sumadhva_vijaya:sarga_10:53"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 223.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.565,
+     "text_id": "sumadhva_vijaya:sarga_10:53"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 224.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 5.205,
+     "text_id": "sumadhva_vijaya:sarga_10:53"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 221.m4a",
+     "score": 18.0,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 4.139,
+     "text_id": "sumadhva_vijaya:sarga_10:53"
+    }
+   ],
+   "recordings": 5,
+   "lg_pattern": "LLGLGLLLGL|LLLLLGLGLG|GLLLLLGLLG|LLGLGLLLGLGLG",
+   "syllable_count": 43,
+   "pada_count": 4,
+   "yati": [],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 222.m4a",
+   "pada_boundaries_known": false,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)",
+    "yati not in DGE DB for this metre (no pause guidance)"
+   ]
+  },
+  "दोधक": {
+   "chandas": "दोधक",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.16.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:16",
+    "text": "अप्लव देव नदी-तरणं ते\nहन्त कथं च चिकीर्षसि किं त्वम्\nतं निगदन्तमिति प्रभृतीह\nस्माह महा-पुरुषोत्तम-दासः",
+    "score": 20.21,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 14.524,
+    "sample_rate": 11025,
+    "snr_db_est": 22.1,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 67.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 4.544,
+     "text_id": "sumadhva_vijaya:sarga_10:16"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 66.m4a",
+     "score": 19.0,
+     "confidence": 0.8,
+     "quality": "B",
+     "duration_seconds": 4.715,
+     "text_id": "sumadhva_vijaya:sarga_10:16"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 65.m4a",
+     "score": 15.0,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 4.437,
+     "text_id": "sumadhva_vijaya:sarga_10:16"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 68.m4a",
+     "score": 14.0,
+     "confidence": 0.8,
+     "quality": "D",
+     "duration_seconds": 5.077,
+     "text_id": "sumadhva_vijaya:sarga_10:16"
+    }
+   ],
+   "recordings": 5,
+   "lg_pattern": "GLLGLLGLLGG|GLLGLLGLLGG|GLLGLLGLLGL|GLLGLLGLLGG",
+   "syllable_count": 44,
+   "pada_count": 4,
+   "yati": [
+    6,
+    5
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 68.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "रुचिरा": {
+   "chandas": "रुचिरा",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.1.SBS43.mp3",
+    "text_id": "bhagavata_saroddhara:BS_P04_V043",
+    "text": "पिबन्ति ये भगवत आत्मनः सतां कथामृतं श्रवणपुटेषु सम्भृतम्\nपुनन्ति ते विषयविदूषिताशयं व्रजन्ति तच्चरणसरोरुहान्तिकम्",
+    "score": 22.1,
+    "confidence": 0.95,
+    "quality": "A",
+    "duration_seconds": 15.203,
+    "sample_rate": 44100,
+    "snr_db_est": 26.0,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.51.mp3",
+     "score": 20.36,
+     "confidence": 1.0,
+     "quality": "B",
+     "duration_seconds": 12.852,
+     "text_id": "sumadhva_vijaya:sarga_10:51"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 212.m4a",
+     "score": 19.0,
+     "confidence": 0.8,
+     "quality": "B",
+     "duration_seconds": 4.843,
+     "text_id": "sumadhva_vijaya:sarga_10:51"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 211.m4a",
+     "score": 16.62,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 4.501,
+     "text_id": "sumadhva_vijaya:sarga_10:51"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 209.m4a",
+     "score": 13.0,
+     "confidence": 0.7,
+     "quality": "D",
+     "duration_seconds": 4.629,
+     "text_id": "sumadhva_vijaya:sarga_10:51"
+    }
+   ],
+   "recordings": 5,
+   "lg_pattern": "LGLGLLLLGLGLG|LGLGLLLLGLGLG|LGLGLLLLGLGLG|LGLGLLLLGLGLG",
+   "syllable_count": 52,
+   "pada_count": 4,
+   "yati": [
+    4,
+    9
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 209.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)"
+   ]
+  },
+  "वातोर्मी": {
+   "chandas": "वातोर्मी",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.25.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:25",
+    "text": "पाराशर्य्यः पर-तत्त्व-प्रसिद्ध्यै\nतात्पर्य्यार्थं परमं भारतस्य\nव्यक्तं वक्तुं नियुनक्ति स्म साक्षाद्\nएनं धन्यं भुवने मन्यमानः",
+    "score": 20.52,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 12.957,
+    "sample_rate": 11025,
+    "snr_db_est": 25.2,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 102.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 5.419,
+     "text_id": "sumadhva_vijaya:sarga_10:25"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 103.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 5.781,
+     "text_id": "sumadhva_vijaya:sarga_10:25"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 104.m4a",
+     "score": 19.0,
+     "confidence": 0.8,
+     "quality": "B",
+     "duration_seconds": 5.483,
+     "text_id": "sumadhva_vijaya:sarga_10:25"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 101.m4a",
+     "score": 15.0,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 5.291,
+     "text_id": "sumadhva_vijaya:sarga_10:25"
+    }
+   ],
+   "recordings": 5,
+   "lg_pattern": "GGGGLLGGLGG|GGGGLLGGLGL|GGGGLLGGLGG|GGGGLLGGLGG",
+   "syllable_count": 44,
+   "pada_count": 4,
+   "yati": [
+    4,
+    7
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 102.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "स्रग्विणी": {
+   "chandas": "स्रग्विणी",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.8.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:8",
+    "text": "सञ्चरन्नञ्चनीयः कदाचिद् विभु\nर्विष्णुपद्यास्तटं वैष्णवाग्रेसरः\nप्रापदाप्तैर्निजैरेष शिष्यैर्वृत\nस्त्यक्त-विश्व-प्लवं शात्रवातङ्कतः",
+    "score": 20.25,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 16.144,
+    "sample_rate": 11025,
+    "snr_db_est": 22.5,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 34.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 5.931,
+     "text_id": "sumadhva_vijaya:sarga_10:8"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 33.m4a",
+     "score": 19.0,
+     "confidence": 0.8,
+     "quality": "B",
+     "duration_seconds": 5.632,
+     "text_id": "sumadhva_vijaya:sarga_10:8"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 36.m4a",
+     "score": 15.0,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 5.76,
+     "text_id": "sumadhva_vijaya:sarga_10:8"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 35.m4a",
+     "score": 14.0,
+     "confidence": 0.8,
+     "quality": "D",
+     "duration_seconds": 5.739,
+     "text_id": "sumadhva_vijaya:sarga_10:8"
+    }
+   ],
+   "recordings": 5,
+   "lg_pattern": "GLGGLGGLGGLL|GLGGLGGLGGLG|GLGGLGGLGGLL|GLGGLGGLGGLG",
+   "syllable_count": 48,
+   "pada_count": 4,
+   "yati": [
+    6,
+    6
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 35.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "आर्यागीति": {
+   "chandas": "आर्यागीति",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.46.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:46",
+    "text": "वर्त्तस्वाद्ध्यधि सर्वं\nदीव्येदं सोऽनिशं स्वतन्त्रो विष्णुः\nउज्जासय दुष्टानां\nसंस्कुरु साधून् गुणाभिपूर्णोऽप्यगुणः",
+    "score": 20.52,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 12.121,
+    "sample_rate": 11025,
+    "snr_db_est": 25.2,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 187.m4a",
+     "score": 18.0,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 3.819,
+     "text_id": "sumadhva_vijaya:sarga_10:46"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 185.m4a",
+     "score": 15.0,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 3.584,
+     "text_id": "sumadhva_vijaya:sarga_10:46"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 188.m4a",
+     "score": 14.52,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 5.995,
+     "text_id": "sumadhva_vijaya:sarga_10:46"
+    }
+   ],
+   "recordings": 4,
+   "lg_pattern": "GGGLLGG|GGGGLGLGGGG|GGLLGGG|GLLGGLGLGGLLG",
+   "syllable_count": 38,
+   "pada_count": 4,
+   "yati": [],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 185.m4a",
+   "pada_boundaries_known": false,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)",
+    "yati not in DGE DB for this metre (no pause guidance)"
+   ]
+  },
+  "हरिणी": {
+   "chandas": "हरिणी",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.56.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:56",
+    "text": "इति विविध-गो-धारा-वारैर्विशारद-वारि-दो\nहरि-पद-रतो विद्या-विद्युत्-प्रदीपित-दिङ्मुखः\nभव-भय-महा-घर्म्मात्तप्तं सदङ्घ्रिप-मण्डलं\nसफल-सुमनः सान्द्रानन्दं व्यधादविपल्लवम्",
+    "score": 20.22,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 17.45,
+    "sample_rate": 11025,
+    "snr_db_est": 22.2,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 242.m4a",
+     "score": 18.0,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 3.797,
+     "text_id": "sumadhva_vijaya:sarga_10:56"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 243.m4a",
+     "score": 17.56,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 4.544,
+     "text_id": "sumadhva_vijaya:sarga_10:56"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 238.m4a",
+     "score": 15.53,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 3.413,
+     "text_id": "sumadhva_vijaya:sarga_10:56"
+    }
+   ],
+   "recordings": 4,
+   "lg_pattern": "LLLLLGGGGGLGLLGLG|LLLLLGGGGGLGLLGLG|LLLLLGGGGGLGLLGLG|LLLLLGGGGGLGLLGLG",
+   "syllable_count": 68,
+   "pada_count": 4,
+   "yati": [
+    6,
+    4,
+    7
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 242.m4a",
    "pada_boundaries_known": true,
    "safe_as_reference": true,
    "text_matches_audio_verified": false,
@@ -1833,9 +2402,17 @@
      "quality": "B",
      "duration_seconds": 12.487,
      "text_id": "sumadhva_vijaya:sarga_11:77"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 782.m4a",
+     "score": 17.67,
+     "confidence": 0.7,
+     "quality": "B",
+     "duration_seconds": 4.928,
+     "text_id": "sumadhva_vijaya:sarga_11:77"
     }
    ],
-   "recordings": 2,
+   "recordings": 3,
    "lg_pattern": "LGGLGGLGGLGG|LGGLGGLGGLGG|LGGLGGLGGLGG|LGGLGGLGGLGG",
    "syllable_count": 48,
    "pada_count": 4,
@@ -1850,6 +2427,98 @@
    "status": "🟡 PARTIAL",
    "what_is_missing": [
     "human confirmation that the audio speaks exactly this text (listen once)"
+   ]
+  },
+  "मणिमाला": {
+   "chandas": "मणिमाला",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.21.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:21",
+    "text": "अन्यत्र च चोरान् धन्य-प्रवरोऽसौ\nशूरान् शत-सङ्ख्यान् प्राप्तान् स्व-जिघांसून्\nएकेन तु शिष्येणाऽकृष्ट-कुठारान्\nनिस्ताडित-यूध्यानद्रावयत द्राक्",
+    "score": 20.23,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 14.681,
+    "sample_rate": 11025,
+    "snr_db_est": 22.3,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 85.m4a",
+     "score": 20.0,
+     "confidence": 0.9,
+     "quality": "B",
+     "duration_seconds": 5.312,
+     "text_id": "sumadhva_vijaya:sarga_10:21"
+    },
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 86.m4a",
+     "score": 15.0,
+     "confidence": 0.9,
+     "quality": "D",
+     "duration_seconds": 5.781,
+     "text_id": "sumadhva_vijaya:sarga_10:21"
+    }
+   ],
+   "recordings": 3,
+   "lg_pattern": "GGLLGGGGLLGG|GGLLGGGGLLGG|GGLLGGGGLLGG|GGLLGGGGLLGG",
+   "syllable_count": 48,
+   "pada_count": 4,
+   "yati": [
+    6,
+    3
+   ],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 85.m4a",
+   "pada_boundaries_known": true,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)"
+   ]
+  },
+  "उपगीति": {
+   "chandas": "उपगीति",
+   "best": {
+    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.6.mp3",
+    "text_id": "sumadhva_vijaya:sarga_10:6",
+    "text": "नानेनेनानेना\nनेनोनूनेन ननु नुन्नाः\nनानाना नो नूनं\nनानेनानूननाऽनुन्नः",
+    "score": 19.94,
+    "confidence": 1.0,
+    "quality": "B",
+    "duration_seconds": 11.128,
+    "sample_rate": 11025,
+    "snr_db_est": 19.4,
+    "part": "full",
+    "duration_check": "plausible"
+   },
+   "alternatives": [
+    {
+     "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 26.m4a",
+     "score": 13.0,
+     "confidence": 0.7,
+     "quality": "D",
+     "duration_seconds": 5.099,
+     "text_id": "sumadhva_vijaya:sarga_10:6"
+    }
+   ],
+   "recordings": 2,
+   "lg_pattern": "GGGGGG|GGGGLLLGG|GGGGGG|GGGGLGGG",
+   "syllable_count": 29,
+   "pada_count": 4,
+   "yati": [],
+   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/New recording 26.m4a",
+   "pada_boundaries_known": false,
+   "safe_as_reference": true,
+   "text_matches_audio_verified": false,
+   "status": "🟡 PARTIAL",
+   "what_is_missing": [
+    "human confirmation that the audio speaks exactly this text (listen once)",
+    "≥24 kHz source (this one is 11025 Hz)",
+    "yati not in DGE DB for this metre (no pause guidance)"
    ]
   },
   "मन्दाक्रान्ता": {
@@ -1896,178 +2565,6 @@
     "≥24 kHz source (this one is 11025 Hz)"
    ]
   },
-  "रुचिरा": {
-   "chandas": "रुचिरा",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.1.SBS43.mp3",
-    "text_id": "bhagavata_saroddhara:BS_P04_V043",
-    "text": "पिबन्ति ये भगवत आत्मनः सतां कथामृतं श्रवणपुटेषु सम्भृतम्\nपुनन्ति ते विषयविदूषिताशयं व्रजन्ति तच्चरणसरोरुहान्तिकम्",
-    "score": 22.1,
-    "confidence": 0.95,
-    "quality": "A",
-    "duration_seconds": 15.203,
-    "sample_rate": 44100,
-    "snr_db_est": 26.0,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [
-    {
-     "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.51.mp3",
-     "score": 20.36,
-     "confidence": 1.0,
-     "quality": "B",
-     "duration_seconds": 12.852,
-     "text_id": "sumadhva_vijaya:sarga_10:51"
-    }
-   ],
-   "recordings": 2,
-   "lg_pattern": "LGLGLLLLGLGLG|LGLGLLLLGLGLG|LGLGLLLLGLGLG|LGLGLLLLGLGLG",
-   "syllable_count": 52,
-   "pada_count": 4,
-   "yati": [
-    4,
-    9
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.1.SBS43.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)"
-   ]
-  },
-  "अन्यविधोद्गता": {
-   "chandas": "अन्यविधोद्गता",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.53.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:53",
-    "text": "अयमेव गो-विषयतोऽपि\nसदसि जनतार्थितो जवात्\nपुष्पमुत फलमो विदधे\nजन-सुप्तिदानुपम-गान-सम्पदा",
-    "score": 20.29,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 13.27,
-    "sample_rate": 11025,
-    "snr_db_est": 22.9,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "LLGLGLLLGL|LLLLLGLGLG|GLLLLLGLLG|LLGLGLLLGLGLG",
-   "syllable_count": 43,
-   "pada_count": 4,
-   "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.53.mp3",
-   "pada_boundaries_known": false,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)",
-    "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "आर्यागीति": {
-   "chandas": "आर्यागीति",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.46.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:46",
-    "text": "वर्त्तस्वाद्ध्यधि सर्वं\nदीव्येदं सोऽनिशं स्वतन्त्रो विष्णुः\nउज्जासय दुष्टानां\nसंस्कुरु साधून् गुणाभिपूर्णोऽप्यगुणः",
-    "score": 20.52,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 12.121,
-    "sample_rate": 11025,
-    "snr_db_est": 25.2,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "GGGLLGG|GGGGLGLGGGG|GGLLGGG|GLLGGLGLGGLLG",
-   "syllable_count": 38,
-   "pada_count": 4,
-   "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.46.mp3",
-   "pada_boundaries_known": false,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)",
-    "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "उपगीति": {
-   "chandas": "उपगीति",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.6.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:6",
-    "text": "नानेनेनानेना\nनेनोनूनेन ननु नुन्नाः\nनानाना नो नूनं\nनानेनानूननाऽनुन्नः",
-    "score": 19.94,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 11.128,
-    "sample_rate": 11025,
-    "snr_db_est": 19.4,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "GGGGGG|GGGGLLLGG|GGGGGG|GGGGLGGG",
-   "syllable_count": 29,
-   "pada_count": 4,
-   "yati": [],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.6.mp3",
-   "pada_boundaries_known": false,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)",
-    "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "दोधक": {
-   "chandas": "दोधक",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.16.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:16",
-    "text": "अप्लव देव नदी-तरणं ते\nहन्त कथं च चिकीर्षसि किं त्वम्\nतं निगदन्तमिति प्रभृतीह\nस्माह महा-पुरुषोत्तम-दासः",
-    "score": 20.21,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 14.524,
-    "sample_rate": 11025,
-    "snr_db_est": 22.1,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "GLLGLLGLLGG|GLLGLLGLLGG|GLLGLLGLLGL|GLLGLLGLLGG",
-   "syllable_count": 44,
-   "pada_count": 4,
-   "yati": [
-    6,
-    5
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.16.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
-   ]
-  },
   "पञ्चचामर": {
    "chandas": "पञ्चचामर",
    "best": {
@@ -2102,40 +2599,6 @@
     "single-rendition clip (27.0s is 1.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included)"
    ]
   },
-  "मणिमाला": {
-   "chandas": "मणिमाला",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.21.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:21",
-    "text": "अन्यत्र च चोरान् धन्य-प्रवरोऽसौ\nशूरान् शत-सङ्ख्यान् प्राप्तान् स्व-जिघांसून्\nएकेन तु शिष्येणाऽकृष्ट-कुठारान्\nनिस्ताडित-यूध्यानद्रावयत द्राक्",
-    "score": 20.23,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 14.681,
-    "sample_rate": 11025,
-    "snr_db_est": 22.3,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "GGLLGGGGLLGG|GGLLGGGGLLGG|GGLLGGGGLLGG|GGLLGGGGLLGG",
-   "syllable_count": 48,
-   "pada_count": 4,
-   "yati": [
-    6,
-    3
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.21.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
-   ]
-  },
   "मृगेन्द्रमुख": {
    "chandas": "मृगेन्द्रमुख",
    "best": {
@@ -2165,109 +2628,6 @@
    "what_is_missing": [
     "human confirmation that the audio speaks exactly this text (listen once)",
     "yati not in DGE DB for this metre (no pause guidance)"
-   ]
-  },
-  "वातोर्मी": {
-   "chandas": "वातोर्मी",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.25.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:25",
-    "text": "पाराशर्य्यः पर-तत्त्व-प्रसिद्ध्यै\nतात्पर्य्यार्थं परमं भारतस्य\nव्यक्तं वक्तुं नियुनक्ति स्म साक्षाद्\nएनं धन्यं भुवने मन्यमानः",
-    "score": 20.52,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 12.957,
-    "sample_rate": 11025,
-    "snr_db_est": 25.2,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "GGGGLLGGLGG|GGGGLLGGLGL|GGGGLLGGLGG|GGGGLLGGLGG",
-   "syllable_count": 44,
-   "pada_count": 4,
-   "yati": [
-    4,
-    7
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.25.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
-   ]
-  },
-  "स्रग्विणी": {
-   "chandas": "स्रग्विणी",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.8.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:8",
-    "text": "सञ्चरन्नञ्चनीयः कदाचिद् विभु\nर्विष्णुपद्यास्तटं वैष्णवाग्रेसरः\nप्रापदाप्तैर्निजैरेष शिष्यैर्वृत\nस्त्यक्त-विश्व-प्लवं शात्रवातङ्कतः",
-    "score": 20.25,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 16.144,
-    "sample_rate": 11025,
-    "snr_db_est": 22.5,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "GLGGLGGLGGLL|GLGGLGGLGGLG|GLGGLGGLGGLL|GLGGLGGLGGLG",
-   "syllable_count": 48,
-   "pada_count": 4,
-   "yati": [
-    6,
-    6
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.8.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
-   ]
-  },
-  "हरिणी": {
-   "chandas": "हरिणी",
-   "best": {
-    "audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.56.mp3",
-    "text_id": "sumadhva_vijaya:sarga_10:56",
-    "text": "इति विविध-गो-धारा-वारैर्विशारद-वारि-दो\nहरि-पद-रतो विद्या-विद्युत्-प्रदीपित-दिङ्मुखः\nभव-भय-महा-घर्म्मात्तप्तं सदङ्घ्रिप-मण्डलं\nसफल-सुमनः सान्द्रानन्दं व्यधादविपल्लवम्",
-    "score": 20.22,
-    "confidence": 1.0,
-    "quality": "B",
-    "duration_seconds": 17.45,
-    "sample_rate": 11025,
-    "snr_db_est": 22.2,
-    "part": "full",
-    "duration_check": "plausible"
-   },
-   "alternatives": [],
-   "recordings": 1,
-   "lg_pattern": "LLLLLGGGGGLGLLGLG|LLLLLGGGGGLGLLGLG|LLLLLGGGGGLGLLGLG|LLLLLGGGGGLGLLGLG",
-   "syllable_count": 68,
-   "pada_count": 4,
-   "yati": [
-    6,
-    4,
-    7
-   ],
-   "cleanest_audio": "kamadhenu_dataset/incoming_audio/dge_linked/sumadhva_vijaya/smv10.56.mp3",
-   "pada_boundaries_known": true,
-   "safe_as_reference": true,
-   "text_matches_audio_verified": false,
-   "status": "🟡 PARTIAL",
-   "what_is_missing": [
-    "human confirmation that the audio speaks exactly this text (listen once)",
-    "≥24 kHz source (this one is 11025 Hz)"
    ]
   },
   "अतिरेखा": {
