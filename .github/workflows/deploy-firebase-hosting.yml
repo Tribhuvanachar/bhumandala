@@ -30,6 +30,15 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+      - name: Which secret names exist (names only — values are masked and never printed)
+        env:
+          SECRET_NAMES: ${{ toJSON(secrets) }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          names = sorted(k for k in json.loads(os.environ["SECRET_NAMES"]).keys() if k != "github_token")
+          print("Actions secrets visible to this workflow:", ", ".join(names) or "(none)")
+          PY
       - name: Assemble the service-account key from the repository secrets
         # Accepts either the whole JSON in FIREBASE_SERVICE_ACCOUNT (or one of the common alternative names)
         # or the individual fields the lead stored one secret each (FIREBASE_PRIVATE_KEY, FIREBASE_PRIVATE_KEY_ID,
