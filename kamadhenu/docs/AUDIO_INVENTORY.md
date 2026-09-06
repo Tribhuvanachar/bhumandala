@@ -1,6 +1,6 @@
 # Audio inventory (Kamadhenu Phase 1)
 
-Built 6 Sep 2026 (refreshed 7:05 pm IST after the Drive folders were shared) by `kamadhenu/scripts/build_audio_inventory.py` from the per-file measurements in
+Built 6 Sep 2026 (refreshed 5:50 pm IST after nine more Drive folders and the `smv.zip` archive arrived) by `kamadhenu/scripts/build_audio_inventory.py` from the per-file measurements in
 `kamadhenu_dataset/audio_inventory.json` and the text mapping in `kamadhenu_dataset/metadata.jsonl`. The CSV is
 `kamadhenu/data/audio_inventory.csv` (one row per file, 31 columns). No audio was copied.
 
@@ -8,12 +8,12 @@ Built 6 Sep 2026 (refreshed 7:05 pm IST after the Drive folders were shared) by 
 
 | | files | hours |
 |---|---|---|
-| everything reachable | 2,719 | 22.57 |
-| grade A (clean, no clipping, SNR good) | 637 | 6.52 |
-| grade B (usable) | 1,382 | 12.00 |
-| grade C/D (clipped, noisy, or very low bitrate) | 525 | 3.63 |
-| paired with a text at confidence ≥ 0.9 | 1,999 | 8.89 |
-| **usable for training today** | **1,454** | **6.02** |
+| everything reachable | 3,892 | 37.83 |
+| grade A (clean, no clipping, SNR good) | 757 | 8.78 |
+| grade B (usable) | 2,045 | 24.34 |
+| grade C/D/F (clipped, noisy, very low bitrate, or unreadable) | 1,090 | 4.71 |
+| paired with a text at confidence ≥ 0.9 | 2,030 | 8.95 |
+| **usable for training today** | **1,475** | **6.07** |
 
 "Usable" = grade A or B, text confidence ≥ 0.9, duration plausible for the text, not a byte-identical duplicate.
 
@@ -31,10 +31,20 @@ Built 6 Sep 2026 (refreshed 7:05 pm IST after the Drive folders were shared) by 
 | drive/Shlokas (Tīrthaprabandha) | 21 | 0.09 | 19 A | 48 kHz | Dakṣiṇa-prabandha verses 1–19 + 2 intro clips; mapped |
 | drive/Prahlada Narasimha Stotra | 43 | 0.21 | 6 A, 37 B | 48 kHz | Bhāgavata 7.9.8–50, one verse per file; mapped |
 | drive/Sripadaraja AshTottara Shatanamavali | 110 | 0.12 | 68 A | 48 kHz | one name per clip; text not in DGE yet |
+| drive/single-file/smv (`smv.zip`, shared 6 Sep) | 1,106 | 9.86 | 554 B, 552 D | 48 kHz AAC | the lead's phone takes of Sumadhva Vijaya at **pāda** level (4–7 s each): 34 named `SMV.<sarga>.<verse>.<pāda>` (30 mapped, exact), 1,072 unnamed `New recording N` — same reciter, higher fidelity than the 11 kHz site files, but half of them clip (peak > 0 dBFS) and none can be paired until identified |
+| drive/single-file/Vedavyasa Gadya.mp3 | 1 | 0.16 | B | 44.1 kHz | prose recitation; no DGE text; not a verse unit |
+| drive/AShThAdhyAyi (pārāyaṇa) | 32 | 3.89 | 13 A, 19 B | 44.1 kHz | one **whole pāda** of the Aṣṭādhyāyī per file (3–12 min) + the Māheśvara sūtras; long-form, needs sūtra-level segmentation before it can pair with `sutrapatha` |
+| drive/Brahmasutra | 2 | 0.08 | B | 48 kHz | Brahmasūtra 1.1 and 1.2 recited whole; long-form |
+| drive/HKS (Harikathāmṛtasāra) | 31 | 1.34 | 14 A, 16 B, 1 D | 48 kHz | Kannada ṣaṭpadi, one verse per file but 1.5–2.5 min each (teaching style); mapped to `hks-<sandhi>-<n>` at 0.8, review |
+| drive/Sripadaraja Seva Sangha | 1 | 0.07 | C | video | Aṣṭottara-śata-nāmāvali sung in one video (mp4); the 108-name text is still missing. The second file in that folder (Kṣīrābhiṣeka, 400 MB event video) was downloaded, judged not a recitation, and the local copy removed |
+
+Not reachable: two of the nine new folders (`1o5-yqK_…`, `1-716NX8…`) still redirect to Google sign-in — not shared publicly.
+The seven others overlap heavily with folders shared earlier (the Gītā, Tīrthaprabandha and Viṣṇu Sahasranāma folders are
+parents/duplicates of ones already fetched); the pipeline now de-duplicates by Drive file id, so nothing is counted twice.
 
 ## Text, metre and laghu/guru association
 
-Of the 1,985 files paired at confidence ≥ 0.7: 88.6 % carry a metre name from the DGE Chandas engine, 100 %
+Of the 2,472 files paired at confidence ≥ 0.7: 85.4 % carry a metre name from the DGE Chandas engine, 100 %
 carry a laghu/guru scan and pāda count, 11.3 % of metres have an exact pāda-level reference recording. Speaker: every file is **3BHU1** (the project lead; consent to train the voice recorded 6 Sep 2026).
 
 ## Known defects (marked, not deleted)
@@ -42,7 +52,8 @@ carry a laghu/guru scan and pāda count, 11.3 % of metres have an exact pāda-le
 * 46 files are byte-identical to another file (Sumadhva Vijaya pairs such as smv1.12 = smv1.16).
 * 5 links in the audio repo are dead (`smv5.8`, `smv5.14`, `smv5.16`, `rv02.54`, `rv10.06`).
 * 486 Rāghavendra Vijaya files show clipping runs.
-* 0 decode errors.
+* 1 decode error (`single-file/smv/SMV/New recording 20250618 150650.m4a`).
+* 551 of the `smv.zip` phone takes clip (recorded too hot); the other 554 are grade B.
 
 ## Columns of the CSV
 

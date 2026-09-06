@@ -1,18 +1,13 @@
 # WHAT I NEED TO DO — Kamadhenu (written for the project lead, not for a programmer)
 
-Open `kamadhenu_dataset/KAMADHENU_STATUS.html` first. Everything below is derived from what the scripts measured on 6 Sep 2026; re-running `python3 tools/kamadhenu_audit.py` updates the numbers.
+Open `kamadhenu_dataset/KAMADHENU_STATUS.html` first. Everything below is derived from what the scripts measured on 6 Sep 2026 (last refresh 5:50 pm IST, 3,892 files / 37.8 h); re-running `python3 tools/kamadhenu_audit.py` updates the numbers.
 
 ## A. DO NOW (only the immediate actions)
 
 1. **Decide whose voice Kamadhenu is.** The 2,544 recordings we could reach (22 h) carry no speaker name anywhere. A TTS voice must be one consenting reciter. Tell Claude: "the voice is ___".
-2. **Share the three blocked Drive folders** (Drive → Share → *Anyone with the link: Viewer*), then tell Claude to re-run. They are:
-   - https://drive.google.com/drive/folders/1GH_6kU5nuMryJ5HbL98u2LSWdkgoCB0V
-   - https://drive.google.com/drive/folders/1eqWmG3hJAExpXzU7Kavx5-wfqdiRLXVM
-   - https://drive.google.com/drive/folders/1wOOrLOfr7wWWpE1xRW90FNsDk54V5M81
-   - and the single file https://drive.google.com/file/d/1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03/view
-   If you prefer not to share them publicly, download each as a zip and follow §B.
+2. ✅ **Drive folders shared** (6 Sep 2026: the three earlier ones, then nine more in the evening, plus `smv.zip`). Still private — share as *Anyone with the link: Viewer* or say what they hold: https://drive.google.com/drive/folders/1o5-yqK_jT-wg-8Augp1XwOyMFJKtyOyU and https://drive.google.com/drive/folders/1-716NX8boMumr_Gyyq67veWKezjK3rez .
 3. **Confirm the "vsn" recordings** (106 files, `vsn1.aac … vsn16.aac` and `vsn1.1.aac … vsn1.91.aac` in the Drive folder "Audio"). The Viṣṇu Sahasranāma text is now in DGE (SarvaMūla › stotra) and the pipeline maps `vsn1.<N>` to stotram verse N at 0.55 confidence; play `vsn1.1.aac` and `vsn5.aac` once and say whether that reading is right (and what the `vsn1..16` "Starting" files are — pūrva-pīṭhikā? dhyāna?). Each file runs ~2 min, so these are teaching-style renditions too.
-4. ✅ **Hugging Face account `SarvamulaOrg` created (6 Sep 2026).** It can host GPU Spaces from 6 Oct 2026. Two small steps remain: on huggingface.co → Settings → Access Tokens make a **Write** token, and add it to GitHub → bhumandala → Settings → Secrets and variables → Actions as `HF_TOKEN`; then run the Actions workflow *Deploy — Kamadhenu Space*. That is the whole "GPU infrastructure": Dr. Prathosh's live demo runs on a free Hugging Face ZeroGPU Space, and Kamadhenu will run the same way — a GPU is attached only for the seconds a verse is being generated, ₹0 within the daily quota, and the 3 GB of model weights stay on Hugging Face, not in our repo. Details: `DEPLOYMENT_REFERENCE.md`. Nothing to buy; no server to rent.
+4. ✅ **Hugging Face account `SarvamulaOrg` created (6 Sep 2026).** PRO enabled 6 Sep 2026 evening, so it can host a ZeroGPU Space **now** (no 30-day wait). Two small steps remain: on huggingface.co → Settings → Access Tokens make a **Write** token, and add it to GitHub → bhumandala → Settings → Secrets and variables → Actions as `HF_TOKEN`; then run the Actions workflow *Deploy — Kamadhenu Space*. That is the whole "GPU infrastructure": Dr. Prathosh's live demo runs on a free Hugging Face ZeroGPU Space, and Kamadhenu will run the same way — a GPU is attached only for the seconds a verse is being generated, ₹0 within the daily quota, and the 3 GB of model weights stay on Hugging Face, not in our repo. Details: `DEPLOYMENT_REFERENCE.md`. Nothing to buy; no server to rent.
 5. **Listen to two Gītā files and describe them.** Every Gītā recording (401 files) is 46–120 seconds long, 5–8× longer than one verse takes. Play `incoming_audio/drive/Gita Shlokas__Adhyaya 2/G.2.10.aac` and `…/Adhyaya 15/G.15.1.1.mp3` and tell Claude what happens inside (verse repeated? meaning spoken? two voices?). That answer decides how 400 files get segmented.
 
 ## B. PROVIDE FILES (put these under `kamadhenu_dataset/incoming_audio/`)
@@ -20,7 +15,7 @@ Open `kamadhenu_dataset/KAMADHENU_STATUS.html` first. Everything below is derive
 | what | where to put it | why |
 |---|---|---|
 | The two YouTube tracks — run on your computer: `yt-dlp -x --audio-format wav https://youtu.be/lgaxTgliOCo` and `… https://youtu.be/54EPwW-xJoI` | `incoming_audio/youtube/` | YouTube blocks this environment (captcha). Titles seen: "Bhukandam Varanandam Narasimha Stotra Vijayendra Tirtha", "Vedavyasa Gadya" |
-| Zips of the three blocked Drive folders (if not shared) | `incoming_audio/<folder name>/` (unzipped) | the Tīrthaprabandha recordings (287) are not in any reachable source — they are probably here |
+| Zips of the two still-private Drive folders (if not shared) | `incoming_audio/<folder name>/` (unzipped) | the remaining Tīrthaprabandha recordings (only Dakṣiṇa 1–19 found so far) may be there |
 | The single blocked Drive file | `incoming_audio/single_files/` | unknown content |
 | Any `.wav` masters you already have of your own voice | `incoming_audio/own_voice/<date>/` | the only path to Stage 2 |
 

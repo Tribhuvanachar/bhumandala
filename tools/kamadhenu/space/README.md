@@ -37,7 +37,7 @@ huggingface-cli login                                   # the DGE account (free 
 bash tools/kamadhenu/space/build_space.sh SarvamulaOrg/kamadhenu     # or run the GitHub Action 'Deploy — Kamadhenu Space'
 ```
 
-Then in the Space settings choose **Hardware → ZeroGPU** (the `SarvamulaOrg` account is eligible from 6 Oct 2026). The first call downloads
+Then in the Space settings choose **Hardware → ZeroGPU** (the `SarvamulaOrg` account is PRO since 6 Sep 2026, so ZeroGPU is available immediately). The first call downloads
 `voice_steer_ema_2026-06-17.pt` + `voc_bigvgan_EMA_2026-06-11.pth` from `prathoshap/vagdhenu` (≈ 1.8 GB,
 cached afterwards) and loads them onto the GPU (30–60 s); later calls take a few seconds.
 

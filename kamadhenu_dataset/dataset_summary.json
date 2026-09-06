@@ -1,16 +1,16 @@
 {
- "generated_at": "06 Sep 2026, 4:55 PM IST",
- "records": 2719,
+ "generated_at": "06 Sep 2026, 5:41 PM IST",
+ "records": 3892,
  "subset_sizes": {
-  "dataset_all": 2719,
-  "dataset_verified": 1999,
-  "dataset_high_quality": 1498,
-  "dataset_reference_bank": 153,
-  "dataset_training": 1349,
+  "dataset_all": 3892,
+  "dataset_verified": 2030,
+  "dataset_high_quality": 1499,
+  "dataset_reference_bank": 157,
+  "dataset_training": 1350,
   "dataset_validation": 149,
-  "dataset_review": 519,
-  "dataset_unmatched_audio": 201,
-  "dataset_unmatched_text": 1641
+  "dataset_review": 548,
+  "dataset_unmatched_audio": 1314,
+  "dataset_unmatched_text": 2558
  },
  "notes": {
   "dataset_training/validation": "deterministic 90/10 split of dataset_high_quality (validation = every 10th by sorted id). Training has NOT been run.",

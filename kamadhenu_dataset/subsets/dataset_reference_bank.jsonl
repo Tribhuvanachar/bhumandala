@@ -152,3 +152,7 @@
 {"id": "km_acbd6bda60f1", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.5.tp5.mp3", "text_id": "tirtha_prabandha:TP_DAK_005"}
 {"id": "km_9754fc3d3f9a", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.6.tp6.mp3", "text_id": "tirtha_prabandha:TP_DAK_006"}
 {"id": "km_dce1c0080937", "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.7.tp7.mp3", "text_id": "tirtha_prabandha:TP_DAK_007"}
+{"id": "km_1c8ab017a012", "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.1.m4a", "text_id": "sumadhva_vijaya:sarga_10:1"}
+{"id": "km_36762d813fba", "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.2.m4a", "text_id": "sumadhva_vijaya:sarga_10:1"}
+{"id": "km_d7ebba14416d", "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.3.m4a", "text_id": "sumadhva_vijaya:sarga_10:1"}
+{"id": "km_59b84aa85300", "audio": "kamadhenu_dataset/incoming_audio/drive/single-file/smv/SMV/SMV.10.1.4.m4a", "text_id": "sumadhva_vijaya:sarga_10:1"}

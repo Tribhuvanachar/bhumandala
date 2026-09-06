@@ -51,18 +51,21 @@ def _download(item, dest, max_retries=3):
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     for attempt in range(max_retries):
-        r = subprocess.run(["curl", "-sS", "-L", "--max-time", "180", "-o", str(tmp), "-w", "%{http_code}\t%{content_type}\t%{size_download}",
+        r = subprocess.run(["curl", "-sS", "-L", "--max-time", "900", "-o", str(tmp), "-w", "%{http_code}\t%{content_type}\t%{size_download}",
                             item["download_url"]], capture_output=True, text=True)
         code, ctype, size = (r.stdout.split("\t") + ["", "", "0"])[:3]
         if code == "200" and tmp.exists() and tmp.stat().st_size > 0 and not ctype.startswith("text/html"):
             tmp.rename(dest)
             return {"ok": True, "bytes": dest.stat().st_size, "content_type": ctype}
-        # Drive returns an HTML "confirm" page for large files; try the confirm URL once
+        # Drive returns an HTML "virus scan / confirm" page for large files. Current Drive serves the real bytes
+        # from drive.usercontent.google.com with confirm=t (plus a uuid the page carries); try that once.
         if tmp.exists():
             body = tmp.read_bytes()[:20000].decode("utf-8", "ignore")
-            m = re.search(r'confirm=([0-9A-Za-z_-]+)', body)
-            if m and "drive.google.com" in item["download_url"] and attempt == 0:
-                item = dict(item, download_url=item["download_url"] + "&confirm=" + m.group(1))
+            fid = re.search(r"[?&]id=([0-9A-Za-z_-]+)", item["download_url"])
+            if "drive.google.com" in item["download_url"] and fid and attempt == 0 and ("confirm" in body or "virus" in body.lower() or "usercontent" in body):
+                uuid = re.search(r'name="uuid" value="([0-9A-Za-z-]+)"', body)
+                item = dict(item, download_url=f"https://drive.usercontent.google.com/download?id={fid.group(1)}&export=download&confirm=t" + (f"&uuid={uuid.group(1)}" if uuid else ""))
+                tmp.unlink(missing_ok=True)
                 continue
             tmp.unlink(missing_ok=True)
         # archive.org items sometimes carry a zero-width space before the extension (DGE's player tries this too)
@@ -72,6 +75,23 @@ def _download(item, dest, max_retries=3):
             continue
         time.sleep(1.5 * (attempt + 1))
     return {"ok": False, "http": code, "content_type": ctype}
+
+
+def _extract_zip(dest, rec):
+    """A shared .zip (e.g. smv.zip = 1,108 pāda-level Sumadhva Vijaya takes) is unpacked into
+    <folder>/<zip stem>/ and the archive removed; the manifest keeps what was inside."""
+    import zipfile
+    out_dir = dest.parent / safe_name(dest.stem)
+    try:
+        with zipfile.ZipFile(dest) as z:
+            names = [n for n in z.namelist() if not n.endswith("/") and "__MACOSX" not in n]
+            z.extractall(out_dir)
+    except zipfile.BadZipFile as e:
+        rec.update(status="failed", error=f"bad zip: {e}"); return
+    dest.unlink(missing_ok=True)
+    rec.update(status="present", extracted_to=rel(out_dir), extracted_files=len(names),
+               extracted_audio=sum(1 for n in names if Path(n).suffix.lower() in AUDIO_EXT), local_path=rel(out_dir))
+    log(f"  extracted {len(names)} files from {dest.name} → {rel(out_dir)}")
 
 
 def run(max_bytes=None, only=None, workers=6, skip_drive=False, skip_dge=False):
@@ -89,7 +109,19 @@ def run(max_bytes=None, only=None, workers=6, skip_drive=False, skip_dge=False):
     for it in items:
         dest = INCOMING / it["folder"] / safe_name(it["name"])
         key = it["id"]
+        if dest.suffix.lower() == ".zip" and (dest.parent / safe_name(dest.stem)).is_dir() and not dest.exists():
+            rec = files.get(key) or {}
+            if rec.get("status") != "present":
+                rec.update({"status": "present", "local_path": rel(dest.parent / safe_name(dest.stem)), "extracted_to": rel(dest.parent / safe_name(dest.stem))})
+                rec.update({k: it.get(k) for k in ("name", "folder", "download_url", "source_url") if it.get(k) is not None})
+                files[key] = rec
+            continue   # already downloaded and unpacked
         if dest.exists() and dest.stat().st_size > 0:
+            if dest.suffix.lower() == ".zip":
+                rec = files.get(key) or {}
+                rec.update({k: it.get(k) for k in ("name", "folder", "download_url", "source_url") if it.get(k) is not None})
+                _extract_zip(dest, rec); files[key] = rec
+                continue
             rec = files.get(key) or {}
             rec.update({"local_path": rel(dest), "bytes": dest.stat().st_size, "status": "present"})
             rec.setdefault("downloaded_at", now_ist())
@@ -112,6 +144,8 @@ def run(max_bytes=None, only=None, workers=6, skip_drive=False, skip_dge=False):
             if res["ok"]:
                 spent += res["bytes"]; done += 1
                 rec.update({"local_path": rel(dest), "bytes": res["bytes"], "content_type": res.get("content_type"), "status": "downloaded", "downloaded_at": now_ist()})
+                if dest.suffix.lower() == ".zip":
+                    _extract_zip(dest, rec)
             else:
                 fail += 1
                 rec.update({"status": "failed", "http": res.get("http"), "content_type": res.get("content_type"), "attempted_at": now_ist()})
