@@ -34,10 +34,10 @@ measure.py        call the deployed Space, record GPU seconds per metre         
 ```bash
 pip install huggingface_hub
 huggingface-cli login                                   # the DGE account (free tier: 2 ZeroGPU Spaces)
-bash tools/kamadhenu/space/build_space.sh <dge-account>/kamadhenu
+bash tools/kamadhenu/space/build_space.sh SarvamulaOrg/kamadhenu     # or run the GitHub Action 'Deploy — Kamadhenu Space'
 ```
 
-Then in the Space settings choose **Hardware → ZeroGPU**. The first call downloads
+Then in the Space settings choose **Hardware → ZeroGPU** (the `SarvamulaOrg` account is eligible from 6 Oct 2026). The first call downloads
 `voice_steer_ema_2026-06-17.pt` + `voc_bigvgan_EMA_2026-06-11.pth` from `prathoshap/vagdhenu` (≈ 1.8 GB,
 cached afterwards) and loads them onto the GPU (30–60 s); later calls take a few seconds.
 
@@ -48,8 +48,8 @@ the weights — this is how Kamadhenu's own voice replaces the baseline later wi
 ## Call it
 
 ```
-POST https://<account>-kamadhenu.hf.space/gradio_api/call/synthesize   {"data": ["<verse>", "<dge chandas or ''>", 60]}
-GET  https://<account>-kamadhenu.hf.space/gradio_api/call/synthesize/<event_id>   (SSE; 'complete' carries [audio, meta])
+POST https://sarvamulaorg-kamadhenu.hf.space/gradio_api/call/synthesize   {"data": ["<verse>", "<dge chandas or ''>", 60]}
+GET  https://sarvamulaorg-kamadhenu.hf.space/gradio_api/call/synthesize/<event_id>   (SSE; 'complete' carries [audio, meta])
 ```
 
 `dge/js/kamadhenu.js` does exactly this from the reader once `appConfig.kamadhenuSpaceUrl` is set.
