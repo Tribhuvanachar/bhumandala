@@ -1,7 +1,7 @@
 {
  "_readme": "Best/alternative recordings per metre. safe_as_reference is structural; text_matches_audio_verified is only true after a human override (mapping_overrides.json verified:true).",
  "summary": {
-  "generated_at": "06 Sep 2026, 3:35 PM IST",
+  "generated_at": "06 Sep 2026, 4:02 PM IST",
   "metres_with_candidate": 39,
   "metres_safe_reference": 38,
   "metres_human_verified": 0,

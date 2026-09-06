@@ -1,7 +1,7 @@
 {
  "_readme": "Per-metre audio coverage computed from audio_text_mapping (confidence ≥0.70) and the DGE Chandas engine's verdict on each mapped text.",
  "summary": {
-  "generated_at": "06 Sep 2026, 3:35 PM IST",
+  "generated_at": "06 Sep 2026, 4:02 PM IST",
   "metres_in_dge_db": 256,
   "thresholds": {
    "GOOD": "≥10 recordings across ≥3 texts",
