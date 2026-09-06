@@ -4,6 +4,12 @@
     python3 tools/saroddhara/apply_chat_answers.py answers_chunk1.txt [chunk2.txt ...]
     pbpaste | python3 tools/saroddhara/apply_chat_answers.py -            # stdin
     python3 tools/saroddhara/apply_chat_answers.py chunk.txt --no-apply   # only update answers.json
+    python3 tools/saroddhara/apply_chat_answers.py chunk.txt --sync-bhagavata   # decision=printed also rewrites the DGE Bhāgavata mūla
+
+One text, not two: the DGE Madhva Bhāgavata is the master. decision=dge copies the master into the Sāroddhāra;
+decision=printed (a confirmed variant reading in the printed edition) rewrites the Sāroddhāra and, with
+--sync-bhagavata, the matching shloka in dge/data/purana/maha_purana/bhagavata_purana_madhva as well, keeping the
+old text in the shloka's `previous_text` + `revision` fields so the change is reviewable.
 
 Input is whatever the chat produced: a JSON list of {id, decision, verified_text, bhagavata_ref, pdf_page, note}
 objects (the shape asked for in batch_*.json), optionally wrapped in ``` fences or prose, or {"items": [...]},
@@ -20,6 +26,28 @@ import apply_verified  # noqa: E402
 STAGING = ROOT / "dge/data/ocr_staging/bhagavata_saroddhara"
 ANSWERS = STAGING / "verify_output/answers.json"
 MULA = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/mula/data.json"
+BHP = ROOT / "dge/data/purana/maha_purana/bhagavata_purana_madhva"
+
+
+def sync_bhagavata(ref, text, note, stamp):
+    """Write a confirmed printed reading into the master Bhāgavata shloka (skandha/adhyaya/verse). Returns a log line."""
+    parts = [int(x) for x in re.findall(r"\d+", ref or "")][:3]
+    if len(parts) != 3: return f"no valid bhagavata_ref {ref!r}"
+    sk, ad, n = parts; f = BHP / f"skandha_{sk:02d}" / "data.json"
+    if not f.exists(): return f"skandha file missing for {ref}"
+    d = json.load(open(f, encoding="utf-8"))
+    item = next((i for i in d["items"] if re.sub(r"\D", "", i.get("id", "")) == f"{ad:02d}" or i.get("id") == f"adhyaya_{ad:02d}"), None)
+    if not item: return f"adhyaya {ad} not found in skandha {sk}"
+    for sh in item.get("shlokas", []):
+        nums = re.findall(r"\d+", str(sh.get("number") or ""))
+        if nums and int(nums[0]) <= n <= int(nums[-1]):
+            clean = re.sub(r"\s*(?:॥|\|\||।।)\s*[०-९]{1,3}\s*(?:॥|\|\||।।)\s*$", "॥", text).strip()
+            if sh["sanskrit_text"] == clean: return f"{ref}: master already has this text"
+            sh.setdefault("previous_text", sh["sanskrit_text"]); sh["sanskrit_text"] = clean
+            sh["revision"] = {"date": stamp, "source": "Bhāgavata Sāroddhāra (Viṣṇutīrtha) printed edition, human-confirmed", "note": note}
+            json.dump(d, open(f, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            return f"{ref}: master shloka updated (old text kept in previous_text)"
+    return f"{ref}: verse {n} not found in adhyaya {ad}"
 
 
 def parse_pasted(text):
@@ -83,6 +111,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="+", help="pasted chat replies ('-' = stdin)")
     ap.add_argument("--no-apply", action="store_true")
+    ap.add_argument("--sync-bhagavata", action="store_true", help="decision=printed also rewrites the master Bhāgavata shloka")
     a = ap.parse_args()
     batch = batch_index()
     present = {it["verse_no"] for it in json.load(open(MULA, encoding="utf-8"))["items"]}
@@ -105,6 +134,13 @@ def main():
     for s in skipped: print("   skip", *s)
     if not a.no_apply and n_new:
         apply_verified.main([str(ANSWERS)])
+    if a.sync_bhagavata:
+        for qid, conv in answers.items():
+            if qid.startswith("_") or conv.get("decision") != "printed" or conv.get("bhagavata_synced"): continue
+            msg = sync_bhagavata(conv.get("bhagavata_ref"), conv.get("verified_text") or "", conv.get("note"), stamp)
+            print("   sync", qid, msg)
+            if "updated" in msg or "already" in msg: conv["bhagavata_synced"] = stamp
+        json.dump(answers, open(ANSWERS, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

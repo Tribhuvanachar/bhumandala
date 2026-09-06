@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+"""Cross-check every Bhāgavata Sāroddhāra verse against the DGE Madhva Bhāgavata mūla, word by word.
+
+    python3 tools/saroddhara/mula_crosscheck.py [--out dge/data/ocr_staging/bhagavata_saroddhara/verify_input/mula_crosscheck.json]
+
+Policy (one text, not two): the DGE Madhva Bhāgavata is the master copy. A Sāroddhāra verse that the
+build verified against it already carries the DGE text verbatim (the print's OCR stays in `ocr`). This
+report lists every verse where the PRINT (Vision OCR) still differs from that master text at the word
+level, so a person can confirm that the print really agrees (OCR noise) or flag a genuine variant reading
+(pāṭhabheda) — which is then fixed on BOTH sides through tools/saroddhara/apply_chat_answers.py
+--sync-bhagavata. Verses whose text was NOT unified yet (mismatch, ref_not_in_dge, extra) are listed first."""
+import argparse, difflib, json, re, sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools" / "saroddhara"))
+from build_saroddhara import load_bhp, ratio  # noqa: E402
+BASE = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara"
+OUT = ROOT / "dge/data/ocr_staging/bhagavata_saroddhara/verify_input/mula_crosscheck.json"
+NOISE = str.maketrans("", "", "ऽ")   # avagraha is printed inconsistently
+
+
+def words(t):
+    t = re.sub(r"[॥।|]\s*[०-९0-9]*\s*[॥।|]?", " ", t or "")
+    t = re.sub(r"[()\[\]'\"“”‘’*?\-–—]", " ", t)
+    return [w.translate(NOISE) for w in t.split() if re.search(r"[ऀ-ॿ]", w)]
+
+
+def ref_str(r): return f"{r['skandha']}.{r['adhyaya']}.{r['verse']}" if r else None
+
+
+def diff_pairs(a, b):
+    sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+    out = []
+    for op, i1, i2, j1, j2 in sm.get_opcodes():
+        if op == "equal": continue
+        pa, pb = " ".join(a[i1:i2]), " ".join(b[j1:j2])
+        r = ratio(pa, pb) if pa and pb else 0.0
+        out.append({"print": pa or None, "dge": pb or None, "similarity": round(r, 2), "kind": "ocr_noise" if r >= 0.8 else "word"})
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=str(OUT)); a = ap.parse_args()
+    bhp = load_bhp(); mula = json.load(open(BASE / "mula/data.json", encoding="utf-8"))
+    rows = []; stats = {"verses": 0, "identical_to_dge": 0, "unified_print_noise_only": 0, "unified_print_word_diffs": 0, "not_unified": 0}
+    for it in mula["items"]:
+        stats["verses"] += 1
+        v = it["verification"]; key = tuple(v.get("dge_key") or []); dge = bhp.get(key, {}).get("text") if key else None
+        ocr = (it.get("ocr") or {}).get("vision") or ""
+        cur = it["sanskrit_text"]
+        unified = bool(dge) and words(cur) == words(dge)
+        pairs_print = diff_pairs(words(ocr), words(dge)) if dge else []
+        if unified and not pairs_print:
+            stats["identical_to_dge"] += 1; continue
+        if unified:
+            bucket = "unified_print_word_diffs" if any(p["kind"] == "word" for p in pairs_print) else "unified_print_noise_only"
+        else:
+            bucket = "not_unified"
+        stats[bucket] += 1
+        rows.append({"id": f"BS_V{it['verse_no']:03d}", "verse_num": it["verse_no"], "prakarana": it["category"], "pdf_page": it["source"].get("pdf_page"),
+                     "book_ref": ref_str(it.get("bhagavata_ref")), "status": v["status"], "bucket": bucket,
+                     "current_text": cur, "print_ocr_vision": ocr or None, "dge_mula_text": dge,
+                     "differences_print_vs_dge": pairs_print or None,
+                     "question": ("Which reading does the print actually have for each 'word' difference? If the print is right and DGE is wrong, answer decision='printed' with the full verse; if the print agrees with DGE (OCR noise), decision='dge'."
+                                  if bucket != "not_unified" else "Text not yet unified with the DGE mūla — see batch_01_critical.json for the arbitration question.")})
+    order = {"not_unified": 0, "unified_print_word_diffs": 1, "unified_print_noise_only": 2}
+    rows.sort(key=lambda r: (order[r["bucket"]], r["verse_num"]))
+    out = {"_readme": "Sāroddhāra verses vs DGE Madhva Bhāgavata, word by word. Master copy = DGE Bhāgavata; every unified verse already carries the DGE text. 'print' = what the scanned edition shows (Vision OCR); 'dge' = the master. kind=ocr_noise: the two spellings differ by little (OCR error likely); kind=word: a different word — needs a human eye on the scan.",
+           "_answer_shape": {"id": "BS_V042", "decision": "dge|printed|unsure", "verified_text": "full verse if printed, else null", "bhagavata_ref": "s.a.v", "note": "…"},
+           "policy": "ONE text: apply_chat_answers.py writes decision=dge into the Sāroddhāra and decision=printed (with --sync-bhagavata) into BOTH the Sāroddhāra and the Bhāgavata mūla.",
+           "stats": stats, "items": rows}
+    Path(a.out).parent.mkdir(parents=True, exist_ok=True)
+    json.dump(out, open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(json.dumps(stats), "→", Path(a.out).relative_to(ROOT))
+
+
+if __name__ == "__main__":
+    main()
