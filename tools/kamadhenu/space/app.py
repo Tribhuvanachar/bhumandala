@@ -118,14 +118,21 @@ def resolve_meter(text, dge_chandas):
     return METER_MAP["fallback"], "fallback"
 
 
-@spaces.GPU(duration=120)
+# ZeroGPU duration: the `spaces` client multiplies the requested seconds by the hardware's duration_factor (1.5 on the
+# sm_120 Blackwell cards this Space gets, configs.json in spaces 0.51.3) before checking the caller's quota, so
+# duration=120 was billed as a 180 s request and refused visitors with fewer than 180 s left even though a warm verse
+# takes 4-14 GPU s and the worst measured cold start 23 s (space_measurements.json). 60 s here = a 90 s request.
+GPU_SECONDS = int(os.environ.get("KAMADHENU_GPU_SECONDS", "60"))
+
+
+@spaces.GPU(duration=GPU_SECONDS)
 def _render(text, bank_key, seed):
     t0 = time.time()
     sr, audio = _get_renderer().render_one(text, bank_key, seed=int(seed))
     return sr, audio, round(time.time() - t0, 2)
 
 
-@spaces.GPU(duration=120)
+@spaces.GPU(duration=GPU_SECONDS)
 def _render_indicf5(text, ref_id, seed):
     import numpy as np, torch
     torch.manual_seed(int(seed))
