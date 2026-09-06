@@ -1,6 +1,6 @@
 {
  "summary": {
-  "generated_at": "06 Sep 2026, 12:58 AM IST",
+  "generated_at": "06 Sep 2026, 9:47 AM IST",
   "records": 2544,
   "subset_sizes": {
    "dataset_all": 2544,
@@ -9,9 +9,9 @@
    "dataset_reference_bank": 140,
    "dataset_training": 969,
    "dataset_validation": 107,
-   "dataset_review": 409,
-   "dataset_unmatched_audio": 559,
-   "dataset_unmatched_text": 836
+   "dataset_review": 515,
+   "dataset_unmatched_audio": 453,
+   "dataset_unmatched_text": 930
   },
   "notes": {
    "dataset_training/validation": "deterministic 90/10 split of dataset_high_quality (validation = every 10th by sorted id). Training has NOT been run.",
@@ -6445,6 +6445,112 @@
    "km_fec4e7610048"
   ],
   "dataset_review": [
+   "km_b95aeed26c23",
+   "km_69cec56c9eb7",
+   "km_ffaa68a4e62f",
+   "km_53cb8ff257ce",
+   "km_ddd3c0ee4998",
+   "km_35bf6a71c76d",
+   "km_ff02f89e168a",
+   "km_c1a548a89cdb",
+   "km_1e9b46375167",
+   "km_4548edfe6d59",
+   "km_aa02ed70c2b1",
+   "km_fad7f25f80f1",
+   "km_07f3c1b389dd",
+   "km_6b5168a867f6",
+   "km_6fc3e922c55e",
+   "km_61d85e4b90e8",
+   "km_829551e5052e",
+   "km_f958ab4c5d2d",
+   "km_e8f4eb5b2757",
+   "km_90569fc7e2ca",
+   "km_6e07195b491d",
+   "km_3b45e69ce1af",
+   "km_fda0be981293",
+   "km_2edc1067915e",
+   "km_8ecc242ee4c5",
+   "km_707d6b4a1b20",
+   "km_02ad43571aba",
+   "km_96ffc786c8c1",
+   "km_a0660b074f06",
+   "km_ec5fe111f51d",
+   "km_4065d17c8e82",
+   "km_f9f1e6b17b61",
+   "km_5e4b4d3672ac",
+   "km_7cfd7ab20e45",
+   "km_5df3ecf9cea1",
+   "km_11ead7093b5e",
+   "km_5524a5cbf6b4",
+   "km_516e0391e2d3",
+   "km_2b0e868899c5",
+   "km_920cc152e428",
+   "km_24c260e39b39",
+   "km_5e571f2c1dea",
+   "km_92359bc6a99f",
+   "km_26b7e9418f2f",
+   "km_ba79a2d9c810",
+   "km_2a424008152d",
+   "km_105b550aa187",
+   "km_0caa398abf92",
+   "km_4cd68ed19423",
+   "km_4d5dd4f886ee",
+   "km_821bac6757c6",
+   "km_c5467dc9fd56",
+   "km_2f61dea419b5",
+   "km_4dd1d1be8c42",
+   "km_a8cc2767c0f9",
+   "km_fd66a9bd2714",
+   "km_29e845c8753c",
+   "km_d3ab4ee06e4f",
+   "km_431cc4f47856",
+   "km_0f4f47404edb",
+   "km_2649ea451f73",
+   "km_1ac10855c6bb",
+   "km_3f7ec0fa4948",
+   "km_bba5cdb47f7c",
+   "km_8069a4d6d5a4",
+   "km_f0ad4e56f08b",
+   "km_e2649ba28ab5",
+   "km_d5a6ec4d1c14",
+   "km_9577ec3c4f63",
+   "km_e35f704fe319",
+   "km_438246375c37",
+   "km_560fc3e20486",
+   "km_71e9b694f5c4",
+   "km_abae48767302",
+   "km_a0ef390e52be",
+   "km_8d79f2d27d3e",
+   "km_b0b17827937e",
+   "km_9e869d0be781",
+   "km_763cf7a92bf3",
+   "km_d3d9e2545139",
+   "km_305d52633e79",
+   "km_f431c5a52ac4",
+   "km_cb8f09274dde",
+   "km_29b16462df2c",
+   "km_c7d0acc535b5",
+   "km_cc539ce5f738",
+   "km_ad992782f3e6",
+   "km_360c9ea374a4",
+   "km_2e665db5c6a9",
+   "km_bc2e25dec42b",
+   "km_5695558fbafb",
+   "km_efc4e49ecc81",
+   "km_03f1847f4eb1",
+   "km_4c1b47ac3f30",
+   "km_fa6c35239b03",
+   "km_8a5404d1457d",
+   "km_0bd198487b14",
+   "km_30c3ce5514b9",
+   "km_ef95c01b66be",
+   "km_ca168c5b14a4",
+   "km_5b46f6f59ec8",
+   "km_b0884ec0dd63",
+   "km_33827af5e601",
+   "km_9d25e294e75f",
+   "km_5d9becc93245",
+   "km_8c457d4a1cdf",
    "km_e1f0de4bb942",
    "km_0e9a563fc37f",
    "km_d683b0e20917",
@@ -6856,112 +6962,6 @@
    "km_fbef738012f0"
   ],
   "dataset_unmatched_audio": [
-   "km_b95aeed26c23",
-   "km_69cec56c9eb7",
-   "km_ffaa68a4e62f",
-   "km_53cb8ff257ce",
-   "km_ddd3c0ee4998",
-   "km_35bf6a71c76d",
-   "km_ff02f89e168a",
-   "km_c1a548a89cdb",
-   "km_1e9b46375167",
-   "km_4548edfe6d59",
-   "km_aa02ed70c2b1",
-   "km_fad7f25f80f1",
-   "km_07f3c1b389dd",
-   "km_6b5168a867f6",
-   "km_6fc3e922c55e",
-   "km_61d85e4b90e8",
-   "km_829551e5052e",
-   "km_f958ab4c5d2d",
-   "km_e8f4eb5b2757",
-   "km_90569fc7e2ca",
-   "km_6e07195b491d",
-   "km_3b45e69ce1af",
-   "km_fda0be981293",
-   "km_2edc1067915e",
-   "km_8ecc242ee4c5",
-   "km_707d6b4a1b20",
-   "km_02ad43571aba",
-   "km_96ffc786c8c1",
-   "km_a0660b074f06",
-   "km_ec5fe111f51d",
-   "km_4065d17c8e82",
-   "km_f9f1e6b17b61",
-   "km_5e4b4d3672ac",
-   "km_7cfd7ab20e45",
-   "km_5df3ecf9cea1",
-   "km_11ead7093b5e",
-   "km_5524a5cbf6b4",
-   "km_516e0391e2d3",
-   "km_2b0e868899c5",
-   "km_920cc152e428",
-   "km_24c260e39b39",
-   "km_5e571f2c1dea",
-   "km_92359bc6a99f",
-   "km_26b7e9418f2f",
-   "km_ba79a2d9c810",
-   "km_2a424008152d",
-   "km_105b550aa187",
-   "km_0caa398abf92",
-   "km_4cd68ed19423",
-   "km_4d5dd4f886ee",
-   "km_821bac6757c6",
-   "km_c5467dc9fd56",
-   "km_2f61dea419b5",
-   "km_4dd1d1be8c42",
-   "km_a8cc2767c0f9",
-   "km_fd66a9bd2714",
-   "km_29e845c8753c",
-   "km_d3ab4ee06e4f",
-   "km_431cc4f47856",
-   "km_0f4f47404edb",
-   "km_2649ea451f73",
-   "km_1ac10855c6bb",
-   "km_3f7ec0fa4948",
-   "km_bba5cdb47f7c",
-   "km_8069a4d6d5a4",
-   "km_f0ad4e56f08b",
-   "km_e2649ba28ab5",
-   "km_d5a6ec4d1c14",
-   "km_9577ec3c4f63",
-   "km_e35f704fe319",
-   "km_438246375c37",
-   "km_560fc3e20486",
-   "km_71e9b694f5c4",
-   "km_abae48767302",
-   "km_a0ef390e52be",
-   "km_8d79f2d27d3e",
-   "km_b0b17827937e",
-   "km_9e869d0be781",
-   "km_763cf7a92bf3",
-   "km_d3d9e2545139",
-   "km_305d52633e79",
-   "km_f431c5a52ac4",
-   "km_cb8f09274dde",
-   "km_29b16462df2c",
-   "km_c7d0acc535b5",
-   "km_cc539ce5f738",
-   "km_ad992782f3e6",
-   "km_360c9ea374a4",
-   "km_2e665db5c6a9",
-   "km_bc2e25dec42b",
-   "km_5695558fbafb",
-   "km_efc4e49ecc81",
-   "km_03f1847f4eb1",
-   "km_4c1b47ac3f30",
-   "km_fa6c35239b03",
-   "km_8a5404d1457d",
-   "km_0bd198487b14",
-   "km_30c3ce5514b9",
-   "km_ef95c01b66be",
-   "km_ca168c5b14a4",
-   "km_5b46f6f59ec8",
-   "km_b0884ec0dd63",
-   "km_33827af5e601",
-   "km_9d25e294e75f",
-   "km_5d9becc93245",
-   "km_8c457d4a1cdf",
    "km_49c963646c2d",
    "km_e52a70d057c1",
    "km_2d138d62ebb9",
@@ -8252,12 +8252,530 @@
    "dvadasha_stotra:DDS_C12_V07",
    "dvadasha_stotra:DDS_C12_V08",
    "dvadasha_stotra:DDS_C12_V09",
-   "dvadasha_stotra:DDS_C12_V10"
+   "dvadasha_stotra:DDS_C12_V10",
+   "vishnu_sahasranama:VSN_PP_X001",
+   "vishnu_sahasranama:VSN_PP_X002",
+   "vishnu_sahasranama:VSN_PP_X009",
+   "vishnu_sahasranama:VSN_PP_V017",
+   "vishnu_sahasranama:VSN_PP_V018",
+   "vishnu_sahasranama:VSN_PP_V019",
+   "vishnu_sahasranama:VSN_PP_V020",
+   "vishnu_sahasranama:VSN_PP_V021",
+   "vishnu_sahasranama:VSN_PP_V022",
+   "vishnu_sahasranama:VSN_SK_X001",
+   "vishnu_sahasranama:VSN_DH_V001",
+   "vishnu_sahasranama:VSN_DH_V002",
+   "vishnu_sahasranama:VSN_DH_V003",
+   "vishnu_sahasranama:VSN_DH_V004",
+   "vishnu_sahasranama:VSN_DH_V005",
+   "vishnu_sahasranama:VSN_DH_V006",
+   "vishnu_sahasranama:VSN_DH_V007",
+   "vishnu_sahasranama:VSN_ST_V083",
+   "vishnu_sahasranama:VSN_ST_V092",
+   "vishnu_sahasranama:VSN_ST_V093",
+   "vishnu_sahasranama:VSN_ST_V094",
+   "vishnu_sahasranama:VSN_ST_V095",
+   "vishnu_sahasranama:VSN_ST_V096",
+   "vishnu_sahasranama:VSN_ST_V097",
+   "vishnu_sahasranama:VSN_ST_V098",
+   "vishnu_sahasranama:VSN_ST_V099",
+   "vishnu_sahasranama:VSN_ST_V100",
+   "vishnu_sahasranama:VSN_ST_V101",
+   "vishnu_sahasranama:VSN_ST_V102",
+   "vishnu_sahasranama:VSN_ST_V103",
+   "vishnu_sahasranama:VSN_ST_V104",
+   "vishnu_sahasranama:VSN_ST_V105",
+   "vishnu_sahasranama:VSN_ST_V106",
+   "vishnu_sahasranama:VSN_ST_V107",
+   "vishnu_sahasranama:VSN_ST_V108",
+   "vishnu_sahasranama:VSN_PH_V001",
+   "vishnu_sahasranama:VSN_PH_V002",
+   "vishnu_sahasranama:VSN_PH_V003",
+   "vishnu_sahasranama:VSN_PH_V004",
+   "vishnu_sahasranama:VSN_PH_V005",
+   "vishnu_sahasranama:VSN_PH_V006",
+   "vishnu_sahasranama:VSN_PH_V007",
+   "vishnu_sahasranama:VSN_PH_V008",
+   "vishnu_sahasranama:VSN_PH_V009",
+   "vishnu_sahasranama:VSN_PH_V010",
+   "vishnu_sahasranama:VSN_PH_V011",
+   "vishnu_sahasranama:VSN_PH_V012",
+   "vishnu_sahasranama:VSN_PH_V013",
+   "vishnu_sahasranama:VSN_PH_V014",
+   "vishnu_sahasranama:VSN_PH_V015",
+   "vishnu_sahasranama:VSN_PH_V016",
+   "vishnu_sahasranama:VSN_PH_V017",
+   "vishnu_sahasranama:VSN_PH_V018",
+   "vishnu_sahasranama:VSN_PH_V019",
+   "vishnu_sahasranama:VSN_PH_V020",
+   "vishnu_sahasranama:VSN_PH_V021",
+   "vishnu_sahasranama:VSN_PH_V022",
+   "vishnu_sahasranama:VSN_PH_V023",
+   "vishnu_sahasranama:VSN_PH_V024",
+   "vishnu_sahasranama:VSN_PH_V025",
+   "vishnu_sahasranama:VSN_PH_V026",
+   "vishnu_sahasranama:VSN_PH_V027",
+   "vishnu_sahasranama:VSN_PH_V028",
+   "vishnu_sahasranama:VSN_PH_V029",
+   "vishnu_sahasranama:VSN_PH_V030",
+   "vishnu_sahasranama:VSN_PH_V031",
+   "vishnu_sahasranama:VSN_PH_V032",
+   "vishnu_sahasranama:VSN_PH_V033",
+   "vishnu_sahasranama:VSN_UP_X001",
+   "vishnu_sahasranama:VSN_UP_X002",
+   "vishnu_sahasranama:VSN_UP_X003",
+   "vishnu_sahasranama:VSN_UP_X004",
+   "vishnu_sahasranama:VSN_UP_X005",
+   "vishnu_sahasranama:VSN_UP_X006",
+   "vishnu_sahasranama:VSN_UP_X007",
+   "vishnu_sahasranama:VSN_UP_X008",
+   "vishnu_sahasranama:VSN_UP_X009",
+   "vishnu_sahasranama:VSN_UP_X010",
+   "vishnu_sahasranama:VSN_UP_X011",
+   "vishnu_sahasranama:VSN_UP_X012",
+   "vishnu_sahasranama:VSN_UP_X013",
+   "vishnu_sahasranama:VSN_UP_X014",
+   "vishnu_sahasranama:VSN_UP_X015",
+   "vishnu_sahasranama:VSN_UP_X016",
+   "vishnu_sahasranama:VSN_UP_X017",
+   "vishnu_sahasranama:VSN_UP_X018",
+   "vishnu_sahasranama:VSN_UP_X019",
+   "vishnu_sahasranama:VSN_UP_X020",
+   "vishnu_sahasranama:VSN_UP_X021",
+   "vishnu_sahasranama:VSN_UP_X022",
+   "vishnu_sahasranama:VSN_UP_X023",
+   "vishnu_sahasranama:VSN_UP_X024",
+   "vishnu_sahasranama:VSN_UP_X025",
+   "vishnu_sahasranama:VSN_UP_X026"
   ]
  },
  "exclusions": {
   "dataset_all": [],
   "dataset_verified": [
+   {
+    "id": "km_b95aeed26c23",
+    "reason": "review_status=review: 123.8s is 8.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_69cec56c9eb7",
+    "reason": "review_status=review: 109.0s is 7.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ffaa68a4e62f",
+    "reason": "review_status=review: 135.1s is 9.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_53cb8ff257ce",
+    "reason": "review_status=review: 96.5s is 6.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ddd3c0ee4998",
+    "reason": "review_status=review: 126.0s is 8.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_35bf6a71c76d",
+    "reason": "review_status=review: 132.1s is 9.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ff02f89e168a",
+    "reason": "review_status=review: 112.6s is 8.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_c1a548a89cdb",
+    "reason": "review_status=review: 142.0s is 10.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_1e9b46375167",
+    "reason": "review_status=review: 120.9s is 8.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_4548edfe6d59",
+    "reason": "review_status=review: 113.7s is 8.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_aa02ed70c2b1",
+    "reason": "review_status=review: 112.4s is 8.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_fad7f25f80f1",
+    "reason": "review_status=review: 192.3s is 13.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_07f3c1b389dd",
+    "reason": "review_status=review: 100.0s is 7.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_6b5168a867f6",
+    "reason": "review_status=review: 110.5s is 7.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_6fc3e922c55e",
+    "reason": "review_status=review: 102.3s is 7.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_61d85e4b90e8",
+    "reason": "review_status=review: 105.2s is 7.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_829551e5052e",
+    "reason": "review_status=review: 127.7s is 9.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_f958ab4c5d2d",
+    "reason": "review_status=review: 107.0s is 7.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_e8f4eb5b2757",
+    "reason": "review_status=review: 126.7s is 9.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_90569fc7e2ca",
+    "reason": "review_status=review: 122.7s is 8.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_6e07195b491d",
+    "reason": "review_status=review: 138.1s is 9.5× the single-rendition upper bound (14.5s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_3b45e69ce1af",
+    "reason": "review_status=review: 138.0s is 9.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_fda0be981293",
+    "reason": "review_status=review: 124.3s is 8.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_2edc1067915e",
+    "reason": "review_status=review: 130.5s is 9.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_8ecc242ee4c5",
+    "reason": "review_status=review: 162.3s is 11.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_707d6b4a1b20",
+    "reason": "review_status=review: 132.6s is 9.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_02ad43571aba",
+    "reason": "review_status=review: 144.0s is 10.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_96ffc786c8c1",
+    "reason": "review_status=review: 168.3s is 12.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_a0660b074f06",
+    "reason": "review_status=review: 179.1s is 12.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ec5fe111f51d",
+    "reason": "review_status=review: 149.1s is 10.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_4065d17c8e82",
+    "reason": "review_status=review: 154.0s is 10.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_f9f1e6b17b61",
+    "reason": "review_status=review: 149.7s is 10.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5e4b4d3672ac",
+    "reason": "review_status=review: 137.1s is 9.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_7cfd7ab20e45",
+    "reason": "review_status=review: 151.5s is 10.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5df3ecf9cea1",
+    "reason": "review_status=review: 179.3s is 12.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_11ead7093b5e",
+    "reason": "review_status=review: 161.4s is 11.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5524a5cbf6b4",
+    "reason": "review_status=review: 139.5s is 9.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_516e0391e2d3",
+    "reason": "review_status=review: 119.1s is 8.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_2b0e868899c5",
+    "reason": "review_status=review: 158.7s is 11.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_920cc152e428",
+    "reason": "review_status=review: 152.3s is 10.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_24c260e39b39",
+    "reason": "review_status=review: 137.6s is 9.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5e571f2c1dea",
+    "reason": "review_status=review: 170.9s is 12.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_92359bc6a99f",
+    "reason": "review_status=review: 129.6s is 9.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_26b7e9418f2f",
+    "reason": "review_status=review: 128.1s is 9.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ba79a2d9c810",
+    "reason": "review_status=review: 128.1s is 9.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_2a424008152d",
+    "reason": "review_status=review: 152.7s is 10.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_105b550aa187",
+    "reason": "review_status=review: 135.7s is 9.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_0caa398abf92",
+    "reason": "review_status=review: 96.4s is 6.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_4cd68ed19423",
+    "reason": "review_status=review: 99.8s is 7.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_4d5dd4f886ee",
+    "reason": "review_status=review: 140.5s is 10.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_821bac6757c6",
+    "reason": "review_status=review: 113.8s is 8.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_c5467dc9fd56",
+    "reason": "review_status=review: 104.0s is 7.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_2f61dea419b5",
+    "reason": "review_status=review: 101.2s is 7.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_4dd1d1be8c42",
+    "reason": "review_status=review: 117.1s is 8.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_a8cc2767c0f9",
+    "reason": "review_status=review: 141.5s is 10.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_fd66a9bd2714",
+    "reason": "review_status=review: 127.0s is 9.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_29e845c8753c",
+    "reason": "review_status=review: 137.6s is 9.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_d3ab4ee06e4f",
+    "reason": "review_status=review: 158.6s is 11.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_431cc4f47856",
+    "reason": "review_status=review: 113.2s is 8.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_0f4f47404edb",
+    "reason": "review_status=review: 122.9s is 8.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_2649ea451f73",
+    "reason": "review_status=review: 140.9s is 10.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_1ac10855c6bb",
+    "reason": "review_status=review: 156.9s is 11.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_3f7ec0fa4948",
+    "reason": "review_status=review: 133.2s is 9.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_bba5cdb47f7c",
+    "reason": "review_status=review: 127.9s is 9.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_8069a4d6d5a4",
+    "reason": "review_status=review: 130.3s is 9.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_f0ad4e56f08b",
+    "reason": "review_status=review: 128.6s is 9.1× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_e2649ba28ab5",
+    "reason": "review_status=review: 139.7s is 9.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_d5a6ec4d1c14",
+    "reason": "review_status=review: 119.3s is 8.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_9577ec3c4f63",
+    "reason": "review_status=review: 111.3s is 7.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_e35f704fe319",
+    "reason": "review_status=review: 129.3s is 9.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_438246375c37",
+    "reason": "review_status=review: 111.6s is 7.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_560fc3e20486",
+    "reason": "review_status=review: 124.9s is 8.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_71e9b694f5c4",
+    "reason": "review_status=review: 152.7s is 10.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_abae48767302",
+    "reason": "review_status=review: 129.2s is 8.9× the single-rendition upper bound (14.5s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_a0ef390e52be",
+    "reason": "review_status=review: 129.0s is 9.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_8d79f2d27d3e",
+    "reason": "review_status=review: 127.4s is 9.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_b0b17827937e",
+    "reason": "review_status=review: 141.4s is 10.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_9e869d0be781",
+    "reason": "review_status=review: 115.1s is 8.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_763cf7a92bf3",
+    "reason": "review_status=review: 130.2s is 9.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_d3d9e2545139",
+    "reason": "review_status=review: 104.7s is 7.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_305d52633e79",
+    "reason": "review_status=review: 115.6s is 8.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_f431c5a52ac4",
+    "reason": "review_status=review: 134.8s is 9.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_cb8f09274dde",
+    "reason": "review_status=review: 113.2s is 8.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_29b16462df2c",
+    "reason": "review_status=review: 131.8s is 9.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_c7d0acc535b5",
+    "reason": "review_status=review: 120.7s is 8.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_cc539ce5f738",
+    "reason": "review_status=review: 134.8s is 9.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ad992782f3e6",
+    "reason": "review_status=review: 117.4s is 8.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_360c9ea374a4",
+    "reason": "review_status=review: 121.6s is 8.6× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_2e665db5c6a9",
+    "reason": "review_status=review: 116.6s is 8.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_bc2e25dec42b",
+    "reason": "review_status=review: 108.4s is 7.7× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5695558fbafb",
+    "reason": "review_status=review: 123.9s is 8.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_efc4e49ecc81",
+    "reason": "review_status=review: 110.8s is 7.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_03f1847f4eb1",
+    "reason": "review_status=review: 144.1s is 10.2× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_4c1b47ac3f30",
+    "reason": "review_status=review: 183.5s is 13.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_fa6c35239b03",
+    "reason": "review_status=review: 127.2s is 9.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_8a5404d1457d",
+    "reason": "review_status=review: 117.6s is 8.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_0bd198487b14",
+    "reason": "review_status=review: 130.5s is 9.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_30c3ce5514b9",
+    "reason": "review_status=review: 126.0s is 8.9× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ef95c01b66be",
+    "reason": "review_status=review: 161.9s is 11.5× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_ca168c5b14a4",
+    "reason": "review_status=review: 117.1s is 8.3× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5b46f6f59ec8",
+    "reason": "review_status=review: 124.5s is 8.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_b0884ec0dd63",
+    "reason": "review_status=review: 126.5s is 9.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_33827af5e601",
+    "reason": "review_status=review: 138.2s is 9.8× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_9d25e294e75f",
+    "reason": "review_status=review: 104.6s is 7.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_5d9becc93245",
+    "reason": "review_status=review: 118.4s is 8.4× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
+   {
+    "id": "km_8c457d4a1cdf",
+    "reason": "review_status=review: 140.4s is 10.0× the single-rendition upper bound (14.1s) — likely repeats, teaching pauses or explanation included"
+   },
    {
     "id": "km_e1f0de4bb942",
     "reason": "review_status=review: 60.2s is 7.0× the single-rendition upper bound (8.6s) — likely repeats, teaching pauses or explanation included"
@@ -11895,6 +12413,430 @@
    {
     "id": "km_0849dce283b7",
     "reason": "duration too_short"
+   },
+   {
+    "id": "km_b95aeed26c23",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_69cec56c9eb7",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_ffaa68a4e62f",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_53cb8ff257ce",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_ddd3c0ee4998",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_35bf6a71c76d",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_ff02f89e168a",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_c1a548a89cdb",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_1e9b46375167",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_4548edfe6d59",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_aa02ed70c2b1",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_fad7f25f80f1",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_07f3c1b389dd",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_6b5168a867f6",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_6fc3e922c55e",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_61d85e4b90e8",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_829551e5052e",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_f958ab4c5d2d",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_e8f4eb5b2757",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_90569fc7e2ca",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_6e07195b491d",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_3b45e69ce1af",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_fda0be981293",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_2edc1067915e",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_8ecc242ee4c5",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_707d6b4a1b20",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_02ad43571aba",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_96ffc786c8c1",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_a0660b074f06",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_ec5fe111f51d",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_4065d17c8e82",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_f9f1e6b17b61",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_5e4b4d3672ac",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_7cfd7ab20e45",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_5df3ecf9cea1",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_11ead7093b5e",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_5524a5cbf6b4",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_516e0391e2d3",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_2b0e868899c5",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_920cc152e428",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_24c260e39b39",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_5e571f2c1dea",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_92359bc6a99f",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_26b7e9418f2f",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_ba79a2d9c810",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_2a424008152d",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_105b550aa187",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_0caa398abf92",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_4cd68ed19423",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_4d5dd4f886ee",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_821bac6757c6",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_c5467dc9fd56",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_2f61dea419b5",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_4dd1d1be8c42",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_a8cc2767c0f9",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_fd66a9bd2714",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_29e845c8753c",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_d3ab4ee06e4f",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_431cc4f47856",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_0f4f47404edb",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_2649ea451f73",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_1ac10855c6bb",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_3f7ec0fa4948",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_bba5cdb47f7c",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_8069a4d6d5a4",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_f0ad4e56f08b",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_e2649ba28ab5",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_d5a6ec4d1c14",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_9577ec3c4f63",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_e35f704fe319",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_438246375c37",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_560fc3e20486",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_71e9b694f5c4",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_abae48767302",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_a0ef390e52be",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_8d79f2d27d3e",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_b0b17827937e",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_9e869d0be781",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_763cf7a92bf3",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_d3d9e2545139",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_305d52633e79",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_f431c5a52ac4",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_cb8f09274dde",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_29b16462df2c",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_c7d0acc535b5",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_cc539ce5f738",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_ad992782f3e6",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_360c9ea374a4",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_2e665db5c6a9",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_bc2e25dec42b",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_5695558fbafb",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_efc4e49ecc81",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_03f1847f4eb1",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_4c1b47ac3f30",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_fa6c35239b03",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_8a5404d1457d",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_0bd198487b14",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_30c3ce5514b9",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_ef95c01b66be",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_ca168c5b14a4",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_5b46f6f59ec8",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_b0884ec0dd63",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_33827af5e601",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
+   },
+   {
+    "id": "km_9d25e294e75f",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_5d9becc93245",
+    "reason": "duration too_long; not verified"
+   },
+   {
+    "id": "km_8c457d4a1cdf",
+    "reason": "audio_quality=D (clipping); duration too_long; not verified"
    },
    {
     "id": "km_e1f0de4bb942",
