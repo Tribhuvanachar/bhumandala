@@ -37,13 +37,20 @@ print(f"uploaded → https://huggingface.co/spaces/{space}")
 # token as a secret so hf_hub can download them at runtime.
 import urllib.request
 tok = os.environ.get("HF_TOKEN")
-try:
-    req = urllib.request.Request("https://huggingface.co/api/models/ai4bharat/IndicF5/ask-access", data=b"", method="POST",
-                                 headers={"Authorization": f"Bearer {tok}"})
+gate_ok = False
+for url in ("https://huggingface.co/ai4bharat/IndicF5/ask-access", "https://huggingface.co/api/models/ai4bharat/IndicF5/ask-access"):
+    try:
+        req = urllib.request.Request(url, data=b"", method="POST", headers={"Authorization": f"Bearer {tok}"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            print(f"IndicF5 gate via {url}: HTTP {r.status}"); gate_ok = True; break
+    except Exception as e:
+        print(f"IndicF5 gate via {url}: {type(e).__name__}: {str(e)[:100]}")
+try:   # verify: can this token read the gated config?
+    req = urllib.request.Request("https://huggingface.co/ai4bharat/IndicF5/resolve/main/config.json", headers={"Authorization": f"Bearer {tok}"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        print("IndicF5 gate:", r.status)
+        print("IndicF5 gated read check: OK (HTTP", r.status, ")")
 except Exception as e:
-    print(f"IndicF5 gate request: {type(e).__name__}: {str(e)[:120]} (already accepted, or accept it once on the model page)")
+    print(f"IndicF5 gated read check: {type(e).__name__}: {str(e)[:100]} — the SarvamulaOrg account must click 'Agree and access repository' once at https://huggingface.co/ai4bharat/IndicF5")
 try:
     api.add_space_secret(repo_id=space, key="HF_TOKEN", value=tok, description="read gated ai4bharat/IndicF5 at runtime")
     print("space secret HF_TOKEN set")

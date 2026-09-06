@@ -158,6 +158,21 @@ def _guards(text, request):
     return text
 
 
+def _as_data(fn):
+    """The /call API of this Space delivers `data: null` for raised errors (message hidden), so every failure is
+    returned as (None, {"error": message}) instead — the reader shows the message, the UI shows the JSON."""
+    def wrapped(*a, **k):
+        try:
+            return fn(*a, **k)
+        except gr.Error as e:
+            return None, {"error": str(e)}
+        except Exception as e:
+            return None, {"error": f"{type(e).__name__}: {e}"}
+    wrapped.__name__ = fn.__name__
+    return wrapped
+
+
+@_as_data
 def synthesize_kamadhenu(text, ref_id, seed, request: gr.Request):
     """Kamadhenu trial: IndicF5 zero-shot with a 3BHU1 reference prompt. Same guards as /synthesize."""
     text = _guards(text, request)
@@ -175,6 +190,7 @@ def synthesize_kamadhenu(text, ref_id, seed, request: gr.Request):
     return (sr, audio), meta
 
 
+@_as_data
 def synthesize(text, dge_chandas, seed, request: gr.Request):
     # Every failure is raised as gr.Error so the /synthesize API returns a message instead of `data: null`
     # (Gradio hides other exception types from clients). The stage name says where it broke.
