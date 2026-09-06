@@ -160,7 +160,12 @@ def _guards(text, request):
 
 def _as_data(fn):
     """The /call API of this Space delivers `data: null` for raised errors (message hidden), so every failure is
-    returned as (None, {"error": message}) instead — the reader shows the message, the UI shows the JSON."""
+    returned as (None, {"error": message}) instead — the reader shows the message, the UI shows the JSON.
+    functools.wraps keeps the original signature visible, which Gradio needs to inject the `request: gr.Request`
+    argument (without it every call failed with "missing 1 required positional argument: 'request'")."""
+    import functools
+
+    @functools.wraps(fn)
     def wrapped(*a, **k):
         try:
             return fn(*a, **k)
@@ -168,7 +173,6 @@ def _as_data(fn):
             return None, {"error": str(e)}
         except Exception as e:
             return None, {"error": f"{type(e).__name__}: {e}"}
-    wrapped.__name__ = fn.__name__
     return wrapped
 
 
