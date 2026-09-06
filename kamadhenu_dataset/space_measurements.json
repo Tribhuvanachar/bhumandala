@@ -1,0 +1,66 @@
+{
+ "measured_at": "06 Sep 2026, 07:17 PM IST",
+ "space": "https://sarvamulaorg-kamadhenu.hf.space",
+ "calls": 14,
+ "rtf_mean": null,
+ "gpu_seconds_per_verse_mean": null,
+ "cold_start_wall_seconds": null,
+ "rows": [
+  {
+   "chandas": "अनुष्टुप्",
+   "error": "None"
+  },
+  {
+   "chandas": "इन्द्रवंशा",
+   "error": "None"
+  },
+  {
+   "chandas": "इन्द्रवज्रा",
+   "error": "None"
+  },
+  {
+   "chandas": "उपेन्द्रवज्रा",
+   "error": "None"
+  },
+  {
+   "chandas": "द्रुतविलम्बित",
+   "error": "None"
+  },
+  {
+   "chandas": "प्रमाणिका",
+   "error": "None"
+  },
+  {
+   "chandas": "भुजङ्गप्रयात",
+   "error": "None"
+  },
+  {
+   "chandas": "मालिनी",
+   "error": "None"
+  },
+  {
+   "chandas": "रथोद्धता",
+   "error": "None"
+  },
+  {
+   "chandas": "वंशस्थ",
+   "error": "None"
+  },
+  {
+   "chandas": "वसन्ततिलका",
+   "error": "None"
+  },
+  {
+   "chandas": "शार्दूलविक्रीडित",
+   "error": "None"
+  },
+  {
+   "chandas": "शालिनी",
+   "error": "None"
+  },
+  {
+   "chandas": "स्रग्धरा",
+   "error": "None"
+  }
+ ]
+}
