@@ -49,23 +49,28 @@
     var chandas = opts.chandas != null ? opts.chandas : chandasOf(text);
     var seed = opts.seed != null ? opts.seed : 60;
     var say = opts.onStatus || function () {};
+    // engine: 'vagdhenu' (baseline, /synthesize) or 'kamadhenu' (IndicF5 zero-shot with a 3BHU1 reference clip,
+    // /synthesize_kamadhenu; opts.ref = reference id from refs.json)
+    var engine = opts.engine === 'kamadhenu' ? 'kamadhenu' : 'vagdhenu';
+    var endpoint = engine === 'kamadhenu' ? 'synthesize_kamadhenu' : 'synthesize';
+    var payload = engine === 'kamadhenu' ? [text, opts.ref || 'tp_anushtubh_19', seed] : [text, chandas, seed];
     say('requesting');
-    return fetch(space + '/gradio_api/call/synthesize', {
+    return fetch(space + '/gradio_api/call/' + endpoint, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: [text, chandas, seed] })
+      body: JSON.stringify({ data: payload })
     }).then(function (r) {
       if (!r.ok) throw new Error('Space returned ' + r.status);
       return r.json();
     }).then(function (j) {
       say('rendering (first call after idle can take a minute)');
-      return fetch(space + '/gradio_api/call/synthesize/' + j.event_id);
+      return fetch(space + '/gradio_api/call/' + endpoint + '/' + j.event_id);
     }).then(function (r) { return r.text(); }).then(function (txt) {
       var data = parseSSE(txt);
       if (!data) throw new Error('no result from the Space');
       var url = fileUrl(space, data[0]);
       if (!url) throw new Error('Space returned no audio');
       say('done');
-      return { url: url, meta: data[1] || {}, chandas: chandas };
+      return { url: url, meta: data[1] || {}, chandas: chandas, engine: engine };
     });
   }
   window.DGEKamadhenu = {

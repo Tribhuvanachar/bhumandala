@@ -4,7 +4,8 @@ Same serving model as prathoshap/vagdhenu-demo (the file this is derived from, A
 renderer is created lazily inside an @spaces.GPU function, so a GPU is attached only for the seconds a verse
 is being synthesised. Differences from the demo:
 
-  * API-first: /synthesize(text, dge_chandas, seed) → (audio, json). The metre comes from the caller —
+  * API-first: /synthesize(text, dge_chandas, seed) → (audio, json) [Vāgdhenu baseline] and
+    /synthesize_kamadhenu(text, ref_id, seed) → (audio, json) [IndicF5 zero-shot, 3BHU1 reference]. The metre comes from the caller —
     DGE's own chandas engine runs in the browser (dge/js/chandas.js) and its verdict is mapped onto the
     reference bank by meter_map.json. Auto-detection with Vāgdhenu's tts_meter is only the fallback.
   * The voice is configuration: VAGDHENU_HF / VAGDHENU_VOICE / VAGDHENU_VOC env vars (Kamadhenu's own voice
@@ -51,6 +52,27 @@ BANK = json.load(open(BANK_PATH, encoding="utf-8"))
 BANK_KEYS = [k for k, v in BANK.items() if not k.startswith("_") and isinstance(v, dict) and "wav" in v]
 
 _RENDERER = None
+
+# ---- Engine 2: "Kamadhenu trial" = IndicF5 base model (ai4bharat/IndicF5, MIT) in zero-shot mode, prompted
+# with one of the project lead's own recordings (refs/refs.json; consent recorded in the dataset). This is NOT a
+# trained Kamadhenu model — it is the licensed base model imitating the reference voice, offered side by side
+# with the Vāgdhenu baseline so the difference can be heard before any training is approved.
+INDICF5_REPO = os.environ.get("KAMADHENU_INDICF5", "ai4bharat/IndicF5")
+REFS_DIR = os.path.join(HERE, "refs")
+REFS = json.load(open(os.path.join(REFS_DIR, "refs.json"), encoding="utf-8"))["refs"]
+_INDICF5 = None
+
+
+def _get_indicf5():
+    global _INDICF5
+    if _INDICF5 is None:
+        from transformers import AutoModel
+        _INDICF5 = AutoModel.from_pretrained(INDICF5_REPO, trust_remote_code=True, token=os.environ.get("HF_TOKEN") or None)
+        try:
+            _INDICF5 = _INDICF5.to("cuda")
+        except Exception:
+            pass
+    return _INDICF5
 
 
 def _get_renderer():
@@ -103,6 +125,56 @@ def _render(text, bank_key, seed):
     return sr, audio, round(time.time() - t0, 2)
 
 
+@spaces.GPU(duration=120)
+def _render_indicf5(text, ref_id, seed):
+    import numpy as np, torch
+    torch.manual_seed(int(seed))
+    r = REFS[ref_id]
+    t0 = time.time()
+    audio = _get_indicf5()(text, ref_audio_path=os.path.join(REFS_DIR, r["wav"]), ref_text=r["text"])
+    audio = np.asarray(audio)
+    if audio.dtype == np.int16:
+        audio = audio.astype(np.float32) / 32768.0
+    return 24000, audio.astype(np.float32), round(time.time() - t0, 2)
+
+
+def _guards(text, request):
+    text = (text or "").strip()
+    if not text:
+        raise gr.Error("empty verse")
+    try:
+        msg = limits.validate_one_shloka(text)
+    except Exception as e:
+        raise gr.Error(f"validate: {type(e).__name__}: {e}")
+    if msg:
+        raise gr.Error(msg)
+    try:
+        ip = limits.client_ip(request) if request is not None else "unknown"
+        allowed = limits.check_and_count(ip)
+    except Exception as e:
+        raise gr.Error(f"quota: {type(e).__name__}: {e}")
+    if not allowed:
+        raise gr.Error(f"daily limit of {limits.DAILY_LIMIT} verses reached from this network")
+    return text
+
+
+def synthesize_kamadhenu(text, ref_id, seed, request: gr.Request):
+    """Kamadhenu trial: IndicF5 zero-shot with a 3BHU1 reference prompt. Same guards as /synthesize."""
+    text = _guards(text, request)
+    if ref_id not in REFS:
+        raise gr.Error(f"unknown reference '{ref_id}'; choose one of {', '.join(REFS)}")
+    try:
+        sr, audio, gpu_s = _render_indicf5(text, ref_id, seed)
+    except Exception as e:
+        raise gr.Error(f"rendering failed: {type(e).__name__}: {e}")
+    r = REFS[ref_id]
+    meta = {"engine": "indicf5-zero-shot", "base_model": f"{INDICF5_REPO} (MIT)", "voice": "3BHU1 reference prompt (no training)",
+            "reference": {"id": ref_id, "chandas": r["chandas"], "work": r["work"], "seconds": r["seconds"]},
+            "seed": int(seed), "sample_rate": sr, "audio_seconds": round(len(audio) / sr, 2), "gpu_seconds": gpu_s,
+            "note": "zero-shot: the base model imitates the reference clip's voice and pace; metre is not modelled — compare with /synthesize (Vāgdhenu baseline)"}
+    return (sr, audio), meta
+
+
 def synthesize(text, dge_chandas, seed, request: gr.Request):
     # Every failure is raised as gr.Error so the /synthesize API returns a message instead of `data: null`
     # (Gradio hides other exception types from clients). The stage name says where it broke.
@@ -150,6 +222,18 @@ with gr.Blocks(title="Kamadhenu — DGE Sanskrit chant") as demo:
             out = gr.Audio(label="Chant", type="numpy")
             meta = gr.JSON(label="meta")
     btn.click(synthesize, inputs=[txt, chandas, seed], outputs=[out, meta], api_name="synthesize")
+    gr.Markdown("## Kamadhenu trial — IndicF5 (MIT) zero-shot, prompted with the lead's own recording\n"
+                "Not a trained model: the base model imitates the chosen reference clip. Same verse box above.")
+    with gr.Row():
+        with gr.Column():
+            ref = gr.Dropdown(choices=[(f"{v['chandas']} — {v['work']} ({v['seconds']} s)", k) for k, v in REFS.items()],
+                              value=next(iter(REFS)), label="Reference voice clip (3BHU1)")
+            seed2 = gr.Slider(0, 1000, value=60, step=1, label="Seed")
+            btn2 = gr.Button("Chant (Kamadhenu trial)", variant="secondary")
+        with gr.Column():
+            out2 = gr.Audio(label="Chant (IndicF5 zero-shot)", type="numpy")
+            meta2 = gr.JSON(label="meta")
+    btn2.click(synthesize_kamadhenu, inputs=[txt, ref, seed2], outputs=[out2, meta2], api_name="synthesize_kamadhenu")
 
 if __name__ == "__main__":
     demo.launch(show_error=True)

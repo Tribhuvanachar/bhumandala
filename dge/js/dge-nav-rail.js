@@ -40,7 +40,8 @@
     { id: "kavya", label: "Kāvya", glyph: "का", href: "dge/kavya/index.html" },
     { id: "tirtha", label: "Tīrtha", glyph: "ती", href: "dge/tirtha/index.html" },
     { id: "guru-parampara", label: "Guru Paramparā", glyph: "गु", href: "dge/guru-parampara/index.html" },
-    { id: "dasa-sahitya", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/index.html" }
+    { id: "dasa-sahitya", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/index.html" },
+    { id: "kamadhenu", label: "Kamadhenu trials", glyph: "🐄", href: "dge/kamadhenu.html" }
   ];
 
   // Per-device vertical position of the tab (px from viewport top). Absent
