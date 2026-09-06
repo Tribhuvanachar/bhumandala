@@ -23,17 +23,19 @@ D′ chat path   python3 tools/saroddhara/make_chat_batch.py --work <dir> --prin
                (no API credits needed; works from a phone).
 E′ chat apply  python3 tools/saroddhara/apply_chat_answers.py pasted_reply.txt [--sync-bhagavata]
                parses the chat's JSON (fences/prose tolerated), merges into verify_output/answers.json, runs E.
-F  cross-check python3 tools/saroddhara/mula_crosscheck.py
-               → dge/data/ocr_staging/bhagavata_saroddhara/verify_input/mula_crosscheck.json
-               every verse whose printed text (Vision OCR) differs word-by-word from the DGE Bhāgavata master,
-               bucketed: not_unified / unified_print_word_diffs / unified_print_noise_only.
+F  cross-check python3 tools/saroddhara/mula_crosscheck.py --batches 20 --exclude BS_V163,…
+               → verify_input/mula_crosscheck.json (every verse whose PRINT differs from the DGE master, word by
+               word) + diffs_batch_NN.json (compact word-diff items, no verse bodies, for a chat without URL access).
+               decision=dge on an already-unified verse only confirms it; a note that names a print reading becomes
+               a "पाठभेदः (मुद्रित-सारोद्धारः): …" line in the verse's `notes` (visible in the reader).
 ```
 
 **One text, not two.** The DGE Madhva Bhāgavata (`purana/maha_purana/bhagavata_purana_madhva`) is the master
 copy of every verse the Sāroddhāra quotes; a verified Sāroddhāra verse carries that text verbatim and keeps the
 print's OCR in `ocr`. A human decision of `dge` re-confirms that; a decision of `printed` (a genuine variant
 reading in Viṣṇutīrtha's edition) rewrites the Sāroddhāra verse and, with `--sync-bhagavata`, the master shloka
-too (old text kept in `previous_text` + `revision`), so the two never drift apart.
+too (old text kept in `previous_text` + `revision`), so the two never drift apart. A `dge` decision whose note
+names the print's reading leaves the text alone and records the variant as a पाठभेदः line on the Sāroddhāra verse.
 
 Rules: every verse is matched to the Madhva Bhāgavata already in DGE (`bhagavata_purana_madhva`) by its printed
 reference (±3) and, when that fails, by text search over the whole Bhāgavata; verified matches take the DGE text as

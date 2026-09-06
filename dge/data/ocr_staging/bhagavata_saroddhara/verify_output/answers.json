@@ -1,0 +1,58 @@
+{
+ "BS_V163": {
+  "accept_vision": false,
+  "note": "OCR confusion न/च; master न kept (na hi dvitīyo guṇa-saṅgha-varjitaḥ). No variant.",
+  "decision": "dge",
+  "bhagavata_ref": "8.8.20",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ },
+ "BS_V165": {
+  "accept_vision": false,
+  "note": "Print reads वरम् (the chosen bridegroom, Lakṣmī-svayaṃvara); DGE master keeps परम्.",
+  "decision": "dge",
+  "bhagavata_ref": "8.8.22",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ },
+ "BS_V105": {
+  "accept_vision": false,
+  "note": "Print reads रतिः (attachment); DGE master keeps मतिः (Balarāma to Rukmiṇī).",
+  "decision": "dge",
+  "bhagavata_ref": "10.54.55",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ },
+ "BS_V280": {
+  "accept_vision": false,
+  "note": "Print भवेम is a भ/व्र ligature slip; classical reading व्रजेम kept. No variant.",
+  "decision": "dge",
+  "bhagavata_ref": "3.16.41",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ },
+ "BS_V360": {
+  "accept_vision": false,
+  "note": "Print reads संस्मृत्य (remembering); DGE master keeps संश्राव्य (Yamarāja's teaching).",
+  "decision": "dge",
+  "bhagavata_ref": "6.3.32",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ },
+ "BS_V212": {
+  "accept_vision": false,
+  "note": "Print word order तत्वसूक्ष्मं (recension variance); DGE master order सूक्ष्मतत्वं kept.",
+  "decision": "dge",
+  "bhagavata_ref": "11.14.26",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ },
+ "BS_V311": {
+  "accept_vision": false,
+  "note": "Print word order लौकिकवैदिकैर्जनैः (recension variance); DGE master order वैदिकलौकिकैर्जनैः kept.",
+  "decision": "dge",
+  "bhagavata_ref": "12.4.31",
+  "answered_at": "2026-09-06 06:57",
+  "via": "gemini_chat"
+ }
+}

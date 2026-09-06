@@ -12,7 +12,8 @@ Open `kamadhenu_dataset/KAMADHENU_STATUS.html` first. Everything below is derive
    - and the single file https://drive.google.com/file/d/1aTBp56uEFK-EAPTEQEuBXmrjAz7z5n03/view
    If you prefer not to share them publicly, download each as a zip and follow §B.
 3. **Confirm the "vsn" recordings** (106 files, `vsn1.aac … vsn16.aac` and `vsn1.1.aac … vsn1.91.aac` in the Drive folder "Audio"). The Viṣṇu Sahasranāma text is now in DGE (SarvaMūla › stotra) and the pipeline maps `vsn1.<N>` to stotram verse N at 0.55 confidence; play `vsn1.1.aac` and `vsn5.aac` once and say whether that reading is right (and what the `vsn1..16` "Starting" files are — pūrva-pīṭhikā? dhyāna?). Each file runs ~2 min, so these are teaching-style renditions too.
-4. **Listen to two Gītā files and describe them.** Every Gītā recording (401 files) is 46–120 seconds long, 5–8× longer than one verse takes. Play `incoming_audio/drive/Gita Shlokas__Adhyaya 2/G.2.10.aac` and `…/Adhyaya 15/G.15.1.1.mp3` and tell Claude what happens inside (verse repeated? meaning spoken? two voices?). That answer decides how 400 files get segmented.
+4. **Get a free Hugging Face account for DGE** (huggingface.co → Sign up; verified e-mail; it must be 30 days old before it can host GPU Spaces, so do this now). That is the whole "GPU infrastructure": Dr. Prathosh's live demo runs on a free Hugging Face ZeroGPU Space, and Kamadhenu will run the same way — a GPU is attached only for the seconds a verse is being generated, ₹0 within the daily quota, and the 3 GB of model weights stay on Hugging Face, not in our repo. Details: `DEPLOYMENT_REFERENCE.md`. Nothing to buy; no server to rent.
+5. **Listen to two Gītā files and describe them.** Every Gītā recording (401 files) is 46–120 seconds long, 5–8× longer than one verse takes. Play `incoming_audio/drive/Gita Shlokas__Adhyaya 2/G.2.10.aac` and `…/Adhyaya 15/G.15.1.1.mp3` and tell Claude what happens inside (verse repeated? meaning spoken? two voices?). That answer decides how 400 files get segmented.
 
 ## B. PROVIDE FILES (put these under `kamadhenu_dataset/incoming_audio/`)
 
@@ -56,7 +57,7 @@ What NOT to record yet: anuṣṭubh, upajāti, vasantatilakā, स्वाग�
 
 ## E. DO NOT DO YET
 
-- Do not train or fine-tune anything (no decided voice, no clean masters, no GPU).
+- Do not train or fine-tune anything (no decided voice, no clean masters). Do not rent a GPU server — serving runs on a ZeroGPU Space (`DEPLOYMENT_REFERENCE.md`).
 - Do not record hours of training audio before §A.1 and §D.1 are done.
 - Do not clean/renormalise/re-encode the fetched recordings — the pipeline never modifies originals and neither should you.
 - Do not build a second Sanskrit text database for TTS — DGE is the source; add missing works (Vāyu Stuti, Sāroddhāra, Saṅkalpa Gadya) to DGE instead.

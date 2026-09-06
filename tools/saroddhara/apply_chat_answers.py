@@ -96,7 +96,10 @@ def to_answer(ans, batch, present):
     if dec == "dge":
         c = b.get("dge_mula_candidate")
         if isinstance(c, list): c = next((x["text"] for x in c if ref and x.get("ref") == ref), c[0]["text"] if c else None)
-        if not (txt or c): return None, "dge decision but no DGE candidate in the batch file"
+        if not (txt or c):
+            # verse already unified with the master (mula_crosscheck items): confirm + note only, text untouched
+            if n in present: return {"verified_text": None, "accept_vision": False, "note": note, "decision": dec, "bhagavata_ref": ref}, "verse"
+            return None, "dge decision but no DGE candidate in the batch file"
         return {"verified_text": txt or c, "accept_vision": False, "note": note, "decision": dec, "bhagavata_ref": ref}, "verse"
     if dec == "printed":
         if not txt: return None, "printed decision without verified_text"
@@ -127,6 +130,7 @@ def main():
                 if why == "unsure": answers.setdefault("_unsure", {})[ans["id"]] = {"note": ans.get("note"), "at": stamp}
                 continue
             conv["answered_at"] = stamp; conv["via"] = "gemini_chat"
+            conv = {k: v for k, v in conv.items() if v is not None}
             answers[ans["id"]] = conv; n_new += 1
     ANSWERS.parent.mkdir(parents=True, exist_ok=True)
     json.dump(answers, open(ANSWERS, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

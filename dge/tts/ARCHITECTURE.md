@@ -1,7 +1,7 @@
 # DGE Sanskrit TTS & Chanting Architecture
 
-**Version 1.1 — 10 August 2026** (supersedes v1.0: adds §22-30, the Bhāgavata-Vāṇi
-APK vs. Vāgdhenu separation-of-responsibilities analysis)
+**Version 1.2 — 6 September 2026** (v1.1 + §28a: the serving layer is a Hugging Face ZeroGPU
+Space, as verified on Vāgdhenu's live deployment — not a rented GPU server)
 
 > **Status: planning document, not yet implemented.** Stored here for when TTS/chanting
 > work actually starts. No code in `dge/` currently reads or depends on anything in this
@@ -483,6 +483,26 @@ This is inspired by the broader Sanskrit speech-recognition direction: Sanskrit 
 ```
 
 The AI infrastructure and application infrastructure should therefore be independently scalable.
+
+### 28a. Serving layer, decided (6 Sep 2026)
+
+Verified against the live deployment (`kamadhenu_dataset/DEPLOYMENT_REFERENCE.md`): Vāgdhenu's public demo
+is a Hugging Face **ZeroGPU** Gradio Space — the GPU is attached only inside the `@spaces.GPU` synthesis
+call and released after; the 3 GB of weights are downloaded into the Space from `prathoshap/vagdhenu`;
+inference runs at RTF 0.63 (≈ 6–15 GPU s per verse); hosting is free on a personal account and callers
+pay nothing within a daily quota (5 min free, 40 min PRO; $1 per 10 GPU-min beyond). DGE adopts the same
+shape, so "TTS infrastructure" in the diagram above means:
+
+```
+GitHub Pages (static DGE)  ──HTTPS──►  HF Space <dge>/kamadhenu (ZeroGPU)  ──►  WAV
+     chandas.js decides the metre        app.py + Vāgdhenu src @ pinned commit
+     kamadhenu.js calls /synthesize      weights pulled from HF at first call
+```
+
+Mode 1 (pre-rendered library → M4A on the audio CDN, no GPU at play time) remains the default for
+important texts; Mode 2 ("generate this verse") uses the Space live. The scaffold is
+`tools/kamadhenu/space/`; the client is `dge/js/kamadhenu.js`. A warm dedicated GPU (Vāgdhenu's
+`demo/server.py` pattern) is deferred until measured Mode 2 demand justifies it.
 
 ## 29. Recommended development order
 
