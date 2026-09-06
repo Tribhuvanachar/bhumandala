@@ -29,13 +29,21 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           test -n "$HF_TOKEN" || { echo "HF_TOKEN secret is not set"; exit 1; }
-          # the logs endpoint streams SSE; read for 20 s then stop
-          timeout 20 curl -sS -N -H "Authorization: Bearer $HF_TOKEN" \
-            "https://api.hf.space/v1/${{ inputs.space }}/logs/run" > run.log || true
-          echo "==== run log tail ===="; tail -n "${{ inputs.lines }}" run.log
-          timeout 20 curl -sS -N -H "Authorization: Bearer $HF_TOKEN" \
-            "https://api.hf.space/v1/${{ inputs.space }}/logs/build" > build.log || true
-          echo "==== build log tail ===="; tail -n 60 build.log
+          # the logs endpoints stream SSE; read for 25 s then stop (hub API first, legacy host as fallback)
+          for kind in run build; do
+            timeout 25 curl -sS -N -H "Authorization: Bearer $HF_TOKEN" -H "Accept: text/event-stream" \
+              "https://huggingface.co/api/spaces/${{ inputs.space }}/logs/$kind" > $kind.log || true
+            if [ ! -s $kind.log ]; then
+              timeout 25 curl -sS -N -H "Authorization: Bearer $HF_TOKEN" -H "Accept: text/event-stream" \
+                "https://api.hf.space/v1/${{ inputs.space }}/logs/$kind" > $kind.log || true
+            fi
+            echo "==== $kind log ($(wc -l < $kind.log) lines) ===="; tail -n "${{ inputs.lines }}" $kind.log | sed 's/^data: //' | python3 -c 'import sys,json
+          for l in sys.stdin:
+              l=l.strip()
+              if not l: continue
+              try: d=json.loads(l); print(d.get("data", l)[:400] if isinstance(d, dict) else l[:400])
+              except Exception: print(l[:400])'
+          done
       - name: Authenticated /synthesize call
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
