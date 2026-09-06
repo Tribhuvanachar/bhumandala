@@ -4255,6 +4255,30 @@
         "_schema": "grantha_tika_text",
         "_default_author": "यद्यभावविशेषित्वं स्यादङ्गी"
        }
+      },
+      "bhagavata_saroddhara": {
+       "_default_author": "Sri Vishnu Tirtha",
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Maharshi Veda Vyasa"
+       },
+       "tika_vishnutirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "Sri Vishnu Tirtha"
+       },
+       "tika_tippani": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_sara_sangraha_kannada": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "Editor (Kannada)"
+       },
+       "parishishta": {
+        "_schema": "grantha_mula_text"
+       },
+       "upodghata": {
+        "_schema": "grantha_mula_text"
+       }
       }
      },
      "sruti_prasthana": {

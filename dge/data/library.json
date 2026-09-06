@@ -4513,6 +4513,84 @@
    }
   },
   {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/mula/data.json",
+   "populated": true,
+   "title": "भागवतसारोद्धारः — Mula (Bhāgavata verses)",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Bhāgavata Sāroddhāra with svopajña ṭīkā, Acharya Vidyadhishthanam (Bengaluru) edition — scanned PDF supplied by the project lead; OCR: Google Vision + Tesseract, verified against the Madhva Bhāgavata in DGE",
+    "licence": "Text of Śrī Viṣṇutīrtha (18th c.) is public domain; Kannada summaries/front matter are the edition's — editorial material, credited to the publisher"
+   },
+   "facets": {
+    "default_author": "Maharshi Veda Vyasa"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/tika_vishnutirtha/data.json",
+   "populated": true,
+   "title": "भागवतसारोद्धारः — Svopajña Ṭīkā — Sri Vishnu Tirtha",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Bhāgavata Sāroddhāra with svopajña ṭīkā, Acharya Vidyadhishthanam (Bengaluru) edition — scanned PDF supplied by the project lead; OCR: Google Vision + Tesseract, verified against the Madhva Bhāgavata in DGE",
+    "licence": "Text of Śrī Viṣṇutīrtha (18th c.) is public domain; Kannada summaries/front matter are the edition's — editorial material, credited to the publisher"
+   },
+   "facets": {
+    "default_author": "Sri Vishnu Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/parishishta/data.json",
+   "populated": true,
+   "title": "भागवतसारोद्धारः — Parishishta (appendix)",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Bhāgavata Sāroddhāra with svopajña ṭīkā, Acharya Vidyadhishthanam (Bengaluru) edition — scanned PDF supplied by the project lead; OCR: Google Vision + Tesseract, verified against the Madhva Bhāgavata in DGE",
+    "licence": "Text of Śrī Viṣṇutīrtha (18th c.) is public domain; Kannada summaries/front matter are the edition's — editorial material, credited to the publisher"
+   },
+   "facets": {
+    "default_author": "Sri Vishnu Tirtha"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/tika_tippani/data.json",
+   "populated": true,
+   "title": "भागवतसारोद्धारः — Tippani (editor's footnotes)",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Bhāgavata Sāroddhāra with svopajña ṭīkā, Acharya Vidyadhishthanam (Bengaluru) edition — scanned PDF supplied by the project lead; OCR: Google Vision + Tesseract, verified against the Madhva Bhāgavata in DGE",
+    "licence": "Text of Śrī Viṣṇutīrtha (18th c.) is public domain; Kannada summaries/front matter are the edition's — editorial material, credited to the publisher"
+   },
+   "facets": {
+    "default_author": "Editor"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/tika_sara_sangraha_kannada/data.json",
+   "populated": true,
+   "title": "भागवतसारोद्धारः — ಸಾರಸಂಗ್ರಹ (Kannada prakaraṇa summaries + front matter)",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Bhāgavata Sāroddhāra with svopajña ṭīkā, Acharya Vidyadhishthanam (Bengaluru) edition — scanned PDF supplied by the project lead; OCR: Google Vision + Tesseract, verified against the Madhva Bhāgavata in DGE",
+    "licence": "Text of Śrī Viṣṇutīrtha (18th c.) is public domain; Kannada summaries/front matter are the edition's — editorial material, credited to the publisher"
+   },
+   "facets": {
+    "default_author": "Editor (Kannada)"
+   }
+  },
+  {
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/upodghata/data.json",
+   "populated": true,
+   "title": "भागवतसारोद्धारः — Upodghāta (Kannada preface, prāstāvika, Viṣṇutīrtha-caritam)",
+   "addedAt": "2026-09-06",
+   "source": {
+    "source": "Bhāgavata Sāroddhāra with svopajña ṭīkā, Acharya Vidyadhishthanam (Bengaluru) edition — scanned PDF supplied by the project lead; OCR: Google Vision + Tesseract, verified against the Madhva Bhāgavata in DGE",
+    "licence": "Text of Śrī Viṣṇutīrtha (18th c.) is public domain; Kannada summaries/front matter are the edition's — editorial material, credited to the publisher"
+   },
+   "facets": {
+    "default_author": "Editor"
+   }
+  },
+  {
    "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/purana_prasthana/bhagavata_tatparya_nirnaya/mula/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — mula",

@@ -729,6 +729,34 @@
     }
    ]
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara": {
+   "title": "भागवतसारोद्धारः",
+   "author": "Maharshi Veda Vyasa (Bhāgavata verses selected by Sri Vishnu Tirtha)",
+   "mulaItems": 364,
+   "layers": [
+    {
+     "folder": "tika_vishnutirtha",
+     "label": "स्वोपज्ञटीका",
+     "author": "Sri Vishnu Tirtha (Jayatirtha, avadhūta)",
+     "items": 344,
+     "matched": 344
+    },
+    {
+     "folder": "tika_tippani",
+     "label": "टिप्पणी",
+     "author": "Editor (Acharya Vidyadhishthanam edition)",
+     "items": 104,
+     "matched": 104
+    },
+    {
+     "folder": "tika_sara_sangraha_kannada",
+     "label": "ಸಾರಸಂಗ್ರಹ (ಕನ್ನಡ)",
+     "author": "Editor (Kannada)",
+     "items": 30,
+     "matched": 30
+    }
+   ]
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhedojjivana": {
    "title": "भेदोज्जीवनम्",
    "author": "श्रीव्यासतीर्थः",
