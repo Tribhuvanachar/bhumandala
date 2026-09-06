@@ -40,7 +40,10 @@ def diff_pairs(a, b):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=str(OUT)); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--batches", type=int, default=0, help="also write diffs_batch_NN.json: compact word-diff items, N per file, for a chat without URL access")
+    ap.add_argument("--exclude", default="", help="comma-separated verse ids or book refs already adjudicated (left out of the batches)")
+    a = ap.parse_args()
     bhp = load_bhp(); mula = json.load(open(BASE / "mula/data.json", encoding="utf-8"))
     rows = []; stats = {"verses": 0, "identical_to_dge": 0, "unified_print_noise_only": 0, "unified_print_word_diffs": 0, "not_unified": 0}
     for it in mula["items"]:
@@ -72,6 +75,36 @@ def main():
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     json.dump(out, open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(json.dumps(stats), "→", Path(a.out).relative_to(ROOT))
+    if a.batches:
+        write_batches(rows, a.batches, {x.strip() for x in a.exclude.split(",") if x.strip()}, Path(a.out).parent)
+
+
+def snippet(ws, i, j, n=2):
+    return " ".join(ws[max(0, i - n):i] + ["【" + " ".join(ws[i:j]) + "】"] + ws[j:j + n]) if ws else ""
+
+
+def write_batches(rows, per, exclude, outdir):
+    """Compact word-diff items (no verse bodies) for pasting into a chat: one item per 'word' difference."""
+    items = []
+    for r in rows:
+        if r["bucket"] != "unified_print_word_diffs" or r["id"] in exclude or (r["book_ref"] or "") in exclude:
+            continue
+        dw, pw = words(r["dge_mula_text"]), words(r["print_ocr_vision"])
+        sm = difflib.SequenceMatcher(None, pw, dw, autojunk=False)
+        for op, i1, i2, j1, j2 in sm.get_opcodes():
+            if op == "equal": continue
+            pa, pb = " ".join(pw[i1:i2]), " ".join(dw[j1:j2])
+            if pa and pb and ratio(pa, pb) >= 0.8: continue          # ocr_noise pairs are not worth a chat turn
+            items.append({"id": r["id"], "ref": r["book_ref"], "pdf_page": r["pdf_page"], "dge_word": pb or None, "print_word": pa or None,
+                          "context": snippet(dw, j1, j2) if pb else snippet(pw, i1, i2), "kind": "word"})
+    n = -(-len(items) // per) if items else 0
+    for k in range(n):
+        chunk = items[k * per:(k + 1) * per]
+        f = outdir / f"diffs_batch_{k + 1:02d}.json"
+        json.dump({"_how_to_answer": "One JSON list, one object per id: {id, decision: 'dge'|'printed'|'unsure', verified_text (full verse only when printed), note}. 'dge' with a note = keep the master text and record the print's reading as a footnote on the Sāroddhāra verse.",
+                   "batch": f"{k + 1} of {n}", "items": chunk}, open(f, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+        print(f"  {f.relative_to(ROOT)}: {len(chunk)} items")
+    print(f"word-diff items {len(items)} in {n} batches (excluded {len(exclude)} adjudicated refs)")
 
 
 if __name__ == "__main__":

@@ -5624,7 +5624,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads रतिः (attachment); DGE master keeps मतिः (Balarāma to Rukmiṇī).",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_10",
@@ -5642,7 +5642,7 @@
     "verse": "55"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.979,
     "dge_key": [
      10,
@@ -5652,7 +5652,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads रतिः (attachment); DGE master keeps मतिः (Balarāma to Rukmiṇī).",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "भवापवर्गो भ्रमतो यदा भवेज्जनस्य तर्ह्यच्युत सत्समागमः । सत्सङ्गमो यर्हि तदैव सद्गतौ परावरेशे त्वयि जायते रतिः ॥ १०५ ॥",
@@ -8929,7 +8936,7 @@
     "verse": "20"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.987,
     "dge_key": [
      8,
@@ -8939,7 +8946,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "OCR confusion न/च; master न kept (na hi dvitīyo guṇa-saṅgha-varjitaḥ). No variant.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "धर्मः क्वचित्तस्य न भूतसौहृदं त्यागः क्वचित्तच्च न मुक्तिकारणम् । वीर्यं च पुंसोऽस्त्यजवेगनिष्कृतं न हि द्वितीयो गुणसङ्गवर्जितः",
@@ -9021,7 +9035,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads वरम् (the chosen bridegroom, Lakṣmī-svayaṃvara); DGE master keeps परम्.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_08",
@@ -9039,7 +9053,7 @@
     "verse": "22"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.986,
     "dge_key": [
      8,
@@ -9049,7 +9063,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads वरम् (the chosen bridegroom, Lakṣmī-svayaṃvara); DGE master keeps परम्.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "'एवं विमृश्याऽव्यभिचारिसद्गुणं पदं निजैकाश्रयि सद्गुणाश्रयम् । वव्रे परं सर्वगुणैरपेक्षितं रमा मुकुन्दं निरपेक्षमीप्सितम् ॥ १६५ ॥",
@@ -11639,7 +11660,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print word order तत्वसूक्ष्मं (recension variance); DGE master order सूक्ष्मतत्वं kept.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_11",
@@ -11657,7 +11678,7 @@
     "verse": "26"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.962,
     "dge_key": [
      11,
@@ -11667,7 +11688,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print word order तत्वसूक्ष्मं (recension variance); DGE master order सूक्ष्मतत्वं kept.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यथा यथाऽऽत्मा परिमृज्यतेऽसौ मत्पुण्यगाथाश्रवणाभिधानैः । तथा तथा पश्यति तत्वसूक्ष्मं चक्षुर्यथैवाञ्जनसम्प्रयुक्तम् ॥ २१२ ॥",
@@ -15381,7 +15409,7 @@
     "verse": "41"
    },
    "verification": {
-    "status": "mula_verified_ref_corrected",
+    "status": "human_verified",
     "dge_similarity": 0.951,
     "dge_key": [
      3,
@@ -15395,7 +15423,14 @@
      3,
      16,
      41
-    ]
+    ],
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print भवेम is a भ/व्र ligature slip; classical reading व्रजेम kept. No variant.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "कामं भवेम वृजिनैर्निरयेषु नष्टाश्वेतोऽलिवद्यदि नु ते पदयो रमेत । वाचश्च न स्तुलसि 'वेद्यदि तेङ्गिशोभाः पूर्येत ते गुणगणैर्यदि कर्णरन्ध्रः ' ॥ २८० ॥",
@@ -17075,7 +17110,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print word order लौकिकवैदिकैर्जनैः (recension variance); DGE master order वैदिकलौकिकैर्जनैः kept.",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_12",
@@ -17093,7 +17128,7 @@
     "verse": "31"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.951,
     "dge_key": [
      12,
@@ -17103,7 +17138,14 @@
     "numbering": "sequence (printed 309 rejected)",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print word order लौकिकवैदिकैर्जनैः (recension variance); DGE master order वैदिकलौकिकैर्जनैः kept.",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "यथा हिरण्यं बहुधा समीयते नृभिः क्रियाभिर्व्यवहारवर्त्मसु । एवं वचोभिर्भगवानधोक्षजो व्याख्यायते लौकिकवैदिकैर्जनैः ॥ ३०९ ॥",
@@ -19841,7 +19883,7 @@
     "verse",
     "bhagavata"
    ],
-   "notes": "",
+   "notes": "पाठभेदः (मुद्रित-सारोद्धारः): Print reads संस्मृत्य (remembering); DGE master keeps संश्राव्य (Yamarāja's teaching).",
    "references": [
     {
      "target": "purana/maha_purana/bhagavata_purana_madhva/skandha_06",
@@ -19859,7 +19901,7 @@
     "verse": "32"
    },
    "verification": {
-    "status": "mula_verified",
+    "status": "human_verified",
     "dge_similarity": 0.969,
     "dge_key": [
      6,
@@ -19869,7 +19911,14 @@
     "numbering": "printed",
     "detected_by": "tag",
     "ref_printed": true,
-    "printed_ref_as_read": null
+    "printed_ref_as_read": null,
+    "human": {
+     "date": "2026-09-06",
+     "note": "Print reads संस्मृत्य (remembering); DGE master keeps संश्राव्य (Yamarāja's teaching).",
+     "accepted_vision": false,
+     "text_changed": false,
+     "via": "gemini_chat"
+    }
    },
    "ocr": {
     "vision": "इत्थं स्वभर्तृगदितं भगवन्महित्वं संश्राव्य विस्मितधियो यमकिङ्करास्ते । तेनाच्युताश्रयजनं प्रति शङ्कमाना द्रष्टुं च बिभ्यति ततः प्रभृति स्म राजन् ॥ ३६० ॥",

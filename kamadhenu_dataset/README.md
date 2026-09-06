@@ -1,6 +1,6 @@
 # kamadhenu_dataset — DGE × Vāgdhenu Sanskrit TTS audit & dataset
 
-**Open `KAMADHENU_STATUS.html`.** Then `WHAT_I_NEED_TO_DO.md` (for the lead) and `KAMADHENU_TODO.md` (dependency-ordered plan).
+**Open `KAMADHENU_STATUS.html`.** Then `WHAT_I_NEED_TO_DO.md` (for the lead), `KAMADHENU_TODO.md` (dependency-ordered plan) and `DEPLOYMENT_REFERENCE.md` (how Vāgdhenu is really served — a Hugging Face ZeroGPU Space — and how Kamadhenu copies it: `tools/kamadhenu/space/`).
 
 ## One command
 ```

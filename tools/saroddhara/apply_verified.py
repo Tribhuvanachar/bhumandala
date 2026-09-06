@@ -72,8 +72,11 @@ def main(files):
             if a.get("accept_vision") and not txt: txt = it.get("ocr", {}).get("vision", "").strip()
             if txt:
                 it["sanskrit_text"] = re.sub(r"\s*(?:॥|\|\||।।)\s*[०-९]{1,3}\s*(?:॥|\|\||।।)\s*$", " ॥", txt).strip()
-            it["verification"]["human"] = {"date": stamp, "note": a.get("note"), "accepted_vision": bool(a.get("accept_vision")), "text_changed": bool(txt)}
+            it["verification"]["human"] = {"date": stamp, "note": a.get("note"), "accepted_vision": bool(a.get("accept_vision")), "text_changed": bool(txt), "via": a.get("via", "verify_queue")}
             it["verification"]["status"] = "human_verified"; n_applied += 1
+            if a.get("decision") == "dge" and a.get("note") and re.search(r"[Pp]rint reads|word order|पाठ", a["note"]):
+                line = "पाठभेदः (मुद्रित-सारोद्धारः): " + a["note"].strip()      # genuine print variant → editorial note on the verse
+                if line not in (it.get("notes") or ""): it["notes"] = ((it.get("notes") or "") + "\n" + line).strip()
     save("mula", mula); save("tika_vishnutirtha", tika); save("tika_tippani", tipp)
     print(f"applied {n_applied} answers; {len(log)} skipped"); [print("  ", l) for l in log[:20]]
 

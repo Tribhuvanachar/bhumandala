@@ -29,6 +29,9 @@ const appConfig = {
   // audio hosting for the whole site never requires editing a single
   // grantha JSON file — see dgeGetEffectiveAudioBaseUrl.
   audioBaseUrl: "https://archive.org/download/",
+  // Kamadhenu ZeroGPU Space for "Generate this verse" (dge/js/kamadhenu.js). Empty = feature off.
+  // Deploy with tools/kamadhenu/space/build_space.sh, then set e.g. "https://<account>-kamadhenu.hf.space".
+  kamadhenuSpaceUrl: "",
   // Full ~1.65M-headword, 63-dictionary Kosha corpus, built and published
   // to the "dist" branch of the separate Tribhuvanachar/bhumandala-kosha-data
   // repo (too large for this repo's 1GB budget). Served over jsDelivr's
