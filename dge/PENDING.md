@@ -1223,6 +1223,11 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, 10:50 pm IST — Kamadhenu Experiment A finished (attempt 4, bf16).** Records: `kamadhenu/reports/experiment_a/`
+  (run/eval/job JSON), weights + 13 A/B pairs in the private Hub repo `SarvamulaOrg/kamadhenu-voice-a`. Waiting on the lead's
+  listening verdict. Next for a session: Phase 13 HUMAN_REVIEW.csv, a Space engine that loads `model.wrapper.safetensors`,
+  an Experiment B card on the full grade-A set (measured 0.4 s/update on the L4 in bf16).
+
 - **7 Sep 2026, ~9:45 pm IST — SEO layer built (docs/SEO_ARCHITECTURE.md).** `tools/seo/{taxonomy,build_seo_site,validate_seo}.py`,
   `admin/config/seo.json`, `.github/workflows/seo-pages.yml`, `dge/data/seo_urls.json`, reader canonical in core.js
   (`dgeApplySeoCanonical`, gated by `canonicalLive`). Open for the lead: switch the Pages source to GitHub Actions and deploy;

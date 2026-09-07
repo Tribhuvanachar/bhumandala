@@ -74,5 +74,6 @@ approval:                         # 7 Sep 2026, 6:20 pm IST — the lead: "appro
   job_timeout_minutes: 135        # attempt 3 (7 Sep, ~8 pm IST): attempts 1+2 spent ~18 RUNNING min ≈ ₹21, so 135 min ($1.80 ≈ ₹158) keeps the total under ₹185
   train_cap_minutes: 90           # inside the job; leaves ~45 min for setup, export, 39 renders and the upload
   attempts: ["1: pip could not resolve x-transformers on torch 2.4.1 (1 min)", "2: EMA state dict key layout (ema_model._orig_mod.*, vocoder.*) — converter fixed, strict verify added (17 min)",
+             "4: bf16, timeout 55 / cap 25 — HEALTHY: 3,060 updates in 20.5 min, loss 0.73→0.66 (window means), 0 NaN; real A/B renders; 40.8 min ≈ ₹48; total ≈ ₹154",
              "3: COMPLETED mechanically (72 min ≈ ₹85: 3,060 updates in 15.5 min = 0.3 s/update, 4× faster than assumed) but fp16 training reported loss=nan from step 1 and the weights were NaN by step ~320; the 'fine-tuned' renders are full-scale noise (rms 1.0). Base renders are good (median duration ratio 0.86, 11/13 on tempo). Attempt 4: bf16, timeout 55, train cap 25 → worst case ₹65 more, total under ₹185"]
   results_repo: SarvamulaOrg/kamadhenu-voice-a   # private; export/ eval/ train.log
