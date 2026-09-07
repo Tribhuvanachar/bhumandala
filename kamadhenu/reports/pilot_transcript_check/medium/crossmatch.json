@@ -1,12 +1,12 @@
 {
- "checkedAt": "2026-09-07T20:20:15+0000",
- "source_report": "kamadhenu/reports/pilot_transcript_check/pilot_transcript_check_small.json + kamadhenu/reports/pilot_transcript_check/pilot_transcript_check_medium.json",
+ "checkedAt": "2026-09-07T20:20:11+0000",
+ "source_report": "kamadhenu/reports/pilot_transcript_check/pilot_transcript_check_medium.json",
  "files": 136,
  "decisions": {
-  "confirmed": 92,
-  "remap": 38,
-  "inconclusive": 5,
-  "weak_confirm": 1
+  "confirmed": 74,
+  "inconclusive": 27,
+  "remap": 31,
+  "weak_confirm": 4
  },
  "rows": [
   {
@@ -15,9 +15,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.10.SBS323.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P21_V323",
-   "score": 0.83,
-   "expected_score": 0.83,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V016",
+   "score": 0.793,
+   "expected_score": 0.793,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V255",
    "decision": "confirmed"
   },
   {
@@ -35,12 +35,12 @@
    "id": "km_03bbae42f01b",
    "text_id": "bhagavata_saroddhara:BS_P01_V011",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.11.SBS11.mp3",
-   "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P01_V011",
-   "score": 0.697,
-   "expected_score": 0.697,
-   "runner_up": "bhagavata_saroddhara:BS_P11_V150",
-   "decision": "confirmed"
+   "verdict": "short",
+   "heard": "bhagavata_saroddhara:BS_P20_V251",
+   "score": 0.013,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P02_V022",
+   "decision": "inconclusive"
   },
   {
    "id": "km_03cc2b0772eb",
@@ -58,11 +58,11 @@
    "text_id": "bhagavata_saroddhara:BS_P14_V190",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS14.6.SBS190.mp3",
    "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P14_V190",
-   "score": 0.313,
-   "expected_score": 0.313,
-   "runner_up": "bhagavata_saroddhara:BS_P18_V210",
-   "decision": "confirmed"
+   "heard": "bhagavata_saroddhara:BS_P05_V069",
+   "score": 0.028,
+   "expected_score": 0.02,
+   "runner_up": "bhagavata_saroddhara:BS_P14_V190",
+   "decision": "inconclusive"
   },
   {
    "id": "km_054a25f94732",
@@ -127,8 +127,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.4.SBS20.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P02_V020",
-   "score": 0.68,
-   "expected_score": 0.68,
+   "score": 0.67,
+   "expected_score": 0.67,
    "runner_up": "bhagavata_saroddhara:BS_P20_V312",
    "decision": "confirmed"
   },
@@ -151,7 +151,7 @@
    "heard": "bhagavata_saroddhara:BS_P18_V210",
    "score": 0.131,
    "expected_score": 0.051,
-   "runner_up": "bhagavata_saroddhara:BS_P03_V031",
+   "runner_up": "bhagavata_saroddhara:BS_P10_V144",
    "decision": "inconclusive"
   },
   {
@@ -193,8 +193,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.7.SBS7.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P01_V007",
-   "score": 0.735,
-   "expected_score": 0.735,
+   "score": 0.64,
+   "expected_score": 0.64,
    "runner_up": "bhagavata_saroddhara:BS_P03_V032",
    "decision": "confirmed"
   },
@@ -238,10 +238,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.10.SBS26.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P02_V026",
-   "score": 0.379,
-   "expected_score": 0.379,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V015",
-   "decision": "confirmed"
+   "score": 0.223,
+   "expected_score": 0.223,
+   "runner_up": "bhagavata_saroddhara:BS_P19_V228",
+   "decision": "weak_confirm"
   },
   {
    "id": "km_201c266a7650",
@@ -261,8 +261,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.1.SBS344.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P25_V344",
-   "score": 0.729,
-   "expected_score": 0.729,
+   "score": 0.682,
+   "expected_score": 0.682,
    "runner_up": "bhagavata_saroddhara:BS_P20_V239",
    "decision": "confirmed"
   },
@@ -272,9 +272,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS13.5.SBS182.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P13_V182",
-   "score": 0.778,
-   "expected_score": 0.778,
-   "runner_up": "bhagavata_saroddhara:BS_P13_V181",
+   "score": 0.636,
+   "expected_score": 0.636,
+   "runner_up": "bhagavata_saroddhara:BS_P06_V108",
    "decision": "confirmed"
   },
   {
@@ -283,9 +283,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS24.6.SBS343.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P24_V343",
-   "score": 0.856,
-   "expected_score": 0.856,
-   "runner_up": "bhagavata_saroddhara:BS_P15_V195",
+   "score": 0.798,
+   "expected_score": 0.798,
+   "runner_up": "bhagavata_saroddhara:BS_P14_V191",
    "decision": "confirmed"
   },
   {
@@ -293,21 +293,21 @@
    "text_id": "bhagavata_saroddhara:BS_P20_V266",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.30.SBS266.mp3",
    "verdict": "short",
-   "heard": "bhagavata_saroddhara:BS_P04_V043",
-   "score": 0.045,
-   "expected_score": 0.0,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V267",
+   "heard": "bhagavata_saroddhara:BS_P18_V213",
+   "score": 0.042,
+   "expected_score": 0.018,
+   "runner_up": "bhagavata_saroddhara:BS_P31_V367",
    "decision": "inconclusive"
   },
   {
    "id": "km_277365464963",
    "text_id": "bhagavata_saroddhara:BS_P20_V302",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.66.SBS302.mp3",
-   "verdict": "suspect_repetition",
+   "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V303",
-   "score": 0.341,
-   "expected_score": 0.04,
-   "runner_up": "bhagavata_saroddhara:BS_P19_V228",
+   "score": 0.308,
+   "expected_score": 0.129,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V302",
    "decision": "remap",
    "heard_text": "तदेव पुण्यं रुचिरं नवं नवं तदेव शश्वन्मनसो महोत्सवम्\nतदेव शोकार्णवशोषणं नृणां यत्रोत्तमश्लोकयशोऽनुगीयते"
   },
@@ -315,13 +315,12 @@
    "id": "km_2970ce5192a6",
    "text_id": "bhagavata_saroddhara:BS_P01_V009",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.9.SBS9.mp3",
-   "verdict": "suspect_mismatch",
-   "heard": "bhagavata_saroddhara:BS_P01_V008",
-   "score": 0.533,
-   "expected_score": 0.09,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V012",
-   "decision": "remap",
-   "heard_text": "मुनिर्विवक्षुर्भगवद्गुणानां सखाऽपि ते भारतमाह कृष्णः\nयस्मिन् नृणां ग्राम्यसुखानुवादैर्मतिर्गृहीता न हरेः कथायाम्"
+   "verdict": "ok",
+   "heard": "bhagavata_saroddhara:BS_P19_V236",
+   "score": 0.054,
+   "expected_score": 0.013,
+   "runner_up": "bhagavata_saroddhara:BS_P17_V202",
+   "decision": "inconclusive"
   },
   {
    "id": "km_2d7cb6e70018",
@@ -329,7 +328,7 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.18.SBS254.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V255",
-   "score": 0.783,
+   "score": 0.774,
    "expected_score": 0.031,
    "runner_up": "bhagavata_saroddhara:BS_P11_V172",
    "decision": "remap",
@@ -352,9 +351,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS24.5.SBS342.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P24_V342",
-   "score": 0.766,
-   "expected_score": 0.766,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V090",
+   "score": 0.673,
+   "expected_score": 0.673,
+   "runner_up": "bhagavata_saroddhara:BS_P14_V189",
    "decision": "confirmed"
   },
   {
@@ -363,11 +362,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.72.SBS308.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V310",
-   "score": 0.778,
-   "expected_score": 0.127,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V014",
-   "decision": "remap",
-   "heard_text": "शब्दस्य हि ब्रह्मण एष पन्था यन्नामभिर्ध्यायति धीरपार्थैः\nपरिभ्रमंस्तत्र न विन्दतेऽर्थान् मायामये वासनया शयानः"
+   "score": 0.093,
+   "expected_score": 0.009,
+   "runner_up": "bhagavata_saroddhara:BS_P11_V161",
+   "decision": "inconclusive"
   },
   {
    "id": "km_38ad7b080196",
@@ -385,12 +383,11 @@
    "text_id": "bhagavata_saroddhara:BS_P19_V231",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.10.SBS231.mp3",
    "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P19_V232",
-   "score": 0.558,
-   "expected_score": 0.037,
-   "runner_up": "bhagavata_saroddhara:BS_P22_V329",
-   "decision": "remap",
-   "heard_text": "अहो बकीयं स्तनकालकूटं जिघांसया पाययदप्यसाध्वी\nलेभे गतिं धात्र्युचितां ततोऽन्यं कं वा दयालुं शरणं व्रजेम"
+   "heard": "bhagavata_saroddhara:BS_P05_V065",
+   "score": 0.03,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P31_V367",
+   "decision": "inconclusive"
   },
   {
    "id": "km_3af39d29c499",
@@ -409,9 +406,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.19.tp19.mp3",
    "verdict": "ok",
    "heard": "tirtha_prabandha:TP_PAS_019",
-   "score": 0.667,
+   "score": 0.485,
    "expected_score": 0.0,
-   "runner_up": "tirtha_prabandha:TP_PAS_018",
+   "runner_up": "tirtha_prabandha:TP_PAS_077",
    "decision": "remap",
    "heard_text": "प्रलये जलदुर्गाऽसि सर्गादौ गिरिविस्तृतिः\nइदानीं स्थलदुर्गाऽसि दुर्गा त्वं सद्गुणार्णवे"
   },
@@ -432,10 +429,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.2.SBS2.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P01_V002",
-   "score": 0.505,
-   "expected_score": 0.505,
-   "runner_up": "bhagavata_saroddhara:BS_P19_V222",
-   "decision": "confirmed"
+   "score": 0.225,
+   "expected_score": 0.225,
+   "runner_up": "bhagavata_saroddhara:BS_P05_V100",
+   "decision": "weak_confirm"
   },
   {
    "id": "km_40d57ea467c7",
@@ -465,12 +462,12 @@
    "id": "km_442036bbc277",
    "text_id": "bhagavata_saroddhara:BS_P20_V272",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.36.SBS272.mp3",
-   "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P20_V272",
-   "score": 0.704,
-   "expected_score": 0.704,
-   "runner_up": "bhagavata_saroddhara:BS_P21_V315",
-   "decision": "confirmed"
+   "verdict": "suspect_mismatch",
+   "heard": "bhagavata_saroddhara:BS_P09_V136",
+   "score": 0.029,
+   "expected_score": 0.009,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V242",
+   "decision": "inconclusive"
   },
   {
    "id": "km_45b1cef3dcc6",
@@ -489,9 +486,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS8.9.SBS130.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P08_V130",
-   "score": 0.787,
-   "expected_score": 0.787,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V088",
+   "score": 0.648,
+   "expected_score": 0.648,
+   "runner_up": "bhagavata_saroddhara:BS_P05_V065",
    "decision": "confirmed"
   },
   {
@@ -500,8 +497,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.7.SBS228.mp3",
    "verdict": "suspect_repetition",
    "heard": "bhagavata_saroddhara:BS_P19_V229",
-   "score": 0.699,
-   "expected_score": 0.026,
+   "score": 0.609,
+   "expected_score": 0.038,
    "runner_up": "bhagavata_saroddhara:BS_P20_V282",
    "decision": "remap",
    "heard_text": "यत्पादयोरशठधीः सलिलं प्रदाय दूर्वाङ्कुरैरपि विधाय सतीं सपर्याम्\nअप्युत्तमां गतिमसौ भजते त्रिलोकीं दत्त्वा नविक्लवमनाः कथमार्तिमृच्छेत्"
@@ -512,8 +509,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.69.SBS305.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V307",
-   "score": 0.744,
-   "expected_score": 0.049,
+   "score": 0.718,
+   "expected_score": 0.069,
    "runner_up": "bhagavata_saroddhara:BS_P20_V308",
    "decision": "remap",
    "heard_text": "न यद्वचश्चित्रपदं हरेर्यशो जगत्पवित्रं यदि कर्हिचिद् वदेत्\nतद् ध्वाङ्क्षतीर्थं न तु हंससेवितं यत्राच्युतस्तत्र हि साधवोऽमलाः"
@@ -524,9 +521,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.8.SBS8.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P03_V042",
-   "score": 0.176,
-   "expected_score": 0.075,
-   "runner_up": "bhagavata_saroddhara:BS_P21_V315",
+   "score": 0.198,
+   "expected_score": 0.065,
+   "runner_up": "bhagavata_saroddhara:BS_P18_V214",
    "decision": "inconclusive"
   },
   {
@@ -534,10 +531,10 @@
    "text_id": "bhagavata_saroddhara:BS_P31_V365",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS31.1.SBS365.mp3",
    "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P23_V337",
-   "score": 0.156,
-   "expected_score": 0.069,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V240",
+   "heard": "bhagavata_saroddhara:BS_P20_V240",
+   "score": 0.143,
+   "expected_score": 0.062,
+   "runner_up": "bhagavata_saroddhara:BS_P01_V006",
    "decision": "inconclusive"
   },
   {
@@ -546,9 +543,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.74.SBS310.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V312",
-   "score": 0.768,
-   "expected_score": 0.074,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V262",
+   "score": 0.333,
+   "expected_score": 0.046,
+   "runner_up": "bhagavata_saroddhara:BS_P07_V120",
    "decision": "remap",
    "heard_text": "यथा हिरण्यं स्वकृतं पुरस्तात् पश्चाच्च सर्वस्य हिरण्मयस्य\nतदेव मध्ये व्यवहार्यमाणं नानापदेशैरहमस्य तद्वत्"
   },
@@ -591,9 +588,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.15.SBS15.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P01_V015",
-   "score": 0.835,
-   "expected_score": 0.835,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V003",
+   "score": 0.825,
+   "expected_score": 0.825,
+   "runner_up": "bhagavata_saroddhara:BS_P01_V014",
    "decision": "confirmed"
   },
   {
@@ -612,13 +609,12 @@
    "id": "km_647eed5bad74",
    "text_id": "tirtha_prabandha:TP_DAK_002",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.2.tp2.mp3",
-   "verdict": "ok",
+   "verdict": "short",
    "heard": "tirtha_prabandha:TP_PAS_002",
-   "score": 0.636,
+   "score": 0.26,
    "expected_score": 0.032,
-   "runner_up": "tirtha_prabandha:TP_DAK_007",
-   "decision": "remap",
-   "heard_text": "हयग्रीवदयासिंधुरंधूकृतभवांबुधिः\nप्रबंधमप्रतिद्वंद्वं करोत्वेनमनेनसम्"
+   "runner_up": "tirtha_prabandha:TP_PAS_082",
+   "decision": "inconclusive"
   },
   {
    "id": "km_682942d279a0",
@@ -659,9 +655,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.6.SBS48.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P04_V049",
-   "score": 0.757,
+   "score": 0.64,
    "expected_score": 0.066,
-   "runner_up": "bhagavata_saroddhara:BS_P29_V358",
+   "runner_up": "bhagavata_saroddhara:BS_P20_V296",
    "decision": "remap",
    "heard_text": "शृण्वन् गृणन् संस्मरयंश्च चिन्तयन् नामानि रूपाणि च मङ्गलानि ते\nक्रियासु यस्त्वच्चरणारविन्दयोराविष्टचित्तो न भवाय कल्प्यते"
   },
@@ -680,35 +676,34 @@
    "id": "km_6dbd9b847ee3",
    "text_id": "bhagavata_saroddhara:BS_P20_V298",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.62.SBS298.mp3",
-   "verdict": "suspect_mismatch",
+   "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V299",
-   "score": 0.764,
-   "expected_score": 0.064,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V249",
-   "decision": "remap",
-   "heard_text": "स वाग्विसर्गो जनताघविप्लवो यस्मिन् प्रतिश्लोकमबद्धवत्यपि\nनामान्यनन्तस्य यशोङ्कितानि शृण्वन्ति गायन्ति गृणन्ति साधवः"
+   "score": 0.255,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P09_V135",
+   "decision": "inconclusive"
   },
   {
    "id": "km_6e39a9f2de99",
    "text_id": "bhagavata_saroddhara:BS_P01_V016",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.16.SBS16.mp3",
-   "verdict": "suspect_mismatch",
-   "heard": "bhagavata_saroddhara:BS_P05_V093",
-   "score": 0.093,
-   "expected_score": 0.014,
-   "runner_up": "bhagavata_saroddhara:BS_P14_V191",
+   "verdict": "ok",
+   "heard": "bhagavata_saroddhara:BS_P20_V277",
+   "score": 0.015,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P02_V029",
    "decision": "inconclusive"
   },
   {
    "id": "km_71e783dc41c9",
    "text_id": "bhagavata_saroddhara:BS_P19_V223",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS19.2.SBS223.mp3",
-   "verdict": "ok",
+   "verdict": "short",
    "heard": "bhagavata_saroddhara:BS_P19_V223",
-   "score": 0.787,
-   "expected_score": 0.787,
-   "runner_up": "bhagavata_saroddhara:BS_P19_V225",
-   "decision": "confirmed"
+   "score": 0.074,
+   "expected_score": 0.074,
+   "runner_up": "bhagavata_saroddhara:BS_P14_V188",
+   "decision": "inconclusive"
   },
   {
    "id": "km_74350a3622e1",
@@ -736,20 +731,20 @@
    "id": "km_79995f4a9e00",
    "text_id": "bhagavata_saroddhara:BS_P05_V098",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.42.SBS98.mp3",
-   "verdict": "ok",
+   "verdict": "short",
    "heard": "bhagavata_saroddhara:BS_P05_V098",
-   "score": 0.443,
-   "expected_score": 0.443,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V261",
-   "decision": "confirmed"
+   "score": 0.148,
+   "expected_score": 0.148,
+   "runner_up": "bhagavata_saroddhara:BS_P13_V178",
+   "decision": "inconclusive"
   },
   {
    "id": "km_79f86acf4d2c",
    "text_id": "bhagavata_saroddhara:BS_P11_V169",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.23.SBS169.mp3",
-   "verdict": "suspect_repetition",
+   "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P11_V170",
-   "score": 0.889,
+   "score": 0.35,
    "expected_score": 0.029,
    "runner_up": "bhagavata_saroddhara:BS_P11_V171",
    "decision": "remap",
@@ -759,12 +754,12 @@
    "id": "km_7c329e866986",
    "text_id": "bhagavata_saroddhara:BS_P20_V295",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.59.SBS295.mp3",
-   "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P20_V295",
-   "score": 0.824,
-   "expected_score": 0.824,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V240",
-   "decision": "confirmed"
+   "verdict": "short",
+   "heard": "bhagavata_saroddhara:BS_P07_V113",
+   "score": 0.02,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V244",
+   "decision": "inconclusive"
   },
   {
    "id": "km_7c33f166381c",
@@ -772,9 +767,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.1.SBS209.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P18_V209",
-   "score": 0.816,
-   "expected_score": 0.816,
-   "runner_up": "bhagavata_saroddhara:BS_P04_V053",
+   "score": 0.706,
+   "expected_score": 0.706,
+   "runner_up": "bhagavata_saroddhara:BS_P25_V345",
    "decision": "confirmed"
   },
   {
@@ -806,9 +801,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.2.SBS139.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P10_V139",
-   "score": 0.579,
-   "expected_score": 0.579,
-   "runner_up": "bhagavata_saroddhara:BS_P10_V146",
+   "score": 0.336,
+   "expected_score": 0.336,
+   "runner_up": "bhagavata_saroddhara:BS_P12_V174",
    "decision": "confirmed"
   },
   {
@@ -827,23 +822,23 @@
    "id": "km_8307b380b67d",
    "text_id": "bhagavata_saroddhara:BS_P01_V010",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.10.SBS10.mp3",
-   "verdict": "ok",
+   "verdict": "suspect_repetition",
    "heard": "bhagavata_saroddhara:BS_P01_V010",
-   "score": 0.515,
-   "expected_score": 0.515,
-   "runner_up": "bhagavata_saroddhara:BS_P04_V047",
-   "decision": "confirmed"
+   "score": 0.099,
+   "expected_score": 0.099,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V246",
+   "decision": "inconclusive"
   },
   {
    "id": "km_84b2d334b746",
    "text_id": "bhagavata_saroddhara:BS_P05_V089",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.33.SBS89.mp3",
    "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P05_V089",
-   "score": 0.594,
-   "expected_score": 0.594,
-   "runner_up": "bhagavata_saroddhara:BS_P08_V129",
-   "decision": "confirmed"
+   "heard": "bhagavata_saroddhara:BS_P20_V274",
+   "score": 0.034,
+   "expected_score": 0.016,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V284",
+   "decision": "inconclusive"
   },
   {
    "id": "km_8567909ce2f6",
@@ -851,9 +846,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS30.1.SBS362.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P30_V362",
-   "score": 0.852,
-   "expected_score": 0.852,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V009",
+   "score": 0.835,
+   "expected_score": 0.835,
+   "runner_up": "bhagavata_saroddhara:BS_P04_V047",
    "decision": "confirmed"
   },
   {
@@ -895,23 +890,23 @@
    "id": "km_8b46d30e4b06",
    "text_id": "bhagavata_saroddhara:BS_P21_V320",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS21.7.SBS320.mp3",
-   "verdict": "ok",
+   "verdict": "short",
    "heard": "bhagavata_saroddhara:BS_P21_V320",
-   "score": 0.71,
-   "expected_score": 0.71,
+   "score": 0.105,
+   "expected_score": 0.105,
    "runner_up": "bhagavata_saroddhara:BS_P20_V304",
-   "decision": "confirmed"
+   "decision": "inconclusive"
   },
   {
    "id": "km_8ba5a0e50eb4",
    "text_id": "bhagavata_saroddhara:BS_P05_V081",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.25.SBS81.mp3",
-   "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P05_V081",
-   "score": 0.585,
-   "expected_score": 0.585,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V259",
-   "decision": "confirmed"
+   "verdict": "short",
+   "heard": "bhagavata_saroddhara:BS_P05_V078",
+   "score": 0.01,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P29_V361",
+   "decision": "inconclusive"
   },
   {
    "id": "km_8c8d3b869852",
@@ -976,8 +971,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS2.3.SBS19.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P02_V019",
-   "score": 0.78,
-   "expected_score": 0.78,
+   "score": 0.67,
+   "expected_score": 0.67,
    "runner_up": "bhagavata_saroddhara:BS_P05_V090",
    "decision": "confirmed"
   },
@@ -1010,10 +1005,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS7.7.SBS118.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P07_V118",
-   "score": 0.58,
-   "expected_score": 0.58,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V010",
-   "decision": "confirmed"
+   "score": 0.116,
+   "expected_score": 0.116,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V304",
+   "decision": "inconclusive"
   },
   {
    "id": "km_a102cc6eb9f8",
@@ -1030,13 +1025,12 @@
    "id": "km_a2c2593b8278",
    "text_id": "bhagavata_saroddhara:BS_P20_V312",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.76.SBS312.mp3",
-   "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P20_V314",
-   "score": 0.746,
-   "expected_score": 0.03,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V252",
-   "decision": "remap",
-   "heard_text": "सत्यां क्षितौ किं कशिपोः प्रयासैर्बाहौ स्वसिद्धे ह्युपबर्हणैः किम्\nसत्यञ्जलौ किं पुरुपर्णपात्रैर्दिग्वस्त्रलाभे सति किं दुकूलैः"
+   "verdict": "suspect_repetition",
+   "heard": "bhagavata_saroddhara:BS_P31_V367",
+   "score": 0.0,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P31_V366",
+   "decision": "inconclusive"
   },
   {
    "id": "km_a7418f54dcd9",
@@ -1067,9 +1061,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS6.2.SBS103.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P06_V103",
-   "score": 0.762,
-   "expected_score": 0.762,
-   "runner_up": "bhagavata_saroddhara:BS_P11_V172",
+   "score": 0.54,
+   "expected_score": 0.54,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V279",
    "decision": "confirmed"
   },
   {
@@ -1089,9 +1083,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.1.tp1.mp3",
    "verdict": "short",
    "heard": "tirtha_prabandha:TP_PAS_001",
-   "score": 0.609,
-   "expected_score": 0.027,
-   "runner_up": "tirtha_prabandha:TP_PAS_027",
+   "score": 0.594,
+   "expected_score": 0.016,
+   "runner_up": "tirtha_prabandha:TP_PAS_062",
    "decision": "remap",
    "heard_text": "हरिक्षीरांबुधेः स्वैरं भवघर्मरिपोर्मनः\nविहराहरहश्चित्रचारित्रचतुरोर्मिषु"
   },
@@ -1112,9 +1106,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS17.5.SBS204.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P17_V204",
-   "score": 0.619,
-   "expected_score": 0.619,
-   "runner_up": "bhagavata_saroddhara:BS_P18_V214",
+   "score": 0.362,
+   "expected_score": 0.362,
+   "runner_up": "bhagavata_saroddhara:BS_P12_V177",
    "decision": "confirmed"
   },
   {
@@ -1123,9 +1117,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.44.SBS280.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V280",
-   "score": 0.637,
-   "expected_score": 0.637,
-   "runner_up": "bhagavata_saroddhara:BS_P08_V127",
+   "score": 0.621,
+   "expected_score": 0.621,
+   "runner_up": "bhagavata_saroddhara:BS_P02_V019",
    "decision": "confirmed"
   },
   {
@@ -1146,9 +1140,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS11.22.SBS168.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P11_V168",
-   "score": 0.762,
-   "expected_score": 0.762,
-   "runner_up": "bhagavata_saroddhara:BS_P03_V032",
+   "score": 0.695,
+   "expected_score": 0.695,
+   "runner_up": "bhagavata_saroddhara:BS_P01_V013",
    "decision": "confirmed"
   },
   {
@@ -1166,10 +1160,10 @@
    "id": "km_b76f9a177e73",
    "text_id": "bhagavata_saroddhara:BS_P10_V138",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS10.1.SBS138.mp3",
-   "verdict": "ok",
+   "verdict": "suspect_repetition",
    "heard": "bhagavata_saroddhara:BS_P10_V138",
-   "score": 0.63,
-   "expected_score": 0.63,
+   "score": 0.52,
+   "expected_score": 0.52,
    "runner_up": "bhagavata_saroddhara:BS_P23_V336",
    "decision": "confirmed"
   },
@@ -1177,12 +1171,12 @@
    "id": "km_b7d7d47c6793",
    "text_id": "bhagavata_saroddhara:BS_P29_V351",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS29.1.SBS351.mp3",
-   "verdict": "ok",
-   "heard": "bhagavata_saroddhara:BS_P29_V351",
-   "score": 0.658,
-   "expected_score": 0.658,
-   "runner_up": "bhagavata_saroddhara:BS_P22_V328",
-   "decision": "confirmed"
+   "verdict": "short",
+   "heard": "bhagavata_saroddhara:BS_P19_V228",
+   "score": 0.09,
+   "expected_score": 0.088,
+   "runner_up": "bhagavata_saroddhara:BS_P29_V351",
+   "decision": "inconclusive"
   },
   {
    "id": "km_b930f00d0aa9",
@@ -1202,9 +1196,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.21.SBS77.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V077",
-   "score": 0.762,
-   "expected_score": 0.762,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V066",
+   "score": 0.752,
+   "expected_score": 0.752,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V240",
    "decision": "confirmed"
   },
   {
@@ -1213,8 +1207,8 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS1.12.SBS12.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P01_V012",
-   "score": 0.738,
-   "expected_score": 0.738,
+   "score": 0.728,
+   "expected_score": 0.728,
    "runner_up": "bhagavata_saroddhara:BS_P20_V240",
    "decision": "confirmed"
   },
@@ -1222,12 +1216,12 @@
    "id": "km_c2b30a72cebf",
    "text_id": "bhagavata_saroddhara:BS_P20_V289",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.53.SBS289.mp3",
-   "verdict": "ok",
+   "verdict": "short",
    "heard": "bhagavata_saroddhara:BS_P20_V289",
-   "score": 0.563,
-   "expected_score": 0.563,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V298",
-   "decision": "confirmed"
+   "score": 0.048,
+   "expected_score": 0.048,
+   "runner_up": "bhagavata_saroddhara:BS_P05_V092",
+   "decision": "inconclusive"
   },
   {
    "id": "km_c33543da6a19",
@@ -1235,9 +1229,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.15.SBS71.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V071",
-   "score": 0.66,
-   "expected_score": 0.66,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V069",
+   "score": 0.538,
+   "expected_score": 0.538,
+   "runner_up": "bhagavata_saroddhara:BS_P03_V041",
    "decision": "confirmed"
   },
   {
@@ -1246,10 +1240,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.3.SBS59.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V059",
-   "score": 0.571,
-   "expected_score": 0.571,
-   "runner_up": "bhagavata_saroddhara:BS_P11_V169",
-   "decision": "confirmed"
+   "score": 0.171,
+   "expected_score": 0.171,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V266",
+   "decision": "inconclusive"
   },
   {
    "id": "km_cd742b97aeee",
@@ -1268,9 +1262,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS4.1.SBS43.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P04_V043",
-   "score": 0.759,
-   "expected_score": 0.759,
-   "runner_up": "bhagavata_saroddhara:BS_P11_V150",
+   "score": 0.75,
+   "expected_score": 0.75,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V295",
    "decision": "confirmed"
   },
   {
@@ -1279,9 +1273,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS23.2.SBS333.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P23_V333",
-   "score": 0.755,
-   "expected_score": 0.755,
-   "runner_up": "bhagavata_saroddhara:BS_P02_V017",
+   "score": 0.745,
+   "expected_score": 0.745,
+   "runner_up": "bhagavata_saroddhara:BS_P23_V336",
    "decision": "confirmed"
   },
   {
@@ -1301,9 +1295,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.44.SBS100.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V101",
-   "score": 0.683,
-   "expected_score": 0.023,
-   "runner_up": "bhagavata_saroddhara:BS_P06_V108",
+   "score": 0.436,
+   "expected_score": 0.008,
+   "runner_up": "bhagavata_saroddhara:BS_P01_V015",
    "decision": "remap",
    "heard_text": "कथा इमास्ते कथिता महीयसां विताय लोकेषु यशः परेयुषाम्\nविज्ञानवैराग्यविवक्षया विभो वचोविभूतीर्न तु पारमार्थ्यम्"
   },
@@ -1313,9 +1307,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS18.4.SBS212.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P18_V212",
-   "score": 0.663,
-   "expected_score": 0.663,
-   "runner_up": "bhagavata_saroddhara:BS_P01_V005",
+   "score": 0.529,
+   "expected_score": 0.529,
+   "runner_up": "bhagavata_saroddhara:BS_P22_V331",
    "decision": "confirmed"
   },
   {
@@ -1347,9 +1341,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS25.3.SBS346.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P25_V346",
-   "score": 0.893,
-   "expected_score": 0.893,
-   "runner_up": "bhagavata_saroddhara:BS_P12_V175",
+   "score": 0.786,
+   "expected_score": 0.786,
+   "runner_up": "bhagavata_saroddhara:BS_P13_V181",
    "decision": "confirmed"
   },
   {
@@ -1382,9 +1376,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.29.SBS85.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V085",
-   "score": 0.734,
-   "expected_score": 0.734,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V091",
+   "score": 0.602,
+   "expected_score": 0.602,
+   "runner_up": "bhagavata_saroddhara:BS_P22_V328",
    "decision": "confirmed"
   },
   {
@@ -1402,13 +1396,12 @@
    "id": "km_e285fef9746e",
    "text_id": "bhagavata_saroddhara:BS_P20_V277",
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.41.SBS277.mp3",
-   "verdict": "suspect_repetition",
-   "heard": "bhagavata_saroddhara:BS_P20_V278",
-   "score": 0.484,
-   "expected_score": 0.134,
-   "runner_up": "bhagavata_saroddhara:BS_P20_V277",
-   "decision": "remap",
-   "heard_text": "नूनं विमुष्टमतयस्तव मायया ते ये त्वां भवाप्ययविमोक्षणमन्यहेतोः\nअर्चन्ति कल्पकतरुं कुणपोपभोग्यमिच्छन्ति यत् स्पर्शजं निरयेऽपि नॄणाम्"
+   "verdict": "suspect_mismatch",
+   "heard": "bhagavata_saroddhara:BS_P23_V336",
+   "score": 0.01,
+   "expected_score": 0.0,
+   "runner_up": "bhagavata_saroddhara:BS_P20_V256",
+   "decision": "inconclusive"
   },
   {
    "id": "km_e488b579e22e",
@@ -1449,9 +1442,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS20.43.SBS279.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P20_V279",
-   "score": 0.887,
-   "expected_score": 0.887,
-   "runner_up": "bhagavata_saroddhara:BS_P18_V214",
+   "score": 0.737,
+   "expected_score": 0.737,
+   "runner_up": "bhagavata_saroddhara:BS_P29_V353",
    "decision": "confirmed"
   },
   {
@@ -1482,9 +1475,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.11.SBS67.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V067",
-   "score": 0.49,
-   "expected_score": 0.49,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V070",
+   "score": 0.433,
+   "expected_score": 0.433,
+   "runner_up": "bhagavata_saroddhara:BS_P05_V065",
    "decision": "confirmed"
   },
   {
@@ -1515,10 +1508,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS17.6.SBS205.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P17_V205",
-   "score": 0.85,
-   "expected_score": 0.85,
-   "runner_up": "bhagavata_saroddhara:BS_P07_V122",
-   "decision": "confirmed"
+   "score": 0.15,
+   "expected_score": 0.15,
+   "runner_up": "bhagavata_saroddhara:BS_P01_V001",
+   "decision": "inconclusive"
   },
   {
    "id": "km_fd9f0b30dde1",
@@ -1526,10 +1519,10 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Bhagavata Saroddhara/SBS5.6.SBS62.mp3",
    "verdict": "ok",
    "heard": "bhagavata_saroddhara:BS_P05_V062",
-   "score": 0.717,
-   "expected_score": 0.717,
-   "runner_up": "bhagavata_saroddhara:BS_P05_V102",
-   "decision": "confirmed"
+   "score": 0.245,
+   "expected_score": 0.245,
+   "runner_up": "bhagavata_saroddhara:BS_P02_V030",
+   "decision": "weak_confirm"
   },
   {
    "id": "km_fece0f10bca2",
@@ -1537,9 +1530,9 @@
    "audio": "kamadhenu_dataset/incoming_audio/drive/Shlokas/tp1.9.tp9.mp3",
    "verdict": "suspect_repetition",
    "heard": "tirtha_prabandha:TP_PAS_009",
-   "score": 0.694,
-   "expected_score": 0.143,
-   "runner_up": "tirtha_prabandha:TP_DAK_009",
+   "score": 0.677,
+   "expected_score": 0.065,
+   "runner_up": "tirtha_prabandha:TP_PAS_082",
    "decision": "remap",
    "heard_text": "द्वारावतीं सकलभाग्यवतीमुपेक्ष्य\nगोपालबालललनाकरपूजनं च\nवार्धिं वधूगृहमतीत्य स मध्वनाथो\nयत्रास्ति तद्रजतपीठपुरं गरीयः"
   }

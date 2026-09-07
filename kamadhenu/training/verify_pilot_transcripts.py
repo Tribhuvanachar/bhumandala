@@ -92,14 +92,15 @@ def main(argv=None):
     ap.add_argument("--out", default="kamadhenu/reports/pilot_transcript_check")
     ap.add_argument("--shard", default=None, help="i/n: check only every n-th file starting at i (0-based), for parallel runners")
     ap.add_argument("--merge", nargs="*", default=None, help="merge these shard JSON reports into --out instead of transcribing")
-    ap.add_argument("--crossmatch", metavar="REPORT_JSON", default=None,
-                    help="instead of transcribing: match every ASR in this report against all verses of its work")
+    ap.add_argument("--crossmatch", metavar="REPORT_JSON", nargs="+", default=None,
+                    help="instead of transcribing: match every ASR in these reports against all verses of its work "
+                         "(several reports, e.g. Whisper small and medium, are combined per recording)")
     ap.add_argument("--text-index", default="kamadhenu_dataset/text_index.json")
     a = ap.parse_args(argv)
     if a.crossmatch:
-        rows = json.load(open(a.crossmatch, encoding="utf-8"))["rows"]
         units = json.load(open(ROOT / a.text_index, encoding="utf-8"))["units"]
-        rep = write_crossmatch(crossmatch(rows, units), a.out, a.crossmatch)
+        runs = [crossmatch(json.load(open(f, encoding="utf-8"))["rows"], units) for f in a.crossmatch]
+        rep = write_crossmatch(combine_crossmatch(runs) if len(runs) > 1 else runs[0], a.out, " + ".join(a.crossmatch))
         print(json.dumps({k: v for k, v in rep.items() if k != "rows"}, ensure_ascii=False)); return 0
     if a.merge is not None:
         rows = []
@@ -184,13 +185,30 @@ def crossmatch(rows, units, min_score=0.3, margin=0.15):
     return out
 
 
+def combine_crossmatch(runs):
+    """Merge cross-match rows from several ASR runs (e.g. Whisper small and medium) per recording:
+    a decisive decision from any run wins (highest score); two runs naming different verses → 'conflict'."""
+    by = {}
+    for recs in runs:
+        for r in recs:
+            cur = by.get(r["id"])
+            if cur is None:
+                by[r["id"]] = dict(r); continue
+            decisive = lambda x: x["decision"] in ("confirmed", "weak_confirm", "remap")
+            if decisive(r) and decisive(cur) and r["heard"] != cur["heard"]:
+                by[r["id"]] = dict(cur, decision="conflict", conflict_with=r["heard"])
+            elif decisive(r) and (not decisive(cur) or r["score"] > cur["score"]):
+                by[r["id"]] = dict(r)
+    return [by[k] for k in sorted(by)]
+
+
 def write_crossmatch(recs, out_dir, source):
     from collections import Counter
     out_dir = Path(out_dir); out_dir.mkdir(parents=True, exist_ok=True)
     rep = {"checkedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "source_report": str(source), "files": len(recs),
            "decisions": dict(Counter(r["decision"] for r in recs)), "rows": recs}
     json.dump(rep, open(out_dir / "crossmatch.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    order = {"remap": 0, "inconclusive": 1, "weak_confirm": 2, "confirmed": 3}
+    order = {"conflict": 0, "remap": 1, "inconclusive": 2, "weak_confirm": 3, "confirmed": 4}
     lines = [f"# Cross-match of recordings against the whole work\n\nSource: `{source}` · {len(recs)} files · " +
              " · ".join(f"{k} {v}" for k, v in sorted(rep["decisions"].items())) + "\n",
              "| id | file | expected | decision | heard | score | expected score |", "|---|---|---|---|---|---|---|"]

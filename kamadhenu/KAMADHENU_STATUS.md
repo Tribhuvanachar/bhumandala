@@ -99,3 +99,21 @@ The lead asked whether the audio fed to Experiment A carries the text we claim. 
   merge job now runs the cross-match itself and uploads it with the report.
 - Next: rerun Experiment A on the verified set (needs the lead's cost approval, same ≈ ₹150–185 envelope),
   and apply the same check to the Gītā recordings before they enter any training set.
+
+## Update — Whisper medium run settled most of the rest (8 Sep 2026, 1:55 am IST)
+
+Run 2 (Whisper medium, 4 shards, 69 min) cross-matched and combined with run 1 (`--crossmatch small medium`;
+the two runs never named different verses for the same file). Final gate file
+`kamadhenu/reports/pilot_transcript_check/crossmatch.json`:
+
+| decision | files | share |
+|---|---|---|
+| confirmed (+1 weak) | 93 | 68 % |
+| remap — recording is a different verse | 38 | 28 % |
+| inconclusive | 5 | 4 % |
+
+The 38 remaps: all 10 Tīrtha Prabandha files (Paścima, not Dakṣiṇa) and 28 Bhāgavata Saroddhāra files
+(+1 / +2 verses, or the same number in the next part). Export: `--require-verified crossmatch.json` → 93 pairs;
+with `--accept-remap` → 131 pairs on the text actually heard. The 5 unresolved (SBS9.5, SBS20.30, SBS1.8,
+SBS31.1, SBS1.16) need a human ear; two of them sound like full Bhāgavata verses the Saroddhāra text does not
+contain. Attempt 4 therefore trained with **28 % wrong pairs**; the rerun waits on the lead's cost go-ahead.
