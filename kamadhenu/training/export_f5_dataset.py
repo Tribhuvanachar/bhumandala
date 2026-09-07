@@ -126,6 +126,36 @@ def write_arrow(out, recs, log=print):
     log(f"  wrote {p} ({p.stat().st_size / 1024:.0f} KB)")
 
 
+def verified_ids(report):
+    """{id: (decision, heard_text)} from a verify_pilot_transcripts.py report.
+
+    A crossmatch.json (rows carry `decision`) is the stronger gate: it says which verse the recording IS.
+    A plain transcript check (rows carry `verdict`) only says whether the expected text was heard."""
+    d = json.load(open(report, encoding="utf-8"))
+    out = {}
+    for r in d.get("rows", []):
+        if "decision" in r:
+            out[r["id"]] = (r["decision"], r.get("heard_text"))
+        else:
+            out[r["id"]] = ("confirmed" if r.get("verdict") == "ok" else r.get("verdict", "missing"), None)
+    return out
+
+
+def split_verified(rows, verdicts, accept_remap=False):
+    """Keep rows whose recording is confirmed to carry their text; return (kept, [dropped {id, decision}]).
+    With accept_remap, a row the cross-match remapped keeps its audio and takes the heard verse's text."""
+    kept, dropped = [], []
+    for r in rows:
+        dec, heard = verdicts.get(r["id"], ("not_checked", None))
+        if dec in ("confirmed", "weak_confirm"):
+            kept.append(r)
+        elif dec == "remap" and accept_remap and heard:
+            kept.append(dict(r, text=heard, remapped_from=r.get("text_id")))
+        else:
+            dropped.append({"id": r["id"], "decision": dec})
+    return kept, dropped
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--train", default="kamadhenu/data/pilot/train.jsonl")
@@ -133,6 +163,12 @@ def main(argv=None):
     ap.add_argument("--out", default="kamadhenu_dataset/processed/audio/f5/kamadhenu_pilot_char")
     ap.add_argument("--arrow", action="store_true", help="also write raw.arrow (needs the `datasets` package)")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--require-verified", metavar="REPORT_JSON", default=None,
+                    help="kamadhenu/reports/pilot_transcript_check/pilot_transcript_check.json from "
+                         "verify_pilot_transcripts.py: export only rows whose ASR verdict is 'ok'; rows the report "
+                         "flagged or never saw are dropped and listed in manifest.json['excluded']")
+    ap.add_argument("--accept-remap", action="store_true",
+                    help="with a crossmatch.json report: keep remapped rows, training them on the verse actually heard")
     a = ap.parse_args(argv)
     exe = ffmpeg_exe()
     if not exe:
@@ -142,10 +178,19 @@ def main(argv=None):
     out = ROOT / a.out
     t0 = time.time()
     train_rows = [json.loads(l) for l in open(ROOT / a.train, encoding="utf-8")]
+    eval_rows = [json.loads(l) for l in open(ROOT / a.eval, encoding="utf-8")] if a.eval and (ROOT / a.eval).exists() else []
+    excluded, verified = [], None
+    if a.require_verified:
+        verified = verified_ids(ROOT / a.require_verified)
+        train_rows, drop = split_verified(train_rows, verified, a.accept_remap)
+        excluded += drop
+        eval_rows, drop = split_verified(eval_rows, verified, a.accept_remap)
+        excluded += drop
+        print(f"--require-verified: {len(train_rows)} train + {len(eval_rows)} eval rows keep an 'ok' verdict, "
+              f"{len(excluded)} dropped")
     recs, problems = export_rows(train_rows, out, exe, vocab, "train", a.limit)
     eval_recs, eval_problems = [], []
-    if a.eval and (ROOT / a.eval).exists():
-        eval_rows = [json.loads(l) for l in open(ROOT / a.eval, encoding="utf-8")]
+    if eval_rows:
         eval_recs, eval_problems = export_rows(eval_rows, out / "eval", exe, vocab, "eval", a.limit)
     if a.arrow and recs:
         write_arrow(out, recs)
@@ -158,6 +203,7 @@ def main(argv=None):
                   "frames": int(sum(m["frames"] for m in recs)), "chars": int(sum(m["chars"] for m in recs)), "files": recs},
         "eval": {"n": len(eval_recs), "seconds": round(sum(m["duration"] for m in eval_recs), 1), "files": eval_recs},
         "problems": problems + eval_problems, "seconds_taken": round(time.time() - t0, 1),
+        "verified_report": a.require_verified, "excluded": excluded,
     }
     json.dump(manifest, open(out / "manifest.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"{len(recs)} train + {len(eval_recs)} eval wavs → {out.relative_to(ROOT)} "

@@ -5451,3 +5451,28 @@ The exact word index (build_search_index.py `word_tokens`/`bucket_key`, dge-sear
 - Still open before deploy=true: the Pages artifact would be the whole repo tree (2.3 GB) plus 0.9 GB of
   generated pages; GitHub Pages' 1 GB soft limit means the artifact should carry generated pages only
   (or the site moves to Firebase Hosting). The lead's call.
+
+## Pilot transcripts checked by ear (Whisper) — a quarter of the pairs were the wrong verse (8 Sep 2026, 12:45 am IST)
+
+The lead asked whether the audio fed to Experiment A carries the text we claim. It did not, for one pair in four.
+
+- Run 1 (`kamadhenu-pilot-transcripts.yml`, Whisper small, 4 CI shards, 23 min): 136 pilot files; the CER
+  verdict alone said ok 104 / suspect_repetition 17 / suspect_mismatch 9 / short 6, CER median 0.26.
+- The CER only says "expected text not heard". The new cross-match (`verify_pilot_transcripts.py --crossmatch`)
+  compares each ASR with *every verse of the same work* (`kamadhenu_dataset/text_index.json`) and says which
+  verse the recording actually is. Result on the same run: **confirmed 78 + weak 2 = 80 (59 %), remap 34
+  (25 %), inconclusive 22 (16 %)**. 18 of the 34 wrong pairs had passed the CER check as "ok".
+- What the 34 wrong pairs are: **all 10 Tīrtha Prabandha files** (`tp1.N`) are Paścima-prabandha verse N,
+  mapped as Dakṣiṇa-prabandha verse N — the whole folder is one prabandha off. **24 Bhāgavata Saroddhāra
+  files** carry the next verse (+1) or the one after (+2), one carries the previous verse, and two carry the
+  same verse number in the next part (P20→P21 V315, P05→P06 V102), so the recorder's numbering drifted at
+  several points and the file name (`SBS20.70.SBS306`) was trusted over the content.
+- Experiment A attempt 4 trained on these 136 pairs, so at least 25 % of its training text was wrong. Its
+  A/B pairs stand, but the model is not a clean measurement of the recipe. Nothing else was spent.
+- Gate, now in code: `export_f5_dataset.py --require-verified kamadhenu/reports/pilot_transcript_check/crossmatch.json`
+  exports only confirmed pairs (80); `--accept-remap` also keeps the 34 remapped files with the verse actually
+  heard as their text (114). The 22 inconclusive files wait for run 2 (Whisper medium, dispatched 12:35 am IST).
+- Reports committed under `kamadhenu/reports/pilot_transcript_check/` (small-model run + crossmatch). The CI
+  merge job now runs the cross-match itself and uploads it with the report.
+- Next: rerun Experiment A on the verified set (needs the lead's cost approval, same ≈ ₹150–185 envelope),
+  and apply the same check to the Gītā recordings before they enter any training set.
