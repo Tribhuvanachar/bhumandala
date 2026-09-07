@@ -70,6 +70,7 @@ approval:                         # 7 Sep 2026, 6:20 pm IST — the lead: "appro
   vram: 24GB
   where: Hugging Face Jobs on the lead's account (hf_job.py + .github/workflows/kamadhenu-experiment-a.yml)
   flavor: l4x1                    # 1× L4 24 GB, $0.80/h, 8 vCPU, 30 GB RAM, 400 GB disk
+  image: pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel   # torch 2.8.0 = the Space's stack; the first attempt on 2.4.1 died in pip (x-transformers 2.19.7), ~₹1
   job_timeout_minutes: 150        # killed by HF at this point: worst case $2.00 ≈ ₹176 < cap
   train_cap_minutes: 100          # inside the job; leaves ~50 min for setup, export, 39 renders and the upload
   results_repo: SarvamulaOrg/kamadhenu-voice-a   # private; export/ eval/ train.log
