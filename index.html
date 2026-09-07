@@ -20,13 +20,21 @@
 <meta property="og:image" content="https://tribhuvanachar.github.io/bhumandala/dge/images/guru/guruji.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
+<script>
+/* Short URLs (7 Sep 2026): https://…/bhumandala/?rv1.1.3 → the reader, which resolves the token (dge/js/shortcuts.js).
+   Only a bare <letters><digits[.digits]> token is forwarded; ?next=… and every other query stay on this page. */
+(function () {
+  var q = location.search.replace(/^\?/, '');
+  if (q && q.indexOf('&') < 0 && /^[A-Za-z]{1,4}=?\d[\d.]*$/.test(q)) location.replace('dge/index.html?' + q + location.hash);
+})();
+</script>
 <link rel="preload" as="image" href="dge/images/guru/guruji.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/home.css?v=1">
+<link rel="stylesheet" href="css/home.css?v=2">
 <!-- In-place editing of admin/content/home.json, for a signed-in super
      admin. Inert for everyone else — it checks before it draws anything. -->
 <link rel="stylesheet" href="dge/css/content-inline.css?v=1">
@@ -718,6 +726,11 @@ let SITE_CONFIG = null;
 
   function markPassed() {
     try { sessionStorage.setItem(cfg.passKey, String(Date.now())); } catch (e) {}
+    // Once a day per device (dge/js/vandana-guard.js reads this), cleared again by a sign-in.
+    try {
+      const d = new Date(), m = d.getMonth() + 1, day = d.getDate();
+      localStorage.setItem('dge_vandana_day', d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day);
+    } catch (e) {}
   }
 
   function enter() {
@@ -734,6 +747,11 @@ let SITE_CONFIG = null;
     $('offerBtn').addEventListener('click', offer);
     $('pranamBtn').addEventListener('click', pranam);
     $('offerZone').addEventListener('click', offer);
+    // "Tap the portrait" means the whole portrait, not only the small offer zone above it (7 Sep 2026 report).
+    document.querySelector('.frame').addEventListener('click', function () {
+      if (document.querySelector('.frame').classList.contains('video-active')) return;
+      offer();
+    });
     $('offerZone').addEventListener('keydown', function (ev) {
       if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); offer(); }
     });

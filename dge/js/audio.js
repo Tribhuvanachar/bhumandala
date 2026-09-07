@@ -279,6 +279,7 @@ async function loadShloka(id) {
 
   if (typeof nsKey === 'function') localStorage.setItem(nsKey('lastVerse'), String(id));
   if (typeof dgeLogReadingHistory === 'function') dgeLogReadingHistory(id);
+  if (typeof window.dgeSyncUrl === 'function') window.dgeSyncUrl(id);
 
   updateRepeatDisplay();
   if (!alreadyActive) {

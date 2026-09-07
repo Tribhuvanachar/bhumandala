@@ -389,7 +389,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.67.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.68.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -870,7 +870,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // BEFORE those are read below, so everything downstream — including the
   // legacy-slug upgrade and the namespace logic — behaves exactly as if the
   // reader had typed the long form themselves.
-  let abbrevPath = null, abbrevShloka = null;
+  let abbrevPath = null, abbrevShloka = null, abbrevVedicId = null;
+  // 7 Sep 2026: the one-token short URL — ?rv1.1.3, ?smv1.5, ?bhp10.14.8 (js/shortcuts.js is the grammar; the
+  // landing page forwards such a query here). Resolved to path + jump exactly like the long form below, and the
+  // short form is kept in the address bar (history.replaceState) so the URL people copy stays short.
+  const dgeShortcut = (window.DGEShortcuts && window.DGEShortcuts.fromSearch) ? window.DGEShortcuts.fromSearch(window.location.search) : null;
+  if (dgeShortcut) {
+    abbrevPath = dgeShortcut.granthaPath;
+    if (dgeShortcut.vedicId) abbrevVedicId = dgeShortcut.vedicId;
+    else if (dgeShortcut.shlokaNumber) abbrevShloka = String(dgeShortcut.shlokaNumber);
+    try { history.replaceState(null, '', window.location.pathname + '?' + dgeShortcut.shortcut + window.location.hash); } catch (e) { /* ignore */ }
+  }
   const DGE_ABBR = window.DGE_TEXT_ABBREVIATIONS || {};
   for (const key of Object.keys(DGE_ABBR)) {
     if (!urlParams.has(key)) continue;
@@ -892,7 +902,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Quick Search jump target (see dgeQuickJump in library.js) — resolved
   // against this grantha's actual shlokas object once it's loaded and
   // normalized, at the end of initApp() below.
-  const jumpVedicId = urlParams.get('jumpVedicId');
+  const jumpVedicId = urlParams.get('jumpVedicId') || abbrevVedicId;
   const jumpShloka = urlParams.get('jumpShloka') || abbrevShloka;
   window._dgeJumpTarget = jumpVedicId ? { vedicId: jumpVedicId } : (jumpShloka ? { shlokaNumber: parseInt(jumpShloka, 10) } : null);
 
@@ -946,6 +956,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const slug = dgeUpgradeLegacySlug(explicitPath
     ? explicitPath.replace(/^\/+|\/+$/g, '')
     : `stotra/${explicitCode || DGE_DEFAULT_STOTRA_SLUG}`);
+  window.dgeCurrentSlug = slug;
+
   const stotrasDirectChild = slug.match(/^stotra\/([^/]+)$/);
 
   // 23 Aug 2026: stotra/pns was renamed stotra/PrahladaKrutaNarasimha for
@@ -1197,6 +1209,26 @@ function dgeHighlightQueryOnLoad(query, attempt, hadJumpTarget) {
 }
 window.dgeHighlightQueryOnLoad = dgeHighlightQueryOnLoad;
 
+// Keeps the address bar on the verse being read (7 Sep 2026, the lead: "share the current shloka, bookmark it,
+// browser history"): the SHORT form when js/shortcuts.js has a key for this grantha (?rv1.1.3), otherwise
+// ?path=…&jumpShloka=N. replaceState, so Back still leaves the text; a reload or a bookmark lands on the verse,
+// and with it the list page that holds it (loadShloka turns to that page). Also what Share/Copy link use.
+window.dgeCanonicalUrl = function (id) {
+  const slug = window.dgeCurrentSlug;
+  if (!slug || !window.stotraData || !window.stotraData.shlokas) return window.location.href;
+  const sh = id ? window.stotraData.shlokas[id] : null;
+  const base = window.location.pathname;
+  if (window.DGEShortcuts && sh) return window.DGEShortcuts.canonical(base, slug, sh, id);
+  const q = '?path=' + (/^[a-z0-9_\/]+$/i.test(slug) ? slug : encodeURIComponent(slug)) + (id ? '&jumpShloka=' + id : '');
+  return base + q;
+};
+window.dgeSyncUrl = function (id) {
+  try {
+    const url = window.dgeCanonicalUrl(id);
+    if (url && url !== window.location.pathname + window.location.search) history.replaceState(null, '', url + window.location.hash);
+  } catch (e) { /* ignore */ }
+};
+
 // Turns a { vedicId } or { shlokaNumber } target into an actual internal
 // shloka key and jumps there via loadShloka() — select, scroll, update the
 // reading card, but never start audio (see the comment at the call).
@@ -1243,9 +1275,18 @@ function dgeResolveQuickJumpTarget(target) {
     // display reference -- match them exactly against the id each shloka
     // now carries. For a nested grantha this lands on the chapter's first
     // shloka, which is the honest resolution of a chapter-level id.
+    // "<unit id>#<n>" (7 Sep 2026, short URLs such as bhp10.14.8 → adhyaya_14#8) names the n-th verse INSIDE
+    // that unit: the data indexes nested verses exactly this way (unitNo, see dgeNormalizeGranthaData).
     if (!targetId) {
-      targetId = Object.keys(stotraData.shlokas).find(k =>
-        stotraData.shlokas[k].unitId === target.vedicId);
+      const hash = String(target.vedicId).indexOf('#');
+      const unitWanted = hash >= 0 ? String(target.vedicId).slice(0, hash) : String(target.vedicId);
+      const verseWanted = hash >= 0 ? String(target.vedicId).slice(hash + 1) : null;
+      const inUnit = keys.filter(k => stotraData.shlokas[k].unitId === unitWanted);
+      if (inUnit.length) {
+        targetId = (verseWanted && inUnit.find(k => String(stotraData.shlokas[k].unitNo) === verseWanted))
+          || (verseWanted && /^\d+$/.test(verseWanted) && inUnit[parseInt(verseWanted, 10) - 1])
+          || inUnit[0];
+      }
     }
   }
 

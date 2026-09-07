@@ -44,13 +44,19 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
   var FALLBACK_CONFIG = {
     base: {
       shloka: [
-        { id: 'favorite', icon: 'star', label: 'Favorite', action: 'dgeCtxToggleFavorite' },
-        { id: 'status', icon: 'status', label: 'Reading status', action: 'dgeCtxOpenStatusPicker' },
-        { id: 'doubt', icon: 'doubt', label: 'Mark doubt', action: 'dgeCtxToggleDoubt' },
-        { id: 'copy', icon: 'copy', label: 'Copy', action: 'dgeCtxCopyShloka' },
-        { id: 'play', icon: 'play', label: 'Play', action: 'dgeCtxPlayShloka' },
-        { id: 'askAcharya', icon: 'acharya', label: 'Explain this shloka', action: 'dgeCtxAskAcharyaShloka' },
-        { id: 'more', icon: 'more', label: 'More', action: 'dgeCtxOpenMoreSheet' }
+        { id: 'favorite', icon: 'star', label: 'Favorite', action: 'dgeCtxToggleFavorite', group: 'mark' },
+        { id: 'status', icon: 'status', label: 'Reading status', action: 'dgeCtxOpenStatusPicker', group: 'mark' },
+        { id: 'doubt', icon: 'doubt', label: 'Mark doubt', action: 'dgeCtxToggleDoubt', group: 'mark' },
+        { id: 'bookmark', icon: 'bookmark', label: 'Bookmark', action: 'dgeCtxBookmark', group: 'mark' },
+        { id: 'shareLink', icon: 'share', label: 'Share link', action: 'dgeCtxShareLink', group: 'share' },
+        { id: 'copyLink', icon: 'link', label: 'Copy link', action: 'dgeCtxCopyLink', group: 'share' },
+        { id: 'shareText', icon: 'text', label: 'Share text', action: 'dgeCtxShareText', group: 'share' },
+        { id: 'copy', icon: 'copy', label: 'Copy text', action: 'dgeCtxCopyShloka', group: 'share' },
+        { id: 'shareImage', icon: 'image', label: 'Share image', action: 'dgeCtxShareImage', group: 'share' },
+        { id: 'shareAudio', icon: 'audio', label: 'Text + audio', action: 'dgeCtxShareAudio', group: 'share' },
+        { id: 'play', icon: 'play', label: 'Play', action: 'dgeCtxPlayShloka', group: 'study' },
+        { id: 'askAcharya', icon: 'acharya', label: 'Explain this shloka', action: 'dgeCtxAskAcharyaShloka', group: 'study' },
+        { id: 'more', icon: 'more', label: 'Notes & snippets', action: 'dgeCtxOpenMoreSheet', group: 'study' }
       ],
       word: [
         { id: 'dictionary', icon: 'book', label: 'Dictionary', action: 'dgeCtxOpenShabda' },
@@ -175,6 +181,7 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
 
   var ICON_GLYPH = {
     star: '⭐', status: '◐', doubt: '❓', copy: '📋', play: '▶️', acharya: '🕉️',
+    bookmark: '🔖', share: '📤', link: '🔗', text: '📝', image: '🖼️', audio: '🎧', refs: '📚',
     link: '🔗', more: '⋯', book: '📖', puzzle: '🧩', search: '🔍', add: '➕',
     open: '↗️', bookmark: '🔖', type: '🔤', audio: '🎧', export: '⬇️', edit: '✏️',
     svara: '𝄄'
@@ -239,12 +246,29 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
       : (TITLES[objectType] || '');
     if (titleEl) titleEl.textContent = label;
     if (bodyEl) {
-      bodyEl.innerHTML = actions.map(function (a) {
+      var btn = function (a) {
         var glyph = ICON_GLYPH[a.icon] || '•';
         return '<button type="button" class="ctx-action-btn" data-ctx-action="' + esc(a.action) + '">' +
           '<span class="ctx-action-icon" aria-hidden="true">' + glyph + '</span>' +
           '<span class="ctx-action-label">' + esc(a.label) + '</span></button>';
-      }).join('');
+      };
+      // 7 Sep 2026: grouped sheet — Mark / Share this verse / Study — so every share action sits together
+      // (the lead: "all share related features under one tab"). Items without a group (runtime registrations
+      // such as the metre check) go under Study; a sheet whose items carry no groups at all renders flat.
+      var GROUPS = [['mark', 'Mark'], ['share', 'Share this verse'], ['study', 'Study']];
+      var grouped = actions.some(function (a) { return a.group; });
+      if (!grouped || objectType !== 'shloka') {
+        bodyEl.innerHTML = actions.map(btn).join('');
+      } else {
+        var ref = (objectType === 'shloka' && typeof window.dgeShlokaReference === 'function') ? window.dgeShlokaReference(shlokaIdFrom(context)) : null;
+        var html = ref ? '<div class="ctx-group-ref">' + esc(ref.line) + (ref.short ? ' <span class="ctx-group-short">?' + esc(ref.short) + '</span>' : '') + '</div>' : '';
+        GROUPS.forEach(function (g) {
+          var items = actions.filter(function (a) { return (a.group || 'study') === g[0]; });
+          if (!items.length) return;
+          html += '<div class="ctx-group-label">' + g[1] + '</div>' + items.map(btn).join('');
+        });
+        bodyEl.innerHTML = html;
+      }
     }
     if (typeof window.openModal === 'function') window.openModal('dgeContextMenu');
   };
@@ -358,6 +382,13 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
     if (typeof window.showToast === 'function') window.showToast('No recognized references on this shloka.');
   };
   window.dgeCtxOpenMoreSheet = function (ctx) { if (typeof window.openActionsSheet === 'function') window.openActionsSheet(shlokaIdFrom(ctx)); };
+  // Share group (7 Sep 2026) — the same functions the More sheet's buttons call, plus link/bookmark from share.js.
+  window.dgeCtxShareLink = function (ctx) { if (typeof window.dgeShareShlokaLink === 'function') window.dgeShareShlokaLink(shlokaIdFrom(ctx)); };
+  window.dgeCtxCopyLink = function (ctx) { if (typeof window.dgeCopyShlokaLink === 'function') window.dgeCopyShlokaLink(shlokaIdFrom(ctx)); };
+  window.dgeCtxShareText = function (ctx) { if (typeof window.shareShlokaTextOnly === 'function') window.shareShlokaTextOnly(shlokaIdFrom(ctx)); };
+  window.dgeCtxShareImage = function (ctx) { if (typeof window.openShareImagePreview === 'function') window.openShareImagePreview(shlokaIdFrom(ctx)); };
+  window.dgeCtxShareAudio = function (ctx) { if (typeof window.shareShlokaAudio === 'function') window.shareShlokaAudio(shlokaIdFrom(ctx)); };
+  window.dgeCtxBookmark = function (ctx) { if (typeof window.dgeBookmarkShloka === 'function') window.dgeBookmarkShloka(shlokaIdFrom(ctx)); };
 
   window.dgeCtxOpenShabda = function () { var btn = document.querySelector('[data-word-only][onpointerdown*="dgeOpenShabdaForSelection"]'); if (btn) btn.click(); else if (typeof window.dgeOpenShabdaForSelection === 'function') window.dgeOpenShabdaForSelection(null); };
   window.dgeCtxOpenDhatu = function () { if (typeof window.dgeOpenDhatuForSelection === 'function') window.dgeOpenDhatuForSelection(null); };

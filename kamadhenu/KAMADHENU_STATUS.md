@@ -1,8 +1,8 @@
 # KAMADHENU_STATUS
 
-Updated 7 Sep 2026, 6:05 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
+Updated 7 Sep 2026, 8:25 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
 
-CURRENT PHASE: 8 done (scaffold + CPU dry run) → 12 Experiment A waits on the lead's approval of the cost card
+CURRENT PHASE: 12 Experiment A RUNNING on Hugging Face Jobs (approved 6:20 pm IST: cap ₹185, 24 GB) — attempt 3 in flight
 
 COMPLETED:
 - 🟢 Phase 0 audit — `kamadhenu/KAMADHENU_AUDIT.md`
@@ -31,7 +31,12 @@ BLOCKED:
 NEXT ACTION: the lead reads `kamadhenu/docs/EXPERIMENT_A_CARD.md` and approves a ₹ cap + GPU class (or declines). On approval: rent a 24 GB card, `bash kamadhenu/training/launch_experiment_a.sh --dry-run` then without the flag; bring back export/, eval/, train.log; listen to the 13 A/B pairs. Meanwhile Phase 13 (evaluation script + HUMAN_REVIEW.csv) can start.
 
 HUMAN ACTION REQUIRED:
-0. **Approve or decline the Experiment A card** (`kamadhenu/docs/EXPERIMENT_A_CARD.md`): tick the box with a ₹ cap and a GPU class. Nothing is rented or trained before that.
+0. ~~Approve the Experiment A card~~ — approved 7 Sep 2026, 6:20 pm IST (cap ₹185, 24 GB). Running on HF Jobs (`l4x1`, $0.80/h)
+   via `.github/workflows/kamadhenu-experiment-a.yml`. Attempt 1 (6:21 pm): pip could not resolve x-transformers on the torch
+   2.4.1 image, 1 min. Attempt 2 (7:05 pm): reached the trainer; IndicF5's model.safetensors is the Hub wrapper's state dict
+   (`ema_model._orig_mod.transformer.*` + `vocoder.*`), converter fixed, strict verify added, 17 min. ≈ ₹21 spent. Attempt 3
+   (7:51 pm, timeout 135 / train cap 90 → worst case ₹158 more): run 34132520249. Results: `SarvamulaOrg/kamadhenu-voice-a`
+   (export/, eval/, train.log) + GitHub artifact `kamadhenu-experiment-a`. Listen to the 13 A/B pairs when they land.
 1. Where are the other Tīrthaprabandha recordings (only Dakṣiṇa 1–19 were in the shared folder)? If they exist, share that folder too.
 2. The Śrīpādarāja Aṣṭottara-śatanāmāvalī text (108 names, Devanagari) — then the 110 clips map by number.
 3. **Listen-list for 149 smv takes** — `kamadhenu_dataset/smv_takes_listen_list.csv`: each row gives what Whisper heard, the best guess, and the identified neighbours; fill the last column (sarga.verse.pāda or `skip`). Also spot-check a few of the 63 interpolated ones (confidence 0.6 in `smv_takes_check.json`).
