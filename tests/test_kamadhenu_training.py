@@ -88,3 +88,22 @@ def test_exporter_writes_f5_layout(tmp_path):
         rd = csv.reader(f, delimiter="|"); assert next(rd) == ["audio_file", "text"]; assert next(rd) == ["wavs/t1.wav", "नमो नारायणाय नमः"]
     assert json.load(open(out / "duration.json"))["duration"] == [m["duration"]]
     assert load_vocab(out / "vocab.txt")[0] == " "
+
+
+def test_hf_job_bootstrap_and_cap():
+    import hf_job
+    sc = hf_job.bootstrap_script("abc123", 100, "SarvamulaOrg/kamadhenu-voice-a")
+    assert "git checkout --quiet abc123" in sc and "launch_experiment_a.sh" in sc and "KAMADHENU_MAX_MINUTES=100" in sc
+    assert "sparse-checkout set kamadhenu tools/kamadhenu/space kamadhenu_dataset" in sc
+    usd, inr = hf_job.worst_case("l4x1", 150)
+    assert usd == 2.0 and inr == 176 and inr <= 185
+    assert hf_job.worst_case("a10g-small", 150)[1] > 185          # a10g at 150 min would breach the cap; submit refuses it
+
+
+def test_run_record_writes_timings(tmp_path):
+    import run_record
+    out = tmp_path / "run.json"
+    run_record.main(["--out", str(out), "--vram", "24GB", "--batch", "3200", "--epochs", "34", "--cap", "100", "--rc", "0",
+                     "--step", "3060", "--t", "0", "600", "4800", "5400"])
+    rec = json.load(open(out))
+    assert rec["minutes"] == {"setup": 10.0, "train": 70.0, "export_eval": 10.0, "total": 90.0} and rec["last_step"] == "3060"

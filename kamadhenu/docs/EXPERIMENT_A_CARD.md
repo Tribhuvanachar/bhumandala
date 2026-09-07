@@ -55,5 +55,5 @@ Warnings (3, none blocking):
 
 ## Decision
 
-- [ ] Approved by the project lead (date, cap in ₹, GPU class): ______
+- [x] Approved by the project lead: 7 Sep 2026, 6:20 pm IST — cap ₹185, 24 GB class. Run on a Hugging Face Job (`l4x1`, $0.80/h, job timeout 150 min → worst case ₹176; training loop capped at 100 min inside it) via `.github/workflows/kamadhenu-experiment-a.yml`.
 - [ ] Declined / changes requested: ______
