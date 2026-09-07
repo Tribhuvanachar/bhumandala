@@ -86,3 +86,6 @@ tools/tessdata/
 # OCR staging bulk (regenerable): Upaniṣad ṭippaṇī blocks + prompt files
 dge/data/ocr_staging/upanishad_tippani/*/blocks.json
 dge/data/ocr_staging/upanishad_tippani/prompts/
+
+# Vedavani (Hugging Face) Rigveda clips fetched by tools/vedavani_hf/vedavani_corpus.py -- never commit audio
+kamadhenu_dataset/incoming_audio/vedavani_hf/

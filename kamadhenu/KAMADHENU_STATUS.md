@@ -53,3 +53,24 @@ HUMAN ACTION REQUIRED:
 
 GPU REQUIRED: none pending. Measured on the L4: 3,060 updates in 20.5 min (bf16); a full-set Experiment B would be ~10× the data → order of 3–4 GPU hours, card to follow.
 ESTIMATED COST: Experiment A spent ≈ ₹154 upper bound (four HF Jobs, cap ₹185, approved). No Gemini spend.
+
+## Vedavani (Hugging Face) Rigveda clip corpus — manifest built, audio not yet mirrored (7 Sep 2026, 11:30 pm IST)
+
+- The lead's phone capture (PCAPdroid) shows the VedaVaNi app streaming whole-sukta MP3s from the two
+  Cloudflare R2 buckets already handled by `tools/vedavani/extract_audio.py`. The *dataset* the lead's
+  ChatGPT thread describes is a different project with the same name: `sanganaka/Vedavani-Dataset`
+  (IIT Kharagpur, ACL 2025, arXiv:2506.00145, Apache-2.0). Its audio is Veda Prasara Samiti's complete
+  Rigveda / Atharvaveda chanting from archive.org (`RigvedaChanting`, Public Domain Mark), cut by the
+  authors into 30,779 clips (20,782 Rigveda, 16 kHz mono WAV, avg 6.4 s, 6.8 GB in all).
+- Built `tools/vedavani_hf/vedavani_corpus.py` (`build-manifest`, `verify`, `fetch`, `mirror`) and
+  `.github/workflows/vedavani-hf-corpus.yml`. Committed manifest: 20,483 / 20,782 Rigveda clips mapped
+  to DGE ṛk ids (exact 18,293, span 437, refrain-resolved 1,110, fuzzy 643; 197 unmatched, 101 too
+  short, 1 ambiguous), 10,440 of 10,552 ṛks covered, 36.1 h mapped. The 54 recording groups run in
+  text order, so refrains resolve by their neighbours. Three random clips verified from the sandbox
+  (HTTP 200, `audio/wave`, RIFF header, size = manifest, sha256 = LFS oid, duration = CSV).
+- **Decision for the lead**: mirror the whole dataset into `SarvamulaOrg/vedavani-dataset-mirror`
+  (private, HF_TOKEN already in secrets) via the workflow's `mirror` mode, or keep pulling from the
+  upstream repo at training time. Audio is never committed to git (2.7 GB repo, 1 GB Pages soft limit).
+- Caveats: group recitation (several voices), 16 kHz (IndicF5 trains at 24 kHz), no svara marks in the
+  texts, clips are pādas not whole ṛks. Use as a Vedic-accent style reference / ASR test set, not as a
+  single-speaker Kamadhenu voice.
