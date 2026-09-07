@@ -33,7 +33,7 @@ echo "== Experiment A: $VRAM → batch $BATCH frames, lr $LR, warmup $WARM, trai
 if [ ! -d "$WORK/IndicF5/.git" ]; then git clone --quiet "$REPO" "$WORK/IndicF5"; fi
 git -C "$WORK/IndicF5" checkout --quiet "$COMMIT"
 python3 -m pip install -q --upgrade pip
-python3 -m pip install -q "torch==2.4.1" "torchaudio==2.4.1" "numpy<=1.26.4" accelerate==0.34.2 transformers==4.46.3 \
+python3 -m pip install -q "torch==2.8.0" "torchaudio==2.8.0" "numpy<=1.26.4" accelerate==0.34.2 transformers==4.46.3 \
   vocos==0.1.0 x-transformers==2.19.7 librosa==0.11.0 soundfile safetensors huggingface_hub datasets tensorboard \
   imageio-ffmpeg pyyaml "cached_path" ema_pytorch jieba pypinyin
 python3 -m pip install -q -e "$WORK/IndicF5"
