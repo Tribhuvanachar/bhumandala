@@ -1223,6 +1223,43 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, ~2:30 pm IST — three scholar features: vṛtta reports, dhātu occurrences, any-stem declension.**
+  1. **Vṛtta reports** (`dge/vyakarana/chandas.html` → `js/chandas-page.js`, core `js/chandas-report.js`, precompute
+     `tools/chandas/build_chandas_reports.js`, data `dge/data/vedanga/chandas/reports/` 6.4 MB): per-grantha report
+     (units, metrical, prose, unmatched, each vṛtta with count, %, variants, sample verses linked into the reader),
+     library/branch statistics (1,056 granthas · 822,066 units · 438,592 metrical · 1,211 distinct names incl. the
+     Vedic data's own declared chandas · 93 DB vṛttas never attested), per-vṛtta usage by branch/sub-branch/grantha
+     with examples, leaderboards (most/rarest/most widespread/most varied granthas). Precomputed reports show
+     instantly; Regenerate re-runs the same `DGEChandasReport.buildAsync` in the browser with a progress bar,
+     elapsed timer and ETA and caches on the device; a branch or the whole library can be re-scanned live (gated).
+     Visibility per feature: `admin/config/chandas-features.json` (all/admin/super/off), edited on the page's
+     super-admin panel (device override, download, or publish to main with the stored GitHub token). Irregular
+     ślokas report as अनुष्टुप् (अनियमितः), 2-line halves are folded to 4 pādas before jāti naming; anuṣṭubh
+     vipulās are variants of one vṛtta. The Node builder loads the browser engine unmodified (chandas_runner.js
+     trick), so both paths agree; ~1 min for the corpus.
+  2. **Dhātu occurrences** (`tools/build_dhatu_prayoga_index.py` → `dge/data/vedanga/vyakarana/dhatu_prayoga/`
+     80.7 MB: `by_dhatu/<gaṇa>/<code>.json`, `by_grantha/<slug>.json`, `manifest.json`): every one of the 251,597
+     tiṅanta/kṛdanta surface forms the site can already name (prakriya formindex + krtindex) matched exactly and
+     word-bounded across 807,801 units → 912,115 occurrences, 12,855 (dhātu, cell) pairs, 1,458 roots attested.
+     Shown as: count badges on every cell of prakriya.html and examples (snippet, source, reader link with ?hl=)
+     under the derivation; the same under each kṛdanta; a धातुप्रयोगसूची summary line; usage pills + "most used
+     in the library" sort + a प्रयोगाः button on dhatu.html; and **dhātu chips under every verse card in the reader**
+     (render.js `dgeDhatuChipsHtml`, core.js fetches the grantha's sidecar) linking to the exact cell — the
+     bidirectional link. Ambiguous surfaces (a form that is also a kṛdanta/noun, e.g. स्तुतम्) prefer the kṛdanta
+     reading and are flagged (dashed chip, note on the page); ≤2-akṣara forms and a stoplist are skipped; sandhi-
+     fused uses are not counted (precision over recall). Why a stored index despite intellisense.js/dhatu.js's
+     "search is enough" comments: this is form-precise (cell, count, rank), search is string-precise.
+  3. **Any-stem declension** (`dge/js/shabda-gen.js` on shabda.html, `?gen=<stem>&l=P|S|N`): all 24 cells for any
+     prātipadika via the vidyut-prakriya WASM already used for per-cell रूपसिद्धिः (0.4 s for राघवेन्द्र), rendered in
+     the Śabdapāṭha layout, each cell opening its sūtra-by-sūtra derivation, with the nearest listed paradigm named
+     ("declines like राम"); cached per device. **No word ends without a table**: the reader's word popover
+     (intellisense.js) links every subanta lemma to its generated table, and the Śabda word-tool modal (ai.js) offers
+     it both from the Vidyut-analysis fallback and from the "not found" end (as पुं/स्त्री/नपुं).
+  Not done: Python `vidyut` did not download through the proxy (19 MB wheel timed out), so there is no offline
+  pregenerated table set — the browser engine is the generator; per-grantha chandas reports are not written back
+  to the repo from the browser (download JSON + the Node builder cover that); Vedic metres remain the data's
+  declared values, not engine-detected.
+
 - **7 Sep 2026, ~1:45 am IST — the lead's ten-point review of the new reader, worked through.** (`index.html` 4.66.0,
   `render.js` v4.8, `utils.js`, `chandas.js`, `menu.js`, `modals.js`, `library.js`, `copy-guard.js`, `dge-nav-rail.js`,
   `core.js`, `main.css`, `admin/config/library-overrides.json`, `data/library.json`; 349 tests, audit and validator clean;

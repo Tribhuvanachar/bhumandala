@@ -59,6 +59,16 @@ jobs:
       - name: Refresh library status snapshot
         run: python tools/gen_library_status.py
 
+      # 7 Sep 2026: the two corpus indexes the reader and the vyākaraṇa pages
+      # link through. Both rebuild from scratch in about a minute each.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild dhātu occurrence index (dhatu_prayoga)
+        run: python tools/build_dhatu_prayoga_index.py
+      - name: Rebuild vṛtta reports (chandas reports)
+        run: node tools/chandas/build_chandas_reports.js
+
       - name: Commit whatever actually changed
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
@@ -68,12 +78,14 @@ jobs:
         run: |
           set -euo pipefail
           git add dge/data/vedanga/vyakarana/ashtadhyayi/prayoga_index \
+                  dge/data/vedanga/vyakarana/dhatu_prayoga \
+                  dge/data/vedanga/chandas/reports \
                   dge/search_index/backlinks \
                   admin/config/library-status.json
           if git diff --cached --quiet; then
             echo "interlink layers already current -- nothing to commit"
           else
-            git commit -m "Interlink rebuild: prayoga index, backlinks, library status" \
+            git commit -m "Interlink rebuild: prayoga index, dhātu occurrences, vṛtta reports, backlinks, library status" \
                        -m "Automatic (interlink.yml) after library content changed in $GITHUB_SHA."
             # someone may have pushed while we built; rebase, ours are
             # generated files nobody else edits between runs

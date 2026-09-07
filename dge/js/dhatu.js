@@ -56,6 +56,7 @@
     });
     var s=state.sort;
     state.view.sort(function(a,b){
+      if(s==="usage"){ var ua=(state.usage&&state.usage[a.id]||[0])[0], ub=(state.usage&&state.usage[b.id]||[0])[0]; if(ua!==ub) return ub-ua; return a.id.localeCompare(b.id); }
       if(s==="dhatu") return a.dhatu.localeCompare(b.dhatu,"sa");
       if(s==="gana"){ if(a.gana!==b.gana) return a.gana-b.gana; return a.id.localeCompare(b.id); }
       return a.id.localeCompare(b.id); // code order
@@ -77,10 +78,18 @@
         +'<span class="rartha '+devCls+'">'+esc(tl(it.artha))+'</span>'
         +'<span class="rpada" style="background:'+padaClass(pill)+'" title="'+it.pada_iast+'">'+esc(pdev)+'</span>'
         +'<span class="rgana '+devCls+'">'+it.gana+' · '+esc(tl(GANA[it.gana]||""))+'</span>'
+        +usagePill(it.id)
         +'<span class="rcaret">▸</span>'
       +'</div>'
       +'<div class="rbody">'+ (open?bodyHTML(it):"") +'</div>'
     +'</article>';
+  }
+  // 7 Sep 2026: corpus usage (tools/build_dhatu_prayoga_index.py → dhatu_prayoga/manifest.json):
+  // [occurrences, attested cells] per root, shown as a pill and as a sort.
+  function usagePill(id){
+    var u=state.usage&&state.usage[id];
+    if(!u) return '';
+    return '<span class="rusage" title="'+u[0].toLocaleString()+' occurrences in the library across '+u[1]+' forms — open the row for examples">'+u[0].toLocaleString()+'×</span>';
   }
   function bodyHTML(it){
     var devCls = state.script==="iast"?"":"deva";
@@ -106,6 +115,7 @@
       +'<a class="btn ai" href="rupasiddhi.html#'+it.id+'" title="उपसर्ग-योजना, सनादि, सर्वे 11 लकाराः, कृदन्त-declensions — every form derived live, step by step">✨ रूपसिद्धिः · उपसर्गैः</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
       +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
+      +((state.usage&&state.usage[it.id])?'<a class="btn ai" href="prakriya.html#'+it.id+'" title="Every attested form of this root with example verses (धातुप्रयोगसूची)">📚 प्रयोगाः · '+state.usage[it.id][0].toLocaleString()+' in '+state.usage[it.id][1]+' forms</a>':'')
       +'<button class="btn" data-dh-more="'+it.id+'" title="More actions for this root" aria-label="More actions for '+esc(tl(it.dhatu))+'">⋯ More</button>'
       +'</div>';
     if(state.vset && state.vset[it.id]){
@@ -413,6 +423,10 @@
       if(state.openId){ var el=$("#d-"+CSS.escape(state.openId)); var it=state.all.find(function(x){return x.id===state.openId;});
         if(el&&it){ var b=el.querySelector(".rbody"); if(b) b.innerHTML=bodyHTML(it); } }
     }).catch(function(){ state.vset={}; });
+    fetch("../data/vedanga/vyakarana/dhatu_prayoga/manifest.json").then(function(r){return r.ok?r.json():null;}).then(function(m){
+      state.usage=(m&&m.byDhatu)||{};
+      if(state.all.length){ recompute(); render(true); }
+    }).catch(function(){ state.usage={}; });
     fetch("../data/vedanga/vyakarana/dhatu_lexicon/data.json").then(function(r){return r.ok?r.json():null;}).then(function(d){
       state.lex={}; if(d) (d.items||[]).forEach(function(it){ state.lex[it.id]=it; });
       if(state.openId){ var el=$("#d-"+CSS.escape(state.openId)); var it=state.all.find(function(x){return x.id===state.openId;});

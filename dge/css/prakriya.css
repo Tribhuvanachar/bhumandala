@@ -94,3 +94,14 @@
   border: 1px solid var(--line); border-radius: 8px; padding: 3px 8px;
   white-space: nowrap; }
 .pk-krt-sutra:hover { border-color: var(--accent); }
+
+/* 7 Sep 2026: corpus occurrences (dhatu_prayoga) */
+.pk-usage{display:inline-block;margin-left:4px;font-size:10.5px;font-weight:700;color:var(--accent);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:0 6px;vertical-align:middle;white-space:nowrap}
+.pk-usage-sum{margin:8px 0;padding:8px 12px;border-left:3px solid var(--accent);background:var(--panel2);border-radius:0 10px 10px 0;font-size:13.5px;line-height:1.7}
+.pk-usage-block{margin-top:14px}
+.pk-ex{padding-left:22px;margin:6px 0}
+.pk-ex li{margin:6px 0;line-height:1.6}
+.pk-ex-snip{font-size:15px}
+.pk-ex-snip mark{background:var(--panel2);color:var(--accent);padding:0 2px;border-radius:4px;font-weight:700}
+.pk-ex-ref{display:inline-block;margin-left:6px;font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:0 8px}
+.pk-ex-ref:hover{color:var(--accent);border-color:var(--accent)}
