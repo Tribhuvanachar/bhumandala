@@ -957,6 +957,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ? explicitPath.replace(/^\/+|\/+$/g, '')
     : `stotra/${explicitCode || DGE_DEFAULT_STOTRA_SLUG}`);
   window.dgeCurrentSlug = slug;
+  if (typeof window.dgeApplySeoCanonical === 'function') window.dgeApplySeoCanonical(slug);
 
   const stotrasDirectChild = slug.match(/^stotra\/([^/]+)$/);
 
@@ -1208,6 +1209,23 @@ function dgeHighlightQueryOnLoad(query, attempt, hadJumpTarget) {
   }
 }
 window.dgeHighlightQueryOnLoad = dgeHighlightQueryOnLoad;
+
+// SEO canonical (7 Sep 2026, tools/seo): the interactive reader is one URL family (?path=…&jumpShloka=…, ?rv1.1.3)
+// over content that also exists as static pages (/dge/veda/rigveda/samhita/mandala-1/…). Once those pages are
+// served (admin/config/seo.json canonicalLive), the reader points <link rel="canonical"> at the grantha's page so
+// search engines index the crawlable copy and treat every reader URL as a view of it.
+window.dgeApplySeoCanonical = async function (slug) {
+  try {
+    const cfg = await fetch('../admin/config/seo.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+    if (!cfg || !cfg.canonicalLive) return;
+    const map = await fetch('data/seo_urls.json').then(r => r.ok ? r.json() : null).catch(() => null);
+    const hit = map && map.granthas && map.granthas[slug];
+    if (!hit) return;
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) { link = document.createElement('link'); link.rel = 'canonical'; document.head.appendChild(link); }
+    link.href = (cfg.siteOrigin || '').replace(/\/$/, '') + (cfg.sitePrefix || '') + hit.url;
+  } catch (e) { /* ignore */ }
+};
 
 // Keeps the address bar on the verse being read (7 Sep 2026, the lead: "share the current shloka, bookmark it,
 // browser history"): the SHORT form when js/shortcuts.js has a key for this grantha (?rv1.1.3), otherwise
