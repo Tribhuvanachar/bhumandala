@@ -1,8 +1,8 @@
 # KAMADHENU_STATUS
 
-Updated 6 Sep 2026, 8:55 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
+Updated 7 Sep 2026, 6:05 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
 
-CURRENT PHASE: 7 done → 8 (training pipeline scaffold) next
+CURRENT PHASE: 8 done (scaffold + CPU dry run) → 12 Experiment A waits on the lead's approval of the cost card
 
 COMPLETED:
 - 🟢 Phase 0 audit — `kamadhenu/KAMADHENU_AUDIT.md`
@@ -17,7 +17,7 @@ COMPLETED:
 - 🟢 Phase 16 architecture decided AND deployed — ZeroGPU Space live (`kamadhenu_dataset/DEPLOYMENT_REFERENCE.md`, `kamadhenu_dataset/space_measurements.json`)
 
 IN PROGRESS:
-- 🟠 Phase 8 training pipeline (IndicF5 / F5-TTS recipe, config, loader, resume, export) — not started in code
+- 🟢 **Phase 8 training pipeline scaffold — done 7 Sep 2026, 6:05 pm IST** (`kamadhenu/training/`, README there): text convention (`kamadhenu_text.py` = Vāgdhenu model_text), IndicF5 vocab (2,545, sha1-pinned), exporter to the F5 layout (24 kHz mono wavs at −3 dBFS, metadata.csv, duration.json, vocab.txt, raw.arrow), checkpoint converter both ways (safetensors ⇄ trainer `model_last.pt`), `experiment_a.yaml`, resumable wall-clock-capped launcher, A/B evaluation renderer. **CPU dry run executed on the real pilot audio** (136 files re-fetched from Drive): 123 train verses = 35.1 min, 13 held out, every character in the vocab, arrow loads, sampler simulated (24 GB: 90 batches/epoch × 34 epochs = 3,060 updates). Card: `kamadhenu/docs/EXPERIMENT_A_CARD.md`; numbers: `kamadhenu/reports/experiment_a_dry_run.json`. Not exercised here: torch/GPU (the launcher's `--dry-run` does that in the first 20 min of the budget)
 - 🟠 Phase 13 evaluation script + HUMAN_REVIEW.csv — not started
 
 BLOCKED:
@@ -28,9 +28,10 @@ BLOCKED:
 - 🔴 Any GPU training — none approved; none proposed yet
 - 🟢 **Zero-shot diagnostics run 7 Sep 2026, 1:24 pm IST** (`Kamadhenu Space — zero-shot diagnostics` workflow, run 34097773688, artifact `kamadhenu-diagnostics`; the Space now has a `/diagnose` endpoint and IndicF5's own model-card prompt clip as a diagnostic reference). Four clips, seed 60, all rendered: A IndicF5 prompt + Hindi 6.17 s (15.98 GPU s cold) · B lead's chant + Hindi 10.19 s · C IndicF5 prompt + Gītā 1.1 6.96 s · D lead's chant + Gītā 1.1 11.51 s. Measured before listening: the same Hindi sentence comes out 65 % longer from the chanted reference (10.19 vs 6.17 s) — the chant clip forces chant tempo on read speech, which is the smearing mechanism. The lead's ear decides A–D; the reading key is in the workflow header. Lead's verdict on the original trial (6 Sep): voice ~70 % similar, words unintelligible.
 
-NEXT ACTION: Phase 8 — write the IndicF5 fine-tune configuration and data exporter (pilot → F5 metadata format, 24 kHz), dry-run on CPU (no training), then present the Experiment A cost card.
+NEXT ACTION: the lead reads `kamadhenu/docs/EXPERIMENT_A_CARD.md` and approves a ₹ cap + GPU class (or declines). On approval: rent a 24 GB card, `bash kamadhenu/training/launch_experiment_a.sh --dry-run` then without the flag; bring back export/, eval/, train.log; listen to the 13 A/B pairs. Meanwhile Phase 13 (evaluation script + HUMAN_REVIEW.csv) can start.
 
 HUMAN ACTION REQUIRED:
+0. **Approve or decline the Experiment A card** (`kamadhenu/docs/EXPERIMENT_A_CARD.md`): tick the box with a ₹ cap and a GPU class. Nothing is rented or trained before that.
 1. Where are the other Tīrthaprabandha recordings (only Dakṣiṇa 1–19 were in the shared folder)? If they exist, share that folder too.
 2. The Śrīpādarāja Aṣṭottara-śatanāmāvalī text (108 names, Devanagari) — then the 110 clips map by number.
 3. **Listen-list for 149 smv takes** — `kamadhenu_dataset/smv_takes_listen_list.csv`: each row gives what Whisper heard, the best guess, and the identified neighbours; fill the last column (sarga.verse.pāda or `skip`). Also spot-check a few of the 63 interpolated ones (confidence 0.6 in `smv_takes_check.json`).
@@ -39,5 +40,5 @@ HUMAN ACTION REQUIRED:
 6. ~~two private folders~~ — not the lead's; dropped.
 7. ~~HKS content~~ — plain full recitation (lead, 6 Sep); accepted.
 
-GPU REQUIRED: none yet. Experiment A will need one 16–24 GB GPU for roughly 1–2 hours (card to be presented for approval).
-ESTIMATED COST: ₹0 GPU spent. Experiment A estimate will be given before launch (order of ₹100–300 on a rented T4/L4-class card).
+GPU REQUIRED: none yet. Experiment A: one 24 GB card (L4 / A10G / RTX 4090) for about 1–1.7 h including setup and the A/B renders (card presented 7 Sep 2026).
+ESTIMATED COST: ₹0 GPU spent. Experiment A point estimate ₹30–95 on a 24 GB card at Sep 2026 marketplace rates; **approve a cap of ₹185** (assumed step rates ±2×, wall-clock cap 150 min enforced by the launcher). No Gemini spend.

@@ -1223,6 +1223,11 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, 6:05 pm IST — Kamadhenu Phase 8 shipped (`kamadhenu/training/`), Experiment A card presented.** CPU dry run on
+  the real pilot audio: 123 train / 13 held-out verses, 35.1 min, vocab coverage 100 %, arrow loads, batches simulated per VRAM
+  class; card `kamadhenu/docs/EXPERIMENT_A_CARD.md` (₹30–95 est., cap ₹185, 24 GB card, 1–1.7 h). Waiting on the lead. The
+  torch-side steps (model build, conversion, one training step) are only exercised by the launcher's `--dry-run` on the GPU box.
+
 - **7 Sep 2026, evening — Library drawer: the lead's six phone reports, all shipped (index.html 4.67.0).**
   Resize edge on every screen size (`library.js` dgeInitLibraryResize, 200 px–95 vw on a phone; `main.css`
   `.drawer-resize-handle` no longer hidden under 760 px); `rv1.1`/`rv1` resolve as a dotted-id prefix

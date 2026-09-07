@@ -87,6 +87,10 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    the list view is paged at 25 (10/25/50/100 from the page bar, above and below the list, remembered per
    device) and nothing forces single view on large granthas any more — a Ṛgveda maṇḍala opens as a paged list.
    Jumps (quick jump, search hit, audio auto-advance) turn to the page holding the verse (`dgeListPageFor`).
+8. **Kamadhenu Phase 8 done** (`kamadhenu/training/`, README there): exporter, vocab, checkpoint converter, config,
+   launcher, A/B renderer, and the CPU dry run executed on the real pilot audio (re-fetched from Drive into the
+   gitignored `kamadhenu_dataset/incoming_audio/`). The lead now has `kamadhenu/docs/EXPERIMENT_A_CARD.md` to approve:
+   ~1–1.7 h on a 24 GB card, ₹30–95 estimated, cap ₹185. Nothing trained, nothing rented.
 
 ## 5. Pending, in priority order
 
@@ -106,12 +110,10 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    (`dgeExportVerifiedEmails`). 47 rules tests (emulator runs in the sandbox: `npm run test:rules`) + 196 unit
    tests pass. Not screenshotted: the export button needs a signed-in super-admin. Rules take effect only when
    the lead publishes them to the live project (Firestore is not created yet).
-4. **Kamadhenu Phase 8**: IndicF5 fine-tune config + pilot exporter (24 kHz, F5 metadata), CPU dry run, then
-   the Experiment A cost card (Kaggle T4 free first; L4 ≈ ₹150 fallback). Data: 1,721 usable pairs (6.5 h);
-   smv.zip pāda takes 909 identified, 149 on the listen-list. Two cheap diagnostics proposed and not yet run:
-   a Hindi sentence with an IndicF5 prompt clip (is the deployment sound), and a plain-read reference clip of
-   the lead (is chant tempo or Sanskrit the gap). `tp_shardula_1` (76 syllables in 11.85 s) may hold only half
-   its verse — listen before using it as a reference.
+4. **Kamadhenu Experiment A (Phase 12)** — waits on the lead's decision on `kamadhenu/docs/EXPERIMENT_A_CARD.md`.
+   On approval: rent one 24 GB card, `HF_TOKEN` + `KAMADHENU_VRAM=24GB`, run `launch_experiment_a.sh --dry-run`, then
+   the real run (resumable, 150-min cap), bring back `export/`, `eval/`, `train.log`, and give the lead the 13 A/B pairs
+   with the duration ratios. Independent of that: Phase 13 evaluation script + HUMAN_REVIEW.csv.
 5. **Scholar features, next steps**: (a) Vedic metre detection is still the data's declared `chandas`, not the
    engine (PENDING.md's long-open item); (b) dhātu index: sandhi-fused forms are uncounted, `_morph` records
    carry no dhātu code, so the intellisense popover links to shabda tables but not to dhātu cells — a
