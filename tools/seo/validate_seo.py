@@ -18,7 +18,7 @@ from pathlib import Path
 
 class Page(HTMLParser):
     def __init__(self):
-        super().__init__(); self.title = []; self.in_title = False; self.desc = None; self.canon = []; self.robots = None
+        super().__init__(); self.title = []; self.in_title = False; self.desc = None; self.canon = []; self.robots = None; self.generator = None
         self.lang = None; self.h1 = 0; self.links = []; self.ld = []; self.in_ld = False; self.crumbs = False; self.text = []; self.in_script = False; self.in_style = False
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -27,6 +27,7 @@ class Page(HTMLParser):
         if tag == "meta":
             if a.get("name") == "description": self.desc = a.get("content", "")
             if a.get("name") == "robots": self.robots = a.get("content", "")
+            if a.get("name") == "generator": self.generator = a.get("content", "")
         if tag == "link" and a.get("rel") == "canonical": self.canon.append(a.get("href", ""))
         if tag == "h1": self.h1 += 1
         if tag == "a" and a.get("href"): self.links.append(a["href"])
@@ -53,7 +54,7 @@ def main(argv=None):
     origin = a.origin or (cfg["siteOrigin"].rstrip("/") + cfg.get("sitePrefix", "").rstrip("/"))
     public_root = cfg.get("publicRoot", "/dge")
     pages = sorted(p for p in site.rglob("index.html") if p.relative_to(site).parts[0] == public_root.strip("/"))
-    urls = {}
+    urls, app_pages = {}, {}
     problems = {"blocking": [], "warnings": []}
     titles, descs, canons = Counter(), Counter(), Counter()
     graph = {}
@@ -64,6 +65,11 @@ def main(argv=None):
         raw = p.read_bytes(); sizes.append((len(raw), url))
         pg = Page(); pg.feed(raw.decode("utf-8", "replace"))
         title = "".join(pg.title).strip()
+        if pg.generator != "dge-seo":
+            # the reader's own hand-written pages (the app shell, tools, views) share the tree but are not
+            # generated: they are valid link targets, nothing more is checked about them here
+            app_pages[url] = title
+            continue
         urls[url] = title
         b = problems["blocking"]; w = problems["warnings"]
         if not title: b.append(f"{url}: no <title>")
@@ -100,7 +106,7 @@ def main(argv=None):
     b = problems["blocking"]; w = problems["warnings"]
     for url, links in graph.items():
         for l in links:
-            if l.startswith(public_root + "/") and l.endswith("/") and l not in urls: b.append(f"{url}: broken link {l}")
+            if l.startswith(public_root + "/") and l.endswith("/") and l not in urls and l not in app_pages: b.append(f"{url}: broken link {l}")
     for t, n in titles.items():
         if n > 1: b.append(f"duplicate title ×{n}: {t}")
     for d, n in descs.items():
@@ -118,8 +124,9 @@ def main(argv=None):
     if missing: b.append(f"{len(missing)} pages missing from the sitemap, e.g. {missing[:3]}")
     if stale: b.append(f"{len(stale)} sitemap URLs with no page, e.g. {stale[:3]}")
     # orphans: BFS from the root index
-    root = public_root + "/"
-    seen = set(); dq = deque([root] if root in graph else [])
+    root = cfg.get("catalogueUrl") or (public_root + "/texts/")
+    if root not in graph: b.append(f"catalogue root {root} was not generated")
+    seen = set(); dq = deque([root])
     while dq:
         u = dq.popleft()
         if u in seen: continue
@@ -129,7 +136,7 @@ def main(argv=None):
     orphans = [u for u in urls if u not in seen]
     if orphans: b.append(f"{len(orphans)} orphan pages (not reachable from {root}), e.g. {orphans[:3]}")
     big = sorted(sizes, reverse=True)[:5]
-    rep = {"pages": len(pages), "sitemapUrls": len(sm), "blocking": problems["blocking"][:200], "blockingCount": len(problems["blocking"]),
+    rep = {"pages": len(urls), "appPages": len(app_pages), "sitemapUrls": len(sm), "blocking": problems["blocking"][:200], "blockingCount": len(problems["blocking"]),
            "warnings": problems["warnings"][:200], "warningCount": len(problems["warnings"]), "largest": [(s, u) for s, u in big],
            "orphans": len(orphans), "duplicateTitles": sum(1 for n in titles.values() if n > 1)}
     out = json.dumps(rep, ensure_ascii=False, indent=1)

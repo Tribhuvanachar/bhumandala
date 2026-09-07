@@ -37,7 +37,7 @@ the pages can move to object storage or Firebase Hosting later without a single 
 
 ## B. URL specification
 
-**Canonical grammar** (tools/seo/taxonomy.py; public root `/dge/`):
+**Canonical grammar** (tools/seo/taxonomy.py; public root `/dge/`; the generated "All texts" catalogue is `/dge/texts/` — `/dge/index.html` stays the reader app and is never overwritten, `Site.write` refuses to replace an unstamped file; every generated page carries `<meta name="generator" content="dge-seo">`, which is also how the validator tells generated pages from the reader's own):
 
 | internal folder (storage) | canonical URL (public) |
 |---|---|
