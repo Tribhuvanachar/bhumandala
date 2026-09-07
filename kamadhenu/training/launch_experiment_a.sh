@@ -73,7 +73,9 @@ if [ "$DRY" = 1 ]; then echo "== dry run complete: code, weights, vocab, dataset
 cd "$WORK/IndicF5"
 T_TRAIN=$(date +%s)
 set +e
-timeout "${MAXMIN}m" accelerate launch --mixed_precision=fp16 f5_tts/train/finetune_cli.py \
+PREC="${KAMADHENU_PRECISION:-bf16}"   # attempt 3 (fp16 + GradScaler) produced loss=nan from step 1 and NaN weights by step ~320; L4/A10G/A100 do bf16 natively
+echo "== mixed precision: $PREC"
+timeout "${MAXMIN}m" accelerate launch --mixed_precision="$PREC" f5_tts/train/finetune_cli.py \
   --exp_name F5TTS_Base --dataset_name "$DSNAME" --tokenizer custom --tokenizer_path "$DATA/vocab.txt" \
   --learning_rate "$LR" --batch_size_per_gpu "$BATCH" --batch_size_type frame --max_samples 64 \
   --grad_accumulation_steps 1 --max_grad_norm 1.0 --epochs "$EPOCHS" --num_warmup_updates "$WARM" \
@@ -94,8 +96,27 @@ python3 "$HERE/render_eval.py" --base "$WORK/base/model.safetensors" --finetuned
   --finetuned-online "$EXP/model_online.safetensors" --vocab "$EXP/vocab.txt" --out "$WORK/eval"
 T_END=$(date +%s)
 STEP="$(python3 -c "import torch;print(torch.load('$LATEST',map_location='cpu',weights_only=True).get('step','?'))")"
+# Loss health from the trainer's own progress bar: how many updates reported a number, how many NaN, the last few.
+python3 - "$CKPT/train.log" <<'PY' | tee "$WORK/loss.json"
+import re, sys, json
+s = open(sys.argv[1], encoding="utf-8", errors="ignore").read()
+seen = {}
+for m in re.finditer(r"loss=([0-9.]+|nan|inf), step=(\d+)", s):
+    seen[int(m.group(2))] = m.group(1)
+vals = [seen[k] for k in sorted(seen)]
+nums = [(k, float(v)) for k, v in sorted(seen.items()) if v not in ("nan", "inf")]
+print(json.dumps({"updates_seen": len(vals), "nan_updates": sum(1 for v in vals if v == "nan"), "numeric_updates": len(nums),
+                  "first_loss": nums[0] if nums else None, "last_numeric": nums[-3:], "last_reported": vals[-1] if vals else None,
+                  "healthy": bool(vals) and vals[-1] not in ("nan", "inf") and sum(1 for v in vals[-50:] if v == "nan") == 0}))
+PY
 python3 "$HERE/run_record.py" --out "$WORK/run.json" --vram "$VRAM" --batch "$BATCH" --epochs "$EPOCHS" --cap "$MAXMIN" \
   --rc "$RC" --step "$STEP" --t "$T_START" "$T_TRAIN" "$T_EVAL" "$T_END"
+python3 - "$WORK/run.json" "$WORK/loss.json" "$PREC" <<'PY'
+import json, sys
+r = json.load(open(sys.argv[1])); r["loss"] = json.load(open(sys.argv[2])); r["mixed_precision"] = sys.argv[3]
+json.dump(r, open(sys.argv[1], "w"), indent=1)
+if not r["loss"]["healthy"]: print("!! TRAINING DIVERGED (NaN loss) — the exported weights are not usable; see loss.json")
+PY
 cp "$WORK/run.json" "$EXP/run.json"; cp "$ROOT/kamadhenu/reports/experiment_a_dry_run.json" "$EXP/dry_run.json" 2>/dev/null || true
 echo "== done. Keep: $EXP, $WORK/eval, $CKPT/model_last.pt, $CKPT/train.log. Delete the rest of $CKPT to free disk."
 

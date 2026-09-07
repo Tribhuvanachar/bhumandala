@@ -23,7 +23,7 @@ SPARSE = ["kamadhenu", "tools/kamadhenu/space", "kamadhenu_dataset"]
 TERMINAL = ("COMPLETED", "ERROR", "CANCELED", "DELETED")
 
 
-def bootstrap_script(commit, train_cap_minutes, results_repo, vram="24GB"):
+def bootstrap_script(commit, train_cap_minutes, results_repo, vram="24GB", precision="bf16"):
     """The command the job runs: minimal system deps, sparse clone at the exact commit, then the same launcher a
     rented box would run. Everything the launcher needs is under the sparse paths (pilot data, refs, manifests)."""
     return "\n".join([
@@ -37,7 +37,7 @@ def bootstrap_script(commit, train_cap_minutes, results_repo, vram="24GB"):
         "cd /repo && git sparse-checkout init --cone && git sparse-checkout set " + " ".join(SPARSE),
         f"git checkout --quiet {commit}",
         "python3 -m pip install -q soundfile numpy imageio-ffmpeg pyyaml datasets huggingface_hub",
-        f"export KAMADHENU_VRAM={vram} KAMADHENU_WORK=/work KAMADHENU_MAX_MINUTES={int(train_cap_minutes)} KAMADHENU_RESULTS_REPO={results_repo}",
+        f"export KAMADHENU_VRAM={vram} KAMADHENU_WORK=/work KAMADHENU_MAX_MINUTES={int(train_cap_minutes)} KAMADHENU_RESULTS_REPO={results_repo} KAMADHENU_PRECISION={precision}",
         "bash kamadhenu/training/launch_experiment_a.sh",
     ])
 
@@ -55,7 +55,7 @@ def cmd_submit(a):
     usd, inr = worst_case(a.flavor, a.timeout_minutes)
     if inr > a.cap_inr:
         sys.exit(f"worst case ₹{inr} (${usd}) exceeds the approved cap ₹{a.cap_inr}: lower --timeout-minutes or pick a cheaper flavor")
-    script = bootstrap_script(a.commit, a.train_cap_minutes, a.results_repo)
+    script = bootstrap_script(a.commit, a.train_cap_minutes, a.results_repo, precision=a.precision)
     api = HfApi(token=token)
     kw = dict(image=IMAGE, command=["bash", "-lc", script], env={"KAMADHENU_JOB": "experiment_a", "PYTHONUNBUFFERED": "1"},
               secrets={"HF_TOKEN": token}, flavor=a.flavor, timeout=int(a.timeout_minutes * 60), name=a.name)
@@ -155,6 +155,7 @@ def main(argv=None):
     s.add_argument("--cap-inr", type=int, default=185); s.add_argument("--commit", required=True)
     s.add_argument("--namespace", default="SarvamulaOrg"); s.add_argument("--results-repo", default="SarvamulaOrg/kamadhenu-voice-a")
     s.add_argument("--name", default="kamadhenu-experiment-a"); s.add_argument("--record", default="experiment_a_job.json")
+    s.add_argument("--precision", default="bf16", choices=["bf16", "fp16", "no"])
     s.add_argument("--github-output", default=os.environ.get("GITHUB_OUTPUT"))
     w = sub.add_parser("wait"); w.add_argument("--job", required=True); w.add_argument("--namespace", default="SarvamulaOrg")
     w.add_argument("--record", default="experiment_a_job.json")

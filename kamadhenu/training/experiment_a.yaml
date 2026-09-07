@@ -45,7 +45,7 @@ training:
   num_warmup_updates: 300         # 10 % of the run
   save_per_updates: 500           # model_<step>.pt for the A/B — each is 5.6 GB (weights+EMA+optimiser), prune after export
   last_per_steps: 250             # model_last.pt cadence: the resume point, and the most a crash can lose (~4 min on an A10G)
-  mixed_precision: fp16           # accelerate launch --mixed_precision=fp16
+  mixed_precision: bf16           # accelerate launch --mixed_precision (KAMADHENU_PRECISION); fp16 + GradScaler diverged on attempt 3
   use_ema: true                   # trainer default; the launcher exports BOTH ema and online weights (README §3 of F5's train notes)
   logger: tensorboard             # no wandb account needed
   max_minutes: 150                # wall-clock cap (`timeout`) on the training loop; KAMADHENU_MAX_MINUTES overrides; a re-run resumes
@@ -73,5 +73,6 @@ approval:                         # 7 Sep 2026, 6:20 pm IST — the lead: "appro
   image: pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel   # torch 2.8.0 = the Space's stack; the first attempt on 2.4.1 died in pip (x-transformers 2.19.7), ~₹1
   job_timeout_minutes: 135        # attempt 3 (7 Sep, ~8 pm IST): attempts 1+2 spent ~18 RUNNING min ≈ ₹21, so 135 min ($1.80 ≈ ₹158) keeps the total under ₹185
   train_cap_minutes: 90           # inside the job; leaves ~45 min for setup, export, 39 renders and the upload
-  attempts: ["1: pip could not resolve x-transformers on torch 2.4.1 (1 min)", "2: EMA state dict key layout (ema_model._orig_mod.*, vocoder.*) — converter fixed, strict verify added (17 min)"]
+  attempts: ["1: pip could not resolve x-transformers on torch 2.4.1 (1 min)", "2: EMA state dict key layout (ema_model._orig_mod.*, vocoder.*) — converter fixed, strict verify added (17 min)",
+             "3: COMPLETED mechanically (72 min ≈ ₹85: 3,060 updates in 15.5 min = 0.3 s/update, 4× faster than assumed) but fp16 training reported loss=nan from step 1 and the weights were NaN by step ~320; the 'fine-tuned' renders are full-scale noise (rms 1.0). Base renders are good (median duration ratio 0.86, 11/13 on tempo). Attempt 4: bf16, timeout 55, train cap 25 → worst case ₹65 more, total under ₹185"]
   results_repo: SarvamulaOrg/kamadhenu-voice-a   # private; export/ eval/ train.log
