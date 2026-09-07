@@ -84,13 +84,19 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
 1. **Lead's feedback on the 7 Sep work** — expect it from the phone. Likely follow-ups: chips in App layout are
    hidden until a card is expanded (deliberate); a search phrase spanning a pāda break won't match (known);
    the Display sheet's "Reading View" header shows no current value until a view is chosen.
-2. **Firebase Hosting preview/live deploy** — blocked on the secret name: the workflow expects
-   `FIREBASE_SERVICE_ACCOUNT` (whole JSON) or `FIREBASE_PRIVATE_KEY` + `FIREBASE_CLIENT_EMAIL` (+ id fields).
-   Then: verify Google sign-in on sarvamula-org.web.app; Firestore (production mode + publish
-   `dge/firebase/firestore.rules`) when the lead creates it; DNS cutover is the lead's decision.
-3. **Verified-email capture** (lead's ask, 6 Sep night): keep only verified emails — Google sign-in is already
-   verified; for email/password sign-up require `sendEmailVerification` and gate the profile create in
-   `firestore.rules` on `request.auth.token.email_verified == true`; export via the Admin SDK. Not implemented.
+2. **Firebase Hosting preview/live deploy — still blocked on the lead** (re-tested 7 Sep, run 4 of
+   `Deploy — Firebase Hosting`): `FIREBASE_PROJECT_ID` is visible but none of the nine service-account secret names
+   the workflow reads is, at repository → Actions scope. The key the lead saved is under another name or another
+   scope (Environment secret, repository *variable*, Codespaces/Dependabot, org). Lead: rename it to
+   `FIREBASE_SERVICE_ACCOUNT` under Settings → Secrets and variables → Actions → Repository secrets, or name it.
+   Then: preview channel → verify Google sign-in on sarvamula-org.web.app → Firestore (production mode + publish
+   `dge/firebase/firestore.rules`, which now carries the verified-email rule) → DNS cutover is the lead's decision.
+3. ~~Verified-email capture~~ — **done 7 Sep 2026**: `user-auth.js` stores only provider-verified emails
+   (`dgeVerifiedEmail`) and captures a later-verified one on the next sign-in; `firestore.rules` `emailOk()` /
+   `emailVerifiedFlagOk()` enforce it on create and self-update; Manage Users exports the verified list as CSV
+   (`dgeExportVerifiedEmails`). 47 rules tests (emulator runs in the sandbox: `npm run test:rules`) + 196 unit
+   tests pass. Not screenshotted: the export button needs a signed-in super-admin. Rules take effect only when
+   the lead publishes them to the live project (Firestore is not created yet).
 4. **Kamadhenu Phase 8**: IndicF5 fine-tune config + pilot exporter (24 kHz, F5 metadata), CPU dry run, then
    the Experiment A cost card (Kaggle T4 free first; L4 ≈ ₹150 fallback). Data: 1,721 usable pairs (6.5 h);
    smv.zip pāda takes 909 identified, 149 on the listen-list. Two cheap diagnostics proposed and not yet run:

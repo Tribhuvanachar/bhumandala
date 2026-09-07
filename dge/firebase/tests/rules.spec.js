@@ -107,9 +107,10 @@ describe('users — creating your own profile', () => {
   const NEW_UID = 'brand_new_user';
 
   test('a new user may create their own profile with the default role', async () => {
-    await assertSucceeds(asUser(NEW_UID).doc(`users/${NEW_UID}`).set({
-      displayName: 'New', email: 'n@x.com', role: 'basic', whatsappOptIn: false
-    }));
+    // With the provider's verified email (a Google sign-in token); an
+    // unverified one is the subject of the "verified emails only" suite.
+    await assertSucceeds(testEnv.authenticatedContext(NEW_UID, { email: 'n@x.com', email_verified: true }).firestore()
+      .doc(`users/${NEW_UID}`).set({ displayName: 'New', email: 'n@x.com', role: 'basic', whatsappOptIn: false }));
   });
 
   test('a new user may NOT hand themselves superadmin on the way in', async () => {
@@ -117,7 +118,7 @@ describe('users — creating your own profile', () => {
     // writes its own profile, so it is the one moment this must hold.
     for (const role of ['superadmin', 'admin', 'sponsor', 'subscriber', 'special']) {
       await assertFails(asUser(NEW_UID).doc(`users/${NEW_UID}`).set({
-        displayName: 'New', email: 'n@x.com', role, whatsappOptIn: false
+        displayName: 'New', email: '', role, whatsappOptIn: false
       }), `creating a profile with role "${role}" must be rejected`);
     }
   });
@@ -142,6 +143,36 @@ describe('users — creating your own profile', () => {
     await assertSucceeds(asUser(NEW_UID).doc(`users/${NEW_UID}`).set({
       displayName: 'New', role: 'basic'
     }));
+  });
+});
+
+describe('users — verified emails only (7 Sep 2026)', () => {
+  // request.auth.token carries what the provider vouched for; the rules
+  // let a profile hold that address and nothing else.
+  const asVerified = (uid, email) => testEnv.authenticatedContext(uid, { email, email_verified: true }).firestore();
+  const asUnverified = (uid, email) => testEnv.authenticatedContext(uid, { email, email_verified: false }).firestore();
+  const base = { displayName: 'N', role: 'basic', whatsappOptIn: false };
+
+  test('a verified provider email may be stored on create', async () => {
+    await assertSucceeds(asVerified('v1', 'v1@x.com').doc('users/v1').set({ ...base, email: 'v1@x.com', emailVerified: true }));
+  });
+  test('an unverified email may not be stored, even the token\'s own', async () => {
+    await assertFails(asUnverified('u1', 'u1@x.com').doc('users/u1').set({ ...base, email: 'u1@x.com' }));
+  });
+  test('an unverified account may still create a profile with an empty email', async () => {
+    await assertSucceeds(asUnverified('u2', 'u2@x.com').doc('users/u2').set({ ...base, email: '', emailVerified: false }));
+  });
+  test('a verified account may not store a DIFFERENT address', async () => {
+    await assertFails(asVerified('v2', 'v2@x.com').doc('users/v2').set({ ...base, email: 'someone-else@x.com' }));
+  });
+  test('emailVerified cannot be claimed without the token backing it', async () => {
+    await assertFails(asUnverified('u3', 'u3@x.com').doc('users/u3').set({ ...base, email: '', emailVerified: true }));
+  });
+  test('a returning user may capture a newly verified email on update', async () => {
+    await assertSucceeds(asVerified(UID_BASIC, 'b@x.com').doc(`users/${UID_BASIC}`).update({ email: 'b@x.com', emailVerified: true }));
+  });
+  test('a returning user may not overwrite the email with an unverified one', async () => {
+    await assertFails(asUnverified(UID_BASIC, 'new@x.com').doc(`users/${UID_BASIC}`).update({ email: 'new@x.com' }));
   });
 });
 

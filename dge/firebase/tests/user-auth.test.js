@@ -256,6 +256,35 @@ describe('profile creation on first sign-in', () => {
     assert.equal(env.window.dgeCurrentUserRole, 'basic');
   });
 
+  test('stores the email only when the provider verified it', async () => {
+    // Google sign-in arrives with emailVerified true; the address is kept.
+    let env = loadAuth();
+    await env.fireReady();
+    await env.fb.fireAuthState({ uid: 'g', displayName: 'G', email: 'G@X.com', emailVerified: true });
+    assert.equal(env.fb.calls.docSet[0].value.email, 'g@x.com');
+    assert.equal(env.fb.calls.docSet[0].value.emailVerified, true);
+    // An unverified address is never written, whatever the provider passed.
+    env = loadAuth();
+    await env.fireReady();
+    await env.fb.fireAuthState({ uid: 'u', displayName: 'U', email: 'u@x.com', emailVerified: false });
+    assert.equal(env.fb.calls.docSet[0].value.email, '');
+    assert.equal(env.fb.calls.docSet[0].value.emailVerified, false);
+  });
+
+  test('captures a newly verified email on a returning user, and only then', async () => {
+    let env = loadAuth({ firebaseOpts: { docs: { 'users/r': { role: 'basic', email: '' } } } });
+    await env.fireReady();
+    await env.fb.fireAuthState({ uid: 'r', displayName: 'R', email: 'r@x.com', emailVerified: true });
+    assert.equal(env.fb.calls.docSet.length, 0);
+    assert.deepEqual(Object.keys(env.fb.calls.docUpdate[0].patch).sort(), ['email', 'emailVerified', 'lastLoginAt']);
+    assert.equal(env.fb.calls.docUpdate[0].patch.email, 'r@x.com');
+    // Unverified: the profile is not touched beyond lastLoginAt.
+    env = loadAuth({ firebaseOpts: { docs: { 'users/r': { role: 'basic', email: '' } } } });
+    await env.fireReady();
+    await env.fb.fireAuthState({ uid: 'r', displayName: 'R', email: 'r@x.com', emailVerified: false });
+    assert.deepEqual(Object.keys(env.fb.calls.docUpdate[0].patch), ['lastLoginAt']);
+  });
+
   test('ignores a tampered defaultRole in config', async () => {
     // config.js is client-side and editable by anyone with devtools; the
     // create path must not read a role from it.

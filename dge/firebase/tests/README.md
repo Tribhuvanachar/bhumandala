@@ -1,13 +1,13 @@
 # Firebase layer — tests
 
-249 tests, none of which need a Firebase project, credentials, a phone
+258 tests, none of which need a Firebase project, credentials, a phone
 number, or money.
 
 ```bash
 cd dge/firebase/tests
 npm install          # once
-npm test             # 194 unit tests, no emulator needed
-npm run test:rules   # 40 security-rules tests against the real emulator
+npm test             # 196 unit tests, no emulator needed
+npm run test:rules   # 47 security-rules tests against the real emulator
 npm run test:e2e     # 15 end-to-end tests against the real emulators
 npm run test:all     # all three
 ```
@@ -24,9 +24,9 @@ Cloud Functions dependencies installed (`cd ../functions && npm install`).
 | `otp-core.test.js` | 49 | Phone normalization, code generation, salted hashing, expiry, attempt caps, per-number rate limits. |
 | `whatsapp.test.js` | 38 | Cloud API payload shapes, error classification, webhook signature verification, opt-out intent detection. |
 | `broadcast-core.test.js` | 25 | Who receives a broadcast and — mostly — who must not. |
-| `user-auth.test.js` | 52 | The browser half: transport routing, profile defaults, OTP flows, consent, inertness when disabled. |
+| `user-auth.test.js` | 54 | The browser half: transport routing, profile defaults, OTP flows, consent, inertness when disabled. |
 | `workflows-core.test.js` | 30 | Which GitHub Actions the admin panel may start, what inputs it accepts, and who may press which. |
-| `rules.spec.js` | 40 | Firestore security rules, against the emulator. |
+| `rules.spec.js` | 47 | Firestore security rules, against the emulator. |
 | `e2e.spec.js` | 15 | The whole OTP flow through the real `index.js`: send → store hashed → verify → custom token → profile created, plus the webhook's signature and handshake checks. |
 
 Most assertions are that something **fails**. A suite that only checked
