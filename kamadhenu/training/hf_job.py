@@ -29,7 +29,9 @@ def bootstrap_script(commit, train_cap_minutes, results_repo, vram="24GB"):
     return "\n".join([
         "set -euo pipefail",
         "export DEBIAN_FRONTEND=noninteractive",
-        "apt-get update -qq >/dev/null && apt-get install -y -qq git ffmpeg >/dev/null",
+        "(command -v git >/dev/null && command -v ffmpeg >/dev/null) || (apt-get update -qq && apt-get install -y -qq git ffmpeg) || echo 'apt failed; continuing with what the image has'",
+        "command -v git || { echo 'git is missing'; exit 2; }",
+        "python3 --version; nvcc --version | tail -1 || true",
         "nvidia-smi --query-gpu=name,memory.total --format=csv || true",
         f"git clone --quiet --filter=blob:none --no-checkout {REPO_URL} /repo",
         "cd /repo && git sparse-checkout init --cone && git sparse-checkout set " + " ".join(SPARSE),
@@ -76,16 +78,23 @@ def cmd_submit(a):
             f.write(f"job_id={job.id}\nnamespace={ns_used or ''}\n")
 
 
+def dump_logs(api, job_id, ns, tail=None):
+    n = 0
+    try:
+        for line in api.fetch_job_logs(job_id=job_id, namespace=ns, follow=False, tail=tail):
+            print(line, flush=True); n += 1
+    except Exception as e:  # noqa: BLE001
+        print(f"[could not fetch the job log: {str(e)[:200]}]")
+    return n
+
+
 def cmd_wait(a):
+    """Poll until the job leaves the queue, stream its log while it runs, and ALWAYS print the complete log at the
+    end (the first run streamed nothing: follow=True returned at once while the job was still SCHEDULING)."""
     from huggingface_hub import HfApi
     api = HfApi(token=os.environ.get("HF_TOKEN"))
     ns = a.namespace or None
-    t0 = time.time(); last = None
-    try:  # stream the log; if the stream drops, poll the status until it is terminal
-        for line in api.fetch_job_logs(job_id=a.job, namespace=ns, follow=True):
-            print(line, flush=True)
-    except Exception as e:  # noqa: BLE001
-        print(f"[log stream ended: {str(e)[:200]}]")
+    last = None; streamed = 0
     while True:
         info = api.inspect_job(job_id=a.job, namespace=ns)
         stage = info.status.stage
@@ -93,16 +102,39 @@ def cmd_wait(a):
             print(f"[{time.strftime('%H:%M:%S')}] status {stage} {info.status.message or ''}", flush=True); last = stage
         if stage in TERMINAL:
             break
+        if stage == "RUNNING" and not streamed:
+            try:
+                for line in api.fetch_job_logs(job_id=a.job, namespace=ns, follow=True):
+                    print(line, flush=True); streamed += 1
+            except Exception as e:  # noqa: BLE001
+                print(f"[log stream ended: {str(e)[:200]}]")
+            continue
         time.sleep(30)
+    print(f"===== complete job log ({a.job}) =====", flush=True)
+    dump_logs(api, a.job, ns)
+    print("===== end of job log =====", flush=True)
     rec = json.loads(Path(a.record).read_text()) if Path(a.record).exists() else {}
     started = getattr(info, "created_at", None)
-    minutes = round((time.time() - started.timestamp()) / 60, 1) if started else round((time.time() - t0) / 60, 1)
+    minutes = round((time.time() - started.timestamp()) / 60, 1) if started else None
     rate = rec.get("rate_usd_per_hour") or RATES_USD_PER_HOUR.get(rec.get("flavor", ""), 0)
-    bill = {"final_status": stage, "message": info.status.message, "minutes_billed_approx": minutes,
-            "usd_approx": round(minutes / 60 * rate, 2), "inr_approx": round(minutes / 60 * rate * INR_PER_USD)}
+    bill = {"final_status": stage, "message": info.status.message, "minutes_since_submit": minutes,
+            "note": "HF bills RUNNING time only; the queue wait is free — see the status timestamps above",
+            "usd_upper_bound": round((minutes or 0) / 60 * rate, 2), "inr_upper_bound": round((minutes or 0) / 60 * rate * INR_PER_USD)}
     rec.update(bill); Path(a.record).write_text(json.dumps(rec, indent=1), encoding="utf-8")
     print(json.dumps(bill, indent=1))
     return 0 if stage == "COMPLETED" else 1
+
+
+def cmd_logs(a):
+    from huggingface_hub import HfApi
+    api = HfApi(token=os.environ.get("HF_TOKEN"))
+    ns = a.namespace or None
+    info = api.inspect_job(job_id=a.job, namespace=ns)
+    print(json.dumps({"id": info.id, "status": info.status.stage, "message": info.status.message, "flavor": str(info.flavor),
+                      "created_at": str(getattr(info, "created_at", "")), "url": info.url}, indent=1))
+    print(f"===== job log ({a.job}) =====")
+    n = dump_logs(api, a.job, ns, tail=a.tail)
+    print(f"===== {n} lines =====")
 
 
 def cmd_collect(a):
@@ -127,8 +159,9 @@ def main(argv=None):
     w = sub.add_parser("wait"); w.add_argument("--job", required=True); w.add_argument("--namespace", default="SarvamulaOrg")
     w.add_argument("--record", default="experiment_a_job.json")
     c = sub.add_parser("collect"); c.add_argument("--results-repo", default="SarvamulaOrg/kamadhenu-voice-a"); c.add_argument("--out", default="out")
+    l = sub.add_parser("logs"); l.add_argument("--job", required=True); l.add_argument("--namespace", default="SarvamulaOrg"); l.add_argument("--tail", type=int, default=None)
     a = ap.parse_args(argv)
-    return {"submit": cmd_submit, "wait": cmd_wait, "collect": cmd_collect}[a.cmd](a)
+    return {"submit": cmd_submit, "wait": cmd_wait, "collect": cmd_collect, "logs": cmd_logs}[a.cmd](a)
 
 
 if __name__ == "__main__":
