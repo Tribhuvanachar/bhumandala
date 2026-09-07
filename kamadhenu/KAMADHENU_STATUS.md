@@ -1,8 +1,8 @@
 # KAMADHENU_STATUS
 
-Updated 7 Sep 2026, 8:25 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
+Updated 7 Sep 2026, 10:50 pm IST. Legend: 🟢 DONE · 🟡 PARTIAL · 🟠 IN PROGRESS · 🔴 BLOCKED · ⚪ NOT REQUIRED
 
-CURRENT PHASE: 12 Experiment A RUNNING on Hugging Face Jobs (approved 6:20 pm IST: cap ₹185, 24 GB) — attempt 3 in flight
+CURRENT PHASE: 12 Experiment A DONE (attempt 4, bf16, 9:56 pm IST) — the lead listens to the 13 A/B pairs; total spend ≈ ₹154 of the ₹185 cap
 
 COMPLETED:
 - 🟢 Phase 0 audit — `kamadhenu/KAMADHENU_AUDIT.md`
@@ -28,15 +28,21 @@ BLOCKED:
 - 🔴 Any GPU training — none approved; none proposed yet
 - 🟢 **Zero-shot diagnostics run 7 Sep 2026, 1:24 pm IST** (`Kamadhenu Space — zero-shot diagnostics` workflow, run 34097773688, artifact `kamadhenu-diagnostics`; the Space now has a `/diagnose` endpoint and IndicF5's own model-card prompt clip as a diagnostic reference). Four clips, seed 60, all rendered: A IndicF5 prompt + Hindi 6.17 s (15.98 GPU s cold) · B lead's chant + Hindi 10.19 s · C IndicF5 prompt + Gītā 1.1 6.96 s · D lead's chant + Gītā 1.1 11.51 s. Measured before listening: the same Hindi sentence comes out 65 % longer from the chanted reference (10.19 vs 6.17 s) — the chant clip forces chant tempo on read speech, which is the smearing mechanism. The lead's ear decides A–D; the reading key is in the workflow header. Lead's verdict on the original trial (6 Sep): voice ~70 % similar, words unintelligible.
 
-NEXT ACTION: the lead reads `kamadhenu/docs/EXPERIMENT_A_CARD.md` and approves a ₹ cap + GPU class (or declines). On approval: rent a 24 GB card, `bash kamadhenu/training/launch_experiment_a.sh --dry-run` then without the flag; bring back export/, eval/, train.log; listen to the 13 A/B pairs. Meanwhile Phase 13 (evaluation script + HUMAN_REVIEW.csv) can start.
+NEXT ACTION: the lead's verdict on the 13 A/B pairs (attempt 4). If the fine-tuned voice is closer: Phase 13 evaluation sheet, then Experiment B on the full grade-A set (6.5 h) with a fresh cost card; wire `model.wrapper.safetensors` into the Space as a third engine. If not: more data before more steps (the pilot is 35 min of audio).
 
 HUMAN ACTION REQUIRED:
-0. ~~Approve the Experiment A card~~ — approved 7 Sep 2026, 6:20 pm IST (cap ₹185, 24 GB). Running on HF Jobs (`l4x1`, $0.80/h)
-   via `.github/workflows/kamadhenu-experiment-a.yml`. Attempt 1 (6:21 pm): pip could not resolve x-transformers on the torch
-   2.4.1 image, 1 min. Attempt 2 (7:05 pm): reached the trainer; IndicF5's model.safetensors is the Hub wrapper's state dict
-   (`ema_model._orig_mod.transformer.*` + `vocoder.*`), converter fixed, strict verify added, 17 min. ≈ ₹21 spent. Attempt 3
-   (7:51 pm, timeout 135 / train cap 90 → worst case ₹158 more): run 34132520249. Results: `SarvamulaOrg/kamadhenu-voice-a`
-   (export/, eval/, train.log) + GitHub artifact `kamadhenu-experiment-a`. Listen to the 13 A/B pairs when they land.
+0. **Experiment A ran (approved 6:20 pm IST, cap ₹185, 24 GB).** Four HF Jobs on `l4x1` ($0.80/h): 1 pip conflict (1 min); 2 EMA
+   key layout (17 min); 3 trained but fp16 diverged — loss=nan from step 1, NaN weights by step ~320, renders were noise
+   (72 min ≈ ₹85); **4 (bf16) healthy**: 3,060 updates in 20.5 min (0.4 s/update), loss 0.73 → window means 0.70/0.69/0.68/0.66,
+   no NaN, EMA + online weights exported in both layouts, 13 held-out A/B renders (base zero-shot vs fine-tuned, same
+   reference/seed) — real audio (rms ≈ 0.2, base↔fine-tuned correlation 0.01, i.e. genuinely different). Total spend upper
+   bound ≈ ₹21 + ₹85 + ₹48 = **₹154** (HF bills RUNNING minutes only). Results: `SarvamulaOrg/kamadhenu-voice-a`
+   (export/model.safetensors + model.wrapper.safetensors for the Space, eval/, train.log), GitHub artifact
+   `kamadhenu-experiment-a` on run 34139626712 (expires 6 Dec), records in `kamadhenu/reports/experiment_a/`.
+   **Lesson**: the duration ratio is not a discriminator for F5 — it fixes the output length from the reference/text
+   ratio, so base and fine-tuned are identical on it (0.86 median, 11/13 on tempo); intelligibility is the lead's ear
+   (Phase 13 HUMAN_REVIEW.csv next). **Human action**: listen to `eval/<verse>/base.wav` vs `finetuned.wav` vs
+   `finetuned_online.wav` for the 13 verses and say which, if any, sounds like you reading intelligible Sanskrit.
 1. Where are the other Tīrthaprabandha recordings (only Dakṣiṇa 1–19 were in the shared folder)? If they exist, share that folder too.
 2. The Śrīpādarāja Aṣṭottara-śatanāmāvalī text (108 names, Devanagari) — then the 110 clips map by number.
 3. **Listen-list for 149 smv takes** — `kamadhenu_dataset/smv_takes_listen_list.csv`: each row gives what Whisper heard, the best guess, and the identified neighbours; fill the last column (sarga.verse.pāda or `skip`). Also spot-check a few of the 63 interpolated ones (confidence 0.6 in `smv_takes_check.json`).
@@ -45,5 +51,5 @@ HUMAN ACTION REQUIRED:
 6. ~~two private folders~~ — not the lead's; dropped.
 7. ~~HKS content~~ — plain full recitation (lead, 6 Sep); accepted.
 
-GPU REQUIRED: none yet. Experiment A: one 24 GB card (L4 / A10G / RTX 4090) for about 1–1.7 h including setup and the A/B renders (card presented 7 Sep 2026).
-ESTIMATED COST: ₹0 GPU spent. Experiment A point estimate ₹30–95 on a 24 GB card at Sep 2026 marketplace rates; **approve a cap of ₹185** (assumed step rates ±2×, wall-clock cap 150 min enforced by the launcher). No Gemini spend.
+GPU REQUIRED: none pending. Measured on the L4: 3,060 updates in 20.5 min (bf16); a full-set Experiment B would be ~10× the data → order of 3–4 GPU hours, card to follow.
+ESTIMATED COST: Experiment A spent ≈ ₹154 upper bound (four HF Jobs, cap ₹185, approved). No Gemini spend.

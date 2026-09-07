@@ -101,11 +101,12 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    and the canonical link; the verse sheet (contextual-actions.json/js) is grouped Mark / Share this verse / Study with
    Share link, Copy link, Bookmark. Vandana: once per device per day (`dge_vandana_day`) and again at every sign-in
    (user-auth.js `dgeVandanaAfterSignIn`); "Meet the Founder" in the Explore menu; tapping the portrait itself offers flowers.
-10. **Kamadhenu Experiment A launched on HF Jobs** (approved 6:20 pm IST, cap ₹185, 24 GB): attempt 1 died in pip (torch
-   2.4.1 image), attempt 2 in the EMA state-dict layout (IndicF5's file is the Hub wrapper's dict: `ema_model._orig_mod.*`
-   + `vocoder.*`), ≈₹21 spent; attempt 3 (converter fixed, strict `ckpt_convert.py verify` before training, timeout 135 /
-   train cap 90) was running at 8:20 pm IST — workflow run 34132520249; results land in `SarvamulaOrg/kamadhenu-voice-a`
-   and the `kamadhenu-experiment-a` artifact. `kamadhenu-hf-job-logs.yml` prints any HF job's log by id.
+10. **Kamadhenu Experiment A done** (approved 6:20 pm IST, cap ₹185, 24 GB; four HF Jobs on `l4x1`): 1 pip conflict, 2 EMA
+   key layout (IndicF5's file is the Hub wrapper's dict `ema_model._orig_mod.*` + `vocoder.*`), 3 fp16 diverged (NaN),
+   **4 bf16 healthy** — 3,060 updates in 20.5 min, loss 0.73→0.66, real A/B renders. Spend ≈ ₹154. Results in
+   `SarvamulaOrg/kamadhenu-voice-a` + artifact on run 34139626712 + `kamadhenu/reports/experiment_a/`. Duration ratio is
+   NOT a discriminator for F5 (fixed by the reference/text ratio) — the lead's ear decides. `kamadhenu-hf-job-logs.yml`
+   prints any HF job's log by id.
 
 11. **SEO architecture** (docs/SEO_ARCHITECTURE.md, evening): `tools/seo/` turns dge/data into a crawlable static tree —
    one HTML page per section (16,977 pages, 726,698 units, ~0.9 GB, 2.5 min), category indexes, canonical tags, unique
