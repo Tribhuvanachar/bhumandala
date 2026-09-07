@@ -40,7 +40,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.78.0">
+<link rel="stylesheet" href="css/main.css?v=4.79.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -87,7 +87,7 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.65.0">
+<meta name="dge-html-version" content="4.66.0">
 <!-- 7 Sep 2026: the search row (scope picker, search box with mic, Ω
      special characters) lives in the top bar between the Library button
      and the ☰ menu -- the project lead's direct ask, together with an
@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="search-container">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="window.handleSearch()">
+      <input type="search" id="searchInput" name="dge-q" class="search-input" placeholder="🔍 Search text or shloka number..." autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" oninput="window.handleSearch()">
       <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
       <button class="clear-search-btn" id="clearSearchBtn" onclick="window.clearSearch()">✖</button>
     </div>
@@ -340,6 +340,7 @@
   <div class="popup-label">Layout</div>
   <div class="pop-item active" data-layout="scholar" onclick="window.dgeSetLayoutMode('scholar', true)">📚 Scholar <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Dense, everything shown</span></div>
   <div class="pop-item" data-layout="app" onclick="window.dgeSetLayoutMode('app', true)">📱 App <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Compact, tap to expand</span></div>
+  <div style="font-size:10px; color:#8a7a63; padding:0 12px;">Own addresses: <code>reader.html</code> (Scholar) · <code>app.html</code> (App)</div>
   <hr>
   <!-- Phase 4 of the frontend redesign: what a single tap selects for the
        Genie, so getting context to Ask Acharya doesn't always require a
@@ -373,8 +374,10 @@
   <div class="popup-label">Reading View</div>
   <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
   <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
-  <div class="pop-item" onclick="window.togglePopup('displayPopup'); window.dgeToggleImmersiveMode(true)">🖥️ Full Screen Reading</div>
-  <div class="pop-item" data-wakelock="1" onclick="window.dgeSetScreenWakeLock(this.classList.contains('active') ? false : true)">🔆 Keep Screen Awake While Reading</div>
+  <hr>
+  <div class="popup-label">Screen</div>
+  <div class="pop-item" onclick="window.togglePopup('displayPopup'); window.dgeToggleImmersiveMode(true)">🖥️ Full Screen Reading <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Hide every toolbar</span></div>
+  <div class="pop-item" data-wakelock="1" onclick="window.dgeSetScreenWakeLock(this.classList.contains('active') ? false : true)">🔆 Keep Screen Awake <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Phone won't dim or lock</span></div>
   <hr>
   <div class="popup-label">Appearance</div>
   <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
@@ -764,19 +767,19 @@
 
         <div class="provider-key-row">
           <label>Gemini API Key</label>
-          <input type="password" id="userGeminiKeyInput" class="modal-input" placeholder="Gemini key" style="margin:4px 0;">
+          <input type="text" id="userGeminiKeyInput" class="modal-input dge-secret" autocomplete="off" spellcheck="false" placeholder="Gemini key" style="margin:4px 0;">
           <input type="text" id="userGeminiModelInput" class="modal-input" placeholder="Model (e.g. gemini-3.6-flash)" style="margin:0;">
         </div>
 
         <div class="provider-key-row">
           <label>OpenAI (ChatGPT) API Key</label>
-          <input type="password" id="userOpenaiKeyInput" class="modal-input" placeholder="OpenAI key" style="margin:4px 0;">
+          <input type="text" id="userOpenaiKeyInput" class="modal-input dge-secret" autocomplete="off" spellcheck="false" placeholder="OpenAI key" style="margin:4px 0;">
           <input type="text" id="userOpenaiModelInput" class="modal-input" placeholder="Model (e.g. a current GPT model)" style="margin:0;">
         </div>
 
         <div class="provider-key-row">
           <label>Claude (Anthropic) API Key</label>
-          <input type="password" id="userClaudeKeyInput" class="modal-input" placeholder="Claude key" style="margin:4px 0;">
+          <input type="text" id="userClaudeKeyInput" class="modal-input dge-secret" autocomplete="off" spellcheck="false" placeholder="Claude key" style="margin:4px 0;">
           <input type="text" id="userClaudeModelInput" class="modal-input" placeholder="Model (e.g. a current Claude model)" style="margin:0;">
         </div>
 
@@ -1068,12 +1071,14 @@
      library.js needed no changes at all. -->
 <div class="modal-overlay drawer-left" id="libraryModal">
   <div class="modal-content">
+    <!-- 7 Sep 2026: drag this edge to resize the pinned Library (library.js dgeInitLibraryResize). -->
+    <div class="drawer-resize-handle" id="libraryResizeHandle" title="Drag to resize"></div>
     <div class="modal-header-sticky">
       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📚 Library</h3>
       <!-- Pin/dock (library.js dgeToggleLibraryDock): pinned = the drawer
            reopens after every navigation, restored to the same open nodes
            and drilled category. -->
-      <button class="btn-sm" id="libraryDockBtn" onclick="window.dgeToggleLibraryDock()" style="font-size:11px; margin-left:auto;" title="Pin the Library open">📌</button>
+      <button class="btn-sm" id="libraryDockBtn" onclick="window.dgeToggleLibraryDock()" style="font-size:11px; margin-left:auto;" title="Pin the Library open (stays open when you tap outside it)">📌</button>
       <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;" title="Close">❮</button>
     </div>
     <div class="modal-body">
@@ -1155,7 +1160,7 @@
     <div class="modal-body">
       <div class="provider-key-row">
         <label>Your GitHub Personal Access Token</label>
-        <input type="password" id="adminGithubTokenInput" class="modal-input" placeholder="Fine-grained PAT, Contents: Read & write, this repo only" style="margin-top:4px;">
+        <input type="text" id="adminGithubTokenInput" class="modal-input dge-secret" autocomplete="off" spellcheck="false" placeholder="Fine-grained PAT, Contents: Read & write, this repo only" style="margin-top:4px;">
         <label style="margin-top:10px;">Your Name (shown in commit messages)</label>
         <input type="text" id="adminNameInput" class="modal-input" placeholder="e.g. 3BU1" style="margin-top:4px;">
         <button class="btn-sm" style="width:100%; margin-top:6px;" onclick="window.saveAdminGithubToken()">Save to This Device</button>
@@ -1279,8 +1284,8 @@
      seeds above — read-only, additive, defines no new storage. -->
 <script src="js/reader-state.js?v=1"></script>
 <script src="js/dev.js?v=4.60.6"></script>
-<script src="js/utils.js?v=4.78.0"></script>
-<script src="js/modals.js?v=4.60.6"></script>
+<script src="js/utils.js?v=4.79.0"></script>
+<script src="js/modals.js?v=4.79.0"></script>
 <!-- Must load, and register its selectionchange listener, before ai.js --
      see selection-modes.js's own header comment for why. -->
 <script src="js/selection-modes.js?v=1"></script>
@@ -1308,7 +1313,7 @@
      no #ch-go and builds no page UI), plus the contextual-menu action +
      inline scansion panel (chandas-check.js). Local computation; the AI
      cross-check inside the panel rides the existing BYOK Ask-Acharya. -->
-<script src="js/chandas.js?v=4" defer></script>
+<script src="js/chandas.js?v=4.79.0" defer></script>
 <script src="js/chandas-check.js?v=1" defer></script>
 <script src="js/voice.js?v=4.60.6"></script>
 <script src="js/screenshot.js?v=4.60.7"></script>
@@ -1326,7 +1331,7 @@
      before render.js, which calls into it. Additive: a commentary without
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
-<script src="js/render.js?v=4.78.0"></script>
+<script src="js/render.js?v=4.79.0"></script>
 <script src="js/legal-content.js?v=1.0"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
@@ -1350,11 +1355,11 @@
 <script src="js/config-editor.js?v=4.78.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.78.0"></script>
+<script src="js/core.js?v=4.79.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
-<script src="js/menu.js?v=4.64.0"></script>
+<script src="js/menu.js?v=4.79.0"></script>
 <!-- Sūtra intellisense: makes citations in the text tappable and identifies
      a rule from a half-remembered name. Fetches nothing until a page turns
      out to cite one. -->
@@ -1365,10 +1370,10 @@
 <script src="js/backlinks.js?v=4.64.0"></script>
 <script src="js/content-inline.js?v=2"></script>
 <script src="js/dge-shell.js?v=1"></script>
-<script src="js/dge-nav-rail.js?v=3"></script>
+<script src="js/dge-nav-rail.js?v=4"></script>
 <dge-nav-rail current="home"></dge-nav-rail>
 <script src="js/tour.js?v=1"></script>
-<script src="js/library.js?v=4.75.7"></script>
+<script src="js/library.js?v=4.79.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
 <script src="js/dge-search.js?v=4.70.0"></script>
@@ -1383,7 +1388,7 @@
      visitor downloading several hundred KB of SDK that never runs. -->
 <script src="js/user-auth.js?v=4.63.1"></script>
 <script src="js/user-roles.js?v=4.63.0"></script>
-<script src="js/copy-guard.js?v=1"></script>
+<script src="js/copy-guard.js?v=4.79.0"></script>
 <script src="js/offline.js?v=1"></script>
 
 <script>

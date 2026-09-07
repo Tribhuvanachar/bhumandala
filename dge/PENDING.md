@@ -1223,6 +1223,40 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, ~1:45 am IST — the lead's ten-point review of the new reader, worked through.** (`index.html` 4.66.0,
+  `render.js` v4.8, `utils.js`, `chandas.js`, `menu.js`, `modals.js`, `library.js`, `copy-guard.js`, `dge-nav-rail.js`,
+  `core.js`, `main.css`, `admin/config/library-overrides.json`, `data/library.json`; 349 tests, audit and validator clean;
+  Playwright 390 px + 1280 px screenshots.)
+  1. **Chandas: Vasantatilakā now recognised** for the Prahlāda Nṛsiṃha stotra. The engine's line splitter treated only
+     `\n । ॥` as breaks, so the ASCII `|` and literal `<br>` in the data were invisible and the "श्रीप्रह्राद उवाच" tag was
+     scanned as 7 syllables of pāda 1 (35 + 28 instead of 28 + 28). One `splitLines()` (both entry points) now honours
+     `|`/`<br>`, drops digits and `उवाच`/`ऊचुः` speaker lines. Verified: तभजजगग, 4 × 14.
+  2./3. **Library tree**: Sumadhva/Raghavendra Vijaya moved to `SarvaMula/kavya/...` (the override had invented a second
+     `kavyam` folder beside the real `kavya`, hence two काव्यम् rows); Prahlāda stotra display-moved to
+     `SarvaMula/stotra/prahlada_kruta_narasimha` with a proper title (its real path is unchanged; config.js still points
+     at it). `SarvaMula/dvadasha_stotra` stays a sibling.
+  4. **Verse card, the lead's option 1**: only the verse in the card. ★ = gold left edge (`.is-fav`), ? = dotted red
+     edge (`.is-doubt`), note/snippet counts sit under the number, copy lives in ⋯ (now shown to every reader; study
+     actions inside stay gated). **Pāda line breaks**: `dgePadaBreak()` asks the chandas engine once per distinct
+     verse (cached), breaks after every pāda for metres longer than 8 syllables (4 lines) and at the half-verse for
+     anuṣṭubh (2 lines), gives the speaker tag its own line, and returns the text untouched unless every syllable
+     aligns. The closing ॥ N ॥ is nowrap. Known limit: a search phrase spanning a pāda break won't match.
+  5. **Layouts**: `dge/reader.html` (Scholar) and `dge/app.html` (App) are thin entry pages that forward to
+     `index.html?layout=…`; the reader honours `?layout=app|scholar` and remembers it. One code base; the layout is
+     still the single `body.dge-app-view` switch.
+  6. **Display sheet**: menu.js's `renderThemes` re-appended theme rows to the sheet root after the accordion was
+     built, which is why Appearance sat "fixed to the bottom" — it now re-orders them inside their own container.
+  7. **Screen** is its own accordion (Full Screen Reading, Keep Screen Awake — the latter uses the Wake Lock API so the
+     phone doesn't dim or lock mid-verse).
+  8. **Nav rail grouped**: Read / Sanskrit tools / Experiments; Chandas, Uṇādi, Phiṭ, Liṅgānuśāsana, Gaṇapāṭha,
+     Rūpasiddhi added; the rail is now mounted on all six of those tool pages (they were dead ends).
+  9. **Library pin**: pinned = the drawer ignores outside taps (only ❮ closes it); on ≥760 px it docks as a side pane
+     (page shifts and stays usable) with a drag handle on its edge (260 px – 60 vw, remembered).
+  10. **Saved-password prompt**: four static `type=password` inputs (API keys, GitHub token) made Chrome treat the page
+     as a login form. They are `type=text` (`.dge-secret`, CSS-masked) until focused. The search box is
+     `type=search autocomplete=off`. Copy-guard now also loads on gita/grantha/kavya/tirtha/dasa/guru pages and
+     leaves the context menu alone inside inputs.
+
 - **7 Sep 2026, ~12:05 am IST — reader page decluttered on the lead's phone-screenshot review.** Five direct asks,
   all shipped in one pass (`dge/index.html` 4.65.0, `main.css`/`tokens.css`, `audio.js` v3.2, `utils.js` v2.5, `core.js`,
   `theme-guard.js`, `config.js`, `config-editor.js`, `transliteration.js`, `intellisense.js`; Playwright 390 px

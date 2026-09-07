@@ -102,8 +102,10 @@
     });
   }
 
-  /* The Appearance group is the last thing in the Display popup, so appending
-     in config order both reorders it and keeps it below the divider. */
+  /* Reorders the theme rows in config order INSIDE whatever container they
+     sit in -- since 7 Sep 2026 that is the Appearance accordion body built
+     by utils.js dgeInitAccordions; appending to #displayPopup itself pulled
+     them out of the accordion to the bottom of the sheet. */
   function renderThemes(list) {
     const popup = document.getElementById('displayPopup');
     if (!popup || !Array.isArray(list) || !list.length) return;
@@ -116,7 +118,7 @@
         el.textContent = t.label;
         if (swatch) el.insertBefore(swatch, el.firstChild);
       }
-      popup.appendChild(el);
+      (el.parentNode || popup).appendChild(el);
     });
   }
 

@@ -2,7 +2,75 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.7 (unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
+window.DGE_VERSIONS['render.js'] = 'v4.8 (verse card carries only the verse: fav/doubt as the card edge, counts under the number, copy in the ⋯ menu for everyone; dgePadaBreak breaks the mūla into pāda lines from the chandas engine. v4.7: unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
+
+// 7 Sep 2026: verse text broken into its pādas for display (the lead: "as a
+// thumb rule, every shloka should render in two lines or 4 as per their
+// vṛtta"). The chandas engine (chandas.js, DGEChandas) scans the Devanagari
+// once per distinct verse text (cached); when it names a metre, a line
+// break goes after every pāda for pādas longer than 8 syllables (4 lines)
+// and only at the half-verse for anuṣṭubh-length pādas (2 lines). Speaker
+// tags ("… उवाच |") get their own line. Breaks are inserted only where the
+// text has none already, and only when every syllable aligns with the
+// source -- any doubt and the text is returned untouched.
+const _dgePadaCache = new Map();
+function dgePadaBreak(sa) {
+  if (typeof sa !== 'string' || !sa || !(window.DGEChandas && window.DGEChandas.ready && window.DGEChandas.ready())) return sa;
+  if (_dgePadaCache.has(sa)) return _dgePadaCache.get(sa);
+  let out = sa;
+  try {
+    let pre = '', body = sa;
+    const pm = sa.match(/^([\s\S]*?(?:उवाच|ऊचुः)\s*[|।॥]*[ \t]*(?:<br\s*\/?>|\n)?)/);
+    if (pm) {
+      pre = pm[1]; body = sa.slice(pre.length);
+      if (!/\n|<br/i.test(pre)) pre = pre.replace(/\s*$/, '') + '\n';
+    }
+    const res = window.DGEChandas.analyzeText(body);
+    const padas = (res && res.padas) || [];
+    if (res && res.match && (padas.length === 2 || padas.length === 4) && padas.every(p => p.sylls && p.sylls.length)) {
+      const perPada = padas.length === 4 && padas[0].aksharas > 8;   // 4 lines for long metres, 2 for anuṣṭubh-length
+      const LETTER = /[\u0904-\u0939\u0958-\u0961]/;              // a skipped consonant/vowel = misalignment
+      let pos = 0, result = '';
+      for (let k = 0; k < padas.length; k++) {
+        const target = padas[k].sylls.map(sy => sy.text + (sy.coda || '')).join('');
+        let ti = 0;
+        while (pos < body.length && ti < target.length) {
+          const ch = body[pos];
+          if (ch === target[ti]) ti++;
+          else if (LETTER.test(ch)) throw new Error('align');
+          result += ch; pos++;
+        }
+        if (ti < target.length) throw new Error('short');
+        const breakHere = k < padas.length - 1 && (perPada || k === 1);
+        if (breakHere) {
+          const tail = body.slice(pos).match(/^(?:[ \t]*(?:[|।॥\-]|<br\s*\/?>|\n))*[ \t]*/);
+          const run = tail ? tail[0] : '';
+          result += run; pos += run.length;
+          if (!/\n|<br/i.test(run)) result = result.replace(/[ \t]+$/, '') + '\n';
+        }
+      }
+      result += body.slice(pos);
+      out = pre + result;
+    } else if (pre) {
+      out = pre + body;
+    }
+  } catch (e) { out = sa; }
+  _dgePadaCache.set(sa, out);
+  return out;
+}
+window.dgePadaBreak = dgePadaBreak;
+// The metre table loads asynchronously; the first render can come before it
+// is in. One re-render once it lands (chandas-check.js / kavya.js load it on
+// demand; the reader asks for it here so the breaks appear on first read).
+(function () {
+  let tries = 0;
+  const kick = () => {
+    if (window.DGEChandas && window.DGEChandas.ready && window.DGEChandas.ready()) { if (typeof renderList === 'function' && window.stotraData) renderList(); return; }
+    if (window.DGEChandas && window.DGEChandas.loadDB && tries === 0) window.DGEChandas.loadDB('').catch(() => {});
+    if (++tries < 40) setTimeout(kick, 500);
+  };
+  document.addEventListener('DOMContentLoaded', () => setTimeout(kick, 300));
+})();
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -301,7 +369,8 @@ function renderList() {
     // Transliterate once per shloka, to whatever script is currently
     // active, and reuse for BOTH search matching and display — this is
     // the actual text on screen, which is what a search should match.
-    const mulaDisplayText = getText(i);
+    const mulaSrc = dgePadaBreak(shloka.sa);
+    const mulaDisplayText = (typeof applyTransliteration === 'function') ? applyTransliteration(mulaSrc, activeScript) : mulaSrc;
 
     const convertedCommentaries = {};
     if (shloka.commentaries) {
@@ -373,6 +442,8 @@ function renderList() {
 
     const stateClasses = [
       activeId === i ? 'active' : '',
+      (canStudy && isFav) ? 'is-fav' : '',
+      (canStudy && isDoubt) ? 'is-doubt' : '',
       (canStudy && status === 'done') ? 'state-done' : '',
       (canStudy && status === 'practice') ? 'state-progress' : ''
     ].filter(Boolean).join(' ');
@@ -381,17 +452,19 @@ function renderList() {
     c.className = `shloka-card ${stateClasses}`.trim();
     c.id = `shloka-${i}`;
 
-    let badgesHtml = '';
-    if (canStudy && (isFav || isDoubt || noteCount > 0 || snipCount > 0)) {
-      badgesHtml = '<div class="shloka-badges">';
-      if (isFav) badgesHtml += '<span class="shloka-badge shloka-badge-fav" title="Favorite" aria-label="Favorite">★</span>';
-      if (isDoubt) badgesHtml += '<span class="shloka-badge shloka-badge-doubt" title="Marked as doubt" aria-label="Marked as doubt">?</span>';
-      if (noteCount > 0) badgesHtml += `<span class="shloka-badge" title="${noteCount} note(s)" aria-label="${noteCount} notes">${noteCount}✎</span>`;
-      if (snipCount > 0) badgesHtml += `<span class="shloka-badge" title="${snipCount} saved snippet(s)" aria-label="${snipCount} saved snippets">${snipCount}✂</span>`;
-      badgesHtml += '</div>';
+    // 7 Sep 2026 (the lead's option 1): the verse card carries only the
+    // verse. ★ is the card's gold left edge (.is-fav), ? a dotted red edge
+    // (.is-doubt), notes/snippets a tiny count under the number, and copy
+    // lives in the ⋯ menu (shown to every reader; study actions inside it
+    // are gated by contextual-actions.js itself).
+    let countsHtml = '';
+    if (canStudy && (noteCount > 0 || snipCount > 0)) {
+      countsHtml = '<span class="shloka-counts">' +
+        (noteCount > 0 ? `<span title="${noteCount} note(s)">${noteCount}✎</span>` : '') +
+        (snipCount > 0 ? `<span title="${snipCount} saved snippet(s)">${snipCount}✂</span>` : '') + '</span>';
     }
 
-    const moreBtnHtml = canStudy
+    const moreBtnHtml = true
       ? `<button type="button" class="shloka-more-btn" title="Shloka ${i} actions" aria-label="Shloka ${i} actions" onclick="event.stopPropagation(); if (typeof window.dgeOpenContextualMenu === 'function') window.dgeOpenContextualMenu('shloka', {shlokaId:${i}}); else if (typeof openActionsSheet==='function') openActionsSheet(${i});">⋯</button>`
       : '';
 
@@ -592,6 +665,8 @@ function renderList() {
     if (shloka.vedicId) {
       mulaHtml = mulaHtml.replace(/\s*\/\s*/g, '<br>');
     }
+    if (!footnoteResult) mulaHtml = mulaHtml.replace(/\n/g, '<br>');   // pāda breaks (dgePadaBreak) and stored newlines
+    mulaHtml = mulaHtml.replace(/(॥\s*[०-९0-9]+\s*॥\s*)$/, '<span class="verse-no">$1</span>');   // the closing ॥ N ॥ never splits across lines
     mulaHtml = dgeWrapWordsForTap(mulaHtml);
     const footnoteListHtml = footnoteResult
       ? `<div class="dge-fn-block">${footnoteResult.footnotesHtml}</div>` : '';
@@ -624,11 +699,9 @@ function renderList() {
 
     c.innerHTML = `
       <div class="shloka-main-row">
-        <div class="shloka-num">${i}</div>
-        ${badgesHtml}
+        <div class="shloka-num">${i}${countsHtml}</div>
         <div class="shloka-text" onclick="if(!window.dgeContentEditMode && typeof loadShloka==='function') loadShloka(${i})">${mulaHtml}</div>
         ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
-        <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
         ${srcBtnHtml}
         ${moreBtnHtml}
       </div>

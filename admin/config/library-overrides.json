@@ -1,21 +1,23 @@
 {
   "note": "DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
   "version": 1,
-  "updatedAt": 1788314235773,
+  "updatedAt": 1788999600000,
   "hidden": [],
   "pinned": [
     "SarvaMula",
     "vedas"
   ],
   "labels": {
-    "kavya_alankara": "sAhitya",
+    "kavya_alankara": "काव्यालङ्कारौ",
     "darshana/vedanta/dvaita/DvaitaVedanta/others": "सर्वमूलेतर-द्वैतसम्बन्धिग्रन्थाः",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/kavyam": "काव्यम्",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam": "व्याकरणम्",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah": "तर्कः",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam": "प्रकरणानि",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram": "स्तोत्राणि",
-    "SarvaMula/kavyam": "काव्यम्"
+    "SarvaMula/kavya": "काव्यम्",
+    "SarvaMula/stotra": "स्तोत्राणि",
+    "SarvaMula/stotra/prahlada_kruta_narasimha": "प्रह्लादकृतनृसिंहस्तोत्रम्"
   },
   "order": {
     "darshana/vedanta/dvaita/SarvaMula/rig_bhashya": [
@@ -53,8 +55,9 @@
     "dasa_sahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam/yuktimallika",
     "dasa_sahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaVedanta/others/svapna_vrindavana_akhyana",
     "darshana/vedanta/dvaita/SarvaMula": "SarvaMula",
-    "kavya_alankara/sumadhva_vijaya": "SarvaMula/kavyam/sumadhva_vijaya",
-    "kavya_alankara/raghavendra_vijaya": "SarvaMula/kavyam/raghavendra_vijaya"
+    "kavya_alankara/sumadhva_vijaya": "SarvaMula/kavya/sumadhva_vijaya",
+    "kavya_alankara/raghavendra_vijaya": "SarvaMula/kavya/raghavendra_vijaya",
+    "stotra/PrahladaKrutaNarasimha": "SarvaMula/stotra/prahlada_kruta_narasimha"
   },
   "adds": [
     "darshana/vedanta/dvaita/DvaitaVedanta/others",
@@ -62,7 +65,6 @@
     "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah",
-    "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam",
-    "SarvaMula/kavyam"
+    "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam"
   ]
 }
