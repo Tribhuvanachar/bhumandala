@@ -1,0 +1,66 @@
+# Kamadhenu — Experiment A: first IndicF5 fine-tune on the pilot set (Phase 12; this file is Phase 8's output).
+# Read by launch_experiment_a.sh and dry_run.py. Nothing here runs by itself; the launcher needs HF_TOKEN and a
+# GPU box, and is only to be started after the project lead approves kamadhenu/docs/EXPERIMENT_A_CARD.md.
+experiment:
+  name: kamadhenu_exp_a
+  purpose: >
+    Voice-steering fine-tune of IndicF5 on 123 grade-A verses of the lead's own recitation (0.6 h), to see whether
+    a few thousand updates turn the garbled zero-shot chant (7 Sep diagnostics, clip D) into intelligible Sanskrit
+    in his voice. Success is judged by ear on the 13 held-out verses, A/B against the zero-shot base.
+  seed: 666                       # trainer's resumable_with_seed (dataset batch order)
+
+base_model:
+  repo: ai4bharat/IndicF5         # MIT weights; gated with auto-accept — HF_TOKEN must have accepted the gate
+  weights: model.safetensors      # 1.40 GB, flat EMA state dict (see ckpt_convert.py)
+  vocab: checkpoints/vocab.txt    # must equal kamadhenu/training/vocab_indicf5.txt (sha1 below) or the run stops
+  vocab_sha1: b46bed8e96ab36df291f8668d64460fd74a398c3
+  code_repo: https://github.com/ai4bharat/IndicF5.git
+  code_commit: 13f7c4d627cc10111aea8fe9c0039462cacacdc7   # the commit the Space runs (tools/kamadhenu/space/requirements.txt)
+
+model:                            # F5TTS_Base — the only architecture finetune_cli.py in that commit builds
+  exp_name: F5TTS_Base
+  arch: {dim: 1024, depth: 22, heads: 16, ff_mult: 2, text_dim: 512, conv_layers: 4}
+  mel_spec: {target_sample_rate: 24000, n_mel_channels: 100, hop_length: 256, win_length: 1024, n_fft: 1024, mel_spec_type: vocos}
+  tokenizer: custom               # → vocab.txt in the dataset dir (2,545 entries; space is index 0)
+
+dataset:
+  name: kamadhenu_pilot           # wandb project name / ckpt naming only
+  train_jsonl: kamadhenu/data/pilot/train.jsonl
+  eval_jsonl: kamadhenu/data/pilot/validation.jsonl
+  export_dir: kamadhenu_dataset/processed/audio/f5/kamadhenu_pilot_char   # export_f5_dataset.py --arrow
+  text_convention: vagdhenu_model_text   # kamadhenu_text.model_text: daṇḍa/digits dropped, hyphen joins, one space per pāda break
+  peak_dbfs: -3.0
+
+training:
+  learning_rate: 1.0e-5           # finetune_cli.py default; F5 community fine-tunes use 1e-5 … 5e-5
+  batch_size_type: frame
+  batch_size_per_gpu:             # frames per optimiser step, from finetune_cli.py's own table; pick by VRAM
+    16GB: 2000                    # T4, RTX 4060 Ti 16 GB
+    24GB: 3200                    # L4, A10G, RTX 3090/4090
+    40GB: 6400                    # A100 40 GB
+  max_samples: 64
+  grad_accumulation_steps: 1
+  max_grad_norm: 1.0
+  target_updates: 3000            # "a few thousand steps" (MODEL_SELECTION.md); epochs derived from batches/epoch by dry_run.py
+  num_warmup_updates: 300         # 10 % of the run
+  save_per_updates: 500           # model_<step>.pt for the A/B — each is 5.6 GB (weights+EMA+optimiser), prune after export
+  last_per_steps: 250             # model_last.pt cadence: the resume point, and the most a crash can lose (~4 min on an A10G)
+  mixed_precision: fp16           # accelerate launch --mixed_precision=fp16
+  use_ema: true                   # trainer default; the launcher exports BOTH ema and online weights (README §3 of F5's train notes)
+  logger: tensorboard             # no wandb account needed
+  max_minutes: 150                # hard wall-clock cap (`timeout`) — bounds the bill; resume by re-running the launcher
+
+evaluation:                       # render_eval.py, after export
+  reference: tp_anushtubh_19      # the lead's own clip from tools/kamadhenu/space/refs (also the Space's default)
+  seed: 60
+  nfe_step: 32
+  cfg_strength: 2.0
+  compare_against: zero-shot IndicF5 with the same reference, same seed (clip D of the 7 Sep diagnostics)
+  metric_first: duration ratio generated/recorded per held-out verse (1.0 ± 0.25 is on-tempo), then the lead's ear
+
+outputs:
+  work_dir: ${KAMADHENU_WORK:-~/kamadhenu_exp_a}
+  ckpt_dir: ${work_dir}/ckpt
+  export_dir: ${work_dir}/export/kamadhenu_voice_a     # model.safetensors (EMA), model_online.safetensors, vocab.txt, card.json
+  eval_dir: ${work_dir}/eval                            # 13 × (base.wav, finetuned.wav, finetuned_online.wav) + eval.json
+  keep: [export_dir, eval_dir, "${ckpt_dir}/model_last.pt", "${ckpt_dir}/train.log"]
