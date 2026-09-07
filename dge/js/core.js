@@ -1400,6 +1400,11 @@ function restorePrefs() {
   const forceSingleForSize = totalForThisGrantha > LARGE_GRANTHA_THRESHOLD;
 
   window.viewMode = (savedViewMode === 'single' || forceSingleForSize) ? 'single' : 'list';
+  // The Display sheet's "Reading View" accordion shows the active row in its
+  // header; mark the effective mode so it never reads blank (7 Sep 2026).
+  document.querySelectorAll('#displayPopup .pop-item[data-viewmode]').forEach(el => {
+    el.classList.toggle('active', el.dataset.viewmode === window.viewMode);
+  });
   if (window.viewMode === 'single') {
     const lastVerseKey = typeof nsKey === 'function' ? nsKey('lastVerse') : null;
     const savedLastVerse = lastVerseKey ? parseInt(localStorage.getItem(lastVerseKey), 10) : NaN;
