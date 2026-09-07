@@ -317,6 +317,8 @@ class Site:
             raise SystemExit(f"two pages want the same URL: {url} (second: {html_text[html_text.find('<title>') + 7: html_text.find('</title>')]})")
         self._written.add(url)
         p.parent.mkdir(parents=True, exist_ok=True)
+        if p.exists() and 'name="generator" content="dge-seo"' not in p.read_text(encoding="utf-8", errors="replace")[:2000]:
+            raise SystemExit(f"refusing to overwrite a hand-written page with a generated one: {p} ({url})")
         p.write_text(html_text, encoding="utf-8")
         self.stats["pages"] += 1; self.stats["bytes"] += len(html_text.encode("utf-8"))
 
@@ -332,6 +334,7 @@ class Site:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="dge-seo">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{esc(self.abs_url(url))}">
@@ -351,7 +354,7 @@ class Site:
 <h1>{esc(h1_sa)}</h1>{f'<div class="en" lang="sa-Latn">{esc(h1_en)}</div>' if h1_en and h1_en != h1_sa else ''}
 {body}
 </main>
-<footer>{esc(self.site_name)} · <a href="{esc(CFG.get('sitePrefix', ''))}/dge/index.html">Interactive reader</a> · <a href="{esc(CFG.get('publicRoot', '/dge'))}/">All texts</a></footer>
+<footer>{esc(self.site_name)} · <a href="{esc(CFG.get('sitePrefix', ''))}/dge/index.html">Interactive reader</a> · <a href="{esc(self.tax.catalogue)}">All texts</a></footer>
 </body>
 </html>
 """
@@ -479,14 +482,14 @@ class Site:
         self._cat_urls = {p: self.tax.prefix_url(p) for p in self._prefixes}
         for p in self._prefixes:
             parent = p.rsplit("/", 1)[0] if "/" in p else ""
-            purl = self._cat_urls.get(parent) if parent else self.tax.public_root + "/"
+            purl = self._cat_urls.get(parent) if parent else self.tax.catalogue
             if purl and self._cat_urls.get(p) and self._cat_urls[p] != purl:
                 seg = p.rsplit("/", 1)[-1]
                 self._add_child(purl, (T.label_sa(seg, p), T.label_en(seg), self._cat_urls[p], self._counts.get(p, 0), False))
         for s in self.slugs:
             crumbs = self.tax.crumbs(s)
             url = self.tax.url(s)
-            parent_url = crumbs[-2][2] if len(crumbs) > 1 else self.tax.public_root + "/"
+            parent_url = crumbs[-2][2] if len(crumbs) > 1 else self.tax.catalogue
             self._add_child(parent_url, (crumbs[-1][0], crumbs[-1][1], url, 0, True))
 
     def build_categories(self):
@@ -494,7 +497,7 @@ class Site:
         grantha_urls = set(self.tax._urls.values())
         rendered = set()
         for p in [""] + prefixes:
-            url = self.tax.public_root + "/" if p == "" else urls[p]
+            url = self.tax.catalogue if p == "" else urls[p]
             if not url: continue
             if p and url in grantha_urls: continue      # the mūla page already lists its layers (see build_grantha)
             if url in rendered: continue               # a collapsed single-child level shares its parent's page

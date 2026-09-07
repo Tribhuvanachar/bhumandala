@@ -130,38 +130,42 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    git. Recommended: run the workflow in `mirror` mode into `SarvamulaOrg/vedavani-dataset-mirror` (private) so
    training pulls from a repo we own; the lead has not yet said yes. Also pending: listen to the three sample clips
    sent in chat (group chant, not a single voice — style reference, not a Kamadhenu voice).
-3. **Firebase Hosting preview/live deploy — still blocked on the lead** (re-tested 7 Sep, run 4 of
+3. **SEO proof-build — validator now passes locally after a real fix (7 Sep, 11:55 pm IST):** the builder
+   used to write its catalogue over `/dge/index.html` and `/dge/kavya/index.html` (the app shell and the Kāvya
+   reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/dge/texts/`, `/dge/kavya/texts/`). CI
+   proof-build re-dispatched with deploy=false; deploy=true still waits on the artifact-size question (see PENDING).
+4. **Firebase Hosting preview/live deploy — still blocked on the lead** (re-tested 7 Sep, run 4 of
    `Deploy — Firebase Hosting`): `FIREBASE_PROJECT_ID` is visible but none of the nine service-account secret names
    the workflow reads is, at repository → Actions scope. The key the lead saved is under another name or another
    scope (Environment secret, repository *variable*, Codespaces/Dependabot, org). Lead: rename it to
    `FIREBASE_SERVICE_ACCOUNT` under Settings → Secrets and variables → Actions → Repository secrets, or name it.
    Then: preview channel → verify Google sign-in on sarvamula-org.web.app → Firestore (production mode + publish
    `dge/firebase/firestore.rules`, which now carries the verified-email rule) → DNS cutover is the lead's decision.
-4. ~~Verified-email capture~~ — **done 7 Sep 2026**: `user-auth.js` stores only provider-verified emails
+5. ~~Verified-email capture~~ — **done 7 Sep 2026**: `user-auth.js` stores only provider-verified emails
    (`dgeVerifiedEmail`) and captures a later-verified one on the next sign-in; `firestore.rules` `emailOk()` /
    `emailVerifiedFlagOk()` enforce it on create and self-update; Manage Users exports the verified list as CSV
    (`dgeExportVerifiedEmails`). 47 rules tests (emulator runs in the sandbox: `npm run test:rules`) + 196 unit
    tests pass. Not screenshotted: the export button needs a signed-in super-admin. Rules take effect only when
    the lead publishes them to the live project (Firestore is not created yet).
-5. **Kamadhenu Experiment A (Phase 12)** — waits on the lead's decision on `kamadhenu/docs/EXPERIMENT_A_CARD.md`.
+6. **Kamadhenu Experiment A (Phase 12)** — waits on the lead's decision on `kamadhenu/docs/EXPERIMENT_A_CARD.md`.
    On approval: rent one 24 GB card, `HF_TOKEN` + `KAMADHENU_VRAM=24GB`, run `launch_experiment_a.sh --dry-run`, then
    the real run (resumable, 150-min cap), bring back `export/`, `eval/`, `train.log`, and give the lead the 13 A/B pairs
    with the duration ratios. Independent of that: Phase 13 evaluation script + HUMAN_REVIEW.csv.
-6. **Scholar features, next steps**: (a) Vedic metre detection is still the data's declared `chandas`, not the
+7. **Scholar features, next steps**: (a) Vedic metre detection is still the data's declared `chandas`, not the
    engine (PENDING.md's long-open item); (b) dhātu index: sandhi-fused forms are uncounted, `_morph` records
    carry no dhātu code, so the intellisense popover links to shabda tables but not to dhātu cells — a
    lemma→code side table would close that; (c) `vidyut` Python wheel (19 MB) timed out through the proxy —
    with it, `tools/` could pregenerate declension tables and verify the analogy paradigms offline; (d) a
    "differs from the paradigm in cells …" diff on shabda-gen is an easy scholar win.
-7. **Upaniṣad ṭippaṇī ×7 + Tantrasāra**: Vision + Tesseract done for all 3,453 pages; LABELS/NEW/DIFF packs
+8. **Upaniṣad ṭippaṇī ×7 + Tantrasāra**: Vision + Tesseract done for all 3,453 pages; LABELS/NEW/DIFF packs
    regenerated; importer into the mapped layers waits for the lead's Gemini answers.
-8. **Chandas engine**: ārṣa triṣṭubh/jagatī classification, अनुष्टुभ् alias, re-ingest Gemini Parts C/D, harvest
+9. **Chandas engine**: ārṣa triṣṭubh/jagatī classification, अनुष्टुभ् alias, re-ingest Gemini Parts C/D, harvest
    lakṣaṇa verses for the remaining fixtures (184 unresolved metres without examples). The new reports list
    93 DB vṛttas never attested in the library — a ready-made target list.
-9. **Sāroddhāra leftovers**: master defects (11.2.37/38, 10.99.34, 10.99.35), 122 extra-beyond-index verses,
+10. **Sāroddhāra leftovers**: master defects (11.2.37/38, 10.99.34, 10.99.35), 122 extra-beyond-index verses,
    287 refs not in DGE, reindex for backlinks.
-10. Waiting on the lead: Śrīpādarāja Aṣṭottara-śata-nāmāvali text (108 names); listen-list answers.
-11. Long-paused (Gemini credits): Vasu SK English (5 batches), Lakṣmī Vyākhyā pilot; Grantha data overhaul pilot.
+11. Waiting on the lead: Śrīpādarāja Aṣṭottara-śata-nāmāvali text (108 names); listen-list answers.
+12. Long-paused (Gemini credits): Vasu SK English (5 batches), Lakṣmī Vyākhyā pilot; Grantha data overhaul pilot.
 
 ## 6. Gotchas learned this session
 

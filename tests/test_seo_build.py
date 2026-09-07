@@ -46,3 +46,18 @@ def test_subset_build_and_validate(tmp_path):
                                     capture_output=True, text=True).stdout.split("\n")[0] and (tmp_path / "r.json").read_text())
     assert rep["duplicateTitles"] == 0
     assert not [b for b in rep["blocking"] if "broken link" not in b and "missing from the sitemap" not in b and "orphan" not in b and "no page" not in b], rep["blocking"][:5]
+
+
+def test_generated_index_never_lands_on_an_app_page(tmp_path):
+    """The reader owns /dge/ and /dge/kavya/ (its own index.html files); generated category indexes move aside."""
+    import sys, json
+    sys.path.insert(0, str(ROOT / "tools" / "seo"))
+    import taxonomy as T
+    lib = json.load(open(ROOT / "dge/data/library.json", encoding="utf-8"))
+    lib = lib["granthas"] if isinstance(lib, dict) and "granthas" in lib else lib
+    t = T.Taxonomy(T.public_slugs(lib))
+    assert "/dge/" in t.reserved and "/dge/kavya/" in t.reserved
+    assert t.catalogue == "/dge/texts/"
+    assert t.prefix_url("kavya_alankara") == "/dge/kavya/texts/"
+    assert t.url("kavya_alankara/raghavendra_vijaya/sarga_1") == "/dge/kavya/raghavendra-vijaya/sarga-1/"
+    assert not (set(t._urls.values()) & t.reserved)

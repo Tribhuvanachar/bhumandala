@@ -5433,3 +5433,21 @@ The exact word index (build_search_index.py `word_tokens`/`bucket_key`, dge-sear
 - Caveats: group recitation (several voices), 16 kHz (IndicF5 trains at 24 kHz), no svara marks in the
   texts, clips are pādas not whole ṛks. Use as a Vedic-accent style reference / ASR test set, not as a
   single-speaker Kamadhenu voice.
+
+## SEO proof-build: the deploy artifact would have overwritten reader pages — fixed (7 Sep 2026, 11:55 pm IST)
+
+- Both CI proof-builds of `seo-pages.yml` (deploy=false, runs 1 and 2) generated all pages (16,977 pages,
+  902 MB, 206 s) but the validator failed with 36 blocking items — all on the reader's own hand-written
+  pages (`/dge/convert/`, `/dge/dasa-sahitya/`, `/dge/guru-parampara/` …) that share the tree.
+- Reading the tree exposed something worse than the validator noise: the builder wrote its "All texts"
+  catalogue to `/dge/index.html` and the Kāvya category index to `/dge/kavya/index.html`, i.e. on top of
+  the reader app shell and the Kāvya reader. Had deploy=true been used, the live app would have been
+  replaced by static pages. Nothing was deployed.
+- Fix: every generated page carries `<meta name="generator" content="dge-seo">`; `Site.write` refuses to
+  overwrite a file without that stamp; `Taxonomy.reserved` lists the reader's own `dge/**/index.html`
+  URLs and any category index that would land on one moves to `<url>texts/` (`/dge/texts/`,
+  `/dge/kavya/texts/`) — grantha/section URLs are unchanged. The validator checks only stamped pages,
+  treats app pages as valid link targets, and walks from the catalogue root. Regression test added.
+- Still open before deploy=true: the Pages artifact would be the whole repo tree (2.3 GB) plus 0.9 GB of
+  generated pages; GitHub Pages' 1 GB soft limit means the artifact should carry generated pages only
+  (or the site moves to Firebase Hosting). The lead's call.

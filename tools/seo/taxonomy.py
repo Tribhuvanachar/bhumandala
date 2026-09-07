@@ -103,6 +103,10 @@ class Taxonomy:
         self.drop = set(CFG.get("dropSegments", []))
         self.root_map = CFG.get("rootMap", {})
         self.public_root = CFG.get("publicRoot", "/dge").rstrip("/")
+        # URLs the reader app already owns (its own index.html files under dge/): a generated index never
+        # replaces one of them; it moves to <url>texts/ instead (the root catalogue /dge/ -> /dge/texts/).
+        self.reserved = reserved_urls(self.public_root)
+        self.catalogue = CFG.get("catalogueUrl") or self._free(self.public_root + "/")
         self._urls = {}
         for s in self.slugs:
             self._urls[s] = self._compute(s)
@@ -135,7 +139,10 @@ class Taxonomy:
                 segs.append(self.root_map[seg])
             else:
                 segs.append(slugify_segment(seg))
-        return self.public_root + "/" + "/".join(segs) + "/"
+        return self._free(self.public_root + "/" + "/".join(segs) + "/")
+
+    def _free(self, url):
+        return url + "texts/" if url in self.reserved else url
 
     def url(self, slug):
         return self._urls[slug]
@@ -157,12 +164,24 @@ class Taxonomy:
             if s.startswith(prefix + "/"):
                 kept = [(seg, p) for seg, p in self._kept_segments(s) if len(p) <= len(prefix)]
                 segs = [self.root_map.get(seg, slugify_segment(seg)) if j == 0 else slugify_segment(seg) for j, (seg, p) in enumerate(kept)]
-                return self.public_root + "/" + "/".join(segs) + "/"
+                return self._free(self.public_root + "/" + "/".join(segs) + "/")
         return None
 
     def category_prefixes(self):
         """Every internal prefix that is a category (has children, is not itself a grantha)."""
         return sorted(p for p in self.children if p and p not in self._urls)
+
+
+def reserved_urls(public_root, repo=None):
+    """Public URLs of the reader's own hand-written index.html files under dge/ (never dge/data)."""
+    root = (repo or ROOT) / "dge"
+    out = set()
+    for p in root.rglob("index.html"):
+        rel = p.relative_to(root).parent.as_posix()
+        if rel.split("/")[0] in ("data", "node_modules") or "/node_modules/" in rel:
+            continue
+        out.add(public_root + "/" + (rel + "/" if rel != "." else ""))
+    return out
 
 
 def public_slugs(library):
