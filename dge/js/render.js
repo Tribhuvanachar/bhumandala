@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.8 (verse card carries only the verse: fav/doubt as the card edge, counts under the number, copy in the ⋯ menu for everyone; dgePadaBreak breaks the mūla into pāda lines from the chandas engine. v4.7: unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
+window.DGE_VERSIONS['render.js'] = 'v4.9 (list view paged at 25 by default, 10/25/50/100 from the page bar, page bar repeated below the list, dgeListPageFor lands a jump on its page. v4.8: verse card carries only the verse: fav/doubt as the card edge, counts under the number, copy in the ⋯ menu for everyone; dgePadaBreak breaks the mūla into pāda lines from the chandas engine. v4.7: unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
 
 // 7 Sep 2026: verse text broken into its pādas for display (the lead: "as a
 // thumb rule, every shloka should render in two lines or 4 as per their
@@ -110,10 +110,38 @@ function getText(id) {
 // Display menu and get the exact same unbounded render. This is the actual
 // safety net -- list mode never builds more than LIST_PAGE_SIZE cards at
 // once, with Prev/Next paging through the rest.
-const LIST_PAGE_SIZE = 50;
+// 7 Sep 2026: the page size is the reader's own (25 by default, 10/25/50/100
+// from the page bar, remembered per device) -- the lead asked for the Vedas
+// "as a list with default paging enabled, 25 per page and adjustable".
+const DGE_LIST_PAGE_SIZES = [10, 25, 50, 100];
+function dgeListPageSize() {
+  try {
+    const n = parseInt(localStorage.getItem('app_listPageSize'), 10);
+    if (DGE_LIST_PAGE_SIZES.indexOf(n) !== -1) return n;
+  } catch (e) { /* ignore */ }
+  return 25;
+}
+window.dgeListPageSize = dgeListPageSize;
 // Exposed for layer-stitch.js's section-navigator jump, which must land
 // the target card's page before scrolling to it.
-window.DGE_LIST_PAGE_SIZE = LIST_PAGE_SIZE;
+Object.defineProperty(window, 'DGE_LIST_PAGE_SIZE', { get: dgeListPageSize, configurable: true });
+// The page that holds a given shloka id in the current filtered list, or
+// -1 when it isn't listed -- so a jump (quick jump, search hit, audio
+// auto-advance, deep link) can turn to that page before scrolling.
+window.dgeListPageFor = function (id) {
+  if (window.viewMode === 'single' || typeof getFilteredIds !== 'function') return -1;
+  const idx = getFilteredIds().indexOf(id);
+  return idx < 0 ? -1 : Math.floor(idx / dgeListPageSize());
+};
+window.dgeSetListPageSize = function (n) {
+  n = parseInt(n, 10);
+  if (DGE_LIST_PAGE_SIZES.indexOf(n) === -1) return;
+  // Keep the first card on screen where it is: page 3 of 25 becomes page 1 of 100.
+  const firstIdx = (window.dgeListPage || 0) * dgeListPageSize();
+  try { localStorage.setItem('app_listPageSize', String(n)); } catch (e) { /* ignore */ }
+  window.dgeListPage = Math.floor(firstIdx / n);
+  renderList();
+};
 
 window.currentSearchScope = 'all';
 window.setSearchScope = function(scope, label, el) {
@@ -371,6 +399,7 @@ function renderList() {
 
   // See the LIST_PAGE_SIZE comment above -- only paginate list mode, and
   // only once there's actually more than one page's worth to show.
+  const LIST_PAGE_SIZE = dgeListPageSize();
   const needsPaging = !singleMode && fIds.length > LIST_PAGE_SIZE;
   let pageIdSet = null;
   if (needsPaging) {
@@ -768,21 +797,37 @@ function renderList() {
   dgeUpdateListViewNav(fIds, needsPaging);
 }
 
+// The page bar sits above the list and again below it (#listViewNavBottom),
+// so a reader who has read to the bottom of a page has Next in reach.
+// Above the list it also carries the page-size picker; the bar is hidden
+// only when everything fits on one page at the SMALLEST size, so the picker
+// stays reachable (choosing 10 on a 20-verse text is a real choice).
 function dgeUpdateListViewNav(fIds, needsPaging) {
   const nav = document.getElementById('listViewNav');
+  const navB = document.getElementById('listViewNavBottom');
   if (!nav) return;
-  if (!needsPaging) { nav.style.display = 'none'; return; }
+  const size = dgeListPageSize();
   const total = fIds.length;
-  const maxPage = Math.max(0, Math.ceil(total / LIST_PAGE_SIZE) - 1);
-  const page = window.dgeListPage || 0;
-  const startN = page * LIST_PAGE_SIZE + 1;
-  const endN = Math.min((page + 1) * LIST_PAGE_SIZE, total);
+  const showBar = window.viewMode !== 'single' && total > DGE_LIST_PAGE_SIZES[0];
+  if (!showBar) { nav.style.display = 'none'; if (navB) navB.style.display = 'none'; return; }
+  const maxPage = Math.max(0, Math.ceil(total / size) - 1);
+  const page = Math.min(window.dgeListPage || 0, maxPage);
+  const startN = page * size + 1;
+  const endN = Math.min((page + 1) * size, total);
+  const prev = `<button class="btn-sm" onclick="window.dgeListViewStep(-1)" ${page <= 0 ? 'disabled' : ''} aria-label="Previous page">⟨ Prev</button>`;
+  const next = `<button class="btn-sm" onclick="window.dgeListViewStep(1)" ${page >= maxPage ? 'disabled' : ''} aria-label="Next page">Next ⟩</button>`;
+  const where = `<span style="font-weight:700; font-size:13px;">${startN}–${endN} of ${total.toLocaleString()}</span>
+    <span style="font-size:11px; color:var(--muted-text);">page ${page + 1}/${maxPage + 1}</span>`;
+  const sizes = `<span class="range-mode-toggle" role="group" aria-label="Verses per page" title="Verses per page" style="margin-left:auto;">
+    ${DGE_LIST_PAGE_SIZES.map(n => `<button type="button" class="range-mode-btn${n === size ? ' active' : ''}" onclick="window.dgeSetListPageSize(${n})">${n}</button>`).join('')}
+  </span>`;
   nav.style.display = 'flex';
-  nav.innerHTML = `
-    <button class="btn-sm" onclick="window.dgeListViewStep(-1)" ${page <= 0 ? 'disabled' : ''}>⟨ Prev</button>
-    <span style="font-weight:700; font-size:13px;">${startN}–${endN} of ${total.toLocaleString()} (page ${page + 1}/${maxPage + 1})</span>
-    <button class="btn-sm" onclick="window.dgeListViewStep(1)" ${page >= maxPage ? 'disabled' : ''}>Next ⟩</button>
-  `;
+  nav.style.flexWrap = 'wrap';
+  nav.innerHTML = `${prev}<span style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">${where}</span>${next}${sizes}`;
+  if (navB) {
+    navB.style.display = maxPage > 0 ? 'flex' : 'none';
+    navB.innerHTML = `${prev}<span style="display:flex; align-items:center; gap:8px;">${where}</span>${next}`;
+  }
 }
 
 window.dgeListViewStep = function(dir) {

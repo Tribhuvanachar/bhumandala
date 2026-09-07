@@ -530,15 +530,20 @@ const QUICK_SEARCH_ABBREVIATIONS = [
     // real data — no padding, e.g. "1.1.1" not "1.1.01") — no separate
     // lookup table needed, just a reverse scan for that id at load time
     // (see dgeResolveQuickJumpTarget in core.js).
+    // 7 Sep 2026: any depth is a valid target, not only the full triple --
+    // "rv1.1" (a sūkta) opens that sūkta's first mantra and "rv1" (a
+    // maṇḍala) its first mantra, because a partial id is a prefix of the
+    // mantra ids under it (core.js dgeResolveQuickJumpTarget matches a
+    // dotted prefix when no exact id exists). Reported live: "rv1.1" + Enter
+    // used to be rejected here and the reader stayed where it was.
     resolve: function(parts) {
-      if (parts.length !== 3 || parts.some(p => !/^\d+$/.test(p))) return null;
+      if (parts.length < 1 || parts.length > 3 || parts.some(p => !/^\d+$/.test(p))) return null;
       const mandala = parseInt(parts[0], 10);
       if (!mandala || mandala < 1 || mandala > 10) return null;
       const mm = String(mandala).padStart(2, '0');
-      return {
-        granthaPath: `vedas/rigveda/shakala_shakha/samhita/mandala_${mm}`,
-        vedicId: `${parseInt(parts[0], 10)}.${parseInt(parts[1], 10)}.${parseInt(parts[2], 10)}`
-      };
+      const granthaPath = `vedas/rigveda/shakala_shakha/samhita/mandala_${mm}`;
+      if (parts.length === 1) return { granthaPath, shlokaNumber: 1 };
+      return { granthaPath, vedicId: parts.map(p => String(parseInt(p, 10))).join('.') };
     }
   },
   {

@@ -658,8 +658,8 @@ body:has(.popup-sheet.show)::after {
 .modal-overlay.drawer-right.show .modal-content { transform: translateX(0); }
 /* 7 Sep 2026: Library drawer -- resizable, and a docked side pane when pinned
    on a wide screen (library.js dgeApplyLibraryDock / dgeInitLibraryResize). */
+.modal-overlay.drawer-left#libraryModal .modal-content { width: min(var(--dge-drawer-w, 340px), 95vw); }
 @media (min-width: 760px) {
-  .modal-overlay.drawer-left#libraryModal .modal-content { width: var(--dge-drawer-w, 340px); }
   body.dge-library-docked { padding-left: var(--dge-drawer-w, 340px); }
   body.dge-library-docked .top-bar { left: var(--dge-drawer-w, 340px); }
   body.dge-library-docked.modal-open { overflow: auto !important; }
@@ -667,9 +667,24 @@ body:has(.popup-sheet.show)::after {
   body.dge-library-docked #libraryModal .modal-content { pointer-events: auto; border-right: 1px solid var(--card-border); box-shadow: var(--shadow-md); }
 }
 #libraryModal.resizing .modal-content { transition: none; user-select: none; }
-.drawer-resize-handle { position: absolute; top: 0; right: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 5; touch-action: none; }
+/* The grab edge is on every screen size (7 Sep 2026: "I should be able to
+   click on the border of it and view the slider" -- on a phone too): a thin
+   line with a centred grip pill, wide enough for a thumb. */
+.drawer-resize-handle { position: absolute; top: 0; right: 0; bottom: 0; width: 14px; cursor: ew-resize; z-index: 5; touch-action: none; }
+.drawer-resize-handle::before { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1px; background: var(--card-border); }
+.drawer-resize-handle::after { content: ""; position: absolute; top: 50%; right: 4px; width: 5px; height: 44px; margin-top: -22px; border-radius: 999px; background: var(--muted-text); opacity: .45; }
+.drawer-resize-handle:hover::after, #libraryModal.resizing .drawer-resize-handle::after { opacity: 1; background: var(--accent-red); }
 .drawer-resize-handle:hover, #libraryModal.resizing .drawer-resize-handle { background: var(--accent-glow); }
-@media (max-width: 759px) { .drawer-resize-handle { display: none; } }
+/* Quick-jump typeahead (library.js dgeQuickJumpSuggest). */
+.dge-qj-suggest { margin-top: 4px; border: 1px solid var(--card-border); border-radius: var(--radius-sm); background: var(--card-bg); box-shadow: var(--shadow-md); max-height: 40vh; overflow: auto; }
+.dge-qj-suggest[hidden] { display: none; }
+.dge-qj-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 12px; font-weight: 600; cursor: pointer; border-bottom: 1px solid var(--card-border); }
+.dge-qj-item:last-child { border-bottom: none; }
+.dge-qj-item:hover, .dge-qj-item.active { background: var(--card-active); color: var(--accent-red); }
+.dge-qj-item .dge-qj-kind { flex: none; font-size: 14px; width: 18px; text-align: center; }
+.dge-qj-item .dge-qj-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dge-qj-item .dge-qj-path { flex: none; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; font-weight: 500; color: var(--muted-text); }
+.dge-qj-item.dge-qj-more { color: var(--muted-text); font-weight: 500; }
 /* Secret fields (API keys, tokens) are plain text inputs until focused so
    Chrome sees no password form on the page and stops offering a saved
    password on the search box; utils.js flips them to type=password on focus. */

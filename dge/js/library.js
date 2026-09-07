@@ -1226,17 +1226,22 @@ function dgeApplyLibraryDock() {
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
-// Drag the drawer's right edge to set its width (260 px .. 60 vw), kept per
-// device in localStorage and applied through --dge-drawer-w (main.css).
+// Drag the drawer's right edge to set its width, kept per device in
+// localStorage and applied through --dge-drawer-w (main.css). On a wide
+// screen 260 px .. 60 vw; on a phone (7 Sep 2026, the lead's ask) 200 px ..
+// 95 vw, so the drawer can be narrowed to see the text behind it.
 function dgeInitLibraryResize() {
   const handle = document.getElementById('libraryResizeHandle');
   const m = document.getElementById('libraryModal');
   if (!handle || !m) return;
   const root = document.documentElement;
   const apply = function (w) { root.style.setProperty('--dge-drawer-w', Math.round(w) + 'px'); };
-  try { const saved = parseInt(localStorage.getItem('dge_library_width'), 10); if (saved >= 260) apply(saved); } catch (e) {}
+  const clamp = function (w) {
+    const wide = window.innerWidth >= 760;
+    return Math.max(wide ? 260 : 200, Math.min(w, Math.round(window.innerWidth * (wide ? 0.6 : 0.95))));
+  };
+  try { const saved = parseInt(localStorage.getItem('dge_library_width'), 10); if (saved >= 200) apply(clamp(saved)); } catch (e) {}
   let dragging = false;
-  const clamp = function (w) { return Math.max(260, Math.min(w, Math.round(window.innerWidth * 0.6))); };
   handle.addEventListener('pointerdown', function (e) {
     dragging = true; handle.setPointerCapture(e.pointerId); m.classList.add('resizing'); e.preventDefault();
   });
@@ -1698,13 +1703,185 @@ window.dgeQuickJump = function(text) {
     // since that's more likely a mistyped abbreviation than a search term.
     const words = String(text).trim().split(/\s+/).filter(Boolean);
     if (words.length === 1 && typeof window.DGEGlobalSearch === 'object' && window.DGEGlobalSearch.open) {
-      window.DGEGlobalSearch.open(words[0]);
+      dgeQuickJumpToGlobalSearch(words[0]);
       return;
     }
     if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3", "pns5", or a section name like "mahabharata sabha parva".');
   });
   return false;
 };
+
+// The global search draws over the drawer, and on a phone the drawer's
+// open state left the search panel sitting on top of a scrolled-off,
+// keyboard-shrunk page (7 Sep 2026 screenshot). Close the drawer first --
+// unless it is the pinned side pane on a wide screen, which is furniture.
+function dgeQuickJumpToGlobalSearch(q) {
+  dgeQuickJumpHide();
+  if (!(dgeLibraryDocked() && window.innerWidth >= 760) && typeof closeModal === 'function') closeModal('libraryModal');
+  window.DGEGlobalSearch.open(q);
+}
+
+// ---------------------------------------------------------------------
+// Quick-jump typeahead (7 Sep 2026, the lead's ask: "start typing something
+// and get intellisense of the library items shown below; clicking on it
+// should take me to that grantha or folder"). A flat index of every folder
+// and populated grantha is built once per catalog render from the same
+// tree the drawer shows (dgeLibTree), so admin relabels, hidden paths and
+// layer folds are all already applied. Matching is script-agnostic: the
+// slug (ASCII), the label as displayed, and the label's HK
+// transliteration are all searched, so "rigveda", "ऋग्वेद" and "Rgveda"
+// find the same row.
+// ---------------------------------------------------------------------
+let dgeQjIndex = null, dgeQjIndexTree = null, dgeQjRows = [], dgeQjActive = -1;
+const DGE_QJ_MAX = 12;
+function dgeQjLatin(text) {
+  if (!/[ऀ-ॿ]/.test(text) || typeof window.applyTransliteration !== 'function') return '';
+  try { return String(window.applyTransliteration(text, 'hk') || ''); } catch (e) { return ''; }
+}
+function dgeQjBuildIndex() {
+  if (dgeQjIndex && dgeQjIndexTree === dgeLibTree) return dgeQjIndex;
+  const rows = [];
+  const walk = function (node, nodePath) {
+    Object.keys(node.children || {}).forEach(function (k) {
+      const p = nodePath ? nodePath + '/' + k : k;
+      const label = dgeSegLabel(k, p);
+      rows.push({ kind: 'folder', path: p, title: label, n: dgeCountLeaves(node.children[k]),
+        hay: dgeNormalizeForMatch(p + ' ' + label + ' ' + dgeQjLatin(label)), raw: String(label).toLowerCase() });
+      walk(node.children[k], p);
+    });
+    (node.leaves || []).forEach(function (leaf) {
+      if (leaf.populated === false) return;
+      rows.push({ kind: 'grantha', path: leaf.slug, realSlug: leaf.realSlug, title: leaf.title,
+        hay: dgeNormalizeForMatch(leaf.realSlug + ' ' + leaf.slug + ' ' + leaf.title + ' ' + dgeQjLatin(leaf.title)), raw: String(leaf.title).toLowerCase() });
+    });
+  };
+  if (dgeLibTree) walk(dgeLibTree, '');
+  dgeQjIndex = rows; dgeQjIndexTree = dgeLibTree;
+  return rows;
+}
+function dgeQjMatch(text) {
+  const q = dgeNormalizeForMatch(text);
+  const rawQ = String(text || '').trim().toLowerCase();
+  const words = q.split(' ').filter(Boolean);
+  if (!words.length && !rawQ) return [];
+  const out = [];
+  dgeQjBuildIndex().forEach(function (r) {
+    let score = 0;
+    if (words.length && words.every(function (w) { return r.hay.indexOf(w) !== -1; })) {
+      const segs = r.hay.split(' ');
+      score = 100 - Math.min(90, r.hay.length / 4);
+      if (words.every(function (w) { return segs.some(function (sg) { return sg.indexOf(w) === 0; }); })) score += 300; // starts a segment
+      if (words.every(function (w) { return segs.indexOf(w) !== -1; })) score += 200;                          // is a whole segment
+      if (r.raw.indexOf(rawQ) === 0) score += 250;                                                              // the title itself begins with it
+    } else if (rawQ && /[ऀ-ॿ]/.test(rawQ) && r.raw.indexOf(rawQ) !== -1) {
+      score = 400 + (r.raw.indexOf(rawQ) === 0 ? 250 : 0) - Math.min(90, r.raw.length / 2);
+    }
+    if (score > 0) out.push([score + (r.kind === 'folder' ? 40 : 0) - r.path.split('/').length * 6, r]);
+  });
+  out.sort(function (a, b) { return b[0] - a[0]; });
+  // Folders outrank texts, but never crowd them out entirely: "rigv" should
+  // list the maṇḍalas after the Ṛgveda folders, not twelve folders alone.
+  const hasText = out.some(function (x) { return x[1].kind === 'grantha'; });
+  const picked = []; let folders = 0;
+  for (let i = 0; i < out.length && picked.length < DGE_QJ_MAX; i++) {
+    const r = out[i][1];
+    if (r.kind === 'folder') { if (hasText && folders >= 7) continue; folders++; }
+    picked.push(r);
+  }
+  return picked;
+}
+function dgeQjEsc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+function dgeQjPathLabel(path) {
+  const segs = String(path).split('/');
+  const parents = segs.slice(0, -1);
+  return parents.map(function (sg, i) { return dgeSegLabel(sg, parents.slice(0, i + 1).join('/')); }).join(' › ');
+}
+function dgeQuickJumpHide() {
+  const box = document.getElementById('quickJumpSuggest');
+  const input = document.getElementById('quickJumpInput');
+  if (box) { box.hidden = true; box.innerHTML = ''; }
+  if (input) input.setAttribute('aria-expanded', 'false');
+  dgeQjRows = []; dgeQjActive = -1;
+}
+function dgeQjPaint() {
+  const box = document.getElementById('quickJumpSuggest');
+  if (!box) return;
+  box.innerHTML = dgeQjRows.map(function (r, i) {
+    const cls = 'dge-qj-item' + (i === dgeQjActive ? ' active' : '') + (r.kind === 'search' ? ' dge-qj-more' : '');
+    const icon = r.kind === 'folder' ? '📁' : r.kind === 'grantha' ? '📖' : r.kind === 'jump' ? '⤴' : '🔍';
+    const sub = r.kind === 'folder' ? (r.n ? r.n + ' text' + (r.n === 1 ? '' : 's') + (r.path.indexOf('/') > 0 ? ' · ' + dgeQjPathLabel(r.path) : '') : dgeQjPathLabel(r.path))
+      : r.kind === 'grantha' ? dgeQjPathLabel(r.path) : '';
+    return `<div class="${cls}" role="option" aria-selected="${i === dgeQjActive}" data-i="${i}"
+        onmousedown="event.preventDefault()" onclick="window.dgeQuickJumpPick(${i})">
+        <span class="dge-qj-kind">${icon}</span><span class="dge-qj-title">${dgeQjEsc(r.title)}</span>${sub ? '<span class="dge-qj-path">' + dgeQjEsc(sub) + '</span>' : ''}</div>`;
+  }).join('');
+  box.hidden = !dgeQjRows.length;
+  const input = document.getElementById('quickJumpInput');
+  if (input) input.setAttribute('aria-expanded', dgeQjRows.length ? 'true' : 'false');
+  const act = box.querySelector('.dge-qj-item.active');
+  if (act && act.scrollIntoView) act.scrollIntoView({ block: 'nearest' });
+}
+window.dgeQuickJumpSuggest = function (text) {
+  const t = String(text || '').trim();
+  if (!t) { dgeQuickJumpHide(); return; }
+  const rows = [];
+  const target = (typeof window.dgeParseQuickSearchQuery === 'function') ? window.dgeParseQuickSearchQuery(t) : null;
+  if (target) rows.push({ kind: 'jump', title: 'Jump to ' + target.label + ' ' + (target.vedicId || target.shlokaNumber || ''), text: t });
+  if (!dgeLibTree) {
+    // Drawer just opened and the catalog is still loading: fill in when it lands.
+    (window.dgeLibraryCatalogPromise || Promise.resolve()).then(function () {
+      const input = document.getElementById('quickJumpInput');
+      if (dgeLibTree && input && input.value.trim() === t) window.dgeQuickJumpSuggest(t);
+    });
+  } else {
+    dgeQjMatch(t).forEach(function (r) { rows.push(r); });
+  }
+  if (t.split(/\s+/).length === 1 && typeof window.DGEGlobalSearch === 'object')
+    rows.push({ kind: 'search', title: 'Search all texts for “' + t + '”', text: t });
+  dgeQjRows = rows; dgeQjActive = -1;
+  dgeQjPaint();
+};
+window.dgeQuickJumpPick = function (i) {
+  const r = dgeQjRows[i];
+  if (!r) return;
+  if (r.kind === 'grantha') { dgeQuickJumpHide(); window.dgeGoToGrantha(r.realSlug); return; }
+  if (r.kind === 'folder') {
+    dgeQuickJumpHide();
+    const input = document.getElementById('quickJumpInput');
+    if (input) input.value = '';
+    window.dgeShowLibraryCategory(r.path);
+    const list = document.getElementById('libraryModalList');
+    if (list && list.scrollIntoView) list.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    return;
+  }
+  if (r.kind === 'jump') { dgeQuickJumpHide(); window.dgeQuickJump(r.text); return; }
+  if (r.kind === 'search') { dgeQuickJumpToGlobalSearch(r.text); }
+};
+// Keyboard on the input: ↓/↑ move through the list, Enter opens the
+// highlighted row, Esc closes the list. Returns true when the key was
+// consumed, so index.html's own Enter → dgeQuickJump fallback still runs
+// when nothing is highlighted.
+window.dgeQuickJumpKey = function (ev) {
+  if (!dgeQjRows.length) return false;
+  if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+    ev.preventDefault();
+    const n = dgeQjRows.length;
+    dgeQjActive = ev.key === 'ArrowDown' ? (dgeQjActive + 1) % n : (dgeQjActive - 1 + n) % n;
+    dgeQjPaint();
+    return true;
+  }
+  if (ev.key === 'Escape') { dgeQuickJumpHide(); return true; }
+  if (ev.key === 'Enter' && dgeQjActive >= 0) { ev.preventDefault(); window.dgeQuickJumpPick(dgeQjActive); return true; }
+  return false;
+};
+(function () {
+  const wire = function () {
+    const input = document.getElementById('quickJumpInput');
+    if (!input) return;
+    input.addEventListener('blur', function () { setTimeout(dgeQuickJumpHide, 150); });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire); else wire();
+})();
 
 // A handful of taxonomy leaves are not shloka-shaped at all (a root/word
 // list, not verses) and have their own dedicated browser/search page

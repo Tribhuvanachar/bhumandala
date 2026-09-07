@@ -40,7 +40,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.80.0">
+<link rel="stylesheet" href="css/main.css?v=4.82.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -87,7 +87,7 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.66.0">
+<meta name="dge-html-version" content="4.67.0">
 <!-- 7 Sep 2026: the search row (scope picker, search box with mic, Ω
      special characters) lives in the top bar between the Library button
      and the ☰ menu -- the project lead's direct ask, together with an
@@ -486,6 +486,9 @@
        toggle sits next to the content it edits. -->
   <div id="contentEditorMount" class="content-editor-mount"></div>
   <div class="shloka-list" id="shlokaList"></div>
+  <!-- Second copy of the list-view page bar (render.js dgeUpdateListViewNav), so
+       Next is in reach at the bottom of a page too. -->
+  <div id="listViewNavBottom" style="display:none; align-items:center; justify-content:space-between; gap:10px; padding:8px 4px;"></div>
 
   <!-- Contribution & Support Banner -->
   <div class="project-banner">
@@ -1088,7 +1091,7 @@
            Defaults to Grid; List is still one tap away and remembered
            per device. -->
       <div class="range-row-flex" style="margin-bottom:10px;">
-        <span style="font-size:10px; color:var(--muted-text); text-transform:uppercase;">Browse</span>
+        <span style="font-size:10px; color:var(--muted-text); text-transform:uppercase;">View</span>
         <div class="range-mode-toggle" id="libraryViewToggle">
           <button type="button" class="range-mode-btn active" data-library-view="grid" onclick="window.dgeSetLibraryViewMode('grid')">▦ Grid</button>
           <button type="button" class="range-mode-btn" data-library-view="list" onclick="window.dgeSetLibraryViewMode('list')">☰ List</button>
@@ -1107,10 +1110,19 @@
           Show pending (unfilled) folders too
         </label>
       </div>
-      <div style="display:flex; gap:6px; margin-bottom:14px;">
-        <input type="text" id="quickJumpInput" class="modal-input" placeholder="Quick jump, e.g. rv1.1.3 or pns5" style="margin:0; flex:1;"
-               onkeydown="if(event.key==='Enter'){window.dgeQuickJump(this.value);}">
-        <button class="btn-sm" style="flex:none;" onclick="window.dgeQuickJump(document.getElementById('quickJumpInput').value)">Go</button>
+      <!-- 7 Sep 2026: typing here lists matching texts and folders underneath
+           (library.js dgeQuickJumpSuggest); ↑/↓ + Enter or a tap opens one.
+           Enter with nothing highlighted still runs the old quick jump
+           (rv1.1.3, pns5, a name, or a word sent to the global search). -->
+      <div class="dge-qj-wrap" style="margin-bottom:14px;">
+        <div style="display:flex; gap:6px;">
+          <input type="text" id="quickJumpInput" class="modal-input" placeholder="Find a text or folder, or jump: rv1.1.3, pns5" style="margin:0; flex:1;"
+                 autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="quickJumpSuggest"
+                 oninput="window.dgeQuickJumpSuggest(this.value)" onfocus="window.dgeQuickJumpSuggest(this.value)"
+                 onkeydown="if(window.dgeQuickJumpKey(event)){return;} if(event.key==='Enter'){window.dgeQuickJump(this.value);}">
+          <button class="btn-sm" style="flex:none;" onclick="window.dgeQuickJump(document.getElementById('quickJumpInput').value)">Go</button>
+        </div>
+        <div id="quickJumpSuggest" class="dge-qj-suggest" role="listbox" hidden></div>
       </div>
       <div id="libraryModalList"></div>
     </div>
@@ -1277,7 +1289,7 @@
 <!-- ?v=4.60.6 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.78.0"></script>
+<script src="js/config.js?v=4.82.0"></script>
 <script src="js/kamadhenu.js?v=1.2"></script>
 <script src="js/state.js?v=4.60.6"></script>
 <!-- Canonical state accessor layer (section 33) over the globals state.js
@@ -1294,7 +1306,7 @@
 <script src="js/gemini.js?v=4.60.6"></script>
 <script src="js/kosha.js?v=4.71.2"></script>
 <script src="js/kosha-citations.js?v=4.65.0"></script>
-<script src="js/audio.js?v=4.78.0"></script>
+<script src="js/audio.js?v=4.82.0"></script>
 <script src="js/filter.js?v=4.61.0"></script>
 <script src="js/search.js?v=4.60.6"></script>
 <script src="js/markers.js?v=4.60.6"></script>
@@ -1331,7 +1343,7 @@
      before render.js, which calls into it. Additive: a commentary without
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
-<script src="js/render.js?v=4.80.0"></script>
+<script src="js/render.js?v=4.82.0"></script>
 <script src="js/legal-content.js?v=1.0"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
@@ -1355,7 +1367,7 @@
 <script src="js/config-editor.js?v=4.78.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.81.0"></script>
+<script src="js/core.js?v=4.82.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
@@ -1373,11 +1385,11 @@
 <script src="js/dge-nav-rail.js?v=4"></script>
 <dge-nav-rail current="home"></dge-nav-rail>
 <script src="js/tour.js?v=1"></script>
-<script src="js/library.js?v=4.79.0"></script>
+<script src="js/library.js?v=4.82.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
 <script src="js/dge-search.js?v=4.70.0"></script>
-<script src="js/global-search.js?v=4.75.7"></script>
+<script src="js/global-search.js?v=4.82.0"></script>
 
 <!-- User Accounts (Firebase, compat build — matches this project's classic-
      script/no-build-step convention rather than the newer ES-module SDK).

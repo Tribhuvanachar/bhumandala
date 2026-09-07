@@ -129,6 +129,12 @@
       // rounding .dge-gs-results' own bottom corners below instead.
       '.dge-gs-panel{position:relative;max-width:720px;margin:6vh auto 0;background:var(--panel-bg,var(--card-bg,#fff));backdrop-filter:blur(var(--glass-blur,0px));-webkit-backdrop-filter:blur(var(--glass-blur,0px));color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:visible;font-family:inherit}',
       '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
+      // Phone widths (7 Sep 2026, reported with a screenshot: the ✕ and the
+      // scope button sat at, and past, the screen's right edge): the panel
+      // keeps a margin inside the viewport, and the bar wraps -- the input
+      // takes the first line, the four buttons the second -- instead of
+      // squeezing five flex:none controls into 400px.
+      '@media (max-width:560px){.dge-gs-panel{margin:8px 8px 0}.dge-gs-top{flex-wrap:wrap;padding:10px}.dge-gs-top .dge-gs-input{flex:1 1 100%}.dge-gs-top .dge-gs-x{margin-left:auto}}',
       // min-width:0 overrides the flex-item default of auto (which resolves
       // to the input's intrinsic content width) -- without it, this input
       // refuses to shrink below that width on a narrow phone, pushing the
