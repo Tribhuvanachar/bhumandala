@@ -28,6 +28,10 @@ on:
         description: "private Hub repo that receives export/ eval/ train.log"
         required: true
         default: "SarvamulaOrg/kamadhenu-voice-a"
+      precision:
+        description: "mixed precision for the trainer (bf16 | fp16 | no) — fp16 diverged to NaN on attempt 3"
+        required: true
+        default: "bf16"
 
 permissions:
   contents: read
@@ -51,7 +55,7 @@ jobs:
           test -n "$HF_TOKEN" || { echo "HF_TOKEN secret is not set"; exit 1; }
           python3 kamadhenu/training/hf_job.py submit --flavor "${{ inputs.flavor }}" \
             --timeout-minutes "${{ inputs.timeout_minutes }}" --train-cap-minutes "${{ inputs.train_cap_minutes }}" \
-            --cap-inr "${{ inputs.cap_inr }}" --commit "${{ github.sha }}" --results-repo "${{ inputs.results_repo }}"
+            --cap-inr "${{ inputs.cap_inr }}" --commit "${{ github.sha }}" --results-repo "${{ inputs.results_repo }}" --precision "${{ inputs.precision }}"
       - name: Wait for the job (streams its log)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
