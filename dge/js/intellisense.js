@@ -503,11 +503,13 @@
   const join = a => a.filter(Boolean).join(' · ');
 
   function describe(rec) {
-    if (rec[0] === 'a') return { lemma: rec[1], gloss: 'अव्ययम्' };
+    if (rec[0] === 'a') return { lemma: rec[1], gloss: 'अव्ययम्', kind: 'a' };
     if (rec[0] === 't') {
-      return { lemma: rec[1], gloss: join([LAK[rec[2]], PUR[rec[3]], VAC[rec[4]], PRA[rec[5]]]) };
+      return { lemma: rec[1], gloss: join([LAK[rec[2]], PUR[rec[3]], VAC[rec[4]], PRA[rec[5]]]), kind: 't' };
     }
-    return { lemma: rec[1], gloss: join([LINGA[rec[2]], VIBH[rec[3]], VAC[rec[4]]]) };
+    // kind/linga (p|s|n) travel with the gloss so the word tools can offer the
+    // stem's full declension (shabda.html?gen=…, 7 Sep 2026).
+    return { lemma: rec[1], gloss: join([LINGA[rec[2]], VIBH[rec[3]], VAC[rec[4]]]), kind: 's', linga: rec[2] };
   }
 
   /* Related words, from tools/build_synonyms.py — the English-Sanskrit
@@ -642,11 +644,15 @@
       const byLemma = {};
       an.forEach(function (a) { (byLemma[a.lemma] = byLemma[a.lemma] || []).push(a.gloss); });
       h += '<div class="dge-si-row"><b>व्याकरणम्</b></div>';
+      var lingaOf = {};
+      an.forEach(function (a) { if (a.kind === 's' && a.linga && !lingaOf[a.lemma]) lingaOf[a.lemma] = a.linga.toUpperCase(); });
       Object.keys(byLemma).forEach(function (lemma) {
         h += '<div class="dge-si-morph"><span class="dge-si-lemma">' + esc(lemma) + '</span>' +
              byLemma[lemma].filter(Boolean).map(function (g) {
                return '<span class="dge-si-parse">' + esc(tr(g)) + '</span>';
-             }).join('') + '</div>';
+             }).join('') +
+             (lingaOf[lemma] ? '<a class="dge-si-parse dge-si-forms" href="vyakarana/shabda.html?gen=' + encodeURIComponent(lemma) + '&l=' + lingaOf[lemma] + '" title="All 24 forms of this stem, derived on the Śabdapāṭha page">रूपाणि ↗</a>' : '') +
+             '</div>';
       });
     } else {
       h += '<div class="dge-si-none">No analysis — Vidyut resolves inflected words, ' +

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../css/vyakarana-base.css?v=1">
 <link rel="stylesheet" href="../css/vyakarana.css?v=1">
 <link rel="stylesheet" href="../css/rupasiddhi.css?v=1">
-<link rel="stylesheet" href="../css/chandas.css?v=1">
+<link rel="stylesheet" href="../css/chandas.css?v=2">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
 <link rel="icon" type="image/png" sizes="48x48" href="../../dge/images/genie/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../../dge/images/genie/favicon-192.png">
@@ -30,7 +30,8 @@
   <div class="hero">
     <h1 class="deva">छन्दोविश्लेषणम्</h1>
     <div class="sub">Paste a verse (1, 2 or 4 lines, Devanagari) — laghu/guru weights, gana
-      segmentation, and the metre identified against 245 classical vruttas.
+      segmentation, and the metre identified against 245 classical vruttas. Below: vṛtta
+      reports for any grantha, branch or the whole library, and where each vṛtta is used.
       <span id="ch-status"></span></div>
   </div>
 
@@ -51,6 +52,46 @@
 
   <div id="ch-out"></div>
 
+  <!-- 7 Sep 2026: Vṛtta reports (js/chandas-page.js). Precomputed by
+       tools/chandas/build_chandas_reports.js with this same engine; a grantha
+       can be regenerated here in the browser. Section visibility:
+       admin/config/chandas-features.json. -->
+  <section class="rs-box cr-section" id="cr-grantha-sec" data-feature="reports">
+    <h2 class="deva">ग्रन्थवृत्तसूची <span class="cr-sub">· Vṛtta report of a grantha</span></h2>
+    <div class="cr-row">
+      <input id="cr-grantha" list="cr-grantha-list" placeholder="Type a grantha title… (e.g. Raghavendra Vijaya सर्गः 1)" autocomplete="off">
+      <datalist id="cr-grantha-list"></datalist>
+      <button type="button" class="btn ai" id="cr-grantha-go">Show</button>
+      <span id="cr-grantha-actions"></span>
+    </div>
+    <div id="cr-grantha-out" class="cr-out"></div>
+  </section>
+
+  <section class="rs-box cr-section" id="cr-corpus-sec" data-feature="corpusStats">
+    <h2 class="deva">समग्रसूची <span class="cr-sub">· The library and its branches</span></h2>
+    <div id="cr-corpus-out" class="cr-out"></div>
+  </section>
+
+  <section class="rs-box cr-section" id="cr-vrutta-sec" data-feature="vruttaReport">
+    <h2 class="deva">वृत्तप्रयोगः <span class="cr-sub">· Where a vṛtta is used</span></h2>
+    <div class="cr-row">
+      <input id="cr-vrutta" list="cr-vrutta-list" placeholder="Type a vṛtta name… (वसन्ततिलका, शार्दूलविक्रीडित, गायत्री)" autocomplete="off" class="deva">
+      <datalist id="cr-vrutta-list"></datalist>
+      <button type="button" class="btn ai" id="cr-vrutta-go">Show</button>
+    </div>
+    <div id="cr-vrutta-out" class="cr-out"></div>
+  </section>
+
+  <section class="rs-box cr-section" id="cr-board-sec" data-feature="leaderboards">
+    <h2 class="deva">अधिकतम-न्यूनतमप्रयोगाः <span class="cr-sub">· Most, least, never</span></h2>
+    <div id="cr-board-out" class="cr-out"></div>
+  </section>
+
+  <section class="rs-box cr-section" id="cr-admin-sec" hidden>
+    <h2>Chandas admin <span class="cr-sub">· who sees what (super-admin)</span></h2>
+    <div id="cr-admin-out" class="cr-out"></div>
+  </section>
+
   <p class="df-note">वृत्तकोशः: Chandojnanam (hrishikeshrt/chanda, AGPL-3.0) —
     see <code>data/vedanga/chandas/data.json</code>. Weights are computed by this
     page's own analyzer; classical (laukika) metres only, not Vedic chandas.
@@ -64,7 +105,9 @@
 
 <script src="../js/dge-shell.js?v=1"></script>
 <script src="../js/dge-breadcrumb.js?v=1"></script>
-<script src="../js/chandas.js?v=4"></script>
+<script src="../js/chandas.js?v=5"></script>
+<script src="../js/chandas-report.js?v=1"></script>
+<script src="../js/chandas-page.js?v=1"></script>
 <script src="../js/dge-nav-rail.js?v=4"></script>
 <dge-nav-rail current="chandas"></dge-nav-rail>
 </body>

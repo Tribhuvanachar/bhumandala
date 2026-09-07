@@ -91,6 +91,49 @@
     return stepped_names || ['लट्', 'लोट्'];
   }
 
+  // 7 Sep 2026: corpus occurrences of every form (tools/build_dhatu_prayoga_index.py →
+  // data/vedanga/vyakarana/dhatu_prayoga/by_dhatu/<gana>/<code>.json). A count
+  // badge on each cell, and example snippets — linked into the reader — under
+  // the derivation panel when a cell is opened.
+  let USAGE = null;
+  function usageUrl(code) {
+    try { return new URL('../data/vedanga/vyakarana/dhatu_prayoga/by_dhatu/' + code.split('.')[0] + '/' + code + '.json', self).href; }
+    catch (e) { return ''; }
+  }
+  function loadUsage(code) {
+    USAGE = null;
+    return fetch(usageUrl(code), { cache: 'force-cache' }).then(r => (r.ok ? r.json() : null)).then(u => { USAGE = u; return u; }).catch(() => null);
+  }
+  function usageBadge(key) {
+    const f = USAGE && USAGE.forms && USAGE.forms[key];
+    return f ? '<span class="pk-usage" title="' + f.n.toLocaleString() + ' occurrences in the library">' + f.n.toLocaleString() + '×</span>' : '';
+  }
+  function readerLink(slug, unit, word) {
+    let u = '../index.html?path=' + encodeURIComponent(slug);
+    const m = String(unit || '').match(/(?:^|#)(\d+)$/);
+    if (m) u += '&jumpShloka=' + m[1]; else if (unit) u += '&jumpVedicId=' + encodeURIComponent(unit);
+    if (word) u += '&hl=' + encodeURIComponent(word);
+    return u;
+  }
+  function examplesHtml(key, label) {
+    const f = USAGE && USAGE.forms && USAGE.forms[key];
+    if (!f) return '<p class="pk-note">No occurrence of this form found in the library (exact, word-bounded matches only — sandhi-joined uses are not counted).</p>';
+    const ex = f.e || [];
+    return '<div class="pk-usage-block"><h3 class="pk-h2 deva">प्रयोगाः <span class="pk-sub">' + esc(label || '') + ' · ' + f.n.toLocaleString() + ' in the library' +
+      (ex.length < f.n ? ', first ' + ex.length + ' shown' : '') + (f.amb ? ' · <em>this form also reads as another word; counts may include it</em>' : '') + '</span></h3><ol class="pk-ex">' +
+      ex.map(e => '<li><span class="deva pk-ex-snip">' + esc(e[3]).replace(esc(e[2]), '<mark>' + esc(e[2]) + '</mark>') + '</span> ' +
+        '<a class="pk-ex-ref" href="' + readerLink(e[0], e[1], e[2]) + '" title="' + esc(e[0]) + '">' + esc(e[4] || e[0]) + (e[1] ? ' · ' + esc(e[1]) : '') + ' ↗</a></li>').join('') +
+      '</ol></div>';
+  }
+  function usageSummaryHtml(view) {
+    if (!USAGE) return '';
+    const keys = Object.keys(USAGE.forms || {}).filter(k => view === 'krdanta' ? k.indexOf('krt:') === 0 : k.indexOf('krt:') !== 0);
+    if (!keys.length) return '';
+    const shown = keys.sort((a, b) => USAGE.forms[b].n - USAGE.forms[a].n).slice(0, 8);
+    return '<div class="pk-usage-sum"><b>धातुप्रयोगसूची</b> · ' + USAGE.total.toLocaleString() + ' occurrences of ' + USAGE.cells + ' forms in the library · most used: ' +
+      shown.map(k => '<span class="deva">' + esc((USAGE.forms[k].e[0] || [])[2] || k) + '</span> <span class="muted">' + USAGE.forms[k].n.toLocaleString() + '</span>').join(', ') + '</div>';
+  }
+
   function paradigmHtml(d, lakara) {
     const stepped = Object.prototype.hasOwnProperty.call(d.steps, lakara + '.00');
     let h = '<table class="pk-grid"><thead><tr><th></th>' +
@@ -103,9 +146,10 @@
         const forms = d.forms[key];
         if (!forms || !forms.length) { h += '<td class="pk-none">—</td>'; continue; }
         const text = forms.map(esc).join(' / ');
+        const badge = usageBadge(key);
         h += stepped
-          ? '<td><button class="pk-form deva" id="pk-cell-' + esc(key) + '" data-key="' + esc(key) + '">' + text + '</button></td>'
-          : '<td><span class="pk-form pk-form-flat deva" id="pk-cell-' + esc(key) + '">' + text + '</span></td>';
+          ? '<td><button class="pk-form deva" id="pk-cell-' + esc(key) + '" data-key="' + esc(key) + '">' + text + '</button>' + badge + '</td>'
+          : '<td><button class="pk-form pk-form-flat deva" id="pk-cell-' + esc(key) + '" data-key="' + esc(key) + '">' + text + '</button>' + badge + '</td>';
       }
       h += '</tr>';
     }
@@ -190,12 +234,12 @@
       if (ol) ol.classList.toggle('pk-main-only', !ev.target.checked);
     });
     if (view === 'krdanta') {
-      root.innerHTML = headerHtml(d) + '<h2 class="pk-h2 deva">कृदन्तरूपाणि</h2>' + krtHtml(d);
+      root.innerHTML = headerHtml(d) + '<h2 class="pk-h2 deva">कृदन्तरूपाणि</h2>' + usageSummaryHtml('krdanta') + krtHtml(d);
       function openKrt(i) {
         const b = root.querySelector('[data-krt="' + i + '"]');
         const body = document.getElementById('pk-krt-' + i);
         if (!b || !body) return;
-        if (body.hidden) { body.innerHTML = stepsHtml(d.krt[i].s); body.hidden = false; }
+        if (body.hidden) { body.innerHTML = stepsHtml(d.krt[i].s) + examplesHtml('krt:' + d.krt[i].k, KRT[d.krt[i].k] || d.krt[i].k); body.hidden = false; }
         b.classList.add('open');
       }
       root.addEventListener('click', function (ev) {
@@ -236,7 +280,7 @@
                  (has ? '' : ' disabled') + ' title="' + esc(LAKARA_EN[l]) + '">' +
                  '<span class="deva">' + esc(LAKARA[l]) + '</span></button>';
         }).join('') + '</div>' +
-        paradigmHtml(d, lakara) +
+        paradigmHtml(d, lakara) + usageSummaryHtml('tinanta') +
         '<div id="pk-deriv"></div>';
     }
     draw();
@@ -250,12 +294,13 @@
       const derivs = d.steps[key];
       const panel = document.getElementById('pk-deriv');
       if (!panel) return;
-      if (!derivs) { panel.innerHTML = ''; return; }
       const p = +key.split('.')[1][0], v = +key.split('.')[1][1];
-      panel.innerHTML = '<h2 class="pk-h2 deva">' + esc(derivs.map(x => x.t).join(' / ')) +
-        '</h2><div class="pk-sub deva">' + esc(LAKARA[lakara]) + ' · ' +
-        esc(PURUSHA[p]) + ' · ' + esc(VACANA[v]) + '</div>' +
-        derivs.map(x => stepsHtml(x.s)).join('');
+      const label = LAKARA[lakara] + ' · ' + PURUSHA[p] + ' · ' + VACANA[v];
+      const formText = (derivs ? derivs.map(x => x.t) : (d.forms[key] || [])).join(' / ');
+      panel.innerHTML = '<h2 class="pk-h2 deva">' + esc(formText) +
+        '</h2><div class="pk-sub deva">' + esc(label) + '</div>' +
+        (derivs ? derivs.map(x => stepsHtml(x.s)).join('') : '') +
+        examplesHtml(key, label);
     }
 
     root.addEventListener('click', function (ev) {
@@ -301,8 +346,10 @@
       fail('Open this from a root in the Dhātupāṭha — it needs a root code such as 01.0008.');
       return;
     }
-    fetch(dataUrl(code.split('.')[0] + '/' + code + '.json'), { cache: 'force-cache' })
-      .then(r => (r.ok ? r.json() : null))
+    Promise.all([
+      fetch(dataUrl(code.split('.')[0] + '/' + code + '.json'), { cache: 'force-cache' }).then(r => (r.ok ? r.json() : null)),
+      loadUsage(code)
+    ]).then(([d]) => d)
       .then(d => d ? render(d, wantKey)
                    : fail('No derivation has been generated for root ' + code + ' yet.'))
       .catch(() => fail('Could not load the derivation for root ' + code + '.'));

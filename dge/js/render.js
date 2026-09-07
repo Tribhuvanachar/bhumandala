@@ -72,6 +72,27 @@ window.dgePadaBreak = dgePadaBreak;
   document.addEventListener('DOMContentLoaded', () => setTimeout(kick, 300));
 })();
 
+const DGE_LAKARA_SHORT = { Lat: 'लट्', Lit: 'लिट्', Lut: 'लुट्', Lrt: 'लृट्', Lot: 'लोट्', Lan: 'लङ्', VidhiLin: 'विधिलिङ्', AshirLin: 'आशीर्लिङ्', Lun: 'लुङ्', Lrn: 'लृङ्' };
+function dgeDhatuChipsHtml(id, shloka) {
+  const hits = window.dgeDhatuHits;
+  if (!hits || (typeof dgeGetEffectiveFeatureFlags === 'function' && dgeGetEffectiveFeatureFlags().dhatuChips === false)) return '';
+  const keys = [String(id)];
+  if (shloka.unitId) { keys.push(shloka.unitId); if (shloka.unitNo) keys.push(shloka.unitId + '#' + shloka.unitNo); }
+  let list = null;
+  for (const k of keys) { if (hits[k]) { list = hits[k]; break; } }
+  if (!list || !list.length) return '';
+  const chips = list.slice(0, 12).map(h => {
+    const [word, code, key, amb] = h;
+    const krt = key.indexOf('krt:') === 0;
+    const page = krt ? 'krdanta' : 'prakriya';
+    const cell = krt ? key.slice(4) : key;
+    const lak = krt ? 'कृदन्त' : (DGE_LAKARA_SHORT[key.split('.')[0]] || key.split('.')[0]);
+    return `<a class="dge-dhatu-chip${amb ? ' amb' : ''}" href="vyakarana/${page}.html#${code}:${cell}" onclick="event.stopPropagation()" ` +
+      `title="धातुः ${code} · ${lak}${amb ? ' · also reads as another word' : ''}">${word}<small>${lak}</small></a>`;
+  }).join('');
+  return `<div class="dge-dhatu-row" title="धातुरूपाणि in this verse — tap a form for its derivation and other uses">${chips}${list.length > 12 ? `<span class="dge-dhatu-more">+${list.length - 12}</span>` : ''}</div>`;
+}
+
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
   // Safely check if transliteration module is loaded
@@ -697,6 +718,10 @@ function renderList() {
     const tirthaChipHtml = shloka.tirthaLink
       ? `<div class="dge-tp-place-row"><a class="dge-tp-place" href="${shloka.tirthaLink}" onclick="event.stopPropagation();" title="See ${tirthaPlace} on the Tīrtha holy-places map">📍 ${tirthaPlace} <span class="dge-tp-arrow">↗</span></a></div>` : '';
 
+    // 7 Sep 2026: dhātu-form chips (window.dgeDhatuHits, loaded per grantha in
+    // core.js). Key = the data-side unit id: a legacy shloka number, an item id,
+    // or <chapter id>#<number> for nested verses. Hidden in App layout by CSS.
+    const dhatuChipsHtml = dgeDhatuChipsHtml(i, shloka);
     c.innerHTML = `
       <div class="shloka-main-row">
         <div class="shloka-num">${i}${countsHtml}</div>
@@ -706,6 +731,7 @@ function renderList() {
         ${moreBtnHtml}
       </div>
       ${tirthaChipHtml}
+      ${dhatuChipsHtml}
       ${footnoteListHtml}
       ${appViewToggleHtml}
       ${extraFieldsHtml}

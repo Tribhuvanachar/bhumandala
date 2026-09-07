@@ -580,4 +580,6 @@
     }).catch(function(e){ $("#sh-list").innerHTML='<div class="empty">Failed to load shabdapatha data ('+e+'). Serve from the dge/ folder.</div>'; });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
+  // 7 Sep 2026: read-only handles for js/shabda-gen.js (nearest listed paradigm, ending class).
+  window.DGEShabda = { all: function(){ return state.all||[]; }, antaOf: antaOf };
 })();

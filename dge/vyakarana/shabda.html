@@ -62,6 +62,18 @@
     <div id="sh-adv"></div>
   </div>
 
+  <!-- 7 Sep 2026: declension of ANY stem (js/shabda-gen.js, vidyut-prakriya in the browser). -->
+  <section class="rs-box" id="sg-sec">
+    <h2 class="deva sg-title">नूतनशब्दरूपाणि <span class="sg-sub">· declension table for any prātipadika</span></h2>
+    <div class="sg-row">
+      <input id="sg-stem" class="deva" placeholder="प्रातिपदिकम् — e.g. राघवेन्द्र, सरस्वती, जगत्" autocomplete="off" spellcheck="false">
+      <span class="sg-chips"><button type="button" class="chip on" data-sg-l="P">पुं</button><button type="button" class="chip" data-sg-l="S">स्त्री</button><button type="button" class="chip" data-sg-l="N">नपुं</button></span>
+      <button type="button" class="btn ai" id="sg-go">Derive</button>
+    </div>
+    <div class="sg-hint">Not on the list? Every word still gets a table: the same Pāṇinian engine that shows रूपसिद्धिः per cell derives all 24 forms here, names the listed paradigm it declines like, and opens any cell's derivation on tap.</div>
+    <div id="sg-out"></div>
+  </section>
+
   <div class="pager" id="sh-pagerTop" style="display:none; align-items:center; justify-content:center; gap:8px; margin:10px 0 4px; flex-wrap:wrap;">
     <button class="more" id="sh-prevTop">‹ Prev</button>
     <span id="sh-pageInfoTop" style="font-size:12px; opacity:.75; padding:0 4px;"></span>
@@ -96,7 +108,8 @@
 <script src="../js/dge-breadcrumb.js?v=1"></script>
 <script src="../js/dge-nav-rail.js?v=4"></script>
 <dge-nav-rail current="shabda"></dge-nav-rail>
-<script src="../js/shabda.js?v=3"></script>
+<script src="../js/shabda.js?v=4"></script>
+<script src="../js/shabda-gen.js?v=1"></script>
 <!-- Sūtra-reference popovers for the रूपसिद्धिः derivation steps
      (subanta-steps.js renders .dge-sutra-ref spans; this owns the click
      handler and the sūtra data). Same include as dhatu.html/ashtadhyayi.html. -->

@@ -707,6 +707,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
           sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || '')),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
           unitId: chapter.id || '',
+          unitNo: v.number != null ? String(v.number) : '',   // data-side indexes address nested verses as <chapter id>#<number>
           commentaries: commentaries,
           geminiEnrichment: v.gemini_enrichment || null
         };
@@ -1080,6 +1081,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof dgeRestoreContentDraftIfAny === 'function' && dgeRestoreContentDraftIfAny()) {
           if (typeof renderList === 'function') renderList();
         }
+        // 7 Sep 2026: dhātu occurrences for this grantha (tools/build_dhatu_prayoga_index.py,
+        // by_grantha/<slug>.json) — verse cards show the attested dhātu forms as
+        // chips linking to prakriya.html; the dhātu pages link back here. One
+        // small fetch per grantha; absent = no chips.
+        try {
+          const slugForHits = window.dgeGranthaSlug(window.jsonFileName.startsWith('dge/') ? window.jsonFileName : 'dge/' + window.jsonFileName);
+          fetch('data/vedanga/vyakarana/dhatu_prayoga/by_grantha/' + slugForHits.replace(/\//g, '__') + '.json', { cache: 'force-cache' })
+            .then(r => (r.ok ? r.json() : null)).then(h => { window.dgeDhatuHits = h || null; if (h && typeof renderList === 'function') renderList(); })
+            .catch(() => { window.dgeDhatuHits = null; });
+        } catch (e) { window.dgeDhatuHits = null; }
         if (typeof dgeMountContentEditorControls === 'function') dgeMountContentEditorControls();
       })
       .catch(err => {

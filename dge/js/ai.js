@@ -1628,6 +1628,9 @@ function dgeShabdaNotFoundHtml(surface) {
     'and it doesn\'t look like a sandhi join Vidyut resolves either. ' +
     'It may still be findable in the full word list — <a href="vyakarana/shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
     '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>' +
+    '<div class="dsm-gen">Or derive its table now, taking "' + dgeShabdaEsc(surface) + '" as the stem: ' +
+    ['P', 'S', 'N'].map(function (l) { return '<a class="btn-sm" href="vyakarana/shabda.html?gen=' + encodeURIComponent(surface) + '&l=' + l + '" target="_blank">' + ({ P: 'पुं', S: 'स्त्री', N: 'नपुं' })[l] + '</a>'; }).join(' ') +
+    ' <span class="dsm-sub">(vidyut-prakriya, on the Śabdapāṭha page)</span></div>' +
     dgeShabdaWhereElseLink(surface);
 }
 
@@ -1690,9 +1693,13 @@ function dgeMorphFallbackHtml(word) {
     an.forEach(function (a) { (byLemma[a.lemma] = byLemma[a.lemma] || []).push(a.gloss); });
     let h = '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
       '<div class="dsm-sub">व्याकरणम् · not in the fixed शब्दपाठः list, but Vidyut resolves this form directly</div>';
+    const lingaOf = {};
+    an.forEach(function (a) { if (a.kind === 's' && a.linga && !lingaOf[a.lemma]) lingaOf[a.lemma] = a.linga.toUpperCase(); });
     Object.keys(byLemma).forEach(function (lemma) {
       h += '<div class="dsm-kv"><div class="dsm-kk deva">' + dgeShabdaEsc(lemma) + '</div><div class="dsm-kvv">' +
-        byLemma[lemma].filter(Boolean).map(g => dgeShabdaEsc(g)).join(' · ') + '</div></div>';
+        byLemma[lemma].filter(Boolean).map(g => dgeShabdaEsc(g)).join(' · ') +
+        (lingaOf[lemma] ? ' <a class="btn-sm" href="vyakarana/shabda.html?gen=' + encodeURIComponent(lemma) + '&l=' + lingaOf[lemma] + '" target="_blank" title="All 24 forms of ' + dgeShabdaEsc(lemma) + ', derived">रूपाणि ↗</a>' : '') +
+        '</div></div>';
     });
     return h + dgeShabdaWhereElseLink(word);
   }).catch(() => null);

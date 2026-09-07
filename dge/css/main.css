@@ -140,6 +140,14 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .shloka-counts { display: flex; flex-direction: column; gap: 1px; font-size: 9px; font-weight: 700; color: var(--muted-text); opacity: .8; }
 .shloka-text .search-match { white-space: normal; }
 .shloka-text .verse-no { white-space: nowrap; }
+/* 7 Sep 2026: dhātu-form chips under a verse (render.js dgeDhatuChipsHtml) */
+.dge-dhatu-row { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 0 0 28px; }
+.dge-dhatu-chip { display: inline-flex; align-items: baseline; gap: 4px; font-family: var(--font-sanskrit); font-size: 12px; color: var(--text-primary); text-decoration: none; border: 1px solid var(--card-border); border-radius: 999px; padding: 1px 8px; background: var(--card-bg); opacity: .85; }
+.dge-dhatu-chip small { font-family: var(--font-ui); font-size: 9px; color: var(--muted-text); }
+.dge-dhatu-chip:hover { border-color: var(--accent-red); color: var(--accent-red); opacity: 1; }
+.dge-dhatu-chip.amb { border-style: dashed; }
+.dge-dhatu-more { font-size: 10px; color: var(--muted-text); align-self: center; }
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display: none; }
 /* Primary reading-progress state = border color only (section 4/17) —
    never combined with more than one border color at once. Selected
    (.active, above) takes visual priority over these when both apply,
@@ -1021,3 +1029,7 @@ sup.tp-fnref:target a, .tp-fnref:target { background: var(--accent-glow, rgba(20
 .gita-translation { margin: 4px 0 6px; }
 .gita-comment { margin-top: 6px; color: var(--muted-text); }
 .gita-comment b { color: var(--text-primary); }
+
+/* 7 Sep 2026: word tools → generated declension */
+.dsm-gen { margin-top: 10px; font-size: 12.5px; }
+.dge-si-forms { text-decoration: none; color: var(--accent-red) !important; }
