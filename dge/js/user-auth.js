@@ -223,7 +223,8 @@ window.dgeSignInWithGoogle = async function() {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     await dgeAuth.signInWithPopup(provider);
-    // onAuthStateChanged below picks up the result — nothing else to do here.
+    // onAuthStateChanged below picks up the result; the vandana is asked afresh at every sign-in.
+    dgeVandanaAfterSignIn();
   } catch (e) {
     console.error('[Auth] Google sign-in failed:', e);
     // A popup the user themselves dismissed is not an error worth
@@ -317,6 +318,7 @@ window.dgeConfirmPhoneOtp = async function(code) {
     try {
       await dgeConfirmationResult.confirm(code);
       dgeConfirmationResult = null;
+      dgeVandanaAfterSignIn();
       return true;
     } catch (e) {
       console.error('[Auth] OTP confirmation failed:', e);
@@ -398,7 +400,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  dgeAuth.onAuthStateChanged(async (user) => {
+  dgeAuth.onAuthStateChanged(async (user) => {   // fires on restore too; the sign-in hooks above are the only vandana triggers
     window.dgeCurrentUser = user;
     if (user) {
       // Sign-in must survive a missing profile store: until the Firestore database exists in the
@@ -420,3 +422,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     dgeUpdateAccountUI();
   });
 });
+
+// A fresh sign-in (Google popup or OTP confirmed) pays respects again (7 Sep 2026, the lead: "every time a user
+// logs in"): forget today's pass and go through the gate, which brings the person straight back here.
+function dgeVandanaAfterSignIn() {
+  try { localStorage.removeItem('dge_vandana_day'); } catch (e) { /* ignore */ }
+  try { sessionStorage.removeItem('dge_vandana_passed'); } catch (e) { /* ignore */ }
+  var guard = document.querySelector('script[src*="vandana-guard.js"]');
+  var gate;
+  try { gate = new URL('../../index.html', guard ? guard.src : new URL('js/x.js', location.href).href); } catch (e) { return; }
+  if (gate.pathname === location.pathname) return;
+  gate.searchParams.set('next', location.pathname + location.search + location.hash);
+  setTimeout(function () { location.href = gate.href; }, 600);
+}
+window.dgeVandanaAfterSignIn = dgeVandanaAfterSignIn;

@@ -44,79 +44,347 @@
     "actions, Nyaya pramana actions, etc.) are future work and get added",
     "here without touching dge/js/contextual-actions.js itself. A page can",
     "also register actions at runtime via window.dgeRegisterContextualActions()",
-    "for logic too dynamic to express as static data."
+    "for logic too dynamic to express as static data.",
+    "7 Sep 2026: base.shloka items carry a `group` (mark | share | study) and the sheet renders them under those headings; an item without a group lands under Study. Share actions (link, text, image, text+audio) live here now instead of only inside the More sheet."
   ],
-
-  "objectTypes": ["shloka", "word", "phrase", "commentary", "reference", "chapter", "page", "composition"],
-
+  "objectTypes": [
+    "shloka",
+    "word",
+    "phrase",
+    "commentary",
+    "reference",
+    "chapter",
+    "page",
+    "composition"
+  ],
   "base": {
     "shloka": [
-      { "id": "favorite",    "icon": "star",     "label": "Favorite",              "action": "dgeCtxToggleFavorite" },
-      { "id": "status",      "icon": "status",   "label": "Reading status",        "action": "dgeCtxOpenStatusPicker" },
-      { "id": "doubt",       "icon": "doubt",    "label": "Mark doubt",            "action": "dgeCtxToggleDoubt" },
-      { "id": "copy",        "icon": "copy",     "label": "Copy",                  "action": "dgeCtxCopyShloka" },
-      { "id": "play",        "icon": "play",     "label": "Play",                  "action": "dgeCtxPlayShloka" },
-      { "id": "askAcharya",  "icon": "acharya",  "label": "Explain this shloka",   "action": "dgeCtxAskAcharyaShloka" },
-      { "id": "references",  "icon": "link",     "label": "References",           "action": "dgeCtxShowReferences" },
-      { "id": "more",        "icon": "more",     "label": "More",                  "action": "dgeCtxOpenMoreSheet" }
+      {
+        "id": "favorite",
+        "icon": "star",
+        "label": "Favorite",
+        "action": "dgeCtxToggleFavorite",
+        "group": "mark"
+      },
+      {
+        "id": "status",
+        "icon": "status",
+        "label": "Reading status",
+        "action": "dgeCtxOpenStatusPicker",
+        "group": "mark"
+      },
+      {
+        "id": "doubt",
+        "icon": "doubt",
+        "label": "Mark doubt",
+        "action": "dgeCtxToggleDoubt",
+        "group": "mark"
+      },
+      {
+        "id": "bookmark",
+        "icon": "bookmark",
+        "label": "Bookmark",
+        "action": "dgeCtxBookmark",
+        "group": "mark"
+      },
+      {
+        "id": "shareLink",
+        "icon": "share",
+        "label": "Share link",
+        "action": "dgeCtxShareLink",
+        "group": "share"
+      },
+      {
+        "id": "copyLink",
+        "icon": "link",
+        "label": "Copy link",
+        "action": "dgeCtxCopyLink",
+        "group": "share"
+      },
+      {
+        "id": "shareText",
+        "icon": "text",
+        "label": "Share text",
+        "action": "dgeCtxShareText",
+        "group": "share"
+      },
+      {
+        "id": "copy",
+        "icon": "copy",
+        "label": "Copy text",
+        "action": "dgeCtxCopyShloka",
+        "group": "share"
+      },
+      {
+        "id": "shareImage",
+        "icon": "image",
+        "label": "Share image",
+        "action": "dgeCtxShareImage",
+        "group": "share"
+      },
+      {
+        "id": "shareAudio",
+        "icon": "audio",
+        "label": "Text + audio",
+        "action": "dgeCtxShareAudio",
+        "group": "share"
+      },
+      {
+        "id": "play",
+        "icon": "play",
+        "label": "Play",
+        "action": "dgeCtxPlayShloka",
+        "group": "study"
+      },
+      {
+        "id": "askAcharya",
+        "icon": "acharya",
+        "label": "Explain this shloka",
+        "action": "dgeCtxAskAcharyaShloka",
+        "group": "study"
+      },
+      {
+        "id": "references",
+        "icon": "refs",
+        "label": "References",
+        "action": "dgeCtxShowReferences",
+        "group": "study"
+      },
+      {
+        "id": "more",
+        "icon": "more",
+        "label": "Notes & snippets",
+        "action": "dgeCtxOpenMoreSheet",
+        "group": "study"
+      }
     ],
     "word": [
-      { "id": "dictionary",  "icon": "book",     "label": "Dictionary",            "action": "dgeCtxOpenShabda" },
-      { "id": "morphology",  "icon": "puzzle",   "label": "Morphology",            "action": "dgeCtxOpenDhatu" },
-      { "id": "search",      "icon": "search",   "label": "Search corpus",         "action": "dgeCtxSearchCorpus" },
-      { "id": "copy",        "icon": "copy",     "label": "Copy",                  "action": "dgeCtxCopySelection" },
-      { "id": "askAcharya",  "icon": "acharya",  "label": "Ask about this word",   "action": "dgeCtxAskAcharyaWord" },
-      { "id": "studyList",   "icon": "add",      "label": "Add to study list",     "action": "dgeCtxAddToStudyList" }
+      {
+        "id": "dictionary",
+        "icon": "book",
+        "label": "Dictionary",
+        "action": "dgeCtxOpenShabda"
+      },
+      {
+        "id": "morphology",
+        "icon": "puzzle",
+        "label": "Morphology",
+        "action": "dgeCtxOpenDhatu"
+      },
+      {
+        "id": "search",
+        "icon": "search",
+        "label": "Search corpus",
+        "action": "dgeCtxSearchCorpus"
+      },
+      {
+        "id": "copy",
+        "icon": "copy",
+        "label": "Copy",
+        "action": "dgeCtxCopySelection"
+      },
+      {
+        "id": "askAcharya",
+        "icon": "acharya",
+        "label": "Ask about this word",
+        "action": "dgeCtxAskAcharyaWord"
+      },
+      {
+        "id": "studyList",
+        "icon": "add",
+        "label": "Add to study list",
+        "action": "dgeCtxAddToStudyList"
+      }
     ],
     "phrase": [
-      { "id": "copy",        "icon": "copy",     "label": "Copy",                  "action": "dgeCtxCopySelection" },
-      { "id": "search",      "icon": "search",   "label": "Search corpus",         "action": "dgeCtxSearchCorpus" },
-      { "id": "askAcharya",  "icon": "acharya",  "label": "Ask about this phrase", "action": "dgeCtxAskAcharyaPhrase" }
+      {
+        "id": "copy",
+        "icon": "copy",
+        "label": "Copy",
+        "action": "dgeCtxCopySelection"
+      },
+      {
+        "id": "search",
+        "icon": "search",
+        "label": "Search corpus",
+        "action": "dgeCtxSearchCorpus"
+      },
+      {
+        "id": "askAcharya",
+        "icon": "acharya",
+        "label": "Ask about this phrase",
+        "action": "dgeCtxAskAcharyaPhrase"
+      }
     ],
     "commentary": [
-      { "id": "copy",        "icon": "copy",     "label": "Copy commentary",       "action": "dgeCtxCopyCommentary" },
-      { "id": "askAcharya",  "icon": "acharya",  "label": "Explain this commentary", "action": "dgeCtxAskAcharyaCommentary" },
-      { "id": "references",  "icon": "link",     "label": "References",           "action": "dgeCtxShowReferences" }
+      {
+        "id": "copy",
+        "icon": "copy",
+        "label": "Copy commentary",
+        "action": "dgeCtxCopyCommentary"
+      },
+      {
+        "id": "askAcharya",
+        "icon": "acharya",
+        "label": "Explain this commentary",
+        "action": "dgeCtxAskAcharyaCommentary"
+      },
+      {
+        "id": "references",
+        "icon": "link",
+        "label": "References",
+        "action": "dgeCtxShowReferences"
+      }
     ],
     "reference": [
-      { "id": "open",        "icon": "open",     "label": "Open in DGE",           "action": "dgeCtxOpenReference" },
-      { "id": "askAcharya",  "icon": "acharya",  "label": "Explain this reference","action": "dgeCtxAskAcharyaReference" }
+      {
+        "id": "open",
+        "icon": "open",
+        "label": "Open in DGE",
+        "action": "dgeCtxOpenReference"
+      },
+      {
+        "id": "askAcharya",
+        "icon": "acharya",
+        "label": "Explain this reference",
+        "action": "dgeCtxAskAcharyaReference"
+      }
     ],
     "chapter": [
-      { "id": "bookmark",    "icon": "bookmark", "label": "Bookmark chapter",      "action": "dgeCtxBookmarkChapter" },
-      { "id": "summarize",   "icon": "acharya",  "label": "Summarize this chapter","action": "dgeCtxAskAcharyaChapter" },
-      { "id": "search",      "icon": "search",   "label": "Search within text",    "action": "dgeCtxSearchWithinText" }
+      {
+        "id": "bookmark",
+        "icon": "bookmark",
+        "label": "Bookmark chapter",
+        "action": "dgeCtxBookmarkChapter"
+      },
+      {
+        "id": "summarize",
+        "icon": "acharya",
+        "label": "Summarize this chapter",
+        "action": "dgeCtxAskAcharyaChapter"
+      },
+      {
+        "id": "search",
+        "icon": "search",
+        "label": "Search within text",
+        "action": "dgeCtxSearchWithinText"
+      }
     ],
     "page": [
-      { "id": "bookmark",    "icon": "bookmark", "label": "Bookmark page",         "action": "dgeCtxBookmarkPage" },
-      { "id": "search",      "icon": "search",   "label": "Search within text",    "action": "dgeCtxSearchWithinText" },
-      { "id": "typography",  "icon": "type",     "label": "Display / Typography",  "action": "dgeCtxOpenDisplaySettings" },
-      { "id": "audio",       "icon": "audio",    "label": "Audio",                 "action": "dgeCtxOpenAudioPanel" },
-      { "id": "export",      "icon": "export",   "label": "Export / copy",         "action": "dgeCtxExportPage" },
-      { "id": "references",  "icon": "link",     "label": "References",           "action": "dgeCtxShowReferences" },
-      { "id": "edit",        "icon": "edit",     "label": "Edit",                  "action": "dgeCtxEnterEditMode", "requires": "admin" },
-      { "id": "more",        "icon": "more",     "label": "More",                  "action": "dgeCtxOpenMoreSheet" }
+      {
+        "id": "bookmark",
+        "icon": "bookmark",
+        "label": "Bookmark page",
+        "action": "dgeCtxBookmarkPage"
+      },
+      {
+        "id": "search",
+        "icon": "search",
+        "label": "Search within text",
+        "action": "dgeCtxSearchWithinText"
+      },
+      {
+        "id": "typography",
+        "icon": "type",
+        "label": "Display / Typography",
+        "action": "dgeCtxOpenDisplaySettings"
+      },
+      {
+        "id": "audio",
+        "icon": "audio",
+        "label": "Audio",
+        "action": "dgeCtxOpenAudioPanel"
+      },
+      {
+        "id": "export",
+        "icon": "export",
+        "label": "Export / copy",
+        "action": "dgeCtxExportPage"
+      },
+      {
+        "id": "references",
+        "icon": "link",
+        "label": "References",
+        "action": "dgeCtxShowReferences"
+      },
+      {
+        "id": "edit",
+        "icon": "edit",
+        "label": "Edit",
+        "action": "dgeCtxEnterEditMode",
+        "requires": "admin"
+      },
+      {
+        "id": "more",
+        "icon": "more",
+        "label": "More",
+        "action": "dgeCtxOpenMoreSheet"
+      }
     ],
     "composition": [
-      { "id": "favorite",    "icon": "star",     "label": "Favorite",              "action": "dgeCtxCompFavorite" },
-      { "id": "practice",    "icon": "status",   "label": "Needs practice",        "action": "dgeCtxCompPractice" },
-      { "id": "completed",   "icon": "status",   "label": "Completed",             "action": "dgeCtxCompCompleted" },
-      { "id": "doubt",       "icon": "doubt",    "label": "Mark doubt",            "action": "dgeCtxCompDoubt" },
-      { "id": "play",        "icon": "play",     "label": "Play audio",            "action": "dgeCtxCompPlay" },
-      { "id": "references",  "icon": "link",     "label": "References",           "action": "dgeCtxShowCompReferences" },
-      { "id": "share",       "icon": "export",   "label": "Share / copy citation", "action": "dgeCtxCompShare" }
+      {
+        "id": "favorite",
+        "icon": "star",
+        "label": "Favorite",
+        "action": "dgeCtxCompFavorite"
+      },
+      {
+        "id": "practice",
+        "icon": "status",
+        "label": "Needs practice",
+        "action": "dgeCtxCompPractice"
+      },
+      {
+        "id": "completed",
+        "icon": "status",
+        "label": "Completed",
+        "action": "dgeCtxCompCompleted"
+      },
+      {
+        "id": "doubt",
+        "icon": "doubt",
+        "label": "Mark doubt",
+        "action": "dgeCtxCompDoubt"
+      },
+      {
+        "id": "play",
+        "icon": "play",
+        "label": "Play audio",
+        "action": "dgeCtxCompPlay"
+      },
+      {
+        "id": "references",
+        "icon": "link",
+        "label": "References",
+        "action": "dgeCtxShowCompReferences"
+      },
+      {
+        "id": "share",
+        "icon": "export",
+        "label": "Share / copy citation",
+        "action": "dgeCtxCompShare"
+      }
     ]
   },
-
   "taxonomyOverrides": [
     {
       "id": "veda-svara",
       "label": "Vedic accent (svara) tools",
-      "pathPrefixes": ["vedas/"],
-      "objectTypes": ["word", "phrase"],
+      "pathPrefixes": [
+        "vedas/"
+      ],
+      "objectTypes": [
+        "word",
+        "phrase"
+      ],
       "enabled": true,
       "add": [
-        { "id": "svara", "icon": "svara", "label": "Svara (accent)", "action": "dgeCtxShowSvaraInfo" }
+        {
+          "id": "svara",
+          "icon": "svara",
+          "label": "Svara (accent)",
+          "action": "dgeCtxShowSvaraInfo"
+        }
       ]
     }
   ]

@@ -259,10 +259,11 @@ window.downloadSnippetAudio = async function(id, start, end) {
 
 window.shareShlokaTextOnly = async function(id) {
     const rawText = typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '';
-    const text = `${rawText}\n\n— Shloka ${id}, ${document.title || 'Sarvamoola Digital Library'}`;
+    const text = typeof dgeShlokaShareText === 'function' ? dgeShlokaShareText(id) : `${rawText}\n\n— Shloka ${id}, ${document.title || 'Sarvamoola Digital Library'}`;
+    const ref = typeof dgeShlokaReference === 'function' ? dgeShlokaReference(id) : null;
     try {
         if (navigator.share) {
-            await navigator.share({ text, title: `Shloka ${id}` });
+            await navigator.share({ text, title: ref ? ref.title + (ref.ref ? ' ' + ref.ref : '') : `Shloka ${id}` });
         } else if (navigator.clipboard) {
             await navigator.clipboard.writeText(text);
             if (typeof showToast === 'function') showToast('Text copied to clipboard.');
@@ -278,7 +279,7 @@ window.shareShlokaAudio = async function(id, snippet) {
     if (typeof showToast === 'function') showToast('Preparing to share…');
     try {
         const rawText = typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '';
-        const text = `${rawText}\n\n— Shloka ${id}, ${document.title || 'Sarvamoola Digital Library'}`;
+        const text = typeof dgeShlokaShareText === 'function' ? dgeShlokaShareText(id) : `${rawText}\n\n— Shloka ${id}, ${document.title || 'Sarvamoola Digital Library'}`;
 
         let blob, filename, fetchFailed = false;
         try {

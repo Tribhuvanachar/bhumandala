@@ -564,6 +564,12 @@ window.QUICK_SEARCH_ABBREVIATIONS = QUICK_SEARCH_ABBREVIATIONS;
 // returns null if it doesn't match any known abbreviation — callers
 // should treat null as "not a quick-search query", not as an error.
 window.dgeParseQuickSearchQuery = function(text) {
+  // 7 Sep 2026: js/shortcuts.js is the one grammar (rv, av, avp, ts, vs, sv, smv, rgv, pns, bhp, mbh, rm, hv…);
+  // the table below is kept as the fallback when that file is not loaded.
+  if (window.DGEShortcuts && window.DGEShortcuts.parse) {
+    const r = window.DGEShortcuts.parse(text);
+    if (r) return r;
+  }
   const m = String(text || '').trim().match(/^([a-zA-Z]+)\s*([\d.]+)$/);
   if (!m) return null;
   const prefixInput = m[1].toLowerCase();

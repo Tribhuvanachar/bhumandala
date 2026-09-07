@@ -354,7 +354,9 @@ function dgeWrapWordsForTap(html) {
 }
 
 window.copyShlokaText = async function(id) {
-  const text = typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '';
+  // The verse, then where it is and its link (share.js) — a pasted verse should say which text it is from.
+  const text = typeof dgeShlokaShareText === 'function' ? dgeShlokaShareText(id)
+    : (typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '');
   if (!text) return;
   try {
     if (navigator.clipboard) {
@@ -833,6 +835,11 @@ function dgeUpdateListViewNav(fIds, needsPaging) {
 window.dgeListViewStep = function(dir) {
   window.dgeListPage = (window.dgeListPage || 0) + dir;
   renderList();
+  // The address bar follows the page (its first verse), so a reload or a bookmark comes back to the same page.
+  if (typeof getFilteredIds === 'function' && typeof window.dgeSyncUrl === 'function') {
+    const first = getFilteredIds()[(window.dgeListPage || 0) * dgeListPageSize()];
+    if (first) window.dgeSyncUrl(first);
+  }
   const nav = document.getElementById('listViewNav');
   if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };

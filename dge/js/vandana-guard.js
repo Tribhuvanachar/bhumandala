@@ -22,9 +22,18 @@
 (function () {
   'use strict';
 
-  // Written by the gate the moment respects are paid. Session-scoped, so
-  // respects last for the visit and are asked again on a fresh one.
+  // Written by the gate the moment respects are paid. The session key covers
+  // this tab; the day key (7 Sep 2026, the lead: "every day afresh, like an
+  // attendance") covers the whole device for the calendar day, so coming
+  // back from another app a few minutes later — which on a phone is often a
+  // brand-new tab session — does not ask again. A sign-in clears both
+  // (user-auth.js dgeVandanaAfterSignIn), so respects are paid at each login.
   var PASS_KEY = 'dge_vandana_passed';
+  var DAY_KEY = 'dge_vandana_day';
+  function today() {
+    var d = new Date(), m = d.getMonth() + 1, day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day;
+  }
 
   var store;
   try {
@@ -40,6 +49,12 @@
   }
 
   if (store.getItem(PASS_KEY)) return;
+  try {
+    if (window.localStorage && window.localStorage.getItem(DAY_KEY) === today()) {
+      store.setItem(PASS_KEY, String(Date.now()));
+      return;
+    }
+  } catch (e) { /* no localStorage: fall back to the per-tab rule */ }
 
   var self = document.currentScript && document.currentScript.src;
   if (!self) return;

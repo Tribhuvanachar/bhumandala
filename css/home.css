@@ -186,7 +186,7 @@ body.leaving #veil { opacity: 1; }
 }
 
 .frame {
-  position: relative; width: 100%; aspect-ratio: var(--frame-ratio, 2 / 3);
+  position: relative; width: 100%; aspect-ratio: var(--frame-ratio, 2 / 3); cursor: pointer;
   border-radius: 50% 50% 14px 14px / 40% 40% 5% 5%;
   overflow: hidden;
   background: linear-gradient(180deg, #241505, #120B04);

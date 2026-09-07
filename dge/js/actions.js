@@ -119,7 +119,15 @@ window.renderActionsSheetContent = function(id) {
   } // end flags.showSnippetTools
 
   // --- Full shloka download / share ---
-  html += `<div class="actions-section-label">Share / Download Full Shloka</div>`;
+  html += `<div class="actions-section-label">Share this verse</div>`;
+  if (typeof dgeShlokaReference === 'function') {
+    const ref = dgeShlokaReference(id);
+    html += `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px; line-height:1.5;">${ref.line.replace(/</g, '&lt;')}${ref.short ? ` · <span style="font-weight:700;">?${ref.short}</span>` : ''}</div>`;
+  }
+  html += `<div style="display:flex; gap:8px; margin-bottom:8px;">`;
+  html += `<button class="btn-sm" style="flex:1;" onclick="window.dgeShareShlokaLink(${id})">📤 Share link</button>`;
+  html += `<button class="btn-sm" style="flex:1;" onclick="window.dgeCopyShlokaLink(${id})">🔗 Copy link</button>`;
+  html += `</div>`;
   html += `<button class="btn-sm" style="width:100%; margin-bottom:8px;" onclick="if(typeof copyShlokaText==='function') copyShlokaText(${id})">📋 Copy Shloka Text</button>`;
   html += `<div style="display:flex; gap:8px; margin-bottom:8px;">`;
   html += `<button class="btn-sm" style="flex:1;" onclick="window.downloadFullShlokaAudio(${id})">⬇️ Audio</button>`;

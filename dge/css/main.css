@@ -1048,3 +1048,8 @@ sup.tp-fnref:target a, .tp-fnref:target { background: var(--accent-glow, rgba(20
 /* 7 Sep 2026: word tools → generated declension */
 .dsm-gen { margin-top: 10px; font-size: 12.5px; }
 .dge-si-forms { text-decoration: none; color: var(--accent-red) !important; }
+
+/* 7 Sep 2026: grouped verse sheet (contextual-actions.js) -- Mark / Share this verse / Study. */
+.ctx-group-label { grid-column: 1 / -1; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--muted-text); margin: 8px 2px -2px; }
+.ctx-group-ref { grid-column: 1 / -1; font-size: 11px; color: var(--muted-text); line-height: 1.5; margin-bottom: 2px; }
+.ctx-group-short { font-weight: 700; color: var(--accent-red); }

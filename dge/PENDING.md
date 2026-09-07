@@ -1223,6 +1223,14 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, 8:25 pm IST — short URLs + shareable verses + grouped sheet + daily vandana shipped (index.html 4.68.0).**
+  Grammar `dge/js/shortcuts.js` (+ `docs/SHORT_URLS.md`, `tests/test_shortcuts.py`), reader resolution and address-bar sync in
+  `core.js` (`dgeCanonicalUrl`/`dgeSyncUrl`, `unit#n` jump targets), `share.js` reference lines, grouped verse sheet
+  (`admin/config/contextual-actions.json` `group` field), `vandana-guard.js` day key + `user-auth.js` sign-in hook, landing
+  page forward + whole-portrait tap. Open: the user-site repo `tribhuvanachar.github.io` does not exist (root is a 404) — the
+  lead creates it with `tools/shortcuts/user-site-index.html` to make `tribhuvanachar.github.io/?rv1.1.3` work; a shortcut
+  grammar for Upaniṣads / Smṛtis / Darśana granthas is not defined yet (only texts with clean numeric ids are covered).
+
 - **7 Sep 2026, 6:05 pm IST — Kamadhenu Phase 8 shipped (`kamadhenu/training/`), Experiment A card presented.** CPU dry run on
   the real pilot audio: 123 train / 13 held-out verses, 35.1 min, vocab coverage 100 %, arrow loads, batches simulated per VRAM
   class; card `kamadhenu/docs/EXPERIMENT_A_CARD.md` (₹30–95 est., cap ₹185, 24 GB card, 1–1.7 h). Waiting on the lead. The

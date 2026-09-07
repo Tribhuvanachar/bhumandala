@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="js/vandana-guard.js?v=1"></script>
+<script src="js/vandana-guard.js?v=2"></script>
 <!-- Theme pre-paint guard: applies the saved theme to <html> before <body>
      exists, so the very first paint uses the visitor's actual saved theme
      instead of the unscoped default -- see dge/js/theme-guard.js. Must load
@@ -40,7 +40,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.82.0">
+<link rel="stylesheet" href="css/main.css?v=4.83.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -87,7 +87,7 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.67.0">
+<meta name="dge-html-version" content="4.68.0">
 <!-- 7 Sep 2026: the search row (scope picker, search box with mic, Ω
      special characters) lives in the top bar between the Library button
      and the ☰ menu -- the project lead's direct ask, together with an
@@ -255,6 +255,7 @@
           <div class="popup popup-top" id="sectionsPopup">
             <div class="popup-label">Explore</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openModal('ourStoryModal');">📖 About the Project — Our Story</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openProfilePanel('tribhuvan');">🧑‍🏫 Meet the Founder</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='vyakarana/ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
@@ -1289,7 +1290,8 @@
 <!-- ?v=4.60.6 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.82.0"></script>
+<script src="js/shortcuts.js?v=4.83.0"></script>
+<script src="js/config.js?v=4.83.0"></script>
 <script src="js/kamadhenu.js?v=1.2"></script>
 <script src="js/state.js?v=4.60.6"></script>
 <!-- Canonical state accessor layer (section 33) over the globals state.js
@@ -1306,20 +1308,21 @@
 <script src="js/gemini.js?v=4.60.6"></script>
 <script src="js/kosha.js?v=4.71.2"></script>
 <script src="js/kosha-citations.js?v=4.65.0"></script>
-<script src="js/audio.js?v=4.82.0"></script>
+<script src="js/audio.js?v=4.83.0"></script>
 <script src="js/filter.js?v=4.61.0"></script>
 <script src="js/search.js?v=4.60.6"></script>
 <script src="js/markers.js?v=4.60.6"></script>
 <script src="js/notes.js?v=4.60.6"></script>
 <script src="js/history.js?v=4.60.6"></script>
 <script src="js/char-palette.js?v=4.60.6"></script>
-<script src="js/snippets.js?v=4.72.5"></script>
-<script src="js/actions.js?v=4.60.7"></script>
+<script src="js/snippets.js?v=4.83.0"></script>
+<script src="js/share.js?v=4.83.0"></script>
+<script src="js/actions.js?v=4.83.0"></script>
 <!-- Per-object-type contextual action registry + per-taxonomy-section
      registration system (reader redesign). Loaded after actions.js (whose
      openActionsSheet it wraps for the shloka "More" action) and before
      ai.js (whose word/phrase tooltip it adds a taxonomy-extras row to). -->
-<script src="js/contextual-actions.js?v=1"></script>
+<script src="js/contextual-actions.js?v=2"></script>
 <!-- per-shloka chandas verification: the SAME analyzer as
      vyakarana/chandas.html (chandas.js loads engine-only here — it finds
      no #ch-go and builds no page UI), plus the contextual-menu action +
@@ -1343,7 +1346,7 @@
      before render.js, which calls into it. Additive: a commentary without
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
-<script src="js/render.js?v=4.82.0"></script>
+<script src="js/render.js?v=4.83.0"></script>
 <script src="js/legal-content.js?v=1.0"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
@@ -1367,7 +1370,7 @@
 <script src="js/config-editor.js?v=4.78.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.82.0"></script>
+<script src="js/core.js?v=4.83.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
@@ -1398,7 +1401,7 @@
      default false). Since the feature is off for every deployment that
      hasn't done the Firebase setup, static tags here would mean every
      visitor downloading several hundred KB of SDK that never runs. -->
-<script src="js/user-auth.js?v=4.81.0"></script>
+<script src="js/user-auth.js?v=4.83.0"></script>
 <script src="js/user-roles.js?v=4.81.0"></script>
 <script src="js/copy-guard.js?v=4.79.0"></script>
 <script src="js/offline.js?v=1"></script>

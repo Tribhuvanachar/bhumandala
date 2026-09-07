@@ -92,6 +92,21 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    gitignored `kamadhenu_dataset/incoming_audio/`). The lead now has `kamadhenu/docs/EXPERIMENT_A_CARD.md` to approve:
    ~1–1.7 h on a 24 GB card, ₹30–95 estimated, cap ₹185. Nothing trained, nothing rented.
 
+9. **Short URLs, shareable verses, grouped verse sheet, daily vandana** (index.html 4.68.0, evening): `dge/js/shortcuts.js`
+   is the one grammar for `?rv1.1.3`-style addresses (13 keys: rv av avp ts vs sv smv rgv pns bhp mbh rm hv; docs/SHORT_URLS.md;
+   `tests/test_shortcuts.py` resolves every key's example against the real data); the reader resolves a bare token, keeps the
+   short form in the address bar and writes it back as you read (`dgeSyncUrl` on selection and paging); the landing page
+   forwards a bare token; `tools/shortcuts/user-site-index.html` is the file for a future `tribhuvanachar.github.io` repo
+   (the root user site is a 404 today). `dge/js/share.js`: every Share / Copy carries the taxonomy crumbs, the verse reference
+   and the canonical link; the verse sheet (contextual-actions.json/js) is grouped Mark / Share this verse / Study with
+   Share link, Copy link, Bookmark. Vandana: once per device per day (`dge_vandana_day`) and again at every sign-in
+   (user-auth.js `dgeVandanaAfterSignIn`); "Meet the Founder" in the Explore menu; tapping the portrait itself offers flowers.
+10. **Kamadhenu Experiment A launched on HF Jobs** (approved 6:20 pm IST, cap ₹185, 24 GB): attempt 1 died in pip (torch
+   2.4.1 image), attempt 2 in the EMA state-dict layout (IndicF5's file is the Hub wrapper's dict: `ema_model._orig_mod.*`
+   + `vocoder.*`), ≈₹21 spent; attempt 3 (converter fixed, strict `ckpt_convert.py verify` before training, timeout 135 /
+   train cap 90) was running at 8:20 pm IST — workflow run 34132520249; results land in `SarvamulaOrg/kamadhenu-voice-a`
+   and the `kamadhenu-experiment-a` artifact. `kamadhenu-hf-job-logs.yml` prints any HF job's log by id.
+
 ## 5. Pending, in priority order
 
 1. **Lead's feedback on the 7 Sep work** — expect it from the phone. Likely follow-ups: chips in App layout are
