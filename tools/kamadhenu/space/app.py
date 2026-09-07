@@ -60,6 +60,18 @@ _RENDERER = None
 INDICF5_REPO = os.environ.get("KAMADHENU_INDICF5", "ai4bharat/IndicF5")
 REFS_DIR = os.path.join(HERE, "refs")
 REFS = json.load(open(os.path.join(REFS_DIR, "refs.json"), encoding="utf-8"))["refs"]
+# Diagnostic reference (7 Sep 2026): IndicF5's own model-card prompt clip (ai4bharat/IndicF5, MIT; Punjabi read
+# speech, 8.1 s, 48 kHz) with the transcript the model card gives. Rendering the model card's Hindi sentence with
+# it checks the deployment itself, independent of the lead's chanted references; rendering Sanskrit with it, and
+# Hindi with the lead's clip, separates "chant tempo is the gap" from "Sanskrit is the gap".
+DIAG_REFS = {
+    "indicf5_pan_f_happy": {
+        "wav": os.path.join("diag", "PAN_F_HAPPY_00001.wav"),
+        "text": "ਭਹੰਪੀ ਵਿੱਚ ਸਮਾਰਕਾਂ ਦੇ ਭਵਨ ਨਿਰਮਾਣ ਕਲਾ ਦੇ ਵੇਰਵੇ ਗੁੰਝਲਦਾਰ ਅਤੇ ਹੈਰਾਨ ਕਰਨ ਵਾਲੇ ਹਨ, ਜੋ ਮੈਨੂੰ ਖੁਸ਼ ਕਰਦੇ  ਹਨ।",
+        "chandas": "—", "work": "IndicF5 model-card prompt (Punjabi read speech)", "seconds": 8.1,
+    }
+}
+DIAG_MAX_CHARS = 240
 _INDICF5 = None
 
 
@@ -136,7 +148,7 @@ def _render(text, bank_key, seed):
 def _render_indicf5(text, ref_id, seed):
     import numpy as np, torch
     torch.manual_seed(int(seed))
-    r = REFS[ref_id]
+    r = REFS.get(ref_id) or DIAG_REFS[ref_id]
     t0 = time.time()
     audio = _get_indicf5()(text, ref_audio_path=os.path.join(REFS_DIR, r["wav"]), ref_text=r["text"])
     audio = np.asarray(audio)
@@ -202,6 +214,36 @@ def synthesize_kamadhenu(text, ref_id, seed, request: gr.Request):
 
 
 @_as_data
+def diagnose(text, ref_id, seed, request: gr.Request):
+    """Diagnostics (7 Sep 2026): IndicF5 zero-shot with ANY short text (Hindi, Sanskrit prose, a śloka) and either the
+    lead's clips or IndicF5's own prompt. No śloka validation — only the length cap and the per-IP daily quota."""
+    text = (text or "").strip()
+    if not text:
+        raise gr.Error("empty text")
+    if len(text) > DIAG_MAX_CHARS:
+        raise gr.Error(f"diagnostic text is capped at {DIAG_MAX_CHARS} characters")
+    try:
+        ip = limits.client_ip(request) if request is not None else "unknown"
+        if not limits.check_and_count(ip):
+            raise gr.Error(f"daily limit of {limits.DAILY_LIMIT} verses reached from this network")
+    except gr.Error:
+        raise
+    except Exception as e:
+        raise gr.Error(f"quota: {type(e).__name__}: {e}")
+    if ref_id not in REFS and ref_id not in DIAG_REFS:
+        raise gr.Error(f"unknown reference '{ref_id}'; choose one of {', '.join(list(REFS) + list(DIAG_REFS))}")
+    try:
+        sr, audio, gpu_s = _render_indicf5(text, ref_id, seed)
+    except Exception as e:
+        raise gr.Error(f"rendering failed: {type(e).__name__}: {e}")
+    r = REFS.get(ref_id) or DIAG_REFS[ref_id]
+    meta = {"engine": "indicf5-zero-shot", "diagnostic": True, "base_model": f"{INDICF5_REPO} (MIT)",
+            "reference": {"id": ref_id, "work": r["work"], "seconds": r["seconds"]}, "text": text,
+            "seed": int(seed), "sample_rate": sr, "audio_seconds": round(len(audio) / sr, 2), "gpu_seconds": gpu_s}
+    return (sr, audio), meta
+
+
+@_as_data
 def synthesize(text, dge_chandas, seed, request: gr.Request):
     # Every failure is raised as gr.Error so the /synthesize API returns a message instead of `data: null`
     # (Gradio hides other exception types from clients). The stage name says where it broke.
@@ -261,6 +303,14 @@ with gr.Blocks(title="Kamadhenu — DGE Sanskrit chant") as demo:
             out2 = gr.Audio(label="Chant (IndicF5 zero-shot)", type="numpy")
             meta2 = gr.JSON(label="meta")
     btn2.click(synthesize_kamadhenu, inputs=[txt, ref, seed2], outputs=[out2, meta2], api_name="synthesize_kamadhenu")
+    with gr.Accordion("Diagnostics — any short text, any reference (owner use; counts against the same quota)", open=False):
+        dtxt = gr.Textbox(label="Text (≤ 240 chars: Hindi, Sanskrit prose or a śloka)", lines=2)
+        dref = gr.Dropdown(choices=list(REFS) + list(DIAG_REFS), value=next(iter(REFS)), label="Reference clip")
+        dseed = gr.Number(value=60, precision=0, label="Seed")
+        dbtn = gr.Button("Render (diagnostic)")
+        dout = gr.Audio(label="Diagnostic render", type="numpy")
+        dmeta = gr.JSON(label="Details")
+        dbtn.click(diagnose, inputs=[dtxt, dref, dseed], outputs=[dout, dmeta], api_name="diagnose")
 
 if __name__ == "__main__":
     demo.launch(show_error=True)
