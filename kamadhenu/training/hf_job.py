@@ -16,7 +16,7 @@ import argparse, json, os, sys, time
 from pathlib import Path
 
 REPO_URL = "https://github.com/Tribhuvanachar/bhumandala.git"
-IMAGE = "pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel"
+IMAGE = "pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel"   # the Space's validated torch 2.8 stack; 2.4.1 cannot resolve x-transformers 2.19.7
 RATES_USD_PER_HOUR = {"t4-small": 0.40, "t4-medium": 0.60, "l4x1": 0.80, "a10g-small": 1.00, "a10g-large": 1.50, "a100-large": 2.50}
 INR_PER_USD = 88.0
 SPARSE = ["kamadhenu", "tools/kamadhenu/space", "kamadhenu_dataset"]
