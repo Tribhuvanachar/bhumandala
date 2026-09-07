@@ -63,7 +63,14 @@ async function dgeRenderUserRolesList(filterText) {
       return;
     }
 
-    body.innerHTML = rows.map(u => `
+    // 7 Sep 2026: the verified-email list, as CSV — the "export" half of the
+    // lead's ask. Only rows whose email the provider verified (emailVerified
+    // true, or a legacy Google profile whose email predates the flag).
+    const exportable = rows.filter(u => u.email && (u.emailVerified === true || u.emailVerified === undefined));
+    body.innerHTML = `<div style="display:flex; gap:8px; align-items:center; margin:0 0 8px;">
+        <span style="font-size:11px; color:var(--muted-text);">${rows.length} shown · ${exportable.length} with a verified email</span>
+        <button class="btn-sm" style="margin-left:auto; font-size:11px;" onclick="window.dgeExportVerifiedEmails()" title="CSV of every listed user with a verified email">⬇ Verified emails (CSV)</button>
+      </div>` + rows.map(u => `
       <div style="border-top:1px dashed var(--card-border); padding:10px 0; display:flex; align-items:center; gap:8px;">
         <div style="flex:1; min-width:0;">
           <div style="font-size:13px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${dgeRolesEsc(u.displayName || u.email || u.phoneNumber || u.id)}</div>
@@ -79,6 +86,28 @@ async function dgeRenderUserRolesList(filterText) {
     body.innerHTML = `<p style="font-size:12px; color:var(--accent-red);">Couldn't load users: ${dgeRolesEsc(e.message || e)}</p>`;
   }
 }
+
+window.dgeExportVerifiedEmails = async function() {
+  try {
+    const db = firebase.firestore();
+    const snap = await db.collection('users').orderBy('lastLoginAt', 'desc').limit(1000).get();
+    const lines = ['email,displayName,role,phoneNumber,createdAt'];
+    snap.forEach(doc => {
+      const u = doc.data();
+      if (!u.email || !(u.emailVerified === true || u.emailVerified === undefined)) return;
+      const created = u.createdAt && u.createdAt.toDate ? u.createdAt.toDate().toISOString() : '';
+      lines.push([u.email, u.displayName || '', u.role || '', u.phoneNumber || '', created].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(','));
+    });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([lines.join('\n') + '\n'], { type: 'text/csv' }));
+    a.download = 'dge-verified-emails-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    if (typeof showToast === 'function') showToast((lines.length - 1) + ' verified email(s) exported.');
+  } catch (e) {
+    console.error('[UserRoles] Export failed:', e);
+    if (typeof showToast === 'function') showToast('Export failed: ' + (e.message || e));
+  }
+};
 
 window.dgeSearchUserRoles = function(text) {
   dgeRenderUserRolesList(text);

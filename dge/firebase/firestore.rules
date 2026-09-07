@@ -60,7 +60,36 @@ service cloud.firestore {
     //   createdAt / lastLoginAt — server timestamps.
     function selfEditableOnly() {
       return request.resource.data.diff(resource.data).affectedKeys()
-        .hasOnly(['displayName', 'email', 'phoneNumber', 'whatsappOptIn', 'whatsappOptInAt', 'preferences', 'lastLoginAt']);
+        .hasOnly(['displayName', 'email', 'emailVerified', 'phoneNumber', 'whatsappOptIn', 'whatsappOptInAt', 'preferences', 'lastLoginAt']);
+    }
+
+    // Only a VERIFIED email may be stored, and only the one the sign-in
+    // provider vouches for (7 Sep 2026, the lead: "keep only verified
+    // emails"). Google sign-in tokens carry email_verified == true; a phone
+    // account has no email; a client cannot type in someone else's address
+    // or claim verification the token does not. An absent or empty email is
+    // always fine — it is the record of nothing.
+    function tokenEmailVerified() {
+      // Missing claims must read as "not verified", not as a rules error
+      // (a phone-OTP token carries no email claims at all).
+      return ('email_verified' in request.auth.token) && request.auth.token.email_verified == true
+        && ('email' in request.auth.token);
+    }
+    function emailOk() {
+      return !('email' in request.resource.data)
+        || request.resource.data.email == ''
+        || (tokenEmailVerified() && request.resource.data.email == request.auth.token.email);
+    }
+    function emailVerifiedFlagOk() {
+      return !('emailVerified' in request.resource.data)
+        || request.resource.data.emailVerified == false
+        || (request.resource.data.emailVerified == true && tokenEmailVerified()
+            && ('email' in request.resource.data) && request.resource.data.email == request.auth.token.email);
+    }
+    // On an update request.resource.data is the whole merged document, so
+    // the email checks apply only when the write actually touches the field.
+    function touches(k) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasAny([k]);
     }
 
     match /users/{uid} {
@@ -78,14 +107,17 @@ service cloud.firestore {
       // by an explicit later action, never assumed at sign-up.
       allow create: if isOwner(uid)
         && request.resource.data.role == 'basic'
-        && (!('whatsappOptIn' in request.resource.data) || request.resource.data.whatsappOptIn == false);
+        && (!('whatsappOptIn' in request.resource.data) || request.resource.data.whatsappOptIn == false)
+        && emailOk() && emailVerifiedFlagOk();
 
       // A user may update their own doc, but only the fields above, and
       // the role must stay exactly what it already was — role changes
       // never come from the person they apply to.
       allow update: if isOwner(uid)
         && request.resource.data.role == resource.data.role
-        && selfEditableOnly();
+        && selfEditableOnly()
+        && (!touches('email') || emailOk())
+        && (!touches('emailVerified') || emailVerifiedFlagOk());
 
       // A superadmin may update anyone ELSE's doc (role changes, from
       // the Manage Users screen). Firestore OR-combines multiple `allow

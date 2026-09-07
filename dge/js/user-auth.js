@@ -142,7 +142,12 @@ async function dgeEnsureUserProfile(user) {
   if (!snap.exists) {
     const profile = {
       displayName: user.displayName || '',
-      email: user.email || '',
+      // 7 Sep 2026 (lead's ask): only a VERIFIED email is ever stored. Google
+      // sign-in arrives verified; a phone-OTP account has none; anything
+      // else stays '' until Firebase says emailVerified. firestore.rules
+      // enforces the same (emailOk), so a tampered client cannot write one.
+      email: dgeVerifiedEmail(user),
+      emailVerified: !!(user.emailVerified && user.email),
       phoneNumber: user.phoneNumber || '',
       // Must be 'basic' — the security rules reject a profile created
       // with any other role, which is what stops anyone handing
@@ -158,9 +163,23 @@ async function dgeEnsureUserProfile(user) {
     await ref.set(profile);
     return profile;
   }
-  await ref.update({ lastLoginAt: firebase.firestore.FieldValue.serverTimestamp() }).catch(() => {});
-  return snap.data();
+  const patch = { lastLoginAt: firebase.firestore.FieldValue.serverTimestamp() };
+  // A returning user whose email became verified since the profile was
+  // created (or whose stored email predates the verified-only rule and no
+  // longer matches) gets it captured now; never the other way round.
+  const verified = dgeVerifiedEmail(user);
+  const cur = snap.data() || {};
+  if (verified && (cur.email !== verified || cur.emailVerified !== true)) { patch.email = verified; patch.emailVerified = true; }
+  await ref.update(patch).catch(() => {});
+  return Object.assign({}, cur, patch.email ? { email: patch.email, emailVerified: true } : {});
 }
+
+// The email an account may carry: the provider's address, only when the
+// provider vouches for it. Exposed for the tests.
+function dgeVerifiedEmail(user) {
+  return (user && user.emailVerified && user.email) ? String(user.email).trim().toLowerCase() : '';
+}
+window.dgeVerifiedEmail = dgeVerifiedEmail;
 
 function dgeUpdateAccountUI() {
   const signedOutEl = document.getElementById('accountSignedOut');
