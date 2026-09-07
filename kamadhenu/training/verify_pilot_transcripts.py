@@ -92,7 +92,15 @@ def main(argv=None):
     ap.add_argument("--out", default="kamadhenu/reports/pilot_transcript_check")
     ap.add_argument("--shard", default=None, help="i/n: check only every n-th file starting at i (0-based), for parallel runners")
     ap.add_argument("--merge", nargs="*", default=None, help="merge these shard JSON reports into --out instead of transcribing")
+    ap.add_argument("--crossmatch", metavar="REPORT_JSON", default=None,
+                    help="instead of transcribing: match every ASR in this report against all verses of its work")
+    ap.add_argument("--text-index", default="kamadhenu_dataset/text_index.json")
     a = ap.parse_args(argv)
+    if a.crossmatch:
+        rows = json.load(open(a.crossmatch, encoding="utf-8"))["rows"]
+        units = json.load(open(ROOT / a.text_index, encoding="utf-8"))["units"]
+        rep = write_crossmatch(crossmatch(rows, units), a.out, a.crossmatch)
+        print(json.dumps({k: v for k, v in rep.items() if k != "rows"}, ensure_ascii=False)); return 0
     if a.merge is not None:
         rows = []
         for f in a.merge: rows += json.load(open(f, encoding="utf-8"))["rows"]
@@ -130,6 +138,67 @@ def main(argv=None):
                 print(f"  {i + 1}/{len(rows)} · {time.time() - t0:.0f}s", flush=True)
     write_reports(a, out, t0, a.model)
     return 0
+
+
+# ---------------------------------------------------------------- cross-match against the whole work
+def _grams(s, n=4):
+    return {s[i:i + n] for i in range(len(s) - n + 1)}
+
+
+def crossmatch(rows, units, min_score=0.3, margin=0.15):
+    """For every checked recording, find the verse of the same work whose text the ASR resembles most.
+
+    A CER against the *expected* text only says "does not match"; it cannot say what the recording IS.
+    Comparing the ASR with every verse of the work does: an off-by-one file numbering or a wrong
+    prabandha shows up as a clear best match on a different verse. Decisions:
+      confirmed     best match is the expected verse, clearly ahead of the runner-up
+      weak_confirm  expected verse is the best match but not by much
+      remap         a different verse is the best match by a clear margin (rik/verse id in `heard`)
+      inconclusive  the ASR is too garbled to match anything (try a bigger model, or listen)
+    """
+    corpus = {u.get("text_id") or u.get("id"): to_latin(u["text"]) for u in units if u.get("text")}
+    G = {k: _grams(t) for k, t in corpus.items()}
+    by_work = {}
+    for k in corpus:
+        by_work.setdefault(k.split(":")[0], []).append(k)
+    out = []
+    for r in rows:
+        asr = to_latin(r.get("asr") or "")
+        pool = by_work.get(r["text_id"].split(":")[0], [])
+        rec = {"id": r["id"], "text_id": r["text_id"], "audio": r.get("audio"), "verdict": r.get("verdict"),
+               "heard": None, "score": 0.0, "expected_score": 0.0, "runner_up": None, "decision": "inconclusive"}
+        if len(asr) >= 20 and pool:
+            ga = _grams(asr)
+            sc = sorted(((len(ga & G[k]) / max(1, len(G[k])), k) for k in pool), reverse=True)
+            best, second = sc[0], sc[1] if len(sc) > 1 else (0.0, None)
+            exp_s = next((x for x, k in sc if k == r["text_id"]), 0.0)
+            rec.update(heard=best[1], score=round(best[0], 3), expected_score=round(exp_s, 3), runner_up=second[1])
+            if best[1] == r["text_id"] and best[0] >= 0.25 and best[0] - second[0] >= 0.1:
+                rec["decision"] = "confirmed"
+            elif best[1] != r["text_id"] and best[0] >= min_score and best[0] - max(exp_s, second[0] if second[1] != r["text_id"] else 0.0) >= margin:
+                rec["decision"] = "remap"
+                rec["heard_text"] = next(u["text"] for u in units if (u.get("text_id") or u.get("id")) == best[1])
+            elif best[1] == r["text_id"] and best[0] >= 0.2:
+                rec["decision"] = "weak_confirm"
+        out.append(rec)
+    return out
+
+
+def write_crossmatch(recs, out_dir, source):
+    from collections import Counter
+    out_dir = Path(out_dir); out_dir.mkdir(parents=True, exist_ok=True)
+    rep = {"checkedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "source_report": str(source), "files": len(recs),
+           "decisions": dict(Counter(r["decision"] for r in recs)), "rows": recs}
+    json.dump(rep, open(out_dir / "crossmatch.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    order = {"remap": 0, "inconclusive": 1, "weak_confirm": 2, "confirmed": 3}
+    lines = [f"# Cross-match of recordings against the whole work\n\nSource: `{source}` · {len(recs)} files · " +
+             " · ".join(f"{k} {v}" for k, v in sorted(rep["decisions"].items())) + "\n",
+             "| id | file | expected | decision | heard | score | expected score |", "|---|---|---|---|---|---|---|"]
+    for r in sorted(recs, key=lambda r: (order[r["decision"]], r["text_id"])):
+        lines.append(f"| {r['id']} | {(r.get('audio') or '').split('/')[-1]} | {r['text_id'].split(':')[-1]} | {r['decision']} | "
+                     f"{(r['heard'] or '').split(':')[-1]} | {r['score']} | {r['expected_score']} |")
+    (out_dir / "crossmatch.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return rep
 
 
 def write_reports(a, out, t0, model_name):

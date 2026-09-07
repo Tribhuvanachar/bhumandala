@@ -57,3 +57,12 @@ Warnings (3, none blocking):
 
 - [x] Approved by the project lead: 7 Sep 2026, 6:20 pm IST — cap ₹185, 24 GB class. Run on a Hugging Face Job (`l4x1`, $0.80/h, job timeout 150 min → worst case ₹176; training loop capped at 100 min inside it) via `.github/workflows/kamadhenu-experiment-a.yml`.
 - [ ] Declined / changes requested: ______
+
+## Data caveat added 8 Sep 2026, 12:45 am IST
+
+A Whisper cross-match of the 136 pilot recordings against every verse of their works
+(`kamadhenu/reports/pilot_transcript_check/crossmatch.md`) found 34 recordings (25 %) carrying a different
+verse from the text they were trained on (all 10 Tīrtha Prabandha files one prabandha off; 24 Bhāgavata
+Saroddhāra files one or two verses off) and 22 the ASR could not settle. Attempt 4 was trained before this
+check existed. Treat its outputs as proof of the pipeline, not of the recipe; the rerun exports with
+`--require-verified crossmatch.json --accept-remap`.

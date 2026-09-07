@@ -49,6 +49,7 @@ jobs:
         with:
           sparse-checkout: |
             kamadhenu
+            kamadhenu_dataset/text_index.json
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -62,9 +63,15 @@ jobs:
           ls -la shards
           python3 kamadhenu/training/verify_pilot_transcripts.py --model "${{ inputs.model }}" --merge shards/*.json --out kamadhenu/reports/pilot_transcript_check
           head -40 kamadhenu/reports/pilot_transcript_check.md
+      - name: Cross-match every recording against the whole work (which verse is it really?)
+        run: |
+          python3 kamadhenu/training/verify_pilot_transcripts.py --crossmatch kamadhenu/reports/pilot_transcript_check.json --out kamadhenu/reports/pilot_transcript_check
+          head -60 kamadhenu/reports/pilot_transcript_check/crossmatch.md
       - uses: actions/upload-artifact@v4
         with:
           name: pilot-transcript-check
           path: |
             kamadhenu/reports/pilot_transcript_check.json
             kamadhenu/reports/pilot_transcript_check.md
+            kamadhenu/reports/pilot_transcript_check/crossmatch.json
+            kamadhenu/reports/pilot_transcript_check/crossmatch.md
