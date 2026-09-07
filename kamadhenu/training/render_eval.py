@@ -20,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kamadhenu_text import model_text  # noqa: E402
+from ckpt_convert import normalize_f5_keys, MEL_BUFFERS  # noqa: E402
 
 MODEL_CFG = dict(dim=1024, depth=22, heads=16, ff_mult=2, text_dim=512, conv_layers=4)
 
@@ -36,7 +37,22 @@ def main(argv=None):
     import torch, soundfile as sf
     from f5_tts.model import DiT
     from f5_tts.model.utils import seed_everything
-    from f5_tts.infer.utils_infer import load_vocoder, load_model, load_checkpoint, preprocess_ref_audio_text, infer_process
+    from f5_tts.infer.utils_infer import load_vocoder, load_model, preprocess_ref_audio_text, infer_process
+    from safetensors.torch import load_file
+
+    def load_any(model, path):
+        """IndicF5 wrapper layout, plain F5 layout or a trainer .pt — all reduced to bare keys, loaded strictly."""
+        if path.endswith(".safetensors"):
+            flat = load_file(path, device="cpu")
+        else:
+            ck = torch.load(path, map_location="cpu", weights_only=True)
+            flat = ck.get("ema_model_state_dict") or ck["model_state_dict"]
+        w, _ = normalize_f5_keys(flat)
+        res = model.load_state_dict(w, strict=False)
+        missing = [k for k in res.missing_keys if not k.endswith(MEL_BUFFERS)]
+        if missing or res.unexpected_keys:
+            raise RuntimeError(f"{path}: missing {missing[:5]} ({len(missing)}), unexpected {res.unexpected_keys[:5]} ({len(res.unexpected_keys)})")
+        return model.to(device).eval()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     refs = json.load(open(ROOT / "tools/kamadhenu/space/refs/refs.json", encoding="utf-8"))["refs"]
     ref = refs[a.ref]; ref_wav = str(ROOT / "tools/kamadhenu/space/refs" / ref["wav"]); ref_text = model_text(ref["text"])
@@ -50,8 +66,7 @@ def main(argv=None):
     results = {r["id"]: {"text_id": r.get("text_id"), "meter": r.get("meter"), "recorded_seconds": r.get("duration"), "renders": {}} for r in rows}
     for name, ckpt in models.items():
         t0 = time.time()
-        model = load_model(DiT, MODEL_CFG, "vocos", a.vocab, "euler", True, device)
-        model = load_checkpoint(model, ckpt, device, use_ema=True)
+        model = load_any(load_model(DiT, MODEL_CFG, "vocos", a.vocab, "euler", True, device), ckpt)
         for r in rows:
             d = out / r["id"]; d.mkdir(exist_ok=True)
             wav_path = d / f"{name}.wav"
