@@ -107,6 +107,14 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    train cap 90) was running at 8:20 pm IST — workflow run 34132520249; results land in `SarvamulaOrg/kamadhenu-voice-a`
    and the `kamadhenu-experiment-a` artifact. `kamadhenu-hf-job-logs.yml` prints any HF job's log by id.
 
+11. **SEO architecture** (docs/SEO_ARCHITECTURE.md, evening): `tools/seo/` turns dge/data into a crawlable static tree —
+   one HTML page per section (16,977 pages, 726,698 units, ~0.9 GB, 2.5 min), category indexes, canonical tags, unique
+   titles/descriptions, breadcrumbs + BreadcrumbList/WebPage/CreativeWork JSON-LD, prev/next, sitemap index, robots;
+   `tools/seo/validate_seo.py` passes clean (0 duplicate titles, 0 orphans). Generated pages are a deploy artifact
+   (`.github/workflows/seo-pages.yml`), never committed. **Waiting on the lead**: Settings → Pages → Source → GitHub
+   Actions, then run the workflow with deploy=true, then `canonicalLive: true` in admin/config/seo.json. Licensed corpora
+   (GO_LIVE §2.2) are excluded by prefix until classified.
+
 ## 5. Pending, in priority order
 
 1. **Lead's feedback on the 7 Sep work** — expect it from the phone. Likely follow-ups: chips in App layout are

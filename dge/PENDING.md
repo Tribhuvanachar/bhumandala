@@ -1223,6 +1223,13 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, ~9:45 pm IST — SEO layer built (docs/SEO_ARCHITECTURE.md).** `tools/seo/{taxonomy,build_seo_site,validate_seo}.py`,
+  `admin/config/seo.json`, `.github/workflows/seo-pages.yml`, `dge/data/seo_urls.json`, reader canonical in core.js
+  (`dgeApplySeoCanonical`, gated by `canonicalLive`). Open for the lead: switch the Pages source to GitHub Actions and deploy;
+  classify the four licensed corpora (excluded from public pages); decide rights for modern translations (only public-domain
+  fields are rendered). Open for a next session: verse-level structured data (no schema.org type fits a single mantra
+  honestly), hreflang/alternate-script versions (only Devanagari + IAST today), lighter reader payload (whole-grantha JSON).
+
 - **7 Sep 2026, 8:25 pm IST — short URLs + shareable verses + grouped sheet + daily vandana shipped (index.html 4.68.0).**
   Grammar `dge/js/shortcuts.js` (+ `docs/SHORT_URLS.md`, `tests/test_shortcuts.py`), reader resolution and address-bar sync in
   `core.js` (`dgeCanonicalUrl`/`dgeSyncUrl`, `unit#n` jump targets), `share.js` reference lines, grouped verse sheet
