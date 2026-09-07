@@ -389,7 +389,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.66.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.67.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -1224,10 +1224,21 @@ function dgeResolveQuickJumpTarget(target) {
       return DOTTED_NUMERIC.test(s) ? s.split('.').map(p => parseInt(p, 10)).join('.') : s;
     };
     const wanted = normalize(target.vedicId);
-    targetId = Object.keys(stotraData.shlokas).find(k => {
+    const keys = Object.keys(stotraData.shlokas);
+    targetId = keys.find(k => {
       const vid = stotraData.shlokas[k].vedicId;
       return vid && normalize(vid) === wanted;
     });
+    // A PARTIAL dotted id names a group, not a verse ("1.1" is Ṛgveda
+    // sūkta 1.1; "3" is adhyāya 3): land on its first verse, i.e. the first
+    // shloka whose id continues the prefix. (7 Sep 2026: "rv1.1" used to
+    // resolve to nothing and leave the reader on its last-read verse.)
+    if (!targetId && DOTTED_NUMERIC.test(wanted)) {
+      targetId = keys.find(k => {
+        const vid = stotraData.shlokas[k].vedicId;
+        return vid && normalize(vid).indexOf(wanted + '.') === 0;
+      });
+    }
     // Data-side unit ids (DV_6001 ...) aren't dotted numbers and aren't the
     // display reference -- match them exactly against the id each shloka
     // now carries. For a nested grantha this lands on the chapter's first
@@ -1389,17 +1400,13 @@ function restorePrefs() {
   if (localStorage.getItem('app_wakeLock') === '1' && typeof window.dgeSetScreenWakeLock === 'function') window.dgeSetScreenWakeLock(true);
 
   const savedViewMode = localStorage.getItem('app_viewMode');
-  // renderList() builds a full DOM card per shloka in "list" mode — fine
-  // for something PNS-sized (43), but genuinely freezes a phone for a
-  // 2000-shloka Rigveda maṇḍala. This overrides to single-view mode for
-  // any large grantha regardless of the user's saved global preference,
-  // WITHOUT overwriting that saved preference — so a small grantha opened
-  // afterward still honors whatever they'd actually chosen.
-  const totalForThisGrantha = (window.stotraData && window.stotraData.metadata) ? (window.stotraData.metadata.totalShlokas || 0) : 0;
-  const LARGE_GRANTHA_THRESHOLD = 150;
-  const forceSingleForSize = totalForThisGrantha > LARGE_GRANTHA_THRESHOLD;
-
-  window.viewMode = (savedViewMode === 'single' || forceSingleForSize) ? 'single' : 'list';
+  // The list view is paged (render.js dgeListPageSize(), 25 cards a page by
+  // default, adjustable from the page bar), so a 2000-mantra Ṛgveda maṇḍala
+  // is as cheap to open as a 43-verse stotra and the reader's own saved
+  // preference is honoured for every grantha. (Until 7 Sep 2026 anything over
+  // 150 verses was forced into single view; the lead asked for the Vedas as
+  // a paged list instead.)
+  window.viewMode = savedViewMode === 'single' ? 'single' : 'list';
   // The Display sheet's "Reading View" accordion shows the active row in its
   // header; mark the effective mode so it never reads blank (7 Sep 2026).
   document.querySelectorAll('#displayPopup .pop-item[data-viewmode]').forEach(el => {

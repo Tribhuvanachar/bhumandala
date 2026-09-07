@@ -1223,6 +1223,16 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **7 Sep 2026, evening — Library drawer: the lead's six phone reports, all shipped (index.html 4.67.0).**
+  Resize edge on every screen size (`library.js` dgeInitLibraryResize, 200 px–95 vw on a phone; `main.css`
+  `.drawer-resize-handle` no longer hidden under 760 px); `rv1.1`/`rv1` resolve as a dotted-id prefix
+  (`config.js` rv abbreviation, `core.js` dgeResolveQuickJumpTarget); quick-jump typeahead over folders and texts
+  (`library.js` dgeQuickJumpSuggest / dgeQuickJumpPick / dgeQuickJumpKey, `#quickJumpSuggest` in index.html);
+  "View" label; the global search closes the drawer and wraps its bar under 560 px (`global-search.js`);
+  list view paged at 25 with 10/25/50/100 (`render.js` dgeListPageSize / dgeSetListPageSize / dgeListPageFor,
+  `#listViewNavBottom`), `core.js` no longer forces single view above 150 verses, `audio.js` loadShloka turns to
+  the page holding the verse. Open question for the lead: should the page size also live in the Display sheet?
+
 - **7 Sep 2026, ~2:30 pm IST — three scholar features: vṛtta reports, dhātu occurrences, any-stem declension.**
   1. **Vṛtta reports** (`dge/vyakarana/chandas.html` → `js/chandas-page.js`, core `js/chandas-report.js`, precompute
      `tools/chandas/build_chandas_reports.js`, data `dge/data/vedanga/chandas/reports/` 6.4 MB): per-grantha report

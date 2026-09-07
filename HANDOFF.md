@@ -78,6 +78,15 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    visitors as "180 s requested"); both engines re-verified; measurements recorded. The lead's own verdict on
    the IndicF5 zero-shot trial: voice ~70 % similar, words unintelligible — expected for an untrained base
    model on chant; this is the "before" sample for Phase 8.
+7. **Library drawer, six phone reports** (index.html 4.67.0, evening): the drawer's right edge resizes on every
+   screen size (200 px–95 vw on a phone, grip pill on the edge); `rv1.1` / `rv1` jump to the first mantra of
+   that sūkta/maṇḍala (a partial dotted id resolves as a prefix, core.js `dgeResolveQuickJumpTarget`);
+   the quick-jump box is a typeahead over every folder and text (slug, label and its HK transliteration;
+   ↑/↓/Enter; folder → drilled category view, text → reader, "Search all texts for …" as the last row);
+   "Browse" → "View"; the global search closes the drawer first and its bar wraps inside a phone screen;
+   the list view is paged at 25 (10/25/50/100 from the page bar, above and below the list, remembered per
+   device) and nothing forces single view on large granthas any more — a Ṛgveda maṇḍala opens as a paged list.
+   Jumps (quick jump, search hit, audio auto-advance) turn to the page holding the verse (`dgeListPageFor`).
 
 ## 5. Pending, in priority order
 

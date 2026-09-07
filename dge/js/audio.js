@@ -282,6 +282,13 @@ async function loadShloka(id) {
 
   updateRepeatDisplay();
   if (!alreadyActive) {
+    // Paged list view (render.js): turn to the page that holds this verse
+    // first, or the card would not exist to scroll to (quick jump, search
+    // hit, audio auto-advance across a page boundary).
+    if (typeof window.dgeListPageFor === 'function') {
+      const pg = window.dgeListPageFor(id);
+      if (pg >= 0) window.dgeListPage = pg;
+    }
     if (typeof renderList === 'function') renderList();
 
     const ac = document.getElementById(`shloka-${id}`);
