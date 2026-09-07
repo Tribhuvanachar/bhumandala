@@ -41,16 +41,24 @@ def test_dynamic_batches_match_trainer_rules():
 
 
 def test_checkpoint_key_mapping_round_trip():
-    flat = {"ema_model.transformer.w": 1, "ema_model.mel_spec.mel_stft.mel_scale.fb": 2, "initted": 3, "step": 4}
-    ck = ckpt_convert.wrap_for_trainer(flat)
-    assert set(ck) == {"ema_model_state_dict"} and ck["ema_model_state_dict"]["ema_model.transformer.w"] == 1
+    # IndicF5's real model.safetensors layout (seen 7 Sep 2026): compiled EMA DiT + bundled vocoder + EMA buffers
+    base = {"ema_model._orig_mod.transformer.w": 1, "ema_model._orig_mod.mel_spec.mel_stft.mel_scale.fb": 2,
+            "vocoder._orig_mod.backbone.x": 7, "initted": 3, "step": 4}
+    w, b = ckpt_convert.normalize_f5_keys(base)
+    assert w == {"transformer.w": 1} and b == {"initted": 3, "step": 4}
+    ck = ckpt_convert.wrap_for_trainer(base)
+    assert ck == {"ema_model_state_dict": {"ema_model.transformer.w": 1, "initted": 3, "step": 4}}
     assert "step" not in ck                                     # no top-level step → trainer starts the fine-tune at 0
-    plain = ckpt_convert.wrap_for_trainer({"transformer.w": 1})
-    assert list(plain["ema_model_state_dict"]) == ["ema_model.transformer.w"]
-    ck2 = {"ema_model_state_dict": flat, "model_state_dict": {"transformer.w": 9, "mel_spec.mel_stft.spectrogram.window": 0}, "step": 500}
+    # plain F5 layout and a raw online state dict reduce to the same thing
+    assert ckpt_convert.normalize_f5_keys({"ema_model.transformer.w": 1})[0] == {"transformer.w": 1}
+    assert ckpt_convert.normalize_f5_keys({"transformer.w": 1})[0] == {"transformer.w": 1}
+    ck2 = {"ema_model_state_dict": {"ema_model.transformer.w": 1, "initted": 3, "step": 4},
+           "model_state_dict": {"transformer.w": 9, "mel_spec.mel_stft.spectrogram.window": 0}, "step": 500}
     ema = ckpt_convert.flatten_for_export(ck2)
-    assert ema == {"ema_model.transformer.w": 1, "initted": 3, "step": 4}   # mel buffers stripped
+    assert ema == {"ema_model.transformer.w": 1, "initted": 3, "step": 4}
     assert ckpt_convert.flatten_for_export(ck2, online=True) == {"ema_model.transformer.w": 9}
+    wl = ckpt_convert.wrapper_layout(ema, base)
+    assert wl == {"ema_model._orig_mod.transformer.w": 1, "vocoder._orig_mod.backbone.x": 7, "initted": 3, "step": 4}
 
 
 def test_experiment_config_is_consistent():

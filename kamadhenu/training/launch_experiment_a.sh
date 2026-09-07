@@ -64,6 +64,8 @@ echo "== $EPOCHS epochs for $VRAM"
 # 4. Starting checkpoint for the trainer (only when no run is in progress).
 CKPT="$WORK/ckpt"; mkdir -p "$CKPT"
 if [ ! -f "$CKPT/model_last.pt" ]; then python3 "$HERE/ckpt_convert.py" to-trainer "$WORK/base/model.safetensors" "$CKPT/model_last.pt"; fi
+# Strict load into the real model + EMA before a single GPU-minute of training is spent (attempt 2 died here).
+python3 "$HERE/ckpt_convert.py" verify "$CKPT/model_last.pt" --vocab "$DATA/vocab.txt"
 
 if [ "$DRY" = 1 ]; then echo "== dry run complete: code, weights, vocab, dataset and starting checkpoint are in place; no training run"; exit 0; fi
 
@@ -84,8 +86,8 @@ cd "$ROOT"
 # 6. Export the latest checkpoint both ways and render the held-out A/B.
 EXP="$WORK/export/kamadhenu_voice_a"; mkdir -p "$EXP"
 LATEST="$(ls -t "$CKPT"/model_*.pt | head -1)"
-python3 "$HERE/ckpt_convert.py" to-safetensors "$LATEST" "$EXP/model.safetensors"
-python3 "$HERE/ckpt_convert.py" to-safetensors "$LATEST" "$EXP/model_online.safetensors" --online
+python3 "$HERE/ckpt_convert.py" to-safetensors "$LATEST" "$EXP/model.safetensors" --wrapper-base "$WORK/base/model.safetensors"
+python3 "$HERE/ckpt_convert.py" to-safetensors "$LATEST" "$EXP/model_online.safetensors" --online --wrapper-base "$WORK/base/model.safetensors"
 cp "$DATA/vocab.txt" "$EXP/vocab.txt"
 T_EVAL=$(date +%s)
 python3 "$HERE/render_eval.py" --base "$WORK/base/model.safetensors" --finetuned "$EXP/model.safetensors" \
