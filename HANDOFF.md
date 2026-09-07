@@ -122,11 +122,12 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    hidden until a card is expanded (deliberate); a search phrase spanning a pāda break won't match (known);
    the Display sheet's "Reading View" header shows no current value until a view is chosen.
 2. **Pilot transcripts were wrong for 1 pair in 4 — Experiment A must be rerun on verified data (8 Sep, 12:45 am IST).**
-   Whisper-small check + cross-match against every verse of the work: 80 confirmed, 34 wrong verse (all 10
-   Tīrtha Prabandha files are Paścima not Dakṣiṇa; 24 Saroddhāra files are +1/+2 verses off), 22 inconclusive
-   (Whisper medium run 2 in progress, check-in at 1:48 am IST). Gate: `export_f5_dataset.py --require-verified
-   kamadhenu/reports/pilot_transcript_check/crossmatch.json [--accept-remap]`. Attempt 4's model stands as an
-   engineering proof only. Rerun needs the lead's cost go-ahead (≈ ₹150–185 on l4x1).
+   Whisper small + medium runs cross-matched against every verse of the work (final, 1:55 am IST): 93 confirmed,
+   38 wrong verse (all 10 Tīrtha Prabandha files are Paścima not Dakṣiṇa; 28 Saroddhāra files +1/+2 verses or
+   next part), 5 inconclusive (need a human ear). Gate: `export_f5_dataset.py --require-verified
+   kamadhenu/reports/pilot_transcript_check/crossmatch.json [--accept-remap]` → 93 or 131 pairs. Attempt 4
+   trained with 28 % wrong pairs; it stands as an engineering proof only. Rerun needs the lead's cost go-ahead
+   (≈ ₹150–185 on l4x1). Then apply the same check to the Gītā recordings.
 3. **Vedavani (Hugging Face) Rigveda clips — lead's decision on the mirror (7 Sep, 11:30 pm IST).**
    `sanganaka/Vedavani-Dataset` (IIT KGP, ACL 2025, Apache-2.0; audio = Veda Prasara Samiti group recitation from
    archive.org, Public Domain Mark) has 20,782 per-pāda Rigveda WAVs, 16 kHz, 36.6 h. NOT the VedaVaNi app
