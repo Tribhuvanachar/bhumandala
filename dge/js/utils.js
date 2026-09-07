@@ -213,6 +213,19 @@ window.dgeInitAccordions = function(rootSel, storageKey) {
 };
 document.addEventListener('DOMContentLoaded', () => { window.dgeInitAccordions('#displayPopup .popup-sheet-scroll', 'dge_display_acc'); });
 
+// 7 Sep 2026: API-key / token inputs start life as type=text (.dge-secret,
+// masked by CSS) and become real password fields only while focused. With
+// four static type=password inputs in hidden modals, Chrome treated the page
+// as a login form and offered "Use saved password?" on the search box.
+document.addEventListener('focusin', function (e) {
+  const el = e.target;
+  if (el && el.classList && el.classList.contains('dge-secret') && el.type === 'text') el.type = 'password';
+});
+document.addEventListener('focusout', function (e) {
+  const el = e.target;
+  if (el && el.classList && el.classList.contains('dge-secret') && el.type === 'password') el.type = 'text';
+});
+
 // --- DYNAMIC DEV LOGGER WITH COPY / MINIMIZE / CLOSE ---
 (function initDevLogger() {
     const urlParams = new URLSearchParams(window.location.search);

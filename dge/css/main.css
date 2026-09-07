@@ -132,6 +132,14 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-left: 3px solid transparent; border-radius: var(--radius-md); padding: 11px 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 10px); }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left-color: var(--accent-red); border-left-width: 4px; }
 .shloka-card:active { background: var(--card-active); }
+/* 7 Sep 2026: marks as the card's own edge instead of badges in the row */
+.shloka-card.is-fav { border-left-color: var(--accent-gold); }
+.shloka-card.is-doubt { border-left-style: dotted; border-left-color: var(--accent-red); }
+.shloka-card.active.is-fav { border-left-color: var(--accent-gold); }
+.shloka-num { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.shloka-counts { display: flex; flex-direction: column; gap: 1px; font-size: 9px; font-weight: 700; color: var(--muted-text); opacity: .8; }
+.shloka-text .search-match { white-space: normal; }
+.shloka-text .verse-no { white-space: nowrap; }
 /* Primary reading-progress state = border color only (section 4/17) —
    never combined with more than one border color at once. Selected
    (.active, above) takes visual priority over these when both apply,
@@ -640,6 +648,25 @@ body:has(.popup-sheet.show)::after {
 .modal-overlay.drawer-right .modal-content { border-right: none; transform: translateX(100%); }
 .modal-overlay.drawer-left.show .modal-content,
 .modal-overlay.drawer-right.show .modal-content { transform: translateX(0); }
+/* 7 Sep 2026: Library drawer -- resizable, and a docked side pane when pinned
+   on a wide screen (library.js dgeApplyLibraryDock / dgeInitLibraryResize). */
+@media (min-width: 760px) {
+  .modal-overlay.drawer-left#libraryModal .modal-content { width: var(--dge-drawer-w, 340px); }
+  body.dge-library-docked { padding-left: var(--dge-drawer-w, 340px); }
+  body.dge-library-docked .top-bar { left: var(--dge-drawer-w, 340px); }
+  body.dge-library-docked.modal-open { overflow: auto !important; }
+  body.dge-library-docked #libraryModal.modal-overlay.show { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; pointer-events: none; }
+  body.dge-library-docked #libraryModal .modal-content { pointer-events: auto; border-right: 1px solid var(--card-border); box-shadow: var(--shadow-md); }
+}
+#libraryModal.resizing .modal-content { transition: none; user-select: none; }
+.drawer-resize-handle { position: absolute; top: 0; right: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 5; touch-action: none; }
+.drawer-resize-handle:hover, #libraryModal.resizing .drawer-resize-handle { background: var(--accent-glow); }
+@media (max-width: 759px) { .drawer-resize-handle { display: none; } }
+/* Secret fields (API keys, tokens) are plain text inputs until focused so
+   Chrome sees no password form on the page and stops offering a saved
+   password on the search box; utils.js flips them to type=password on focus. */
+.dge-secret { -webkit-text-security: disc; }
+.search-input::-webkit-search-cancel-button, .search-input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
 .modal-overlay.drawer-left .modal-body,
 .modal-overlay.drawer-right .modal-body { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
 

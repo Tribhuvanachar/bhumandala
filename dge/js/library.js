@@ -1199,11 +1199,59 @@ window.openLibraryModal = async function() {
 function dgeLibraryDocked() {
   try { return localStorage.getItem('dge_library_docked') === '1'; } catch (e) { return false; }
 }
+window.dgeLibraryDocked = dgeLibraryDocked;
 window.dgeToggleLibraryDock = function () {
   const on = !dgeLibraryDocked();
   try { localStorage.setItem('dge_library_docked', on ? '1' : '0'); } catch (e) { /* ignore */ }
   dgeUpdateLibraryDockBtn();
+  dgeApplyLibraryDock();
 };
+// 7 Sep 2026: pinned + open on a wide screen = a docked side pane, IDE
+// style: the page keeps scrolling and stays clickable beside it (main.css
+// body.dge-library-docked), and the edge handle resizes it (below). The
+// class follows the drawer's own .show state so every open/close path
+// (button, navigation auto-reopen, ❮) keeps it right.
+function dgeApplyLibraryDock() {
+  const m = document.getElementById('libraryModal');
+  const on = !!(m && m.classList.contains('show') && dgeLibraryDocked() && window.innerWidth >= 760);
+  document.body.classList.toggle('dge-library-docked', on);
+}
+(function () {
+  const start = function () {
+    const m = document.getElementById('libraryModal');
+    if (!m) return;
+    new MutationObserver(dgeApplyLibraryDock).observe(m, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', dgeApplyLibraryDock);
+    dgeInitLibraryResize();
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+// Drag the drawer's right edge to set its width (260 px .. 60 vw), kept per
+// device in localStorage and applied through --dge-drawer-w (main.css).
+function dgeInitLibraryResize() {
+  const handle = document.getElementById('libraryResizeHandle');
+  const m = document.getElementById('libraryModal');
+  if (!handle || !m) return;
+  const root = document.documentElement;
+  const apply = function (w) { root.style.setProperty('--dge-drawer-w', Math.round(w) + 'px'); };
+  try { const saved = parseInt(localStorage.getItem('dge_library_width'), 10); if (saved >= 260) apply(saved); } catch (e) {}
+  let dragging = false;
+  const clamp = function (w) { return Math.max(260, Math.min(w, Math.round(window.innerWidth * 0.6))); };
+  handle.addEventListener('pointerdown', function (e) {
+    dragging = true; handle.setPointerCapture(e.pointerId); m.classList.add('resizing'); e.preventDefault();
+  });
+  handle.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    apply(clamp(e.clientX));
+  });
+  const stop = function (e) {
+    if (!dragging) return;
+    dragging = false; m.classList.remove('resizing');
+    try { localStorage.setItem('dge_library_width', String(clamp(e.clientX))); } catch (err) {}
+  };
+  handle.addEventListener('pointerup', stop);
+  handle.addEventListener('pointercancel', stop);
+}
 function dgeUpdateLibraryDockBtn() {
   const b = document.getElementById('libraryDockBtn');
   if (!b) return;

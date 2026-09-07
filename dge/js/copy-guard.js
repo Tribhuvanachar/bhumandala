@@ -22,6 +22,9 @@ window.DGE_VERSIONS['copy-guard.js'] = 'v1.0';
 
   document.addEventListener('contextmenu', function (ev) {
     if (isAdmin()) return;
+    // Editable fields keep their menu (paste into the search box, notes).
+    var t = ev.target;
+    if (t && t.closest && t.closest('input, textarea, [contenteditable="true"]')) return;
     ev.preventDefault();
   });
 

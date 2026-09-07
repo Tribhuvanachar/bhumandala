@@ -106,6 +106,10 @@ document.addEventListener('click', (e) => {
 // (a tap inside it stops there, same as clicking real content in any modal).
 document.addEventListener('click', (e) => {
   if (e.target.classList && e.target.classList.contains('modal-overlay') && dgeIsDrawer(e.target)) {
+    // 7 Sep 2026: a pinned Library stays put when the tap lands outside it
+    // (the lead: "when pinned, it should stick to its place even if clicked
+    // outside of it"); only its own ❮ button closes it.
+    if (e.target.id === 'libraryModal' && typeof window.dgeLibraryDocked === 'function' && window.dgeLibraryDocked()) return;
     closeModal(e.target.id);
   }
 });

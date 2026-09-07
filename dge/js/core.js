@@ -389,7 +389,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.65.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.66.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -1368,7 +1368,11 @@ function restorePrefs() {
   const savedScript = localStorage.getItem('app_script');
   if (savedScript && typeof applyScript === 'function') applyScript(savedScript);
 
-  const savedLayoutMode = localStorage.getItem('app_layoutMode');
+  // 7 Sep 2026: ?layout=app|scholar (the thin entry pages dge/app.html and
+  // dge/reader.html carry it) presets and remembers the layout; otherwise
+  // the saved preference applies. The layout itself stays one body class.
+  const urlLayout = new URLSearchParams(window.location.search).get('layout');
+  const savedLayoutMode = (urlLayout === 'app' || urlLayout === 'scholar') ? urlLayout : localStorage.getItem('app_layoutMode');
   if (savedLayoutMode && typeof window.dgeSetLayoutMode === 'function') window.dgeSetLayoutMode(savedLayoutMode);
 
   if (localStorage.getItem('app_wakeLock') === '1' && typeof window.dgeSetScreenWakeLock === 'function') window.dgeSetScreenWakeLock(true);

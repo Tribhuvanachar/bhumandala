@@ -27,21 +27,37 @@
  * Usage: <dge-nav-rail current="dhatu"></dge-nav-rail>, placed anywhere in
  * the body (position is fixed, so DOM location doesn't matter), after this
  * script tag. `current` is one of the ids in ITEMS below, or omitted.
+ * Sheet is grouped (GROUPS): Read / Sanskrit tools / Experiments.
  */
 (function () {
   "use strict";
   if (window.customElements && window.customElements.get("dge-nav-rail")) return;
 
+  // 7 Sep 2026: grouped (the lead: "Chandas page missing... where can I see
+  // the phitsutra, unadi sutra, linganushasana pages? Should we have some
+  // Sanskrit Tools grouping"). Every vyakarana/*.html tool page now mounts
+  // this rail too, so none of them is a dead end any more.
+  var GROUPS = [
+    { id: "read", label: "Read" },
+    { id: "tools", label: "Sanskrit tools" },
+    { id: "lab", label: "Experiments" }
+  ];
   var ITEMS = [
-    { id: "home", label: "DGE Home", glyph: "⌂", href: "dge/index.html" },
-    { id: "ashtadhyayi", label: "Aṣṭādhyāyī", glyph: "अ", href: "dge/vyakarana/ashtadhyayi.html" },
-    { id: "dhatu", label: "Dhātu", glyph: "ध", href: "dge/vyakarana/dhatu.html" },
-    { id: "shabda", label: "Śabda", glyph: "श", href: "dge/vyakarana/shabda.html" },
-    { id: "kavya", label: "Kāvya", glyph: "का", href: "dge/kavya/index.html" },
-    { id: "tirtha", label: "Tīrtha", glyph: "ती", href: "dge/tirtha/index.html" },
-    { id: "guru-parampara", label: "Guru Paramparā", glyph: "गु", href: "dge/guru-parampara/index.html" },
-    { id: "dasa-sahitya", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/index.html" },
-    { id: "kamadhenu", label: "Kamadhenu trials", glyph: "🐄", href: "dge/kamadhenu.html" }
+    { id: "home", group: "read", label: "DGE Home", glyph: "⌂", href: "dge/index.html" },
+    { id: "kavya", group: "read", label: "Kāvya", glyph: "का", href: "dge/kavya/index.html" },
+    { id: "tirtha", group: "read", label: "Tīrtha", glyph: "ती", href: "dge/tirtha/index.html" },
+    { id: "guru-parampara", group: "read", label: "Guru Paramparā", glyph: "गु", href: "dge/guru-parampara/index.html" },
+    { id: "dasa-sahitya", group: "read", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/index.html" },
+    { id: "ashtadhyayi", group: "tools", label: "Aṣṭādhyāyī", glyph: "अ", href: "dge/vyakarana/ashtadhyayi.html" },
+    { id: "dhatu", group: "tools", label: "Dhātu", glyph: "ध", href: "dge/vyakarana/dhatu.html" },
+    { id: "shabda", group: "tools", label: "Śabda", glyph: "श", href: "dge/vyakarana/shabda.html" },
+    { id: "rupasiddhi", group: "tools", label: "Rūpasiddhi", glyph: "रू", href: "dge/vyakarana/rupasiddhi.html" },
+    { id: "chandas", group: "tools", label: "Chandas", glyph: "छ", href: "dge/vyakarana/chandas.html" },
+    { id: "unadi", group: "tools", label: "Uṇādi-sūtra", glyph: "उ", href: "dge/vyakarana/unadi.html" },
+    { id: "phitsutra", group: "tools", label: "Phiṭ-sūtra", glyph: "फि", href: "dge/vyakarana/phitsutra.html" },
+    { id: "linganushasana", group: "tools", label: "Liṅgānuśāsana", glyph: "लि", href: "dge/vyakarana/linganushasana.html" },
+    { id: "ganapatha", group: "tools", label: "Gaṇapāṭha", glyph: "ग", href: "dge/vyakarana/ganapatha.html" },
+    { id: "kamadhenu", group: "lab", label: "Kamadhenu trials", glyph: "🐄", href: "dge/kamadhenu.html" }
   ];
 
   // Per-device vertical position of the tab (px from viewport top). Absent
@@ -88,6 +104,9 @@
       "-webkit-backdrop-filter:blur(8px);border:1px solid rgba(232,178,77,0.22);border-radius:10px;" +
       "padding:6px 0;box-shadow:0 8px 24px rgba(0,0,0,.35);}" +
       ".dge-nr-sheet.open{display:block;}" +
+      ".dge-nr-group{padding:8px 16px 2px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;" +
+      "color:rgba(243,231,212,.55);}" +
+      ".dge-nr-group+.dge-nr-group,.dge-nr-link+.dge-nr-group{margin-top:4px;border-top:1px solid rgba(232,178,77,0.16);padding-top:8px;}" +
       ".dge-nr-backdrop{display:none;position:fixed;inset:0;z-index:9192;background:transparent;}" +
       ".dge-nr-backdrop.open{display:block;}";
     document.head.appendChild(s);
@@ -132,7 +151,11 @@
     var sheet = document.createElement("div");
     sheet.className = "dge-nr-sheet";
     sheet.setAttribute("role", "menu");
-    sheet.innerHTML = ITEMS.map(function (it) { return itemHTML(it, current); }).join("");
+    sheet.innerHTML = GROUPS.map(function (g) {
+      var items = ITEMS.filter(function (it) { return it.group === g.id; });
+      return '<div class="dge-nr-group">' + g.label + "</div>" +
+        items.map(function (it) { return itemHTML(it, current); }).join("");
+    }).join("");
 
     var backdrop = document.createElement("div");
     backdrop.className = "dge-nr-backdrop";

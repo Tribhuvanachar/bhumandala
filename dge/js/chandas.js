@@ -299,6 +299,18 @@
       .map(function (v) { return [v.padas[0].akshara_sankhya, v.padas[1].akshara_sankhya]; })
       .filter(function (ab) { return ab[0] && ab[1]; });
   }
+  // 7 Sep 2026: one line splitter for both entry points. The corpus marks
+  // half-verse ends with an ASCII "|" as often as with a danda, stores
+  // line breaks as literal <br>, and prefixes verses with a speaker tag
+  // ("श्रीप्रह्राद उवाच |", "अर्जुन उवाच") -- none of which is metre. Before
+  // this, the Prahlāda Nṛsiṃha stotra came out as a 35-syllable "pāda"
+  // (7 of उवाच + 28) instead of Vasantatilakā 4 × 14.
+  function splitLines(txt) {
+    txt = String(txt || '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, ' ');
+    return txt.split(/[\n।॥|]+/)
+      .map(function (l) { return l.replace(/[०-९0-9]+/g, ' ').trim(); })
+      .filter(function (l) { return l && !/(^|\s)(उवाच|ऊचुः)\s*$/.test(l); });
+  }
   function padaCandidates(lines) {
     var sy = lines.map(syllabify).filter(function (s) { return s.length; });
     var cands = [];
@@ -347,8 +359,7 @@
   }
   function analyze() {
     var txt = foldScript($('#ch-input').value || '');   // Kannada/Telugu/Malayalam input, nukta, Vedic accents
-    var lines = txt.split(/[\n।॥]+/).map(function (l) { return l.trim(); })
-      .filter(Boolean);
+    var lines = splitLines(txt);
     var out = $('#ch-out');
     if (!lines.length) { out.innerHTML = ''; return; }
     var padas = toPadas(lines);
@@ -400,8 +411,7 @@
     },
     analyzeText: function (txt) {
       txt = foldScript(String(txt || ''));
-      var lines = txt.split(/[\n।॥]+/)
-        .map(function (l) { return l.trim(); }).filter(Boolean);
+      var lines = splitLines(txt);
       var padas = toPadas(lines);
       var pats = padas.map(pattern);
       return {
