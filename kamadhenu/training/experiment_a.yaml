@@ -48,7 +48,7 @@ training:
   mixed_precision: fp16           # accelerate launch --mixed_precision=fp16
   use_ema: true                   # trainer default; the launcher exports BOTH ema and online weights (README §3 of F5's train notes)
   logger: tensorboard             # no wandb account needed
-  max_minutes: 150                # hard wall-clock cap (`timeout`) — bounds the bill; resume by re-running the launcher
+  max_minutes: 150                # wall-clock cap (`timeout`) on the training loop; KAMADHENU_MAX_MINUTES overrides; a re-run resumes
 
 evaluation:                       # render_eval.py, after export
   reference: tp_anushtubh_19      # the lead's own clip from tools/kamadhenu/space/refs (also the Space's default)
@@ -64,3 +64,12 @@ outputs:
   export_dir: ${work_dir}/export/kamadhenu_voice_a     # model.safetensors (EMA), model_online.safetensors, vocab.txt, card.json
   eval_dir: ${work_dir}/eval                            # 13 × (base.wav, finetuned.wav, finetuned_online.wav) + eval.json
   keep: [export_dir, eval_dir, "${ckpt_dir}/model_last.pt", "${ckpt_dir}/train.log"]
+
+approval:                         # 7 Sep 2026, 6:20 pm IST — the lead: "approved cap 185, 24 gb"
+  cap_inr: 185
+  vram: 24GB
+  where: Hugging Face Jobs on the lead's account (hf_job.py + .github/workflows/kamadhenu-experiment-a.yml)
+  flavor: l4x1                    # 1× L4 24 GB, $0.80/h, 8 vCPU, 30 GB RAM, 400 GB disk
+  job_timeout_minutes: 150        # killed by HF at this point: worst case $2.00 ≈ ₹176 < cap
+  train_cap_minutes: 100          # inside the job; leaves ~50 min for setup, export, 39 renders and the upload
+  results_repo: SarvamulaOrg/kamadhenu-voice-a   # private; export/ eval/ train.log

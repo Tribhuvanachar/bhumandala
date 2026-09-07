@@ -25,9 +25,9 @@ PY
 COMMIT="$(yq base_model.code_commit)"; REPO="$(yq base_model.code_repo)"; HFREPO="$(yq base_model.repo)"
 VOCAB_SHA="$(yq base_model.vocab_sha1)"; LR="$(yq training.learning_rate)"; BATCH="$(yq training.batch_size_per_gpu.$VRAM)"
 WARM="$(yq training.num_warmup_updates)"; SAVE="$(yq training.save_per_updates)"; LAST="$(yq training.last_per_steps)"
-MAXMIN="$(yq training.max_minutes)"; SEED="$(yq experiment.seed)"; DSNAME="$(yq dataset.name)"
-EPOCHS="${KAMADHENU_EPOCHS:-$(python3 "$HERE/dry_run.py" --epochs-for "$VRAM" 2>/dev/null || echo 44)}"
-echo "== Experiment A: $VRAM → batch $BATCH frames, lr $LR, $EPOCHS epochs, warmup $WARM, cap $MAXMIN min, work $WORK"
+MAXMIN="${KAMADHENU_MAX_MINUTES:-$(yq training.max_minutes)}"; SEED="$(yq experiment.seed)"; DSNAME="$(yq dataset.name)"
+T_START=$(date +%s)
+echo "== Experiment A: $VRAM → batch $BATCH frames, lr $LR, warmup $WARM, training cap $MAXMIN min, work $WORK"
 
 # 1. IndicF5 code at the pinned commit (the same the Space serves), installed editable.
 if [ ! -d "$WORK/IndicF5/.git" ]; then git clone --quiet "$REPO" "$WORK/IndicF5"; fi
@@ -52,10 +52,14 @@ if got != want or mine != want:
     sys.exit("vocab.txt on the Hub differs from kamadhenu/training/vocab_indicf5.txt — stop, re-export with the Hub file and re-run the dry run")
 PY
 
-# 3. Dataset: 24 kHz wavs + raw.arrow with THIS machine's absolute paths.
+# 3. Dataset: source recordings (re-fetched if this box lacks them), 24 kHz wavs + raw.arrow with THIS machine's
+#    absolute paths, then the same checks the CPU dry run made, and the epoch count for this VRAM class.
+python3 "$HERE/fetch_pilot_audio.py"
 python3 "$HERE/export_f5_dataset.py" --arrow
 DATA="$ROOT/$(yq dataset.export_dir)"
-python3 "$HERE/dry_run.py" --no-export --quiet     # re-checks vocab coverage / durations on the exported set
+python3 "$HERE/dry_run.py" --no-export --quiet
+EPOCHS="${KAMADHENU_EPOCHS:-$(python3 "$HERE/dry_run.py" --epochs-for "$VRAM")}"
+echo "== $EPOCHS epochs for $VRAM"
 
 # 4. Starting checkpoint for the trainer (only when no run is in progress).
 CKPT="$WORK/ckpt"; mkdir -p "$CKPT"
@@ -65,6 +69,7 @@ if [ "$DRY" = 1 ]; then echo "== dry run complete: code, weights, vocab, dataset
 
 # 5. Train (resumable; hard wall-clock cap; tensorboard log in $CKPT).
 cd "$WORK/IndicF5"
+T_TRAIN=$(date +%s)
 set +e
 timeout "${MAXMIN}m" accelerate launch --mixed_precision=fp16 f5_tts/train/finetune_cli.py \
   --exp_name F5TTS_Base --dataset_name "$DSNAME" --tokenizer custom --tokenizer_path "$DATA/vocab.txt" \
@@ -82,6 +87,18 @@ LATEST="$(ls -t "$CKPT"/model_*.pt | head -1)"
 python3 "$HERE/ckpt_convert.py" to-safetensors "$LATEST" "$EXP/model.safetensors"
 python3 "$HERE/ckpt_convert.py" to-safetensors "$LATEST" "$EXP/model_online.safetensors" --online
 cp "$DATA/vocab.txt" "$EXP/vocab.txt"
+T_EVAL=$(date +%s)
 python3 "$HERE/render_eval.py" --base "$WORK/base/model.safetensors" --finetuned "$EXP/model.safetensors" \
   --finetuned-online "$EXP/model_online.safetensors" --vocab "$EXP/vocab.txt" --out "$WORK/eval"
+T_END=$(date +%s)
+STEP="$(python3 -c "import torch;print(torch.load('$LATEST',map_location='cpu',weights_only=True).get('step','?'))")"
+python3 "$HERE/run_record.py" --out "$WORK/run.json" --vram "$VRAM" --batch "$BATCH" --epochs "$EPOCHS" --cap "$MAXMIN" \
+  --rc "$RC" --step "$STEP" --t "$T_START" "$T_TRAIN" "$T_EVAL" "$T_END"
+cp "$WORK/run.json" "$EXP/run.json"; cp "$ROOT/kamadhenu/reports/experiment_a_dry_run.json" "$EXP/dry_run.json" 2>/dev/null || true
 echo "== done. Keep: $EXP, $WORK/eval, $CKPT/model_last.pt, $CKPT/train.log. Delete the rest of $CKPT to free disk."
+
+# 7. Optional: publish the results to a private Hub repo (KAMADHENU_RESULTS_REPO=<org>/<name>), so a job on rented
+#    hardware leaves nothing behind when its disk is reclaimed. Weights, renders, log, run record — no source audio.
+if [ -n "${KAMADHENU_RESULTS_REPO:-}" ]; then
+  python3 "$HERE/run_record.py" --publish "$KAMADHENU_RESULTS_REPO" --export "$EXP" --eval "$WORK/eval" --log "$CKPT/train.log"
+fi
