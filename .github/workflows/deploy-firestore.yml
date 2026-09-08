@@ -92,6 +92,20 @@ jobs:
               json.dump(sa, fh)
           print("service account:", sa.get("client_email"), "| source:", ", ".join(found))
           PY
+      - name: Sanity-check FIREBASE_PROJECT_ID without ever printing it
+        # 8 Sep 2026: the earlier 403 (firebaserules) and this run's new 400 "Project ... not found"
+        # (serviceusage) are both consistent with $PID NOT being the literal project id "sarvamula-org"
+        # -- e.g. missing the "-org" suffix, wrong case, or a stray space/newline from how the secret
+        # was pasted. This step reports only shape (length, suffix), never the value, so a wrong secret
+        # can be diagnosed without a raw-value leak either way.
+        env:
+          PID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          echo "PID length: ${#PID}"
+          echo "PID ends with '-org': $( [[ "$PID" == *-org ]] && echo yes || echo no )"
+          echo "PID ends with '.org': $( [[ "$PID" == *.org ]] && echo yes || echo no )"
+          echo "PID has leading/trailing whitespace: $( [[ "$PID" != "$(echo -n "$PID" | xargs echo -n)" ]] && echo yes || echo no )"
+          echo "PID is all-lowercase: $( [[ "$PID" == "$(echo "$PID" | tr '[:upper:]' '[:lower:]')" ]] && echo yes || echo no )"
       - name: Write .firebaserc (gitignored on purpose — the repo never carries a project id)
         run: |
           printf '{ "projects": { "default": "%s" } }\n' "${{ secrets.FIREBASE_PROJECT_ID }}" > dge/firebase/.firebaserc
