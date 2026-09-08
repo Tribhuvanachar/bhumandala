@@ -6,7 +6,7 @@ broadcasts, tightened the security rules, and — for the first time —
 tests. 204 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
-## 0. Where this stands (8 Sep 2026, ~9:50 am IST)
+## 0. Where this stands (8 Sep 2026, ~10:20 am IST)
 
 The lead created the Firebase project **`sarvamula-org`** and pasted its web config; it is now in
 `dge/js/config.js` (`FIREBASE_CONFIG`) and `AUTH_CONFIG.enabled` is **true**. The three identifiers are
@@ -20,9 +20,33 @@ Probed from the public endpoints and re-tested 8 Sep 2026:
 | Authorized domains | ✅ `tribhuvanachar.github.io`, `sarvamula.org`, `madhvacharya.in`, `sanatanavidyagurukulam.com`, the `*.web.app`/`*.firebaseapp.com` hosts, `localhost` |
 | Verified emails only | ✅ 7 Sep 2026: `user-auth.js` stores an email only when the provider marks it verified (`dgeVerifiedEmail`), and captures a later-verified one on the next sign-in; `firestore.rules` `emailOk()`/`emailVerifiedFlagOk()` reject any other email on create or self-update (7 emulator tests); the Manage Users screen exports the verified list as CSV (`dgeExportVerifiedEmails`). There is no email/password sign-up in DGE, so `sendEmailVerification` is not needed today; if one is added, the same rule already gates it |
 | Google sign-in provider | ✅ enabled by the lead (6 Sep 2026, ~9:40 pm IST) |
-| Firestore database | ✅ **created by the lead, 8 Sep 2026** (production mode, per §3.3 below) — `firestore.rules` re-validated against the real emulator right after (47/47 tests pass, `npm run test:rules` in `dge/firebase/tests`), but **not yet published to the live database**: see the Hosting/Firestore-deploy row below, same blocker |
-| Firestore rules + indexes deploy | ❌ **Blocked on the same missing secret as Hosting** — new workflow `Deploy — Firestore rules & indexes` (`.github/workflows/deploy-firestore.yml`) added 8 Sep 2026, also fires on every push to `firestore.rules`/`firestore.indexes.json`. It reuses Hosting's service-account resolution, so it fails the same way until that secret exists. Until it runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes are denied by Firestore's own production-mode default, not by our rules) — sign-in still works via the same fallback as before (profile read/write failure → "signed in, default role") |
-| Hosting deploy | ❌ **Still blocked, re-tested 8 Sep 2026 ~9:47 am UTC (run 5 of `Deploy — Firebase Hosting`, dispatched after the lead said Firestore was set up)** — same failure as runs 2 and 4: `No service-account key found`, `FIREBASE_PROJECT_ID` visible, all nine other secret names empty. This session has no way to list secret *names* (only a value-blind existence check via the workflow itself), so it cannot tell which name the lead actually used, if any. Lead: open Settings → Secrets and variables → Actions → *Repository secrets*, confirm a service-account key secret exists there (not only under an *Environment*, a repository *variable*, or Codespaces/Dependabot secrets — none of those are visible to `secrets.*` in this workflow), and either name it `FIREBASE_SERVICE_ACCOUNT` (whole JSON key) or tell the next session its exact name. GitHub Pages stays the live origin until the DNS cutover |
+| Firestore database | ✅ **created by the lead, 8 Sep 2026** (production mode, per §3.3 below) — `firestore.rules` re-validated against the real emulator right after (47/47 tests pass, `npm run test:rules` in `dge/firebase/tests`), but **not yet published to the live database**: see the row below |
+| `FIREBASE_SERVICE_ACCOUNT` secret | ✅ **added by the lead, 8 Sep 2026, ~10:11 am IST** — the workflows now parse it correctly (`service account: firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`); the earlier "no key found" blocker is resolved |
+| Firestore rules + indexes deploy | ❌ **New blocker, 8 Sep 2026 ~10:15 am IST (run 1 of `Deploy — Firestore rules & indexes`)**: `Error: Request to https://firebaserules.googleapis.com/v1/projects/sarvamula-org:test had HTTP Error: 403, The caller does not have permission`. This is a Google Cloud **IAM role** gap, not a secret problem — see §0.1 below for the fix and why. Until it runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes denied by Firestore's own production-mode default, not by our rules); sign-in still works via the existing fallback (profile read/write failure → "signed in, default role") |
+| Hosting deploy | ⏸ **Not yet re-tried** — the service-account secret now resolves, but Hosting almost certainly needs the same IAM role granted below before it will deploy either; re-dispatch after the fix, don't assume it's a separate issue until proven so |
+
+### 0.1 The IAM fix needed before either deploy workflow can succeed
+
+The service-account key itself is fine — Adarsh generated a real key for the right project and it parses
+correctly. What's missing is a **Google Cloud IAM role** on that service account. The default
+`firebase-adminsdk-*` account Firebase auto-creates carries only **"Firebase Admin SDK Administrator
+Service Agent"** (`roles/firebase.sdkAdminServiceAgent`) — built for the *Admin SDK* (a backend server
+reading/writing Firestore/Auth data as an admin user), not for the *control plane* operations these
+workflows do (publishing rules, building indexes, deploying hosting).
+
+To fix, in the **Google Cloud Console** (console.cloud.google.com — a different console from
+Firebase's), not the Firebase console:
+
+1. Select project **`sarvamula-org`** (top bar, same as Firebase).
+2. Go to **IAM & Admin → IAM** in the left sidebar.
+3. Find the row for **`firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`**.
+4. Click the pencil (edit) icon on that row.
+5. Click **Add another role**, search for **"Firebase Admin"**, select it (`roles/firebase.admin`).
+6. Click **Save**.
+
+That one role is broad enough to cover rules, indexes, and hosting deploys together, so it only needs to
+be done once. After saving, tell the next session (or re-dispatch `Deploy — Firestore rules & indexes`
+directly) — IAM changes apply within a minute or two, no redeploy of anything else needed.
 
 ## 1. What this is
 

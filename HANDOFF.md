@@ -141,20 +141,28 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    used to write its catalogue over `/dge/index.html` and `/dge/kavya/index.html` (the app shell and the Kāvya
    reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/dge/texts/`, `/dge/kavya/texts/`). CI
    proof-build re-dispatched with deploy=false; deploy=true still waits on the artifact-size question (see PENDING).
-5. **Firestore database now created (8 Sep); rules deployed locally-verified but still blocked on the same
-   secret as Hosting.** Rules re-ran clean against the real emulator (47/47, `npm run test:rules` in
-   `dge/firebase/tests`). Added `.github/workflows/deploy-firestore.yml` (rules + indexes, also fires on push
-   to those two files) reusing Hosting's service-account resolution. Re-dispatched `Deploy — Firebase Hosting`
-   (run 5, 8 Sep ~9:47 am UTC) to check for the secret now that Firestore exists: same failure as runs 2 and 4,
-   `FIREBASE_PROJECT_ID` visible, all nine other secret names empty. This session cannot list secret *names*,
-   only probe for known ones by name, so it cannot say which name the lead actually used, if any. **Lead:**
-   confirm a service-account key secret exists at Settings → Secrets and variables → Actions → *Repository
-   secrets* (not an Environment secret, a repo *variable*, or Codespaces/Dependabot — none of those reach
-   `secrets.*` in a plain `workflow_dispatch` job) and either name it `FIREBASE_SERVICE_ACCOUNT` (whole JSON
-   key) or give the next session its exact name. Once it resolves: dispatch `Deploy — Firestore rules &
-   indexes` first (rules take effect in Firestore within about a minute), then `Deploy — Firebase Hosting`
-   with channel=preview, verify Google sign-in and a real profile write on the preview URL, then decide live
-   channel / DNS cutover — that decision stays the lead's.
+5. **Firebase deploy: secret is resolved, now blocked on a Google Cloud IAM role (8 Sep, ~10:20 am IST).**
+   Firestore database created by the lead; rules re-ran clean against the real emulator (47/47,
+   `npm run test:rules` in `dge/firebase/tests`). Added `.github/workflows/deploy-firestore.yml` (rules +
+   indexes, also fires on push to those two files) reusing Hosting's service-account resolution. The lead
+   added `FIREBASE_SERVICE_ACCOUNT` (the Adarsh-generated key) as a repository secret — both workflows now
+   parse it correctly (`service account: firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`), so
+   the old "no key found" blocker is gone. Dispatching `Deploy — Firestore rules & indexes` hit a *new*,
+   different blocker: `403, The caller does not have permission` from `firebaserules.googleapis.com`. This is
+   a Google Cloud IAM role gap — the default `firebase-adminsdk-*` service account only carries "Firebase
+   Admin SDK Administrator Service Agent" (`roles/firebase.sdkAdminServiceAgent`), which covers server-side
+   Admin SDK reads/writes, not control-plane deploys. **Lead:** in **Google Cloud Console** (not Firebase
+   console) → IAM & Admin → IAM → project `sarvamula-org` → find
+   `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` → Edit → Add another role → **"Firebase
+   Admin"** (`roles/firebase.admin`) → Save. Full walkthrough in `dge/FIREBASE_SETUP.md` §0.1. That one role
+   should cover rules, indexes, and hosting together. Once granted: re-dispatch `Deploy — Firestore rules &
+   indexes` (rules take effect within about a minute), then `Deploy — Firebase Hosting` with channel=preview
+   (untried since the secret was added — likely needs the same role, not yet proven a separate issue), verify
+   Google sign-in and a real profile write on the preview URL, then decide live channel / DNS cutover — that
+   decision stays the lead's.
+   Security note left for the lead: the service-account JSON passed through this chat session to get set up —
+   worth generating a fresh key and deleting the old one from Firebase Console → Project settings → Service
+   accounts once the deploy is confirmed working, as routine hygiene.
    Unrelated, noticed while re-running the JS suite: `dge/firebase/tests/user-auth.test.js` "phone OTP —
    Firebase SMS transport → confirms the code through the confirmation result" fails on a clean checkout
    (pre-existing, not caused by anything this session touched, not part of the Python merge gate) — worth a
