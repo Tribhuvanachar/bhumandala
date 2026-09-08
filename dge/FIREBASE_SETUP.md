@@ -22,7 +22,7 @@ Probed from the public endpoints and re-tested 8 Sep 2026:
 | Google sign-in provider | ✅ enabled by the lead (6 Sep 2026, ~9:40 pm IST) |
 | Firestore database | ✅ **created by the lead, 8 Sep 2026** (production mode, per §3.3 below) — `firestore.rules` re-validated against the real emulator right after (47/47 tests pass, `npm run test:rules` in `dge/firebase/tests`), but **not yet published to the live database**: see the row below |
 | `FIREBASE_SERVICE_ACCOUNT` secret | ✅ **added by the lead, 8 Sep 2026, ~10:11 am IST** — the workflows now parse it correctly (`service account: firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`); the earlier "no key found" blocker is resolved |
-| Firestore rules + indexes deploy | ❌ **Same 403 on both attempts, 10:15 am and 10:36 am IST**, run 1 (before the role) and run 2 (right after saving "Firebase Admin"): `Error: Request to https://firebaserules.googleapis.com/v1/projects/sarvamula-org:test had HTTP Error: 403, The caller does not have permission`. §0.1 explains the role and how to add it; the identical failure ~20 minutes after saving is longer than ordinary IAM propagation (usually seconds, rarely a few minutes), so before a third attempt: (a) reopen IAM & Admin → IAM for `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` and confirm "Firebase Admin" is actually listed among its roles now — the earlier screenshot showed the *edit* form with it added but not a post-save confirmation; (b) separately check APIs & Services → Enabled APIs & services for **"Firebase Rules API"** (`firebaserules.googleapis.com`) — if a fresh project never had it explicitly enabled, that is a second, independent gap a role grant does not fix, and it looks like the same 403 message. Until this runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes denied by Firestore's own production-mode default, not by our rules); sign-in still works via the existing fallback (profile read/write failure → "signed in, default role") |
+| Firestore rules + indexes deploy | ❌ **Identical 403 on THREE attempts** (10:15, 10:36, 10:50 am IST) with the same message every time: `Error: Request to https://firebaserules.googleapis.com/v1/projects/sarvamula-org:test had HTTP Error: 403, The caller does not have permission`. The two obvious suspects are both now independently confirmed fine — the lead verified in the Google Cloud console that (a) `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` genuinely carries the "Firebase Admin" role (visible twice in the IAM principals list, next to the original SDK role), and (b) "Firebase Rules API" (`firebaserules.googleapis.com`) shows **API Enabled**. See §0.1a for what's suspected next: a Cloud Console banner reading "To avoid losing access to Google Cloud services, an administrator must verify th…" was visible on the API details page — this project's owner is a personal Gmail account (`jagadgurumadhvacharyaadmin@gmail.com`), not a Workspace/Cloud Identity org, and Google gates some API calls behind an account/billing verification step for exactly this kind of project even when IAM and API-enablement both look correct. Until this runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes denied by Firestore's own production-mode default, not by our rules); sign-in still works via the existing fallback (profile read/write failure → "signed in, default role") |
 | Hosting deploy | ⏸ **Not yet re-tried** — hold until Firestore rules deploy actually succeeds once, since it needs the same service account and likely the same fix; re-dispatch right after, don't assume it's a separate issue until proven so |
 | Cloud Functions (WhatsApp OTP + broadcasts) | ⏸ **Not started** — see §0.2 for the ordered checklist. Two workflows are ready: `Deploy — Firebase Functions` and `Push Firebase Functions secrets` (deploys `dge/firebase/functions`, pushes WhatsApp/MSG91/OTP_PEPPER secrets from GitHub into Firebase Secret Manager without them passing through chat). Both wait on the same IAM/API fix above, and functions (2nd-gen, Cloud Run-backed) may need further roles on top — read the exact 403 when it happens, same playbook, don't pre-grant a guessed bundle |
 
@@ -48,6 +48,29 @@ Firebase's), not the Firebase console:
 That one role is broad enough to cover rules, indexes, and hosting deploys together, so it only needs to
 be done once. After saving, tell the next session (or re-dispatch `Deploy — Firestore rules & indexes`
 directly) — IAM changes apply within a minute or two, no redeploy of anything else needed.
+
+### 0.1a Both fixes confirmed correct, error unchanged — suspect account verification, not IAM
+
+Three deploy attempts (10:15, 10:36, 10:50 am IST) all failed with the exact same 403 from
+`firebaserules.googleapis.com`, and the lead has since verified in the console that the role is genuinely
+attached to the service account and the Rules API is genuinely enabled — so neither of those, individually
+or together, is the actual cause.
+
+One thing stands out: a Google Cloud Console banner appeared reading **"To avoid losing access to Google
+Cloud services, an administrator must verify th…"** (cut off in the screenshot). This project's owner
+(`jagadgurumadhvacharyaadmin@gmail.com`) is a personal Gmail account, not a Workspace / Cloud Identity
+organization — Google puts an account-or-billing-verification gate on some projects created this way, and
+that gate can block specific API calls with a permission-looking 403 even when IAM and per-API enablement
+are both correct, because the check happens at a layer above ordinary IAM.
+
+**Lead, next step:** open that banner (it's likely visible from the Google Cloud Console home page or the
+API details page it appeared on) and read the full text — it should link straight to whatever needs
+verifying (usually a billing account re-verification or an identity check). Complete whatever it asks for,
+then tell the next session to retry. If the banner doesn't lead anywhere actionable, the next thing to try
+is `gcloud auth application-default login` locally as the project **owner** account (not the service
+account) and running `firebase deploy --only firestore:rules --project sarvamula-org` from a machine you
+control — if that also 403s, the problem is confirmed to be at the project/account level, not the service
+account's permissions, and is worth a message to Google Cloud support or Firebase support directly.
 
 ### 0.2 Phone OTP + WhatsApp — the ordered path to turning it on
 
