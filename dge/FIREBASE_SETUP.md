@@ -6,23 +6,23 @@ broadcasts, tightened the security rules, and — for the first time —
 tests. 204 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
-## 0. Where this stands (7 Sep 2026, 3:20 pm IST)
+## 0. Where this stands (8 Sep 2026, ~9:50 am IST)
 
 The lead created the Firebase project **`sarvamula-org`** and pasted its web config; it is now in
 `dge/js/config.js` (`FIREBASE_CONFIG`) and `AUTH_CONFIG.enabled` is **true**. The three identifiers are
 also GitHub secrets (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`) — harmless, but
-only `FIREBASE_PROJECT_ID` is used by a workflow (`deploy-firebase-hosting.yml`); the web config is public
-by design (§4).
+only `FIREBASE_PROJECT_ID` is used by the deploy workflows; the web config is public by design (§4).
 
-Probed from the public endpoints the same evening:
+Probed from the public endpoints and re-tested 8 Sep 2026:
 
 | Console step (§3) | State |
 |---|---|
 | Authorized domains | ✅ `tribhuvanachar.github.io`, `sarvamula.org`, `madhvacharya.in`, `sanatanavidyagurukulam.com`, the `*.web.app`/`*.firebaseapp.com` hosts, `localhost` |
 | Verified emails only | ✅ 7 Sep 2026: `user-auth.js` stores an email only when the provider marks it verified (`dgeVerifiedEmail`), and captures a later-verified one on the next sign-in; `firestore.rules` `emailOk()`/`emailVerifiedFlagOk()` reject any other email on create or self-update (7 emulator tests); the Manage Users screen exports the verified list as CSV (`dgeExportVerifiedEmails`). There is no email/password sign-up in DGE, so `sendEmailVerification` is not needed today; if one is added, the same rule already gates it |
 | Google sign-in provider | ✅ enabled by the lead (6 Sep 2026, ~9:40 pm IST) |
-| Firestore database | ❌ **not created yet** (lead: "later on") — sign-in still works: `user-auth.js` now treats a failed profile read/write as "signed in, default role" and says so in a toast. Create in **production mode**, then publish `dge/firebase/firestore.rules`, and roles come alive |
-| Hosting deploy | ❌ **Still blocked, 7 Sep 2026 3:20 pm IST** — runs 2 and 4 of `Deploy — Firebase Hosting` both report `No service-account key found` although `FIREBASE_PROJECT_ID` is visible. The workflow reads nine names (`FIREBASE_SERVICE_ACCOUNT`, `…_KEY`, `…_SARVAMULA_ORG`, `FIREBASE_ADMIN_SDK`, `GOOGLE_APPLICATION_CREDENTIALS_JSON`, and the four `FIREBASE_PRIVATE_KEY`/`…_ID`/`FIREBASE_CLIENT_EMAIL`/`…_ID` fields) at the **repository → Actions** scope; the key the lead saved is therefore under another name, or in a different scope (an *Environment* secret, a repository *variable*, Codespaces/Dependabot secrets, or the org). Lead: open Settings → Secrets and variables → Actions → *Repository secrets* and either rename it to `FIREBASE_SERVICE_ACCOUNT` or tell the next session its exact name. GitHub Pages stays the live origin until the DNS cutover |
+| Firestore database | ✅ **created by the lead, 8 Sep 2026** (production mode, per §3.3 below) — `firestore.rules` re-validated against the real emulator right after (47/47 tests pass, `npm run test:rules` in `dge/firebase/tests`), but **not yet published to the live database**: see the Hosting/Firestore-deploy row below, same blocker |
+| Firestore rules + indexes deploy | ❌ **Blocked on the same missing secret as Hosting** — new workflow `Deploy — Firestore rules & indexes` (`.github/workflows/deploy-firestore.yml`) added 8 Sep 2026, also fires on every push to `firestore.rules`/`firestore.indexes.json`. It reuses Hosting's service-account resolution, so it fails the same way until that secret exists. Until it runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes are denied by Firestore's own production-mode default, not by our rules) — sign-in still works via the same fallback as before (profile read/write failure → "signed in, default role") |
+| Hosting deploy | ❌ **Still blocked, re-tested 8 Sep 2026 ~9:47 am UTC (run 5 of `Deploy — Firebase Hosting`, dispatched after the lead said Firestore was set up)** — same failure as runs 2 and 4: `No service-account key found`, `FIREBASE_PROJECT_ID` visible, all nine other secret names empty. This session has no way to list secret *names* (only a value-blind existence check via the workflow itself), so it cannot tell which name the lead actually used, if any. Lead: open Settings → Secrets and variables → Actions → *Repository secrets*, confirm a service-account key secret exists there (not only under an *Environment*, a repository *variable*, or Codespaces/Dependabot secrets — none of those are visible to `secrets.*` in this workflow), and either name it `FIREBASE_SERVICE_ACCOUNT` (whole JSON key) or tell the next session its exact name. GitHub Pages stays the live origin until the DNS cutover |
 
 ## 1. What this is
 

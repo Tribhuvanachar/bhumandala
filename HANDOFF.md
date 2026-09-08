@@ -141,13 +141,24 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    used to write its catalogue over `/dge/index.html` and `/dge/kavya/index.html` (the app shell and the Kāvya
    reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/dge/texts/`, `/dge/kavya/texts/`). CI
    proof-build re-dispatched with deploy=false; deploy=true still waits on the artifact-size question (see PENDING).
-5. **Firebase Hosting preview/live deploy — still blocked on the lead** (re-tested 7 Sep, run 4 of
-   `Deploy — Firebase Hosting`): `FIREBASE_PROJECT_ID` is visible but none of the nine service-account secret names
-   the workflow reads is, at repository → Actions scope. The key the lead saved is under another name or another
-   scope (Environment secret, repository *variable*, Codespaces/Dependabot, org). Lead: rename it to
-   `FIREBASE_SERVICE_ACCOUNT` under Settings → Secrets and variables → Actions → Repository secrets, or name it.
-   Then: preview channel → verify Google sign-in on sarvamula-org.web.app → Firestore (production mode + publish
-   `dge/firebase/firestore.rules`, which now carries the verified-email rule) → DNS cutover is the lead's decision.
+5. **Firestore database now created (8 Sep); rules deployed locally-verified but still blocked on the same
+   secret as Hosting.** Rules re-ran clean against the real emulator (47/47, `npm run test:rules` in
+   `dge/firebase/tests`). Added `.github/workflows/deploy-firestore.yml` (rules + indexes, also fires on push
+   to those two files) reusing Hosting's service-account resolution. Re-dispatched `Deploy — Firebase Hosting`
+   (run 5, 8 Sep ~9:47 am UTC) to check for the secret now that Firestore exists: same failure as runs 2 and 4,
+   `FIREBASE_PROJECT_ID` visible, all nine other secret names empty. This session cannot list secret *names*,
+   only probe for known ones by name, so it cannot say which name the lead actually used, if any. **Lead:**
+   confirm a service-account key secret exists at Settings → Secrets and variables → Actions → *Repository
+   secrets* (not an Environment secret, a repo *variable*, or Codespaces/Dependabot — none of those reach
+   `secrets.*` in a plain `workflow_dispatch` job) and either name it `FIREBASE_SERVICE_ACCOUNT` (whole JSON
+   key) or give the next session its exact name. Once it resolves: dispatch `Deploy — Firestore rules &
+   indexes` first (rules take effect in Firestore within about a minute), then `Deploy — Firebase Hosting`
+   with channel=preview, verify Google sign-in and a real profile write on the preview URL, then decide live
+   channel / DNS cutover — that decision stays the lead's.
+   Unrelated, noticed while re-running the JS suite: `dge/firebase/tests/user-auth.test.js` "phone OTP —
+   Firebase SMS transport → confirms the code through the confirmation result" fails on a clean checkout
+   (pre-existing, not caused by anything this session touched, not part of the Python merge gate) — worth a
+   look next time that file is touched.
 6. ~~Verified-email capture~~ — **done 7 Sep 2026**: `user-auth.js` stores only provider-verified emails
    (`dgeVerifiedEmail`) and captures a later-verified one on the next sign-in; `firestore.rules` `emailOk()` /
    `emailVerifiedFlagOk()` enforce it on create and self-update; Manage Users exports the verified list as CSV
