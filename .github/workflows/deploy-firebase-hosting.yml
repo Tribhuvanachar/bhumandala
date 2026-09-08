@@ -4,6 +4,20 @@
 # (6 Sep 2026). GitHub Pages stays the live origin until the DNS cutover in that guide's Part 3; this
 # workflow publishes the same commit to https://<project>.web.app so it can be checked first.
 #
+# 8 Sep 2026: FIREBASE_SERVICE_ACCOUNT is now set and correctly parsed (the Assemble step succeeds,
+# logging "service account: firebase-adminsdk-fbsvc@...iam.gserviceaccount.com | source: SA_JSON_1"),
+# but the actual deploy fails with:
+#   Error: Request to https://firebaserules.googleapis.com/v1/projects/...:test had HTTP Error:
+#   403, The caller does not have permission
+# (deploy-firestore.yml hit this first; Hosting likely needs the same fix, untried as of 8 Sep 2026).
+# This is a Google Cloud IAM role gap, not a workflow or secret bug: the default firebase-adminsdk-*
+# service account only carries "Firebase Admin SDK Administrator Service Agent"
+# (roles/firebase.sdkAdminServiceAgent), which covers server-side Admin SDK reads/writes but NOT
+# control-plane deploys (rules, indexes, hosting). Fix, in Google Cloud Console (not the Firebase
+# console): IAM & Admin -> IAM, project sarvamula-org, find
+# firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com, Edit principal, Add another role ->
+# "Firebase Admin" (roles/firebase.admin) -> Save. That one role covers rules, indexes, and hosting.
+#
 # Secrets used (Settings → Secrets and variables → Actions):
 #   FIREBASE_PROJECT_ID        e.g. sarvamula-org                       (added by the lead 6 Sep 2026)
 #   FIREBASE_SERVICE_ACCOUNT   the JSON key of the firebase-adminsdk service account (whole file) — OR the

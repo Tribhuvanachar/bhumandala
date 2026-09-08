@@ -6,6 +6,17 @@
 # Run it every time either file changes; rules take effect within a minute, indexes can take
 # longer to build (the deploy step reports whether they're already built or building).
 #
+# 8 Sep 2026: run 1, right after FIREBASE_SERVICE_ACCOUNT was added, failed at the deploy step with:
+#   Error: Request to https://firebaserules.googleapis.com/v1/projects/...:test had HTTP Error:
+#   403, The caller does not have permission
+# The secret itself is fine (Assemble step succeeded and logged the right client_email). This is a
+# Google Cloud IAM role gap: the default firebase-adminsdk-* service account only carries "Firebase
+# Admin SDK Administrator Service Agent" (roles/firebase.sdkAdminServiceAgent), which covers
+# server-side Admin SDK reads/writes but NOT control-plane deploys (rules, indexes, hosting). Fix, in
+# Google Cloud Console (not the Firebase console): IAM & Admin -> IAM, project sarvamula-org, find
+# firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com, Edit principal, Add another role ->
+# "Firebase Admin" (roles/firebase.admin) -> Save. That one role covers rules, indexes, and hosting.
+#
 # Secrets: same service-account resolution as deploy-firebase-hosting.yml — see that file's header
 # for the accepted secret names. Only rules + indexes are deployed here, never hosting or functions.
 
