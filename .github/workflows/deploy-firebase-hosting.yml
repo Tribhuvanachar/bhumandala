@@ -107,7 +107,7 @@ jobs:
           PID: ${{ secrets.FIREBASE_PROJECT_ID }}
           CHANNEL: ${{ inputs.channel }}
         run: |
-          npm install -g firebase-tools@13 >/dev/null 2>&1
+          npm install -g firebase-tools@15 >/dev/null 2>&1
           cd dge/firebase
           if [ "$CHANNEL" = "live" ]; then
             firebase deploy --only hosting --project "$PID" --non-interactive
