@@ -96,7 +96,7 @@ jobs:
           PID: ${{ secrets.FIREBASE_PROJECT_ID }}
           ONLY: ${{ inputs.only }}
         run: |
-          npm install -g firebase-tools@13 >/dev/null 2>&1
+          npm install -g firebase-tools@15 >/dev/null 2>&1
           cd dge/firebase
           if [ -n "$ONLY" ]; then
             TARGET="$(echo "$ONLY" | sed 's/^/functions:/; s/,/,functions:/g')"
