@@ -318,6 +318,33 @@ describe('broadcasts — admin-only operational data', () => {
   });
 });
 
+describe('config — role gates, readable by everyone, writable only by a superadmin', () => {
+  test('a signed-out visitor can read the role gates', async () => {
+    // Content gating has to work for anonymous browsing too, not just
+    // signed-in users — a gate that only anonymous visitors can't see
+    // would defeat its own purpose.
+    await assertSucceeds(asAnon().doc('config/roleAccess').get());
+    await assertSucceeds(asAnon().doc('config/roles').get());
+  });
+
+  test('a basic user can read but not write it', async () => {
+    await assertSucceeds(asUser(UID_BASIC).doc('config/roleAccess').get());
+    await assertFails(asUser(UID_BASIC).doc('config/roleAccess').set({ gates: [] }));
+  });
+
+  test('an admin (not superadmin) can read but not write it', async () => {
+    await assertSucceeds(asUser(UID_ADMIN).doc('config/roleAccess').get());
+    await assertFails(asUser(UID_ADMIN).doc('config/roleAccess').set({ gates: [] }));
+  });
+
+  test('a superadmin can create, update and delete it', async () => {
+    await assertSucceeds(asUser(UID_SUPER).doc('config/roleAccess').set({ gates: [{ prefix: 'x', allowRoles: ['sponsor'] }] }));
+    await assertSucceeds(asUser(UID_SUPER).doc('config/roleAccess').update({ gates: [] }));
+    await assertSucceeds(asUser(UID_SUPER).doc('config/roleAccess').delete());
+    await assertSucceeds(asUser(UID_SUPER).doc('config/roles').set({ list: [{ id: 'basic', label: 'Basic' }] }));
+  });
+});
+
 describe('unlisted collections are denied by default', () => {
   test('an arbitrary collection is closed to everyone', async () => {
     await assertFails(asUser(UID_SUPER).doc('random_stuff/x').set({ a: 1 }));

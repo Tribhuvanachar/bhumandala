@@ -167,6 +167,21 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Role-based content gating (8 Sep 2026): which taxonomy path prefixes
+    // are restricted, and to which roles — read by every client (including
+    // signed-out visitors, so a gate applies site-wide, not only to people
+    // who happen to be signed in) so dge/js/library.js and dge/js/role-access.js
+    // can hide gated content in the reader. Public read is correct here in
+    // the same sense library-overrides.json's "hidden" list is: this is
+    // UI-level curation, not the storage of anything sensitive — the actual
+    // grantha text is a public static file either way (see role-access.js's
+    // own header for the caveat spelled out for whoever configures a gate).
+    // Writes are superadmin-only, from admin/access-control.html.
+    match /config/{docId} {
+      allow read: if true;
+      allow write: if isSuperadmin();
+    }
+
     // Anything not matched above is denied by default. Stated explicitly
     // so that adding a collection later is a conscious decision rather
     // than something that silently inherits access from a broad rule.

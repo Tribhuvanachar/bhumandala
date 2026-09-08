@@ -22,7 +22,8 @@ only `FIREBASE_PROJECT_ID` is used by the deploy workflows; the web config is pu
 | `FIREBASE_SERVICE_ACCOUNT` secret | ✅ added by the lead, 8 Sep 2026 |
 | Firestore rules + indexes deploy | ✅ **live, 8 Sep 2026, ~11:56 am IST** (`Deploy — Firestore rules & indexes` runs 8 and 9) — see §0.1 for what it actually took to get here |
 | Hosting deploy | ✅ **live, 8 Sep 2026, ~12:11 pm IST** — preview channel confirmed serving the real site (fetched, title "Sarvamūla Digital Library", the ॐ landing page and footer links render). First attempt had failed with `Error: ../.. is outside of project directory` (`dge/firebase/firebase.json`'s `hosting.public: "../.."` reached outside what firebase-tools treats as the config file's own directory); fixed with a dedicated `firebase-hosting.json` at the repo root (`public: "."`) used via `--config` — `dge/firebase/firebase.json` unchanged, still serves firestore/functions/emulators. `live` channel / DNS cutover is still the lead's decision, GitHub Pages remains the live origin until then |
-| Cloud Functions (WhatsApp OTP + broadcasts) | ⏳ Second attempt dispatched 8 Sep ~12:15 pm IST after the lead enabled Artifact Registry API (confirmed **Enabled** in Cloud Console), result pending as this line was written. First attempt had failed on that API not being enabled — not IAM, a one-time manual enable only a project owner can do |
+| Cloud Functions (WhatsApp OTP + broadcasts) | ⏳ Third attempt (run 3, 8 Sep ~6:09 pm IST) failed on **Cloud Build API not enabled** — Artifact Registry and Cloud Functions APIs are both confirmed enabled now, but deploying a function also needs `cloudbuild.googleapis.com`, and the service account still can't self-enable a new API (same pattern as the other two). The lead needs to open https://console.cloud.google.com/apis/library/cloudbuild.googleapis.com?project=sarvamula-org and click Enable, then re-dispatch `Deploy — Firebase Functions` |
+| Role-based content access (Access Control) | ✅ **built 8 Sep 2026** — see §0.3 |
 
 ### 0.1 What actually blocked the Firestore deploy (resolved 8 Sep 2026)
 
@@ -115,6 +116,59 @@ This is the actual sequence, in order — each step names who does it:
 Nothing in steps 1, 4, 5, 7 can be done by an AI session — they're either a decision only you can make,
 or require Meta Business Manager / GitHub settings access. Steps 3, 6, 8 are mine once their
 prerequisites land; tell me when each is ready rather than waiting for all of them at once.
+
+### 0.3 Role-based content access (`admin/access-control.html`)
+
+The lead's ask: create custom roles beyond the fixed six, restrict specific library paths
+(commentaries, granthas, whole folders) to specific roles, test the result without needing several
+real accounts, and have a real signed-in account actually reflect its role in the app. Deliberately
+**UI-level hiding, not server-enforced access** — the lead's explicit choice when offered both: a gated
+path is left out of the reader's navigation/search for a role that can't see it, the same way
+`admin/library.html`'s "Hide" list already works, but the underlying `data.json` stays a public static
+file and a direct URL still fetches it. Real per-request enforcement would mean serving corpus text
+through an authenticated proxy instead of static files on Hosting — a materially different (and more
+expensive, see the cost note below) hosting architecture, out of scope unless asked for later.
+
+**Pieces:**
+- `firestore.rules`' `config/{docId}` block — `config/roles` (`{list:[{id,label}]}`) and
+  `config/roleAccess` (`{gates:[{prefix,allowRoles:[id,...]}]}`), public read (so a signed-out visitor's
+  view is gated too), superadmin-only write. Covered by 4 of the 51 rules-emulator tests in
+  `dge/firebase/tests/rules.spec.js`.
+- `dge/js/role-access.js` — loads those two docs once (cached), a pure prefix-matcher
+  (`dgeMatchRoleGate`/`dgeIsRoleGatedPath`, unit tested in `dge/firebase/tests/role-access.test.js`
+  without any Firebase/DOM), and `dgeSetPreviewRole`/`dgeGetPreviewRole`/`dgeClearPreviewRole`
+  (sessionStorage, superadmin-only) for previewing the reader as another role in the same browser.
+- `dge/js/library.js`'s `dgeIsHiddenPath` — extended with one extra check
+  (`dgeIsHiddenByRoleGate`) alongside the pre-existing curator "hidden" list; a real admin/superadmin
+  always bypasses a gate (so curating one can't lock its own author out), a *previewed* role does not.
+- `admin/access-control.html` — role list (add/remove custom roles; the six built-ins can't be
+  removed), a content-gate picker (path + which roles may see it, longest-prefix-wins), and an
+  in-page "Test it" panel that checks the DRAFT instantly (no save needed) — the fast
+  create-role → grant-access → test loop the lead asked for. Gated the same way every other
+  `admin/*.html` page is (a passkey from `admin/config/keys.json`, or `localStorage.is_superadmin`) —
+  but that only opens the PAGE; **saving still requires being actually signed in with a Firebase
+  account whose stored role is `superadmin`**, enforced for real by the rules above, not by this page's
+  own passkey.
+- "Log in and see what roles I've got": `dge/js/user-auth.js`'s `dgeBridgeRoleToAdminTools()` — on
+  every sign-in, mirrors the REAL Firestore role (`admin`/`superadmin`) onto the same
+  `localStorage.is_superadmin`/`acharyaAuthorized` flags the old `?superadmin=CODE` passkey sets, live,
+  no reload — so a real account now reveals the admin tools menu (including Access Control) the same
+  way the passkey always did, without replacing the passkey.
+
+**Cost**: reads two small Firestore docs per page view, on top of the Firebase SDK `user-auth.js`
+already loads unconditionally whenever `AUTH_CONFIG.enabled` — well inside the free tier (50k
+reads/day) at any traffic this site sees today. The lead separately asked whether the *whole* corpus
+(not just these two config docs) could move into Firestore instead of static JSON: no — Firestore's
+1 MiB per-document limit is a hard wall several `data.json` files already blow past by 20-70x (measured,
+not estimated), so that would need re-chunking ~16,000 files into 100,000+ documents, and would turn
+today's flat/CDN-cached hosting cost into one that scales with reader traffic. Not recommended; noted
+here so the reasoning isn't lost.
+
+**Not yet done**: nothing in this feature is deployed differently from the rest of the site — it rides
+the existing Firestore rules + Hosting deploys above. It has not been exercised against a *live*
+Firestore project (this session's Playwright check ran against the real page but with gstatic.com
+unreachable from the sandbox, which the code handles by falling back to "no gates configured" — worth
+one real click-through once Firestore is confirmed reachable from wherever the lead tests next).
 
 ## 1. What this is
 
