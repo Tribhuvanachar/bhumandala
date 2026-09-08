@@ -22,8 +22,9 @@ Probed from the public endpoints and re-tested 8 Sep 2026:
 | Google sign-in provider | ✅ enabled by the lead (6 Sep 2026, ~9:40 pm IST) |
 | Firestore database | ✅ **created by the lead, 8 Sep 2026** (production mode, per §3.3 below) — `firestore.rules` re-validated against the real emulator right after (47/47 tests pass, `npm run test:rules` in `dge/firebase/tests`), but **not yet published to the live database**: see the row below |
 | `FIREBASE_SERVICE_ACCOUNT` secret | ✅ **added by the lead, 8 Sep 2026, ~10:11 am IST** — the workflows now parse it correctly (`service account: firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`); the earlier "no key found" blocker is resolved |
-| Firestore rules + indexes deploy | ❌ **New blocker, 8 Sep 2026 ~10:15 am IST (run 1 of `Deploy — Firestore rules & indexes`)**: `Error: Request to https://firebaserules.googleapis.com/v1/projects/sarvamula-org:test had HTTP Error: 403, The caller does not have permission`. This is a Google Cloud **IAM role** gap, not a secret problem — see §0.1 below for the fix and why. Until it runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes denied by Firestore's own production-mode default, not by our rules); sign-in still works via the existing fallback (profile read/write failure → "signed in, default role") |
-| Hosting deploy | ⏸ **Not yet re-tried** — the service-account secret now resolves, but Hosting almost certainly needs the same IAM role granted below before it will deploy either; re-dispatch after the fix, don't assume it's a separate issue until proven so |
+| Firestore rules + indexes deploy | ❌ **Same 403 on both attempts, 10:15 am and 10:36 am IST**, run 1 (before the role) and run 2 (right after saving "Firebase Admin"): `Error: Request to https://firebaserules.googleapis.com/v1/projects/sarvamula-org:test had HTTP Error: 403, The caller does not have permission`. §0.1 explains the role and how to add it; the identical failure ~20 minutes after saving is longer than ordinary IAM propagation (usually seconds, rarely a few minutes), so before a third attempt: (a) reopen IAM & Admin → IAM for `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` and confirm "Firebase Admin" is actually listed among its roles now — the earlier screenshot showed the *edit* form with it added but not a post-save confirmation; (b) separately check APIs & Services → Enabled APIs & services for **"Firebase Rules API"** (`firebaserules.googleapis.com`) — if a fresh project never had it explicitly enabled, that is a second, independent gap a role grant does not fix, and it looks like the same 403 message. Until this runs once, Firestore enforces **no rules at all** for a database just created in production mode (reads/writes denied by Firestore's own production-mode default, not by our rules); sign-in still works via the existing fallback (profile read/write failure → "signed in, default role") |
+| Hosting deploy | ⏸ **Not yet re-tried** — hold until Firestore rules deploy actually succeeds once, since it needs the same service account and likely the same fix; re-dispatch right after, don't assume it's a separate issue until proven so |
+| Cloud Functions (WhatsApp OTP + broadcasts) | ⏸ **Not started** — see §0.2 for the ordered checklist. Two workflows are ready: `Deploy — Firebase Functions` and `Push Firebase Functions secrets` (deploys `dge/firebase/functions`, pushes WhatsApp/MSG91/OTP_PEPPER secrets from GitHub into Firebase Secret Manager without them passing through chat). Both wait on the same IAM/API fix above, and functions (2nd-gen, Cloud Run-backed) may need further roles on top — read the exact 403 when it happens, same playbook, don't pre-grant a guessed bundle |
 
 ### 0.1 The IAM fix needed before either deploy workflow can succeed
 
@@ -47,6 +48,65 @@ Firebase's), not the Firebase console:
 That one role is broad enough to cover rules, indexes, and hosting deploys together, so it only needs to
 be done once. After saving, tell the next session (or re-dispatch `Deploy — Firestore rules & indexes`
 directly) — IAM changes apply within a minute or two, no redeploy of anything else needed.
+
+### 0.2 Phone OTP + WhatsApp — the ordered path to turning it on
+
+Read §2 first (cost) and §5 (channel tradeoffs) if you haven't. Recommendation there stands: prefer
+`'whatsapp'` over `'firebase'` once you're ready for phone verification, for the ~6x cost difference.
+This is the actual sequence, in order — each step names who does it:
+
+1. **You: decide the channel.** `'whatsapp'`, `'msg91'`, or stay on Google-only for now. The rest of
+   this list assumes `'whatsapp'`; `'msg91'` needs the same Cloud Functions plus DLT registration (§7
+   doesn't cover DLT — that's an MSG91-side process).
+2. **You: get Firestore rules deploying** (§0/§0.1 above) — Cloud Functions read the same project and
+   the same rules govern `broadcasts`/`users` writes, so this has to work first.
+3. **Me, once (2) is green: dispatch `Deploy — Firebase Functions`.** This deploys everything in
+   `dge/firebase/functions` (`requestOtp`, `verifyOtp`, `whatsappWebhook`, `runWhatsAppBroadcast`, the
+   admin workflow-dispatch functions). The functions that need WhatsApp secrets will exist but error
+   when called until step 5 — that's expected, it doesn't block this deploy. If this 403s, it's very
+   likely a *further* IAM role (2nd-gen functions deploy to Cloud Run under the hood and are more
+   permission-hungry than Hosting/Firestore) — the workflow's header explains what to look for; read
+   the actual error and grant only what it names, same playbook as §0.1.
+4. **You: set up Meta.** Nobody but you (or Adarsh) can do this part:
+   - Create a Meta Business account and a WhatsApp Business app at developers.facebook.com.
+   - WhatsApp → API Setup: note the **Phone number ID**, generate a **permanent** (System User) access
+     token — not the 24-hour temporary one.
+   - WhatsApp Manager → Message templates → create an **Authentication** template named `dge_otp`
+     with the **copy code** button enabled. Approval is usually minutes to a few hours.
+   - Create a **Utility** template for broadcasts (e.g. the daily shloka), with whatever variables you
+     want to fill in per message.
+   - Meta app → Settings → Basic: note the **App Secret**.
+   - Pick any long random string for `OTP_PEPPER` (a password manager's generator is fine) — **write
+     it down somewhere durable**, see the warning in step 5.
+5. **You: add six GitHub repository secrets** (same screen as `FIREBASE_SERVICE_ACCOUNT` — Settings →
+   Secrets and variables → Actions → Repository secrets): `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`,
+   `WHATSAPP_VERIFY_TOKEN` (any random string you choose — Meta will ask for this exact value in step
+   6), `WHATSAPP_APP_SECRET`, `OTP_PEPPER`, and `MSG91_AUTHKEY` only if using that channel instead.
+   **`OTP_PEPPER` is written once, ever.** Phone-account UIDs are derived from it — changing it later
+   orphans every existing phone account. `push-firebase-function-secrets.yml` refuses to overwrite an
+   existing `OTP_PEPPER` version unless you explicitly tick `rotate_otp_pepper`, precisely to prevent
+   that by accident.
+6. **Me, once (5) is done: dispatch `Push Firebase Functions secrets`.** Pushes each one from GitHub
+   into Firebase's own Secret Manager, where the functions actually read them — never through this
+   chat, never committed. I'll report which names were pushed (never the values).
+7. **You: point Meta's webhook** at the deployed `whatsappWebhook` function URL (printed in the step-4
+   deploy log, or Firebase Console → Functions → `whatsappWebhook` → copy the trigger URL), using the
+   `WHATSAPP_VERIFY_TOKEN` from step 5, and subscribe to the `messages` field. This is what honours
+   **STOP** replies — not optional, ignoring opt-outs is a Meta policy breach and damages the sender
+   quality rating that governs how much WhatsApp lets the account send at all.
+8. **Me: flip the switches in `dge/js/config.js`** and merge: `AUTH_CONFIG.enablePhoneAuth = true`,
+   `phoneOtpProvider = 'whatsapp'`, and — only once you're ready for broadcasts specifically —
+   `enableWhatsappBroadcasts = true`. These can land in one commit or two; broadcasts don't require
+   phone auth to be on, they're independent (§8).
+9. **Both: test end to end.** Sign in with a real phone number, confirm the WhatsApp OTP arrives with
+   the copy-code button, confirm a wrong code is rejected and rate limits hold (1/minute, 5/hour per
+   number — `functions/lib/otp-core.js`). For broadcasts, add one test document to the `broadcasts`
+   collection with `sendAfter` a minute out and confirm it fires and marks itself delivered (§8 has the
+   exact document shape).
+
+Nothing in steps 1, 4, 5, 7 can be done by an AI session — they're either a decision only you can make,
+or require Meta Business Manager / GitHub settings access. Steps 3, 6, 8 are mine once their
+prerequisites land; tell me when each is ready rather than waiting for all of them at once.
 
 ## 1. What this is
 

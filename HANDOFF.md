@@ -141,25 +141,34 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    used to write its catalogue over `/dge/index.html` and `/dge/kavya/index.html` (the app shell and the Kāvya
    reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/dge/texts/`, `/dge/kavya/texts/`). CI
    proof-build re-dispatched with deploy=false; deploy=true still waits on the artifact-size question (see PENDING).
-5. **Firebase deploy: secret is resolved, now blocked on a Google Cloud IAM role (8 Sep, ~10:20 am IST).**
-   Firestore database created by the lead; rules re-ran clean against the real emulator (47/47,
-   `npm run test:rules` in `dge/firebase/tests`). Added `.github/workflows/deploy-firestore.yml` (rules +
-   indexes, also fires on push to those two files) reusing Hosting's service-account resolution. The lead
-   added `FIREBASE_SERVICE_ACCOUNT` (the Adarsh-generated key) as a repository secret — both workflows now
-   parse it correctly (`service account: firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`), so
-   the old "no key found" blocker is gone. Dispatching `Deploy — Firestore rules & indexes` hit a *new*,
-   different blocker: `403, The caller does not have permission` from `firebaserules.googleapis.com`. This is
-   a Google Cloud IAM role gap — the default `firebase-adminsdk-*` service account only carries "Firebase
-   Admin SDK Administrator Service Agent" (`roles/firebase.sdkAdminServiceAgent`), which covers server-side
-   Admin SDK reads/writes, not control-plane deploys. **Lead:** in **Google Cloud Console** (not Firebase
-   console) → IAM & Admin → IAM → project `sarvamula-org` → find
-   `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` → Edit → Add another role → **"Firebase
-   Admin"** (`roles/firebase.admin`) → Save. Full walkthrough in `dge/FIREBASE_SETUP.md` §0.1. That one role
-   should cover rules, indexes, and hosting together. Once granted: re-dispatch `Deploy — Firestore rules &
-   indexes` (rules take effect within about a minute), then `Deploy — Firebase Hosting` with channel=preview
-   (untried since the secret was added — likely needs the same role, not yet proven a separate issue), verify
-   Google sign-in and a real profile write on the preview URL, then decide live channel / DNS cutover — that
-   decision stays the lead's.
+5. **Firebase deploy: secret resolved, IAM role added, same 403 persists — needs a second look (8 Sep,
+   ~10:40 am IST).** Firestore database created by the lead; rules re-ran clean against the real emulator
+   (47/47, `npm run test:rules` in `dge/firebase/tests`). `FIREBASE_SERVICE_ACCOUNT` added as a repository
+   secret — the deploy workflows now parse it correctly (`service account:
+   firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`), so the old "no key found" blocker is
+   gone. The lead then granted the service account the **"Firebase Admin"** role
+   (`roles/firebase.admin`) in Google Cloud Console → IAM & Admin → IAM, per `dge/FIREBASE_SETUP.md` §0.1,
+   and confirmed it saved. Re-dispatching `Deploy — Firestore rules & indexes` (run 2) hit the **identical**
+   error as run 1, before the role was granted: `403, The caller does not have permission` from
+   `firebaserules.googleapis.com`. ~20 minutes between the grant and run 2 is longer than ordinary IAM
+   propagation. **Lead, two things to check before a third attempt:** (a) reopen the IAM page for
+   `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` and confirm "Firebase Admin" is actually
+   listed among its roles now, not just added-then-not-saved; (b) Google Cloud Console → APIs & Services →
+   Enabled APIs & services → check whether **"Firebase Rules API"** is enabled for `sarvamula-org` — a
+   fresh project that never had this specific API turned on can throw the exact same 403 message, and a
+   role grant does not fix a disabled API. Once either is corrected (or a longer wait confirms it really
+   was propagation), re-dispatch `Deploy — Firestore rules & indexes`, then `Deploy — Firebase Hosting`
+   with channel=preview, verify Google sign-in and a real profile write on the preview URL, then decide
+   live channel / DNS cutover — that decision stays the lead's.
+   Also built and ready for when the above clears: `.github/workflows/deploy-firebase-functions.yml`
+   (deploys `dge/firebase/functions` — OTP, WhatsApp webhook, broadcasts, the admin workflow panel) and
+   `.github/workflows/push-firebase-function-secrets.yml` (pushes `WHATSAPP_TOKEN`,
+   `WHATSAPP_PHONE_NUMBER_ID`, `WHATSAPP_VERIFY_TOKEN`, `WHATSAPP_APP_SECRET`, `OTP_PEPPER`, `MSG91_AUTHKEY`
+   from GitHub repository secrets into Firebase Secret Manager non-interactively, with a guard against ever
+   silently rotating `OTP_PEPPER`). Full ordered checklist — who does each step — in
+   `dge/FIREBASE_SETUP.md` §0.2; 2nd-gen Cloud Functions deploys are more permission-hungry than
+   Hosting/Firestore and may need a further IAM role once tried — diagnose from the actual error, same
+   playbook as §0.1, don't pre-grant a guessed bundle.
    Security note left for the lead: the service-account JSON passed through this chat session to get set up —
    worth generating a fresh key and deleting the old one from Firebase Console → Project settings → Service
    accounts once the deploy is confirmed working, as routine hygiene.
