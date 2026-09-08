@@ -21,8 +21,8 @@ only `FIREBASE_PROJECT_ID` is used by the deploy workflows; the web config is pu
 | Firestore database | ✅ created by the lead, 8 Sep 2026 (production mode, per §3.3 below) |
 | `FIREBASE_SERVICE_ACCOUNT` secret | ✅ added by the lead, 8 Sep 2026 |
 | Firestore rules + indexes deploy | ✅ **live, 8 Sep 2026, ~11:56 am IST** (`Deploy — Firestore rules & indexes` runs 8 and 9) — see §0.1 for what it actually took to get here |
-| Hosting deploy | ⏳ dispatched (channel=preview), result pending as this line was written |
-| Cloud Functions (WhatsApp OTP + broadcasts) | ⏳ dispatched, result pending — see §0.2 for the ordered checklist once functions are live |
+| Hosting deploy | ⚠️ First real attempt (8 Sep, ~11:59 am IST) failed with `Error: ../.. is outside of project directory` — `dge/firebase/firebase.json`'s `hosting.public: "../.."` reaches outside what firebase-tools treats as the config file's own directory. Fixed: a dedicated `firebase-hosting.json` at the repo root (`public: "."`), used via `--config`; `dge/firebase/firebase.json` is unchanged and still serves firestore/functions/emulators. Re-dispatch pending |
+| Cloud Functions (WhatsApp OTP + broadcasts) | ⚠️ First real attempt (8 Sep, ~12:00 pm IST) failed with `Error: Permissions denied enabling artifactregistry.googleapis.com` — not IAM, a one-time manual API enable only a project **owner** can do (the CLI auto-enabled Cloud Build and Cloud Functions APIs fine, then hit this one). **Lead:** Google Cloud Console → APIs & Services → Library → search "Artifact Registry API" → Enable. Re-dispatch after |
 
 ### 0.1 What actually blocked the Firestore deploy (resolved 8 Sep 2026)
 

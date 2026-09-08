@@ -13,6 +13,13 @@
 # names the missing role; grant it to firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com
 # in Google Cloud Console -> IAM & Admin -> IAM, the same way "Firebase Admin" was added. Don't guess
 # a bundle of roles up front — grant only what the actual error asks for, one at a time.
+#
+# 8 Sep 2026, run 1: hit "Error: Permissions denied enabling artifactregistry.googleapis.com. Please
+# ask a project owner to visit [console link] to enable this service." Not an IAM-role problem — the
+# CLI auto-enabled cloudbuild.googleapis.com and cloudfunctions.googleapis.com fine, then a project
+# owner (not the service account) needs to manually enable Artifact Registry API once, the same way
+# Firestore/Rules APIs were checked earlier: Google Cloud Console -> APIs & Services -> Library ->
+# search "Artifact Registry API" -> Enable. One-time; re-dispatch after.
 
 name: Deploy — Firebase Functions
 
