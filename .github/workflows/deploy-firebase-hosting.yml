@@ -4,19 +4,13 @@
 # (6 Sep 2026). GitHub Pages stays the live origin until the DNS cutover in that guide's Part 3; this
 # workflow publishes the same commit to https://<project>.web.app so it can be checked first.
 #
-# 8 Sep 2026: FIREBASE_SERVICE_ACCOUNT is now set and correctly parsed (the Assemble step succeeds,
-# logging "service account: firebase-adminsdk-fbsvc@...iam.gserviceaccount.com | source: SA_JSON_1"),
-# but the actual deploy fails with:
-#   Error: Request to https://firebaserules.googleapis.com/v1/projects/...:test had HTTP Error:
-#   403, The caller does not have permission
-# (deploy-firestore.yml hit this first; Hosting likely needs the same fix, untried as of 8 Sep 2026).
-# This is a Google Cloud IAM role gap, not a workflow or secret bug: the default firebase-adminsdk-*
-# service account only carries "Firebase Admin SDK Administrator Service Agent"
-# (roles/firebase.sdkAdminServiceAgent), which covers server-side Admin SDK reads/writes but NOT
-# control-plane deploys (rules, indexes, hosting). Fix, in Google Cloud Console (not the Firebase
-# console): IAM & Admin -> IAM, project sarvamula-org, find
-# firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com, Edit principal, Add another role ->
-# "Firebase Admin" (roles/firebase.admin) -> Save. That one role covers rules, indexes, and hosting.
+# 8 Sep 2026: uses dge/FIREBASE_SETUP.md §0.1's now-resolved service account (secret + IAM roles +
+# correct FIREBASE_PROJECT_ID). One Hosting-specific issue on top of that: the CLI rejected
+# dge/firebase/firebase.json's hosting.public ("../..", reaching the repo root) with
+# "Error: ../.. is outside of project directory" -- firebase-tools requires hosting.public to resolve
+# within the directory containing the config file it's reading. Fixed by giving Hosting its own config
+# at the repo root, ../firebase-hosting.json (public: "."), used here via --config instead of
+# dge/firebase/firebase.json (which still owns firestore/functions/emulators, unchanged).
 #
 # Secrets used (Settings → Secrets and variables → Actions):
 #   FIREBASE_PROJECT_ID        e.g. sarvamula-org                       (added by the lead 6 Sep 2026)
@@ -98,20 +92,19 @@ jobs:
               json.dump(sa, fh)
           print("service account:", sa.get("client_email"), "| source:", ", ".join(found))
           PY
-      - name: Write .firebaserc (gitignored on purpose — the repo never carries a project id)
-        run: |
-          printf '{ "projects": { "default": "%s" } }\n' "${{ secrets.FIREBASE_PROJECT_ID }}" > dge/firebase/.firebaserc
       - name: Deploy with the Firebase CLI
+        # Run from the repo root with --config firebase-hosting.json (not dge/firebase/firebase.json)
+        # so hosting.public: "." stays within the CLI's "project directory" -- see the header note above.
+        # --project is passed explicitly on every command, so no .firebaserc is needed.
         env:
           GOOGLE_APPLICATION_CREDENTIALS: /home/runner/.sa/key.json
           PID: ${{ secrets.FIREBASE_PROJECT_ID }}
           CHANNEL: ${{ inputs.channel }}
         run: |
           npm install -g firebase-tools@15 >/dev/null 2>&1
-          cd dge/firebase
           if [ "$CHANNEL" = "live" ]; then
-            firebase deploy --only hosting --project "$PID" --non-interactive
+            firebase deploy --only hosting --project "$PID" --non-interactive --config firebase-hosting.json
             echo "live: https://$PID.web.app"
           else
-            firebase hosting:channel:deploy "$CHANNEL" --project "$PID" --expires 7d --non-interactive
+            firebase hosting:channel:deploy "$CHANNEL" --project "$PID" --expires 7d --non-interactive --config firebase-hosting.json
           fi
