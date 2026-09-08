@@ -141,25 +141,28 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    used to write its catalogue over `/dge/index.html` and `/dge/kavya/index.html` (the app shell and the Kāvya
    reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/dge/texts/`, `/dge/kavya/texts/`). CI
    proof-build re-dispatched with deploy=false; deploy=true still waits on the artifact-size question (see PENDING).
-5. **Firebase deploy: secret resolved, IAM role added, same 403 persists — needs a second look (8 Sep,
-   ~10:40 am IST).** Firestore database created by the lead; rules re-ran clean against the real emulator
-   (47/47, `npm run test:rules` in `dge/firebase/tests`). `FIREBASE_SERVICE_ACCOUNT` added as a repository
-   secret — the deploy workflows now parse it correctly (`service account:
-   firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`), so the old "no key found" blocker is
-   gone. The lead then granted the service account the **"Firebase Admin"** role
-   (`roles/firebase.admin`) in Google Cloud Console → IAM & Admin → IAM, per `dge/FIREBASE_SETUP.md` §0.1,
-   and confirmed it saved. Re-dispatching `Deploy — Firestore rules & indexes` (run 2) hit the **identical**
-   error as run 1, before the role was granted: `403, The caller does not have permission` from
-   `firebaserules.googleapis.com`. ~20 minutes between the grant and run 2 is longer than ordinary IAM
-   propagation. **Lead, two things to check before a third attempt:** (a) reopen the IAM page for
-   `firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com` and confirm "Firebase Admin" is actually
-   listed among its roles now, not just added-then-not-saved; (b) Google Cloud Console → APIs & Services →
-   Enabled APIs & services → check whether **"Firebase Rules API"** is enabled for `sarvamula-org` — a
-   fresh project that never had this specific API turned on can throw the exact same 403 message, and a
-   role grant does not fix a disabled API. Once either is corrected (or a longer wait confirms it really
-   was propagation), re-dispatch `Deploy — Firestore rules & indexes`, then `Deploy — Firebase Hosting`
-   with channel=preview, verify Google sign-in and a real profile write on the preview URL, then decide
-   live channel / DNS cutover — that decision stays the lead's.
+5. **Firebase deploy: secret resolved, IAM role confirmed, API confirmed enabled — three attempts, identical
+   403 every time. Suspect account/billing verification, not IAM (8 Sep, ~10:52 am IST).** Firestore database
+   created by the lead; rules re-ran clean against the real emulator (47/47, `npm run test:rules` in
+   `dge/firebase/tests`). `FIREBASE_SERVICE_ACCOUNT` added as a repository secret — the deploy workflows now
+   parse it correctly (`service account: firebase-adminsdk-fbsvc@sarvamula-org.iam.gserviceaccount.com`), so
+   the old "no key found" blocker is gone. The lead granted the service account the **"Firebase Admin"** role
+   (`roles/firebase.admin`) in Google Cloud Console → IAM & Admin → IAM, per `dge/FIREBASE_SETUP.md` §0.1.
+   Runs 1, 2, and 3 of `Deploy — Firestore rules & indexes` (10:15, 10:36, 10:50 am IST) all failed with the
+   *exact same* error: `403, The caller does not have permission` from `firebaserules.googleapis.com`. The
+   lead has since verified directly in the console that **both suspects are genuinely fine**: the "Firebase
+   Admin" role is listed on the service account (screenshot confirmed), and "Firebase Rules API" shows **API
+   Enabled**. So the cause is neither of those. A console banner was spotted reading "To avoid losing access
+   to Google Cloud services, an administrator must verify th…" — the project owner
+   (`jagadgurumadhvacharyaadmin@gmail.com`) is a personal Gmail account, not a Workspace/Cloud Identity org,
+   and Google gates some API calls behind an account-or-billing verification step for exactly this project
+   shape, which can 403 even when IAM and API enablement both check out. **Lead: open that banner, read the
+   full text, complete whatever verification it links to** (see `dge/FIREBASE_SETUP.md` §0.1a for the
+   fallback if it doesn't lead anywhere — testing with the owner's own `gcloud` login instead of the service
+   account, to isolate service-account-specific vs. project-wide). Once resolved: re-dispatch `Deploy —
+   Firestore rules & indexes`, then `Deploy — Firebase Hosting` with channel=preview, verify Google sign-in
+   and a real profile write on the preview URL, then decide live channel / DNS cutover — that decision stays
+   the lead's.
    Also built and ready for when the above clears: `.github/workflows/deploy-firebase-functions.yml`
    (deploys `dge/firebase/functions` — OTP, WhatsApp webhook, broadcasts, the admin workflow panel) and
    `.github/workflows/push-firebase-function-secrets.yml` (pushes `WHATSAPP_TOKEN`,
