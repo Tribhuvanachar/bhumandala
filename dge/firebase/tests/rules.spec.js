@@ -345,6 +345,120 @@ describe('config — role gates, readable by everyone, writable only by a supera
   });
 });
 
+describe('donors — the most sensitive PII, superadmin read only', () => {
+  test('a signed-out visitor, a basic user, and an admin (not superadmin) are all denied read', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('donors/d1').set({ fullName: 'X', email: 'x@x.com', pan: 'ABCDE1234F' });
+    });
+    await assertFails(asAnon().doc('donors/d1').get());
+    await assertFails(asUser(UID_BASIC).doc('donors/d1').get());
+    await assertFails(asUser(UID_ADMIN).doc('donors/d1').get());
+  });
+  test('a superadmin can read it', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('donors/d1').set({ fullName: 'X', email: 'x@x.com' });
+    });
+    await assertSucceeds(asUser(UID_SUPER).doc('donors/d1').get());
+  });
+  test('no client, not even a superadmin, may write directly — only Cloud Functions (Admin SDK) may', async () => {
+    await assertFails(asUser(UID_SUPER).doc('donors/d2').set({ fullName: 'X', email: 'x@x.com' }));
+  });
+});
+
+describe('donations — admin read, no direct client write ever', () => {
+  test('a basic user cannot read', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('donations/don1').set({ donationReference: 'DGE-1', status: 'SUCCESS', amountMinor: 100 });
+    });
+    await assertFails(asUser(UID_BASIC).doc('donations/don1').get());
+  });
+  test('an admin can read', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('donations/don1').set({ donationReference: 'DGE-1', status: 'SUCCESS', amountMinor: 100 });
+    });
+    await assertSucceeds(asUser(UID_ADMIN).doc('donations/don1').get());
+  });
+  test('a client cannot set its own donation to SUCCESS — this is exactly the tamper this feature must resist', async () => {
+    await assertFails(asUser(UID_SUPER).doc('donations/don2').set({ status: 'SUCCESS', amountMinor: 999999999 }));
+    await assertFails(asUser(UID_BASIC).doc('donations/don2').set({ status: 'SUCCESS', amountMinor: 1 }));
+  });
+});
+
+describe('payments — admin read, no client write', () => {
+  test('read/write follow the same admin-only, no-client-write shape as donations', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('payments/p1').set({ donationId: 'don1', gateway: 'mock' });
+    });
+    await assertFails(asUser(UID_BASIC).doc('payments/p1').get());
+    await assertSucceeds(asUser(UID_ADMIN).doc('payments/p1').get());
+    await assertFails(asUser(UID_SUPER).doc('payments/p1').set({ gatewayStatus: 'SUCCESS' }));
+  });
+});
+
+describe('payment_events — sealed off from every client, like otp_challenges', () => {
+  test('not even a superadmin may read or write it', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('payment_events/mock_evt1').set({ gateway: 'mock', processingStatus: 'PROCESSED' });
+    });
+    await assertFails(asUser(UID_SUPER).doc('payment_events/mock_evt1').get());
+    await assertFails(asUser(UID_SUPER).doc('payment_events/mock_evt2').set({ gateway: 'mock' }));
+  });
+});
+
+describe('receipts and receipt_counters — no client access to the counters, admin read on receipts', () => {
+  test('receipts: admin can read, nobody can write', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('receipts/don1').set({ receiptNumber: 'DGE-2026-000001' });
+    });
+    await assertSucceeds(asUser(UID_ADMIN).doc('receipts/don1').get());
+    await assertFails(asUser(UID_BASIC).doc('receipts/don1').get());
+    await assertFails(asUser(UID_SUPER).doc('receipts/don1').set({ receiptNumber: 'DGE-2026-999999' }));
+  });
+  test('receipt_counters: sealed from every client — a client that could write this could mint its own receipt numbers', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('receipt_counters/2026').set({ seq: 5 });
+    });
+    await assertFails(asUser(UID_SUPER).doc('receipt_counters/2026').get());
+    await assertFails(asUser(UID_SUPER).doc('receipt_counters/2026').set({ seq: 999999 }));
+  });
+});
+
+describe('supporter_entitlements — admin read only until Phase 3 links a donor to a uid', () => {
+  test('a basic user cannot read someone else\'s entitlement', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('supporter_entitlements/d1_PREMIUM_LIBRARY').set({ donorId: 'd1', entitlementCode: 'PREMIUM_LIBRARY' });
+    });
+    await assertFails(asUser(UID_BASIC).doc('supporter_entitlements/d1_PREMIUM_LIBRARY').get());
+    await assertSucceeds(asUser(UID_ADMIN).doc('supporter_entitlements/d1_PREMIUM_LIBRARY').get());
+  });
+});
+
+describe('public_supporters — the one collection in this feature that is public read', () => {
+  test('a signed-out visitor can read it', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('public_supporters/don1').set({ displayName: 'Sri Example', amountMinor: null, currency: 'INR' });
+    });
+    await assertSucceeds(asAnon().doc('public_supporters/don1').get());
+  });
+  test('no client, not even a superadmin, may write it directly — only onDonationSucceeded may', async () => {
+    await assertFails(asUser(UID_SUPER).doc('public_supporters/don2').set({ displayName: 'Forged Name', amountMinor: 999999999 }));
+  });
+  test('it never carries donor PII fields even when present in the seeded doc — the RULE does not filter fields, so this documents what index.js must never write, not something the rules themselves enforce', async () => {
+    // Firestore rules can restrict which DOCUMENTS are readable, not
+    // which FIELDS within an allowed document — so the actual privacy
+    // guarantee here is entirely "onDonationSucceeded in index.js only
+    // ever writes displayName/amountMinor/currency/paidAt/donationReference".
+    // This test exists as a tripwire: if a future edit ever writes email
+    // or pan onto this collection, nothing in the rules would catch it.
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('public_supporters/don3').set({ displayName: 'X', amountMinor: 100, currency: 'INR' });
+    });
+    const snap = await asAnon().doc('public_supporters/don3').get();
+    const data = snap.data();
+    assert.ok(!('email' in data) && !('pan' in data) && !('phone' in data) && !('donorId' in data));
+  });
+});
+
 describe('unlisted collections are denied by default', () => {
   test('an arbitrary collection is closed to everyone', async () => {
     await assertFails(asUser(UID_SUPER).doc('random_stuff/x').set({ a: 1 }));

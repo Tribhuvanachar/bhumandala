@@ -32,6 +32,11 @@ const waLib = require('./lib/whatsapp');
 const { getProvider, assertProviderAllowed } = require('./lib/providers');
 const broadcastCore = require('./lib/broadcast-core');
 const wf = require('./lib/workflows-core');
+const donationCore = require('./lib/donation-core');
+const paymentState = require('./lib/payment-state');
+const { getGateway, assertGatewayAllowed } = require('./lib/payment-providers');
+const receiptCore = require('./lib/receipt-core');
+const { getEmailProvider } = require('./lib/email-providers');
 
 initializeApp();
 const db = getFirestore();
@@ -70,9 +75,27 @@ const MSG91_TEMPLATE_ID = defineString('MSG91_TEMPLATE_ID', { default: '' });
 const GITHUB_DISPATCH_TOKEN = defineSecret('GITHUB_DISPATCH_TOKEN');
 const GITHUB_REPO = defineString('GITHUB_REPO', { default: 'Tribhuvanachar/bhumandala' });
 
+// The donation/supporter system's own secrets and config. No real
+// payment gateway is wired in yet — see PAYMENTS_SETUP.md for why, and
+// for the plan to add one. PAYMENT_WEBHOOK_SECRET is the `mock` gateway's
+// shared HMAC secret today; a real gateway gets its OWN secret name
+// alongside this one when chosen (each gateway's webhook signing is
+// different), not a rename of this one.
+const PAYMENT_WEBHOOK_SECRET = defineSecret('PAYMENT_WEBHOOK_SECRET');
+const PAYMENT_GATEWAY = defineString('PAYMENT_GATEWAY', { default: 'mock' });
+const EMAIL_PROVIDER = defineString('EMAIL_PROVIDER', { default: 'console' });
+
 const CHALLENGES = 'otp_challenges';
 const USERS = 'users';
 const DISPATCHES = 'workflow_dispatches';
+const DONORS = 'donors';
+const DONATIONS = 'donations';
+const PAYMENTS = 'payments';
+const PAYMENT_EVENTS = 'payment_events';
+const RECEIPTS = 'receipts';
+const RECEIPT_COUNTERS = 'receipt_counters';
+const SUPPORTER_ENTITLEMENTS = 'supporter_entitlements';
+const PUBLIC_SUPPORTERS = 'public_supporters';
 
 function providerConfig(providerId) {
   return {
@@ -578,7 +601,393 @@ exports.runWorkflow = onCall(
   }
 );
 
+// =====================================================================
+// Donations, payments, receipts, supporters — Phase 1 foundation.
+//
+// No real payment gateway is wired in yet (see PAYMENTS_SETUP.md): the
+// `mock` gateway (lib/payment-providers.js) exercises this entire
+// pipeline — createDonation, a webhook, the state machine, the receipt,
+// the public Supporters Wall entry — end to end, so it is all built and
+// tested for real right now rather than only sketched. Adding a real
+// gateway later means adding one entry to lib/payment-providers.js;
+// nothing below this comment should need to change.
+//
+// The one rule everything here enforces: nothing the browser says about
+// a payment's OUTCOME is ever trusted. `createDonation` only ever
+// creates a CREATED/PENDING record; only a verified gateway webhook
+// (paymentWebhook) can move a donation to SUCCESS, through
+// payment-state.js's state machine, which refuses to walk a donation
+// backwards or sideways from wherever a possibly-out-of-order or
+// possibly-replayed event finds it.
+// =====================================================================
+
+/** Finds a donor by email, or creates one. Never runs as a client-facing
+ *  query — only from inside createDonation, via the Admin SDK. */
+async function findOrCreateDonor(donorFields) {
+  const existing = await db.collection(DONORS).where('email', '==', donorFields.email).limit(1).get();
+  if (!existing.empty) {
+    const ref = existing.docs[0].ref;
+    // Keep the donor record current, but never silently drop a PAN a
+    // past donation supplied just because this one didn't include it.
+    const patch = { fullName: donorFields.fullName, updatedAt: FieldValue.serverTimestamp() };
+    if (donorFields.phone) patch.phone = donorFields.phone;
+    if (donorFields.pan) patch.pan = donorFields.pan;
+    await ref.update(patch);
+    return ref.id;
+  }
+  const ref = db.collection(DONORS).doc();
+  await ref.set({
+    fullName: donorFields.fullName,
+    email: donorFields.email,
+    phone: donorFields.phone || '',
+    countryCode: donorFields.countryCode,
+    pan: donorFields.pan || '',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp()
+  });
+  return ref.id;
+}
+
+/**
+ * Atomically claims the next receipt number for the given calendar year.
+ * A transaction, not a plain increment, because two donations reaching
+ * SUCCESS in the same instant must never be handed the same number.
+ */
+async function nextReceiptNumber(year) {
+  const ref = db.collection(RECEIPT_COUNTERS).doc(String(year));
+  const seq = await db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    const next = (snap.exists ? (snap.data().seq || 0) : 0) + 1;
+    tx.set(ref, { seq: next }, { merge: true });
+    return next;
+  });
+  return receiptCore.formatReceiptNumber(year, seq);
+}
+
+/**
+ * Placeholder for Phase 4 (supporter_entitlements). No entitlement is
+ * defined yet, so this is a deliberate no-op — the hook exists so
+ * granting one later is a change here, not a new webhook code path.
+ */
+async function maybeGrantEntitlements(/* donation */) {
+  return [];
+}
+
+// =====================================================================
+// createDonation — validates input, creates/reuses the donor, opens a
+// gateway order, and returns only what the browser needs to continue.
+// =====================================================================
+exports.createDonation = onCall(
+  { cors: true, enforceAppCheck: false },
+  async (request) => {
+    const data = request.data || {};
+
+    const donorCheck = donationCore.validateDonorInput(data);
+    if (!donorCheck.ok) {
+      throw new HttpsError('invalid-argument', donorCheck.errors.join('; '));
+    }
+
+    const amountMinor = donationCore.majorToMinor(data.amount);
+    if (amountMinor == null) {
+      throw new HttpsError('invalid-argument', 'Enter a valid amount, e.g. 501 or 501.50.');
+    }
+    const amountCheck = donationCore.validateAmountMinor(amountMinor);
+    if (!amountCheck.ok) {
+      throw new HttpsError('invalid-argument', amountCheck.reason);
+    }
+
+    const currency = donationCore.DEFAULT_CURRENCY; // single-currency until Phase 5 (international)
+    const gatewayId = PAYMENT_GATEWAY.value();
+    try {
+      assertGatewayAllowed(gatewayId);
+    } catch (e) {
+      logger.error('createDonation: gateway not allowed in this environment', { gatewayId, message: e.message });
+      throw new HttpsError('failed-precondition', 'Donations are not accepting payments on this deployment yet.');
+    }
+    const gateway = getGateway(gatewayId);
+
+    const donorId = await findOrCreateDonor(donorCheck.donor);
+    const donationReference = donationCore.generateDonationReference();
+
+    // contributionType/fcraApplicable are DELIBERATELY hardcoded to the
+    // conservative default regardless of the donor's own country until a
+    // human confirms the Trust's FCRA status and turns this on for real
+    // — see PAYMENTS_SETUP.md's FCRA boundary. This is not yet donor
+    // country-aware; that logic is Phase 5 work, not a bug here.
+    const donationRef = db.collection(DONATIONS).doc();
+    await donationRef.set({
+      donationReference,
+      donorId,
+      amountMinor,
+      currency,
+      gateway: gatewayId,
+      contributionType: 'DOMESTIC',
+      fcraApplicable: false,
+      purposeCode: donationCore.sanitizeDisplayText(data.purpose, donationCore.MAX_PURPOSE_LEN),
+      displayName: !!data.displayName,
+      displayAmount: !!data.displayAmount,
+      status: 'CREATED',
+      createdAt: FieldValue.serverTimestamp(),
+      paidAt: null,
+      updatedAt: FieldValue.serverTimestamp()
+    });
+
+    let order;
+    try {
+      order = await gateway.createOrder({
+        donationReference,
+        amountMinor,
+        currency,
+        customer: { donorId, name: donorCheck.donor.fullName, email: donorCheck.donor.email, phone: donorCheck.donor.phone },
+        returnUrl: typeof data.returnUrl === 'string' ? data.returnUrl : null
+      });
+    } catch (e) {
+      logger.error('createDonation: gateway order creation failed', { gatewayId, message: e.message });
+      await donationRef.update({ status: 'FAILED', updatedAt: FieldValue.serverTimestamp() });
+      throw new HttpsError('unavailable', 'Could not start the payment. Please try again shortly.');
+    }
+    if (!order || !order.ok) {
+      await donationRef.update({ status: 'FAILED', updatedAt: FieldValue.serverTimestamp() });
+      throw new HttpsError('unavailable', 'Could not start the payment. Please try again shortly.');
+    }
+
+    await db.collection(PAYMENTS).doc().set({
+      donationId: donationRef.id,
+      gateway: gatewayId,
+      gatewayOrderId: order.gatewayOrderId,
+      gatewayPaymentId: null,
+      gatewayStatus: null,
+      amountMinor,
+      currency,
+      paymentMethod: null,
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp()
+    });
+    await donationRef.update({ status: 'PENDING', updatedAt: FieldValue.serverTimestamp() });
+
+    logger.info('Donation created', { donationReference, gatewayId, amountMinor });
+    return { ok: true, donationReference, checkout: order.checkout };
+  }
+);
+
+// =====================================================================
+// paymentWebhook — the ONLY thing that may move a donation to SUCCESS.
+// Signature-verified, idempotent (payment_events/{gateway}_{eventId}),
+// and drives every transition through payment-state.js so a stale or
+// replayed event can never walk a donation backwards.
+// =====================================================================
+exports.paymentWebhook = onRequest(
+  { secrets: [PAYMENT_WEBHOOK_SECRET], cors: false },
+  async (req, res) => {
+    if (req.method !== 'POST') { res.status(405).send('Method Not Allowed'); return; }
+
+    const gatewayId = String(req.query.gateway || '');
+    let gateway;
+    try {
+      assertGatewayAllowed(gatewayId);
+      gateway = getGateway(gatewayId);
+    } catch (e) {
+      logger.warn('paymentWebhook: unknown or disallowed gateway', { gatewayId, message: e.message });
+      res.status(400).send('Unknown gateway');
+      return;
+    }
+
+    // `req.rawBody` (provided by the Functions runtime) is required here —
+    // re-serializing req.body would change the exact bytes and break the
+    // signature, the same reasoning as the WhatsApp webhook above.
+    if (!gateway.verifyWebhookSignature(req.rawBody, req.headers, PAYMENT_WEBHOOK_SECRET.value())) {
+      logger.warn('paymentWebhook: bad signature', { gatewayId });
+      res.status(401).send('Bad signature');
+      return;
+    }
+
+    const event = gateway.parseWebhookEvent(req.rawBody, req.headers);
+    if (!event) {
+      logger.warn('paymentWebhook: unparseable event', { gatewayId });
+      res.status(400).send('Unparseable event');
+      return;
+    }
+
+    // Idempotency: the event doc's ID IS the uniqueness constraint — a
+    // second delivery of the same event collides on the same doc ID
+    // rather than needing a separate unique-index lookup.
+    const eventRef = db.collection(PAYMENT_EVENTS).doc(`${gatewayId}_${event.eventId}`);
+    const claimed = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(eventRef);
+      if (snap.exists && snap.data().processingStatus === 'PROCESSED') return false; // already handled — true idempotent no-op
+      tx.set(eventRef, {
+        gateway: gatewayId,
+        gatewayEventId: event.eventId,
+        eventType: event.eventType,
+        gatewayOrderId: event.gatewayOrderId,
+        gatewayPaymentId: event.gatewayPaymentId,
+        receivedAt: FieldValue.serverTimestamp(),
+        processingStatus: 'RECEIVED'
+      }, { merge: true });
+      return true;
+    });
+    if (!claimed) {
+      res.status(200).send('OK (already processed)');
+      return;
+    }
+
+    try {
+      await processPaymentEvent(gatewayId, event, eventRef);
+      res.status(200).send('OK');
+    } catch (e) {
+      logger.error('paymentWebhook: processing failed', { gatewayId, eventId: event.eventId, message: e.message });
+      await eventRef.set({ processingStatus: 'ERROR', errorMessage: String(e.message || e), processedAt: FieldValue.serverTimestamp() }, { merge: true }).catch(() => {});
+      // 200, not 500: our own failure to process is not a reason to make
+      // the gateway retry-storm an endpoint that will fail identically
+      // every time. The event is durably recorded either way (see the
+      // ERROR status above) for a human to investigate.
+      res.status(200).send('Recorded, not processed');
+    }
+  }
+);
+
+/** The actual state update, split out from the HTTP handler so it has no
+ *  req/res in its signature — easier to reason about, and reusable from
+ *  a future manual-reconciliation tool without faking an HTTP request. */
+async function processPaymentEvent(gatewayId, event, eventRef) {
+  if (!event.gatewayOrderId) {
+    await eventRef.set({ processingStatus: 'ERROR', errorMessage: 'event carried no order id', processedAt: FieldValue.serverTimestamp() }, { merge: true });
+    return;
+  }
+
+  const paymentSnap = await db.collection(PAYMENTS).where('gatewayOrderId', '==', event.gatewayOrderId).limit(1).get();
+  if (paymentSnap.empty) {
+    logger.warn('paymentWebhook: no payment matches this order id', { gatewayId, gatewayOrderId: event.gatewayOrderId });
+    await eventRef.set({ processingStatus: 'ERROR', errorMessage: 'no matching payment/donation', processedAt: FieldValue.serverTimestamp() }, { merge: true });
+    return;
+  }
+  const paymentRef = paymentSnap.docs[0].ref;
+  const donationId = paymentSnap.docs[0].data().donationId;
+  const donationRef = db.collection(DONATIONS).doc(donationId);
+
+  const outcome = await db.runTransaction(async (tx) => {
+    const donationSnap = await tx.get(donationRef);
+    if (!donationSnap.exists) return { applied: false, reason: 'donation not found' };
+    const donation = donationSnap.data();
+
+    const transition = paymentState.nextStatus(donation.status, event.status);
+    if (!transition.ok) {
+      return { applied: false, reason: transition.reason };
+    }
+
+    tx.update(paymentRef, {
+      gatewayPaymentId: event.gatewayPaymentId,
+      gatewayStatus: event.status,
+      paymentMethod: event.paymentMethod || null,
+      updatedAt: FieldValue.serverTimestamp()
+    });
+
+    if (!transition.changed) {
+      // Same status reported again — nothing to change on the donation,
+      // but the payment doc above still absorbs any new detail (e.g. a
+      // paymentMethod that arrived on a later retry of the same event).
+      return { applied: true, changed: false, status: transition.status, donation };
+    }
+
+    const patch = { status: transition.status, updatedAt: FieldValue.serverTimestamp() };
+    if (transition.status === 'SUCCESS') patch.paidAt = FieldValue.serverTimestamp();
+    tx.update(donationRef, patch);
+    return { applied: true, changed: true, status: transition.status, donation: Object.assign({}, donation, patch) };
+  });
+
+  if (!outcome.applied) {
+    logger.warn('paymentWebhook: transition rejected', { gatewayId, donationId, reason: outcome.reason });
+    await eventRef.set({ processingStatus: 'IGNORED', errorMessage: outcome.reason, donationId, processedAt: FieldValue.serverTimestamp() }, { merge: true });
+    return;
+  }
+
+  if (outcome.changed && outcome.status === 'SUCCESS') {
+    await onDonationSucceeded(donationId, outcome.donation);
+  }
+
+  await eventRef.set({ processingStatus: 'PROCESSED', donationId, processedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+/** Runs once, the moment a donation is first confirmed SUCCESS: receipt,
+ *  email, the public Supporters Wall entry, and any entitlement. */
+async function onDonationSucceeded(donationId, donation) {
+  const year = new Date().getUTCFullYear();
+  const receiptNumber = await nextReceiptNumber(year);
+
+  await db.collection(RECEIPTS).doc(donationId).set({
+    receiptNumber,
+    receiptStatus: 'GENERATED',
+    emailSentAt: null,
+    createdAt: FieldValue.serverTimestamp()
+  });
+
+  const donorSnap = await db.collection(DONORS).doc(donation.donorId).get();
+  const donor = donorSnap.exists ? donorSnap.data() : { fullName: '', email: '' };
+
+  // Email failure must never reverse the payment or the receipt above —
+  // both are already committed by the time this runs. A failed send
+  // just leaves emailSentAt null for a later retry to pick up.
+  try {
+    const { subject, textBody } = receiptCore.buildReceiptEmail({
+      receiptNumber,
+      donorName: donor.fullName,
+      amountMinor: donation.amountMinor,
+      currency: donation.currency,
+      paidAtIso: new Date().toISOString(),
+      paymentMethod: null
+    });
+    const emailResult = await getEmailProvider(EMAIL_PROVIDER.value()).send({ to: donor.email, subject, textBody });
+    if (emailResult.ok) {
+      await db.collection(RECEIPTS).doc(donationId).set({ emailSentAt: FieldValue.serverTimestamp() }, { merge: true });
+    }
+  } catch (e) {
+    logger.error('onDonationSucceeded: receipt email failed (donation remains SUCCESS)', { donationId, message: e.message });
+  }
+
+  if (donation.displayName) {
+    await db.collection(PUBLIC_SUPPORTERS).doc(donationId).set({
+      donationReference: donation.donationReference,
+      displayName: donor.fullName || 'Anonymous',
+      amountMinor: donation.displayAmount ? donation.amountMinor : null,
+      currency: donation.currency,
+      paidAt: FieldValue.serverTimestamp()
+    });
+  }
+
+  const granted = await maybeGrantEntitlements(donation);
+  logger.info('Donation succeeded', { donationId, receiptNumber, entitlementsGranted: granted.length });
+}
+
+// =====================================================================
+// getDonationStatus — the server-verified truth a success page must
+// check before it ever says "thank you". The donation reference itself
+// is the capability (crypto-random, effectively unguessable) — no
+// sign-in is required to check on a donation you just made.
+// =====================================================================
+exports.getDonationStatus = onCall(
+  { cors: true, enforceAppCheck: false },
+  async (request) => {
+    const ref = String((request.data && request.data.donationReference) || '');
+    if (!donationCore.isWellFormedDonationReference(ref)) {
+      throw new HttpsError('invalid-argument', 'That does not look like a donation reference.');
+    }
+    const snap = await db.collection(DONATIONS).where('donationReference', '==', ref).limit(1).get();
+    if (snap.empty) throw new HttpsError('not-found', 'No donation found for that reference.');
+
+    const donation = snap.docs[0];
+    const receiptSnap = await db.collection(RECEIPTS).doc(donation.id).get();
+
+    return {
+      ok: true,
+      status: donation.data().status,
+      amountMinor: donation.data().amountMinor,
+      currency: donation.data().currency,
+      receiptNumber: receiptSnap.exists ? receiptSnap.data().receiptNumber : null
+    };
+  }
+);
+
 // Exported for tests that need the internals without a live project.
 // (The signature check itself lives in lib/whatsapp.js, where it is
 // testable without loading firebase-admin — see tests/whatsapp.test.js.)
-exports.__internal = { applyOptState, runOneCampaign };
+exports.__internal = { applyOptState, runOneCampaign, findOrCreateDonor, nextReceiptNumber, processPaymentEvent, onDonationSucceeded };
