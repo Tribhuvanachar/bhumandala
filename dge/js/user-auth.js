@@ -419,9 +419,43 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.dgeCurrentUserRole = null;
       window.dgeCurrentUserProfile = null;
     }
+    dgeBridgeRoleToAdminTools(window.dgeCurrentUserRole);
     dgeUpdateAccountUI();
   });
 });
+
+// 8 Sep 2026: a real signed-in admin/superadmin used to see none of the
+// admin tools unless they ALSO knew the separate ?superadmin=CODE passkey
+// (dge/js/admin-editor.js) — two unrelated systems for "is this an admin"
+// that never talked to each other. This bridges the REAL Firestore role
+// (enforced server-side by firestore.rules; see callerRole() there) onto
+// the same localStorage flags the passkey sets, and re-runs
+// dgeRevealAdminTools() so the menu updates live, no reload needed.
+//
+// A marker (the `_viaSignIn` suffix) tracks which grant came from THIS
+// bridge, so signing out of the Firebase account only revokes what
+// signing in granted — a passkey entered by hand stays valid until the
+// person clears it themselves, same as before this existed.
+function dgeBridgeRoleToAdminTools(role) {
+  try {
+    if (role === 'superadmin') {
+      localStorage.setItem('is_superadmin', 'true');
+      localStorage.setItem('is_superadmin_viaSignIn', 'true');
+    } else if (localStorage.getItem('is_superadmin_viaSignIn') === 'true') {
+      localStorage.removeItem('is_superadmin');
+      localStorage.removeItem('is_superadmin_viaSignIn');
+    }
+    if (role === 'admin' || role === 'superadmin') {
+      localStorage.setItem('acharyaAuthorized', 'true');
+      localStorage.setItem('acharyaAuthorized_viaSignIn', 'true');
+    } else if (localStorage.getItem('acharyaAuthorized_viaSignIn') === 'true') {
+      localStorage.removeItem('acharyaAuthorized');
+      localStorage.removeItem('acharyaAuthorized_viaSignIn');
+    }
+  } catch (e) { /* localStorage unavailable (private mode, etc.) — admin tools just stay hidden */ }
+  if (typeof window.dgeRevealAdminTools === 'function') window.dgeRevealAdminTools();
+}
+window.dgeBridgeRoleToAdminTools = dgeBridgeRoleToAdminTools;
 
 // A fresh sign-in (Google popup or OTP confirmed) pays respects again (7 Sep 2026, the lead: "every time a user
 // logs in"): forget today's pass and go through the gate, which brings the person straight back here.

@@ -75,23 +75,34 @@ function dgeAdminBuildCommitMessage(action) {
   return `${action} — by ${name} at ${timestamp}`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (dgeCheckSuperadminGate()) {
-    const btn = document.getElementById('adminToolsBtn');
-    if (btn) btn.style.display = 'flex';
-    ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem', 'adminContentProvenanceItem'].forEach(id => {
+// Split out from the DOMContentLoaded listener below (8 Sep 2026) so a real
+// Firebase sign-in can reveal these tools too, not only the ?superadmin=CODE
+// passkey — see dgeIsAdmin()'s bridge in user-auth.js, which calls this
+// again once a signed-in user's own role resolves to admin/superadmin. Safe
+// to call more than once: every branch just (re)shows elements that are
+// already hidden by default in the markup.
+function dgeRevealAdminTools() {
+  if (!dgeCheckSuperadminGate()) return;
+  const btn = document.getElementById('adminToolsBtn');
+  if (btn) btn.style.display = 'flex';
+  ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem', 'adminContentProvenanceItem'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'flex';
+  });
+  // Manage Users / Access Control only make sense once accounts are
+  // actually set up — showing them before then would just be menu items
+  // that always toast "not set up yet" (see openUserRolesModal in
+  // user-roles.js and admin/access-control.html's own gate).
+  if (window.AUTH_CONFIG && window.AUTH_CONFIG.enabled) {
+    ['adminUserRolesItem', 'adminAccessControlItem'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'flex';
     });
-    // Manage Users only makes sense once accounts are actually set up —
-    // showing it before then would just be a menu item that always
-    // toasts "not set up yet" (see openUserRolesModal in user-roles.js).
-    if (window.AUTH_CONFIG && window.AUTH_CONFIG.enabled) {
-      const rolesItem = document.getElementById('adminUserRolesItem');
-      if (rolesItem) rolesItem.style.display = 'flex';
-    }
   }
-});
+}
+window.dgeRevealAdminTools = dgeRevealAdminTools;
+
+document.addEventListener('DOMContentLoaded', dgeRevealAdminTools);
 
 // ---------------------------------------------------------------
 // GitHub API helpers

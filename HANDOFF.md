@@ -27,6 +27,7 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
 | Dhātu occurrence index | `dge/data/vedanga/vyakarana/dhatu_prayoga/manifest.json`, `tools/build_dhatu_prayoga_index.py` (its docstring is the design note) |
 | Any-stem declension | `dge/js/shabda-gen.js` (+ `subanta-steps.js`, `dge/wasm/vidyut/`) |
 | Library curation (display-only moves, labels) | `admin/config/library-overrides.json` |
+| Role-based content access (create roles, gate paths, preview-as-role) | `admin/access-control.html`, `dge/js/role-access.js`, `dge/firebase/firestore.rules` (`config/{docId}`), `dge/FIREBASE_SETUP.md` §0.3 |
 | Upaniṣad ṭippaṇī OCR, Chandas Gemini workflow, Sāroddhāra | `dge/data/ocr_staging/upanishad_tippani/<book>/summary.json`, `kamadhenu_dataset/chandas_gemini_review.md`, `tools/saroddhara/` |
 
 ## 3. Standing rules from the lead (non-negotiable)

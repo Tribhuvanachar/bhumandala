@@ -724,6 +724,14 @@ function dgeIsHiddenPath(path) {
   for (let i = 1; i <= parts.length; i++) {
     if (dgeLibOverrides.hidden.indexOf(parts.slice(0, i).join('/')) >= 0) return true;
   }
+  // Role-based content gates (see dge/js/role-access.js) -- a separate,
+  // Firestore-backed layer from the curator's own hidden list above, kept
+  // as a second independent check rather than merged into dgeLibOverrides
+  // so an admin gating a path by role doesn't have to touch the same
+  // committed file the Library Manager owns. Optional: if role-access.js
+  // never loaded (or a deployment has no gates configured) this is a
+  // no-op, same as before this existed.
+  if (typeof window.dgeIsHiddenByRoleGate === 'function' && window.dgeIsHiddenByRoleGate(path)) return true;
   return false;
 }
 
@@ -1107,6 +1115,11 @@ window.openLibraryModal = async function() {
   // Admin-curated overrides — see admin/library.html. Optional; most
   // repos won't have one until the project lead actually curates something.
   await dgeLoadLibraryOverrides();
+  // Role-based content gates — see dge/js/role-access.js. Must resolve
+  // before the dgeIsHiddenPath() filters below run since that function
+  // reads the cached gate list synchronously; loadRoleAccessConfig caches
+  // after its first call so this is free on every subsequent open.
+  if (typeof window.dgeLoadRoleAccessConfig === 'function') await window.dgeLoadRoleAccessConfig();
 
   // The layer manifest (see layer-stitch.js / MULTI_LAYER_READER_ARCHITECTURE.md)
   // drives the drawer fold below: a joinable multi-layer grantha shows as
