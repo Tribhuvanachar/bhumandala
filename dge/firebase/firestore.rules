@@ -182,6 +182,69 @@ service cloud.firestore {
       allow write: if isSuperadmin();
     }
 
+    // Donations, payments, receipts, supporter entitlements (8 Sep 2026,
+    // Phase 1 foundation — see ../../PAYMENTS_SETUP.md). Every write in
+    // this whole feature goes through Cloud Functions using the Admin
+    // SDK, which bypasses these rules entirely — that is deliberate, not
+    // an oversight: `createDonation` and `paymentWebhook` are the only
+    // code that may ever set a donation's amount or move it to SUCCESS,
+    // and a client permitted to write here at all could set both for
+    // itself. Reads are scoped by how sensitive the collection is.
+    match /donors/{donorId} {
+      // Name, email, phone, PAN — this is the most sensitive PII in the
+      // whole feature. Superadmin only, not the broader admin tier the
+      // rest of this file's operational data uses.
+      allow read: if isSuperadmin();
+      allow write: if false;
+    }
+    match /donations/{donationId} {
+      // Amount, status, contribution type — no raw donor PII, since that
+      // lives only in donors/. Financial ops needs this to build a
+      // dashboard eventually (§21 of the spec this implements); the
+      // superadmin-only donors/ collection above already gates the PII.
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    match /payments/{paymentId} {
+      // Gateway order/payment IDs, no PII.
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    // Raw webhook audit trail. Sealed off from every client exactly like
+    // otp_challenges above — a client that could read this could infer
+    // webhook timing/shape; one that could write it could forge a
+    // "processed" event and skip the real gateway call entirely.
+    match /payment_events/{eventId} {
+      allow read, write: if false;
+    }
+    match /receipts/{donationId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    // Internal sequence counters for receipt numbers. No client has any
+    // business reading or writing these directly.
+    match /receipt_counters/{year} {
+      allow read, write: if false;
+    }
+    // Supporter entitlements (Phase 4 — not granted by anything yet, see
+    // maybeGrantEntitlements in index.js). Admin-only for now because
+    // there is no owner-uid link from a donation back to a signed-in
+    // account until Phase 3 (magic-link supporter auth) exists; revisit
+    // this rule to `isOwner(donorId) || isAdmin()` once that link is real.
+    match /supporter_entitlements/{entitlementId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    // The public Supporters Wall. Written only by index.js's
+    // onDonationSucceeded, and only for a donation whose donor opted
+    // into displayName — never containing email, phone, PAN, gateway
+    // IDs, or the raw donorId. Public read is the whole point of this
+    // collection existing separately from donations/ above.
+    match /public_supporters/{donationId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
     // Anything not matched above is denied by default. Stated explicitly
     // so that adding a collection later is a conscious decision rather
     // than something that silently inherits access from a broad rule.

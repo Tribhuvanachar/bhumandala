@@ -28,6 +28,7 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
 | Any-stem declension | `dge/js/shabda-gen.js` (+ `subanta-steps.js`, `dge/wasm/vidyut/`) |
 | Library curation (display-only moves, labels) | `admin/config/library-overrides.json` |
 | Role-based content access (create roles, gate paths, preview-as-role) | `admin/access-control.html`, `dge/js/role-access.js`, `dge/firebase/firestore.rules` (`config/{docId}`), `dge/FIREBASE_SETUP.md` §0.3 |
+| Donations/payments/supporters (Phase 1 foundation, no gateway chosen yet) | `dge/PAYMENTS_SETUP.md`, `dge/firebase/functions/lib/{donation-core,payment-state,payment-providers,receipt-core,email-providers}.js`, `index.js`'s `createDonation`/`paymentWebhook`/`getDonationStatus` |
 | Upaniṣad ṭippaṇī OCR, Chandas Gemini workflow, Sāroddhāra | `dge/data/ocr_staging/upanishad_tippani/<book>/summary.json`, `kamadhenu_dataset/chandas_gemini_review.md`, `tools/saroddhara/` |
 
 ## 3. Standing rules from the lead (non-negotiable)
