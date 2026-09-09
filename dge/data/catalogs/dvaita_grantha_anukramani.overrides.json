@@ -21,10 +21,13 @@
   "           path, guru-parampara node id, author_aliases person id)."
  ],
  "version": 1,
- "updatedAt": null,
+ "updatedAt": "2026-09-09T09:13:47.765Z",
  "canonical": {
   "category": {},
-  "author": {},
+  "author": {
+   "जयतीर्थ": "जयतीर्थः",
+   "श्रीजयतीर्थः": "जयतीर्थः"
+  },
   "title": {}
  },
  "parents": {},
