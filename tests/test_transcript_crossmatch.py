@@ -1,5 +1,13 @@
 import importlib.util, json, pathlib, sys
 
+import pytest
+
+# The exporter pulls in numpy and soundfile (audio I/O). CI and most laptops
+# do not have them; the crossmatch logic is what this file tests, so skip
+# cleanly instead of failing pytest's collection for the whole suite.
+pytest.importorskip("numpy")
+pytest.importorskip("soundfile")
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "kamadhenu" / "training"))
 import verify_pilot_transcripts as v  # noqa: E402

@@ -40,7 +40,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - run: pip install pytest beautifulsoup4 requests pyyaml
+      # numpy: tests/test_transcript_crossmatch.py imports the Kamadhenu
+      # exporter; indic-transliteration: tools/seo/taxonomy.py's IAST labels.
+      # Without them pytest stopped at collection and every later step here
+      # (validators, drift gates) never ran — main was red for the wrong reason.
+      - run: pip install pytest beautifulsoup4 requests pyyaml numpy indic-transliteration
 
       - name: Python test suite (tests/)
         run: python3 -m pytest tests/ -q
