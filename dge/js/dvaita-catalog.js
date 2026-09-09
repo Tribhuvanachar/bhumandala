@@ -224,6 +224,34 @@
       default: return null;
     }
   }
+  // The order the tradition reads a grantha in, applied among siblings: the
+  // mula or bhashya, then its tikas, then the tippanis on those, then the
+  // vyakhyas, and independent works after all of it. The lead, 9 Sep 2026:
+  // "Bhashya and then under it the child would be Tika... Within each Tika,
+  // their corresponding tippanis. Apart from Tikas, there could be Vyakhyas...
+  // And then comes anything related to Bhashya as Swatantra Grantha."
+  // Sheet order and A→Z both break ties inside a rank, never across them.
+  var CAT_ORDER = ['मूलम्', 'मूल', 'सर्वमूलम्', 'S.M.T', 'भाष्यम्', 'भाष्यम', 'टीका', 'टिप्पणी',
+                   'व्याख्यानम्', 'खण्डार्थः', 'तात्पर्यम्', 'प्रकरणम्', 'स्वतन्त्रग्रन्थः'];
+  var CAT_RANK = {};
+  CAT_ORDER.forEach(function (v, i) { CAT_RANK[v] = i; });
+  function catRank(id) {
+    var it = state.byId[id];
+    var v = eff(it, 'vishayaVibhaga') || eff(it, 'vibhaga') || '';
+    var r = CAT_RANK[v];
+    // Anything the sheet tags with a term not in the reading order sorts after
+    // the ones that are, rather than being silently treated as a mula.
+    return r === undefined ? CAT_ORDER.length : r;
+  }
+
+  // Tree only. A flat table sorted "A→Z by title" must actually be A→Z, so
+  // the reading order groups siblings in the tree and nowhere else.
+  function sortSiblings(ids) {
+    var base = sortIds(ids);
+    if (base.length < 2) return base;
+    return base.sort(function (a, b) { return catRank(a) - catRank(b); });
+  }
+
   function sortIds(ids) {
     if (state.sort === 'row') return ids.slice().sort(function (a, b) { return state.byId[a].row - state.byId[b].row; });
     var roman = state.sort.indexOf('Roman') > 0;
@@ -241,9 +269,15 @@
   function matches(it) {
     if (reviewOf(it.id) === 'delete') return false;
     if (state.personFilter && !state.personFilter.authorIds.has(it.kartaId)) return false;
+    // The chips HIDE kinds; they do not select one. The lead, 9 Sep 2026:
+    // "All relevant ones must be populated. If I do not want to see a
+    // particular kind of notes, I will go to Vibhaga section and unselect the
+    // tippani or vyakhya." Selecting-to-show meant the tree was empty of
+    // tippanis until you asked for them by name -- backwards for a reader who
+    // wants the whole grantha and only occasionally less of it.
     for (var i = 0; i < TAG_FIELDS.length; i++) {
-      var set = state.tagFilters[TAG_FIELDS[i]];
-      if (set.size && !set.has(eff(it, TAG_FIELDS[i]))) return false;
+      var hidden = state.tagFilters[TAG_FIELDS[i]];
+      if (hidden.size && hidden.has(eff(it, TAG_FIELDS[i]))) return false;
     }
     if (state.labelFilter && labelsOf(it).indexOf(state.labelFilter) < 0) return false;
     if (state.onlyFlag) {
@@ -273,15 +307,24 @@
   // ancestors needed to reach it, fully expanded -- otherwise a match three
   // levels down would simply not be on screen.
   function visibleSet() {
-    var filtering = state.q.trim() || state.onlyFlag || state.labelFilter || state.personFilter ||
-      TAG_FIELDS.some(function (f) { return state.tagFilters[f].size; });
-    if (!filtering) return null;
+    // A NARROWING filter (search, a flag, a label, a person) hides most of the
+    // tree, so its few matches are force-expanded into view -- otherwise a hit
+    // three levels down is simply not on screen. Hiding a kind with a chip is
+    // the opposite: nearly everything still matches, and force-expanding all
+    // of it would blow the tree open every time a curator switched off
+    // तिप्पणी. There, drop the hidden nodes and leave expansion to the reader.
+    var narrowing = state.q.trim() || state.onlyFlag || state.labelFilter || state.personFilter;
+    var hiding = TAG_FIELDS.some(function (f) { return state.tagFilters[f].size; });
+    if (!narrowing && !hiding) return null;
     var keep = {};
     state.items.forEach(function (it) {
       if (!matches(it)) return;
       keep[it.id] = true;
       var p = effParent(it), guard = 0;
-      while (p && state.byId[p] && guard++ < 50) { keep[p] = 'ancestor'; p = effParent(state.byId[p]); }
+      while (p && state.byId[p] && guard++ < 50) {
+        if (!keep[p]) keep[p] = narrowing ? 'ancestor' : 'kept';
+        p = effParent(state.byId[p]);
+      }
     });
     return keep;
   }
@@ -312,7 +355,7 @@
       '<span class="dvc-node-row">#' + it.row + '</span>' +
       '</div>';
     if (open && kids.length) {
-      html += sortIds(kids).map(function (c) { return nodeHTML(c, depth + 1, keep); }).join('');
+      html += sortSiblings(kids).map(function (c) { return nodeHTML(c, depth + 1, keep); }).join('');
     }
     return html;
   }
@@ -330,7 +373,7 @@
     var box = $("#dvc-tree");
     var keep = visibleSet();
     var roots = state.roots.filter(function (r) { return !keep || keep[r]; });
-    roots = sortIds(roots);
+    roots = sortSiblings(roots);
     if (reset) { box.innerHTML = ''; state.shown = 0; }
     if (!roots.length) { box.innerHTML = '<div class="dvc-empty-msg">No entries match.</div>'; $("#dvc-more").style.display = 'none'; return; }
     var end = Math.min(state.shown + CHUNK, roots.length);
@@ -1018,9 +1061,14 @@
       if (!wrap) return;
       var counts = {};
       state.items.forEach(function (it) { var v = eff(it, col); if (v) counts[v] = (counts[v] || 0) + 1; });
+      // A chip reads as ON (this kind is showing) until it is clicked off, so
+      // the default state of the page is every kind visible.
       wrap.innerHTML = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).map(function (v) {
-        return '<button type="button" class="dvc-chip' + (state.tagFilters[col].has(v) ? ' on' : '') +
-          '" data-col="' + col + '" data-val="' + esc(v) + '">' + esc(v) + ' <span class="dvc-muted">' + counts[v] + '</span></button>';
+        var off = state.tagFilters[col].has(v);
+        return '<button type="button" class="dvc-chip' + (off ? ' dvc-chip-off' : ' on') +
+          '" data-col="' + col + '" data-val="' + esc(v) + '" title="' +
+          (off ? 'Hidden — click to show again' : 'Showing — click to hide these') + '">' +
+          esc(v) + ' <span class="dvc-muted">' + counts[v] + '</span></button>';
       }).join('');
     });
     var labels = {};
@@ -1194,7 +1242,9 @@
       if (chip && chip.dataset.col) {
         var set = state.tagFilters[chip.dataset.col], v = chip.dataset.val;
         if (set.has(v)) set.delete(v); else set.add(v);
-        chip.classList.toggle('on'); rerender(); return;
+        // Rebuild rather than toggle a class by hand: 'on' now means "showing",
+        // so the two states differ by more than one class name.
+        buildChips(); rerender(); return;
       }
       if (chip && chip.dataset.label) {
         state.labelFilter = state.labelFilter === chip.dataset.label ? '' : chip.dataset.label;

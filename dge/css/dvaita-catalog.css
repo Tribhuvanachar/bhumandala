@@ -171,3 +171,4 @@ table.dvc-minitable td,table.dvc-minitable th{padding:4px 8px;border-bottom:1px 
 .dvc-libcrumb{font-size:.72rem;opacity:.75;word-break:break-word}
 .dvc-dupdiff{font-size:.74rem;opacity:.8;margin:2px 0 6px}
 .dvc-dupdiff-same{color:var(--accent);opacity:1;font-weight:600}
+.dvc-chip-off{opacity:.45;text-decoration:line-through}
