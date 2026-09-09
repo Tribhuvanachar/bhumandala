@@ -51,7 +51,7 @@
 
   var state = {
     items: [], byId: {}, masters: { categories: [], authors: [], titles: [] },
-    suggestions: { parentLinks: [] }, crossLinks: {}, duplicates: {},
+    suggestions: { parentLinks: [] }, crossLinks: {}, duplicates: {}, dropped: [],
     catById: {}, authById: {}, titleById: {},
     ov: null,               // the overrides object being edited
     committedSha: null,     // GitHub blob sha of the committed overrides file
@@ -174,6 +174,7 @@
       state.suggestions = d.suggestions || { parentLinks: [] };
       state.crossLinks = d.crossLinks || {};
       state.duplicates = d.duplicates || {};
+      state.dropped = d.droppedDuplicates || [];
       $("#dvc-total").textContent = state.items.length.toLocaleString();
     });
   }
@@ -693,35 +694,94 @@
   }
 
   /* ---------------- DUPLICATES tab ---------------- */
-  function dupGroupHTML(g, showName) {
-    return '<div class="dvc-dupgroup">' + (showName && g.name ? '<div class="dvc-dupname">' + esc(g.name) + '</div>' : '') +
-      g.ids.map(function (id) {
-        var it = state.byId[id];
-        if (!it) return '';
-        var st = reviewOf(id);
-        return '<div class="dvc-duprow' + (st === 'delete' ? ' dvc-marked-delete' : '') + '">' +
-          '<div class="dvc-dupinfo"><b>#' + it.row + '</b> ' + esc(it.breadcrumb) +
-          '<span class="dvc-muted"> · ' + esc(eff(it, 'karta')) + '</span>' +
-          (st ? ' <span class="dvc-statuspill">' + esc(st) + '</span>' : '') + '</div>' +
-          '<div class="dvc-dupacts">' +
-          '<button class="dvc-btn dvc-btn-sm" data-review="retain" data-id="' + id + '">keep</button>' +
-          '<button class="dvc-btn dvc-btn-sm" data-review="delete" data-id="' + id + '">drop</button>' +
-          (st ? '<button class="dvc-btn dvc-btn-sm" data-review="clear" data-id="' + id + '">undo</button>' : '') +
-          '</div></div>';
-      }).join('') + '</div>';
+  // The columns a group's rows actually disagree on. The lead's rule is "a
+  // duplicate is a row whose every column repeats", so a group shown here has
+  // to say where it falls short of that -- otherwise a reader can only take
+  // the heading's word for it that these are not exact repeats.
+  var DUP_COLS = [
+    { f: 'grantha', label: 'title' }, { f: 'karta', label: 'author' },
+    { f: 'linkRaw', label: 'link' }, { f: 'vibhaga', label: 'विभागः' },
+    { f: 'vishayaVibhaga', label: 'विषयविभागः' }, { f: 'prasthana', label: 'प्रस्थानम्' },
+    { f: 'status', label: 'status' }, { f: 'mention', label: 'mention' },
+    { f: 'sourceLibrary', label: 'source' }, { f: 'availability', label: 'availability' }
+  ];
+  function differingCols(ids) {
+    var rows = ids.map(function (id) { return state.byId[id]; }).filter(Boolean);
+    if (rows.length < 2) return [];
+    var out = [];
+    DUP_COLS.forEach(function (c) {
+      var first = eff(rows[0], c.f) || '';
+      for (var i = 1; i < rows.length; i++) {
+        if ((eff(rows[i], c.f) || '') !== first) { out.push(c.label); return; }
+      }
+    });
+    var parents = rows.map(function (r) { return effParent(r) || ''; });
+    if (parents.some(function (p) { return p !== parents[0]; })) out.push('parent');
+    return out;
   }
+
+  function dupRowHTML(id) {
+    var it = state.byId[id];
+    if (!it) return '';
+    var st = reviewOf(id);
+    return '<div class="dvc-duprow' + (st === 'delete' ? ' dvc-marked-delete' : '') + '" data-duprow="' + id + '">' +
+      '<div class="dvc-dupinfo"><b>#' + it.row + '</b> ' + esc(it.breadcrumb) +
+      '<span class="dvc-muted"> · ' + esc(eff(it, 'karta')) + '</span>' +
+      (st ? ' <span class="dvc-statuspill">' + esc(st) + '</span>' : '') + '</div>' +
+      '<div class="dvc-dupacts">' +
+      '<button class="dvc-btn dvc-btn-sm" data-review="retain" data-id="' + id + '">keep</button>' +
+      '<button class="dvc-btn dvc-btn-sm" data-review="delete" data-id="' + id + '">drop</button>' +
+      (st ? '<button class="dvc-btn dvc-btn-sm" data-review="clear" data-id="' + id + '">undo</button>' : '') +
+      '</div></div>';
+  }
+
+  function dupGroupHTML(g, showName) {
+    var diff = differingCols(g.ids);
+    return '<div class="dvc-dupgroup">' + (showName && g.name ? '<div class="dvc-dupname">' + esc(g.name) + '</div>' : '') +
+      (diff.length ? '<div class="dvc-dupdiff">differs in: ' + esc(diff.join(', ')) + '</div>'
+                   : '<div class="dvc-dupdiff dvc-dupdiff-same">every column identical</div>') +
+      g.ids.map(dupRowHTML).join('') + '</div>';
+  }
+  // The rows the importer already deleted. Without this the tab opened on
+  // "Exact duplicates (0 groups)" and read as though nothing had been removed
+  // -- when in fact 556 rows had been, 551 of them past row 1180. The
+  // deletions are the answer to "are the duplicates gone", so show them.
+  function droppedHTML() {
+    var dropped = state.dropped || [];
+    if (!dropped.length) return '';
+    var beyond = dropped.filter(function (x) { return x.row > 1180; }).length;
+    var byKept = {};
+    dropped.forEach(function (x) { (byKept[x.keptRow] = byKept[x.keptRow] || []).push(x); });
+    var keys = Object.keys(byKept).sort(function (a, b) { return a - b; });
+    return '<h3>अपनीताः · Already deleted at import <span class="dvc-muted">(' + dropped.length + ' rows)</span></h3>' +
+      '<p class="dvc-hint">Rows whose every column repeated an earlier row, removed before the catalogue was built — ' +
+      beyond + ' of them past row 1180. They are gone from all ' + state.items.length.toLocaleString() +
+      ' entries below; this is the record of what went.</p>' +
+      '<details><summary>show all ' + dropped.length + '</summary><table class="dvc-minitable">' +
+      '<thead><tr><th>kept</th><th>deleted rows</th><th>ग्रन्थनाम</th></tr></thead><tbody>' +
+      keys.map(function (k) {
+        var g = byKept[k];
+        return '<tr><td>#' + esc(k) + '</td><td class="dvc-muted">' +
+          esc(g.map(function (x) { return '#' + x.row; }).join(', ')) + '</td><td>' + esc(g[0].grantha) + '</td></tr>';
+      }).join('') + '</tbody></table></details>';
+  }
+
   function renderDuplicates() {
     var d = state.duplicates;
     var ex = d.exactRowDuplicates || [], npk = d.nameParentKartaDuplicates || [], coll = d.nameCollisions || [];
     $("#dvc-dup-body").innerHTML =
-      '<h3>ठीक समानाः · Exact duplicates <span class="dvc-muted">(' + ex.length + ' groups)</span></h3>' +
-      '<p class="dvc-hint">Every column identical, same resolved parent — almost certainly one entry typed twice.</p>' +
+      droppedHTML() +
+      '<h3>ठीक समानाः · Exact duplicates still present <span class="dvc-muted">(' + ex.length + ' groups)</span></h3>' +
+      '<p class="dvc-hint">Every column identical AND the same resolved parent. Empty is the expected state — the importer ' +
+      'already removes these; anything here arrived from a later edit.</p>' +
       (ex.slice(0, 120).map(function (g) { return dupGroupHTML(g); }).join('') || '<p class="dvc-muted">none</p>') +
       '<h3>नाम+मूल+कर्तृ-साम्यम् <span class="dvc-muted">(' + npk.length + ')</span></h3>' +
       '<p class="dvc-hint">Title, parent and author match but something else differs — worth a look, not auto-mergeable.</p>' +
       (npk.map(function (g) { return dupGroupHTML(g); }).join('') || '<p class="dvc-muted">none</p>') +
-      '<h3>नामसाम्यम् <span class="dvc-muted">(' + coll.length + ', informational)</span></h3>' +
-      '<p class="dvc-hint">Same title, different work — normal for the दशप्रकरण, where one commentary title recurs once per mūla. Not a duplicate.</p>' +
+      '<h3>नामसाम्यम् · Same title only <span class="dvc-muted">(' + coll.length + ', informational)</span></h3>' +
+      '<p class="dvc-hint">Grouped by title alone, so every group below differs in at least one other column — each says which. ' +
+      'Normal for the दशप्रकरण, where one commentary title recurs once per mūla. These are <b>not</b> duplicates by the ' +
+      'all-columns rule and are not deleted; the ones that were are listed at the top of this tab.</p>' +
       '<details><summary>show ' + coll.length + ' groups</summary>' +
       coll.slice(0, 150).map(function (g) { return dupGroupHTML(g, true); }).join('') + '</details>';
   }
@@ -1190,7 +1250,14 @@
       if (rev) {
         var v2 = rev.dataset.review;
         if (v2 === 'clear') delete state.ov.review[rev.dataset.id]; else state.ov.review[rev.dataset.id] = v2;
-        saveDraft(); rerender(); renderDuplicates(); return;
+        saveDraft(); rerender();
+        // Repaint just this row. Re-rendering the whole tab collapsed the
+        // <details> the curator was working inside and threw the page back to
+        // the top -- one decision cost them their place in a 310-group list.
+        var row = rev.closest('[data-duprow]');
+        if (row) row.outerHTML = dupRowHTML(row.dataset.duprow);
+        else renderDuplicates();
+        return;
       }
       var lnk = t.closest('[data-link-id]');
       if (lnk) { state.ov.links[lnk.dataset.linkId] = lnk.dataset.linkVal; saveDraft(); renderCrossLinks(); return; }
