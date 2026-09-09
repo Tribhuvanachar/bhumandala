@@ -548,6 +548,17 @@ function dgeStripEditionMarkers(text) {
              .replace(/[ \t]+([\u0964\u0965])/g, ' $1').replace(/\s{2,}/g, ' ').trim();
 }
 
+// Combines bhagavata_ref {skandha,adhyaya,verse} with references[].{target,unit_id}
+// into the existing ?path=&jumpVedicId=<unitId>#<verseNo> addressing; null if incomplete.
+function dgeBuildBhagavataRefLink(bhagavataRef, references) {
+  if (!bhagavataRef || bhagavataRef.skandha == null || bhagavataRef.adhyaya == null || bhagavataRef.verse == null) return null;
+  const ref = Array.isArray(references) ? references.find(r => r && r.target && r.unit_id) : null;
+  if (!ref) return null;
+  const jumpVedicId = ref.unit_id + '#' + bhagavataRef.verse;
+  const url = 'index.html?path=' + ref.target + '&jumpVedicId=' + encodeURIComponent(jumpVedicId);
+  return { url, label: `भा. ${bhagavataRef.skandha}.${bhagavataRef.adhyaya}.${bhagavataRef.verse}` };
+}
+
 function dgeNormalizeGranthaData(data, granthaTitle) {
   if (!data) return data;
   if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
@@ -804,7 +815,9 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // Optional outbound link to a related project page (Tīrthaprabandha
         // verses → the Tīrtha holy-places page, filtered to the kṣetra).
         // Empty for every other grantha; render.js shows a 📍 chip when set.
-        tirthaLink: typeof item.tirtha_link === 'string' ? item.tirtha_link : ''
+        tirthaLink: typeof item.tirtha_link === 'string' ? item.tirtha_link : '',
+        // null for every grantha but Bhāgavata Sāroddhāra; render.js shows a 🔗 chip when set.
+        bhagavataLink: dgeBuildBhagavataRefLink(item.bhagavata_ref, item.references)
       };
     });
 

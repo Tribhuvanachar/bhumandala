@@ -749,6 +749,13 @@ function renderList() {
     const tirthaChipHtml = shloka.tirthaLink
       ? `<div class="dge-tp-place-row"><a class="dge-tp-place" href="${shloka.tirthaLink}" onclick="event.stopPropagation();" title="See ${tirthaPlace} on the Tīrtha holy-places map">📍 ${tirthaPlace} <span class="dge-tp-arrow">↗</span></a></div>` : '';
 
+    // 9 Sep 2026: a verse that condenses a specific Śrīmad Bhāgavatam verse
+    // (core.js's dgeBuildBhagavataRefLink) links straight to it — same
+    // chip-row idiom as the Tīrtha link just above, one level down since
+    // it's a same-app jump rather than an outbound page.
+    const bhagavataChipHtml = shloka.bhagavataLink
+      ? `<div class="dge-tp-place-row"><a class="dge-tp-place" href="${shloka.bhagavataLink.url}" onclick="event.stopPropagation();" title="Open the source verse in Śrīmad Bhāgavatam">🔗 ${shloka.bhagavataLink.label} <span class="dge-tp-arrow">↗</span></a></div>` : '';
+
     // 7 Sep 2026: dhātu-form chips (window.dgeDhatuHits, loaded per grantha in
     // core.js). Key = the data-side unit id: a legacy shloka number, an item id,
     // or <chapter id>#<number> for nested verses. Hidden in App layout by CSS.
@@ -762,6 +769,7 @@ function renderList() {
         ${moreBtnHtml}
       </div>
       ${tirthaChipHtml}
+      ${bhagavataChipHtml}
       ${dhatuChipsHtml}
       ${footnoteListHtml}
       ${appViewToggleHtml}
