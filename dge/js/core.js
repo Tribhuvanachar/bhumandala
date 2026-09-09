@@ -115,6 +115,28 @@ const DGE_LEGACY_SLUGS = {
   // below) -- every entry here must point straight at the CURRENT
   // location, never at an older name that itself needed upgrading.
   'sarvamoola_grantha':     'darshana/vedanta/dvaita/SarvaMula',
+  // 9 Sep 2026 — Sumadhva Vijaya. The DvaitaVedanta extraction of this work
+  // produced six tika folders and no mula, each "item" a whole sarga as one
+  // wall of text with the verses it comments on buried inside it (the site
+  // puts a whole sarga on one leaf; the importer assumes one leaf = one
+  // verse). The same three commentaries now sit verse-by-verse on the
+  // kavya_alankara copy, which has the better mula, so every one of those
+  // paths lands on the real text instead. Exact slugs, not a prefix: there is
+  // no tika_* folder on the other side to append.
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_prakashika':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_padarthadipikodbodhika':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_mandopakarini':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_shrichalarisheshacarya':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuni':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrinarayanapanditacarya':
+    'kavya_alankara/sumadhva_vijaya/sarga_1',
   'shankara_bhashya':       'darshana/vedanta/advaita/shankara_bhashya',
   'itihasas':               'itihasa',
   'puranas':                'purana',
@@ -1390,6 +1412,9 @@ window.renderStotraChrome = function() {
   // of the chrome this function owns.
   if (typeof window.dgeRenderStitchChrome === 'function') window.dgeRenderStitchChrome();
   if (typeof window.dgeInitSectionNav === 'function') window.dgeInitSectionNav();
+  // Async (it waits on the library catalogue) and deliberately not awaited:
+  // the volume picker is navigation chrome, not part of the text.
+  if (typeof window.dgeInitVolumeNav === 'function') window.dgeInitVolumeNav();
 };
 
 function initAuthAndBranding() {

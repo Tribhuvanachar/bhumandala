@@ -28,7 +28,7 @@
 // fields the importer already captures per item.
 // ============================================================
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['layer-stitch.js'] = 'v1.2 (section navigator gains a category FILTER mode: when items carry a `category` heading (Tīrthaprabandha kṣetra/deity), the dropdown filters the list to that heading via getFilteredIds instead of jumping, with per-heading counts and an "all" option; structural-breadcrumb texts keep the jump behaviour. v1.1: auto-select the primary layer on load + dgeStitchedAvailableKeys for the per-card pill row; v1.0: manifest-gated load-time stitching of sibling mula/tika_* layers into commentaries{}, lineage strip, breadcrumb section navigator, standalone-tika banner)';
+window.DGE_VERSIONS['layer-stitch.js'] = 'v1.3 (volume navigator: a grantha the library splits across numbered sibling folders -- sumadhva_vijaya/sarga_1..16, shatapatha_brahmana/kanda_NN -- gets a picker that switches between them, siblings read from library.json so an unpopulated volume still lists and says so; lineage strip now falls back to walking the taxonomy path for every mula, not just the five in DGE_GRANTHA_LINEAGE. v1.2 (section navigator gains a category FILTER mode: when items carry a `category` heading (Tīrthaprabandha kṣetra/deity), the dropdown filters the list to that heading via getFilteredIds instead of jumping, with per-heading counts and an "all" option; structural-breadcrumb texts keep the jump behaviour. v1.1: auto-select the primary layer on load + dgeStitchedAvailableKeys for the per-card pill row; v1.0: manifest-gated load-time stitching of sibling mula/tika_* layers into commentaries{}, lineage strip, breadcrumb section navigator, standalone-tika banner)';
 
 // Fetched once per page load, same cache-busting rationale as
 // dgeLibraryCatalogPromise (core.js): GitHub Pages' CDN happily serves a
@@ -445,4 +445,79 @@ window.dgeJumpToSection = function(value) {
   if (typeof renderList === 'function') renderList();
   const el = document.getElementById('shloka-' + n);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+// ---------- volume navigator (sarga / kanda / amsha siblings) ----------
+
+// Some granthas are split across numbered sibling folders, one data.json each:
+// sumadhva_vijaya/sarga_1..sarga_16, shatapatha_brahmana/kanda_01..., 
+// vishnu_purana/amsha_01... Only the volume being read is ever fetched, which
+// is what keeps a 992-verse kavya off a single page -- but until now the only
+// way from sarga 3 to sarga 4 was back out through the Library.
+//
+// The lead, 9 Sep 2026, on Sumadhva Vijaya: "it should be filterable sarga
+// wise . total 16 sargas. at a time only 1 sarga should load."
+//
+// Siblings come from library.json rather than a guessed URL, so a volume that
+// is registered but not yet populated still lists (and says so) instead of
+// leading a reader to an empty page they cannot explain.
+const DGE_VOLUME_WORDS = ['sarga', 'kanda', 'amsha', 'adhyaya', 'parva', 'ullasa',
+                          'taranga', 'pariccheda', 'stabaka', 'mandala', 'ashtaka',
+                          'khanda', 'prapathaka', 'anuvaka', 'canto'];
+const DGE_VOLUME_RE = new RegExp('^(' + DGE_VOLUME_WORDS.join('|') + ')_(\\d+)$', 'i');
+
+window.dgeGoToVolume = function(slug) {
+  if (slug) window.location.href = 'index.html?path=' + encodeURIComponent(slug);
+};
+
+window.dgeInitVolumeNav = async function() {
+  const row = document.getElementById('volumeNavRow');
+  const select = document.getElementById('volumeNavSelect');
+  const count = document.getElementById('volumeNavCount');
+  if (!row || !select) return;
+  row.style.display = 'none';
+  select.innerHTML = '';
+
+  const slug = window.currentGranthaSlug || '';
+  const segs = slug.split('/').filter(Boolean);
+  const leaf = segs[segs.length - 1] || '';
+  const match = leaf.match(DGE_VOLUME_RE);
+  if (!match) return;
+  const parent = segs.slice(0, -1).join('/');
+  if (!parent) return;
+
+  const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
+  const granthas = (library && library.granthas) || [];
+  const siblings = [];
+  granthas.forEach(g => {
+    const rel = String(g.path || '').replace(/^dge\/data\//, '').replace(/\/data\.json$/, '');
+    const parts = rel.split('/');
+    if (parts.slice(0, -1).join('/') !== parent) return;
+    const m = (parts[parts.length - 1] || '').match(DGE_VOLUME_RE);
+    if (!m) return;
+    siblings.push({ slug: rel, word: m[1].toLowerCase(), n: parseInt(m[2], 10),
+                    populated: g.populated !== false });
+  });
+  if (siblings.length < 2) return;
+  siblings.sort((a, b) => a.n - b.n);
+
+  const t = (s) => (typeof applyTransliteration === 'function' && window.activeScript)
+    ? applyTransliteration(s, window.activeScript) : s;
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // The label the Library tree already uses for this folder, so the two agree.
+  const label = (s) => (typeof window.dgeSegLabel === 'function')
+    ? window.dgeSegLabel(s.slug.split('/').pop(), s.slug)
+    : s.word + ' ' + s.n;
+
+  select.innerHTML = siblings.map(s =>
+    `<option value="${esc(s.slug)}"${s.slug === slug ? ' selected' : ''}>` +
+    `${esc(label(s))}${s.populated ? '' : ' — ' + t('अनुपलब्धम्')}</option>`).join('');
+  if (count) {
+    const shown = (window.stotraData && window.stotraData.shlokas)
+      ? Object.keys(window.stotraData.shlokas).length : 0;
+    count.textContent = `${siblings.length} ${siblings[0].word}` +
+      (shown ? ` · ${shown} ${t('श्लोकाः')}` : '');
+  }
+  row.style.display = 'flex';
 };
