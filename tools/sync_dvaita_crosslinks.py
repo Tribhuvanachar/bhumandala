@@ -246,6 +246,40 @@ def sync_library_authors(aliases, apply_it):
     return planned, unmapped, changed_files
 
 
+DASA_INDEX = "dge/data/dasa_sahitya/index.json"
+
+
+def dasa_alias_proposals(cat, overrides, aliases, person_of):
+    """Kannada composer names to teach author_aliases, for the dasa-sahitya
+    joins a scholar has actually confirmed.
+
+    Never for a merely proposed one. The join is made on a bare given name,
+    and नरसिंहः / राघवेन्द्रः are among the commonest names in the tradition --
+    a tikakara and a Kannada composer sharing one is no evidence at all that
+    they are one person. Writing that automatically would be inventing an
+    identity, so the confirmation in the overrides is the whole authority
+    here; without one this returns nothing.
+    """
+    by_slug = {c["slug"]: c for c in (load(DASA_INDEX, {}) or {}).get("composers", [])}
+    known = set(aliases.get("aliases") or {})
+    proposals, unconfirmed = OrderedDict(), []
+    for x in cat.get("crossLinks", {}).get("dasaSahitya", []):
+        author_id = x.get("authorId")
+        confirmed = (overrides.get("links") or {}).get("dasa:" + str(author_id))
+        if not confirmed:
+            unconfirmed.append(x)
+            continue
+        pid = person_of.get(author_id)
+        if not pid:
+            # Confirmed against a composer, but the catalogue author is not
+            # tied to a person yet -- there is nothing to hang the spelling on.
+            continue
+        name = (by_slug.get(confirmed) or {}).get("composer") or x.get("composer")
+        if name and name not in known:
+            proposals[name] = pid
+    return proposals, unconfirmed
+
+
 def write_json(path, payload):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
@@ -317,6 +351,16 @@ def main(argv=None):
         print(f"  wrote library.json and {changed_files} data.json files")
     else:
         print("  (pass --apply-library-authors to write them)")
+
+    dasa_add, dasa_pending = dasa_alias_proposals(cat, overrides, aliases, person_of)
+    print(f"\ndasa sahitya:")
+    print(f"  {len(dasa_add)} Kannada composer names to add, from confirmed joins")
+    for name, pid in dasa_add.items():
+        print(f"    {name!r} -> {pid}")
+    print(f"  {len(dasa_pending)} joins still awaiting a scholar's confirmation")
+    for x in dasa_pending:
+        print(f"    {x['canonical']} ~ {x.get('composer') or x['slug']}  (unconfirmed, not written)")
+    add_aliases.update(dasa_add)
 
     if not (args.apply or args.apply_new_persons):
         print("\ndry run — pass --apply to add the spellings, "

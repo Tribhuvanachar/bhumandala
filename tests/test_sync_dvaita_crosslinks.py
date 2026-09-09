@@ -196,6 +196,52 @@ class PatchDefaultAuthor(unittest.TestCase):
         self.assertFalse(s.patch_default_author("/nonexistent/nope.json", "Y"))
 
 
+class DasaSahityaProposals(unittest.TestCase):
+    CAT = catalogue(
+        authors=[author("kar-1", "नरसिंहः")],
+        cross={"dasaSahitya": [{"authorId": "kar-1", "canonical": "नरसिंहः",
+                                "slug": "narasimha", "composer": "ನರಸಿಂಹ"}],
+                "authorAliases": [{"authorId": "kar-1", "personId": "narasimha_t"}]},
+    )
+
+    def proposals(self, overrides, aliases=None):
+        person_of, _ = s.resolve_person_ids(self.CAT, overrides)
+        return s.dasa_alias_proposals(self.CAT, overrides,
+                                       aliases or {"persons": {}, "aliases": {}}, person_of)
+
+    def test_an_unconfirmed_join_writes_nothing(self):
+        # Matched on a bare given name: a tikakara and a Kannada composer both
+        # called नरसिंहः are not thereby one person.
+        add, pending = self.proposals({})
+        self.assertEqual(add, {})
+        self.assertEqual(len(pending), 1)
+
+    def test_a_confirmed_join_proposes_the_kannada_spelling(self):
+        add, pending = self.proposals({"links": {"dasa:kar-1": "narasimha"}})
+        self.assertEqual(add, {"ನರಸಿಂಹ": "narasimha_t"})
+        self.assertEqual(pending, [])
+
+    def test_a_spelling_already_known_is_not_proposed_again(self):
+        add, _ = self.proposals({"links": {"dasa:kar-1": "narasimha"}},
+                                 {"persons": {}, "aliases": {"ನರಸಿಂಹ": "narasimha_t"}})
+        self.assertEqual(add, {})
+
+    def test_a_confirmation_on_an_author_with_no_person_writes_nothing(self):
+        # Nothing to hang the spelling on yet.
+        cat = catalogue(authors=[author("kar-9", "X")],
+                        cross={"dasaSahitya": [{"authorId": "kar-9", "canonical": "X",
+                                                 "slug": "y", "composer": "ವೈ"}]})
+        person_of, _ = s.resolve_person_ids(cat, {})
+        add, _ = s.dasa_alias_proposals(cat, {"links": {"dasa:kar-9": "y"}},
+                                         {"persons": {}, "aliases": {}}, person_of)
+        self.assertEqual(add, {})
+
+    def test_a_dasa_confirmation_is_not_mistaken_for_a_person_id(self):
+        # resolve_person_ids only reads kar- keys; a dasa: key must not leak in.
+        person_of, _ = s.resolve_person_ids(self.CAT, {"links": {"dasa:kar-1": "narasimha"}})
+        self.assertEqual(person_of["kar-1"], "narasimha_t")
+
+
 class ParamparaNodeShape(unittest.TestCase):
     def test_nodes_accepted_as_either_a_list_or_a_map(self):
         as_list = s.parampara_nodes({"nodes": [{"id": "a", "name": "A"}]})
