@@ -459,6 +459,47 @@ describe('public_supporters — the one collection in this feature that is publi
   });
 });
 
+describe('catalog_dvaita_entries — grantha-anukramani review overlay, public read, admin write', () => {
+  test('a signed-out visitor can read a row edit', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('catalog_dvaita_entries/r6').set({ tags: { vibhaga: 'मूलम्' } });
+    });
+    await assertSucceeds(asAnon().doc('catalog_dvaita_entries/r6').get());
+  });
+
+  test('a basic user can read but not write it', async () => {
+    await assertSucceeds(asUser(UID_BASIC).doc('catalog_dvaita_entries/r6').get());
+    await assertFails(asUser(UID_BASIC).doc('catalog_dvaita_entries/r6').set({ reviewStatus: 'retain' }));
+  });
+
+  test('an admin can create, update and delete a row edit', async () => {
+    await assertSucceeds(asUser(UID_ADMIN).doc('catalog_dvaita_entries/r6').set({ tags: { vibhaga: 'मूलम्' } }));
+    await assertSucceeds(asUser(UID_ADMIN).doc('catalog_dvaita_entries/r6').update({ reviewStatus: 'retain' }));
+    await assertSucceeds(asUser(UID_ADMIN).doc('catalog_dvaita_entries/r6').delete());
+  });
+
+  test('a superadmin can also write it', async () => {
+    await assertSucceeds(asUser(UID_SUPER).doc('catalog_dvaita_entries/r7').set({ reviewStatus: 'merge', mergeIntoId: 'r6' }));
+  });
+});
+
+describe('catalog_dvaita_master — controlled vocabulary, public read, admin write', () => {
+  test('a signed-out visitor can read a master list', async () => {
+    await testEnv.withSecurityRulesDisabled(async (ctx) => {
+      await ctx.firestore().doc('catalog_dvaita_master/karta').set({ values: ['श्रीमदानन्दतीर्थः'] });
+    });
+    await assertSucceeds(asAnon().doc('catalog_dvaita_master/karta').get());
+  });
+
+  test('a basic user can read but not write it', async () => {
+    await assertFails(asUser(UID_BASIC).doc('catalog_dvaita_master/karta').set({ values: [] }));
+  });
+
+  test('an admin can write it', async () => {
+    await assertSucceeds(asUser(UID_ADMIN).doc('catalog_dvaita_master/vibhaga').set({ values: ['मूलम्', 'टीका'] }));
+  });
+});
+
 describe('unlisted collections are denied by default', () => {
   test('an arbitrary collection is closed to everyone', async () => {
     await assertFails(asUser(UID_SUPER).doc('random_stuff/x').set({ a: 1 }));
