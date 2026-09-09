@@ -17,11 +17,32 @@ function throwsWith(code, fn) {
 }
 
 describe('the catalogue', () => {
-  test('lists exactly the seven workflows the panel offers', () => {
+  test('lists exactly the workflows the panel offers', () => {
     assert.deepEqual(wf.catalogue().map((w) => w.id).sort(), [
-      'check-sources', 'dhatu-lexicon', 'import-kavya', 'kavya-tracker',
-      'publish-wordnet', 'reindex', 'sync-dvaitavedanta'
+      'check-sources', 'dhatu-lexicon', 'extract-setutila', 'import-dasa-sahitya',
+      'import-kavya', 'kavya-tracker', 'publish-wordnet', 'reindex',
+      'sync-advaitasharada', 'sync-anandamakaranda', 'sync-ashtadhyayi',
+      'sync-dasa-sahitya', 'sync-dvaitavedanta', 'sync-dvaitavedanta-quick',
+      'sync-kavya', 'sync-sarvamulavani', 'sync-setutila', 'sync-srivaishnavan'
     ]);
+  });
+
+  test('every source-sync card runs check-sources.yml with a fixed `only`', () => {
+    for (const w of wf.catalogue().filter((x) => x.group === 'source-sync' && x.id.startsWith('sync-') && x.id !== 'sync-dvaitavedanta')) {
+      assert.equal(w.file, 'check-sources.yml', w.id);
+      const only = w.inputs.find((i) => i.name === 'only');
+      assert.ok(only && only.fixed && only.default, w.id + ' must pin its source ids');
+      assert.deepEqual(only.default.split(','), w.source_ids, w.id);
+    }
+  });
+
+  test('a shared file reports its newest run under every card that runs it', () => {
+    const out = wf.latestRuns({ workflow_runs: [
+      { id: 1, path: '.github/workflows/check-sources.yml', status: 'completed', conclusion: 'success', created_at: '2026-09-09T05:00:00Z', html_url: 'u' }
+    ] });
+    assert.equal(out['check-sources'].id, 1);
+    assert.equal(out['sync-setutila'].id, 1);
+    assert.equal(out['sync-kavya'].id, 1);
   });
 
   test('names a real workflow file for each', () => {

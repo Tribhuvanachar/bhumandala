@@ -87,8 +87,19 @@ That is the one click. Everything in this project already works this way:
 *DGE re-index*, *Publish the Sanskrit WordNet*. Each shows its result in the
 run summary — counts, what changed, what to do next — so you never read a log.
 
-**From the site's own admin panel** — `admin/workflows.html`, built, and
-running today in its fallback form. The site is static on GitHub Pages: a page
+**From the site's own admin panel** — Admin Tools → *Repository & Workflows*
+(`admin/repo-map.html`, which absorbed the earlier `admin/workflows.html` on
+9 Sep 2026). Its first accordion, *Online source syncers*, has one card per
+website — sarvamulavani.com, setutila.in, dvaitavedanta.in,
+anandamakaranda.in, srivaishnavan.com (Meghamālā), advaitasharada.sringeri.net,
+the four Kāvya sites, ashtadhyayi.com, the three Dāsa Sāhitya blogs — each
+showing what that site fed, what the last check saw, a **Check now** button
+(this workflow with `only=<that site>`) and, where an importer exists, an
+**Import** button that jumps to the importer's own card and form. Sites with no
+importer say so on the card: a change there is a note for the lead. The page
+runs jobs three ways and says which on its face: the Cloud Function below when
+deployed and signed in, else the GitHub token held in the browser, else it
+opens GitHub. Today it is in the token-or-GitHub form. The site is static on GitHub Pages: a page
 cannot start a job by itself, and it must never hold a token that could
 (anyone could read it out of the browser). So it goes through one small
 server-side hop:

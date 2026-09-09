@@ -21,7 +21,15 @@
   "  writes: 'nothing'  — reads the outside world, writes a report",
   "          'metadata' — rewrites generated status/tracker files",
   "          'corpus'   — rewrites or republishes text people read",
-  "                       (superadmin only; see minRoleFor in workflows-core.js)"
+  "                       (superadmin only; see minRoleFor in workflows-core.js)",
+  "",
+  "  group    which accordion of admin/repo-map.html the card sits in (matches",
+  "           the workflow categories in admin/config/repo-map.json).",
+  "  site/url/source_ids/feeds/importer  only on 'source-sync' cards: the",
+  "           website the card watches, which registry ids it checks, what it",
+  "           fed in dge/data, and the id of the card that re-imports it.",
+  "  inputs[].fixed  the panel shows the value but does not let it be edited",
+  "           (a syncer card is one site; changing `only` would make it another)."
  ],
  "workflows": [
   {
@@ -43,7 +51,8 @@
      "label": "Record what was seen, so the next run reports only what is new",
      "default": true
     }
-   ]
+   ],
+   "group": "source-sync"
   },
   {
    "id": "sync-dvaitavedanta",
@@ -76,7 +85,8 @@
      "label": "If granthas changed, dispatch the extractor for them right away",
      "default": false
     }
-   ]
+   ],
+   "group": "source-sync"
   },
   {
    "id": "kavya-tracker",
@@ -84,7 +94,8 @@
    "name": "Kāvya tracker — refresh",
    "blurb": "Re-counts every kāvya on disk and rewrites KAVYA_TRACKER.md and kavya-status.json.",
    "writes": "metadata",
-   "inputs": []
+   "inputs": [],
+   "group": "index-links"
   },
   {
    "id": "reindex",
@@ -111,7 +122,8 @@
      "label": "Index the commentaries too (larger index)",
      "default": false
     }
-   ]
+   ],
+   "group": "index-links"
   },
   {
    "id": "import-kavya",
@@ -145,7 +157,8 @@
      "label": "Open a pull request with the result",
      "default": true
     }
-   ]
+   ],
+   "group": "content-import"
   },
   {
    "id": "dhatu-lexicon",
@@ -193,7 +206,8 @@
      "label": "Skip the review PR and push straight to main",
      "default": false
     }
-   ]
+   ],
+   "group": "enrichment"
   },
   {
    "id": "publish-wordnet",
@@ -219,6 +233,326 @@
      "type": "boolean",
      "label": "Build and report only — publish nothing",
      "default": true
+    }
+   ],
+   "group": "index-links"
+  },
+  {
+   "id": "sync-sarvamulavani",
+   "file": "check-sources.yml",
+   "name": "Sarvamūlavāṇī — sarvamulavani.com",
+   "group": "source-sync",
+   "site": "sarvamulavani.com",
+   "url": "https://sarvamulavani.com/",
+   "source_ids": [
+    "sarvamulavani"
+   ],
+   "feeds": "Not imported yet — watch only. Reports when the site's database revision changes.",
+   "importer": null,
+   "blurb": "Watches the reader's database version stamp (version.json). Nothing here has been imported; a change is a note for the lead.",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "sarvamulavani",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-setutila",
+   "file": "check-sources.yml",
+   "name": "SetuTila — setutila.in",
+   "group": "source-sync",
+   "site": "setutila.in",
+   "url": "https://setutila.in/catalogue/",
+   "source_ids": [
+    "setutila"
+   ],
+   "feeds": "darshana/vedanta/dvaita/SetuTila — 47 granthas",
+   "importer": "extract-setutila",
+   "blurb": "Counts published posts and reads the newest modified date through the WordPress API. If it moved, run the SetuTila importer (delta sync).",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "setutila",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-dvaitavedanta-quick",
+   "file": "check-sources.yml",
+   "name": "DvaitaVedanta.in — dvaitavedanta.in (quick check)",
+   "group": "source-sync",
+   "site": "dvaitavedanta.in",
+   "url": "https://dvaitavedanta.in/",
+   "source_ids": [
+    "dvaitavedanta"
+   ],
+   "feeds": "darshana/vedanta/dvaita/DvaitaVedanta — 699 granthas",
+   "importer": "sync-dvaitavedanta",
+   "blurb": "Cheap check: the union of grantha links found at one seed page per section. For a per-grantha census and text spot-checks use the precise sync check (the Import button here runs it).",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "dvaitavedanta",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-anandamakaranda",
+   "file": "check-sources.yml",
+   "name": "Ānandamakaranda — anandamakaranda.in",
+   "group": "source-sync",
+   "site": "anandamakaranda.in",
+   "url": "https://anandamakaranda.in/Main_Page",
+   "source_ids": [
+    "anandamakaranda"
+   ],
+   "feeds": "darshana/vedanta/dvaita/SarvaMula — 38 works, 127 files",
+   "importer": null,
+   "blurb": "Reads the wiki's recent-changes list: newest revision and page count. There is no batch importer for this wiki (the corpus arrived through the browser-side convert tool), so a change is a note for the lead.",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "anandamakaranda",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-srivaishnavan",
+   "file": "check-sources.yml",
+   "name": "Śrī Rāmānuja Meghamālā — srivaishnavan.com",
+   "group": "source-sync",
+   "site": "srivaishnavan.com",
+   "url": "https://srivaishnavan.com/sri-ramanuja-meghamala/",
+   "source_ids": [
+    "srivaishnavan_meghamala"
+   ],
+   "feeds": "darshana/vedanta/vishishtadvaita/RamanujaMeghamala",
+   "importer": null,
+   "blurb": "Reads the Meghamālā page's last-modified date through the WordPress API. Re-import is importers/ramanuja_meghamala.py by hand (needs its knowledge-tree TSV).",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "srivaishnavan_meghamala",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-advaitasharada",
+   "file": "check-sources.yml",
+   "name": "Advaita Śāradā — advaitasharada.sringeri.net",
+   "group": "source-sync",
+   "site": "advaitasharada.sringeri.net",
+   "url": "https://advaitasharada.sringeri.net/",
+   "source_ids": [
+    "advaitasharada"
+   ],
+   "feeds": "darshana/vedanta/advaita — 51 files (prakaraṇa, siddhi, stotra, prasthāna ṭīkās)",
+   "importer": null,
+   "blurb": "Fingerprints the set of works the home page offers plus the site's build hash. Re-import is importers/advaita_sharada.py by hand (delta-only, permission recorded 2 Sep 2026).",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "advaitasharada",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-kavya",
+   "file": "check-sources.yml",
+   "name": "Kāvya sources — GRETIL · sanskritsahitya · ambuda.org · sa.wikisource",
+   "group": "source-sync",
+   "site": "four sites",
+   "url": "https://ambuda.org/",
+   "source_ids": [
+    "gretil",
+    "sanskritsahitya",
+    "ambuda",
+    "sa_wikisource"
+   ],
+   "feeds": "kavya-dist branch (43 works) and kavya_alankara",
+   "importer": "import-kavya",
+   "blurb": "Checks all four Kāvya sources at once: GRETIL's file list, the sanskritsahitya-com commit, ambuda's export ETag, the 65 Wikisource page revisions. If any moved, run the Kāvya importer (probe first).",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "gretil,sanskritsahitya,ambuda,sa_wikisource",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-ashtadhyayi",
+   "file": "check-sources.yml",
+   "name": "Aṣṭādhyāyī data — ashtadhyayi.com",
+   "group": "source-sync",
+   "site": "ashtadhyayi.com",
+   "url": "https://ashtadhyayi.com/",
+   "source_ids": [
+    "ashtadhyayi_com"
+   ],
+   "feeds": "vedanga/vyakarana/ashtadhyayi — sūtrapāṭha, Siddhānta-Kaumudī, Mahābhāṣya, Vasu",
+   "importer": null,
+   "blurb": "Watches the latest commit of github.com/ashtadhyayi-com/data, the repository the site is built from. Re-import is importers/ashtadhyayi_layers.py by hand.",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "ashtadhyayi_com",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "sync-dasa-sahitya",
+   "file": "check-sources.yml",
+   "name": "Dāsa Sāhitya — madhwafestivals · dasasahitya.net · meerasubbarao",
+   "group": "source-sync",
+   "site": "three blogs",
+   "url": "https://dasasahitya.net/",
+   "source_ids": [
+    "madhwafestivals",
+    "dasasahitya_net",
+    "meerasubbarao"
+   ],
+   "feeds": "dasa_sahitya — 152 composers, 15,863 compositions",
+   "importer": "import-dasa-sahitya",
+   "blurb": "Reads the three blogs' RSS feeds for the newest post. If any moved, run the Dāsa Sāhitya importer.",
+   "writes": "nothing",
+   "inputs": [
+    {
+     "name": "only",
+     "type": "string",
+     "label": "Source ids to check",
+     "default": "madhwafestivals,dasasahitya_net,meerasubbarao",
+     "fixed": true
+    },
+    {
+     "name": "remember",
+     "type": "boolean",
+     "label": "Record what was seen, so the next run reports only what is new",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "extract-setutila",
+   "file": "extract-setutila.yml",
+   "name": "SetuTila — import / delta sync",
+   "group": "content-import",
+   "blurb": "Pulls new or modified SetuTila posts (all, as a delta, or the slugs you name) and opens a pull request.",
+   "writes": "corpus",
+   "inputs": [
+    {
+     "name": "slugs",
+     "type": "string",
+     "label": "Post slugs, comma-separated (blank = delta since last sync)",
+     "default": ""
+    },
+    {
+     "name": "force",
+     "type": "boolean",
+     "label": "Re-import even if unchanged",
+     "default": false
+    }
+   ]
+  },
+  {
+   "id": "import-dasa-sahitya",
+   "file": "import-dasa-sahitya.yml",
+   "name": "Dāsa Sāhitya — import",
+   "group": "content-import",
+   "blurb": "Crawls the Haridāsa archives and opens a pull request with the corpus.",
+   "writes": "corpus",
+   "inputs": [
+    {
+     "name": "limit_per_index",
+     "type": "string",
+     "label": "Max compositions per source index (blank = all)",
+     "default": ""
+    },
+    {
+     "name": "delay",
+     "type": "string",
+     "label": "Seconds between requests",
+     "default": "1.0"
     }
    ]
   }

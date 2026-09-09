@@ -85,7 +85,7 @@ function dgeRevealAdminTools() {
   if (!dgeCheckSuperadminGate()) return;
   const btn = document.getElementById('adminToolsBtn');
   if (btn) btn.style.display = 'flex';
-  ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem', 'adminContentProvenanceItem'].forEach(id => {
+  ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem', 'adminContentProvenanceItem', 'adminRepoMapItem'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'flex';
   });

@@ -430,15 +430,22 @@ registrar. SSL and custom domains are free either way.
   opt-outs but ignores `statuses` callbacks; per-message delivery
   receipts are not recorded.
 
-## 12. The workflow buttons (`admin/workflows.html`)
+## 12. The workflow buttons (`admin/repo-map.html`, Workflows tab)
+
+(Until 9 Sep 2026 this was a separate page, `admin/workflows.html`; it is now
+the Workflows tab of *Repository & Workflows*, and the old URL redirects.)
 
 The site is static on GitHub Pages: a page cannot start a job by itself, and
 it must never hold a token that could — anything shipped to a browser is
 readable by whoever opens it. So the panel talks to two Cloud Functions,
 `listWorkflows` and `runWorkflow`, which hold the token and check the caller.
+The page also accepts a personal GitHub token typed into the browser (the same
+one Repo Files uses) as a second route, which is the lead's own credential and
+never leaves their device; the Function route is the one that lets *other*
+admins press buttons without holding a token.
 
 ```
-admin/workflows.html  ──▶  runWorkflow  ──▶  GitHub API
+admin/repo-map.html   ──▶  runWorkflow  ──▶  GitHub API
 (admin latch +             (holds the token as     (workflow_dispatch,
  Firebase Auth)             a secret; reads the     ref: main, always)
                             caller's role from

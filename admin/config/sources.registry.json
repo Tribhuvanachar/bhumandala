@@ -21,7 +21,9 @@
   "",
   "A source with `imported: false` is one we have read, cited or evaluated but",
   "never ingested. It is here so that the question 'where did this come from,",
-  "and did we check it?' has an answer for every site the project has touched."
+  "and did we check it?' has an answer for every site the project has touched.",
+  "",
+  "`watch_only: true` marks a site we have not imported from but want to hear about (sarvamulavani.com). The admin page's syncer card for it can only Check, never Import."
  ],
  "sources": [
   {
@@ -292,29 +294,149 @@
    "id": "sacred_texts",
    "title": "sacred-texts.com",
    "base": "https://sacred-texts.com/",
-   "imported": false,
+   "imported": true,
    "probe": {
     "kind": "manual"
    },
-   "feeds": [],
-   "importer": "",
-   "config": "importers/sources.json",
-   "rights": "Mostly public-domain scans of old translations; consulted, not ingested.",
+   "feeds": [
+    "itihasa/mahabharata/*/translation_ganguli"
+   ],
+   "importer": "ingest-commentaries.yml",
+   "config": "importers/mahabharata_ganguli.py",
+   "rights": "Public-domain Ganguli translation; imported by importers/mahabharata_ganguli.py.",
    "cadence": "n/a"
   },
   {
    "id": "valmikiramayan",
    "title": "valmikiramayan.net",
    "base": "https://www.valmikiramayan.net/",
-   "imported": false,
+   "imported": true,
    "probe": {
     "kind": "manual"
    },
-   "feeds": [],
-   "importer": "",
-   "config": "importers/sources.json",
+   "feeds": [
+    "itihasa/ramayana/*/saartha (kāṇḍas 1–6)"
+   ],
+   "importer": "ingest-commentaries.yml",
+   "config": "importers/ramayana_saartha.py",
    "rights": "No explicit licence; consulted for verification.",
    "cadence": "n/a"
+  },
+  {
+   "id": "sarvamulavani",
+   "title": "sarvamulavani.com — Sarvamūla reader (SQLite-backed single page)",
+   "base": "https://sarvamulavani.com/",
+   "imported": false,
+   "probe": {
+    "kind": "json_fields",
+    "url": "https://pub-f4f244dc7f1b4ad2ad5c4116104064ed.r2.dev/version.json",
+    "fields": [
+     "db",
+     "audio"
+    ],
+    "note": "The reader loads one sarvamula.db from that host after asking version.json which revision is current (2026-08-18a on 9 Sep 2026). Every route on the site itself returns the same app shell, so the version stamp is the only honest signal."
+   },
+   "feeds": [],
+   "importer": "",
+   "config": "",
+   "rights": "Not yet ingested; no licence statement found on the site. A change here is a note for the lead, not a job.",
+   "cadence": "fortnightly",
+   "watch_only": true
+  },
+  {
+   "id": "setutila",
+   "title": "setutila.in — SetuTila Sarvamūla edition (WordPress)",
+   "base": "https://setutila.in/",
+   "imported": true,
+   "probe": {
+    "kind": "wp_json",
+    "base": "https://setutila.in",
+    "path": "posts",
+    "note": "Total published posts plus the newest modified_gmt, the same field tools/setutila/import_setutila.py's delta sync keys on."
+   },
+   "feeds": [
+    "darshana/vedanta/dvaita/SetuTila (47 granthas, 67 MiB)"
+   ],
+   "importer": "extract-setutila.yml",
+   "config": "tools/setutila/import_setutila.py",
+   "rights": "Case-by-case permission recorded by the lead; all 47 leaves flagged restricted.",
+   "cadence": "fortnightly"
+  },
+  {
+   "id": "anandamakaranda",
+   "title": "anandamakaranda.in — Ānandamakaranda wiki (Sarvamūla source)",
+   "base": "https://anandamakaranda.in/Main_Page",
+   "imported": true,
+   "probe": {
+    "kind": "mediawiki_recentchanges",
+    "api": "https://anandamakaranda.in/api.php",
+    "namespace": "0",
+    "note": "A MediaWiki; the newest main-namespace revision id plus the wiki's page count."
+   },
+   "feeds": [
+    "darshana/vedanta/dvaita/SarvaMula (38 works, 127 data.json — arrived via the cowork/sarvamoola-and-search branch; the browser-side importer is dge/convert/urlimport.js)"
+   ],
+   "importer": "",
+   "config": "dge/convert/urlimport.js",
+   "rights": "No licence statement; used under the lead's case-by-case authorisation. No committed batch importer — a change here is a note for the lead.",
+   "cadence": "fortnightly"
+  },
+  {
+   "id": "srivaishnavan_meghamala",
+   "title": "srivaishnavan.com — Śrī Rāmānuja Meghamālā (JIR Foundation)",
+   "base": "https://srivaishnavan.com/sri-ramanuja-meghamala/",
+   "imported": true,
+   "probe": {
+    "kind": "wp_json",
+    "base": "https://srivaishnavan.com",
+    "path": "pages?slug=sri-ramanuja-meghamala",
+    "note": "The Meghamālā is one long WordPress page; its modified_gmt moves when the page is edited."
+   },
+   "feeds": [
+    "darshana/vedanta/vishishtadvaita/RamanujaMeghamala"
+   ],
+   "importer": "",
+   "config": "importers/ramanuja_meghamala.py",
+   "rights": "Public site; imported once (importers/ramanuja_meghamala.py, needs a hand-made knowledge-tree TSV to re-run).",
+   "cadence": "fortnightly"
+  },
+  {
+   "id": "advaitasharada",
+   "title": "advaitasharada.sringeri.net — Sringeri Advaita Śāradā critical edition",
+   "base": "https://advaitasharada.sringeri.net/",
+   "imported": true,
+   "probe": {
+    "kind": "html_index",
+    "url": "https://advaitasharada.sringeri.net/",
+    "extract": "\"(/read/[a-z0-9-]+/|/_astro/[^\"]+)",
+    "note": "A static (Astro) site with no sitemap: the fingerprint is the set of /read/<work> links on the home page plus the build-hashed asset names, which change on every deploy."
+   },
+   "feeds": [
+    "darshana/vedanta/advaita/{prakarana_granthas,siddhi_granthas,stotrani,*_prasthana_tikas,shankara_bhashya_extra} (51 data.json, 155 MiB)"
+   ],
+   "importer": "",
+   "config": "importers/advaita_sharada.py",
+   "rights": "Case-by-case permission (2 Sep 2026); licensed corpus — must not be indexed publicly (docs/SEO_ARCHITECTURE.md).",
+   "cadence": "fortnightly"
+  },
+  {
+   "id": "ashtadhyayi_com",
+   "title": "ashtadhyayi.com — sūtra, vṛtti and commentary data (github ashtadhyayi-com/data)",
+   "base": "https://ashtadhyayi.com/",
+   "imported": true,
+   "probe": {
+    "kind": "github_commit",
+    "repo": "ashtadhyayi-com/data",
+    "branch": "master",
+    "note": "The site is built from this public repository; its latest commit is the change signal."
+   },
+   "feeds": [
+    "vedanga/vyakarana/ashtadhyayi/{sutrapatha,siddhanta_kaumudi,mahabhashya_patanjali,vasu}"
+   ],
+   "importer": "",
+   "config": "importers/ashtadhyayi_layers.py",
+   "rights": "Curator's e-mail permission held by the lead; no LICENSE file on the repo.",
+   "cadence": "fortnightly"
   }
  ]
 }

@@ -97,3 +97,15 @@ jobs:
             git --no-pager diff sitemap.xml | head -80
             exit 1
           fi
+
+      - name: Names audit (audit_names.py — report only until the backlog is cleared)
+        # docs/NAMING_CONVENTIONS.md. Writes the counts into the run summary;
+        # switch to --strict once the HARD findings it lists are fixed.
+        run: python3 tools/audit_names.py
+
+      - name: Repo inventory drift gate (build_repo_inventory.py)
+        # Every workflow file must have a classified entry in
+        # admin/config/repo-map.json, and the generated fields (inputs,
+        # triggers, secrets) must match the yml — otherwise the admin page's
+        # Repository & Workflows tab shows a stale form.
+        run: python3 tools/build_repo_inventory.py --check

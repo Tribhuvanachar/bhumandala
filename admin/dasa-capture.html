@@ -303,7 +303,27 @@ function splitStanzas(text){
   return text.split(/\n\s*\n/).map(st=>st.split("\n").map(l=>l.trim()).filter(Boolean)).filter(st=>st.length);
 }
 function slugify(s){
-  return (s||"").normalize('NFKD').replace(/[^\w\s-]/g,"").trim().toLowerCase().replace(/[\s_-]+/g,"_") || "untitled";
+  // JS \w is ASCII-only, so a Kannada name used to collapse to "" and every
+  // such capture landed in one "untitled" bucket. A Kannada/Devanagari name now
+  // gets a stable hash slug instead; resolveSlug() below prefers the slug the
+  // corpus already uses for that composer, so existing folders are reused.
+  const ascii = (s||"").normalize('NFKD').replace(/[^\w\s-]/g,"").trim().toLowerCase().replace(/[\s_-]+/g,"_");
+  if (ascii) return ascii;
+  const raw = (s||"").trim();
+  if (!raw) return "untitled";
+  let h = 0; for (const ch of raw) h = (h * 31 + ch.codePointAt(0)) >>> 0;
+  return "composer_" + h.toString(16);
+}
+// The corpus keys composers by slug in index.json (composer names there are
+// mostly Kannada). Match the typed name against index.json first -- exact,
+// then case-insensitive on the Latin form -- so a capture joins the composer's
+// existing file rather than creating a second one under a new slug.
+function resolveSlug(manifest, composerName){
+  const want = (composerName||"").trim();
+  const norm = x => (x||"").normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z\u0C80-\u0CFF\u0900-\u097F]/g,'');
+  const list = (manifest && manifest.composers) || [];
+  let hit = list.find(c => c.composer === want) || list.find(c => norm(c.composer) === norm(want) && norm(want));
+  return hit ? hit.slug : slugify(want);
 }
 async function sha1hex8(s){
   const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(s));
@@ -392,20 +412,31 @@ document.getElementById('saveBtn').onclick = async () => {
   if(!GH || !GH.getToken()){ status.textContent = 'Paste a GitHub token above first.'; return; }
   btn.disabled = true; status.textContent = 'Saving…';
   try{
-    const { slug, record } = await buildRecord(f);
-    const composerPath = `${GH_BASE}/composers/${slug}.json`;
-    let composerFile;
-    try{ composerFile = JSON.parse(await GH.getFileText(composerPath)); }
-    catch(e){ composerFile = { composer: f.composer, count: 0, compositions: [] }; }
-    composerFile.composer = composerFile.composer || f.composer;
-    composerFile.compositions.push(record);
-    composerFile.count = composerFile.compositions.length;
-
+    // Read the manifest FIRST so the slug can reuse the composer's existing
+    // folder. The corpus shape is composers/<slug>/data.json with `items`
+    // (see dge/data/dasa_sahitya/composers/*/data.json and schemas.json
+    // `dasa_pada_text`); the earlier composers/<slug>.json + `compositions`
+    // wrote a file the reader never fetched and re-pointed index.json at it.
     const indexPath = `${GH_BASE}/index.json`;
     let manifest = JSON.parse(await GH.getFileText(indexPath));
+    const { record } = await buildRecord(f);
+    const slug = resolveSlug(manifest, f.composer);
+    record.id = slug + "__" + record.id.split("__").pop();
+    const composerPath = `${GH_BASE}/composers/${slug}/data.json`;
+    let composerFile;
+    try{ composerFile = JSON.parse(await GH.getFileText(composerPath)); }
+    catch(e){ composerFile = { schema: "dasa_pada_text", default_author: f.composer, composer: f.composer, count: 0, bio_notes: "", items: [] }; }
+    composerFile.schema = composerFile.schema || "dasa_pada_text";
+    composerFile.composer = composerFile.composer || f.composer;
+    composerFile.default_author = composerFile.default_author || composerFile.composer;
+    composerFile.items = composerFile.items || composerFile.compositions || [];
+    delete composerFile.compositions;
+    composerFile.items.push(record);
+    composerFile.count = composerFile.items.length;
+
     let entry = (manifest.composers||[]).find(c=>c.slug===slug);
-    if(entry){ entry.count = composerFile.count; entry.composer = composerFile.composer; }
-    else { entry = { slug, composer: composerFile.composer, count: composerFile.count, file: `composers/${slug}.json` };
+    if(entry){ entry.count = composerFile.count; entry.composer = entry.composer || composerFile.composer; entry.file = `composers/${slug}/data.json`; }
+    else { entry = { slug, composer: composerFile.composer, count: composerFile.count, file: `composers/${slug}/data.json` };
       manifest.composers = manifest.composers||[]; manifest.composers.push(entry); }
     manifest.count_total = (manifest.count_total||0) + 1;
     manifest.counts_by_form = manifest.counts_by_form||{};
