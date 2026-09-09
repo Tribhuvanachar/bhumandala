@@ -172,3 +172,9 @@ table.dvc-minitable td,table.dvc-minitable th{padding:4px 8px;border-bottom:1px 
 .dvc-dupdiff{font-size:.74rem;opacity:.8;margin:2px 0 6px}
 .dvc-dupdiff-same{color:var(--accent);opacity:1;font-weight:600}
 .dvc-chip-off{opacity:.45;text-decoration:line-through}
+.dvc-alpha{margin:8px 0 4px}
+.dvc-alpharow{display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:4px}
+.dvc-alphabtn{border:1px solid var(--line);background:var(--panel2);color:var(--fg);
+  border-radius:6px;min-width:26px;padding:2px 5px;font-size:.8rem;cursor:pointer;line-height:1.4}
+.dvc-alphabtn:hover{border-color:var(--accent)}
+.dvc-alphabtn.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
