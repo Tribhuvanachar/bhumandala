@@ -1802,6 +1802,31 @@ function dgeFetchSandhiBucket(name) {
     .then(r => (r.ok ? r.json() : null)).catch(() => null);
   return DGE_SANDHI_BUCKET_CACHE[name];
 }
+// The locally-committed split index (tools/build_sandhi_split_index.py,
+// sanskrit_parser's Sandhi.split_all validated against this repo's own word
+// lists). Tried BEFORE the CDN-hosted Vidyut index: it ships in the repo, so
+// it is the one that works on a local checkout -- which is why the Sandhi
+// tool did nothing there. Each half carries the list that recognised it, so
+// a half that is a real verb form can be marked as the dhatu link it is.
+const DGE_LOCAL_SANDHI_CACHE = {};
+function dgeFetchLocalSandhiBucket(name) {
+  if (!DGE_LOCAL_SANDHI_CACHE[name]) {
+    DGE_LOCAL_SANDHI_CACHE[name] = fetch('data/_sandhi_local/' + name + '.json', { cache: 'force-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+  }
+  return DGE_LOCAL_SANDHI_CACHE[name];
+}
+function dgeFindLocalSandhiSplits(word) {
+  const clean = String(word || '').trim();
+  if (!clean || typeof window.Sanscript === 'undefined') return Promise.resolve(null);
+  let slp;
+  try { slp = window.Sanscript.t(clean, 'devanagari', 'slp1'); } catch (e) { return Promise.resolve(null); }
+  if (!slp) return Promise.resolve(null);
+  return dgeWithTimeout(dgeFetchLocalSandhiBucket(dgeSandhiBucketOf(slp)), 5000, null)
+    .then(function (b) { return (b && b[clean]) || null; });
+}
+
 function dgeFindSandhiSplits(word) {
   const clean = String(word || '').trim();
   if (!clean || typeof window.Sanscript === 'undefined') return Promise.resolve(null);
@@ -1815,6 +1840,44 @@ function dgeFindSandhiSplits(word) {
   return dgeWithTimeout(dgeFetchSandhiBucket(dgeSandhiBucketOf(slp)), 5000, null)
     .then(b => (b && b[clean]) || null);
 }
+// One row per split, each half marked with what recognised it. A half that is
+// a real verb form gets the dhatu background and is tappable straight through
+// to its paradigm -- the lead's ask: "integrate this with your local dhatu
+// library to identify and highlight matches with a special background color."
+const DGE_SANDHI_SRC_TITLE = {
+  v: 'a verb form — tap for its root',
+  n: 'a known inflected form in this corpus',
+  u: 'an upasarga'
+};
+function dgeLocalSandhiRowsHtml(splits) {
+  return splits.map(function (s) {
+    function half(text, src) {
+      const cls = 'dge-sandhi-piece' + (src ? ' dge-src-' + src : '');
+      const tip = DGE_SANDHI_SRC_TITLE[src] || '';
+      return '<span class="' + cls + '"' + (tip ? ' title="' + dgeShabdaEsc(tip) + '"' : '') +
+        (src === 'v' ? ' data-sandhi-dhatu="' + dgeShabdaEsc(text) + '" role="button" tabindex="0"' : '') +
+        '>' + dgeShabdaEsc(text) + '</span>';
+    }
+    return '<div class="dsm-sandhi-row deva">' + half(s.a, s.sa) +
+      ' <span class="dge-sandhi-plus">+</span> ' + half(s.b, s.sb) + '</div>';
+  }).join('');
+}
+
+// Tapping a verb half opens the Dhātu popup on it, which is the whole point of
+// splitting a compound: the root was never reachable while it sat glued to a
+// prefix or a preceding word.
+function dgeWireSandhiDhatuTaps(box) {
+  if (!box) return;
+  box.querySelectorAll('[data-sandhi-dhatu]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      const w = el.dataset.sandhiDhatu;
+      const prev = window.dgeSelectedWordText;
+      window.dgeSelectedWordText = function () { return w; };
+      try { window.dgeOpenDhatuForSelection(null); } finally { window.dgeSelectedWordText = prev; }
+    });
+  });
+}
+
 function dgeSandhiRowsHtml(splits) {
   return splits.map(function (s) {
     return '<div class="dsm-sandhi-row deva">' + dgeShabdaEsc(s.first) + ' + ' + dgeShabdaEsc(s.second) +
@@ -1987,14 +2050,27 @@ window.dgeOpenVidyutSandhiForSelection = function (e) {
     window.lastSelectedText = word;
     window.askAcharya(null, 'sandhi');
   }
-  dgeFindSandhiSplits(word).then(function (splits) {
-    if (!splits || !splits.length) { fallbackToAi(); return; }
+  function show(html) {
     dgeEnsureSandhiModal();
     window.openModal(DGE_SANDHI_MODAL_ID);
-    document.getElementById('dgeSandhiModalBody').innerHTML =
-      '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
-      '<div class="dsm-sub">सन्धिविच्छेदः · precomputed, not AI-generated</div>' +
-      dgeSandhiRowsHtml(splits);
+    const body = document.getElementById('dgeSandhiModalBody');
+    body.innerHTML = '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' + html;
+    dgeWireSandhiDhatuTaps(body);
+  }
+  // The local index first: it is committed to the repo, so it is the one that
+  // answers on a local checkout. The CDN-hosted Vidyut index (vowel sandhi
+  // only, with sutra citations) is the second try, and the AI guess the last.
+  dgeFindLocalSandhiSplits(word).then(function (local) {
+    if (local && local.length) {
+      show('<div class="dsm-sub">सन्धिविच्छेदः · rule-based, verified against this library\u2019s own word lists</div>' +
+           dgeLocalSandhiRowsHtml(local));
+      return;
+    }
+    return dgeFindSandhiSplits(word).then(function (splits) {
+      if (!splits || !splits.length) { fallbackToAi(); return; }
+      show('<div class="dsm-sub">सन्धिविच्छेदः · precomputed, not AI-generated</div>' +
+           dgeSandhiRowsHtml(splits));
+    });
   }).catch(fallbackToAi);
 };
 
