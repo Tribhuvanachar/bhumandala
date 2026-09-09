@@ -437,6 +437,75 @@ const FEATURE_FLAGS = {
 };
 window.FEATURE_FLAGS = FEATURE_FLAGS;
 
+/* ---------------------------------------------------------------------------
+   Word tools (the 🕉️ Genie row on a selection). One registry so the set can
+   be configured instead of edited: the buttons used to be hand-written markup
+   in index.html, which meant "hide Samasa" was a code change.
+
+   `powered` is the load-bearing field:
+     own      — this project's own precomputed data (Vidyut-derived, shipped
+                in dge/data). Free to run, works offline, no third party.
+     gemini   — a paid Gemini call on the project lead's prepaid credits.
+                Hidden from ordinary readers; see dgeGetEffectiveWordActions.
+     external — a live third-party service (dharmamitra.org). Off by default:
+                it sends the reader's selection off-site.
+
+   Precedence, matching every other configurable in this file: shipped default
+   < global admin (appConfig.wordActions, via admin/config/config-overrides.json)
+   < per-device (localStorage 'word_actions_override', ⚙️ → 🎛️).
+   --------------------------------------------------------------------------- */
+const WORD_ACTIONS = [
+  { id: 'shabda', icon: '🔤', label: 'Shabda', handler: 'dgeOpenShabdaForSelection',
+    wordOnly: true, powered: 'own', enabled: true,
+    title: 'Declension table and dictionary results for this word' },
+  { id: 'dhatu', icon: '📚', label: 'Dhātu', handler: 'dgeOpenDhatuForSelection',
+    wordOnly: true, powered: 'own', enabled: true,
+    title: 'Find the root this form comes from and show its derivation' },
+  // 9 Sep 2026, the lead: "right-click options for Sandhi and Samasa are not
+  // working properly locally. they must be hidden for now." Off by default
+  // rather than deleted -- the code path is intact and an admin can re-enable
+  // both once they behave.
+  { id: 'sandhi', icon: '🔗', label: 'Sandhi', handler: 'dgeOpenVidyutSandhiForSelection',
+    wordOnly: true, powered: 'own', enabled: false,
+    title: 'Sandhi split for this word' },
+  { id: 'samasa', icon: '🧩', label: 'Samasa', handler: 'askAcharya', arg: 'samasa',
+    wordOnly: true, powered: 'gemini', enabled: false,
+    title: 'Samasa Vigraha for this word' },
+  { id: 'searchLibrary', icon: '🔍', label: 'Search Library', handler: 'dgeOpenCorpusSearchForSelection',
+    wordOnly: false, powered: 'own', enabled: true,
+    title: 'Find every other place this word or phrase appears in the library' },
+  { id: 'sandhiLive', icon: '🔗', label: 'Sandhi (Live)', handler: 'dgeOpenSandhiForSelection',
+    wordOnly: true, powered: 'external', enabled: false,
+    title: 'Live sandhi split via a third-party service' }
+];
+window.WORD_ACTIONS = WORD_ACTIONS;
+
+// True when this viewer may spend the project's Gemini credits. Ordinary
+// readers never see a paid action at all -- the lead's ask, 9 Sep 2026:
+// "hide the Gemini API options from normal users and restrict them to
+// features powered by project-owned APIs."
+window.dgeAiFeaturesAllowed = function () {
+  try {
+    return localStorage.getItem('acharyaAuthorized') === 'true' ||
+           localStorage.getItem('is_superadmin') === 'true';
+  } catch (e) { return false; }
+};
+
+window.dgeGetEffectiveWordActions = function () {
+  let global = {}, local = {};
+  try { global = (window.appConfig && window.appConfig.wordActions) || {}; } catch (e) {}
+  try { local = JSON.parse(localStorage.getItem('word_actions_override') || 'null') || {}; } catch (e) {}
+  const aiOk = window.dgeAiFeaturesAllowed();
+  return WORD_ACTIONS
+    .map(function (a) {
+      const enabled = local[a.id] !== undefined ? local[a.id]
+                    : global[a.id] !== undefined ? global[a.id]
+                    : a.enabled;
+      return Object.assign({}, a, { enabled: enabled });
+    })
+    .filter(function (a) { return a.enabled && (a.powered !== 'gemini' || aiOk); });
+};
+
 // Which scripts/languages appear in the 🔠 script selector, and in what
 // order. Remove an entry (or set enabled:false) to hide it from the
 // picker without touching any transliteration code — it still works if

@@ -634,7 +634,7 @@
           (s.pratyay ? '<div class="k2-note">प्रत्ययः</div><div class="body" lang="sa">' + esc(s.pratyay) + '</div>' : '') +
           (s.sk ? '<div class="k2-note" style="margin-top:6px">वृत्तिः</div><div class="body" lang="sa">' + esc(s.sk).replace(/\[\[(\d+\.\d+\.\d+)\]\]/g, '<button class="k2-ref sutra" data-sutra="$1">$1</button>') + '</div>' : '')
           : '<div class="body" lang="sa">इदं सूत्रं उणादिपाठे न लब्धम् (' + esc(ref) + ').</div>') +
-        '<div class="k2-note" style="margin-top:6px">उणादिपाठः: ashtadhyayi.com data · <a href="vyakarana/unadi.html" style="color:inherit">पूर्णसूची ↗</a></div>' +
+        '<div class="k2-note" style="margin-top:6px">उणादिपाठः · <a href="vyakarana/unadi.html" style="color:inherit">पूर्णसूची ↗</a></div>' +
         '<div class="row"><button data-copy="' + esc('उ० ' + ref + (s ? ' ' + s.sutra : '')) + '">⧉ Copy</button></div>');
       var pop = $('#k2Pop');
       pop.querySelectorAll('[data-sutra]').forEach(function (b) {

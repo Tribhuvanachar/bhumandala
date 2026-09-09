@@ -39,8 +39,28 @@ function dgeLangInstruction() {
 // selection was a dead end, not a helpful contextual option. "Search
 // Library" (corpus search) is left showing for both, since searching a
 // phrase is perfectly reasonable.
+// The row is built from config.js's WORD_ACTIONS rather than the hand-written
+// markup it used to be, so which tools a reader is offered is configuration:
+// a global admin default plus a per-device override, with the paid ones
+// filtered out entirely for anyone who is not authorised to spend on them.
+function dgeRenderWordToolsRow() {
+  const row = document.getElementById('wordToolsRow');
+  if (!row || typeof window.dgeGetEffectiveWordActions !== 'function') return;
+  row.innerHTML = window.dgeGetEffectiveWordActions().map(function (a) {
+    const call = a.arg
+      ? "window." + a.handler + "(event, '" + a.arg + "')"
+      : "window." + a.handler + "(event)";
+    return '<button class="tooltip-btn"' + (a.wordOnly ? ' data-word-only' : '') +
+      ' data-action-id="' + a.id + '" onpointerdown="' + call + '" title="' +
+      String(a.title || '').replace(/"/g, '&quot;') + '">' + a.icon + ' ' + a.label + '</button>';
+  }).join('');
+}
+window.dgeRenderWordToolsRow = dgeRenderWordToolsRow;
+document.addEventListener('DOMContentLoaded', dgeRenderWordToolsRow);
+
 function dgeUpdateWordToolsForSelection(txt) {
   const isSingleWord = !!txt && !/\s/.test(txt.trim());
+  dgeRenderWordToolsRow();
   document.querySelectorAll('#wordToolsRow [data-word-only]').forEach(btn => {
     btn.style.display = isSingleWord ? '' : 'none';
   });
@@ -403,6 +423,41 @@ const SCRIPT_OPTION_CHECKBOX_IDS = {
   malayalam: 'scriptOptMalayalam'
 };
 
+// Word-tool toggles are built from the registry rather than hand-listed like
+// the flags above -- adding a tool to config.js should not also require a
+// checkbox here, which is how such lists drift out of sync.
+function dgeLoadWordActionsIntoUI() {
+  const box = document.getElementById('wordActionToggles');
+  if (!box || !window.WORD_ACTIONS) return;
+  let global = {}, local = {};
+  try { global = (window.appConfig && window.appConfig.wordActions) || {}; } catch (e) {}
+  try { local = JSON.parse(localStorage.getItem('word_actions_override') || 'null') || {}; } catch (e) {}
+  const aiOk = typeof window.dgeAiFeaturesAllowed === 'function' && window.dgeAiFeaturesAllowed();
+  const POWERED_NOTE = { gemini: ' · paid AI', external: ' · third-party service' };
+  box.innerHTML = window.WORD_ACTIONS
+    .filter(function (a) { return a.powered !== 'gemini' || aiOk; })
+    .map(function (a) {
+      const on = local[a.id] !== undefined ? local[a.id]
+               : global[a.id] !== undefined ? global[a.id] : a.enabled;
+      return '<label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">' +
+        '<input type="checkbox" data-wordaction="' + a.id + '" style="margin:0; width:14px; height:14px;"' +
+        (on ? ' checked' : '') + '> ' + a.icon + ' ' + a.label +
+        '<span style="font-weight:400; opacity:.65;">' + (POWERED_NOTE[a.powered] || '') + '</span></label>';
+    }).join('');
+}
+
+function dgeSaveWordActionsFromUI() {
+  const override = {};
+  let any = false;
+  document.querySelectorAll('#wordActionToggles [data-wordaction]').forEach(function (el) {
+    override[el.dataset.wordaction] = el.checked;
+    any = true;
+  });
+  if (!any) return;
+  try { localStorage.setItem('word_actions_override', JSON.stringify(override)); } catch (e) {}
+  if (typeof window.dgeRenderWordToolsRow === 'function') window.dgeRenderWordToolsRow();
+}
+
 function dgeLoadFeatureFlagsIntoUI() {
   const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : (window.FEATURE_FLAGS || {});
   Object.entries(FEATURE_FLAG_CHECKBOX_IDS).forEach(([flagKey, elId]) => {
@@ -416,6 +471,7 @@ function dgeLoadFeatureFlagsIntoUI() {
     masterEl.checked = markerFlags.every(f => flags[f] !== false);
   }
 
+  dgeLoadWordActionsIntoUI();
   const scriptOptions = (typeof dgeGetEffectiveScriptOptions === 'function') ? dgeGetEffectiveScriptOptions() : (window.SCRIPT_OPTIONS || []);
   scriptOptions.forEach(opt => {
     const elId = SCRIPT_OPTION_CHECKBOX_IDS[opt.id];
@@ -439,6 +495,7 @@ function dgeSaveFeatureFlagsFromUI() {
     if (el) { override[flagKey] = el.checked; any = true; }
   });
   if (any) localStorage.setItem('feature_flags_override', JSON.stringify(override));
+  dgeSaveWordActionsFromUI();
 
   const scriptOverride = {};
   let anyScript = false;
@@ -1166,6 +1223,9 @@ function renderAcharyaQueryButtons(isSingleWord) {
   row.innerHTML = '';
   fullContainer.innerHTML = '';
 
+  // Every Acharya query is a paid Gemini call, so the whole row is hidden
+  // from a reader who is not authorised to spend the project's credits.
+  if (typeof window.dgeAiFeaturesAllowed === 'function' && !window.dgeAiFeaturesAllowed()) return;
   const enabled = types.filter(q => q.enabled && !(q.id === 'grammar' && isSingleWord === false));
   enabled.forEach(q => {
     const btn = document.createElement('button');
@@ -1625,7 +1685,7 @@ function dgeShabdaCompoundHtml(surface, hit) {
 }
 function dgeShabdaNotFoundHtml(surface) {
   return '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '", ' +
-    'and it doesn\'t look like a sandhi join Vidyut resolves either. ' +
+    'and it doesn\'t look like a sandhi join the grammar engine resolves either. ' +
     'It may still be findable in the full word list — <a href="vyakarana/shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
     '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>' +
     '<div class="dsm-gen">Or derive its table now, taking "' + dgeShabdaEsc(surface) + '" as the stem: ' +
@@ -1692,7 +1752,7 @@ function dgeMorphFallbackHtml(word) {
     const byLemma = {};
     an.forEach(function (a) { (byLemma[a.lemma] = byLemma[a.lemma] || []).push(a.gloss); });
     let h = '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
-      '<div class="dsm-sub">व्याकरणम् · not in the fixed शब्दपाठः list, but Vidyut resolves this form directly</div>';
+      '<div class="dsm-sub">व्याकरणम् · not in the fixed शब्दपाठः list, but the grammar engine resolves this form directly</div>';
     const lingaOf = {};
     an.forEach(function (a) { if (a.kind === 's' && a.linga && !lingaOf[a.lemma]) lingaOf[a.lemma] = a.linga.toUpperCase(); });
     Object.keys(byLemma).forEach(function (lemma) {
@@ -1767,7 +1827,7 @@ function dgeSandhiFallbackHtml(word) {
   return dgeFindSandhiSplits(word).then(function (splits) {
     if (!splits || !splits.length) return null;
     return '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
-      '<div class="dsm-sub">सन्धिविच्छेदः · not in the fixed शब्दपाठः list, but Vidyut resolves this as a sandhi join</div>' +
+      '<div class="dsm-sub">सन्धिविच्छेदः · not in the fixed शब्दपाठः list, but the grammar engine resolves this as a sandhi join</div>' +
       dgeSandhiRowsHtml(splits) + dgeShabdaWhereElseLink(word);
   }).catch(() => null);
 }
@@ -1933,7 +1993,7 @@ window.dgeOpenVidyutSandhiForSelection = function (e) {
     window.openModal(DGE_SANDHI_MODAL_ID);
     document.getElementById('dgeSandhiModalBody').innerHTML =
       '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
-      '<div class="dsm-sub">सन्धिविच्छेदः · from Vidyut (real, not AI-generated)</div>' +
+      '<div class="dsm-sub">सन्धिविच्छेदः · precomputed, not AI-generated</div>' +
       dgeSandhiRowsHtml(splits);
   }).catch(fallbackToAi);
 };

@@ -152,7 +152,7 @@
 
       var note=document.createElement("p");
       note.className="df-note";
-      note.textContent="रूपाणि (सन्/णिच्/यङ्/यङ्लुक्, शुद्ध कर्मणि) · source: ashtadhyayi-com/data — शुद्ध कर्तरि के लिए देखें प्रक्रिया (चरणबद्ध व्युत्पत्ति, vidyut-prakriya)।";
+      note.textContent="रूपाणि (सन्/णिच्/यङ्/यङ्लुक्, शुद्ध कर्मणि) — शुद्ध कर्तरि के लिए देखें प्रक्रिया (चरणबद्ध व्युत्पत्ति)।";
       root.appendChild(note);
     }).catch(function(e){
       root.innerHTML='<div class="df-empty">इस धातु के रूप लोड नहीं हो सके ('+e+')। dge/ फ़ोल्डर से सर्व करें।</div>';
