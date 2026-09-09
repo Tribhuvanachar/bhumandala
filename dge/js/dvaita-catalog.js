@@ -65,6 +65,7 @@
     labelFilter: "",
     onlyFlag: "",
     expanded: {},           // id -> true, tree expansion
+    personFilter: null,     // {personId, authorIds:Set} — set by a #person= deep link
     view_ids: [],           // current filtered id list (flat views)
     shown: 0,
     children: {},           // effective parentId -> [childId...]
@@ -232,6 +233,7 @@
 
   function matches(it) {
     if (reviewOf(it.id) === 'delete') return false;
+    if (state.personFilter && !state.personFilter.authorIds.has(it.kartaId)) return false;
     for (var i = 0; i < TAG_FIELDS.length; i++) {
       var set = state.tagFilters[TAG_FIELDS[i]];
       if (set.size && !set.has(eff(it, TAG_FIELDS[i]))) return false;
@@ -264,7 +266,7 @@
   // ancestors needed to reach it, fully expanded -- otherwise a match three
   // levels down would simply not be on screen.
   function visibleSet() {
-    var filtering = state.q.trim() || state.onlyFlag || state.labelFilter ||
+    var filtering = state.q.trim() || state.onlyFlag || state.labelFilter || state.personFilter ||
       TAG_FIELDS.some(function (f) { return state.tagFilters[f].size; });
     if (!filtering) return null;
     var keep = {};
@@ -850,6 +852,7 @@
       }).join('') +
       '<tr><td class="dvc-muted">मूलम् · parent</td><td>' + (p && state.byId[p] ? '<a href="#" data-open="' + p + '">' + esc(eff(state.byId[p], 'grantha')) + '</a>' : '—') + '</td></tr>' +
       '<tr><td class="dvc-muted">वंशः · lineage</td><td>' + esc(it.breadcrumb) + '</td></tr>' +
+      guruLinkFor(it) +
       (it.mention ? '<tr><td class="dvc-muted">note in sheet</td><td>' + esc(it.mention) + '</td></tr>' : '') +
       (libMatch ? '<tr><td class="dvc-muted">in the library</td><td>' + libMatch.matches.map(function (x) { return esc(x.title); }).join(', ') + '</td></tr>' : '') +
       '</tbody></table>' +
@@ -860,6 +863,81 @@
         }).join('') + '</ul>' : '');
     $("#dvc-detail").style.display = '';
     $("#dvc-detail-close").onclick = function () { $("#dvc-detail").style.display = 'none'; };
+  }
+
+  /* ---------------- deep links from Guru Paramparā ---------------- */
+  // #entry=r884  -> open that entry, with its ancestors expanded
+  // #person=jayatirtha -> show only that ācārya's works
+  function personToAuthorIds(personId) {
+    var ids = new Set();
+    (state.crossLinks.parampara || []).forEach(function (p) {
+      if (p.kind === 'author' && p.nodeId === personId && p.authorId) ids.add(p.authorId);
+    });
+    (state.crossLinks.authorAliases || []).forEach(function (a) {
+      if (a.personId === personId) ids.add(a.authorId);
+    });
+    Object.keys(state.ov.links || {}).forEach(function (k) {
+      if (k.indexOf('kar-') === 0 && state.ov.links[k] === personId) ids.add(k);
+    });
+    return ids;
+  }
+  function applyHash() {
+    var h = (location.hash || '').replace(/^#/, '');
+    if (!h) return false;
+    var m = /^entry=(.+)$/.exec(h);
+    if (m) {
+      var id = decodeURIComponent(m[1]);
+      var it = state.byId[id];
+      if (!it) return false;
+      var p = effParent(it), guard = 0;
+      while (p && state.byId[p] && guard++ < 50) { state.expanded[p] = true; p = effParent(state.byId[p]); }
+      renderCurrentView(true);
+      openDetail(id);
+      var el = $('.dvc-node[data-id="' + id + '"]');
+      if (el) el.scrollIntoView({ block: 'center' });
+      return true;
+    }
+    m = /^person=(.+)$/.exec(h);
+    if (m) {
+      var pid = decodeURIComponent(m[1]);
+      var ids = personToAuthorIds(pid);
+      if (!ids.size) return false;
+      state.personFilter = { personId: pid, authorIds: ids };
+      showPersonBanner();
+      rerender();
+      return true;
+    }
+    return false;
+  }
+  function showPersonBanner() {
+    var el = $("#dvc-personbanner");
+    if (!el) return;
+    if (!state.personFilter) { el.style.display = 'none'; return; }
+    var names = state.masters.authors.filter(function (a) { return state.personFilter.authorIds.has(a.id); })
+      .map(function (a) { return a.canonical; }).join(', ');
+    el.style.display = '';
+    el.innerHTML = 'Showing only works by <b>' + esc(names) + '</b> ' +
+      '<span class="dvc-muted">(from Guru Paramparā · ' + esc(state.personFilter.personId) + ')</span> ' +
+      '<button class="dvc-btn dvc-btn-sm" id="dvc-clearperson">✕ show everything</button>';
+    $("#dvc-clearperson").onclick = function () {
+      state.personFilter = null;
+      try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+      showPersonBanner(); rerender();
+    };
+  }
+  // The reverse link: this author is a paramparā node, so offer their page.
+  function guruLinkFor(item) {
+    if (!item.kartaId) return '';
+    var pid = null;
+    (state.crossLinks.parampara || []).forEach(function (p) {
+      if (p.kind === 'author' && p.authorId === item.kartaId) pid = p.nodeId;
+    });
+    (state.crossLinks.authorAliases || []).forEach(function (a) {
+      if (a.authorId === item.kartaId) pid = pid || a.personId;
+    });
+    if (!pid) return '';
+    return '<tr><td class="dvc-muted">गुरुपरम्परा</td><td><a href="../guru-parampara/guru1.html#' +
+      esc(pid) + '" target="_blank" rel="noopener">' + esc(pid) + ' ↗</a></td></tr>';
   }
 
   /* ---------------- wiring ---------------- */
@@ -987,6 +1065,8 @@
       wire();
       rerender();
       updateSyncBar();
+      applyHash();
+      window.addEventListener('hashchange', applyHash);
     }).catch(function (e) {
       console.error('[dvaita-catalog] init failed', e);
       $("#dvc-tree").innerHTML = '<div class="dvc-empty-msg">Could not load the catalogue: ' + esc(e.message || e) + '</div>';

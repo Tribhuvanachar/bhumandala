@@ -831,6 +831,7 @@
           (s.purva || (s.titles || []).length ? '<div class="detail-row"><span class="detail-label">Pūrvāśrama & Titles</span><span>' + esc(s.purva || '') + (s.titles && s.titles.length ? ' — <em>' + esc(s.titles.join(', ')) + '</em>' : '') + '</span></div>' : '') +
           (s.contrib ? '<div class="detail-row"><span class="detail-label">Contribution</span><span>' + esc(s.contrib) + '</span></div>' : '') +
           ((s.works || []).length ? '<div class="detail-row"><span class="detail-label">Works</span><div>' + s.works.map(w => '<span class="chip-link" onclick="event.stopPropagation(); filterByWork(\'' + esc(w).replace(/'/g, "\\'") + '\')">📖 ' + esc(w) + '</span>').join('') + '</div></div>' : '') +
+          catalogueWorksHtml(s) +
           (s.guru && G.byId[s.guru] ? '<div class="detail-row"><span class="detail-label">Guru</span><span class="chip-link" onclick="event.stopPropagation(); jumpToSaint(\'' + s.guru + '\')">↑ ' + esc(G.byId[s.guru].name) + '</span></div>' : '') +
           ((G.children[s.id] || []).length ? '<div class="detail-row"><span class="detail-label">Śiṣyas</span><div>' + G.children[s.id].map(c => '<span class="chip-link" onclick="event.stopPropagation(); jumpToSaint(\'' + c + '\')">↓ ' + esc(G.byId[c].name) + '</span>').join('') + '</div></div>' : '') +
           ((s.contemporaries || []).length ? '<div class="detail-row"><span class="detail-label">Contemporaries</span><div>' + s.contemporaries.filter(c => G.byId[c]).map(c => '<span class="chip-link" onclick="event.stopPropagation(); jumpToSaint(\'' + c + '\')">🔗 ' + esc(G.byId[c].name) + '</span>').join('') + '</div></div>' : '') +
@@ -876,6 +877,39 @@
     searchTerm = w;
     document.getElementById('search-input-field').value = w;
     updateFilterSummaryUI(); renderRail();
+  }
+
+  // Works this ācārya has in the द्वैतवेदान्तग्रन्थानुक्रमणी catalogue
+  // (guru-data.js attaches them from data/catalogs/author_works_index.json).
+  // Kept separate from the hand-written English "Works" row above: these are
+  // the bibliography's own Devanagari titles, and a commentary is shown with
+  // the mūla it was written on, which is what distinguishes one जयतीर्थीय-टीका
+  // from the nine others.
+  function catalogueWorksHtml(s) {
+    const works = s.catalogueWorks || [];
+    if (!works.length) return '';
+    const meta = s.catalogueWorksMeta || {};
+    const SHOWN = 12;
+    const chips = works.slice(0, SHOWN).map(w =>
+      '<span class="chip-link" title="' + esc(w.parent ? 'on ' + w.parent : w.category || '') +
+      '" onclick="event.stopPropagation(); openCatalogue(\'' + esc(w.id) + '\')">📜 ' + esc(w.title) +
+      (w.parent ? ' <em style="opacity:.65">on ' + esc(w.parent) + '</em>' : '') +
+      (w.digitised ? ' ✓' : '') + '</span>').join('');
+    const more = works.length > SHOWN
+      ? '<span class="chip-link" onclick="event.stopPropagation(); openCatalogueAuthor(\'' + esc(s.id) + '\')">… all ' + works.length + ' →</span>'
+      : '';
+    return '<div class="detail-row"><span class="detail-label">Catalogued works</span><div>' +
+      chips + more +
+      '<div style="font-size:0.74rem;color:var(--text-secondary);margin-top:4px">' +
+      works.length + ' in the ग्रन्थानुक्रमणी' +
+      (meta.digitised ? ' · ' + meta.digitised + ' already digitised (✓)' : '') +
+      ' · matched ' + esc(meta.matchedVia || 'automatically') + '</div></div></div>';
+  }
+  function openCatalogue(rowId) {
+    window.open('../dvaita-grantha-anukramani/index.html#entry=' + encodeURIComponent(rowId), '_blank');
+  }
+  function openCatalogueAuthor(personId) {
+    window.open('../dvaita-grantha-anukramani/index.html#person=' + encodeURIComponent(personId), '_blank');
   }
   function updateFilterSummaryUI() {
     currentLineBadge.textContent = currentLine === 'all' ? 'ALL LINES' : currentLine.toUpperCase();

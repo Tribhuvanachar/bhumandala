@@ -44,9 +44,13 @@
     if (cache) return cache;
     cache = Promise.all([
       fetch('data/parampara.json').then(function (r) { return r.json(); }),
-      fetch('data/places.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+      fetch('data/places.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      // The द्वैतवेदान्तग्रन्थानुक्रमणी catalogue's works for these ācāryas,
+      // keyed by this file's own node ids (tools/sync_dvaita_crosslinks.py).
+      // Optional: an older checkout without it just shows no extra works.
+      fetch('../data/catalogs/author_works_index.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
-      var d = res[0], placesDoc = res[1];
+      var d = res[0], placesDoc = res[1], worksDoc = res[2];
       var nodes = (d.nodes || []).map(function (n) { return Object.assign({}, n); });
 
       // superadmin draft overlay (admin/guru.html) — preview before commit
@@ -69,6 +73,23 @@
           nodes = nodes.filter(function (n) { return n.id !== id; });
         });
       }
+
+      // Catalogued works, attached as their own field rather than merged
+      // into n.works: those are hand-written English summaries, these are
+      // the bibliography's own Devanagari titles with the mula each
+      // commentary was written on, and a reader should be able to tell
+      // which is which.
+      var catWorks = (worksDoc && worksDoc.byPerson) || {};
+      nodes.forEach(function (n) {
+        var entry = catWorks[n.id];
+        if (entry) {
+          n.catalogueWorks = entry.works || [];
+          n.catalogueWorksMeta = {
+            count: entry.count, digitised: entry.digitisedCount,
+            canonical: entry.canonical, iast: entry.iast, matchedVia: entry.matchedVia
+          };
+        }
+      });
 
       var byId = {}, children = {};
       nodes.forEach(function (n) { byId[n.id] = n; });
