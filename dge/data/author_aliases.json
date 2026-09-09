@@ -26,39 +26,152 @@
   "and the person is certain; leave it unmapped when it is not."
  ],
  "persons": {
-  "madhva": {"parampara": true, "name_sa": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः", "name_en": "Madhvācārya (Ānandatīrtha)", "name_kn": "ಶ್ರೀ ಮಧ್ವಾಚಾರ್ಯರು"},
-  "jayatirtha": {"parampara": true, "name_sa": "श्रीजयतीर्थः", "name_en": "Jayatīrtha (Ṭīkācārya)", "name_kn": "ಶ್ರೀ ಜಯತೀರ್ಥರು"},
-  "vyasatirtha": {"parampara": true, "name_sa": "श्रीव्यासतीर्थः", "name_en": "Vyāsatīrtha (Vyāsarāja)", "name_kn": "ಶ್ರೀ ವ್ಯಾಸರಾಜರು"},
-  "raghavendra": {"parampara": true, "name_sa": "श्रीराघवेन्द्रतीर्थः", "name_en": "Rāghavendra Tīrtha", "name_kn": "ಶ್ರೀ ರಾಘವೇಂದ್ರ ಸ್ವಾಮಿಗಳು"},
-  "vadiraja": {"parampara": true, "name_sa": "श्रीवादिराजतीर्थः", "name_en": "Vādirāja Tīrtha", "name_kn": "ಶ್ರೀ ವಾದಿರಾಜರು"},
-  "trivikrama": {"parampara": true, "name_sa": "श्रीत्रिविक्रमपण्डिताचार्यः", "name_en": "Trivikrama Paṇḍitācārya"},
-  "narahari": {"parampara": true, "name_sa": "श्रीनरहरितीर्थः", "name_en": "Narahari Tīrtha"},
-  "sripadaraja": {"parampara": true, "name_sa": "श्रीपादराजः", "name_en": "Śrīpādarāja", "name_kn": "ಶ್ರೀಪಾದರಾಜರು"},
-  "purandara": {"parampara": true, "name_sa": "श्रीपुरन्दरदासः", "name_en": "Purandara Dāsa", "name_kn": "ಪುರಂದರದಾಸರು"},
-  "kanaka": {"parampara": true, "name_sa": "श्रीकनकदासः", "name_en": "Kanaka Dāsa", "name_kn": "ಕನಕದಾಸರು"},
-  "vijayadasa": {"parampara": true, "name_sa": "श्रीविजयदासः", "name_en": "Vijaya Dāsa", "name_kn": "ವಿಜಯದಾಸರು"},
-  "vedavyasa_maharshi": {"kind": "person", "name_sa": "महर्षिवेदव्यासः", "name_en": "Maharṣi Veda Vyāsa", "name_kn": "ವೇದವ್ಯಾಸರು", "note": "Not a paramparā node (the parampara.json ids vedavyasa* are maṭha pontiffs of that name)."},
-  "valmiki": {"kind": "person", "name_sa": "महर्षिवाल्मीकिः", "name_en": "Maharṣi Vālmīki"},
-  "shankara": {"kind": "person", "name_sa": "श्रीशङ्कराचार्यः", "name_en": "Śaṅkarācārya"},
-  "ramanuja": {"kind": "person", "name_sa": "श्रीरामानुजाचार्यः", "name_en": "Rāmānujācārya"},
-  "sayana": {"kind": "person", "name_sa": "सायणाचार्यः", "name_en": "Sāyaṇācārya"},
-  "panini": {"kind": "person", "name_sa": "पाणिनिः", "name_en": "Pāṇini"},
-  "patanjali": {"kind": "person", "name_sa": "पतञ्जलिः", "name_en": "Patañjali"},
-  "kalidasa": {"kind": "person", "name_sa": "कालिदासः", "name_en": "Kālidāsa"},
-  "apaurusheya": {"kind": "tradition", "name_sa": "अपौरुषेयम्", "name_en": "Apauruṣeya (no human author)", "note": "Vedic saṃhitā/brāhmaṇa text. Four phrasings in the corpus are this one concept."},
-  "traditional": {"kind": "collective", "name_sa": "—", "name_en": "Traditional / anonymous"}
+  "madhva": {
+   "parampara": true,
+   "name_sa": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+   "name_en": "Madhvācārya (Ānandatīrtha)",
+   "name_kn": "ಶ್ರೀ ಮಧ್ವಾಚಾರ್ಯರು"
+  },
+  "jayatirtha": {
+   "parampara": true,
+   "name_sa": "श्रीजयतीर्थः",
+   "name_en": "Jayatīrtha (Ṭīkācārya)",
+   "name_kn": "ಶ್ರೀ ಜಯತೀರ್ಥರು"
+  },
+  "vyasatirtha": {
+   "parampara": true,
+   "name_sa": "श्रीव्यासतीर्थः",
+   "name_en": "Vyāsatīrtha (Vyāsarāja)",
+   "name_kn": "ಶ್ರೀ ವ್ಯಾಸರಾಜರು"
+  },
+  "raghavendra": {
+   "parampara": true,
+   "name_sa": "श्रीराघवेन्द्रतीर्थः",
+   "name_en": "Rāghavendra Tīrtha",
+   "name_kn": "ಶ್ರೀ ರಾಘವೇಂದ್ರ ಸ್ವಾಮಿಗಳು"
+  },
+  "vadiraja": {
+   "parampara": true,
+   "name_sa": "श्रीवादिराजतीर्थः",
+   "name_en": "Vādirāja Tīrtha",
+   "name_kn": "ಶ್ರೀ ವಾದಿರಾಜರು"
+  },
+  "trivikrama": {
+   "parampara": true,
+   "name_sa": "श्रीत्रिविक्रमपण्डिताचार्यः",
+   "name_en": "Trivikrama Paṇḍitācārya"
+  },
+  "narahari": {
+   "parampara": true,
+   "name_sa": "श्रीनरहरितीर्थः",
+   "name_en": "Narahari Tīrtha"
+  },
+  "sripadaraja": {
+   "parampara": true,
+   "name_sa": "श्रीपादराजः",
+   "name_en": "Śrīpādarāja",
+   "name_kn": "ಶ್ರೀಪಾದರಾಜರು"
+  },
+  "purandara": {
+   "parampara": true,
+   "name_sa": "श्रीपुरन्दरदासः",
+   "name_en": "Purandara Dāsa",
+   "name_kn": "ಪುರಂದರದಾಸರು"
+  },
+  "kanaka": {
+   "parampara": true,
+   "name_sa": "श्रीकनकदासः",
+   "name_en": "Kanaka Dāsa",
+   "name_kn": "ಕನಕದಾಸರು"
+  },
+  "vijayadasa": {
+   "parampara": true,
+   "name_sa": "श्रीविजयदासः",
+   "name_en": "Vijaya Dāsa",
+   "name_kn": "ವಿಜಯದಾಸರು"
+  },
+  "vedavyasa_maharshi": {
+   "kind": "person",
+   "name_sa": "महर्षिवेदव्यासः",
+   "name_en": "Maharṣi Veda Vyāsa",
+   "name_kn": "ವೇದವ್ಯಾಸರು",
+   "note": "Not a paramparā node (the parampara.json ids vedavyasa* are maṭha pontiffs of that name)."
+  },
+  "valmiki": {
+   "kind": "person",
+   "name_sa": "महर्षिवाल्मीकिः",
+   "name_en": "Maharṣi Vālmīki"
+  },
+  "shankara": {
+   "kind": "person",
+   "name_sa": "श्रीशङ्कराचार्यः",
+   "name_en": "Śaṅkarācārya"
+  },
+  "ramanuja": {
+   "kind": "person",
+   "name_sa": "श्रीरामानुजाचार्यः",
+   "name_en": "Rāmānujācārya"
+  },
+  "sayana": {
+   "kind": "person",
+   "name_sa": "सायणाचार्यः",
+   "name_en": "Sāyaṇācārya"
+  },
+  "panini": {
+   "kind": "person",
+   "name_sa": "पाणिनिः",
+   "name_en": "Pāṇini"
+  },
+  "patanjali": {
+   "kind": "person",
+   "name_sa": "पतञ्जलिः",
+   "name_en": "Patañjali"
+  },
+  "kalidasa": {
+   "kind": "person",
+   "name_sa": "कालिदासः",
+   "name_en": "Kālidāsa"
+  },
+  "apaurusheya": {
+   "kind": "tradition",
+   "name_sa": "अपौरुषेयम्",
+   "name_en": "Apauruṣeya (no human author)",
+   "note": "Vedic saṃhitā/brāhmaṇa text. Four phrasings in the corpus are this one concept."
+  },
+  "traditional": {
+   "kind": "collective",
+   "name_sa": "—",
+   "name_en": "Traditional / anonymous"
+  }
  },
  "aliases": {
-  "Sri Madhvacharya": "madhva",
-  "श्रीमदानन्दतीर्थभगवत्पादाचार्यः": "madhva",
-  "Sri Jayatirtha": "jayatirtha",
-  "श्रीजयतीर्थः": "jayatirtha",
-  "श्री जयतीर्थविरचिता": "jayatirtha",
-  "Sri Vyasatirtha (Vyasaraja)": "vyasatirtha",
-  "श्रीव्यासतीर्थः": "vyasatirtha",
-  "Sri Raghavendra Swami": "raghavendra",
-  "श्रीराघवेन्द्रतीर्थः": "raghavendra",
   "Maharshi Veda Vyasa": "vedavyasa_maharshi",
-  "महर्षिवेदव्यासः": "vedavyasa_maharshi"
+  "Sri Jayatirtha": "jayatirtha",
+  "Sri Madhvacharya": "madhva",
+  "Sri Raghavendra Swami": "raghavendra",
+  "Sri Vyasatirtha (Vyasaraja)": "vyasatirtha",
+  "अपौरुषेयम्": "apaurusheya",
+  "जयतीर्थ": "jayatirtha",
+  "जयतीर्थः": "jayatirtha",
+  "त्रिविक्रम पण्डिताचार्य": "trivikrama",
+  "त्रिविक्रमपण्डिताचार्य": "trivikrama",
+  "त्रिविक्रमपण्डिताचार्यः": "trivikrama",
+  "नरहरितीर्थ": "narahari",
+  "नरहरितीर्थः": "narahari",
+  "महर्षिवेदव्यासः": "vedavyasa_maharshi",
+  "राघवेन्द्रतीर्थः": "raghavendra",
+  "राघवेन्द्रतीर्थाः": "raghavendra",
+  "वादिराजतीर्थः": "vadiraja",
+  "व्यासतीर्थ": "vyasatirtha",
+  "व्यासतीर्थः": "vyasatirtha",
+  "श्री जयतीर्थविरचिता": "jayatirtha",
+  "श्रीजयतीर्थः": "jayatirtha",
+  "श्रीनरहरितीर्थः": "narahari",
+  "श्रीपादराज": "sripadaraja",
+  "श्रीपादराजः": "sripadaraja",
+  "श्रीमदानन्दतीर्थभगवत्पादाचार्यः": "madhva",
+  "श्रीराघवेन्द्रतीर्थः": "raghavendra",
+  "श्रीवादिराजतीर्थः": "vadiraja",
+  "श्रीव्यासतीर्थः": "vyasatirtha"
  }
 }
