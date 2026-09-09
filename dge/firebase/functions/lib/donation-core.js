@@ -151,6 +151,21 @@ function majorToMinor(amountMajor) {
 }
 
 /**
+ * The reverse of majorToMinor: an integer minor-unit amount to a clean
+ * 2-decimal-place major-unit number, for gateways (Cashfree's Create
+ * Order API) that want the amount expressed in rupees rather than paise.
+ * Routed through toFixed(2)/Number() rather than a bare division so the
+ * result is never something like 1001.3299999999999 -- division by 100
+ * is exact for the specific values IEEE-754 doubles represent cleanly,
+ * but not guaranteed for all of them, and a gateway request is not the
+ * place to find out which.
+ */
+function minorToMajor(amountMinor) {
+  if (!Number.isInteger(amountMinor)) throw new Error(`minorToMajor: amountMinor must be an integer, got ${amountMinor}`);
+  return Number((amountMinor / 100).toFixed(2));
+}
+
+/**
  * Generates a donation reference: DGE-YYYYMMDD-XXXXXX, where XXXXXX is 6
  * cryptographically random uppercase base32-ish characters (Crockford's
  * alphabet, which drops ambiguous characters like 0/O and 1/I/L -- this
@@ -190,6 +205,7 @@ module.exports = {
   validateDonorInput,
   validateAmountMinor,
   majorToMinor,
+  minorToMajor,
   generateDonationReference,
   isWellFormedDonationReference
 };

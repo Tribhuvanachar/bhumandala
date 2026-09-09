@@ -23,6 +23,26 @@
 'use strict';
 
 const crypto = require('crypto');
+const donationCore = require('./donation-core');
+
+/**
+ * Constant-time comparison of two encoded strings (hex or base64) that
+ * are expected to be the same LENGTH when correct. Guards the length
+ * check itself (Buffer.from of two different-length strings would throw
+ * inside timingSafeEqual) the same way otp-core.js's safeEqualHex does.
+ */
+function timingSafeEqualStr(a, b, encoding) {
+  if (typeof a !== 'string' || typeof b !== 'string' || !a || !b) return false;
+  let bufA, bufB;
+  try {
+    bufA = Buffer.from(a, encoding);
+    bufB = Buffer.from(b, encoding);
+  } catch (e) {
+    return false;
+  }
+  if (bufA.length === 0 || bufB.length === 0 || bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
 
 /**
  * Each gateway exposes:
@@ -109,12 +129,270 @@ const gateways = {
         paymentMethod: typeof body.paymentMethod === 'string' ? body.paymentMethod : null
       };
     }
-  }
+  },
 
-  // 'cashfree', 'razorpay', etc. go here once a gateway is chosen --
-  // each is a self-contained entry with the same four members as
-  // `mock` above, built against that gateway's current API docs.
+  /**
+   * Cashfree Payment Gateway (Orders API). Built against Cashfree's own
+   * current docs (api-reference/payments/latest, docs pulled 9 Sep
+   * 2026) -- see PAYMENTS_SETUP.md for the exact source URLs. Not yet
+   * exercised against a real Cashfree account: no credentials exist in
+   * this deployment. `config` (built by index.js's paymentGatewayConfig)
+   * carries clientId/clientSecret/apiVersion/baseUrl -- never imported
+   * as module-level secrets here, so this file stays testable without
+   * touching firebase-functions/params.
+   */
+  cashfree: {
+    id: 'cashfree',
+    async createOrder({ donationReference, amountMinor, currency, customer, returnUrl, config }) {
+      const res = await (config.fetchImpl || globalThis.fetch)(`${config.baseUrl}/pg/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-client-id': config.clientId,
+          'x-client-secret': config.clientSecret,
+          'x-api-version': config.apiVersion,
+          // Our own donationReference IS a well-formed, safe-to-retry
+          // idempotency key -- reusing it here means a network-level
+          // retry of the same createDonation call can never open two
+          // Cashfree orders for one donation.
+          'x-idempotency-key': donationReference
+        },
+        body: JSON.stringify({
+          order_id: donationReference, // our reference IS the Cashfree order_id -- one id, not two to keep in sync
+          order_amount: donationCore.minorToMajor(amountMinor),
+          order_currency: currency,
+          customer_details: {
+            customer_id: customer.donorId,
+            customer_name: customer.name,
+            customer_email: customer.email,
+            // Cashfree requires a phone number on customer_details; an
+            // optional donor field becomes a placeholder here rather
+            // than failing order creation over a field this app itself
+            // treats as optional -- see PAYMENTS_SETUP.md's note on this.
+            customer_phone: customer.phone || '9999999999'
+          },
+          order_meta: returnUrl ? { return_url: returnUrl } : undefined
+        })
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok || !body.payment_session_id) {
+        return { ok: false, message: body.message || `Cashfree order creation failed (HTTP ${res.status})` };
+      }
+      return {
+        ok: true,
+        gatewayOrderId: body.order_id || donationReference,
+        checkout: { gateway: 'cashfree', paymentSessionId: body.payment_session_id, orderId: body.order_id || donationReference }
+      };
+    },
+
+    /**
+     * timestamp + rawBody, HMAC-SHA256, base64 -- NOT the raw body alone.
+     * Cashfree's own docs warn explicitly that verifying against a
+     * re-parsed/re-serialized body breaks the hash (a decimal amount
+     * becoming an integer is enough to change every byte after it), so
+     * this must run on the literal bytes the runtime handed us.
+     */
+    verifyWebhookSignature(rawBody, headers, secret, now = Date.now()) {
+      if (!rawBody || !secret) return false;
+      const signature = headers && (headers['x-webhook-signature'] || headers['X-Webhook-Signature']);
+      const timestamp = headers && (headers['x-webhook-timestamp'] || headers['X-Webhook-Timestamp']);
+      if (!signature || !timestamp) return false;
+
+      // Cashfree's docs recommend rejecting a stale signature as a
+      // replay defense, but do not state x-webhook-timestamp's unit in
+      // what this session could verify -- treated as Unix SECONDS here
+      // (the far more common HTTP-header convention, e.g. Stripe's own
+      // t= field) with a generous 10-minute window, so a wrong guess at
+      // the unit fails safe toward "still accepted" rather than
+      // rejecting genuine webhooks outright. CONFIRM the actual unit
+      // against a real received webhook before relying on this window
+      // being tight. Either way, this is a SECONDARY defense: the
+      // primary replay protection is payment_events' idempotency keying
+      // on the event id (index.js), which makes a byte-identical
+      // replayed webhook a no-op regardless of this check.
+      const timestampMs = Number(timestamp) * 1000;
+      const age = Math.abs(now - timestampMs);
+      if (!Number.isFinite(age) || age > 10 * 60 * 1000) return false;
+
+      const expected = crypto.createHmac('sha256', secret).update(String(timestamp) + rawBody).digest('base64');
+      return timingSafeEqualStr(signature, expected, 'base64');
+    },
+
+    parseWebhookEvent(rawBody) {
+      let body;
+      try { body = JSON.parse(rawBody.toString('utf8')); } catch (e) { return null; }
+      if (!body || typeof body !== 'object' || !body.type) return null;
+      const data = body.data || {};
+
+      if (body.type === 'PAYMENT_SUCCESS_WEBHOOK') {
+        return eventOf(data.payment, {
+          status: 'SUCCESS',
+          gatewayOrderId: data.order && data.order.order_id,
+          gatewayPaymentId: data.payment && data.payment.cf_payment_id,
+          amountMinor: amountToMinor(data.payment && data.payment.payment_amount),
+          currency: data.payment && data.payment.payment_currency,
+          paymentMethod: data.payment && data.payment.payment_method && Object.keys(data.payment.payment_method)[0]
+        });
+      }
+      if (body.type === 'PAYMENT_FAILED_WEBHOOK') {
+        return eventOf(data.payment, {
+          status: 'FAILED',
+          gatewayOrderId: data.order && data.order.order_id,
+          gatewayPaymentId: data.payment && data.payment.cf_payment_id
+        });
+      }
+      if (body.type === 'PAYMENT_USER_DROPPED_WEBHOOK') {
+        return eventOf(data.payment, {
+          status: 'CANCELLED',
+          gatewayOrderId: data.order && data.order.order_id,
+          gatewayPaymentId: data.payment && data.payment.cf_payment_id
+        });
+      }
+      if (body.type === 'REFUND_STATUS_WEBHOOK' || body.type === 'AUTO_REFUND_STATUS_WEBHOOK') {
+        const refund = data.refund || data.auto_refund;
+        if (!refund || refund.refund_status !== 'SUCCESS') {
+          // Only a SUCCEEDED refund moves the donation; a pending or
+          // failed refund attempt is recorded but changes nothing yet.
+          return eventOf(refund, { status: null, gatewayOrderId: refund && refund.order_id });
+        }
+        return eventOf(refund, {
+          status: 'REFUNDED', // index.js decides REFUNDED vs PARTIALLY_REFUNDED by comparing refundAmountMinor to the donation's own amount
+          gatewayOrderId: refund.order_id,
+          gatewayPaymentId: refund.cf_payment_id,
+          refundAmountMinor: amountToMinor(refund.refund_amount),
+          currency: refund.refund_currency
+        });
+      }
+      // A recognized-but-not-actionable event type (e.g.
+      // PAYMENT_CHARGES_WEBHOOK) -- acknowledged, no status change.
+      return { eventId: cashfreeEventId(body), eventType: body.type, gatewayOrderId: null, gatewayPaymentId: null, status: null, amountMinor: null, currency: null, paymentMethod: null };
+
+      function eventOf(entity, fields) {
+        return Object.assign({
+          eventId: cashfreeEventId(body),
+          eventType: body.type,
+          gatewayOrderId: null,
+          gatewayPaymentId: null,
+          amountMinor: null,
+          currency: null,
+          paymentMethod: null
+        }, fields);
+      }
+    }
+  },
+
+  /**
+   * Razorpay (Orders API + Checkout). Built against Razorpay's own
+   * current docs (docs pulled 9 Sep 2026) -- see PAYMENTS_SETUP.md.
+   * Also not yet exercised against a real account.
+   */
+  razorpay: {
+    id: 'razorpay',
+    async createOrder({ donationReference, amountMinor, currency, customer, config }) {
+      const auth = Buffer.from(`${config.keyId}:${config.keySecret}`).toString('base64');
+      const res = await (config.fetchImpl || globalThis.fetch)('https://api.razorpay.com/v1/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Basic ${auth}` },
+        body: JSON.stringify({
+          amount: amountMinor, // Razorpay's Orders API already wants the smallest currency unit -- no conversion, unlike Cashfree
+          currency,
+          // `receipt` is Razorpay's own idempotency mechanism for this
+          // API (there is no generic Idempotency-Key header on Orders) --
+          // our donationReference is already unique and <=40 chars, so
+          // it doubles as the receipt with no extra bookkeeping.
+          receipt: donationReference,
+          notes: { donationReference, donorId: customer.donorId }
+        })
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok || !body.id) {
+        const message = (body.error && body.error.description) || `Razorpay order creation failed (HTTP ${res.status})`;
+        return { ok: false, message };
+      }
+      return {
+        ok: true,
+        gatewayOrderId: body.id,
+        checkout: {
+          gateway: 'razorpay',
+          orderId: body.id,
+          amount: body.amount,
+          currency: body.currency,
+          // key_id is Razorpay's PUBLIC identifier, the same role a
+          // Stripe publishable key plays -- it is meant to reach the
+          // browser (Checkout.js needs it to open the payment modal)
+          // and carries no ability to authenticate a server call on its
+          // own, unlike key_secret, which never leaves this function.
+          keyId: config.keyId
+        }
+      };
+    },
+
+    /** Raw body, HMAC-SHA256, hex -- Razorpay's own validateWebhookSignature helper does the same construction. */
+    verifyWebhookSignature(rawBody, headers, secret) {
+      if (!rawBody || !secret) return false;
+      const signature = headers && (headers['x-razorpay-signature'] || headers['X-Razorpay-Signature']);
+      if (!signature) return false;
+      const expected = crypto.createHmac('sha256', secret).update(rawBody).digest('hex');
+      return timingSafeEqualStr(signature, expected, 'hex');
+    },
+
+    parseWebhookEvent(rawBody, headers) {
+      let body;
+      try { body = JSON.parse(rawBody.toString('utf8')); } catch (e) { return null; }
+      if (!body || typeof body !== 'object' || !body.event) return null;
+
+      // Razorpay doesn't guarantee ordered or exactly-once delivery and
+      // documents x-razorpay-event-id specifically for de-duplication;
+      // fall back to a hash of the body if a delivery somehow lacks it
+      // (a synthetic id here still gets the SAME idempotency guarantee
+      // as a real one, since it's a pure function of the same bytes).
+      const eventId = (headers && (headers['x-razorpay-event-id'] || headers['X-Razorpay-Event-Id']))
+        || crypto.createHash('sha256').update(rawBody).digest('hex');
+
+      const payment = body.payload && body.payload.payment && body.payload.payment.entity;
+      const refund = body.payload && body.payload.refund && body.payload.refund.entity;
+
+      if (body.event === 'payment.captured' && payment) {
+        return {
+          eventId, eventType: body.event, gatewayOrderId: payment.order_id, gatewayPaymentId: payment.id,
+          status: 'SUCCESS', amountMinor: payment.amount, currency: payment.currency, paymentMethod: payment.method || null
+        };
+      }
+      if (body.event === 'payment.failed' && payment) {
+        return {
+          eventId, eventType: body.event, gatewayOrderId: payment.order_id, gatewayPaymentId: payment.id,
+          status: 'FAILED', amountMinor: payment.amount, currency: payment.currency, paymentMethod: payment.method || null
+        };
+      }
+      if (body.event === 'refund.processed' && refund) {
+        return {
+          eventId, eventType: body.event, gatewayOrderId: null, gatewayPaymentId: refund.payment_id,
+          status: 'REFUNDED', refundAmountMinor: refund.amount, currency: refund.currency, paymentMethod: null,
+          amountMinor: null
+        };
+      }
+      // A recognized-but-not-actionable event (payment.authorized,
+      // refund.failed, order.paid, downtime.*, ...) -- acknowledged, no
+      // status change. Safer than guessing at fields for events this
+      // session could not pull a verified sample payload for; see
+      // PAYMENTS_SETUP.md's explicit gap note on order.paid.
+      return { eventId, eventType: body.event, gatewayOrderId: null, gatewayPaymentId: null, status: null, amountMinor: null, currency: null, paymentMethod: null };
+    }
+  }
 };
+
+/** Cashfree webhooks carry no single obvious "event id" field across all
+ *  types -- derived deterministically from the payload instead, which
+ *  gives the exact same idempotency guarantee (same bytes -> same id). */
+function cashfreeEventId(body) {
+  return crypto.createHash('sha256').update(JSON.stringify(body)).digest('hex');
+}
+
+/** Cashfree amounts arrive as major-unit numbers (e.g. 501.00); converts
+ *  to the integer minor units this whole feature stores everywhere else. */
+function amountToMinor(amountMajor) {
+  return typeof amountMajor === 'number' && Number.isFinite(amountMajor) ? Math.round(amountMajor * 100) : null;
+}
 
 function getGateway(id) {
   const g = gateways[id];
