@@ -130,6 +130,72 @@ class AliasProposals(unittest.TestCase):
         self.assertEqual(add_persons["jayatirtha"]["name_en"], "Jayatirtha")
 
 
+class LibraryAuthorNormalisation(unittest.TestCase):
+    ALIASES = {
+        "persons": {"madhva": {"name_sa": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+                                "name_en": "Madhvācārya"}},
+        "aliases": {"Sri Madhvacharya": "madhva"},
+    }
+
+    def test_english_and_devanagari_spellings_both_reach_the_canonical_name(self):
+        m = s.canonical_author_map(self.ALIASES)
+        import import_dvaita_grantha_anukramani as imp
+        target = "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        self.assertEqual(m[imp.join_key(imp.iast("Sri Madhvacharya"))], target)
+        self.assertEqual(m[imp.join_key(imp.iast("Madhvācārya"))], target)
+        self.assertEqual(m[imp.join_key(imp.iast(target))], target)
+
+    def test_a_person_with_no_devanagari_name_is_never_a_target(self):
+        # Normalising towards a bare English name would be a regression for a
+        # reader that transliterates from Devanagari.
+        m = s.canonical_author_map({"persons": {"x": {"name_en": "Someone"}},
+                                     "aliases": {"Some One": "x"}})
+        self.assertEqual(m, {})
+
+    def test_scope_covers_the_dvaita_subtree_only(self):
+        # The lead's rule: not the Vedas, not kavya, not dasa sahitya.
+        self.assertTrue("dge/data/darshana/vedanta/dvaita/SarvaMula/x/data.json"
+                        .startswith(s.LIBRARY_AUTHOR_SCOPE))
+        for outside in ("dge/data/veda/rigveda/mula/data.json",
+                        "dge/data/kavya/raghuvamsha/mula/data.json",
+                        "dge/data/darshana/vedanta/advaita/x/data.json"):
+            self.assertFalse(outside.startswith(s.LIBRARY_AUTHOR_SCOPE), outside)
+
+
+class PatchDefaultAuthor(unittest.TestCase):
+    def write(self, text):
+        import tempfile
+        fh = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8")
+        fh.write(text)
+        fh.close()
+        return fh.name
+
+    def test_only_the_author_line_changes(self):
+        # A json round-trip would reformat files up to 2.6 MB; the whole point
+        # is that the rest of the file survives byte for byte.
+        original = ('{\n  "schema": "grantha_mula_text",\n'
+                     '  "default_author": "Sri Madhvacharya",\n'
+                     '  "items": [ {"a": 1} ]\n}\n')
+        p = self.write(original)
+        self.assertTrue(s.patch_default_author(p, "श्रीमदानन्दतीर्थः"))
+        after = open(p, encoding="utf-8").read()
+        self.assertIn('"default_author": "श्रीमदानन्दतीर्थः"', after)
+        self.assertEqual(after.replace('"श्रीमदानन्दतीर्थः"', '"Sri Madhvacharya"'), original)
+        import json as _j
+        self.assertEqual(_j.loads(after)["items"], [{"a": 1}])
+
+    def test_an_unchanged_value_is_left_alone(self):
+        p = self.write('{"default_author": "X"}')
+        self.assertFalse(s.patch_default_author(p, "X"))
+
+    def test_a_file_without_the_field_is_left_alone(self):
+        p = self.write('{"schema": "x"}')
+        self.assertFalse(s.patch_default_author(p, "Y"))
+
+    def test_a_missing_file_is_not_an_error(self):
+        self.assertFalse(s.patch_default_author("/nonexistent/nope.json", "Y"))
+
+
 class ParamparaNodeShape(unittest.TestCase):
     def test_nodes_accepted_as_either_a_list_or_a_map(self):
         as_list = s.parampara_nodes({"nodes": [{"id": "a", "name": "A"}]})

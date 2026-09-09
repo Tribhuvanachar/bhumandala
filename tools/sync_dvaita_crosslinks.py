@@ -43,6 +43,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 from collections import OrderedDict
 from datetime import datetime, timezone
 
@@ -50,6 +51,7 @@ CATALOGUE = "dge/data/catalogs/dvaita_grantha_anukramani.json"
 OVERRIDES = "dge/data/catalogs/dvaita_grantha_anukramani.overrides.json"
 ALIASES = "dge/data/author_aliases.json"
 PARAMPARA = "dge/guru-parampara/data/parampara.json"
+LIBRARY = "dge/data/library.json"
 WORKS_INDEX = "dge/data/catalogs/author_works_index.json"
 
 
@@ -159,6 +161,91 @@ def propose_alias_changes(cat, aliases, para, person_of, source):
     return add_aliases, add_persons
 
 
+# Only these library paths get their author normalised. The project lead's
+# instruction: "in library this should happen only for SarvamUlagrantha and
+# vedanta/dvaita specific granthas. not other ones like vedas or sahitya" --
+# this catalogue is a Dvaita bibliography and has no authority over how the
+# Vedas, kavya or dasa sahitya spell their authors.
+LIBRARY_AUTHOR_SCOPE = ("dge/data/darshana/vedanta/dvaita/",)
+
+
+def canonical_author_map(aliases):
+    """Every spelling the project knows -> that person's canonical Devanagari
+    name. Devanagari is the target because the reader transliterates from it,
+    so 'Sri Madhvacharya' becomes श्रीमदानन्दतीर्थभगवत्पादाचार्यः and not the
+    other way round."""
+    from import_dvaita_grantha_anukramani import iast as _iast, join_key as _jk
+    out = {}
+    persons = aliases.get("persons") or {}
+    for spelling, pid in (aliases.get("aliases") or {}).items():
+        name_sa = (persons.get(pid) or {}).get("name_sa")
+        if name_sa:
+            k = _jk(_iast(spelling))
+            if k:
+                out[k] = name_sa
+    for pid, p in persons.items():
+        if not p.get("name_sa"):
+            continue
+        for form in (p.get("name_sa"), p.get("name_en")):
+            if form:
+                k = _jk(_iast(form))
+                if k:
+                    out.setdefault(k, p["name_sa"])
+    return out
+
+
+def patch_default_author(path, new_value):
+    """Rewrite just the default_author string in a data.json, leaving the rest
+    of the file byte-for-byte alone. A json round-trip would reformat files up
+    to 2.6 MB and bury a one-word change in a whole-file diff."""
+    if not os.path.exists(path):
+        return False
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    pattern = re.compile(r'("default_author"\s*:\s*)"((?:[^"\\]|\\.)*)"')
+    m = pattern.search(text)
+    if not m or m.group(2) == new_value:
+        return False
+    escaped = json.dumps(new_value, ensure_ascii=False)
+    patched = text[:m.start()] + m.group(1) + escaped + text[m.end():]
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(patched)
+    return True
+
+
+def sync_library_authors(aliases, apply_it):
+    library = load(LIBRARY, {}) or {}
+    canon = canonical_author_map(aliases)
+    from import_dvaita_grantha_anukramani import iast as _iast, join_key as _jk
+
+    planned, unmapped, changed_files = [], {}, 0
+    for g in library.get("granthas", []):
+        path = g.get("path", "")
+        if not path.startswith(LIBRARY_AUTHOR_SCOPE):
+            continue
+        cur = (g.get("facets") or {}).get("default_author") or ""
+        if not cur:
+            continue
+        target = canon.get(_jk(_iast(cur)))
+        if target is None:
+            unmapped[cur] = unmapped.get(cur, 0) + 1
+        elif target != cur:
+            planned.append((path, cur, target))
+
+    if apply_it and planned:
+        by_path = {g["path"]: g for g in library.get("granthas", [])}
+        for path, _cur, target in planned:
+            by_path[path].setdefault("facets", {})["default_author"] = target
+            if patch_default_author(path, target):
+                changed_files += 1
+        # indent=1 is what the committed file actually uses; writing it any
+        # other way reformats all 17,919 lines and buries the real change.
+        with open(LIBRARY, "w", encoding="utf-8") as fh:
+            json.dump(library, fh, ensure_ascii=False, indent=1)
+            fh.write("\n")
+    return planned, unmapped, changed_files
+
+
 def write_json(path, payload):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
@@ -174,6 +261,9 @@ def main(argv=None):
     ap.add_argument("--apply-new-persons", action="store_true",
                     help="also add people matched to a parampara node (an identity claim)")
     ap.add_argument("--no-index", action="store_true", help="skip writing the works index")
+    ap.add_argument("--apply-library-authors", action="store_true",
+                    help="normalise facets.default_author in library.json and the matching "
+                         "data.json files, for the Dvaita subtree only")
     args = ap.parse_args(argv)
 
     cat = load(CATALOGUE)
@@ -216,6 +306,17 @@ def main(argv=None):
     print(f"  {len(add_persons)} people it does not yet declare")
     for pid, p in list(add_persons.items())[:8]:
         print(f"    {pid:22s} {p['name_sa']}  ({p['_catalogueCount']} works, via {p['_matchedVia']})")
+
+    planned, unmapped, changed_files = sync_library_authors(aliases, args.apply_library_authors)
+    print(f"\nlibrary authors (Dvaita subtree only):")
+    print(f"  {len(planned)} entries whose author spelling would be normalised")
+    for path, cur, tgt in planned[:6]:
+        print(f"    {cur!r} -> {tgt!r}")
+    print(f"  {len(unmapped)} spellings the project does not yet map to a person")
+    if args.apply_library_authors:
+        print(f"  wrote library.json and {changed_files} data.json files")
+    else:
+        print("  (pass --apply-library-authors to write them)")
 
     if not (args.apply or args.apply_new_persons):
         print("\ndry run — pass --apply to add the spellings, "

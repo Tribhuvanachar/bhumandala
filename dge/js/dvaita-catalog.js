@@ -88,11 +88,13 @@
         "parents:   row id -> the row id that is really its parent.",
         "rows:      row id -> field overrides, labels and a note for that one row.",
         "review:    row id -> retain | delete | merge (duplicate decisions).",
-        "links:     row/master id -> a confirmed cross-corpus match."
+        "links:     row/master id -> a confirmed cross-corpus match.",
+        "extraTerms: kind -> terms a curator added that the sheet never used."
       ],
       version: 1, updatedAt: null,
       canonical: { category: {}, author: {}, title: {} },
-      parents: {}, rows: {}, review: {}, links: {}
+      parents: {}, rows: {}, review: {}, links: {},
+      extraTerms: { category: [], author: [], title: [] }
     };
   }
 
@@ -112,7 +114,8 @@
     var c = state.ov.canonical;
     return Object.keys(c.category).length + Object.keys(c.author).length + Object.keys(c.title).length
       + Object.keys(state.ov.parents).length + Object.keys(state.ov.rows).length
-      + Object.keys(state.ov.review).length + Object.keys(state.ov.links).length;
+      + Object.keys(state.ov.review).length + Object.keys(state.ov.links).length
+      + Object.keys(state.ov.extraTerms || {}).reduce(function (n, k) { return n + state.ov.extraTerms[k].length; }, 0);
   }
 
   /* ---------------- effective values ---------------- */
@@ -185,6 +188,9 @@
         ['canonical', 'parents', 'rows', 'review', 'links'].forEach(function (k) {
           if (!base[k]) base[k] = (k === 'canonical') ? { category: {}, author: {}, title: {} } : {};
         });
+        // Predates extraTerms: a file synced before curators could add a term
+        // of their own has no such key.
+        if (!base.extraTerms) base.extraTerms = { category: [], author: [], title: [] };
         var draft = loadDraft();
         if (draft) { state.ov = draft; state.dirty = true; }
         else { state.ov = base; state.dirty = false; }
@@ -533,32 +539,52 @@
     var q = ($("#dvc-masters-q") && $("#dvc-masters-q").value || '').trim().toLowerCase();
     var html = masterKinds().map(function (mk) {
       var list = mk.list.filter(function (m) {
-        if (onlyVariants && m.variants.length < 2) return false;
-        if (q && (m.canonical + ' ' + (m.iast || '')).toLowerCase().indexOf(q) < 0) return false;
+        if (onlyVariants && m.variants.length < 2 && !isEdited(mk.kind, m)) return false;
+        if (q && (m.canonical + ' ' + (m.iast || '') + ' ' + variantChosen(mk.kind, m)).toLowerCase().indexOf(q) < 0) return false;
         return true;
       });
       var withVar = mk.list.filter(function (m) { return m.variants.length > 1; }).length;
+      var added = addedTerms(mk.kind);
       return '<section class="dvc-masterblock"><h3>' + mk.label +
-        ' <span class="dvc-muted">(' + mk.list.length + ' terms, ' + withVar + ' with more than one spelling)</span></h3>' +
+        ' <span class="dvc-muted">(' + (mk.list.length + added.length) + ' terms, ' + withVar + ' with more than one spelling)</span></h3>' +
         '<p class="dvc-hint">' + mk.hint + '</p>' +
-        '<table class="dvc-minitable"><thead><tr><th>Canonical</th><th>IAST</th><th>Used</th><th>Spellings found</th></tr></thead><tbody>' +
-        list.slice(0, 300).map(function (m) {
-          var chosen = variantChosen(mk.kind, m);
-          return '<tr><td><b>' + esc(chosen) + '</b></td><td class="dvc-muted">' + esc(m.iast || '') + '</td>' +
-            '<td class="dvc-rnum">' + m.count + '</td><td>' +
-            m.variants.map(function (v) {
-              var isChosen = v.value === chosen;
-              return '<button class="dvc-vchip' + (isChosen ? ' on' : '') + '" data-canon-kind="' + mk.kind +
-                '" data-canon-key="' + esc(m.key) + '" data-canon-val="' + esc(v.value) + '" title="' +
-                (isChosen ? 'This is the spelling shown everywhere' : 'Use this spelling everywhere instead') + '">' +
-                esc(v.value) + ' <span class="dvc-muted">×' + v.count + '</span></button>';
-            }).join('') + '</td></tr>';
-        }).join('') + '</tbody></table>' +
+        '<div class="dvc-addform"><input type="text" class="dvc-newterm" data-kind="' + mk.kind +
+          '" placeholder="add a term this sheet has not used yet…">' +
+          '<button class="dvc-btn" data-addterm="' + mk.kind + '">➕ Add</button></div>' +
+        (added.length ? '<div class="dvc-masterchips">' + added.map(function (t) {
+          return '<span class="dvc-mchip">' + esc(t) + '<button class="dvc-mchip-x" data-delterm="' + mk.kind + '" data-val="' + esc(t) + '">×</button></span>';
+        }).join('') + '</div>' : '') +
+        '<table class="dvc-minitable"><thead><tr><th>Canonical</th><th>IAST</th><th>Used</th><th>Spellings found · click one to make it canonical</th><th></th></tr></thead><tbody>' +
+        list.slice(0, 300).map(function (m) { return masterRowHTML(mk.kind, m); }).join('') +
+        '</tbody></table>' +
         (list.length > 300 ? '<p class="dvc-muted">' + (list.length - 300) + ' more — search above to narrow.</p>' : '') +
         '</section>';
     }).join('');
     $("#dvc-masters-body").innerHTML = html;
   }
+
+  function masterRowHTML(kind, m) {
+    var chosen = variantChosen(kind, m);
+    var edited = isEdited(kind, m);
+    return '<tr' + (edited ? ' class="dvc-edited"' : '') + ' data-mkind="' + kind + '" data-mkey="' + esc(m.key) + '">' +
+      '<td><b class="dvc-canon" data-editcanon="1" title="Click to rename this term everywhere">' + esc(chosen) + '</b></td>' +
+      '<td class="dvc-muted">' + esc(iastFor(kind, chosen, m)) + '</td>' +
+      '<td class="dvc-rnum">' + m.count + '</td>' +
+      '<td>' + m.variants.map(function (v) {
+        var isChosen = v.value === chosen;
+        return '<button class="dvc-vchip' + (isChosen ? ' on' : '') + '" data-canon-kind="' + kind +
+          '" data-canon-key="' + esc(m.key) + '" data-canon-val="' + esc(v.value) + '" title="' +
+          (isChosen ? 'The spelling shown everywhere' : 'Use this spelling everywhere instead') + '">' +
+          esc(v.value) + ' <span class="dvc-muted">×' + v.count + '</span></button>';
+      }).join('') + '</td>' +
+      '<td><button class="dvc-btn dvc-btn-sm" data-mergemaster="1">⇢ merge</button>' +
+      (edited ? ' <button class="dvc-btn dvc-btn-sm" data-resetmaster="1" title="Drop my change to this term">undo</button>' : '') +
+      '</td></tr>';
+  }
+
+  // What this term currently displays as: a curator's choice if they made
+  // one (any of its spellings mapped in the overrides points at it), else
+  // the commonest spelling the sheet used.
   function variantChosen(kind, m) {
     var map = state.ov.canonical[kind] || {};
     for (var i = 0; i < m.variants.length; i++) {
@@ -567,18 +593,103 @@
     }
     return m.canonical;
   }
-  // Choosing a spelling maps EVERY other spelling of that term onto it, so
-  // one click fixes every row that used a variant.
-  function chooseCanonical(kind, key, value) {
-    var list = kind === 'category' ? state.masters.categories : kind === 'author' ? state.masters.authors : state.masters.titles;
-    var m = list.filter(function (x) { return x.key === key; })[0];
-    if (!m) return;
+  // IAST is transliterated at build time, so a spelling the sheet never used
+  // has none. After a merge the chosen value usually IS another term's
+  // spelling, so borrow that term's reading; after a rename to something new,
+  // say nothing rather than leave the old term's reading beside a new name.
+  var iastIndex = {};
+  function iastFor(kind, chosen, m) {
+    if (chosen === m.canonical) return m.iast || '';
+    if (!iastIndex[kind]) {
+      var ix = iastIndex[kind] = {};
+      masterList(kind).forEach(function (x) {
+        if (!x.iast) return;
+        if (!(x.canonical in ix)) ix[x.canonical] = x.iast;
+        x.variants.forEach(function (v) { if (!(v.value in ix)) ix[v.value] = x.iast; });
+      });
+    }
+    return iastIndex[kind][chosen] || '';
+  }
+  function masterList(kind) {
+    return kind === 'category' ? state.masters.categories
+         : kind === 'author' ? state.masters.authors : state.masters.titles;
+  }
+  function masterByKey(kind, key) {
+    return masterList(kind).filter(function (x) { return x.key === key; })[0];
+  }
+  function isEdited(kind, m) {
+    var map = state.ov.canonical[kind] || {};
+    return m.variants.some(function (v) { return map[v.value]; });
+  }
+  function addedTerms(kind) {
+    return ((state.ov.extraTerms || {})[kind]) || [];
+  }
+  // Every value this kind can currently be set to — the observed canonicals
+  // plus anything a curator has added. Feeds the merge target list and the
+  // grid's autocomplete.
+  function allTermsFor(kind) {
+    var seen = {}, out = [];
+    masterList(kind).forEach(function (m) {
+      var v = variantChosen(kind, m);
+      if (v && !seen[v]) { seen[v] = 1; out.push(v); }
+    });
+    addedTerms(kind).forEach(function (v) { if (!seen[v]) { seen[v] = 1; out.push(v); } });
+    return out;
+  }
+
+  // Point EVERY spelling of this term at `value`, so one action fixes every
+  // row that used any of them. `value` need not be one of the observed
+  // spellings — that is what makes this a rename rather than just a pick.
+  function setCanonical(kind, key, value) {
+    var m = masterByKey(kind, key);
+    if (!m || !value) return;
     var map = state.ov.canonical[kind] = state.ov.canonical[kind] || {};
     m.variants.forEach(function (v) {
       if (v.value === value) delete map[v.value];
       else map[v.value] = value;
     });
-    saveDraft(); rerender(); renderMasters();
+    saveDraft(); rerender(); renderMasters(); refreshDatalists();
+  }
+  function resetCanonical(kind, key) {
+    var m = masterByKey(kind, key);
+    if (!m) return;
+    var map = state.ov.canonical[kind] || {};
+    m.variants.forEach(function (v) { delete map[v.value]; });
+    saveDraft(); rerender(); renderMasters(); refreshDatalists();
+  }
+  // Merging is the same operation aimed at another term's canonical: two
+  // master entries that never folded together automatically (स्तोत्रम् and
+  // स्तोत्रग्रन्थः) become one because both now display the same value.
+  function mergeMaster(kind, key, targetValue) {
+    setCanonical(kind, key, targetValue);
+  }
+
+  function beginCanonEdit(td, kind, key, currentValue, opts) {
+    if (td.querySelector('input')) return;
+    var listId = 'dvc-dl-master-' + kind;
+    var dl = $('#' + listId);
+    if (!dl) {
+      dl = document.createElement('datalist');
+      dl.id = listId;
+      document.body.appendChild(dl);
+    }
+    dl.innerHTML = allTermsFor(kind).slice(0, 1200).map(function (v) { return '<option value="' + esc(v) + '">'; }).join('');
+    td.innerHTML = '<input class="dvc-ginput" list="' + listId + '" value="' + esc(opts && opts.blank ? '' : currentValue) +
+      '" placeholder="' + esc(opts && opts.placeholder || '') + '">';
+    var input = td.querySelector('input');
+    input.focus(); input.select();
+    var done = false;
+    function finish(save) {
+      if (done) return; done = true;
+      var v = input.value.trim();
+      if (save && v && v !== currentValue) setCanonical(kind, key, v);
+      else renderMasters();
+    }
+    input.addEventListener('blur', function () { finish(true); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') finish(true);
+      else if (e.key === 'Escape') finish(false);
+    });
   }
 
   /* ---------------- DUPLICATES tab ---------------- */
@@ -616,6 +727,14 @@
   }
 
   /* ---------------- CROSS-LINKS tab ---------------- */
+  // 'dge/data/darshana/.../jayanti_nirnaya/mula/data.json' ->
+  // 'darshana › vedanta › dvaita › SarvaMula › ... › jayanti_nirnaya › mula'
+  function pathCrumb(p) {
+    return String(p || '')
+      .replace(/^dge\/data\//, '').replace(/\/data\.json$/, '')
+      .split('/').join(' › ');
+  }
+
   function renderCrossLinks() {
     var cl = state.crossLinks;
     var lib = cl.library || [], para = cl.parampara || [], alias = cl.authorAliases || [], dasa = cl.dasaSahitya || [];
@@ -630,7 +749,14 @@
         var it = state.byId[m.id]; if (!it) return '';
         var done = state.ov.links[m.id];
         return '<tr><td>' + it.row + '</td><td>' + esc(eff(it, 'grantha')) + '</td><td class="dvc-muted">' +
-          m.matches.map(function (x) { return esc(x.title) + (x.populated ? '' : ' <i>(empty)</i>'); }).join('<br>') + '</td>' +
+          m.matches.map(function (x) {
+            // The bare title is useless where four library entries are all
+            // called "Tika": show each one's place in the taxonomy, which is
+            // the only thing that tells them apart.
+            return '<div class="dvc-libmatch"><b>' + esc(x.title) + '</b>' +
+              (x.populated ? '' : ' <i>(not yet digitised)</i>') +
+              '<div class="dvc-libcrumb">' + esc(pathCrumb(x.path)) + '</div></div>';
+          }).join('') + '</td>' +
           '<td>' + (done ? '<span class="dvc-statuspill">linked</span>' :
             '<button class="dvc-btn dvc-btn-sm" data-link-id="' + m.id + '" data-link-val="' + esc(m.matches[0].path) + '">✓ confirm</button>') + '</td></tr>';
       }).join('') + '</tbody></table>';
@@ -829,10 +955,17 @@
         return '<button type="button" class="dvc-chip' + (state.labelFilter === l ? ' on' : '') + '" data-label="' + esc(l) + '">' + esc(l) + ' <span class="dvc-muted">' + labels[l] + '</span></button>';
       }).join('') : '<span class="dvc-muted">no labels yet — add them in the grid view’s labels column</span>';
     }
+    refreshDatalists();
+  }
+
+  // The grid's autocomplete offers exactly the master list's current terms —
+  // renames, merges and added terms all reach it, which is what keeps a
+  // curator from silently reintroducing a spelling they just retired.
+  function refreshDatalists() {
     var dl = $("#dvc-dl-category");
-    if (dl) dl.innerHTML = state.masters.categories.map(function (m) { return '<option value="' + esc(variantChosen('category', m)) + '">'; }).join('');
+    if (dl) dl.innerHTML = allTermsFor('category').map(function (v) { return '<option value="' + esc(v) + '">'; }).join('');
     var da = $("#dvc-dl-author");
-    if (da) da.innerHTML = state.masters.authors.slice(0, 900).map(function (m) { return '<option value="' + esc(variantChosen('author', m)) + '">'; }).join('');
+    if (da) da.innerHTML = allTermsFor('author').slice(0, 1200).map(function (v) { return '<option value="' + esc(v) + '">'; }).join('');
   }
 
   /* ---------------- detail panel ---------------- */
@@ -991,7 +1124,47 @@
         buildChips(); rerender(); return;
       }
       var vchip = t.closest('[data-canon-kind]');
-      if (vchip) { chooseCanonical(vchip.dataset.canonKind, vchip.dataset.canonKey, vchip.dataset.canonVal); return; }
+      if (vchip) { setCanonical(vchip.dataset.canonKind, vchip.dataset.canonKey, vchip.dataset.canonVal); return; }
+      var canonCell = t.closest('[data-editcanon]');
+      if (canonCell) {
+        var trA = canonCell.closest('tr');
+        beginCanonEdit(canonCell.parentNode, trA.dataset.mkind, trA.dataset.mkey, canonCell.textContent.trim());
+        return;
+      }
+      var mergeBtn = t.closest('[data-mergemaster]');
+      if (mergeBtn) {
+        var trB = mergeBtn.closest('tr');
+        var cell = trB.querySelector('td');
+        beginCanonEdit(cell, trB.dataset.mkind, trB.dataset.mkey,
+                       cell.textContent.trim(), { blank: true, placeholder: 'merge into which term?' });
+        return;
+      }
+      var resetBtn = t.closest('[data-resetmaster]');
+      if (resetBtn) {
+        var trC = resetBtn.closest('tr');
+        resetCanonical(trC.dataset.mkind, trC.dataset.mkey);
+        return;
+      }
+      var addBtn = t.closest('[data-addterm]');
+      if (addBtn) {
+        var kind = addBtn.dataset.addterm;
+        var inp = $('.dvc-newterm[data-kind="' + kind + '"]');
+        var val = inp && inp.value.trim();
+        if (!val) return;
+        var extra = state.ov.extraTerms = state.ov.extraTerms || {};
+        extra[kind] = extra[kind] || [];
+        if (extra[kind].indexOf(val) < 0) extra[kind].push(val);
+        saveDraft(); renderMasters(); refreshDatalists();
+        return;
+      }
+      var delBtn = t.closest('[data-delterm]');
+      if (delBtn) {
+        var k2 = delBtn.dataset.delterm, v2 = delBtn.dataset.val;
+        var ex = (state.ov.extraTerms || {})[k2] || [];
+        state.ov.extraTerms[k2] = ex.filter(function (x) { return x !== v2; });
+        saveDraft(); renderMasters(); refreshDatalists();
+        return;
+      }
       var acc = t.closest('[data-accept-parent]');
       if (acc) { acceptParent(acc.dataset.acceptParent, acc.dataset.parent); return; }
       var rej = t.closest('[data-reject-parent]');
