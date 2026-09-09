@@ -138,7 +138,15 @@ class TestRequiredCrossReferenceCases(unittest.TestCase):
             DGE_DATA, "kavya_alankara", "sumadhva_vijaya", "sarga_1", "data.json"))
         shlokas = data.get("shlokas") or data.get("items")
         first = shlokas["1"] if isinstance(shlokas, dict) else shlokas[0]
-        self.assertTrue(first["sa"].startswith("ॐ ॥ कान्ताय"))
+        # 9 Sep 2026: the primary text is now the DvaitaVedanta recension,
+        # which opens straight on कान्ताय; the ॐ ॥ this once asserted was the
+        # invocation our earlier copy (now carried as बन्नञ्जे-पाठः) printed
+        # ahead of it. The fact the test exists to pin -- कान्ताय is the
+        # opening WORD of 1.1 -- is unchanged, so the assertion follows it
+        # rather than the old string.
+        opening = first["sa"].lstrip("ॐ ॥।\n ")
+        self.assertTrue(opening.startswith("कान्ताय"), opening[:40])
+        self.assertTrue(first.get("bannanje", "").lstrip("ॐ ॥।\n ").startswith("कान्ताय"))
 
 
 if __name__ == "__main__":

@@ -277,6 +277,161 @@ def best_match(our_text, site_verses, number):
     return best_n, best_r
 
 
+BANNANJE = "dge/data/kavya_alankara/sumadhva_vijaya/bannanje_patha.json"
+
+# A patha difference IS a textual difference, so the floor for recognising the
+# same verse across the two recensions has to sit well below the one used for
+# binding commentary. 0.55 still separates "the same verse, differently read"
+# (sarga 4's verse 18 scores 0.68, sarga 6's 47 scores 0.72) from "a different
+# verse entirely" (the four Bannanje verses with no counterpart score 0.25-0.33).
+PATHA_FLOOR = 0.55
+# Below this the two recensions genuinely disagree -- word order, or a wholly
+# different verse. Above it they differ only in orthography: our copy's
+# compound hyphens, and the gemination conventions the two printings follow
+# (कीर्तिः / कीर्त्तिः, वाग्मी / वाग्ग्मी, पादारविन्द / पदारविन्द). Measured
+# over all 987 shared verses: 887 sit at 0.97 or better and are spelling
+# alone, while sarga 1's verse 41 -- "स कृष्णवर्त्मा विजयेन युक्तो" against
+# "विजयेन युक्तो स कृष्ण-वर्मा" -- scores 0.88 on a real reordering. Flagging
+# the orthographic ones would cry wolf on two verses in three.
+PATHA_SAME = 0.93
+
+
+def rebuild_mula(collected, apply_it, verbose=True):
+    """Make the DvaitaVedanta recension the primary text and carry the
+    Bannanje reading alongside it.
+
+    The lead, 9 Sep 2026: "pick all the Moola verses from the Dvaita Vedanta
+    itself. Also give an option to view the other version ... Call it as
+    Bannanje Patha. This Bannanje Patha will be a subset ... but majority
+    believe that the version in Dvaita Vedanta is the actual set of verses."
+
+    The audio agrees with that choice independently: the recitation app ships
+    55 tracks for sarga 9 and 79 for sarga 11, matching the DvaitaVedanta
+    recension, while the copy we held had 41 and 77 -- so sarga 9 was missing
+    its first fourteen verses outright and sarga 11's tail was numbered two
+    short of its own audio.
+
+    The Bannanje text is read from bannanje_patha.json, never from the
+    data.json being rewritten, so re-running can never fold the primary text
+    back into the variant.
+    """
+    with open(BANNANJE, encoding="utf-8") as handle:
+        bannanje = json.load(handle)
+    sargas = bannanje.get("sargas") or {}
+    report = []
+    for sarga_no, sarga in sorted(collected.items()):
+        path = DEST.format(n=sarga_no)
+        with open(path, encoding="utf-8") as handle:
+            doc = json.load(handle)
+        ours = sargas.get(str(sarga_no)) or {}
+        site_verses = sarga["verses"]
+
+        # A vacant number is claimed by the Bannanje verse that bears it,
+        # before any matching runs. Sarga 4 is why: our verse 18 scores 0.68
+        # against the recension's 19 -- close enough to look like a match --
+        # so left to the matcher it would take 19's place and strand our 19,
+        # when in truth 18 is simply the verse the recension does not print
+        # and 19 is 19 in both.
+        gaps = set(range(1, max(site_verses) + 1)) - set(site_verses)
+        placed = {}
+        for key in sorted(ours, key=lambda k: int(k)):
+            number = int(key)
+            if number in gaps:
+                placed[number] = {"bannanjeVerse": number, "sa": ours[key]}
+
+        # Every remaining Bannanje verse claims at most one DvaitaVedanta
+        # verse, best match wins, and a verse already claimed is never taken
+        # twice.
+        claimed, pairs, orphans = {}, {}, []
+        for key in sorted(ours, key=lambda k: int(k)):
+            number = int(key)
+            if number in placed:
+                continue
+            site_number, ratio = best_match(ours[key], site_verses, number)
+            if site_number is None or ratio < PATHA_FLOOR or site_number in claimed:
+                orphans.append({"bannanjeVerse": number, "sa": ours[key]})
+                continue
+            claimed[site_number] = number
+            pairs[site_number] = (number, ratio, ours[key])
+
+        # The recension NUMBERS its verses continuously but does not print
+        # 2.12, 4.18 or 10.52 -- exactly three of the verses only Bannanje
+        # carries, now sitting back in their own places above. The two that
+        # fall past the end of a sarga (9.55, 10.56) have no slot and stay
+        # recorded in the metadata instead.
+
+        shlokas = {}
+        varies = 0
+        for number in sorted(set(site_verses) | set(placed)):
+            if number in placed:
+                # No reading of its own in this recension, so the Bannanje text
+                # IS the verse here; the flag is what tells a reader that.
+                shlokas[str(number)] = {
+                    "sa": placed[number]["sa"],
+                    "commentaries": {},
+                    "bannanje": placed[number]["sa"],
+                    "bannanjeVerse": number,
+                    "bannanjeOnly": True,
+                }
+                continue
+            verse = site_verses[number]
+            entry = dict(doc.get("shlokas", {}).get(str(number)) or {})
+            entry["sa"] = verse["mula"]
+            # Cleared unconditionally, then re-set: these are derived from a
+            # comparison whose threshold can change, so leaving a previous
+            # run's flag in place would strand a verse marked as differing
+            # after the rule that marked it was retired.
+            entry.pop("bannanje", None)
+            entry.pop("bannanjeVerse", None)
+            entry.pop("bannanjeVaries", None)
+            pair = pairs.get(number)
+            if pair:
+                b_number, ratio, text = pair
+                entry["bannanje"] = text
+                entry["bannanjeVerse"] = b_number
+                if ratio < PATHA_SAME:
+                    entry["bannanjeVaries"] = True
+                    varies += 1
+            # Never inherited: after renumbering, the old entry at this
+            # number is a different verse, so its commentaries would be bound
+            # to the wrong text. merge_into_repo re-attaches them afterwards
+            # against the rebuilt mula.
+            entry["commentaries"] = {}
+            shlokas[str(number)] = entry
+        doc["shlokas"] = shlokas
+
+        meta = doc.setdefault("metadata", {})
+        meta["totalShlokas"] = len(shlokas)
+        meta["pathaVersions"] = {
+            "primary": {"key": "dvaitavedanta", "label": "द्वैतवेदान्तपाठः",
+                        "note": "The recension most of the tradition reads."},
+            "variant": {"key": "bannanje", "label": "बन्नञ्जे-पाठः",
+                        "note": "Bannanje Govindacharya's edition, which admits "
+                                "fewer verses. Shown beside the main text wherever "
+                                "it has a reading."},
+        }
+        meta["bannanjeCoverage"] = {"withReading": len(pairs), "differing": varies,
+                                    "withoutCounterpart": len(orphans)}
+        # Verses Bannanje has and this recension does not. Four in the whole
+        # kavya -- kept here rather than dropped, and rather than forced into a
+        # numbering that has no room for them.
+        meta["bannanjeOnly"] = orphans
+        meta["bannanjeInGaps"] = sorted(placed)
+        report.append({"sarga": sarga_no, "verses": len(shlokas),
+                       "bannanje": len(pairs) + len(placed), "varies": varies,
+                       "placed": len(placed), "orphans": len(orphans)})
+        if apply_it:
+            with open(path, "w", encoding="utf-8") as handle:
+                json.dump(doc, handle, ensure_ascii=False, indent=1)
+                handle.write("\n")
+        if verbose:
+            row = report[-1]
+            print(f"  sarga {sarga_no:2d}: {row['verses']:3d} verses  "
+                  f"bannanje {row['bannanje']:3d} ({row['varies']} differ)  "
+                  f"filled-gaps {row['placed']}  unplaced {row['orphans']}")
+    return report
+
+
 def merge_into_repo(collected, apply_it, verbose=True):
     """Attach the commentaries to the kavya_alankara mula. Returns a report."""
     report = []
@@ -355,6 +510,9 @@ def main(argv=None):
     parser.add_argument("--cache-dir", default=".cache/sumadhva_vijaya")
     parser.add_argument("--delay", type=float, default=1.0,
                         help="seconds between live requests (cached ones are free)")
+    parser.add_argument("--rebuild-mula", action="store_true",
+                        help="make the DvaitaVedanta recension the primary text and "
+                             "carry our previous text as the Bannanje patha")
     parser.add_argument("--staged", default="",
                         help="write the parsed commentaries here as JSON too")
     args = parser.parse_args(argv)
@@ -371,6 +529,10 @@ def main(argv=None):
             json.dump({str(k): v for k, v in collected.items()}, handle,
                       ensure_ascii=False, indent=1)
         print("staged ->", args.staged)
+
+    if args.rebuild_mula:
+        print("\nrebuilding the mula from the DvaitaVedanta recension")
+        rebuild_mula(collected, args.apply)
 
     print("\nmerging into dge/data/kavya_alankara/sumadhva_vijaya")
     report = merge_into_repo(collected, args.apply)

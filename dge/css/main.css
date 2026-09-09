@@ -984,6 +984,21 @@ body.dge-app-view .shloka-list { gap: 20px; }
 .section-nav-row { display: flex; justify-content: center; margin: 8px 0 2px; }
 .section-nav-select { max-width: 100%; min-width: 60%; padding: 7px 10px; border: 1px solid var(--card-border); border-radius: var(--radius-pill); background: var(--card-bg); color: var(--text-primary); font-family: var(--font-sanskrit); font-size: 13px; outline: none; }
 .section-nav-select:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px var(--accent-glow); }
+/* बन्नञ्जे-पाठः — the alternate mula reading offered on a verse. Styled apart
+   from the commentary blocks on purpose: an alternate MULA is not a gloss,
+   and a reader must be able to tell the two apart at a glance. */
+.dge-patha-chip { display: inline-flex; align-items: center; gap: 5px; border: 1px dashed var(--card-border);
+  background: transparent; color: var(--text-secondary); border-radius: var(--radius-pill);
+  padding: 3px 10px; font-family: var(--font-sanskrit); font-size: 12px; cursor: pointer; }
+.dge-patha-chip:hover { border-color: var(--accent-red); color: var(--text-primary); }
+.dge-patha-varies { border-style: solid; border-color: var(--accent-red); color: var(--text-primary); }
+.dge-patha-dot { color: var(--accent-red); font-size: 15px; line-height: 0; }
+.dge-pathaview { margin: 6px 0 2px; padding: 8px 12px; border-left: 3px dashed var(--accent-red);
+  background: var(--card-bg); border-radius: 0 var(--radius-md, 8px) var(--radius-md, 8px) 0; }
+.dge-patha-label { font-size: 11px; letter-spacing: .04em; opacity: .75; margin-bottom: 4px;
+  font-family: var(--font-sanskrit); color: var(--text-secondary); }
+.dge-patha-text { font-family: var(--font-sanskrit); line-height: 1.75; }
+
 /* Volume navigator's "16 sarga · 55 ślokāḥ" note, beside its picker. */
 .section-nav-row { align-items: center; gap: 8px; }
 .section-nav-count { font-size: 12px; opacity: .7; white-space: nowrap; color: var(--text-secondary); }
