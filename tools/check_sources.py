@@ -179,6 +179,66 @@ def probe_crawl_seeds(p):
     return digest(*sorted(found)), {"seeds": len(seeds), "linked": len(found)}
 
 
+def probe_json_fields(p):
+    """A site that publishes its own version stamp as JSON.
+
+    sarvamulavani.com is a single-page reader over one SQLite file; the app
+    asks `<db host>/version.json` for the current database revision before it
+    loads anything. That stamp is the cleanest change signal a site can give:
+    the fingerprint is the named fields of that JSON, nothing else.
+    """
+    _, body = fetch(p["url"])
+    d = json.loads(body)
+    fields = p.get("fields") or sorted(d.keys())
+    picked = {k: d.get(k) for k in fields}
+    return digest(*[f"{k}={v}" for k, v in sorted(picked.items())]), \
+        {k: str(v)[:40] for k, v in picked.items()}
+
+
+def probe_wp_json(p):
+    """A WordPress site through its REST API.
+
+    Two numbers say everything: how many published posts (or pages) there are
+    (`X-WP-Total`) and when the newest one was last modified. A rewritten post
+    moves `modified_gmt`; a new one moves the total. `path` picks the
+    collection -- `posts` for a blog like setutila.in, `pages?slug=...` for one
+    long page like the Meghamālā on srivaishnavan.com.
+    """
+    base = p["base"].rstrip("/") + "/wp-json/wp/v2/"
+    path = p.get("path", "posts")
+    sep = "&" if "?" in path else "?"
+    url = base + path + sep + "per_page=1&orderby=modified&order=desc&_fields=id,slug,modified_gmt"
+    h, body = fetch(url)
+    items = json.loads(body)
+    newest = items[0] if items else {}
+    total = h.get("X-WP-Total", "")
+    return digest(total, newest.get("modified_gmt", ""), newest.get("id", "")), \
+        {"total": total, "newest_modified": str(newest.get("modified_gmt", ""))[:19],
+         "newest_slug": str(newest.get("slug", ""))[:40]}
+
+
+def probe_mediawiki_recentchanges(p):
+    """A whole MediaWiki, through its recent-changes list.
+
+    anandamakaranda.in is a wiki: any edit or new page in the main namespace
+    is a change worth hearing about, so the fingerprint is the newest content
+    revision id, and the detail reports the wiki's own article/page counts.
+    """
+    q = urllib.parse.urlencode({"action": "query", "list": "recentchanges",
+                                "rcnamespace": p.get("namespace", "0"),
+                                "rctype": "edit|new", "rclimit": "1",
+                                "rcprop": "ids|timestamp|title",
+                                "meta": "siteinfo", "siprop": "statistics",
+                                "format": "json"})
+    _, body = fetch(p["api"] + "?" + q)
+    d = json.loads(body).get("query", {})
+    rc = (d.get("recentchanges") or [{}])[0]
+    stats = d.get("statistics") or {}
+    return digest(rc.get("revid", ""), stats.get("pages", "")), \
+        {"newest_rev": str(rc.get("revid", "")), "when": str(rc.get("timestamp", ""))[:19],
+         "title": str(rc.get("title", ""))[:40], "pages": str(stats.get("pages", ""))}
+
+
 PROBES = {
     "crawl_seeds": probe_crawl_seeds,
     "html_index": probe_html_index,
@@ -186,6 +246,9 @@ PROBES = {
     "github_commit": probe_github_commit,
     "feed": probe_feed,
     "mediawiki_revisions": probe_mediawiki,
+    "mediawiki_recentchanges": probe_mediawiki_recentchanges,
+    "wp_json": probe_wp_json,
+    "json_fields": probe_json_fields,
 }
 
 
@@ -207,7 +270,10 @@ def main():
         if only and sid not in only:
             continue
         kind = src["probe"]["kind"]
-        if kind == "manual" or not src.get("imported", False):
+        # A site we never imported from is normally not worth a request -- unless
+        # it is marked watch_only, which means "we have not taken from it yet,
+        # but tell us when it moves" (sarvamulavani.com).
+        if kind == "manual" or not (src.get("imported", False) or src.get("watch_only", False)):
             skipped.append((sid, "no automatic probe" if kind == "manual" else "not imported"))
             continue
         try:

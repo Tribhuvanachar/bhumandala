@@ -43,6 +43,14 @@ function catalogue() {
     blurb: w.blurb,
     writes: w.writes,
     minRole: minRoleFor(w),
+    // Placement and provenance for the admin page's cards (see the
+    // _readme in workflows.json). Descriptive only; nothing dispatches on them.
+    group: w.group || null,
+    site: w.site || null,
+    url: w.url || null,
+    feeds: w.feeds || null,
+    importer: w.importer || null,
+    source_ids: w.source_ids || null,
     inputs: w.inputs.map((i) => ({ ...i }))
   }));
 }
@@ -151,20 +159,25 @@ function latestRuns(payload) {
   const byFile = {};
   for (const r of runs) {
     const file = String(r.path || '').replace(/^\.github\/workflows\//, '');
-    const w = WORKFLOWS.find((x) => x.file === file);
-    if (!w) continue;
+    // Several cards can share one file (every "online source syncer" card is
+    // check-sources.yml with a different `only`), so the newest run of a file
+    // is reported under each card that runs it.
+    const sharing = WORKFLOWS.filter((x) => x.file === file);
+    if (!sharing.length) continue;
     const at = Date.parse(r.created_at || '') || 0;
-    const seen = byFile[w.id];
-    if (seen && seen._at >= at) continue;
-    byFile[w.id] = {
-      _at: at,
-      id: r.id,
-      status: r.status,                 // queued | in_progress | completed
-      conclusion: r.conclusion || null, // success | failure | cancelled | …
-      startedAt: r.created_at || null,
-      url: r.html_url || null,
-      by: (r.triggering_actor && r.triggering_actor.login) || null
-    };
+    for (const w of sharing) {
+      const seen = byFile[w.id];
+      if (seen && seen._at >= at) continue;
+      byFile[w.id] = {
+        _at: at,
+        id: r.id,
+        status: r.status,                 // queued | in_progress | completed
+        conclusion: r.conclusion || null, // success | failure | cancelled | …
+        startedAt: r.created_at || null,
+        url: r.html_url || null,
+        by: (r.triggering_actor && r.triggering_actor.login) || null
+      };
+    }
   }
   for (const k of Object.keys(byFile)) delete byFile[k]._at;
   return byFile;

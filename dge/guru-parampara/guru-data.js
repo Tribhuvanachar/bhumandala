@@ -137,7 +137,7 @@
   }
 
   // Rich biography panel for a saint node's `bio` object (see
-  // tools/guru_harvest/enrich_jagannatha_v.py for the shape). Returns '' when
+  // archive/retired-importers-2026-09.zip → tools/guru_harvest/enrich_jagannatha_v.py for the shape). Returns '' when
   // the node has no bio, so every detail view can append it unconditionally.
   // Prose fields (summary/origin/anecdote text/verse note) are curated repo
   // content and may carry light inline HTML (<b>, <i>, <a>) — rendered as-is,
