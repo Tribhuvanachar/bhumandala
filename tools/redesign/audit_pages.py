@@ -52,7 +52,11 @@ def discover_pages():
     # narrowing the rglob pattern, so a real future subfolder under dge/ or
     # admin/ still gets picked up by default.
     def real_pages(root):
-        return sorted(p for p in root.rglob("*.html") if "node_modules" not in p.parts)
+        # dge/data/ holds source material, not pages: SetuTila's _raw/
+        # chapter chunks are the site's own HTML kept verbatim for
+        # provenance (317 files) and must never be audited as DGE chrome.
+        return sorted(p for p in root.rglob("*.html")
+                      if "node_modules" not in p.parts and not (root.name == "dge" and "data" in p.relative_to(root).parts[:1]))
 
     pages = [REPO_ROOT / "index.html"]
     pages.extend(real_pages(REPO_ROOT / "dge"))

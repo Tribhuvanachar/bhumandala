@@ -60,6 +60,7 @@ jobs:
           set -euo pipefail
           python3 tools/gen_library_status.py
           python3 tools/build_repo_inventory.py
+          python3 tools/build_sitemap.py
           python3 tools/audit_names.py | tee /tmp/names.md
           {
             echo "## Names audit (report only)"
@@ -72,7 +73,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add admin/config/library-status.json admin/config/repo-map.json docs/REPO_INVENTORY.md
+          git add admin/config/library-status.json admin/config/repo-map.json docs/REPO_INVENTORY.md sitemap.xml robots.txt
           if git diff --cached --quiet; then
             echo "Generated files unchanged." >> "$GITHUB_STEP_SUMMARY"
           else

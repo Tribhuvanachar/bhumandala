@@ -2591,6 +2591,7 @@
      "tools/audit_library.py",
      "tools/audit_names.py",
      "tools/build_repo_inventory.py",
+     "tools/build_sitemap.py",
      "tools/gen_library_status.py",
      "tools/validate_data.py"
     ],
@@ -2599,7 +2600,7 @@
      "opens a pull request",
      "commits directly to the branch it ran on"
     ],
-    "lines": 127
+    "lines": 128
    }
   },
   "ocr-lakshmi-kaumudi.yml": {
@@ -4098,7 +4099,7 @@
     "writes": [
      "nothing in the repository (report only)"
     ],
-    "lines": 112
+    "lines": 116
    }
   },
   "vedavani-extract.yml": {
@@ -4263,7 +4264,7 @@
    }
   }
  },
- "generated_at": "2026-09-09 11:24 IST",
+ "generated_at": "2026-09-09 11:31 IST",
  "workflow_categories": [
   {
    "id": "source-sync",
