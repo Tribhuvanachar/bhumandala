@@ -81,7 +81,15 @@ const appConfig = {
   // over this exact commit before pinning: राम/कृष्ण/धर्म all return correct
   // 0.97-confidence hits, and section-scoped queries (itihasa, darshana)
   // return only that section's granthas.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0631b5e64c290f2c6a0fb080e5e82b33e5b2c1c7",
+  // 9 Sep 2026: re-ran reindex.yml to pick up content merged since 21 Aug
+  // (Bhagavata Saroddhara among it) -- 1232 granthas. Confirmed by fetching
+  // this exact manifest.json that all 6 of its layers (mula 371 units,
+  // parishishta, 3 commentaries, upodghata) are present and populated;
+  // could not confirm a live in-app query in this session's sandbox
+  // (cdn.jsdelivr.net fetches from the headless browser were dropped by the
+  // dev proxy, curl to the same URL was fine) -- worth a quick real-browser
+  // check next time this file is touched.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@29331ce6d122480bd0ec4ac012efebafa24b1a82",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
