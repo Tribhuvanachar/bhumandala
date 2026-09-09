@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.9 (list view paged at 25 by default, 10/25/50/100 from the page bar, page bar repeated below the list, dgeListPageFor lands a jump on its page. v4.8: verse card carries only the verse: fav/doubt as the card edge, counts under the number, copy in the ⋯ menu for everyone; dgePadaBreak breaks the mūla into pāda lines from the chandas engine. v4.7: unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
+window.DGE_VERSIONS['render.js'] = 'v5.0 (बन्नञ्जे-पाठः: a verse carrying an alternate mula reading shows a chip that reveals it inline, marked when the two recensions genuinely disagree rather than merely spell differently; an alternate mula is never rendered as a commentary. v4.9 (list view paged at 25 by default, 10/25/50/100 from the page bar, page bar repeated below the list, dgeListPageFor lands a jump on its page. v4.8: verse card carries only the verse: fav/doubt as the card edge, counts under the number, copy in the ⋯ menu for everyone; dgePadaBreak breaks the mūla into pāda lines from the chandas engine. v4.7: unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
 
 // 7 Sep 2026: verse text broken into its pādas for display (the lead: "as a
 // thumb rule, every shloka should render in two lines or 4 as per their
@@ -742,6 +742,24 @@ function renderList() {
     const srcViewHtml = shloka.sourceHtml
       ? `<div class="dge-srcview" hidden>${shloka.sourceHtml}</div>` : '';
 
+    // बन्नञ्जे-पाठः. Sumadhva Vijaya is read in two recensions: the one most
+    // of the tradition accepts (the primary text here, from dvaitavedanta.in)
+    // and Bannanje Govindacharya's critical edition, which admits fewer
+    // verses. Where his reading exists it is offered on the verse itself
+    // rather than buried in a picker -- the lead's ask, 9 Sep 2026: "there
+    // should be some marking which could display that version of this sloka
+    // as well." An alternate MULA is not a commentary and is deliberately not
+    // rendered as one: mistaking a variant reading for a gloss is the kind of
+    // error a reader would carry away without noticing.
+    // bannanjeVaries marks the ~26 verses where the two genuinely disagree
+    // (word order, or a different verse); the rest differ only in spelling.
+    const pathaChipHtml = shloka.bannanje
+      ? `<div class="dge-tp-place-row"><button type="button" class="dge-patha-chip${shloka.bannanjeVaries ? ' dge-patha-varies' : ''}" onclick="event.stopPropagation(); window.dgeTogglePathaView(this)" title="${shloka.bannanjeVaries ? 'Bannanje Govindacharya reads this verse differently' : 'Show this verse as Bannanje Govindacharya’s edition reads it'}">बन्नञ्जे-पाठः${shloka.bannanjeVaries ? ' <span class="dge-patha-dot">•</span>' : ''} <span class="dge-tp-arrow">▾</span></button></div>`
+      : '';
+    const pathaViewHtml = shloka.bannanje
+      ? `<div class="dge-pathaview" hidden><div class="dge-patha-label">बन्नञ्जे-पाठः${shloka.bannanjeVerse && String(shloka.bannanjeVerse) !== String(i) ? ` · ${shloka.bannanjeVerse}` : ''}</div><div class="dge-patha-text">${dgeWrapWordsForTap(highlightText(dgePadaBreak(shloka.bannanje), pattern).replace(/\n/g, '<br>'))}</div></div>`
+      : '';
+
     // Tīrthaprabandha verses carry a link to the project's Tīrtha holy-places
     // page, filtered to the kṣetra this verse describes (tirtha_link in the
     // data). Rendered as a small 📍 chip; empty/absent for every other text.
@@ -768,6 +786,8 @@ function renderList() {
         ${srcBtnHtml}
         ${moreBtnHtml}
       </div>
+      ${pathaChipHtml}
+      ${pathaViewHtml}
       ${tirthaChipHtml}
       ${bhagavataChipHtml}
       ${dhatuChipsHtml}
@@ -928,6 +948,15 @@ window.dgeSetLayoutMode = function (mode, announce) {
 // loadShloka() to select/play that verse; an ambiguous full-card tap
 // would collide with that existing behaviour.
 // The 🕮 source-view toggle (see the srcBtnHtml comment in renderList).
+window.dgeTogglePathaView = function (btnEl) {
+  const card = btnEl.closest('.shloka-card');
+  const v = card && card.querySelector('.dge-pathaview');
+  if (!v) return;
+  v.hidden = !v.hidden;
+  const arrow = btnEl.querySelector('.dge-tp-arrow');
+  if (arrow) arrow.textContent = v.hidden ? '▾' : '▴';
+};
+
 window.dgeToggleSourceView = function (btnEl) {
   const card = btnEl.closest('.shloka-card');
   const v = card && card.querySelector('.dge-srcview');
