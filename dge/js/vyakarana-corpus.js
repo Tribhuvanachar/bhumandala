@@ -156,9 +156,14 @@
             });
           });
         }
+        // 9 Sep 2026, the lead: third-party names belong on the Credits
+        // page, not on every page that happens to use their data. A source
+        // the DATA itself names still shows -- that is this text's own
+        // provenance, which a reader of that text needs.
         var at = d.attribution || {};
-        $('#vc-credit').innerHTML = 'स्रोतः: <a href="' + esc(at.source_url || 'https://ashtadhyayi.com') +
-          '" target="_blank" rel="noopener">' + esc(at.source_name || 'ashtadhyayi.com') + '</a>' +
+        $('#vc-credit').innerHTML = (at.source_url && at.source_name
+          ? 'स्रोतः: <a href="' + esc(at.source_url) + '" target="_blank" rel="noopener">' + esc(at.source_name) + '</a>'
+          : '') +
           (at.accessed_date ? ' · accessed ' + esc(at.accessed_date) : '') +
           (at.license_notes ? ' · ' + esc(at.license_notes) : '');
         render();

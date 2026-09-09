@@ -66,14 +66,11 @@
   <div class="tooltip-header">🕉️ Genie</div>
   <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
   <div id="acharyaFullWidthButtons"></div>
-  <div class="tooltip-row" id="wordToolsRow">
-    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Declension table, plus Vidyut/sandhi fallbacks and dictionary results for this word">🔤 Shabda</button>
-    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root and show its derivation">📚 Dhātu</button>
-    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenVidyutSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
-    <button class="tooltip-btn" data-word-only onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word or phrase appears in the library">🔍 Search Library</button>
-    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi (Live)</button>
-  </div>
+  <!-- Populated by ai.js's dgeRenderWordToolsRow from config.js's
+       WORD_ACTIONS: shipped defaults, then the global admin override, then
+       this device's. Paid (Gemini) tools are filtered out for readers who
+       are not authorised to spend on them. -->
+  <div class="tooltip-row" id="wordToolsRow"></div>
   <!-- Per-taxonomy-section extra word/phrase actions (dge/js/contextual-actions.js),
        e.g. Veda svara tools — populated only when the current text's taxonomy
        path matches a registered override; empty and hidden otherwise. -->
@@ -872,6 +869,10 @@
             <input type="checkbox" id="flagShowScriptPicker" style="margin:0; width:14px; height:14px;"> 🔠 Script/language picker
           </label>
 
+          <div style="font-size:10px; color:var(--muted-text); margin-top:8px; text-transform:uppercase;">Word tools on a selection (🕉️ Genie)</div>
+          <p style="font-size:11px; color:var(--muted-text); margin:0 0 6px 0;">Which tools appear when you select a word. Paid AI tools are shown only to authorised accounts and are listed here for them alone.</p>
+          <div id="wordActionToggles"></div>
+
           <div style="font-size:10px; color:var(--muted-text); margin-top:8px; text-transform:uppercase;">Languages shown in 🔠 picker</div>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
             <input type="checkbox" id="scriptOptDevanagari" style="margin:0; width:14px; height:14px;"> Sanskrit (Devanagari)
@@ -1263,7 +1264,7 @@
         <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
       </div>
       <div id="acharyaAiOnlyNote" style="display:none; font-size:11.5px; color:var(--muted-text); background:var(--card-bg); border:1px dashed var(--card-border); border-radius:var(--radius-sm); padding:8px 10px; margin-bottom:10px; line-height:1.5;">
-        🔎 AI-generated analysis — Vidyut (this app's own Sanskrit engine) has no precomputed data for this yet, unlike Shabda and Dhātu. Please verify independently.
+        🔎 AI-generated analysis — this app has no precomputed data for this yet, unlike Shabda and Dhātu. Please verify independently.
       </div>
       <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
 

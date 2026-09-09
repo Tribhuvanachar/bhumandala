@@ -418,7 +418,7 @@
       lakaraHtml() + tableHtml() + '</section>' +
       krtHtml() + upaArthaHtml() +
       '<p class="df-note">रूपसिद्धिः — व्युत्पत्तिः अस्मिन्नेव यन्त्रे क्रियते (vidyut-prakriya, Apache-2.0, Ambuda) · ' +
-      'उपसर्गार्थाः: ashtadhyayi.com data (with credit, per its terms) · ' +
+      'उपसर्गार्थाः · ' +
       'a derived form is the grammar\'s output, not an attested citation — for attested usage see the corpus search.</p>';
     wireSearch();
     fillTable();
