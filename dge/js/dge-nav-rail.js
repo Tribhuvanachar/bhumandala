@@ -48,6 +48,7 @@
     { id: "tirtha", group: "read", label: "Tīrtha", glyph: "ती", href: "dge/tirtha/index.html" },
     { id: "guru-parampara", group: "read", label: "Guru Paramparā", glyph: "गु", href: "dge/guru-parampara/index.html" },
     { id: "dasa-sahitya", group: "read", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/index.html" },
+    { id: "dvaita-grantha-anukramani", group: "read", label: "Grantha Anukramaṇī", glyph: "द्वै", href: "dge/dvaita-grantha-anukramani/index.html" },
     { id: "ashtadhyayi", group: "tools", label: "Aṣṭādhyāyī", glyph: "अ", href: "dge/vyakarana/ashtadhyayi.html" },
     { id: "dhatu", group: "tools", label: "Dhātu", glyph: "ध", href: "dge/vyakarana/dhatu.html" },
     { id: "shabda", group: "tools", label: "Śabda", glyph: "श", href: "dge/vyakarana/shabda.html" },
