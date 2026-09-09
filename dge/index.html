@@ -469,6 +469,15 @@
     <div id="sectionNavRow" class="section-nav-row" style="display:none;">
       <select id="sectionNavSelect" class="section-nav-select" onchange="window.dgeJumpToSection(this.value)"></select>
     </div>
+    <!-- Volume navigator (layer-stitch.js): for a grantha the library splits
+         across numbered sibling folders -- sumadhva_vijaya/sarga_1..16,
+         shatapatha_brahmana/kanda_NN. Each is its own data.json, so only the
+         one being read is ever fetched; this switches between them without a
+         trip back through the Library. Hidden when a text has no siblings. -->
+    <div id="volumeNavRow" class="section-nav-row" style="display:none;">
+      <select id="volumeNavSelect" class="section-nav-select" onchange="window.dgeGoToVolume(this.value)"></select>
+      <span id="volumeNavCount" class="section-nav-count"></span>
+    </div>
   </div>
 
   <div id="charPalettePanel" class="char-palette-panel">

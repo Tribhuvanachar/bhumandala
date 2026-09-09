@@ -984,6 +984,9 @@ body.dge-app-view .shloka-list { gap: 20px; }
 .section-nav-row { display: flex; justify-content: center; margin: 8px 0 2px; }
 .section-nav-select { max-width: 100%; min-width: 60%; padding: 7px 10px; border: 1px solid var(--card-border); border-radius: var(--radius-pill); background: var(--card-bg); color: var(--text-primary); font-family: var(--font-sanskrit); font-size: 13px; outline: none; }
 .section-nav-select:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px var(--accent-glow); }
+/* Volume navigator's "16 sarga · 55 ślokāḥ" note, beside its picker. */
+.section-nav-row { align-items: center; gap: 8px; }
+.section-nav-count { font-size: 12px; opacity: .7; white-space: nowrap; color: var(--text-secondary); }
 
 /* Stitched layers not yet loaded: tappable "load me" pills on each card
    (layer-stitch.js/render.js, 25 Aug night — the way into commentary must
