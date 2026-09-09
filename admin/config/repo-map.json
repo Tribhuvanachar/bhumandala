@@ -2686,7 +2686,7 @@
   "ocr-preview-pages.yml": {
    "category": "ocr",
    "display_name": "OCR — free page preview",
-   "purpose": "Renders a page range of a PDF to PNGs (poppler only — no Vision, no Gemini) so you can check start/end/exclusions before paying for an OCR run.",
+   "purpose": "Renders a page range of a PDF to PNGs (poppler only — no Vision, no Gemini) as an artifact, and with publish_work set also publishes them to the ocr-images/<work> branch so admin/ocr-review.html can show the scan beside the text. Free.",
    "recommendation": "keep",
    "reason": "Free; the sanity step before every billed OCR run.",
    "keep": true,
@@ -2732,6 +2732,13 @@
       "type": "string",
       "default": "",
       "required": true
+     },
+     {
+      "name": "publish_work",
+      "label": "Also publish the PNGs to branch ocr-images/<this slug>, so admin/ocr-review.html can show the scan beside the text (blank = artifact only)",
+      "type": "string",
+      "default": "",
+      "required": false
      }
     ],
     "secrets": [],
@@ -2741,9 +2748,111 @@
     ],
     "missing_scripts": [],
     "writes": [
+     "force-pushes a dist/staging branch",
      "uploads a run artifact"
     ],
-    "lines": 64
+    "lines": 93
+   }
+  },
+  "ocr-review-merge.yml": {
+   "category": "ocr",
+   "display_name": "OCR review — merge approved text into a layer",
+   "purpose": "The last step of the scholar-review pipeline: takes the decisions saved by admin/ocr-review.html beside a staged OCR file, builds or updates the commentary layer with tools/ocr_review_merge.py (every item carries the reviewer's decision), validates, and opens a pull request. The nightly job registers the new folder in the library after the merge.",
+   "notes": "Dispatched from the review page's Finalise panel with the browser's token, or from the Actions tab.",
+   "recommendation": "keep",
+   "reason": "Closes the loop from scan to library item.",
+   "keep": true,
+   "generated": {
+    "name": "OCR review — merge approved text into a layer",
+    "triggers": [
+     "manual"
+    ],
+    "schedule": [],
+    "inputs": [
+     {
+      "name": "branch",
+      "label": "Branch holding the staged file and its review/ folder (e.g. ocr-staging/isha_upanishad_bhashya_tippani, or main)",
+      "type": "string",
+      "default": "",
+      "required": true
+     },
+     {
+      "name": "staged",
+      "label": "Path of the staged OCR file, e.g. dge/data/ocr_staging/isha_upanishad_bhashya_tippani/vision_pages_1-292.json",
+      "type": "string",
+      "default": "",
+      "required": true
+     },
+     {
+      "name": "target",
+      "label": "Layer to write (page/block OCR), e.g. dge/data/darshana/.../isha/tippani_x/data.json — blank for a Gemini commentary file",
+      "type": "string",
+      "default": "",
+      "required": false
+     },
+     {
+      "name": "sarga_dir",
+      "label": "For a Gemini commentary staged file: the sarga directory to merge into",
+      "type": "string",
+      "default": "",
+      "required": false
+     },
+     {
+      "name": "schema",
+      "label": "Schema of the layer",
+      "type": "choice",
+      "default": "grantha_tippani_text",
+      "required": false,
+      "options": [
+       "grantha_tippani_text",
+       "grantha_tika_text",
+       "grantha_mula_text"
+      ]
+     },
+     {
+      "name": "title",
+      "label": "Layer title (Devanagari)",
+      "type": "string",
+      "default": "",
+      "required": false
+     },
+     {
+      "name": "author",
+      "label": "Author / commentator (Devanagari)",
+      "type": "string",
+      "default": "",
+      "required": false
+     },
+     {
+      "name": "mode",
+      "label": "append = merge by id into an existing layer; replace = rewrite it",
+      "type": "choice",
+      "default": "append",
+      "required": false,
+      "options": [
+       "append",
+       "replace"
+      ]
+     },
+     {
+      "name": "include_undecided",
+      "label": "Also take units the reviewer has not decided yet",
+      "type": "boolean",
+      "default": false,
+      "required": false
+     }
+    ],
+    "secrets": [],
+    "cost": [],
+    "scripts": [
+     "tools/ocr_review_merge.py",
+     "tools/validate_data.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "opens a pull request"
+    ],
+    "lines": 116
    }
   },
   "ocr-sanskrit-commentary.yml": {
@@ -4154,7 +4263,7 @@
    }
   }
  },
- "generated_at": "2026-09-09 11:16 IST",
+ "generated_at": "2026-09-09 11:24 IST",
  "workflow_categories": [
   {
    "id": "source-sync",

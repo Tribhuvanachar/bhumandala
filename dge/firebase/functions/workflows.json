@@ -722,6 +722,72 @@
      "default": true
     }
    ]
+  },
+  {
+   "id": "ocr-review-merge",
+   "file": "ocr-review-merge.yml",
+   "name": "OCR review — merge approved text into a layer",
+   "group": "ocr",
+   "writes": "corpus",
+   "blurb": "Reads a scholar's saved decisions beside a staged OCR file, builds or updates the layer data.json, validates, and opens a pull request. Dispatched from admin/ocr-review.html's Finalise panel.",
+   "inputs": [
+    {
+     "name": "branch",
+     "type": "string",
+     "label": "Branch holding the staged file",
+     "default": "main",
+     "required": true
+    },
+    {
+     "name": "staged",
+     "type": "string",
+     "label": "Staged OCR file path",
+     "default": "",
+     "required": true
+    },
+    {
+     "name": "target",
+     "type": "string",
+     "label": "Target layer data.json (blank for a Gemini commentary file)",
+     "default": ""
+    },
+    {
+     "name": "sarga_dir",
+     "type": "string",
+     "label": "Sarga directory (Gemini commentary files only)",
+     "default": ""
+    },
+    {
+     "name": "schema",
+     "type": "string",
+     "label": "grantha_tippani_text | grantha_tika_text | grantha_mula_text",
+     "default": "grantha_tippani_text"
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "label": "Layer title",
+     "default": ""
+    },
+    {
+     "name": "author",
+     "type": "string",
+     "label": "Author",
+     "default": ""
+    },
+    {
+     "name": "mode",
+     "type": "string",
+     "label": "append | replace",
+     "default": "append"
+    },
+    {
+     "name": "include_undecided",
+     "type": "boolean",
+     "label": "Also take undecided units",
+     "default": false
+    }
+   ]
   }
  ]
 }

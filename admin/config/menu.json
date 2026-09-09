@@ -66,6 +66,7 @@
       { "id": "adminAudioManagerItem",       "icon": "🎙️", "label": "Audio Admin",          "href": "../admin/audio.html",        "requires": "superadmin", "enabled": true },
       { "id": "adminGenieAsrRecorderItem",   "icon": "🗣️", "label": "Genie ASR Recorder",   "href": "../admin/genie-asr-recorder.html", "requires": "superadmin", "enabled": true },
       { "id": "adminRepoMapItem",            "icon": "⚙️", "label": "Repository & Workflows", "href": "../admin/repo-map.html",   "requires": "superadmin", "enabled": true },
+      { "id": "adminOcrReviewItem",          "icon": "🔍", "label": "OCR Review",             "href": "../admin/ocr-review.html", "requires": "admin",      "enabled": true },
       { "id": "adminUserRolesItem",          "icon": "👥", "label": "Manage Users",         "action": "openUserRolesModal", "requires": "superadmin", "feature": "auth", "enabled": true }
     ]
   },
