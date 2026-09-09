@@ -10,7 +10,7 @@ what is in use, without losing the code. Git history has every file as well.
 
 | Inside the zip | What it loaded | Output (still on main) |
 |---|---|---|
-| `importers/ramanuja_meghamala.py` | Śrī Rāmānuja Meghamālā from srivaishnavan.com (needs a hand-made knowledge-tree TSV + page cache) | `dge/data/darshana/vedanta/vishishtadvaita/RamanujaMeghamala/` |
+| ~~`importers/ramanuja_meghamala.py`~~ | **Taken back out on 9 Sep 2026** — the lead wants the Meghamālā synced, so it lives in `importers/` again with `--granthas` / `--strict` and a crawler beside it (`tools/meghamala/crawl_meghamala.py`, `sync-meghamala.yml`). | — |
 | `importers/shatapatha_madhyandina.py` | Mādhyandina Śatapatha Brāhmaṇa with Sāyaṇa + Eggeling layers, from github.com/vishvasa/vedAH_yajuH | `dge/data/vedas/yajurveda/shukla_yajurveda/…/shatapatha_brahmana_madhyandina/` |
 | `tools/gretil_pancharatra/` | Pauṣkara (partial) and Viṣvaksena Saṃhitās from GRETIL; the other 11 Pāñcarātra leaves have no e-text | `dge/data/agama/vaishnava_agama/pancharatra/…` |
 | `tools/guru_harvest/` | The two hand-curated Guru-Paramparā spreadsheets (`sources/guru_parampara_sheet_raw.txt`) + `enrich_jagannatha_v.py` | `dge/guru-parampara/data/parampara.json` (now hand-edited through `admin/guru.html`) |

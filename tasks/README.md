@@ -31,6 +31,30 @@ The same tab lists every conversation with its status and thread. The lead
 can reply there (appends to `thread`, status back to `pending`) or mark it
 done. Reading needs no token; writing does.
 
+## Live replies (`.github/workflows/ask-claude.yml`)
+
+The commit the page makes is a push to `main` touching `tasks/inbox/*.json`,
+and that push starts the **Ask Claude** workflow: a Claude Code session on
+GitHub's own runner (`anthropics/claude-code-action`). It reads this README
+and the request, answers it or makes the change, and its reply is committed
+back into the same file — the page polls the file every few seconds and
+shows the reply in place. Two to four minutes end to end, usually.
+
+- Questions are answered from the repository.
+- Changes are made on a branch `claude/inbox-<id>` and arrive as a pull
+  request; `main` is never rewritten by the workflow except for the reply
+  itself (and the Pending → Done bookkeeping).
+- While it works, the file carries `working: {since, run}`; the page shows
+  "Claude is working" with a link to the run.
+- If it cannot run (no secret, no credit) it writes that into the thread and
+  sets `needs-answer`, and the Sunday session still picks the request up.
+
+**One secret is needed**, in Settings → Secrets and variables → Actions:
+`ANTHROPIC_API_KEY` (console.anthropic.com) **or** `CLAUDE_CODE_OAUTH_TOKEN`
+(run `claude setup-token` on a machine signed in to a Claude subscription and
+paste the token). This spends Anthropic credits per request; nothing here
+touches the Gemini key.
+
 ## The id
 
 `YYYYMMDD-HHMM-xxxx` in IST, so files sort by when they were asked.

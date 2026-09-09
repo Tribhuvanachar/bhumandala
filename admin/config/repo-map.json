@@ -945,6 +945,46 @@
   }
  },
  "workflows": {
+  "ask-claude.yml": {
+   "category": "deploy",
+   "display_name": "Ask Claude — live replies to the website inbox",
+   "purpose": "Runs a Claude Code session on GitHub's runner whenever the Ask Claude tab commits a request into tasks/inbox/. Claude reads the request, answers or makes the change (changes go to a branch and a pull request, never straight to main), and commits its reply into the same file, which the page is polling.",
+   "notes": "Needs one repository secret: ANTHROPIC_API_KEY (console.anthropic.com) or CLAUDE_CODE_OAUTH_TOKEN (`claude setup-token` on a subscription). Spends Anthropic credits, never Gemini. Skips its own reply commits so it cannot loop.",
+   "recommendation": "keep",
+   "reason": "The live half of Ask Claude; without it replies wait for Sunday.",
+   "keep": true,
+   "generated": {
+    "name": "Ask Claude — answer inbox requests",
+    "triggers": [
+     "manual",
+     "push to main touching tasks/inbox/*.json"
+    ],
+    "schedule": [],
+    "inputs": [
+     {
+      "name": "id",
+      "label": "Inbox id to answer (blank = every request whose status is pending)",
+      "type": "string",
+      "default": "",
+      "required": false
+     }
+    ],
+    "secrets": [
+     "ANTHROPIC_API_KEY",
+     "CLAUDE_CODE_OAUTH_TOKEN"
+    ],
+    "cost": [],
+    "scripts": [
+     "tools/audit_library.py",
+     "tools/validate_data.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "commits directly to the branch it ran on"
+    ],
+    "lines": 241
+   }
+  },
   "check-sources.yml": {
    "category": "source-sync",
    "display_name": "Check every outside source",
@@ -2516,6 +2556,52 @@
     "lines": 78
    }
   },
+  "nightly.yml": {
+   "category": "index-links",
+   "display_name": "Nightly — library sync and inventory (00:00 IST)",
+   "purpose": "Every midnight: validates the corpus, refreshes library-status.json and the repository inventory (branch snapshots included) straight to main, runs the names audit as a report, and proposes catalogue repairs from audit_library.py --fix in one rolling pull request (nightly/library-sync) for a person to merge.",
+   "notes": "Followed at 00:30 IST by reindex.yml, which rebuilds the search index only if dge/data changed.",
+   "recommendation": "keep",
+   "reason": "Keeps catalogue, status and inventory within a day of the data without anyone remembering.",
+   "keep": true,
+   "generated": {
+    "name": "Nightly — library sync and inventory",
+    "triggers": [
+     "schedule",
+     "manual"
+    ],
+    "schedule": [
+     {
+      "cron_utc": "30 18 * * *",
+      "ist": "12:00 am IST daily"
+     }
+    ],
+    "inputs": [
+     {
+      "name": "open_pr",
+      "label": "Open/update the library-sync pull request (off = report only)",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     }
+    ],
+    "secrets": [],
+    "cost": [],
+    "scripts": [
+     "tools/audit_library.py",
+     "tools/audit_names.py",
+     "tools/build_repo_inventory.py",
+     "tools/gen_library_status.py",
+     "tools/validate_data.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "opens a pull request",
+     "commits directly to the branch it ran on"
+    ],
+    "lines": 127
+   }
+  },
   "ocr-lakshmi-kaumudi.yml": {
    "category": "ocr",
    "display_name": "OCR — Lakṣmī Vyākhyā (Siddhānta-Kaumudī)",
@@ -2844,6 +2930,92 @@
      "uploads a run artifact"
     ],
     "lines": 236
+   }
+  },
+  "ocr-sarvam.yml": {
+   "category": "ocr",
+   "display_name": "OCR — Sarvam Document AI (layout kept)",
+   "purpose": "Layout-preserving OCR of a PDF page range through Sarvam AI's Document AI (headings, paragraphs, verse breaks and tables kept as HTML/Markdown), staged to the ocr-staging/<work> branch for the scholar review page. Ten pages per request; dry run by default.",
+   "notes": "Needs a SARVAM_API_KEY secret (dashboard.sarvam.ai); bills per page from a prepaid balance. The run records how many pages it sent.",
+   "recommendation": "keep",
+   "reason": "The alternative OCR engine for commentaries where structure matters.",
+   "keep": true,
+   "generated": {
+    "name": "OCR — Sarvam Document AI (layout kept)",
+    "triggers": [
+     "manual"
+    ],
+    "schedule": [],
+    "inputs": [
+     {
+      "name": "pdf_url",
+      "label": "Direct URL of the PDF (archive.org download link, Drive direct link, …)",
+      "type": "string",
+      "default": "",
+      "required": true
+     },
+     {
+      "name": "pages",
+      "label": "Pages to send, e.g. 11-40 or 1-10,15,20-24 (each 10 pages is one job)",
+      "type": "string",
+      "default": "",
+      "required": true
+     },
+     {
+      "name": "work_slug",
+      "label": "Work slug for the staging folder / branch (e.g. isha_upanishad_bhashya_tippani)",
+      "type": "string",
+      "default": "",
+      "required": true
+     },
+     {
+      "name": "language",
+      "label": "Sarvam language code",
+      "type": "choice",
+      "default": "sa-IN",
+      "required": false,
+      "options": [
+       "sa-IN",
+       "kn-IN",
+       "hi-IN",
+       "en-IN",
+       "ta-IN",
+       "te-IN"
+      ]
+     },
+     {
+      "name": "output_format",
+      "label": "html keeps the most layout; md is lighter; json is raw blocks",
+      "type": "choice",
+      "default": "html",
+      "required": false,
+      "options": [
+       "html",
+       "md",
+       "json"
+      ]
+     },
+     {
+      "name": "dry_run",
+      "label": "Count pages and jobs only — call nothing, spend nothing",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     }
+    ],
+    "secrets": [
+     "SARVAM_API_KEY"
+    ],
+    "cost": [],
+    "scripts": [
+     "tools/sarvam_docai.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "commits directly to the branch it ran on",
+     "uploads a run artifact"
+    ],
+    "lines": 99
    }
   },
   "ocr-vasu-kaumudi.yml": {
@@ -3349,9 +3521,9 @@
   },
   "reindex.yml": {
    "category": "index-links",
-   "display_name": "Re-index — search index & library status",
-   "purpose": "Rebuilds the ~330 MB corpus search index, force-publishes it to the search-dist branch (served by jsDelivr) and opens a pull request with the refreshed library status and backlinks.",
-   "notes": "Needs a CDN pin bump afterwards. PR #148 is one of its stale outputs.",
+   "display_name": "Re-index — search index & library status (nightly 00:30 IST, or by hand)",
+   "purpose": "Rebuilds the ~330 MB corpus search index, force-publishes it to the search-dist branch (served by jsDelivr) and refreshes library status and backlinks. Nightly it runs only if dge/data changed since the last publish and bumps the CDN pin in dge/js itself; by hand it opens a PR and prints the hash unless bump_pin is on.",
+   "notes": "Remembers what it indexed in admin/config/search-index.state.json.",
    "recommendation": "keep",
    "reason": "The mechanism behind search.",
    "keep": true,
@@ -3359,9 +3531,15 @@
    "generated": {
     "name": "DGE re-index (search + library status)",
     "triggers": [
+     "schedule",
      "manual"
     ],
-    "schedule": [],
+    "schedule": [
+     {
+      "cron_utc": "0 19 * * *",
+      "ist": "12:30 am IST daily"
+     }
+    ],
     "inputs": [
      {
       "name": "open_pr",
@@ -3383,6 +3561,20 @@
       "type": "boolean",
       "default": false,
       "required": false
+     },
+     {
+      "name": "bump_pin",
+      "label": "Bump the CDN pin in dge/js and commit it to main (what the nightly run does)",
+      "type": "boolean",
+      "default": false,
+      "required": false
+     },
+     {
+      "name": "force",
+      "label": "Rebuild even if dge/data has not changed since the last publish",
+      "type": "boolean",
+      "default": true,
+      "required": false
      }
     ],
     "secrets": [],
@@ -3396,7 +3588,7 @@
      "opens a pull request",
      "force-pushes a dist/staging branch"
     ],
-    "lines": 135
+    "lines": 221
    }
   },
   "seo-pages.yml": {
@@ -3447,6 +3639,182 @@
      "deploys GitHub Pages"
     ],
     "lines": 92
+   }
+  },
+  "sync-advaitasharada.yml": {
+   "category": "source-sync",
+   "display_name": "Advaita Śāradā — sync (re-read and PR)",
+   "purpose": "Re-reads all 51 works we hold from advaitasharada.sringeri.net and opens a pull request with whatever changed. Monthly by itself (3rd, 6:00 am IST) or on demand. The site publishes no change dates, so each run is a full re-crawl (~980 pages, ~17 min at one request a second).",
+   "notes": "Guarded by tools/sync_guard.py: no file may lose items, nothing outside the Advaita folder may change. Never widens the corpus (new works on the site are reported by check-sources).",
+   "recommendation": "keep",
+   "reason": "The import half of the Advaita Śāradā syncer card.",
+   "keep": true,
+   "generated": {
+    "name": "Sync — Advaita Śāradā (advaitasharada.sringeri.net)",
+    "triggers": [
+     "schedule",
+     "manual"
+    ],
+    "schedule": [
+     {
+      "cron_utc": "30 0 3 * *",
+      "ist": "6:00 am IST on the 3rd of every month"
+     }
+    ],
+    "inputs": [
+     {
+      "name": "works",
+      "label": "Only these work slugs, comma-separated (blank = all 51)",
+      "type": "string",
+      "default": "",
+      "required": false
+     },
+     {
+      "name": "delay",
+      "label": "Seconds between requests to the site",
+      "type": "string",
+      "default": "1.0",
+      "required": false
+     },
+     {
+      "name": "open_pr",
+      "label": "Open a pull request with the changes (off = report only)",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     }
+    ],
+    "secrets": [],
+    "cost": [],
+    "scripts": [
+     "importers/advaita_sharada.py",
+     "tools/audit_library.py",
+     "tools/sync_guard.py",
+     "tools/validate_data.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "opens a pull request"
+    ],
+    "lines": 88
+   }
+  },
+  "sync-anandamakaranda.yml": {
+   "category": "source-sync",
+   "display_name": "Ānandamakaranda — sync from the wiki",
+   "purpose": "Checks the wiki revision of all 47 SarvaMūla works with wiki provenance; merges works whose items map one-to-one onto wiki blocks (old text kept in previous_text), snapshots composite ones to _sync/anandamakaranda.json with a block-by-block diff for a scholar, lists new wiki works for the lead, and opens a pull request. Twice a month (4th, 19th).",
+   "notes": "Never imports a new work by itself (no licence statement on the wiki).",
+   "recommendation": "keep",
+   "reason": "The import half of the Ānandamakaranda syncer card.",
+   "keep": true,
+   "generated": {
+    "name": "Sync — Ānandamakaranda (anandamakaranda.in)",
+    "triggers": [
+     "schedule",
+     "manual"
+    ],
+    "schedule": [
+     {
+      "cron_utc": "30 0 4,19 * *",
+      "ist": "6:00 am IST on the 4th and 19th of every month"
+     }
+    ],
+    "inputs": [
+     {
+      "name": "titles",
+      "label": "Only these wiki titles, comma-separated (blank = all 47 works we hold)",
+      "type": "string",
+      "default": "",
+      "required": false
+     },
+     {
+      "name": "force",
+      "label": "Re-sync even if the wiki revision is unchanged",
+      "type": "boolean",
+      "default": false,
+      "required": false
+     },
+     {
+      "name": "open_pr",
+      "label": "Open a pull request with the changes (off = report only)",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     }
+    ],
+    "secrets": [],
+    "cost": [],
+    "scripts": [
+     "tools/anandamakaranda/sync_anandamakaranda.py",
+     "tools/audit_library.py",
+     "tools/sync_guard.py",
+     "tools/validate_data.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "opens a pull request"
+    ],
+    "lines": 92
+   }
+  },
+  "sync-ashtadhyayi.yml": {
+   "category": "source-sync",
+   "display_name": "Aṣṭādhyāyī data — sync from ashtadhyayi-com/data",
+   "purpose": "Clones the public repository behind ashtadhyayi.com; stops if its commit is the one we imported; otherwise refreshes Phiṭ/Gaṇa/Liṅgānuśāsana/Uṇādi and the sūtra enrichment, Mahābhāṣya and Vasu layers (re-aligned by text, since the source numbers some sūtras differently) and opens a pull request. Twice a month (8th, 23rd).",
+   "notes": "Siddhānta-Kaumudī is never touched (re-sourced to Dhaval Patel's TEI on 29 Aug 2026). The English sūtrārtha field is never imported (licensing).",
+   "recommendation": "keep",
+   "reason": "The import half of the Aṣṭādhyāyī syncer card.",
+   "keep": true,
+   "generated": {
+    "name": "Sync — Aṣṭādhyāyī data (ashtadhyayi.com / github ashtadhyayi-com/data)",
+    "triggers": [
+     "schedule",
+     "manual"
+    ],
+    "schedule": [
+     {
+      "cron_utc": "30 0 8,23 * *",
+      "ist": "6:00 am IST on the 8th and 23rd of every month"
+     }
+    ],
+    "inputs": [
+     {
+      "name": "force",
+      "label": "Re-import even if the upstream commit is unchanged",
+      "type": "boolean",
+      "default": false,
+      "required": false
+     },
+     {
+      "name": "layers",
+      "label": "Also refresh the sūtra enrichment / Mahābhāṣya / Vasu layers (the slower, id-realigned import)",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     },
+     {
+      "name": "open_pr",
+      "label": "Open a pull request with the changes (off = report only)",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     }
+    ],
+    "secrets": [],
+    "cost": [],
+    "scripts": [
+     "importers/ashtadhyayi_layers.py",
+     "tools/build_sutra_index.py",
+     "tools/realign_sutra_enrichment.py",
+     "tools/sync_guard.py",
+     "tools/validate_data.py",
+     "tools/vyakarana/import_ashtadhyayi_corpora.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "opens a pull request"
+    ],
+    "lines": 118
    }
   },
   "sync-dvaitavedanta.yml": {
@@ -3512,6 +3880,72 @@
      "opens a GitHub issue"
     ],
     "lines": 176
+   }
+  },
+  "sync-meghamala.yml": {
+   "category": "source-sync",
+   "display_name": "Śrī Rāmānuja Meghamālā — sync (changed granthas and PR)",
+   "purpose": "Scrapes the archive page's knowledge tree, asks srivaishnavan.com's WordPress API which posts changed, re-fetches only those granthas whole, rebuilds them with importers/ramanuja_meghamala.py --strict, and opens a pull request. Twice a month by itself (5th and 20th) or on demand.",
+   "notes": "First run fetches everything it has no state for, capped at 60 granthas per run. State travels in the PR (admin/config/sync/meghamala.state.json).",
+   "recommendation": "keep",
+   "reason": "The import half of the Meghamālā syncer card; the importer was retired to the zip and brought back for this.",
+   "keep": true,
+   "generated": {
+    "name": "Sync — Śrī Rāmānuja Meghamālā (srivaishnavan.com)",
+    "triggers": [
+     "schedule",
+     "manual"
+    ],
+    "schedule": [
+     {
+      "cron_utc": "30 0 5,20 * *",
+      "ist": "6:00 am IST on the 5th and 20th of every month"
+     }
+    ],
+    "inputs": [
+     {
+      "name": "all",
+      "label": "Re-fetch every grantha, not only the changed ones",
+      "type": "boolean",
+      "default": false,
+      "required": false
+     },
+     {
+      "name": "max_granthas",
+      "label": "Cap on granthas re-fetched in one run",
+      "type": "string",
+      "default": "60",
+      "required": false
+     },
+     {
+      "name": "delay",
+      "label": "Seconds between requests to the site",
+      "type": "string",
+      "default": "1.0",
+      "required": false
+     },
+     {
+      "name": "open_pr",
+      "label": "Open a pull request with the changes (off = report only)",
+      "type": "boolean",
+      "default": true,
+      "required": false
+     }
+    ],
+    "secrets": [],
+    "cost": [],
+    "scripts": [
+     "importers/ramanuja_meghamala.py",
+     "tools/audit_library.py",
+     "tools/meghamala/crawl_meghamala.py",
+     "tools/sync_guard.py",
+     "tools/validate_data.py"
+    ],
+    "missing_scripts": [],
+    "writes": [
+     "opens a pull request"
+    ],
+    "lines": 112
    }
   },
   "test.yml": {
@@ -3720,7 +4154,7 @@
    }
   }
  },
- "generated_at": "2026-09-09 09:09 IST",
+ "generated_at": "2026-09-09 11:16 IST",
  "workflow_categories": [
   {
    "id": "source-sync",

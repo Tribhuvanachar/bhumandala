@@ -19,8 +19,9 @@ function throwsWith(code, fn) {
 describe('the catalogue', () => {
   test('lists exactly the workflows the panel offers', () => {
     assert.deepEqual(wf.catalogue().map((w) => w.id).sort(), [
-      'check-sources', 'dhatu-lexicon', 'extract-setutila', 'import-dasa-sahitya',
-      'import-kavya', 'kavya-tracker', 'publish-wordnet', 'reindex',
+      'check-sources', 'dhatu-lexicon', 'extract-setutila', 'import-advaitasharada',
+      'import-anandamakaranda', 'import-ashtadhyayi', 'import-dasa-sahitya',
+      'import-kavya', 'import-meghamala', 'kavya-tracker', 'ocr-sarvam', 'publish-wordnet', 'reindex',
       'sync-advaitasharada', 'sync-anandamakaranda', 'sync-ashtadhyayi',
       'sync-dasa-sahitya', 'sync-dvaitavedanta', 'sync-dvaitavedanta-quick',
       'sync-kavya', 'sync-sarvamulavani', 'sync-setutila', 'sync-srivaishnavan'

@@ -1,0 +1,6 @@
+{
+ "_readme": "Written by reindex.yml: which dge/data commit the published search index was built from, and where it went. Seeded 9 Sep 2026 with the pin then in dge/js/config.js.",
+ "data_sha": "6bf04a771bc074e20cd2bd601584dfb6945bb445",
+ "dist_sha": "29331ce6d122480bd0ec4ac012efebafa24b1a82",
+ "published_at_utc": "2026-09-09T00:00:00Z"
+}
