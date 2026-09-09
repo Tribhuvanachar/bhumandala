@@ -1,8 +1,8 @@
 # DGE Donations, Payments & Supporters — Foundation
 
-_Written 8 Sep 2026. Phase 1 foundation only — no real payment gateway
-credentials exist anywhere in this repo, no rupee has moved, and nothing
-here is deployed. See §0 for exactly what that means._
+_Written 8 Sep 2026, updated 9 Sep 2026 (both gateways wired in). Neither
+gateway has real credentials anywhere in this repo, no rupee has moved,
+and nothing here is deployed. See §0 for exactly what that means._
 
 ## 0. Where this stands
 
@@ -10,22 +10,22 @@ The lead asked for the donation/payment/supporter system to be built on
 **this project's existing Firebase stack** (Cloud Functions + Firestore +
 Firebase Auth) rather than the Cloudflare Workers + Supabase architecture
 that was independently proposed — see §1 for why that's the better fit
-here. The actual payment gateway (Cashfree, Razorpay, or otherwise) is
-**explicitly deferred**; the lead's own words: "let's keep the end payment
-gateway... we'll decide it later. But what else all is required?" This
-document, and the code it describes, is the answer to that question.
+here. The gateway choice was then resolved: rather than pick one, the
+lead asked for **both Cashfree and Razorpay wired in behind a switch** —
+"make it work for both... should be just a switch to either as required
+based on situations." §4 covers exactly what that switch is.
 
 | Piece | State |
 |---|---|
 | Firestore schema (§3) | ✅ built — 8 collections, integer money, security rules |
 | `lib/donation-core.js` (validation, sanitization, reference generation) | ✅ built, 33 unit tests |
 | `lib/payment-state.js` (the status state machine) | ✅ built, 12 unit tests |
-| `lib/payment-providers.js` (gateway adapter registry) | ✅ built — `mock` only; a real gateway is one new entry away, see §4 |
+| `lib/payment-providers.js` (gateway adapter registry: `mock`, `cashfree`, `razorpay`) | ✅ built, 41 unit tests — see §4 for what "built" does and doesn't mean here |
 | `lib/receipt-core.js` (receipt numbering + email content) | ✅ built, 9 unit tests |
 | `lib/email-providers.js` | ✅ built — `console` only (logs instead of sending); a real provider is a later decision, same shape as the gateway |
 | `createDonation` / `paymentWebhook` / `getDonationStatus` Cloud Functions | ✅ built, exercised end to end against the `mock` gateway (§6) |
 | Firestore rules for the 8 new collections | ✅ built, 21 rules-emulator tests |
-| **A real payment gateway** | ❌ not started — the lead's decision, see §4 |
+| **Cashfree and Razorpay credentials** | ❌ neither exists in this deployment — both adapters are code-complete and unit-tested against synthetic fixtures matching each gateway's documented shapes, but NEITHER has been exercised against a real sandbox account. See §4's honesty note. |
 | Donation frontend page (`dge/donate.html` or similar) | ❌ not started |
 | Real transactional email | ❌ not started — `console` provider only |
 | Rate limiting on `createDonation`/`paymentWebhook` | ❌ not started — flagged as a gap, see §8 |
@@ -115,47 +115,96 @@ schema, both deliberate:
   (`{donationId}`, `{donorId}_{entitlementCode}`) for the same reason —
   no separate unique index needed.
 
-## 4. Adding a real payment gateway later
+## 4. Two gateways, one switch — Cashfree and Razorpay
 
 `dge/firebase/functions/lib/payment-providers.js` is a small registry —
 the exact shape `lib/providers.js` already uses for OTP delivery
-channels (WhatsApp/MSG91/console). Today it holds exactly one entry,
-`mock`, which is **refused outside a Firebase emulator**
-(`assertGatewayAllowed`) so it can never be mistaken for a production
-gateway the way `providers.js`'s `console` OTP channel already can't be.
+channels (WhatsApp/MSG91/console). It holds three entries: `mock`
+(refused outside a Firebase emulator, same as `providers.js`'s `console`
+OTP channel), and now **`cashfree`** and **`razorpay`**, each a
+self-contained `{ id, createOrder, verifyWebhookSignature,
+parseWebhookEvent }` built against that gateway's own current
+documentation (sources below).
 
-Adding Cashfree, Razorpay, or anything else means adding ONE more entry
-with the same four members `mock` has:
+**The switch, concretely — a config value or a request field, never a
+code change:**
+- `PAYMENT_GATEWAY` (Cloud Functions param, default `mock`) is this
+  deployment's default gateway.
+- `PAYMENT_GATEWAYS_ENABLED` (default `mock`) is the allow-list; a
+  gateway not on it can never be selected, by config or by request. Set
+  it to e.g. `cashfree,razorpay` once both have real credentials.
+- `createDonation` accepts an optional `gateway` field in its request;
+  if it names something in `PAYMENT_GATEWAYS_ENABLED`, that donation
+  uses it — otherwise it silently falls back to `PAYMENT_GATEWAY`'s
+  default rather than trusting the client's say-so outright. This is
+  the whole mechanism for "situation A uses Cashfree, situation B uses
+  Razorpay" — a donation UI can pass whichever it wants; a campaign
+  default is a config change; neither touches `index.js` or
+  `payment-providers.js`.
+- `paymentWebhook`'s URL already carries `?gateway=cashfree` /
+  `?gateway=razorpay` as a query param (register each gateway's webhook
+  in ITS OWN dashboard pointing at the same function URL with its own
+  `?gateway=` value) — one endpoint already serves every gateway this
+  deployment accepts; adding a gateway never means adding an endpoint.
 
-```js
-cashfree: {
-  id: 'cashfree',
-  async createOrder({ donationReference, amountMinor, currency, customer, returnUrl }) { ... },
-  verifyWebhookSignature(rawBody, headers, secret) { ... },
-  parseWebhookEvent(rawBody, headers) { ... } // normalized to payment-state.js's ALL_STATUSES
-}
-```
+**Money conversion differs between the two, and the adapters handle it
+so nothing else in this codebase has to know:** Cashfree's Create Order
+API wants the amount in major units (rupees, e.g. `501.50`) —
+`donation-core.js`'s `minorToMajor()` does that conversion inside the
+`cashfree` adapter only. Razorpay's Orders API already wants the
+smallest currency unit (paise) — the SAME `amountMinor` this whole
+feature stores everywhere else, passed straight through, no conversion.
 
-Nothing else changes: `createDonation`, `paymentWebhook`,
-`payment-state.js`'s state machine, the receipt pipeline, and the
-Supporters Wall are already built and tested against `mock` and will
-work identically against a real gateway the moment `PAYMENT_GATEWAY` is
-set to its id.
+**Refund classification (full vs. partial) is decided in `index.js`, not
+in either adapter.** Both adapters normalize a successful refund webhook
+to `{ status: 'REFUNDED', refundAmountMinor }` — `processPaymentEvent`
+then compares `refundAmountMinor` against the donation's own
+`amountMinor` to decide whether the real transition is to `REFUNDED` or
+`PARTIALLY_REFUNDED`. Neither gateway's adapter needs the donation's
+history to answer a question only `index.js` has the context for.
 
-**Important — do not trust a pasted API description, including the one
-that prompted this document.** The proposal that led to this foundation
-asserted specific current details about Cashfree (a `payment_session_id`
-returned from `POST /pg/orders`, an API version string `2026-01-01`, an
-`x-idempotency-key` header, specific webhook versions). None of that was
-verified against Cashfree's own live documentation in this session —
-this document deliberately does not repeat those specifics as fact.
-Whoever implements the `cashfree` (or any other) entry above must pull
-the exact request/response shape, the current API version header, and
-the webhook signature scheme from that gateway's OWN current docs at
-implementation time, the same discipline this repo already applies
-elsewhere (`FIREBASE_SETUP.md`'s own history is a good example of why —
-three of its four real deploy blockers were things that LOOKED right
-from memory and weren't).
+**Honesty about what "wired in" does NOT mean.** Neither gateway has a
+sandbox account or any credential in this deployment — `CASHFREE_CLIENT_ID`,
+`CASHFREE_CLIENT_SECRET`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, and
+`RAZORPAY_WEBHOOK_SECRET` are all unset. Both adapters are built against
+each gateway's OWN current documentation (pulled 9 Sep 2026 — see the
+source URLs in the code comments in `payment-providers.js`) and covered
+by 41 unit tests using synthetic fixtures shaped exactly like each
+gateway's documented request/response/webhook payloads — but a unit test
+against a synthetic fixture is not the same as a real API call, and
+**neither adapter has been exercised against a real sandbox account.**
+Specific gaps this session could not verify from primary docs, flagged
+rather than guessed at in the code itself:
+- **Cashfree's `x-webhook-timestamp` unit** (seconds vs. milliseconds) —
+  `verifyWebhookSignature` assumes Unix seconds with a generous 10-minute
+  window; confirm against a real received webhook before relying on that
+  window being tight. The primary replay defense either way is
+  `payment_events`' idempotency keying, not this timestamp check.
+- **Cashfree's `x-api-version`** — defaults to `2023-08-01`
+  (`CASHFREE_API_VERSION` param); confirm which version your merchant
+  account/API keys were actually provisioned against before a real call.
+- **Razorpay's exact behavior on a duplicate `receipt`** — the Orders API
+  rejects a second order with a `receipt` value that already exists (our
+  `donationReference` is used as the receipt), but this session could not
+  verify whether that means "returns the existing order" or "returns an
+  error" — `createDonation`'s current error handling treats any failure
+  the same way (marks the donation `FAILED`), which is safe but may be
+  unnecessarily conservative if it turns out to return the existing order.
+- **Razorpay's `order.paid` event and full webhook envelope** (`account_id`,
+  `contains`, etc.) — could not pull a verified sample payload; `order.paid`
+  is currently treated as recognized-but-not-actionable (acknowledged,
+  no status change) rather than guessed at.
+
+Before a real transaction ever runs against either gateway: get real
+sandbox credentials, dispatch a real `createDonation` call, and drive at
+least one real webhook through `paymentWebhook` end to end — the same
+verification `test:donations-e2e` already does for `mock`, but for real.
+
+Primary sources consulted (9 Sep 2026): `cashfree.com/docs/reference/pgcreateorder`,
+`cashfree.com/docs/api-reference/payments/latest/{orders/create,payments/webhooks,refunds/webhooks,enums}`,
+`cashfree.com/docs/payments/online/webhooks/signature-verification`,
+`razorpay.com/docs/api/orders/{create,entity}`, `razorpay.com/docs/api/payments/entity`,
+`razorpay.com/docs/webhooks/{validate-test,payments,refunds}`.
 
 ## 5. FCRA / foreign-contribution boundary
 
@@ -174,14 +223,21 @@ are confirmed (Phase 5 in §8 below) — not before.
 
 ```bash
 cd dge/firebase/tests
-npm test                    # pure-function unit tests (this feature: 63 of them,
-                             # across donation-core/payment-state/payment-providers/receipt-core)
+npm test                    # pure-function unit tests (this feature: 88 of them --
+                             # donation-core 26, payment-state 13, payment-providers 41
+                             # (mock + cashfree + razorpay), receipt-core 8)
 npm run test:rules          # Firestore rules, real emulator (this feature: 21 tests)
 npm run test:donations-e2e  # real Functions + Firestore emulators, the `mock` gateway,
                              # end to end: createDonation -> signed webhook -> SUCCESS ->
                              # receipt -> Supporters Wall entry -> idempotent replay ->
                              # a stale out-of-order event rejected
 ```
+
+The Cashfree and Razorpay adapters are covered by unit tests only (signature
+verification, request shaping, event parsing/normalization against synthetic
+fixtures) — `test:donations-e2e` still exercises the `mock` gateway exclusively,
+since neither real gateway has credentials to run an actual end-to-end pass
+against (see §4's honesty note).
 
 `test:donations-e2e` needs `dge/firebase/functions/.secret.local`
 (gitignored, never committed — same convention `FIREBASE_SETUP.md`
@@ -208,11 +264,12 @@ internal ID.
   real gateway behind it — otherwise a script can open unlimited PENDING
   donations (cheap, but pollutes the data) or hammer the webhook
   endpoint.
-- **No refund/partial-refund code path is implemented** — the state
-  machine (`payment-state.js`) allows the `SUCCESS -> REFUNDED` and
-  `SUCCESS -> PARTIALLY_REFUNDED` transitions and is tested for them, but
-  nothing in `index.js` yet calls a gateway's refund API or exposes an
-  admin action to trigger one.
+- **No way to INITIATE a refund** — `index.js` can now RECEIVE a refund
+  webhook from either gateway and correctly classify it as full vs.
+  partial (comparing the refunded amount to the donation's own amount),
+  but nothing calls a gateway's refund API or exposes an admin action to
+  start one. A refund still has to be issued from the gateway's own
+  dashboard for now; this feature only reacts to it afterward.
 - **No donation frontend.** `createDonation`/`getDonationStatus` are
   callable functions with no UI in front of them yet.
 - **No real email provider** — receipts are logged, not sent.
@@ -226,7 +283,8 @@ internal ID.
 |---|---|
 | **0 — Compliance** (legal entity, PAN, bank account, 12A/80G, FCRA status, gateway merchant approval) | ❌ the lead's own action items — nothing here can substitute for them, see §9 |
 | **1 — Domestic payment foundation** (schema, validation, state machine, gateway adapter pattern, webhook idempotency, receipts, tests) | ✅ this document |
-| **1b — A real gateway wired in, INR only, plus rate limiting and a donation UI** | ❌ next, once the lead picks a gateway |
+| **1a — Cashfree and Razorpay adapters, switchable per-donation or by deployment default** | ✅ code-complete and unit-tested against synthetic fixtures; ❌ neither has real credentials or a real end-to-end run — see §4 |
+| **1b — Real credentials, rate limiting, and a donation UI** | ❌ next, once the lead adds real credentials for whichever gateway(s) go live first |
 | **2 — Supporters Wall UI** (the `public_supporters` collection already exists and is tested; a page rendering it does not) | ❌ not started |
 | **3 — Supporter magic-link auth** (Firebase Auth already supports this pattern; linking a `donorId` to a `uid` is the new part) | ❌ not started |
 | **4 — Entitlements actually granted** (`supporter_entitlements` collection and `maybeGrantEntitlements()` hook exist; no entitlement is defined yet) | ❌ not started |
@@ -244,6 +302,8 @@ This is the lead's checklist, not something an AI session can complete:
 - [ ] FCRA status and, if applicable, the FCRA-designated bank account
       confirmed against the Trust's actual registration — never assumed
       from a payment gateway's own marketing copy
-- [ ] A payment gateway chosen and its merchant/KYC approval completed
+- [ ] Merchant/KYC approval completed with Cashfree, Razorpay, or both —
+      whichever actually goes live; `PAYMENT_GATEWAYS_ENABLED` (§4) only
+      needs to name the ones that are actually approved and configured
 - [ ] International payment capability, if wanted, separately approved
       by that gateway — never enabled by frontend code alone

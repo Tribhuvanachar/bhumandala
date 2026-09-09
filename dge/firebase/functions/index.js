@@ -75,15 +75,82 @@ const MSG91_TEMPLATE_ID = defineString('MSG91_TEMPLATE_ID', { default: '' });
 const GITHUB_DISPATCH_TOKEN = defineSecret('GITHUB_DISPATCH_TOKEN');
 const GITHUB_REPO = defineString('GITHUB_REPO', { default: 'Tribhuvanachar/bhumandala' });
 
-// The donation/supporter system's own secrets and config. No real
-// payment gateway is wired in yet — see PAYMENTS_SETUP.md for why, and
-// for the plan to add one. PAYMENT_WEBHOOK_SECRET is the `mock` gateway's
-// shared HMAC secret today; a real gateway gets its OWN secret name
-// alongside this one when chosen (each gateway's webhook signing is
-// different), not a rename of this one.
+// The donation/supporter system's own secrets and config. Both Cashfree
+// and Razorpay are wired in (lib/payment-providers.js) alongside the
+// `mock` gateway; see PAYMENTS_SETUP.md for what "wired in" does and
+// does not mean here (no credentials exist in this deployment yet, so
+// neither has been exercised against a real account).
+//
+// PAYMENT_WEBHOOK_SECRET is the `mock` gateway's own shared HMAC secret
+// — Cashfree and Razorpay each carry their OWN secret below, because
+// each gateway's webhook signing uses a different secret by design
+// (Razorpay's is a dashboard-configured webhook secret, distinct from
+// its API key secret; Cashfree signs with the same client secret used
+// for API auth). Never collapse these into one shared value.
 const PAYMENT_WEBHOOK_SECRET = defineSecret('PAYMENT_WEBHOOK_SECRET');
+const CASHFREE_CLIENT_ID = defineSecret('CASHFREE_CLIENT_ID');
+const CASHFREE_CLIENT_SECRET = defineSecret('CASHFREE_CLIENT_SECRET');
+const RAZORPAY_KEY_SECRET = defineSecret('RAZORPAY_KEY_SECRET');
+const RAZORPAY_WEBHOOK_SECRET = defineSecret('RAZORPAY_WEBHOOK_SECRET');
+
+// PAYMENT_GATEWAY is this deployment's DEFAULT gateway. A donation can
+// ask for a different one (createDonation's optional `gateway` field) as
+// long as it's in PAYMENT_GATEWAYS_ENABLED — that's the whole "switch":
+// a config value or a per-request field, never a code change, to move a
+// donation (or the deployment's default) between Cashfree and Razorpay.
 const PAYMENT_GATEWAY = defineString('PAYMENT_GATEWAY', { default: 'mock' });
+const PAYMENT_GATEWAYS_ENABLED = defineString('PAYMENT_GATEWAYS_ENABLED', { default: 'mock' });
+// Cashfree's API host AND credentials differ between sandbox and
+// production (a separate Test App vs Live App from the same dashboard).
+// Defaults to sandbox — the safe failure direction is "real money can't
+// move yet", never the reverse.
+const CASHFREE_ENV = defineString('CASHFREE_ENV', { default: 'sandbox' });
+const CASHFREE_API_VERSION = defineString('CASHFREE_API_VERSION', { default: '2023-08-01' });
+// Razorpay's key_id is the PUBLIC half of its API credential — meant to
+// reach the browser (Checkout.js needs it), unlike key_secret above.
+// Still a defineString rather than a literal here so sandbox (rzp_test_)
+// vs production (rzp_live_) is a config change, not a redeploy.
+const RAZORPAY_KEY_ID = defineString('RAZORPAY_KEY_ID', { default: '' });
 const EMAIL_PROVIDER = defineString('EMAIL_PROVIDER', { default: 'console' });
+
+const PAYMENT_SECRETS = [PAYMENT_WEBHOOK_SECRET, CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET];
+
+/** Per-gateway config, built the moment it's needed rather than at
+ *  module scope — mirrors providerConfig() below for the same reason:
+ *  an unconfigured gateway's secrets should never be *.value()'d unless
+ *  a donation actually asked for that gateway. */
+function paymentGatewayConfig(gatewayId) {
+  if (gatewayId === 'cashfree') {
+    return {
+      clientId: CASHFREE_CLIENT_ID.value(),
+      clientSecret: CASHFREE_CLIENT_SECRET.value(),
+      apiVersion: CASHFREE_API_VERSION.value(),
+      baseUrl: CASHFREE_ENV.value() === 'production' ? 'https://api.cashfree.com' : 'https://sandbox.cashfree.com'
+    };
+  }
+  if (gatewayId === 'razorpay') {
+    return { keyId: RAZORPAY_KEY_ID.value(), keySecret: RAZORPAY_KEY_SECRET.value() };
+  }
+  return {};
+}
+
+/** The webhook secret for a given gateway — kept separate from
+ *  paymentGatewayConfig so paymentWebhook (which needs only this) does
+ *  not have to declare every gateway's API secret, only its own. */
+function paymentWebhookSecret(gatewayId) {
+  if (gatewayId === 'cashfree') return CASHFREE_CLIENT_SECRET.value(); // Cashfree signs webhooks with the same client secret used for API auth
+  if (gatewayId === 'razorpay') return RAZORPAY_WEBHOOK_SECRET.value();
+  return PAYMENT_WEBHOOK_SECRET.value();
+}
+
+/** Is `gatewayId` one this deployment actually accepts right now? A
+ *  client asking for a gateway not in PAYMENT_GATEWAYS_ENABLED falls
+ *  back to the configured default rather than being trusted outright —
+ *  the enabled-list is what makes "switch to either" a deliberate
+ *  config decision, not something a crafted request can pick on its own. */
+function isGatewayEnabled(gatewayId) {
+  return PAYMENT_GATEWAYS_ENABLED.value().split(',').map(s => s.trim()).filter(Boolean).includes(gatewayId);
+}
 
 const CHALLENGES = 'otp_challenges';
 const USERS = 'users';
@@ -678,7 +745,7 @@ async function maybeGrantEntitlements(/* donation */) {
 // gateway order, and returns only what the browser needs to continue.
 // =====================================================================
 exports.createDonation = onCall(
-  { cors: true, enforceAppCheck: false },
+  { secrets: PAYMENT_SECRETS, cors: true, enforceAppCheck: false },
   async (request) => {
     const data = request.data || {};
 
@@ -697,7 +764,15 @@ exports.createDonation = onCall(
     }
 
     const currency = donationCore.DEFAULT_CURRENCY; // single-currency until Phase 5 (international)
-    const gatewayId = PAYMENT_GATEWAY.value();
+
+    // The "switch to either gateway" mechanism: a client MAY name a
+    // gateway (e.g. an admin flipping a campaign between Cashfree and
+    // Razorpay, or a future UI that offers a choice), but only when it's
+    // in PAYMENT_GATEWAYS_ENABLED — an unrecognized or disabled request
+    // silently falls back to this deployment's own configured default
+    // rather than trusting the client's say-so outright.
+    const requestedGateway = typeof data.gateway === 'string' ? data.gateway : null;
+    const gatewayId = (requestedGateway && isGatewayEnabled(requestedGateway)) ? requestedGateway : PAYMENT_GATEWAY.value();
     try {
       assertGatewayAllowed(gatewayId);
     } catch (e) {
@@ -739,7 +814,8 @@ exports.createDonation = onCall(
         amountMinor,
         currency,
         customer: { donorId, name: donorCheck.donor.fullName, email: donorCheck.donor.email, phone: donorCheck.donor.phone },
-        returnUrl: typeof data.returnUrl === 'string' ? data.returnUrl : null
+        returnUrl: typeof data.returnUrl === 'string' ? data.returnUrl : null,
+        config: paymentGatewayConfig(gatewayId)
       });
     } catch (e) {
       logger.error('createDonation: gateway order creation failed', { gatewayId, message: e.message });
@@ -777,10 +853,14 @@ exports.createDonation = onCall(
 // replayed event can never walk a donation backwards.
 // =====================================================================
 exports.paymentWebhook = onRequest(
-  { secrets: [PAYMENT_WEBHOOK_SECRET], cors: false },
+  { secrets: PAYMENT_SECRETS, cors: false },
   async (req, res) => {
     if (req.method !== 'POST') { res.status(405).send('Method Not Allowed'); return; }
 
+    // Each gateway's own dashboard is configured with its OWN webhook
+    // URL — .../paymentWebhook?gateway=cashfree, ?gateway=razorpay —
+    // so this one endpoint already serves every gateway this deployment
+    // accepts; adding a gateway never means adding a new endpoint.
     const gatewayId = String(req.query.gateway || '');
     let gateway;
     try {
@@ -795,7 +875,7 @@ exports.paymentWebhook = onRequest(
     // `req.rawBody` (provided by the Functions runtime) is required here —
     // re-serializing req.body would change the exact bytes and break the
     // signature, the same reasoning as the WhatsApp webhook above.
-    if (!gateway.verifyWebhookSignature(req.rawBody, req.headers, PAYMENT_WEBHOOK_SECRET.value())) {
+    if (!gateway.verifyWebhookSignature(req.rawBody, req.headers, paymentWebhookSecret(gatewayId))) {
       logger.warn('paymentWebhook: bad signature', { gatewayId });
       res.status(401).send('Bad signature');
       return;
@@ -850,14 +930,31 @@ exports.paymentWebhook = onRequest(
  *  req/res in its signature — easier to reason about, and reusable from
  *  a future manual-reconciliation tool without faking an HTTP request. */
 async function processPaymentEvent(gatewayId, event, eventRef) {
-  if (!event.gatewayOrderId) {
-    await eventRef.set({ processingStatus: 'ERROR', errorMessage: 'event carried no order id', processedAt: FieldValue.serverTimestamp() }, { merge: true });
+  // A recognized-but-not-actionable event (payment.authorized,
+  // refund.failed, Cashfree's PAYMENT_CHARGES_WEBHOOK, ...) — the
+  // adapter already normalized this to status: null. Acknowledged and
+  // recorded, but there is no donation to look up and nothing to change.
+  if (event.status === null) {
+    await eventRef.set({ processingStatus: 'PROCESSED', errorMessage: 'no-op event type, nothing to apply', processedAt: FieldValue.serverTimestamp() }, { merge: true });
     return;
   }
 
-  const paymentSnap = await db.collection(PAYMENTS).where('gatewayOrderId', '==', event.gatewayOrderId).limit(1).get();
+  // Most events carry the gateway's order id, which is how a payment doc
+  // is normally found. Razorpay's own refund.processed payload is the
+  // one exception this session could verify (its `refund.entity` carries
+  // only `payment_id`, not `order_id` — see PAYMENTS_SETUP.md) — falling
+  // back to a gatewayPaymentId lookup covers it without a gateway-specific
+  // branch here.
+  if (!event.gatewayOrderId && !event.gatewayPaymentId) {
+    await eventRef.set({ processingStatus: 'ERROR', errorMessage: 'event carried no order id or payment id', processedAt: FieldValue.serverTimestamp() }, { merge: true });
+    return;
+  }
+
+  const lookupField = event.gatewayOrderId ? 'gatewayOrderId' : 'gatewayPaymentId';
+  const lookupValue = event.gatewayOrderId || event.gatewayPaymentId;
+  const paymentSnap = await db.collection(PAYMENTS).where(lookupField, '==', lookupValue).limit(1).get();
   if (paymentSnap.empty) {
-    logger.warn('paymentWebhook: no payment matches this order id', { gatewayId, gatewayOrderId: event.gatewayOrderId });
+    logger.warn('paymentWebhook: no payment matches this event', { gatewayId, lookupField, lookupValue });
     await eventRef.set({ processingStatus: 'ERROR', errorMessage: 'no matching payment/donation', processedAt: FieldValue.serverTimestamp() }, { merge: true });
     return;
   }
@@ -870,7 +967,18 @@ async function processPaymentEvent(gatewayId, event, eventRef) {
     if (!donationSnap.exists) return { applied: false, reason: 'donation not found' };
     const donation = donationSnap.data();
 
-    const transition = paymentState.nextStatus(donation.status, event.status);
+    // A refund event only ever reports "REFUNDED" from the adapter (see
+    // payment-providers.js) — whether that's a FULL or PARTIAL refund is
+    // decided HERE, gateway-agnostically, by comparing the refunded
+    // amount against the donation's own original amount, so neither
+    // gateway's adapter needs to know the donation's history to answer
+    // a question only this function has the context to answer.
+    let reportedStatus = event.status;
+    if (reportedStatus === 'REFUNDED' && Number.isInteger(event.refundAmountMinor) && event.refundAmountMinor < donation.amountMinor) {
+      reportedStatus = 'PARTIALLY_REFUNDED';
+    }
+
+    const transition = paymentState.nextStatus(donation.status, reportedStatus);
     if (!transition.ok) {
       return { applied: false, reason: transition.reason };
     }
