@@ -7,1164 +7,8 @@
   "matchedVia: confirmed (a scholar accepted it in the catalogue page) |",
   "author-aliases | parampara-node."
  ],
- "generatedAt": "2026-09-09T09:17:21+00:00",
+ "generatedAt": "2026-09-09T10:33:56+00:00",
  "byPerson": {
-  "jayatirtha": {
-   "authorIds": [
-    "kar-813911b2"
-   ],
-   "canonical": "जयतीर्थः",
-   "iast": "jayatīrthaḥ",
-   "matchedVia": "author-aliases",
-   "count": 143,
-   "digitisedCount": 0,
-   "works": [
-    {
-     "id": "r4",
-     "row": 4,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "प्रमाणलक्षणम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r19",
-     "row": 19,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "कथालक्षणम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r31",
-     "row": 31,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "मायावादखण्डनम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r43",
-     "row": 43,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "मिथ्यात्वानुमानखण्डनम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r55",
-     "row": 55,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "उपाधिखण्डनम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r63",
-     "row": 63,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "तत्वसङ्ख्यानम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r88",
-     "row": 88,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "तत्वविवेकः",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r99",
-     "row": 99,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "तत्वोद्योतः",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r116",
-     "row": 116,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "विष्णुतत्वनिर्णयः",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r133",
-     "row": 133,
-     "title": "जयतीर्थीय-टीका",
-     "parent": "कर्मनिर्णयः",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r219",
-     "row": 219,
-     "title": "तत्वप्रकाशिका",
-     "parent": "ब्रह्मसूत्रभाष्यम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r312",
-     "row": 312,
-     "title": "न्यायसुधा",
-     "parent": "अनुव्याख्यानम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r376",
-     "row": 376,
-     "title": "न्यायविवरणपञ्चिका",
-     "parent": "न्यायविवरणम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r446",
-     "row": 446,
-     "title": "जयतीर्थीयटीका",
-     "parent": "ईशावास्योपनिषद्-भाष्यम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r477",
-     "row": 477,
-     "title": "जयतीर्थीयटीका-वचनप्रसूनमाला",
-     "parent": "षट्प्रश्नोपनिषद्-भाष्यम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r520",
-     "row": 520,
-     "title": "प्रमेयदीपिका",
-     "parent": "गीताभाष्यम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r558",
-     "row": 558,
-     "title": "न्यायदीपिका",
-     "parent": "गीतातात्पर्यम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r903",
-     "row": 903,
-     "title": "पूजाकल्पलता",
-     "parent": null,
-     "category": "स्वतन्त्रग्रन्थः",
-     "digitised": false
-    },
-    {
-     "id": "r904",
-     "row": 904,
-     "title": "वादावली",
-     "parent": null,
-     "category": "स्वतन्त्रग्रन्थः",
-     "digitised": false
-    },
-    {
-     "id": "r909",
-     "row": 909,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "मूलम्",
-     "digitised": false
-    },
-    {
-     "id": "r1002",
-     "row": 1002,
-     "title": "ऋग्भाष्यटीका",
-     "parent": "ऋग्भाष्यम्",
-     "category": "टीका",
-     "digitised": false
-    },
-    {
-     "id": "r1250",
-     "row": 1250,
-     "title": "उपाधिखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1251",
-     "row": 1251,
-     "title": "उपाधिखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1252",
-     "row": 1252,
-     "title": "उपाधिखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1253",
-     "row": 1253,
-     "title": "उपाधिखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1254",
-     "row": 1254,
-     "title": "उपाधिखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1255",
-     "row": 1255,
-     "title": "उपाधिखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1256",
-     "row": 1256,
-     "title": "तत्त्वप्रकाशिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1257",
-     "row": 1257,
-     "title": "तत्त्वप्रकाशिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1258",
-     "row": 1258,
-     "title": "तत्त्वप्रकाशिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1259",
-     "row": 1259,
-     "title": "तत्त्वप्रकाशिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1273",
-     "row": 1273,
-     "title": "कथालक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1274",
-     "row": 1274,
-     "title": "कथालक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1277",
-     "row": 1277,
-     "title": "कर्मनिर्णयटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1279",
-     "row": 1279,
-     "title": "कर्मनिर्णयखण्डार्थः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1280",
-     "row": 1280,
-     "title": "कर्मनिर्णयटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1281",
-     "row": 1281,
-     "title": "कर्मनिर्णयटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1355",
-     "row": 1355,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1356",
-     "row": 1356,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1357",
-     "row": 1357,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1358",
-     "row": 1358,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1359",
-     "row": 1359,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1360",
-     "row": 1360,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1361",
-     "row": 1361,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1362",
-     "row": 1362,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1363",
-     "row": 1363,
-     "title": "तत्त्वविवेकटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1377",
-     "row": 1377,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1378",
-     "row": 1378,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1379",
-     "row": 1379,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1380",
-     "row": 1380,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1381",
-     "row": 1381,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1382",
-     "row": 1382,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1383",
-     "row": 1383,
-     "title": "तत्त्वसङ्ख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1393",
-     "row": 1393,
-     "title": "तत्त्वसङ्ख्यानविवरणम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1394",
-     "row": 1394,
-     "title": "तत्त्वसङ्ख्यानविवरणम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1418",
-     "row": 1418,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1419",
-     "row": 1419,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1420",
-     "row": 1420,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1421",
-     "row": 1421,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1422",
-     "row": 1422,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1423",
-     "row": 1423,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1424",
-     "row": 1424,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1425",
-     "row": 1425,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1426",
-     "row": 1426,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1427",
-     "row": 1427,
-     "title": "तत्त्वोद्योतटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1587",
-     "row": 1587,
-     "title": "न्यायसुधा",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1588",
-     "row": 1588,
-     "title": "न्यायसुधा",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1645",
-     "row": 1645,
-     "title": "पद्यमाला",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1646",
-     "row": 1646,
-     "title": "पद्यमाला",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1664",
-     "row": 1664,
-     "title": "प्रपंचमिथ्यात्वनुमानखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1665",
-     "row": 1665,
-     "title": "प्रपंचमिथ्यात्वनुमानखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1666",
-     "row": 1666,
-     "title": "प्रपंचमिथ्यात्वनुमानखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1667",
-     "row": 1667,
-     "title": "प्रपंचमिथ्यात्वनुमानखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1668",
-     "row": 1668,
-     "title": "प्रपंचमिथ्यात्वनुमानखण्डनटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1676",
-     "row": 1676,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1677",
-     "row": 1677,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1678",
-     "row": 1678,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1679",
-     "row": 1679,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1680",
-     "row": 1680,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1681",
-     "row": 1681,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1682",
-     "row": 1682,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1683",
-     "row": 1683,
-     "title": "प्रमाणपद्धतिः",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1722",
-     "row": 1722,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1723",
-     "row": 1723,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1724",
-     "row": 1724,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1725",
-     "row": 1725,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1726",
-     "row": 1726,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1727",
-     "row": 1727,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1728",
-     "row": 1728,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1729",
-     "row": 1729,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1730",
-     "row": 1730,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1731",
-     "row": 1731,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1732",
-     "row": 1732,
-     "title": "प्रमाणलक्षणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1815",
-     "row": 1815,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1816",
-     "row": 1816,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1817",
-     "row": 1817,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1818",
-     "row": 1818,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1819",
-     "row": 1819,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1820",
-     "row": 1820,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1821",
-     "row": 1821,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1822",
-     "row": 1822,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1823",
-     "row": 1823,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1824",
-     "row": 1824,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1825",
-     "row": 1825,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1826",
-     "row": 1826,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1827",
-     "row": 1827,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1828",
-     "row": 1828,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1829",
-     "row": 1829,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1891",
-     "row": 1891,
-     "title": "न्यायविवरणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1892",
-     "row": 1892,
-     "title": "न्यायविवरणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1893",
-     "row": 1893,
-     "title": "न्यायविवरणटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1909",
-     "row": 1909,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1910",
-     "row": 1910,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1911",
-     "row": 1911,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1912",
-     "row": 1912,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1913",
-     "row": 1913,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1914",
-     "row": 1914,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1915",
-     "row": 1915,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1916",
-     "row": 1916,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1917",
-     "row": 1917,
-     "title": "ब्रह्मसूत्रभाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2052",
-     "row": 2052,
-     "title": "गीतातात्पर्यनिर्णयटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2053",
-     "row": 2053,
-     "title": "गीतातात्पर्यनिर्णयटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2263",
-     "row": 2263,
-     "title": "अनुव्याख्यान",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2285",
-     "row": 2285,
-     "title": "ईशावास्योपनिषत् टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2299",
-     "row": 2299,
-     "title": "उपाधिखण्डन टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2310",
-     "row": 2310,
-     "title": "ऋग्भाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2345",
-     "row": 2345,
-     "title": "कथालक्षण टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2353",
-     "row": 2353,
-     "title": "कर्मनिर्णय टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2380",
-     "row": 2380,
-     "title": "गीता टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2386",
-     "row": 2386,
-     "title": "गीताभाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2452",
-     "row": 2452,
-     "title": "तत्त्वप्रकाशिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2478",
-     "row": 2478,
-     "title": "तत्त्वविवेक टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2486",
-     "row": 2486,
-     "title": "तत्त्वसंख्यान टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2518",
-     "row": 2518,
-     "title": "तत्त्वोद्योत टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2614",
-     "row": 2614,
-     "title": "न्यायविवरण टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2684",
-     "row": 2684,
-     "title": "पद्यमाला",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2692",
-     "row": 2692,
-     "title": "प्रपञ्चमिथ्यात्वानुमान खण्डन टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2704",
-     "row": 2704,
-     "title": "प्रमाणपद्धति",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2725",
-     "row": 2725,
-     "title": "प्रमाणलक्षण टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2880",
-     "row": 2880,
-     "title": "मायावाद खण्डन टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2920",
-     "row": 2920,
-     "title": "वादावळि",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2942",
-     "row": 2942,
-     "title": "विष्णुतत्त्वविनिर्णय प्राचीन टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2980",
-     "row": 2980,
-     "title": "षट्प्रश्नोपनिषत् भाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    }
-   ]
-  },
   "vadiraja": {
    "authorIds": [
     "kar-c6c1809d"
@@ -1937,6 +781,498 @@
     }
    ]
   },
+  "jayatirtha": {
+   "authorIds": [
+    "kar-813911b2"
+   ],
+   "canonical": "जयतीर्थ",
+   "iast": "jayatīrtha",
+   "matchedVia": "author-aliases",
+   "count": 60,
+   "digitisedCount": 0,
+   "works": [
+    {
+     "id": "r4",
+     "row": 4,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "प्रमाणलक्षणम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r19",
+     "row": 19,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "कथालक्षणम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r31",
+     "row": 31,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "मायावादखण्डनम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r43",
+     "row": 43,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "मिथ्यात्वानुमानखण्डनम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r55",
+     "row": 55,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "उपाधिखण्डनम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r63",
+     "row": 63,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "तत्वसङ्ख्यानम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r88",
+     "row": 88,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "तत्वविवेकः",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r99",
+     "row": 99,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "तत्वोद्योतः",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r116",
+     "row": 116,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "विष्णुतत्वनिर्णयः",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r133",
+     "row": 133,
+     "title": "जयतीर्थीय-टीका",
+     "parent": "कर्मनिर्णयः",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r219",
+     "row": 219,
+     "title": "तत्वप्रकाशिका",
+     "parent": "ब्रह्मसूत्रभाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r312",
+     "row": 312,
+     "title": "न्यायसुधा",
+     "parent": "अनुव्याख्यानम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r376",
+     "row": 376,
+     "title": "न्यायविवरणपञ्चिका",
+     "parent": "न्यायविवरणम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r446",
+     "row": 446,
+     "title": "जयतीर्थीयटीका",
+     "parent": "ईशावास्योपनिषद्-भाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r477",
+     "row": 477,
+     "title": "जयतीर्थीयटीका-वचनप्रसूनमाला",
+     "parent": "षट्प्रश्नोपनिषद्-भाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r520",
+     "row": 520,
+     "title": "प्रमेयदीपिका",
+     "parent": "गीताभाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r558",
+     "row": 558,
+     "title": "न्यायदीपिका",
+     "parent": "गीतातात्पर्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r903",
+     "row": 903,
+     "title": "पूजाकल्पलता",
+     "parent": null,
+     "category": "स्वतन्त्रग्रन्थः",
+     "digitised": false
+    },
+    {
+     "id": "r904",
+     "row": 904,
+     "title": "वादावली",
+     "parent": null,
+     "category": "स्वतन्त्रग्रन्थः",
+     "digitised": false
+    },
+    {
+     "id": "r909",
+     "row": 909,
+     "title": "प्रमाणपद्धतिः",
+     "parent": null,
+     "category": "मूलम्",
+     "digitised": false
+    },
+    {
+     "id": "r1002",
+     "row": 1002,
+     "title": "ऋग्भाष्यटीका",
+     "parent": "ऋग्भाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r1250",
+     "row": 1250,
+     "title": "उपाधिखण्डनटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1256",
+     "row": 1256,
+     "title": "तत्त्वप्रकाशिका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1273",
+     "row": 1273,
+     "title": "कथालक्षणटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1277",
+     "row": 1277,
+     "title": "कर्मनिर्णयटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1279",
+     "row": 1279,
+     "title": "कर्मनिर्णयखण्डार्थः",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1355",
+     "row": 1355,
+     "title": "तत्त्वविवेकटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1377",
+     "row": 1377,
+     "title": "तत्त्वसङ्ख्यानटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1393",
+     "row": 1393,
+     "title": "तत्त्वसङ्ख्यानविवरणम्",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1418",
+     "row": 1418,
+     "title": "तत्त्वोद्योतटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1587",
+     "row": 1587,
+     "title": "न्यायसुधा",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1645",
+     "row": 1645,
+     "title": "पद्यमाला",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1664",
+     "row": 1664,
+     "title": "प्रपंचमिथ्यात्वनुमानखण्डनटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1676",
+     "row": 1676,
+     "title": "प्रमाणपद्धतिः",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1722",
+     "row": 1722,
+     "title": "प्रमाणलक्षणटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1815",
+     "row": 1815,
+     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1891",
+     "row": 1891,
+     "title": "न्यायविवरणटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1909",
+     "row": 1909,
+     "title": "ब्रह्मसूत्रभाष्यटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2052",
+     "row": 2052,
+     "title": "गीतातात्पर्यनिर्णयटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2263",
+     "row": 2263,
+     "title": "अनुव्याख्यान",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2285",
+     "row": 2285,
+     "title": "ईशावास्योपनिषत् टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2299",
+     "row": 2299,
+     "title": "उपाधिखण्डन टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2310",
+     "row": 2310,
+     "title": "ऋग्भाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2345",
+     "row": 2345,
+     "title": "कथालक्षण टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2353",
+     "row": 2353,
+     "title": "कर्मनिर्णय टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2380",
+     "row": 2380,
+     "title": "गीता टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2386",
+     "row": 2386,
+     "title": "गीताभाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2452",
+     "row": 2452,
+     "title": "तत्त्वप्रकाशिका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2478",
+     "row": 2478,
+     "title": "तत्त्वविवेक टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2486",
+     "row": 2486,
+     "title": "तत्त्वसंख्यान टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2518",
+     "row": 2518,
+     "title": "तत्त्वोद्योत टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2614",
+     "row": 2614,
+     "title": "न्यायविवरण टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2684",
+     "row": 2684,
+     "title": "पद्यमाला",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2692",
+     "row": 2692,
+     "title": "प्रपञ्चमिथ्यात्वानुमान खण्डन टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2704",
+     "row": 2704,
+     "title": "प्रमाणपद्धति",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2725",
+     "row": 2725,
+     "title": "प्रमाणलक्षण टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2880",
+     "row": 2880,
+     "title": "मायावाद खण्डन टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2920",
+     "row": 2920,
+     "title": "वादावळि",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2942",
+     "row": 2942,
+     "title": "विष्णुतत्त्वविनिर्णय प्राचीन टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2980",
+     "row": 2980,
+     "title": "षट्प्रश्नोपनिषत् भाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    }
+   ]
+  },
   "raghavendra": {
    "authorIds": [
     "kar-4d34b6e8",
@@ -1945,7 +1281,7 @@
    "canonical": "श्रीराघवेन्द्रतीर्थः",
    "iast": "śrīrāghavendratīrthaḥ",
    "matchedVia": "author-aliases",
-   "count": 61,
+   "count": 57,
    "digitisedCount": 3,
    "works": [
     {
@@ -2245,14 +1581,6 @@
      "digitised": false
     },
     {
-     "id": "r927",
-     "row": 927,
-     "title": "पुरुषसूक्तव्याख्यानम्",
-     "parent": "ऋग्वेदः",
-     "category": "व्याख्यानम्",
-     "digitised": false
-    },
-    {
      "id": "r928",
      "row": 928,
      "title": "अम्भ्रणीसूक्तव्याख्यानम्",
@@ -2411,450 +1739,6 @@
      "parent": null,
      "category": "",
      "digitised": false
-    },
-    {
-     "id": "r1655",
-     "row": 1655,
-     "title": "पुरुषसूक्तभाष्यम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1656",
-     "row": 1656,
-     "title": "पुरुषसूक्तभाष्यम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1657",
-     "row": 1657,
-     "title": "पुरुषसूक्तभाष्यम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    }
-   ]
-  },
-  "vyasatirtha": {
-   "authorIds": [
-    "kar-b37ae368"
-   ],
-   "canonical": "व्यासतीर्थः",
-   "iast": "vyāsatīrthaḥ",
-   "matchedVia": "author-aliases",
-   "count": 51,
-   "digitisedCount": 4,
-   "works": [
-    {
-     "id": "r32",
-     "row": 32,
-     "title": "मन्दारमञ्जरी",
-     "parent": "जयतीर्थीय-टीका",
-     "category": "टिप्पणी",
-     "digitised": true
-    },
-    {
-     "id": "r47",
-     "row": 47,
-     "title": "मन्दारमञ्जरी",
-     "parent": "जयतीर्थीय-टीका",
-     "category": "टिप्पणी",
-     "digitised": true
-    },
-    {
-     "id": "r56",
-     "row": 56,
-     "title": "मन्दारमञ्जरी",
-     "parent": "जयतीर्थीय-टीका",
-     "category": "टिप्पणी",
-     "digitised": true
-    },
-    {
-     "id": "r89",
-     "row": 89,
-     "title": "मन्दारमञ्जरी",
-     "parent": "जयतीर्थीय-टीका",
-     "category": "टिप्पणी",
-     "digitised": true
-    },
-    {
-     "id": "r287",
-     "row": 287,
-     "title": "तात्पर्यचन्द्रिका",
-     "parent": "तत्वप्रकाशिका",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r740",
-     "row": 740,
-     "title": "बृहज्जयतीर्थविजयः",
-     "parent": null,
-     "category": "मूलम्",
-     "digitised": false
-    },
-    {
-     "id": "r852",
-     "row": 852,
-     "title": "वायुस्तुतिपुनश्चरणपद्धतिः",
-     "parent": "वायुस्तुतिः",
-     "category": "आचारः",
-     "digitised": false
-    },
-    {
-     "id": "r1059",
-     "row": 1059,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "प्रकरणम्",
-     "digitised": false
-    },
-    {
-     "id": "r1087",
-     "row": 1087,
-     "title": "तर्कताण्डवम्",
-     "parent": null,
-     "category": "प्रकरणम्",
-     "digitised": false
-    },
-    {
-     "id": "r1196",
-     "row": 1196,
-     "title": "आथर्वणोपनिषद्भाष्यटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1593",
-     "row": 1593,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1594",
-     "row": 1594,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1595",
-     "row": 1595,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1596",
-     "row": 1596,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1597",
-     "row": 1597,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1598",
-     "row": 1598,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1599",
-     "row": 1599,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1600",
-     "row": 1600,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1601",
-     "row": 1601,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1602",
-     "row": 1602,
-     "title": "न्यायामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1932",
-     "row": 1932,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1933",
-     "row": 1933,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1934",
-     "row": 1934,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1935",
-     "row": 1935,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1936",
-     "row": 1936,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1937",
-     "row": 1937,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1938",
-     "row": 1938,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1939",
-     "row": 1939,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1940",
-     "row": 1940,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1941",
-     "row": 1941,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1942",
-     "row": 1942,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1943",
-     "row": 1943,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1944",
-     "row": 1944,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1945",
-     "row": 1945,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1946",
-     "row": 1946,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1947",
-     "row": 1947,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1948",
-     "row": 1948,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1949",
-     "row": 1949,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1950",
-     "row": 1950,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1951",
-     "row": 1951,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2189",
-     "row": 2189,
-     "title": "भेदोज्जीवनम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2190",
-     "row": 2190,
-     "title": "भेदोज्जीवनम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2191",
-     "row": 2191,
-     "title": "भेदोज्जीवनम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2274",
-     "row": 2274,
-     "title": "आथर्वणोपनिषत् टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2325",
-     "row": 2325,
-     "title": "ऐतरेयोपनिषत् टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2362",
-     "row": 2362,
-     "title": "काठकोपनिषत् भाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2410",
-     "row": 2410,
-     "title": "छांदोग्योपनिषत् टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2428",
-     "row": 2428,
-     "title": "तळवकारोपनिषत् टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2572",
-     "row": 2572,
-     "title": "तैत्तिरीयोपनिशत् भाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2760",
-     "row": 2760,
-     "title": "बृहदारण्यकोपनिषत् भाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2871",
-     "row": 2871,
-     "title": "माण्डूकोपनिषत् भाष्य टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
     }
    ]
   },
@@ -2866,7 +1750,7 @@
    "canonical": "पद्मनाभतीर्थ",
    "iast": "padmanābhatīrtha",
    "matchedVia": "parampara-node",
-   "count": 28,
+   "count": 26,
    "digitisedCount": 0,
    "works": [
     {
@@ -2990,22 +1874,6 @@
      "digitised": false
     },
     {
-     "id": "r1813",
-     "row": 1813,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1814",
-     "row": 1814,
-     "title": "ब्रह्मसूत्रानुव्याख्यानटीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
      "id": "r2258",
      "row": 2258,
      "title": "अनुव्याख्यान",
@@ -3095,6 +1963,227 @@
     }
    ]
   },
+  "vyasatirtha": {
+   "authorIds": [
+    "kar-20200c9b",
+    "kar-b37ae368"
+   ],
+   "canonical": "श्रीव्यासतीर्थः",
+   "iast": "śrīvyāsatīrthaḥ",
+   "matchedVia": "author-aliases",
+   "count": 26,
+   "digitisedCount": 5,
+   "works": [
+    {
+     "id": "r32",
+     "row": 32,
+     "title": "मन्दारमञ्जरी",
+     "parent": "जयतीर्थीय-टीका",
+     "category": "टिप्पणी",
+     "digitised": true
+    },
+    {
+     "id": "r47",
+     "row": 47,
+     "title": "मन्दारमञ्जरी",
+     "parent": "जयतीर्थीय-टीका",
+     "category": "टिप्पणी",
+     "digitised": true
+    },
+    {
+     "id": "r56",
+     "row": 56,
+     "title": "मन्दारमञ्जरी",
+     "parent": "जयतीर्थीय-टीका",
+     "category": "टिप्पणी",
+     "digitised": true
+    },
+    {
+     "id": "r89",
+     "row": 89,
+     "title": "मन्दारमञ्जरी",
+     "parent": "जयतीर्थीय-टीका",
+     "category": "टिप्पणी",
+     "digitised": true
+    },
+    {
+     "id": "r287",
+     "row": 287,
+     "title": "तात्पर्यचन्द्रिका",
+     "parent": "तत्वप्रकाशिका",
+     "category": "टिप्पणी",
+     "digitised": false
+    },
+    {
+     "id": "r383",
+     "row": 383,
+     "title": "व्यासतीर्थीयटीका",
+     "parent": "आथर्वणोपनिषद्भाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r429",
+     "row": 429,
+     "title": "व्यासतीर्थीयटीका",
+     "parent": "तलवकारोपनिषद्-भाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r466",
+     "row": 466,
+     "title": "व्यासतीर्थीयटीका",
+     "parent": "माण्डूक्योपनिषद्भाष्यम्",
+     "category": "टीका",
+     "digitised": false
+    },
+    {
+     "id": "r495",
+     "row": 495,
+     "title": "बृहदारण्यकोपनिषत्-खण्डार्थः",
+     "parent": "बृहदारण्यकोपनिषत्",
+     "category": "व्याख्यानम्",
+     "digitised": false
+    },
+    {
+     "id": "r740",
+     "row": 740,
+     "title": "बृहज्जयतीर्थविजयः",
+     "parent": null,
+     "category": "मूलम्",
+     "digitised": false
+    },
+    {
+     "id": "r852",
+     "row": 852,
+     "title": "वायुस्तुतिपुनश्चरणपद्धतिः",
+     "parent": "वायुस्तुतिः",
+     "category": "आचारः",
+     "digitised": false
+    },
+    {
+     "id": "r1059",
+     "row": 1059,
+     "title": "न्यायामृतम्",
+     "parent": null,
+     "category": "प्रकरणम्",
+     "digitised": false
+    },
+    {
+     "id": "r1087",
+     "row": 1087,
+     "title": "तर्कताण्डवम्",
+     "parent": null,
+     "category": "प्रकरणम्",
+     "digitised": false
+    },
+    {
+     "id": "r1196",
+     "row": 1196,
+     "title": "आथर्वणोपनिषद्भाष्यटीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1262",
+     "row": 1262,
+     "title": "मन्दारमञ्जरी",
+     "parent": null,
+     "category": "",
+     "digitised": true
+    },
+    {
+     "id": "r1593",
+     "row": 1593,
+     "title": "न्यायामृतम्",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1932",
+     "row": 1932,
+     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2189",
+     "row": 2189,
+     "title": "भेदोज्जीवनम्",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2274",
+     "row": 2274,
+     "title": "आथर्वणोपनिषत् टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2325",
+     "row": 2325,
+     "title": "ऐतरेयोपनिषत् टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2362",
+     "row": 2362,
+     "title": "काठकोपनिषत् भाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2410",
+     "row": 2410,
+     "title": "छांदोग्योपनिषत् टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2428",
+     "row": 2428,
+     "title": "तळवकारोपनिषत् टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2572",
+     "row": 2572,
+     "title": "तैत्तिरीयोपनिशत् भाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2760",
+     "row": 2760,
+     "title": "बृहदारण्यकोपनिषत् भाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2871",
+     "row": 2871,
+     "title": "माण्डूकोपनिषत् भाष्य टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    }
+   ]
+  },
   "srinivasa_v": {
    "authorIds": [
     "kar-be248d8c",
@@ -3103,7 +2192,7 @@
    "canonical": "श्रीनिवासतीर्थः",
    "iast": "śrīnivāsatīrthaḥ",
    "matchedVia": "parampara-node",
-   "count": 22,
+   "count": 16,
    "digitisedCount": 0,
    "works": [
     {
@@ -3195,14 +2284,6 @@
      "digitised": false
     },
     {
-     "id": "r1610",
-     "row": 1610,
-     "title": "न्यायामृतव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
      "id": "r1696",
      "row": 1696,
      "title": "प्रमाणपद्धतिटीका",
@@ -3227,48 +2308,8 @@
      "digitised": false
     },
     {
-     "id": "r1849",
-     "row": 1849,
-     "title": "न्यायसुधाटिप्पणी",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1850",
-     "row": 1850,
-     "title": "न्यायसुधाटिप्पणी",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1851",
-     "row": 1851,
-     "title": "न्यायसुधाटिप्पणी",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1852",
-     "row": 1852,
-     "title": "न्यायसुधाटिप्पणी",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
      "id": "r1997",
      "row": 1997,
-     "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1998",
-     "row": 1998,
      "title": "ब्रह्मसूत्रभाष्यटीकाव्याख्या",
      "parent": null,
      "category": "",
@@ -3278,254 +2319,6 @@
      "id": "r2122",
      "row": 2122,
      "title": "भागवततात्पर्यनिर्णयव्याख्या",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    }
-   ]
-  },
-  "satyanatha": {
-   "authorIds": [
-    "kar-6c269795"
-   ],
-   "canonical": "सत्यनाथतीर्थः",
-   "iast": "satyanāthatīrthaḥ",
-   "matchedVia": "parampara-node",
-   "count": 19,
-   "digitisedCount": 0,
-   "works": [
-    {
-     "id": "r137",
-     "row": 137,
-     "title": "कर्मप्रकाशः",
-     "parent": "जयतीर्थीय-टीका",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r227",
-     "row": 227,
-     "title": "अभिनवचन्द्रिका",
-     "parent": "तत्वप्रकाशिका",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r327",
-     "row": 327,
-     "title": "दुर्घटवाक्यार्थविचारः",
-     "parent": "न्यायसुधा",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r341",
-     "row": 341,
-     "title": "सुधावाक्यार्थविचारः",
-     "parent": "न्यायसुधा",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r356",
-     "row": 356,
-     "title": "न्यायसुधापरशुः",
-     "parent": "न्यायसुधा",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r527",
-     "row": 527,
-     "title": "वाक्यविवेकः",
-     "parent": "प्रमेयदीपिका",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r562",
-     "row": 562,
-     "title": "न्यायदीपिकावाक्यविवेकः",
-     "parent": "न्यायदीपिका",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r916",
-     "row": 916,
-     "title": "अभिनवामृतम्",
-     "parent": "प्रमाणपद्धतिः",
-     "category": "व्याख्यानम्",
-     "digitised": false
-    },
-    {
-     "id": "r1215",
-     "row": 1215,
-     "title": "अभिनवगदा",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1216",
-     "row": 1216,
-     "title": "अभिनवगदा",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1217",
-     "row": 1217,
-     "title": "अभिनवगदा",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1218",
-     "row": 1218,
-     "title": "अभिनवचन्द्रिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1219",
-     "row": 1219,
-     "title": "अभिनवचन्द्रिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1220",
-     "row": 1220,
-     "title": "अभिनवचन्द्रिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1221",
-     "row": 1221,
-     "title": "अभिनवचन्द्रिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1222",
-     "row": 1222,
-     "title": "अभिनवताण्डव",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1223",
-     "row": 1223,
-     "title": "अभिनवताण्डव",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1224",
-     "row": 1224,
-     "title": "अभिनवामृतम्",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1263",
-     "row": 1263,
-     "title": "उपाधिखण्डनटीका-टिप्पणी (परशुः)",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    }
-   ]
-  },
-  "raghunatha_s": {
-   "authorIds": [
-    "kar-606acee7"
-   ],
-   "canonical": "रघुनाथतीर्थ",
-   "iast": "raghunāthatīrtha",
-   "matchedVia": "parampara-node",
-   "count": 9,
-   "digitisedCount": 0,
-   "works": [
-    {
-     "id": "r240",
-     "row": 240,
-     "title": "शेषतात्पर्यचन्द्रिका",
-     "parent": "तत्वप्रकाशिका",
-     "category": "टिप्पणी",
-     "digitised": false
-    },
-    {
-     "id": "r1329",
-     "row": 1329,
-     "title": "तत्त्वचन्द्रिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1330",
-     "row": 1330,
-     "title": "तत्त्वचन्द्रिका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1344",
-     "row": 1344,
-     "title": "तत्त्वमञ्जरी",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r1751",
-     "row": 1751,
-     "title": "प्रेमेयनी न्याह",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2287",
-     "row": 2287,
-     "title": "ईशावास्योपनिषत् टीका टिप्पणि",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2441",
-     "row": 2441,
-     "title": "तंत्रसार टीका",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2456",
-     "row": 2456,
-     "title": "तत्त्वप्रकाशिका टिप्पणि",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2757",
-     "row": 2757,
-     "title": "बृहतीसहस्रव्याख्यान",
      "parent": null,
      "category": "",
      "digitised": false
@@ -3616,6 +2409,82 @@
     }
    ]
   },
+  "raghunatha_s": {
+   "authorIds": [
+    "kar-606acee7"
+   ],
+   "canonical": "रघुनाथतीर्थ",
+   "iast": "raghunāthatīrtha",
+   "matchedVia": "parampara-node",
+   "count": 8,
+   "digitisedCount": 0,
+   "works": [
+    {
+     "id": "r240",
+     "row": 240,
+     "title": "शेषतात्पर्यचन्द्रिका",
+     "parent": "तत्वप्रकाशिका",
+     "category": "टिप्पणी",
+     "digitised": false
+    },
+    {
+     "id": "r1329",
+     "row": 1329,
+     "title": "तत्त्वचन्द्रिका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1344",
+     "row": 1344,
+     "title": "तत्त्वमञ्जरी",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r1751",
+     "row": 1751,
+     "title": "प्रेमेयनी न्याह",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2287",
+     "row": 2287,
+     "title": "ईशावास्योपनिषत् टीका टिप्पणि",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2441",
+     "row": 2441,
+     "title": "तंत्रसार टीका",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2456",
+     "row": 2456,
+     "title": "तत्त्वप्रकाशिका टिप्पणि",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    },
+    {
+     "id": "r2757",
+     "row": 2757,
+     "title": "बृहतीसहस्रव्याख्यान",
+     "parent": null,
+     "category": "",
+     "digitised": false
+    }
+   ]
+  },
   "narahari": {
    "authorIds": [
     "kar-363d7074"
@@ -3623,7 +2492,7 @@
    "canonical": "नरहरितीर्थ",
    "iast": "naraharitīrtha",
    "matchedVia": "author-aliases",
-   "count": 6,
+   "count": 5,
    "digitisedCount": 0,
    "works": [
     {
@@ -3661,14 +2530,6 @@
     {
      "id": "r2899",
      "row": 2899,
-     "title": "यमकभारत व्याख्यान",
-     "parent": null,
-     "category": "",
-     "digitised": false
-    },
-    {
-     "id": "r2900",
-     "row": 2900,
      "title": "यमकभारत व्याख्यान",
      "parent": null,
      "category": "",

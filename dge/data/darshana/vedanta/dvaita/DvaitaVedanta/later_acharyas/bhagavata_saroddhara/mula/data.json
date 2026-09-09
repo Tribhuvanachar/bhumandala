@@ -1,6 +1,6 @@
 {
  "schema": "grantha_mula_text",
- "default_author": "Maharshi Veda Vyasa (Bhāgavata verses selected by Sri Vishnu Tirtha)",
+ "default_author": "महर्षिवेदव्यासः",
  "title": "भागवतसारोद्धारः — मूलम् (श्लोकाः)",
  "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
  "source_note": "Google Vision + Tesseract (san+kan), merged by tools/saroddhara/ocr_merge.py",

@@ -1008,6 +1008,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const cardEl = document.getElementById('shlokaList');
       if (titleEl) titleEl.innerText = 'Not Yet Available';
       if (cardEl) cardEl.innerText = "This text hasn't been added to the library yet — check back soon.";
+      // Still say WHERE this empty slot sits. Landing on a bare "Not Yet
+      // Available" with no lineage leaves a reader who followed a search hit
+      // with nothing to orient by and no way back into the taxonomy.
+      if (typeof window.dgeRenderStitchChrome === 'function') window.dgeRenderStitchChrome();
       return;
     }
 

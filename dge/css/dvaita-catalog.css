@@ -166,3 +166,6 @@ table.dvc-minitable td,table.dvc-minitable th{padding:4px 8px;border-bottom:1px 
 .dvc-vchip.on .dvc-muted{color:rgba(255,255,255,.75)}
 .dvc-personbanner{background:color-mix(in srgb,var(--accent) 16%,transparent);
   border:1px solid var(--accent);border-radius:10px;padding:9px 13px;margin-bottom:10px;font-size:.86rem}
+.dvc-libmatch{margin-bottom:6px}
+.dvc-libmatch:last-child{margin-bottom:0}
+.dvc-libcrumb{font-size:.72rem;opacity:.75;word-break:break-word}

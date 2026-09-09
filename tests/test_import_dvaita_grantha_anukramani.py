@@ -148,6 +148,48 @@ class DuplicateDetection(unittest.TestCase):
         self.assertEqual(set(coll[0]["ids"]), {"r2", "r4"})
 
 
+class DropExactDuplicates(unittest.TestCase):
+    def test_all_columns_identical_keeps_the_first_and_drops_the_rest(self):
+        rows = [row("A", karta="X", vibhaga="मूलम्", row_no=1),
+                row("A", karta="X", vibhaga="मूलम्", row_no=2),
+                row("A", karta="X", vibhaga="मूलम्", row_no=3)]
+        m.resolve_parents(rows)
+        kept, dropped = m.drop_exact_duplicates(rows)
+        self.assertEqual([r["row"] for r in kept], [1])
+        self.assertEqual([d["row"] for d in dropped], [2, 3])
+        self.assertEqual(dropped[0]["keptRow"], 1)
+
+    def test_a_differing_column_is_not_a_duplicate(self):
+        rows = [row("A", karta="X", availability="s", row_no=1),
+                row("A", karta="X", availability="n", row_no=2)]
+        m.resolve_parents(rows)
+        kept, dropped = m.drop_exact_duplicates(rows)
+        self.assertEqual(len(kept), 2)
+        self.assertEqual(dropped, [])
+
+    def test_identical_columns_under_different_parents_are_both_kept(self):
+        # The 16 real groups this protects: Vyasatirtha's मन्दारमञ्जरी is typed
+        # identically four times -- same title, author and Link text -- but each
+        # sits under a different prakarana's tika, so all four are real works.
+        rows = [row("mula-A", row_no=1),
+                row("टीका", linkRaw="mula-A", row_no=2),
+                row("मन्दारमञ्जरी", linkRaw="टीका", karta="व्यासतीर्थः", row_no=3),
+                row("mula-B", row_no=4),
+                row("टीका", linkRaw="mula-B", row_no=5),
+                row("मन्दारमञ्जरी", linkRaw="टीका", karta="व्यासतीर्थः", row_no=6)]
+        m.resolve_parents(rows)
+        kept, dropped = m.drop_exact_duplicates(rows)
+        self.assertEqual(dropped, [])
+        self.assertEqual([r["row"] for r in kept], [1, 2, 3, 4, 5, 6])
+
+    def test_rows_without_a_title_are_never_dropped(self):
+        rows = [row("", karta="X", row_no=1), row("", karta="X", row_no=2)]
+        m.resolve_parents(rows)
+        kept, dropped = m.drop_exact_duplicates(rows)
+        self.assertEqual(len(kept), 2)
+        self.assertEqual(dropped, [])
+
+
 class Masters(unittest.TestCase):
     def test_spelling_variants_fold_onto_one_canonical_entry(self):
         # The exact complaint this feature exists for: भाष्यम् and भाष्यम

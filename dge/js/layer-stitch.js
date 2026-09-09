@@ -273,7 +273,7 @@ window.dgeRenderStitchChrome = function() {
       let cum = '';
       segs.forEach(seg => {
         cum = cum ? cum + '/' + seg : seg;
-        parts.push(`<a class="lineage-link" href="index.html?libraryPath=${encodeURIComponent(cum)}">${window.dgeSegLabel(seg)}</a>`);
+        parts.push(`<a class="lineage-link" href="index.html?libraryPath=${encodeURIComponent(cum)}">${window.dgeSegLabel(seg, cum)}</a>`);
       });
     }
     // Standalone commentary layer: the way back to the stitched grantha.
@@ -292,6 +292,29 @@ window.dgeRenderStitchChrome = function() {
           : `<span class="lineage-node">${t(link.label)}</span>`);
       });
       const ownTitle = (window.stotraData && window.stotraData.metadata && window.stotraData.metadata.title) || '';
+      parts.push(`<span class="lineage-node lineage-current">${t(ownTitle)}</span>`);
+    } else if (rel && typeof window.dgeSegLabel === 'function') {
+      // 9 Sep 2026, the lead: "every item rendered from library should have
+      // breadcrumb without miss." DGE_GRANTHA_LINEAGE above is a hand-written
+      // table covering five granthas, so every OTHER mula -- 987 of the 1,280
+      // populated library.json entries, jayanti_nirnaya among them -- fell to
+      // the empty `parts` below and rendered no strip at all. The taxonomy is
+      // already in the path; walk it exactly the way the tika branch does,
+      // rather than waiting for someone to hand-write another table entry.
+      const segs = rel.split('/');
+      const leaf = segs.pop(); // shown as the current node, not as a link
+      let cum = '';
+      segs.forEach(seg => {
+        cum = cum ? cum + '/' + seg : seg;
+        parts.push(`<a class="lineage-link" href="index.html?libraryPath=${encodeURIComponent(cum)}">${window.dgeSegLabel(seg, cum)}</a>`);
+      });
+      // The label table first, metadata.title only as a fallback: this node is
+      // the GRANTHA folder, whereas metadata.title describes the layer being
+      // read, and on the many entries whose data.json carries no title core.js
+      // synthesises one from the folder -- karma_nirnaya's reads "Mula". The
+      // table's कर्मनिर्णयः is both right and transliterable by the script toggle.
+      const ownTitle = window.dgeSegLabel(leaf, rel)
+        || (window.stotraData && window.stotraData.metadata && window.stotraData.metadata.title) || '';
       parts.push(`<span class="lineage-node lineage-current">${t(ownTitle)}</span>`);
     }
   }

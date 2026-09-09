@@ -256,6 +256,38 @@ def detect_duplicates(rows):
     return exact_groups, npk_groups, collisions
 
 
+def drop_exact_duplicates(rows):
+    """A row repeated with every column identical is a data-entry artifact,
+    not a catalogue entry: 'ब्रह्मसूत्रभाष्यटीकाव्याख्या' by Rāghavendra fills
+    26 consecutive rows. Keep the first, drop the rest.
+
+    The one qualification, and it matters: sameness includes the RESOLVED
+    parent, not just the typed columns. Sixteen groups have identical
+    columns — same title, same author, same Link text — and yet belong in
+    different places, because the Link text is itself ambiguous: Vyāsatīrtha's
+    मन्दारमञ्जरी appears four times under 'जयतीर्थीय-टीका' because he wrote one
+    on the ṭīkā of each of four prakaraṇas. Collapsing those would delete real
+    works. They stay, and surface instead as name collisions.
+
+    Returns (kept_rows, dropped_report)."""
+    seen, kept, dropped = {}, [], []
+    for rec in rows:
+        pm = rec["parentIdx"] if rec["parentIdx"] is not None else ("unresolved:" + rec["linkRaw"])
+        key = (rec["status"], rec["grantha"], pm, rec["karta"], rec["vibhaga"],
+               rec["vishayaVibhaga"], rec["prasthana"], rec["mention"],
+               rec["sourceLibrary"], rec["availability"])
+        if not rec["grantha"]:
+            kept.append(rec)
+            continue
+        if key in seen:
+            seen[key].append(rec["row"])
+            dropped.append({"row": rec["row"], "keptRow": seen[key][0], "grantha": rec["grantha"]})
+        else:
+            seen[key] = [rec["row"]]
+            kept.append(rec)
+    return kept, dropped
+
+
 def build_masters(rows):
     """One canonical entry per category / author / title, carrying every
     spelling variant that folds onto it. The canonical form is simply the
@@ -467,6 +499,12 @@ def main(argv=None):
 
     rows = read_rows(args.source)
     resolve_parents(rows)
+    # Drop the all-columns-identical repeats, then resolve again: parentIdx
+    # is a position in the row list, so it has to be recomputed once rows
+    # have gone, and the nearest-preceding parent of what remains is the
+    # binding we actually want.
+    rows, dropped_duplicates = drop_exact_duplicates(rows)
+    resolve_parents(rows)
     build_paths(rows)
     exact_groups, npk_groups, collisions = detect_duplicates(rows)
     masters = build_masters(rows)
@@ -512,6 +550,7 @@ def main(argv=None):
                        "not applied to the sheet's own data.",
         "sourceSheet": SHEET_NAME,
         "totalRows": len(rows),
+        "droppedDuplicates": dropped_duplicates,
         "masters": masters,
         "items": items,
         "suggestions": {"parentLinks": parent_suggestions},
@@ -528,7 +567,8 @@ def main(argv=None):
         json.dump(out, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
 
-    print(f"{len(rows)} rows -> {args.out}")
+    print(f"{len(rows)} rows -> {args.out}  "
+          f"({len(dropped_duplicates)} all-columns-identical repeats dropped)")
     print(f"  masters: {len(masters['categories'])} categories, "
           f"{len(masters['authors'])} authors, {len(masters['titles'])} titles")
     for name, key in (("categories", "categories"), ("authors", "authors"), ("titles", "titles")):
