@@ -20,7 +20,7 @@ form's first Devanagari codepoint (as a 4-hex-digit filename, e.g. उ ->
 the whole index. Around 50-60 shards result, one per distinct initial
 consonant/vowel actually in use.
 
-AMBIGUITY, HANDLED DELIBERATELY. A surface form can belong to more than one
+AMBIGUITY, NOW SURFACED. A surface form can belong to more than one
 (root, key):
   - the SAME root can produce the same string from two different cells
     (वच् 02.0058 itself: Lit.00 प्रथम-एकवचन and Lit.20 उत्तम-एकवचन both
@@ -29,19 +29,29 @@ AMBIGUITY, HANDLED DELIBERATELY. A surface form can belong to more than one
     example: वच् 02.0058 has its own native लिट्, and ब्रू 02.0039 (which
     has no लिट् of its own) borrows वच्'s ("ब्रुवो वचिः") — Vidyut
     correctly generates उवाच under both roots' own paradigms.
-  This script keeps ONE (root, key) per surface form — first-write-wins —
-  rather than a list, so the client needs no disambiguation UI (the
-  project lead has been explicit: build one good answer, don't hand the
-  reader a choice they didn't ask for). The scan order is chosen so
-  "first write" lands on the traditionally-expected answer as often as
-  possible: roots in Dhātupātha code order (so a lower gaṇa/id wins —
-  ब्रू 02.0039 before वच् 02.0058, matching how उवाच is actually taught,
-  as ब्रू's लिट्), and within one root, lakāras in ALL_LAKARAS order and
-  cells in प्रथम/मध्यम/उत्तम × एक/द्वि/बहु order (so the citation form
-  Lit.00 wins over any later cell's overlapping variant). This is a
-  heuristic, not a guarantee — a genuinely ambiguous form can still land
-  on the "wrong" root for a given sentence's context, same limitation as
-  every other automatic word-linking already shipped on this site.
+  This script used to keep ONE (root, key) per surface form —
+  first-write-wins — and said so: build one good answer, don't hand the
+  reader a choice they didn't ask for. The project lead reversed that on
+  9 Sep 2026 after clicking चक्रे and being shown क्रुञ् "हिंसायाम्",
+  asking that the click "return all matching dhatus with user-selectable
+  options, rather than defaulting to himsa". Every match is stored now and
+  the reader picks; of 204,970 distinct forms, 178,584 have one root and
+  26,386 have two or more.
+
+  The list is ordered by Dhātupāṭha code and deliberately NOT by corpus
+  frequency, which looks like the better default and is not: the per-root
+  totals in dhatu_prayoga were themselves built through the old one-answer
+  index, so 05.0007 carries 29,938 occurrences whose commonest form is
+  कृत्वा — a form of डुकृञ् 08.0010, not of क्रुञ् at all. Ranking on that
+  would launder the very misattribution this change exists to fix. Code
+  order is arbitrary but honest, and the client shows each root's own अर्थ
+  so a reader can tell हिंसायाम् from करणे at a glance.
+
+  The old scan order still decides one thing: which CELL of a root is
+  cited when that single root reaches the form from several of its own.
+  Lakāras run in ALL_LAKARAS order and cells in प्रथम/मध्यम/उत्तम ×
+  एक/द्वि/बहु order, so the citation form (Lit.00) wins over a later
+  cell's overlapping variant.
 
     python3 tools/build_prakriya_form_index.py
 """
@@ -79,7 +89,7 @@ def main():
         print(f'no per-root files found under {PRAKRIYA_DIR}', file=sys.stderr)
         return 1
 
-    flat = {}  # surface form -> {"c": code, "k": key}
+    flat = {}  # surface form -> [{"c": code, "k": key}, ...]
     roots_seen = 0
     for path in root_files:
         with open(path, encoding='utf-8') as fh:
@@ -97,8 +107,14 @@ def main():
                     continue
                 for f in variants:
                     f = (f or '').strip()
-                    if f and f not in flat:
-                        flat[f] = {'c': code, 'k': key}
+                    if not f:
+                        continue
+                    hits = flat.setdefault(f, [])
+                    # One entry per ROOT: a root reaching the same string from
+                    # two of its own cells is one candidate to a reader, not
+                    # two, and the scan order puts the citation cell first.
+                    if not any(h['c'] == code for h in hits):
+                        hits.append({'c': code, 'k': key})
 
     shards = {}
     for form, hit in flat.items():
@@ -118,19 +134,22 @@ def main():
             'directory already holds (see build_prakriya.py). Sharded by the '
             'form\'s first Devanagari codepoint (4 lowercase hex digits, e.g. '
             'उ -> 0909.json) so one word-click fetches one small shard, not the '
-            'whole index. A form present under more than one (root, key) keeps '
-            'only its first match by a deliberately chosen scan order — see the '
+            'whole index. The value is a LIST of every (root, key) the form '
+            'belongs to, in Dhatupatha code order — see the '
             'AMBIGUITY note in the build script\'s own docstring, not stored here '
             'to avoid drifting out of sync with it.'
         ),
         'rootsIndexed': roots_seen,
         'distinctForms': len(flat),
+        'formsWithMoreThanOneRoot': sum(1 for v in flat.values() if len(v) > 1),
         'shardCount': len(shards),
     }
     with open(os.path.join(OUT_DIR, 'manifest.json'), 'w', encoding='utf-8') as fh:
         json.dump(manifest, fh, ensure_ascii=False, indent=1)
 
-    print(f'{roots_seen} roots -> {len(flat)} distinct forms across {len(shards)} shards')
+    ambiguous = sum(1 for v in flat.values() if len(v) > 1)
+    print(f'{roots_seen} roots -> {len(flat)} distinct forms '
+          f'({ambiguous} with more than one root) across {len(shards)} shards')
     return 0
 
 

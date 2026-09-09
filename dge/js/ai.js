@@ -2009,14 +2009,24 @@ window.dgeOpenVidyutSandhiForSelection = function (e) {
 // files (262 MB total), so tools/build_prakriya_form_index.py precomputes
 // a reverse index, sharded by the form's first Devanagari codepoint so a
 // single word-click only fetches one small shard.
-function dgeFindDhatuFormHit(word) {
+// Every root whose paradigm reaches this form, not just the first. The lead,
+// 9 Sep 2026, on clicking चक्रे and getting क्रुञ् "हिंसायाम्": return "all
+// matching dhatus with user-selectable options, rather than defaulting to
+// himsa". चक्रे has two roots, चकार five; 26,386 of the index's 204,970 forms
+// have more than one. Tolerates the old single-object shard shape so a stale
+// cached shard degrades to one candidate rather than throwing.
+function dgeFindDhatuFormHits(word) {
   const w = String(word || '').trim();
-  if (!w) return Promise.resolve(null);
+  if (!w) return Promise.resolve([]);
   const cp = w.codePointAt(0).toString(16).toLowerCase().padStart(4, '0');
   return fetch('data/vedanga/vyakarana/prakriya/formindex/' + cp + '.json')
     .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (m) { return (m && m[w]) || null; })
-    .catch(function () { return null; });
+    .then(function (m) {
+      const hit = m && m[w];
+      if (!hit) return [];
+      return Array.isArray(hit) ? hit : [hit];
+    })
+    .catch(function () { return []; });
 }
 
 const DGE_DHATU_MODAL_ID = 'dgeDhatuModal';
@@ -2055,28 +2065,76 @@ function dgeShowDhatuNotFound(body, surface) {
 // already carries `steps` for all 72 cells alongside `forms` -- the exact
 // same fetch dgeOpenDhatuForSelection already made, just not fully used
 // until now. No extra request, no build-time work.
+// Which pada a form belongs to, read off its own derivation: 1.3.72 is the
+// sutra that assigns आत्मनेपदम्, 1.3.78 परस्मैपदम्. Grounded in Panini rather
+// than guessed from the order of the variants array, and available for all
+// eight lakaras because build_prakriya.py stores steps for every one.
+// null = this variant has no recorded derivation to read.
+function dgeDhatuPadaOf(d, key, form) {
+  const variants = (d.steps && d.steps[key]) || [];
+  for (let i = 0; i < variants.length; i++) {
+    if (variants[i].t !== form) continue;
+    const sutras = (variants[i].s || []).map(function (x) { return x[0]; });
+    if (sutras.indexOf('1.3.72') >= 0) return 'A';
+    if (sutras.indexOf('1.3.78') >= 0) return 'P';
+    return null;
+  }
+  return null;
+}
+
+// One table per pada when a root is उभयपदी. The lead: "visual separation or
+// separate tables for Atmanepadi and Parasmaipadi forms" -- चक्रे and चकार
+// sharing a cell reads as two spellings of one form, when they are the two
+// padas of it. `which` is 'P', 'A', or null for the undifferentiated table a
+// single-pada root gets (and for any variant whose pada we cannot read).
+function dgeDhatuLakaraTable(d, lk, hlKey, which) {
+  let t = '<table class="dsm-table"><thead><tr><th></th><th class="deva">एक.</th><th class="deva">द्वि.</th><th class="deva">बहु.</th></tr></thead><tbody>';
+  for (let p = 0; p < 3; p++) {
+    t += '<tr><th class="deva">' + DGE_PURUSHA[p] + '</th>';
+    for (let v = 0; v < 3; v++) {
+      const key = lk + '.' + p + v;
+      let forms = (d.forms && d.forms[key]) || [];
+      if (which) {
+        forms = forms.filter(function (f) {
+          const pada = dgeDhatuPadaOf(d, key, f);
+          return pada === which || pada === null;
+        });
+      }
+      const hl = (key === hlKey);
+      const has = forms.length > 0;
+      t += '<td class="deva' + (hl ? ' dsm-hl' : '') + (has ? ' sst-cell-hint' : '') + '"' +
+        (has ? ' data-dk="' + dgeShabdaEsc(key) + '" title="रूपसिद्धिः — tap for the derivation"' : '') + '>' +
+        dgeShabdaEsc(forms.join(', ')) + '</td>';
+    }
+    t += '</tr>';
+  }
+  return t + '</tbody></table>';
+}
+
 function dgeDhatuFormsHtml(d, hlKey) {
   const lakaras = ['Lat', 'Lit', 'Lut', 'Lrt', 'Lot', 'Lan', 'VidhiLin', 'Lun'];
   const hlLakara = hlKey ? hlKey.split('.')[0] : null;
   return lakaras.map(function (lk) {
-    let t = '<table class="dsm-table"><thead><tr><th></th><th class="deva">एक.</th><th class="deva">द्वि.</th><th class="deva">बहु.</th></tr></thead><tbody>';
+    // Split only where this lakara actually carries both padas -- a purely
+    // parasmaipadi root gets the single table it has always had.
+    const padas = {};
     for (let p = 0; p < 3; p++) {
-      t += '<tr><th class="deva">' + DGE_PURUSHA[p] + '</th>';
       for (let v = 0; v < 3; v++) {
         const key = lk + '.' + p + v;
-        const forms = (d.forms && d.forms[key]) || [];
-        const hl = (key === hlKey);
-        const has = forms.length > 0;
-        t += '<td class="deva' + (hl ? ' dsm-hl' : '') + (has ? ' sst-cell-hint' : '') + '"' +
-          (has ? ' data-dk="' + dgeShabdaEsc(key) + '" title="रूपसिद्धिः — tap for the derivation"' : '') + '>' +
-          dgeShabdaEsc(forms.join(', ')) + '</td>';
+        ((d.forms && d.forms[key]) || []).forEach(function (f) {
+          const x = dgeDhatuPadaOf(d, key, f);
+          if (x) padas[x] = true;
+        });
       }
-      t += '</tr>';
     }
-    t += '</tbody></table>';
+    const both = padas.P && padas.A;
+    const body = both
+      ? '<div class="dsm-pada-label deva">परस्मैपदम्</div>' + dgeDhatuLakaraTable(d, lk, hlKey, 'P') +
+        '<div class="dsm-pada-label deva">आत्मनेपदम्</div>' + dgeDhatuLakaraTable(d, lk, hlKey, 'A')
+      : dgeDhatuLakaraTable(d, lk, hlKey, null);
     return '<details class="dsm-lakara-block"' + (lk === hlLakara ? ' open' : '') + '>' +
       '<summary class="deva">' + dgeShabdaEsc(DGE_LAKARA[lk]) + ' <span class="dsm-lakara-en">· ' + dgeShabdaEsc(DGE_LAKARA_EN[lk]) + '</span></summary>' +
-      t + '</details>';
+      body + '</details>';
   }).join('');
 }
 
@@ -2179,35 +2237,103 @@ window.dgeOpenDhatuForSelection = function(e) {
   const body = document.getElementById('dgeDhatuModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
 
-  dgeFindDhatuFormHit(word).then(function (hit) {
-    if (myReq !== window.dgeDhatuReqSeq) return; // a newer word was opened meanwhile -- this response is stale
-    if (!hit) { dgeShowDhatuNotFound(body, word); return; }
-    const rootPart = hit.c.split('.')[0];
-    fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + hit.c + '.json')
-      .then(r => r.ok ? r.json() : null)
-      .then(function (d) {
+  dgeFindDhatuFormHits(word).then(function (hits) {
+    if (myReq !== window.dgeDhatuReqSeq) return; // a newer word was opened meanwhile
+    if (!hits.length) { dgeShowDhatuNotFound(body, word); return; }
+    dgeRenderDhatuCandidate(body, word, hits, 0, myReq);
+    // Chips render immediately with codes and relabel themselves with each
+    // root's name and meaning as soon as the list arrives -- the paradigm the
+    // reader came for is never held up waiting on it.
+    if (hits.length > 1) {
+      dgeFetchDhatuListByCode().then(function () {
         if (myReq !== window.dgeDhatuReqSeq) return;
-        const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
-        if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
-        body.innerHTML =
-          '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
-          '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
-          dgeDhatuFormsHtml(d, hit.k) +
-          '<div id="ddmSteps"></div>' +
-          '<a class="dsm-full-link" href="vyakarana/prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>' +
-          '<div id="ddmLexicon"></div>';
-        dgeWireDhatuFormsTable(body, d, hit.k);
-        dgeWithTimeout(dgeFetchDhatuLexicon(), 8000, null).then(function (byId) {
-          if (myReq !== window.dgeDhatuReqSeq) return;
-          const lexHtml = dgeDhatuLexiconHtml(byId && byId[hit.c]);
-          const box = body.querySelector('#ddmLexicon');
-          if (!lexHtml || !box || !box.isConnected) return;
-          box.outerHTML = '<div>' + lexHtml + '</div>';
+        const box = body.querySelector('.dsm-cands');
+        if (!box) return;
+        const on = box.querySelector('.dsm-cand.on');
+        const idx = on ? parseInt(on.dataset.dhatuCand, 10) : 0;
+        box.outerHTML = dgeDhatuCandidateChipsHtml(hits, idx);
+        body.querySelectorAll('[data-dhatu-cand]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            dgeRenderDhatuCandidate(body, word, hits, parseInt(btn.dataset.dhatuCand, 10), myReq);
+          });
         });
-      })
-      .catch(() => { if (myReq === window.dgeDhatuReqSeq) dgeShowDhatuNotFound(body, word); });
+      });
+    }
   });
 };
+
+// Renders one candidate root and, above it, the row of roots to switch
+// between. Each chip carries the root's own अर्थ, which is the whole point:
+// क्रुञ् "हिंसायाम्" and डुकृञ् "करणे" both yield चक्रे, and only the meaning
+// tells a reader which one their sentence means.
+function dgeRenderDhatuCandidate(body, word, hits, index, myReq) {
+  const hit = hits[index];
+  const rootPart = hit.c.split('.')[0];
+  fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + hit.c + '.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (myReq !== window.dgeDhatuReqSeq) return;
+      const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
+      if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
+      body.innerHTML =
+        '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
+        dgeDhatuCandidateChipsHtml(hits, index) +
+        '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
+        dgeDhatuFormsHtml(d, hit.k) +
+        '<div id="ddmSteps"></div>' +
+        '<a class="dsm-full-link" href="vyakarana/prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>' +
+        '<div id="ddmLexicon"></div>';
+      body.querySelectorAll('[data-dhatu-cand]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          dgeRenderDhatuCandidate(body, word, hits, parseInt(btn.dataset.dhatuCand, 10), myReq);
+        });
+      });
+      dgeWireDhatuFormsTable(body, d, hit.k);
+      dgeWithTimeout(dgeFetchDhatuLexicon(), 8000, null).then(function (byId) {
+        if (myReq !== window.dgeDhatuReqSeq) return;
+        const lexHtml = dgeDhatuLexiconHtml(byId && byId[hit.c]);
+        const box = body.querySelector('#ddmLexicon');
+        if (!lexHtml || !box || !box.isConnected) return;
+        box.outerHTML = '<div>' + lexHtml + '</div>';
+      });
+    })
+    .catch(function () { if (myReq === window.dgeDhatuReqSeq) dgeShowDhatuNotFound(body, word); });
+}
+
+// The Dhatupatha list, once per page, keyed by code -- so a chip can name its
+// root (डुकृञ् · करणे) without fetching that root's own 30-120 KB paradigm
+// file just to read two fields off it.
+let DGE_DHATU_LIST_PROMISE = null;
+function dgeFetchDhatuListByCode() {
+  if (!DGE_DHATU_LIST_PROMISE) {
+    DGE_DHATU_LIST_PROMISE = fetch('data/vedanga/vyakarana/dhatupatha/data.json', { cache: 'force-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        const by = {};
+        ((d && d.items) || []).forEach(function (it) { if (it && it.id) by[it.id] = it; });
+        window.DGE_DHATU_LIST_BY_CODE = by;
+        return by;
+      })
+      .catch(function () { return {}; });
+  }
+  return DGE_DHATU_LIST_PROMISE;
+}
+
+// Chips are drawn only when there is a real choice; one root renders exactly
+// as before. Labels come from the already-fetched dhatupatha list so a chip
+// can name its root before that root's own file is loaded.
+function dgeDhatuCandidateChipsHtml(hits, index) {
+  if (hits.length < 2) return '';
+  const meta = window.DGE_DHATU_LIST_BY_CODE || {};
+  return '<div class="dsm-cands"><div class="dsm-cands-note">' + hits.length +
+    ' roots produce this form — tap to compare</div>' +
+    hits.map(function (h, i) {
+      const m = meta[h.c] || {};
+      const label = m.dhatu ? m.dhatu + (m.artha ? ' · ' + m.artha : '') : h.c;
+      return '<button type="button" class="dsm-cand deva' + (i === index ? ' on' : '') +
+        '" data-dhatu-cand="' + i + '">' + dgeShabdaEsc(label) + '</button>';
+    }).join('') + '</div>';
+}
 
 // "Intelligence mapping" -- where else the word appears in the corpus
 // (including which section, e.g. Vedanga), reusing the same corpus-wide
