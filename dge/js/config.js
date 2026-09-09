@@ -461,13 +461,16 @@ const WORD_ACTIONS = [
   { id: 'dhatu', icon: '📚', label: 'Dhātu', handler: 'dgeOpenDhatuForSelection',
     wordOnly: true, powered: 'own', enabled: true,
     title: 'Find the root this form comes from and show its derivation' },
-  // 9 Sep 2026, the lead: "right-click options for Sandhi and Samasa are not
-  // working properly locally. they must be hidden for now." Off by default
-  // rather than deleted -- the code path is intact and an admin can re-enable
-  // both once they behave.
+  // Sandhi was hidden on 9 Sep 2026 -- "not working properly locally" -- and
+  // it genuinely was not: the only split index was CDN-hosted, so a local
+  // checkout had no data to answer with. dge/data/_sandhi_local (built by
+  // tools/build_sandhi_split_index.py from sanskrit_parser's Sandhi.split_all,
+  // validated against this repo's own word lists) ships in the repo, so it
+  // now answers offline. Back on, and still switchable off by an admin or on
+  // one device like everything else here.
   { id: 'sandhi', icon: '🔗', label: 'Sandhi', handler: 'dgeOpenVidyutSandhiForSelection',
-    wordOnly: true, powered: 'own', enabled: false,
-    title: 'Sandhi split for this word' },
+    wordOnly: true, powered: 'own', enabled: true,
+    title: 'Split this word at its sandhi boundary; verb halves link to their root' },
   { id: 'samasa', icon: '🧩', label: 'Samasa', handler: 'askAcharya', arg: 'samasa',
     wordOnly: true, powered: 'gemini', enabled: false,
     title: 'Samasa Vigraha for this word' },
