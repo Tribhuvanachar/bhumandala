@@ -62,6 +62,7 @@
     sort: LS.get("sort", "row"),
     q: "",
     tagFilters: { vibhaga: new Set(), vishayaVibhaga: new Set(), prasthana: new Set() },
+    alpha: null,   // {script:'deva'|'roman', letter}
     labelFilter: "",
     onlyFlag: "",
     expanded: {},           // id -> true, tree expansion
@@ -266,8 +267,37 @@
     });
   }
 
+  /* ---------------- first-letter index ---------------- */
+  // Which field the letter bar indexes: whatever the sort is ordering by, so
+  // the bar and the list always agree about what "alphabetical" means here.
+  function alphaField() { return state.sort.indexOf('author') === 0 ? 'karta' : 'grantha'; }
+
+  // The Devanagari initial is the first codepoint that is a letter -- a word
+  // opening on a conjunct (स्+व) still files under its first consonant, and
+  // stray danda/space/digits at the head of a cell are skipped.
+  function devaInitial(s) {
+    for (var i = 0; i < s.length; i++) {
+      var ch = s[i];
+      if (/[ऄ-हक़-ॡ]/.test(ch)) return ch;
+    }
+    return '';
+  }
+  // NFD splits ā/ī/ṭ/ś/ṇ/ṛ into a base letter plus a combining mark, so
+  // dropping the marks leaves the plain English letter a reader would look
+  // under -- Ṭīkā files under T, not in some separate diacritic section.
+  function romanInitial(s) {
+    var folded = s.normalize ? s.normalize('NFD').replace(/[̀-ͯ]/g, '') : s;
+    var m = folded.match(/[A-Za-z]/);
+    return m ? m[0].toUpperCase() : '';
+  }
+  function initialOf(it, script) {
+    var f = alphaField();
+    return script === 'roman' ? romanInitial(iastOf(it, f)) : devaInitial(eff(it, f));
+  }
+
   function matches(it) {
     if (reviewOf(it.id) === 'delete') return false;
+    if (state.alpha && initialOf(it, state.alpha.script) !== state.alpha.letter) return false;
     if (state.personFilter && !state.personFilter.authorIds.has(it.kartaId)) return false;
     // The chips HIDE kinds; they do not select one. The lead, 9 Sep 2026:
     // "All relevant ones must be populated. If I do not want to see a
@@ -313,7 +343,7 @@
     // the opposite: nearly everything still matches, and force-expanding all
     // of it would blow the tree open every time a curator switched off
     // तिप्पणी. There, drop the hidden nodes and leave expansion to the reader.
-    var narrowing = state.q.trim() || state.onlyFlag || state.labelFilter || state.personFilter;
+    var narrowing = state.q.trim() || state.onlyFlag || state.labelFilter || state.personFilter || state.alpha;
     var hiding = TAG_FIELDS.some(function (f) { return state.tagFilters[f].size; });
     if (!narrowing && !hiding) return null;
     var keep = {};
@@ -1054,6 +1084,41 @@
     $("#dvc-sync").disabled = !state.dirty;
   }
 
+  // Both alphabets, always both on screen: a scholar reading the Devanagari
+  // wants ज, someone who knows the work as Jayatirthiya-tika wants J, and
+  // neither should have to change a display setting to get an index.
+  // Counts come from every entry, not the filtered view, so a letter never
+  // disappears out from under a reader mid-browse; a letter with no entries
+  // simply is not drawn.
+  function buildAlphaBar() {
+    var wrap = $("#dvc-alpha");
+    if (!wrap) return;
+    var fieldLabel = alphaField() === 'karta' ? 'कर्तृ · author' : 'ग्रन्थनाम · title';
+    var html = '<div class="dvc-alpharow"><span class="dvc-flab">आदि-अक्षरम् · first letter of ' +
+      fieldLabel + '</span>' +
+      '<button type="button" class="dvc-chip' + (state.alpha ? '' : ' on') + '" data-alpha-all="1">सर्वे · all</button></div>';
+    [['deva', 'देवनागरी'], ['roman', 'A→Z']].forEach(function (pair) {
+      var script = pair[0];
+      var counts = {};
+      state.items.forEach(function (it) {
+        var k = initialOf(it, script);
+        if (k) counts[k] = (counts[k] || 0) + 1;
+      });
+      var letters = Object.keys(counts).sort(function (a, b) {
+        return script === 'roman' ? (a < b ? -1 : 1) : a.localeCompare(b, 'sa');
+      });
+      if (!letters.length) return;
+      html += '<div class="dvc-alpharow"><span class="dvc-flab">' + pair[1] + '</span>' +
+        letters.map(function (l) {
+          var on = state.alpha && state.alpha.script === script && state.alpha.letter === l;
+          return '<button type="button" class="dvc-alphabtn' + (on ? ' on' : '') +
+            '" data-alpha-script="' + script + '" data-alpha="' + esc(l) + '" title="' +
+            counts[l] + ' entries">' + esc(l) + '</button>';
+        }).join('') + '</div>';
+    });
+    wrap.innerHTML = html;
+  }
+
   /* ---------------- filter chips ---------------- */
   function buildChips() {
     TAG_FIELDS.forEach(function (col) {
@@ -1071,6 +1136,7 @@
           esc(v) + ' <span class="dvc-muted">' + counts[v] + '</span></button>';
       }).join('');
     });
+    buildAlphaBar();
     var labels = {};
     state.items.forEach(function (it) { labelsOf(it).forEach(function (l) { labels[l] = (labels[l] || 0) + 1; }); });
     var lw = $("#dvc-chips-labels");
@@ -1201,7 +1267,15 @@
   /* ---------------- wiring ---------------- */
   function wire() {
     $("#dvc-search").addEventListener('input', function (e) { state.q = e.target.value; rerender(); });
-    $("#dvc-sort").addEventListener('change', function (e) { state.sort = e.target.value; LS.set('sort', state.sort); rerender(); });
+    $("#dvc-sort").addEventListener('change', function (e) {
+      var wasField = alphaField();
+      state.sort = e.target.value; LS.set('sort', state.sort);
+      // Switching between title and author sorting changes what the letter bar
+      // indexes, so a letter picked for the old field would silently filter on
+      // the new one. Drop it and redraw.
+      if (alphaField() !== wasField) state.alpha = null;
+      buildAlphaBar(); rerender();
+    });
     $("#dvc-onlyflag").addEventListener('change', function (e) { state.onlyFlag = e.target.value; rerender(); });
     $("#dvc-more").addEventListener('click', function () { renderCurrentView(false); });
     $("#dvc-export").addEventListener('click', exportRowsCSV);
@@ -1238,6 +1312,14 @@
       if (toggle) { var id = toggle.dataset.toggle; state.expanded[id] = !state.expanded[id]; renderCurrentView(true); return; }
       var open = t.closest('[data-open]');
       if (open) { e.preventDefault(); openDetail(open.dataset.open); return; }
+      var alphaBtn = t.closest('[data-alpha]');
+      if (alphaBtn) {
+        var sc = alphaBtn.dataset.alphaScript, ltr = alphaBtn.dataset.alpha;
+        state.alpha = (state.alpha && state.alpha.script === sc && state.alpha.letter === ltr)
+          ? null : { script: sc, letter: ltr };
+        buildAlphaBar(); rerender(); return;
+      }
+      if (t.closest('[data-alpha-all]')) { state.alpha = null; buildAlphaBar(); rerender(); return; }
       var chip = t.closest('.dvc-chip');
       if (chip && chip.dataset.col) {
         var set = state.tagFilters[chip.dataset.col], v = chip.dataset.val;
