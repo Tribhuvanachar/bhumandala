@@ -101,3 +101,66 @@ table.dvc-minitable td,table.dvc-minitable th{padding:4px 8px;border-bottom:1px 
 
 .dvc-reportgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
 .dvc-reportcol h3{margin:0 0 4px;font-size:.9rem}
+
+/* ============ v2: tree, grid, detail panel, sync bar ============ */
+
+.dvc-seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.dvc-seg button{border:none;background:var(--panel);color:var(--muted);padding:6px 11px;font:inherit;font-size:.82rem;cursor:pointer}
+.dvc-seg button+button{border-left:1px solid var(--line)}
+.dvc-seg button.on{background:var(--accent2);color:#fff}
+
+.dvc-syncbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.82rem;
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.dvc-dirtydot{color:var(--warn);font-weight:600}
+.dvc-checklab{font-size:.82rem;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
+
+/* --- work area: main + detail aside --- */
+.dvc-worksplit{display:flex;gap:14px;align-items:flex-start}
+.dvc-workmain{flex:1;min-width:0}
+.dvc-detail{width:330px;flex:none;position:sticky;top:10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-height:82vh;overflow:auto}
+.dvc-detail h3{margin:0 0 2px;font-size:1rem}
+.dvc-detail h4{margin:14px 0 4px;font-size:.85rem}
+.dvc-kidlist{margin:0;padding-left:18px;font-size:.85rem}
+.dvc-kidlist li{margin:2px 0}
+@media (max-width:900px){.dvc-worksplit{flex-direction:column}.dvc-detail{width:100%;position:static;max-height:none}}
+
+/* --- tree --- */
+.dvc-tree{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.dvc-node{display:flex;align-items:center;gap:7px;padding:4px 10px;border-bottom:1px solid var(--line);
+  font-size:.88rem;min-height:31px}
+.dvc-node:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.dvc-node.dvc-edited{border-left:3px solid var(--accent);padding-left:7px}
+.dvc-caret{border:none;background:none;color:var(--muted);cursor:pointer;font-size:.85rem;
+  width:18px;flex:none;padding:0;line-height:1}
+.dvc-caret-leaf{opacity:.35;cursor:default}
+.dvc-node-title{font-weight:600;cursor:pointer}
+.dvc-node-title:hover{text-decoration:underline;color:var(--accent2)}
+.dvc-node-karta{color:var(--muted);font-size:.8rem}
+.dvc-node-row{margin-left:auto;color:var(--muted);font-size:.72rem;font-variant-numeric:tabular-nums;flex:none}
+.dvc-chip-cat{border:1px solid var(--line);background:var(--panel2);border-radius:999px;
+  padding:0 7px;font-size:.7rem;color:var(--muted);flex:none}
+.dvc-kidcount{background:var(--panel2);border-radius:999px;padding:0 6px;font-size:.68rem;color:var(--muted)}
+.dvc-label{background:color-mix(in srgb,var(--accent) 20%,transparent);border-radius:5px;
+  padding:0 6px;font-size:.68rem}
+.dvc-badge-sugg{background:color-mix(in srgb,var(--accent) 25%,transparent);color:var(--accent)}
+
+/* --- grid --- */
+.dvc-grid td.dvc-gcell{cursor:cell;min-width:96px;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dvc-grid td.dvc-gcell:focus{outline:2px solid var(--accent2);outline-offset:-2px;background:color-mix(in srgb,var(--accent2) 10%,transparent)}
+.dvc-gcell-edited{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.dvc-ginput{width:100%;border:1px solid var(--accent2);border-radius:4px;padding:2px 5px;font:inherit;background:var(--panel);color:var(--ink)}
+.dvc-gridhint{padding:8px 10px;margin:0;border-bottom:1px solid var(--line)}
+.dvc-table tr.dvc-edited td:first-child{border-left:3px solid var(--accent)}
+
+/* --- links / masters review rows --- */
+.dvc-suggrow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  border:1px solid var(--line);border-radius:8px;padding:7px 10px;margin:6px 0;background:var(--panel2)}
+.dvc-suggmain{font-size:.86rem;min-width:0}
+.dvc-conf{font-size:.72rem}
+.dvc-btn-sm{padding:3px 8px;font-size:.76rem}
+.dvc-masterblock{margin-bottom:22px}
+.dvc-vchip{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;
+  padding:2px 9px;font-size:.76rem;cursor:pointer;margin:2px 3px 2px 0}
+.dvc-vchip.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+.dvc-vchip.on .dvc-muted{color:rgba(255,255,255,.75)}
