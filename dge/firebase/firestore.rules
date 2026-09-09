@@ -245,31 +245,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // द्वैतवेदान्तग्रन्थानुक्रमणी catalogue review (9 Sep 2026) — the imported
-    // Excel bibliography itself lives as a static, committed JSON
-    // (dge/data/catalogs/dvaita_grantha_anukramani.json); these two
-    // collections hold only the editable OVERLAY on top of it, same
-    // reasoning as config/{docId} above: this is curation of bibliographic
-    // metadata, not sensitive data, so read is public (the page is a real
-    // public catalogue, not an admin-only tool) and write needs the admin
-    // role. catalog_dvaita_entries is deliberately sparse — one doc per
-    // row actually touched by a scholar, not one per catalogue row — so a
-    // review pass over a few hundred rows costs a few hundred documents,
-    // not 3000+.
-    match /catalog_dvaita_entries/{rowId} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-    // Controlled vocabulary for the tag dropdowns (division/subject/
-    // prasthana) and the canonical-author alias list — grown by curators
-    // as they review rows, not preloaded from the Excel import (the
-    // page seeds its dropdown suggestions from the JSON's own vocab
-    // counts and only writes here when someone adds a genuinely new
-    // canonical value).
-    match /catalog_dvaita_master/{listId} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
+    // (The द्वैतवेदान्तग्रन्थानुक्रमणी catalogue briefly had two collections
+    // here. It keeps its curated corrections in the repo instead —
+    // dge/data/catalogs/dvaita_grantha_anukramani.overrides.json, written
+    // through the GitHub API like the other admin pages — so that master
+    // data is reviewable in a diff rather than living only in Firestore.
+    // Those collections are gone; the catch-all below denies them.)
 
     // Anything not matched above is denied by default. Stated explicitly
     // so that adding a collection later is a conscious decision rather
