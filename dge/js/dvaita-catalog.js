@@ -735,6 +735,16 @@
       .split('/').join(' › ');
   }
 
+  // Confirm / undo for one proposed join. Every section shares it so a
+  // decision is recorded the same way wherever it is made, and so none of
+  // them is a dead end a curator can look at but not act on.
+  function linkCell(id, value) {
+    return state.ov.links[id]
+      ? '<span class="dvc-statuspill">confirmed</span> ' +
+        '<button class="dvc-btn dvc-btn-sm" data-unlink-id="' + esc(id) + '" title="Withdraw this confirmation">undo</button>'
+      : '<button class="dvc-btn dvc-btn-sm" data-link-id="' + esc(id) + '" data-link-val="' + esc(value) + '">✓ confirm</button>';
+  }
+
   function renderCrossLinks() {
     var cl = state.crossLinks;
     var lib = cl.library || [], para = cl.parampara || [], alias = cl.authorAliases || [], dasa = cl.dasaSahitya || [];
@@ -747,7 +757,6 @@
       '<table class="dvc-minitable"><thead><tr><th>#</th><th>Catalogue entry</th><th>library.json</th><th></th></tr></thead><tbody>' +
       lib.slice(0, 200).map(function (m) {
         var it = state.byId[m.id]; if (!it) return '';
-        var done = state.ov.links[m.id];
         return '<tr><td>' + it.row + '</td><td>' + esc(eff(it, 'grantha')) + '</td><td class="dvc-muted">' +
           m.matches.map(function (x) {
             // The bare title is useless where four library entries are all
@@ -757,13 +766,15 @@
               (x.populated ? '' : ' <i>(not yet digitised)</i>') +
               '<div class="dvc-libcrumb">' + esc(pathCrumb(x.path)) + '</div></div>';
           }).join('') + '</td>' +
-          '<td>' + (done ? '<span class="dvc-statuspill">linked</span>' :
-            '<button class="dvc-btn dvc-btn-sm" data-link-id="' + m.id + '" data-link-val="' + esc(m.matches[0].path) + '">✓ confirm</button>') + '</td></tr>';
+          '<td>' + linkCell(m.id, m.matches[0].path) + '</td></tr>';
       }).join('') + '</tbody></table>';
 
     html += '<h3>गुरुपरम्परा · Authors matched to a paramparā node <span class="dvc-muted">(' + paraAuthors.length + ')</span></h3>' +
+      '<p class="dvc-hint">Matched on the name alone, so each one is a proposal. Confirming it makes this the person of record: ' +
+      'tools/sync_dvaita_crosslinks.py then treats it as authoritative over its own guesses, and the ācārya’s page lists these works.</p>' +
       '<table class="dvc-minitable"><tbody>' + paraAuthors.map(function (p) {
-        return '<tr><td>' + esc(p.canonical) + '</td><td class="dvc-muted">→ ' + esc(p.nodeId) + '</td></tr>';
+        return '<tr><td>' + esc(p.canonical) + '</td><td class="dvc-muted">→ ' + esc(p.nodeId) + '</td>' +
+          '<td>' + linkCell(p.authorId, p.nodeId) + '</td></tr>';
       }).join('') + '</tbody></table>';
 
     html += '<h3>गुरुपरम्परायाः कृतयः · Works listed on a paramparā node <span class="dvc-muted">(' + paraWorks.length + ')</span></h3>' +
@@ -781,9 +792,15 @@
       }).join('') + '</tbody></table>';
 
     if (dasa.length) {
-      html += '<h3>दाससाहित्यम् <span class="dvc-muted">(' + dasa.length + ')</span></h3><table class="dvc-minitable"><tbody>' +
-        dasa.map(function (x) { return '<tr><td>' + esc(x.canonical) + '</td><td class="dvc-muted">→ ' + esc(x.composer || x.slug) + '</td></tr>'; }).join('') +
-        '</tbody></table>';
+      html += '<h3>दाससाहित्यम् <span class="dvc-muted">(' + dasa.length + ')</span></h3>' +
+        '<p class="dvc-hint">Weakest of the four joins, and the one to read hardest: matched on a bare given name, and नरसिंहः / राघवेन्द्रः ' +
+        'are among the commonest names in the tradition. A ṭīkākāra and a Kannada composer sharing one is no evidence they are one person. ' +
+        'Confirm only what you know; a confirmation adds the composer’s Kannada name as a spelling of that person.</p>' +
+        '<table class="dvc-minitable"><tbody>' +
+        dasa.map(function (x) {
+          return '<tr><td>' + esc(x.canonical) + '</td><td class="dvc-muted">→ ' + esc(x.composer || x.slug) + '</td>' +
+            '<td>' + linkCell('dasa:' + x.authorId, x.slug) + '</td></tr>';
+        }).join('') + '</tbody></table>';
     }
     $("#dvc-cross-body").innerHTML = html;
   }
@@ -1177,6 +1194,8 @@
       }
       var lnk = t.closest('[data-link-id]');
       if (lnk) { state.ov.links[lnk.dataset.linkId] = lnk.dataset.linkVal; saveDraft(); renderCrossLinks(); return; }
+      var unlnk = t.closest('[data-unlink-id]');
+      if (unlnk) { delete state.ov.links[unlnk.dataset.unlinkId]; saveDraft(); renderCrossLinks(); return; }
     });
 
     // grid editing
