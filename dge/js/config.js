@@ -89,7 +89,7 @@ const appConfig = {
   // (cdn.jsdelivr.net fetches from the headless browser were dropped by the
   // dev proxy, curl to the same URL was fine) -- worth a quick real-browser
   // check next time this file is touched.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@29331ce6d122480bd0ec4ac012efebafa24b1a82",
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@359a83df0fbe9fad29d335ae59dff314c7386615",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
