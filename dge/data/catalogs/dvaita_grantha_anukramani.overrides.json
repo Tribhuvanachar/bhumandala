@@ -21,17 +21,24 @@
   "           path, guru-parampara node id, author_aliases person id)."
  ],
  "version": 1,
- "updatedAt": "2026-09-09T09:13:47.765Z",
+ "updatedAt": "2026-09-09T09:18:28.970Z",
  "canonical": {
   "category": {},
-  "author": {
-   "जयतीर्थ": "जयतीर्थः",
-   "श्रीजयतीर्थः": "जयतीर्थः"
-  },
+  "author": {},
   "title": {}
  },
  "parents": {},
  "rows": {},
- "review": {},
+ "review": {
+  "r363": "delete",
+  "r624": "delete",
+  "r696": "delete",
+  "r747": "delete",
+  "r752": "delete",
+  "r1184": "delete",
+  "r1186": "delete",
+  "r1190": "delete",
+  "r1191": "delete"
+ },
  "links": {}
 }
