@@ -79,7 +79,7 @@
     <div class="ask">
       <div class="box">
         <div style="font-weight:700;font-size:15px">Leave an instruction for Claude</div>
-        <p class="muted" style="margin:4px 0 10px">Pick the library sections it concerns (optional), write what you want in plain English, Kannada or Sanskrit — a question, "delete this", "pair this with that", "categorise these", anything — and Send. The page writes <code>tasks/inbox/&lt;id&gt;.json</code> and a bullet in <code>tasks/WEEKLY_INSTRUCTIONS.md</code> with your token, so the commit is yours. The Sunday session picks it up; for sooner, copy the prompt it offers into any Claude Code session. Replies land in the same file and show below.</p>
+        <p class="muted" style="margin:4px 0 10px">Pick the library sections it concerns (optional), write what you want in plain English, Kannada or Sanskrit — a question, "delete this", "pair this with that", "categorise these", anything — and Send. The page commits <code>tasks/inbox/&lt;id&gt;.json</code> with your token; that push starts the <b>Ask Claude</b> workflow, a Claude Code session on GitHub's runner, which answers or makes the change (changes arrive as a pull request) and writes its reply into the same file. This page keeps polling and shows the reply here, usually within two to four minutes. The Sunday session is the fallback if the workflow's secret is missing.</p>
         <input type="search" id="secsearch" placeholder="Find a section — type part of a title or path (e.g. brahmasutra, purana/ maha, गीता)…">
         <div class="picklist" id="picklist"><div class="empty">Type to search the 1,700 library entries.</div></div>
         <div class="chosen" id="chosen"></div>
@@ -850,15 +850,56 @@
       if (at < 0) throw new Error("tasks/WEEKLY_INSTRUCTIONS.md has no '## Pending' heading");
       lines.splice(at + 1, 0, "", bullet);
       await putRepoFile("tasks/WEEKLY_INSTRUCTIONS.md", lines.join("\n"), "Ask Claude " + id + ": queue in WEEKLY_INSTRUCTIONS.md", wi.sha);
-      say.className = "say ok"; say.textContent = "Sent as " + id + ". The Sunday session will pick it up; for sooner, copy the prompt from the conversation below.";
+      say.className = "say ok"; say.textContent = "Sent as " + id + ". Claude usually replies here within a few minutes.";
       $("#askText").value = ""; CHOSEN = {}; renderPicklist();
       setTimeout(loadThreads, 1500);
+      watchThread(id);
     } catch (e) { say.className = "say bad"; say.textContent = "Could not send: " + e.message; }
     $("#askSend").disabled = false;
   }
-  async function loadThreads(){
+  // Live: while a request is with Claude, re-read its file every few seconds
+  // and the workflow's latest run alongside, so the thread updates in place.
+  var WATCHING = {};
+  function watchThread(id){
+    if (WATCHING[id]) return;
+    var started = Date.now();
+    WATCHING[id] = setInterval(async function(){
+      if (Date.now() - started > 20 * 60 * 1000) { clearInterval(WATCHING[id]); delete WATCHING[id]; return; }
+      try {
+        var f = await getRepoFile("tasks/inbox/" + id + ".json");
+        var d = JSON.parse(f.text);
+        var last = (d.thread || [{}])[(d.thread || [{}]).length - 1];
+        await loadThreads(true);
+        if (last.who === "claude" && d.status !== "pending") { clearInterval(WATCHING[id]); delete WATCHING[id]; }
+      } catch (e) {}
+    }, 7000);
+  }
+  var ASK_RUN = null;
+  async function askRunStatus(){
+    try {
+      var r = await gh("/actions/workflows/ask-claude.yml/runs?per_page=1");
+      if (!r.ok) { ASK_RUN = { missing: r.status === 404 }; return; }
+      var d = await r.json();
+      ASK_RUN = (d.workflow_runs || [])[0] || { none: true };
+    } catch (e) { ASK_RUN = null; }
+  }
+  function waitingHtml(d){
+    var last = (d.thread || [{}])[(d.thread || [{}]).length - 1];
+    if (d.status !== "pending" || last.who === "claude") return "";
+    var run = ASK_RUN || {};
+    var line;
+    if (d.working) line = "⏳ Claude is working on this since " + whenIST(d.working.since) + (d.working.run ? ' — <a href="' + esc(d.working.run) + '" target="_blank">watch the run ↗</a>' : "");
+    else if (run.missing) line = "⚠ The Ask Claude workflow is not on main yet — the Sunday session will answer this.";
+    else if (run.status && run.status !== "completed") line = '⏳ The Ask Claude workflow is running (' + esc(run.status) + ') — <a href="' + esc(run.html_url) + '" target="_blank">watch ↗</a>';
+    else if (run.conclusion === "failure") line = '⚠ The last Ask Claude run failed — usually the ANTHROPIC_API_KEY / CLAUDE_CODE_OAUTH_TOKEN secret is missing. <a href="' + esc(run.html_url) + '" target="_blank">see why ↗</a>';
+    else line = "⏳ Waiting for Claude — the workflow starts within a minute of your commit.";
+    return '<div class="msg lead" style="border-style:dashed"><span class="who">status</span>' + line + '</div>';
+  }
+
+  async function loadThreads(quiet){
     var host = $("#threads"), say = $("#askListSay");
     say.textContent = "";
+    await askRunStatus();
     try {
       var r = await gh("/contents/tasks/inbox?ref=main&_=" + Date.now());
       if (!r.ok) throw new Error("GitHub said " + r.status);
@@ -869,6 +910,8 @@
         try { var f = await getRepoFile("tasks/inbox/" + list[i].name); var d = JSON.parse(f.text); d._sha = f.sha; d._name = list[i].name; docs.push(d); } catch (e) {}
       }
       host.innerHTML = docs.map(threadHtml).join("");
+      // Anything still with Claude keeps refreshing itself while this tab is open.
+      docs.forEach(function(d){ var last = (d.thread || [{}])[(d.thread || [{}]).length - 1]; if (d.status === "pending" && last.who !== "claude") watchThread(d.id); });
       $$("[data-reply]", host).forEach(function(btn){ btn.onclick = function(){ sendReply(btn.dataset.reply, docs.find(function(d){ return d.id === btn.dataset.reply; })); }; });
       $$("[data-copyprompt]", host).forEach(function(btn){
         btn.onclick = function(){
@@ -885,7 +928,7 @@
     var st = d.status || "pending";
     return '<div class="card nothing" style="margin-top:8px"><div class="top"><span class="title">' + esc(d.id) + '</span><span class="status ' + esc(st) + '">' + esc(st) + '</span></div>' +
       (secs ? '<div class="chosen">' + secs + '</div>' : '') +
-      '<div class="thread">' + msgs + '</div>' +
+      '<div class="thread">' + msgs + waitingHtml(d) + '</div>' +
       (st !== "done" ? '<textarea id="reply_' + esc(d.id) + '" placeholder="Reply…" style="min-height:56px;margin-top:6px"></textarea>' : '') +
       '<div class="actions">' +
       (st !== "done" ? '<button class="btn pri" data-reply="' + esc(d.id) + '">Reply</button>' : '') +
@@ -905,6 +948,7 @@
     try {
       await putRepoFile("tasks/inbox/" + name, JSON.stringify(d, null, 1) + "\n", "Ask Claude " + id + ": reply from the lead", sha);
       loadThreads();
+      watchThread(id);
     } catch (e) { alert("Could not write the reply: " + e.message); }
   }
   async function closeThread(d){

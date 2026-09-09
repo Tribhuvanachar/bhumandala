@@ -1,0 +1,91 @@
+name: Sync — Ānandamakaranda (anandamakaranda.in)
+
+# Keeps the SarvaMūla granthas that came from the Ānandamakaranda wiki in
+# step with it. The wiki is a MediaWiki that publishes a block-level JSON
+# export per work, and our items carry the block ids, so the sync is exact:
+#
+#   * one API call per 50 works tells which pages have a new revision;
+#   * a work whose items map one-to-one onto wiki blocks is merged in place
+#     (changed text replaced, old text kept in previous_text, new blocks
+#     appended, everything added locally kept);
+#   * a work whose first import folded bhāṣya blocks into sūtra items
+#     (Brahmasutra and the like) is not rewritten: the wiki's current blocks
+#     are snapshotted to <layer>/_sync/anandamakaranda.json and the report
+#     lists exactly which blocks changed, for a scholar to apply.
+#   * new top-level works on the wiki are listed for the lead, never imported.
+#
+# tools/sync_guard.py refuses lost items or writes outside SarvaMūla; the
+# result is a pull request. State: admin/config/sync/anandamakaranda.state.json
+# (travels in the PR).
+#
+# Rights: the wiki carries no licence statement; used under the lead's
+# case-by-case authorisation, which is why new works are reported, not taken.
+
+on:
+  schedule:
+    - cron: "30 0 4,19 * *"        # 06:00 IST on the 4th and 19th
+  workflow_dispatch:
+    inputs:
+      titles:
+        description: "Only these wiki titles, comma-separated (blank = all 47 works we hold)"
+        type: string
+        default: ""
+      force:
+        description: "Re-sync even if the wiki revision is unchanged"
+        type: boolean
+        default: false
+      open_pr:
+        description: "Open a pull request with the changes (off = report only)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-anandamakaranda
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Sync from the wiki
+        env:
+          TITLES: ${{ inputs.titles }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          set -euo pipefail
+          ARGS=(--write --write-state)
+          [ -n "${TITLES:-}" ] && ARGS+=(--titles "$TITLES")
+          [ "${FORCE:-false}" = "true" ] && ARGS+=(--force)
+          python3 tools/anandamakaranda/sync_anandamakaranda.py "${ARGS[@]}"
+
+      - name: Guard — no lost items, nothing outside SarvaMūla
+        run: python3 tools/sync_guard.py --scope dge/data/darshana/vedanta/dvaita/SarvaMula --allow admin/config/sync --max-files 120
+
+      - name: Validate
+        run: python3 tools/validate_data.py && python3 tools/audit_library.py
+
+      - name: Open a pull request
+        if: ${{ github.event_name == 'schedule' || inputs.open_pr }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: sync/anandamakaranda
+          title: "Sync: Ānandamakaranda — changes on anandamakaranda.in"
+          commit-message: "Sync SarvaMūla granthas from anandamakaranda.in"
+          body: |
+            Works whose wiki revision moved were merged (one-to-one layers) or
+            snapshotted to `_sync/anandamakaranda.json` (composite layers) by
+            `sync-anandamakaranda.yml`. The run summary says which, block by block.
+          add-paths: |
+            dge/data/darshana/vedanta/dvaita/SarvaMula/**
+            admin/config/sync/anandamakaranda.state.json
+          delete-branch: true

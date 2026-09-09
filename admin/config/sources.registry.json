@@ -374,11 +374,11 @@
     "note": "A MediaWiki; the newest main-namespace revision id plus the wiki's page count."
    },
    "feeds": [
-    "darshana/vedanta/dvaita/SarvaMula (38 works, 127 data.json — arrived via the cowork/sarvamoola-and-search branch; the browser-side importer is dge/convert/urlimport.js)"
+    "darshana/vedanta/dvaita/SarvaMula (47 works with wiki provenance; merged one-to-one or snapshotted by sync-anandamakaranda.yml)"
    ],
-   "importer": "",
+   "importer": "sync-anandamakaranda.yml",
    "config": "dge/convert/urlimport.js",
-   "rights": "No licence statement; used under the lead's case-by-case authorisation. No committed batch importer — a change here is a note for the lead.",
+   "rights": "No licence statement; used under the lead's case-by-case authorisation. Existing works are synced; new works are reported, never imported blind.",
    "cadence": "fortnightly"
   },
   {
@@ -395,9 +395,9 @@
    "feeds": [
     "darshana/vedanta/vishishtadvaita/RamanujaMeghamala"
    ],
-   "importer": "",
+   "importer": "sync-meghamala.yml",
    "config": "importers/ramanuja_meghamala.py",
-   "rights": "Public site; imported once (importers/ramanuja_meghamala.py, needs a hand-made knowledge-tree TSV to re-run).",
+   "rights": "Public site; case-by-case permission recorded 2 Sep 2026. Synced by grantha when posts change (sync-meghamala.yml).",
    "cadence": "fortnightly"
   },
   {
@@ -414,9 +414,9 @@
    "feeds": [
     "darshana/vedanta/advaita/{prakarana_granthas,siddhi_granthas,stotrani,*_prasthana_tikas,shankara_bhashya_extra} (51 data.json, 155 MiB)"
    ],
-   "importer": "",
+   "importer": "sync-advaitasharada.yml",
    "config": "importers/advaita_sharada.py",
-   "rights": "Case-by-case permission (2 Sep 2026); licensed corpus — must not be indexed publicly (docs/SEO_ARCHITECTURE.md).",
+   "rights": "Case-by-case permission (2 Sep 2026); licensed corpus — must not be indexed publicly (docs/SEO_ARCHITECTURE.md). Refreshed by sync-advaitasharada.yml; never widened.",
    "cadence": "fortnightly"
   },
   {
@@ -433,9 +433,9 @@
    "feeds": [
     "vedanga/vyakarana/ashtadhyayi/{sutrapatha,siddhanta_kaumudi,mahabhashya_patanjali,vasu}"
    ],
-   "importer": "",
+   "importer": "sync-ashtadhyayi.yml",
    "config": "importers/ashtadhyayi_layers.py",
-   "rights": "Curator's e-mail permission held by the lead; no LICENSE file on the repo.",
+   "rights": "Curator's e-mail permission held by the lead; no LICENSE file on the repo. Re-imported by sync-ashtadhyayi.yml when the repository moves.",
    "cadence": "fortnightly"
   }
  ]

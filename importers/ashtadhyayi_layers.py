@@ -247,10 +247,17 @@ def main():
     fields = ["padaccheda", "anvaya", "anuvritti", "adhikara", "sutra_type"]
     if args.allow_ashtadhyayi_com_english:
         fields.append("english")
+    previous = sutrapatha.get("enrichment") or {}
     sutrapatha["enrichment"] = {
         "source": "ashtadhyayi.com sutraani/data.txt + sutrartha_english.txt",
         "fields": fields
     }
+    # The id join misaligns ~930 sutras (the source numbers 1.1.17 उञ ऊँ as
+    # two); tools/realign_sutra_enrichment.py --apply repairs that by text
+    # and records how, and that record must survive a re-import — the sync
+    # workflow runs realign right after this script.
+    if previous.get("alignment"):
+        sutrapatha["enrichment"]["alignment"] = previous["alignment"]
     if not args.allow_ashtadhyayi_com_english:
         # Preserve the 23-Aug removal note across re-runs rather than
         # silently dropping it -- see the --allow-ashtadhyayi-com-english
@@ -268,12 +275,15 @@ def main():
                "non-commercial/educational use (source repo has no formal LICENSE); "
                "keep visible attribution to ashtadhyayi.com; resolve before public launch")
 
-    write_layer("vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi",
-                {"schema": "grantha_tika_text", "default_author": "Bhaṭṭoji Dīkṣita",
-                 "title": "Siddhānta-Kaumudī", "title_devanagari": "सिद्धान्तकौमुदी",
-                 "source": "ashtadhyayi.com sutraani/kaumudi.txt", "licence": lic_ash},
-                sk_items)
-    write_layer("vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali",
+    # Siddhānta-Kaumudī is NOT written any more: on 29 Aug 2026 that layer was
+    # re-sourced to Dhaval Patel's MIT-licensed TEI (github.com/drdhaval2785/
+    # siddhantakaumudi) — see the licence_note in
+    # dge/data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json.
+    # Rewriting it from kaumudi.txt would be a regression to the superseded
+    # source. sk_items is still built so the count below stays comparable.
+    # (The paniniya_vyakarana/ folder the earlier version wrote to was folded
+    # into ashtadhyayi/ by commit 5bc757783; the paths below are the live ones.)
+    write_layer("vedanga/vyakarana/ashtadhyayi/mahabhashya_patanjali",
                 {"schema": "grantha_tika_text", "default_author": "Patañjali",
                  "title": "Mahābhāṣya", "title_devanagari": "महाभाष्यम्",
                  "source": "ashtadhyayi.com sutraani/bhashya.txt", "licence": lic_ash},

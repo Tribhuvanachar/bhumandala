@@ -338,8 +338,8 @@
     "anandamakaranda"
    ],
    "feeds": "darshana/vedanta/dvaita/SarvaMula — 38 works, 127 files",
-   "importer": null,
-   "blurb": "Reads the wiki's recent-changes list: newest revision and page count. There is no batch importer for this wiki (the corpus arrived through the browser-side convert tool), so a change is a note for the lead.",
+   "importer": "import-anandamakaranda",
+   "blurb": "Reads the wiki's recent-changes list. The Import button checks every work's revision, merges what maps one-to-one, snapshots the rest with a block diff, and opens a pull request.",
    "writes": "nothing",
    "inputs": [
     {
@@ -368,8 +368,8 @@
     "srivaishnavan_meghamala"
    ],
    "feeds": "darshana/vedanta/vishishtadvaita/RamanujaMeghamala",
-   "importer": null,
-   "blurb": "Reads the Meghamālā page's last-modified date through the WordPress API. Re-import is importers/ramanuja_meghamala.py by hand (needs its knowledge-tree TSV).",
+   "importer": "import-meghamala",
+   "blurb": "Reads the Meghamālā page's last-modified date through the WordPress API. The Import button fetches only the granthas whose posts changed and opens a pull request.",
    "writes": "nothing",
    "inputs": [
     {
@@ -398,8 +398,8 @@
     "advaitasharada"
    ],
    "feeds": "darshana/vedanta/advaita — 51 files (prakaraṇa, siddhi, stotra, prasthāna ṭīkās)",
-   "importer": null,
-   "blurb": "Fingerprints the set of works the home page offers plus the site's build hash. Re-import is importers/advaita_sharada.py by hand (delta-only, permission recorded 2 Sep 2026).",
+   "importer": "import-advaitasharada",
+   "blurb": "Fingerprints the set of works the home page offers plus the site's build hash. If it moved, the Import button re-reads the site and opens a pull request.",
    "writes": "nothing",
    "inputs": [
     {
@@ -461,8 +461,8 @@
     "ashtadhyayi_com"
    ],
    "feeds": "vedanga/vyakarana/ashtadhyayi — sūtrapāṭha, Siddhānta-Kaumudī, Mahābhāṣya, Vasu",
-   "importer": null,
-   "blurb": "Watches the latest commit of github.com/ashtadhyayi-com/data, the repository the site is built from. Re-import is importers/ashtadhyayi_layers.py by hand.",
+   "importer": "import-ashtadhyayi",
+   "blurb": "Watches the latest commit of github.com/ashtadhyayi-com/data, the repository the site is built from. The Import button re-imports from it (Siddhānta-Kaumudī excluded) and opens a pull request.",
    "writes": "nothing",
    "inputs": [
     {
@@ -553,6 +553,173 @@
      "type": "string",
      "label": "Seconds between requests",
      "default": "1.0"
+    }
+   ]
+  },
+  {
+   "id": "import-advaitasharada",
+   "file": "sync-advaitasharada.yml",
+   "name": "Advaita Śāradā — re-read the site and open a PR",
+   "group": "content-import",
+   "writes": "corpus",
+   "blurb": "Re-reads all 51 works we hold from advaitasharada.sringeri.net (~17 min) and opens a pull request with what changed. Guarded: no file may lose items.",
+   "inputs": [
+    {
+     "name": "works",
+     "type": "string",
+     "label": "Only these work slugs, comma-separated (blank = all 51)",
+     "default": ""
+    },
+    {
+     "name": "delay",
+     "type": "string",
+     "label": "Seconds between requests",
+     "default": "1.0"
+    },
+    {
+     "name": "open_pr",
+     "type": "boolean",
+     "label": "Open a pull request (off = report only)",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "import-meghamala",
+   "file": "sync-meghamala.yml",
+   "name": "Śrī Rāmānuja Meghamālā — fetch changed granthas and open a PR",
+   "group": "content-import",
+   "writes": "corpus",
+   "blurb": "Asks srivaishnavan.com which posts changed, re-fetches only those granthas whole, rebuilds them and opens a pull request.",
+   "inputs": [
+    {
+     "name": "all",
+     "type": "boolean",
+     "label": "Re-fetch every grantha, not only the changed ones",
+     "default": false
+    },
+    {
+     "name": "max_granthas",
+     "type": "string",
+     "label": "Cap on granthas re-fetched in one run",
+     "default": "60"
+    },
+    {
+     "name": "delay",
+     "type": "string",
+     "label": "Seconds between requests",
+     "default": "1.0"
+    },
+    {
+     "name": "open_pr",
+     "type": "boolean",
+     "label": "Open a pull request (off = report only)",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "import-ashtadhyayi",
+   "file": "sync-ashtadhyayi.yml",
+   "name": "Aṣṭādhyāyī data — re-import from ashtadhyayi-com/data and open a PR",
+   "group": "content-import",
+   "writes": "corpus",
+   "blurb": "Stops at once if the upstream commit is the one we imported; otherwise refreshes the four ancillary corpora and the sūtra enrichment, Mahābhāṣya and Vasu layers (re-aligned), and opens a pull request.",
+   "inputs": [
+    {
+     "name": "force",
+     "type": "boolean",
+     "label": "Re-import even if the upstream commit is unchanged",
+     "default": false
+    },
+    {
+     "name": "layers",
+     "type": "boolean",
+     "label": "Also refresh the sūtra enrichment / Mahābhāṣya / Vasu layers",
+     "default": true
+    },
+    {
+     "name": "open_pr",
+     "type": "boolean",
+     "label": "Open a pull request (off = report only)",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "import-anandamakaranda",
+   "file": "sync-anandamakaranda.yml",
+   "name": "Ānandamakaranda — merge changed works from the wiki and open a PR",
+   "group": "content-import",
+   "writes": "corpus",
+   "blurb": "Checks the wiki revision of all 47 works we hold; merges one-to-one layers in place, snapshots composite ones with a block-by-block diff, and opens a pull request.",
+   "inputs": [
+    {
+     "name": "titles",
+     "type": "string",
+     "label": "Only these wiki titles, comma-separated (blank = all)",
+     "default": ""
+    },
+    {
+     "name": "force",
+     "type": "boolean",
+     "label": "Re-sync even if the wiki revision is unchanged",
+     "default": false
+    },
+    {
+     "name": "open_pr",
+     "type": "boolean",
+     "label": "Open a pull request (off = report only)",
+     "default": true
+    }
+   ]
+  },
+  {
+   "id": "ocr-sarvam",
+   "file": "ocr-sarvam.yml",
+   "name": "OCR — Sarvam Document AI (layout kept)",
+   "group": "ocr",
+   "writes": "metadata",
+   "blurb": "Layout-preserving OCR of a PDF page range through Sarvam Document AI, staged to the ocr-staging/<work> branch for scholar review. Costs money per page; dry run by default.",
+   "inputs": [
+    {
+     "name": "pdf_url",
+     "type": "string",
+     "label": "Direct URL of the PDF",
+     "default": "",
+     "required": true
+    },
+    {
+     "name": "pages",
+     "type": "string",
+     "label": "Pages, e.g. 11-40",
+     "default": "",
+     "required": true
+    },
+    {
+     "name": "work_slug",
+     "type": "string",
+     "label": "Work slug (staging folder / branch)",
+     "default": "",
+     "required": true
+    },
+    {
+     "name": "language",
+     "type": "string",
+     "label": "Language code: sa-IN, kn-IN, hi-IN, en-IN",
+     "default": "sa-IN"
+    },
+    {
+     "name": "output_format",
+     "type": "string",
+     "label": "html (most layout), md, or json",
+     "default": "html"
+    },
+    {
+     "name": "dry_run",
+     "type": "boolean",
+     "label": "Count pages only — spend nothing",
+     "default": true
     }
    ]
   }
