@@ -414,7 +414,9 @@ const FEATURE_FLAG_CHECKBOX_IDS = {
   showSpeedControl: 'flagShowSpeedControl',
   showDhatuChips: 'flagShowDhatuChips',
   showWordMarks: 'flagShowWordMarks',
+  showReferenceLinks: 'flagShowReferenceLinks',
   showPratikaLinks: 'flagShowPratikaLinks',
+  showCommentarySandhi: 'flagShowCommentarySandhi',
   showPadaccheda: 'flagShowPadaccheda'
 };
 

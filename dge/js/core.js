@@ -1154,6 +1154,31 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(d => { window.dgePadaccheda = d || null; if (d && typeof renderList === 'function') renderList(); })
             .catch(() => { window.dgePadaccheda = null; });
         } catch (e) { window.dgePadaccheda = null; }
+        // सन्दर्भाः for this grantha (tools/build_references.py,
+        // _references/<slug>.json): where a commentary is CITING a धातु, a
+        // कोश or a सूत्र, decided from context at build time and validated
+        // against the authoritative list. One small fetch per grantha;
+        // absent = the commentary simply carries no citation marks. This is
+        // what replaced the old generic word marking, which coloured any word
+        // present in a database whether or not it was a reference.
+        try {
+          const refSlug = window.dgeGranthaSlug(window.jsonFileName.startsWith('dge/') ? window.jsonFileName : 'dge/' + window.jsonFileName);
+          fetch('data/_references/' + refSlug.replace(/\//g, '__') + '.json', { cache: 'force-cache' })
+            .then(r => (r.ok ? r.json() : null))
+            .then(d => { window.dgeReferences = d || null; if (d && typeof renderList === 'function') renderList(); })
+            .catch(() => { window.dgeReferences = null; });
+        } catch (e) { window.dgeReferences = null; }
+        // सन्धिच्छेदः inside the commentary (tools/build_padaccheda.py
+        // --commentary, _commentary_sandhi/<slug>.json): which written
+        // commentary tokens are two words joined by sandhi. Built per grantha
+        // on request rather than corpus-wide; absent = no marks.
+        try {
+          const csSlug = window.dgeGranthaSlug(window.jsonFileName.startsWith('dge/') ? window.jsonFileName : 'dge/' + window.jsonFileName);
+          fetch('data/_commentary_sandhi/' + csSlug.replace(/\//g, '__') + '.json', { cache: 'force-cache' })
+            .then(r => (r.ok ? r.json() : null))
+            .then(d => { window.dgeCommentarySandhi = d || null; if (d && typeof renderList === 'function') renderList(); })
+            .catch(() => { window.dgeCommentarySandhi = null; });
+        } catch (e) { window.dgeCommentarySandhi = null; }
         if (typeof dgeMountContentEditorControls === 'function') dgeMountContentEditorControls();
       })
       .catch(err => {

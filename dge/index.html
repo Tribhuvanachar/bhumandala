@@ -37,7 +37,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.83.0">
+<link rel="stylesheet" href="css/main.css?v=4.85.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -879,10 +879,16 @@
             <input type="checkbox" id="flagShowWordMarks" style="margin:0; width:14px; height:14px;"> 🎨 धातु/कोश word highlighting <span style="font-weight:400; opacity:.65;">· off: a lexical match is not a citation</span>
           </label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowReferenceLinks" style="margin:0; width:14px; height:14px;"> 📖 धातु/कोश/सूत्र citations in a commentary <span style="font-weight:400; opacity:.65;">· only where the commentator is quoting</span>
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
             <input type="checkbox" id="flagShowDhatuChips" style="margin:0; width:14px; height:14px;"> 🔗 धातुरूपाणि chip row under a verse
           </label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
             <input type="checkbox" id="flagShowPratikaLinks" style="margin:0; width:14px; height:14px;"> 📌 प्रतीक links (commentary ↔ verse)
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowCommentarySandhi" style="margin:0; width:14px; height:14px;"> ➕ सन्धिः marks in a commentary
           </label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
             <input type="checkbox" id="flagShowPadaccheda" style="margin:0; width:14px; height:14px;"> 🔤 पदच्छेदः chip on a verse
@@ -1323,7 +1329,7 @@
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
 <script src="js/shortcuts.js?v=4.83.0"></script>
-<script src="js/config.js?v=4.83.0"></script>
+<script src="js/config.js?v=4.85.0"></script>
 <script src="js/kamadhenu.js?v=1.2"></script>
 <script src="js/state.js?v=4.60.6"></script>
 <!-- Canonical state accessor layer (section 33) over the globals state.js
@@ -1367,7 +1373,9 @@
 <script src="js/vyakarana-runtime.js?v=1.0.0"></script>
 <script src="js/highlight-words.js?v=1.0.0"></script>
 <script src="js/pratika.js?v=1.0.0"></script>
-<script src="js/ai.js?v=4.80.0"></script>
+<script src="js/reference-links.js?v=1.0.0"></script>
+<script src="js/commentary-sandhi.js?v=1.0.0"></script>
+<script src="js/ai.js?v=4.85.0"></script>
 <script src="js/genie.js?v=1"></script>
 <script src="js/sandhi.js?v=1"></script>
 <script src="js/subanta-steps.js?v=1"></script>
@@ -1381,7 +1389,7 @@
      before render.js, which calls into it. Additive: a commentary without
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
-<script src="js/render.js?v=5.1.0"></script>
+<script src="js/render.js?v=5.2.0"></script>
 <script src="js/legal-content.js?v=1.0"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
@@ -1405,7 +1413,7 @@
 <script src="js/config-editor.js?v=4.78.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.84.0"></script>
+<script src="js/core.js?v=4.85.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->

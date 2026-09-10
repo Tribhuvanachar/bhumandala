@@ -925,6 +925,17 @@ function renderList() {
   // spans that are already in place, so unlike the word marks it needs no
   // fetch and no lazy observation.
   if (typeof window.dgePratikaMarkAll === 'function') window.dgePratikaMarkAll(listEl);
+
+  // सन्दर्भाः (reference-links.js): the धातु/कोश/सूत्र a commentary is
+  // actually CITING, from _references/<slug>.json. Runs after the pratīka
+  // pass because both write onto the same .dge-word spans and a pratīka is
+  // the quieter claim -- a citation mark should be able to sit on top of one.
+  if (typeof window.dgeReferenceMarkAll === 'function') window.dgeReferenceMarkAll(listEl);
+
+  // सन्धिच्छेदः in the commentary prose (commentary-sandhi.js). Last of the
+  // three, and it steps aside wherever one of the others already marked a
+  // word: a citation and a pratīka are louder claims than a seam.
+  if (typeof window.dgeCommentarySandhiMarkAll === 'function') window.dgeCommentarySandhiMarkAll(listEl);
 }
 
 // The page bar sits above the list and again below it (#listViewNavBottom),

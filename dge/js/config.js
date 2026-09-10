@@ -443,11 +443,23 @@ const FEATURE_FLAGS = {
   // appears in a list told a reader something that was not true.
   // The machinery stays (highlight-words.js is unchanged and still serves the
   // word tools' script conversion); only the automatic marking is off. What
-  // replaces it is context-first detection: see reference-detect.js, where a
-  // link is made because the commentator is visibly CITING something, and
-  // only then validated against the authoritative list.
+  // replaces it is context-first detection: tools/reference_detect.py finds
+  // the places a commentary is visibly CITING something, validates each
+  // against the authoritative list, and reference-links.js marks only those
+  // (flag showReferenceLinks below).
   showWordMarks: false,    // धातु/कोश background marks on words (highlight-words.js)
+  // सन्दर्भाः — धातु/कोश/सूत्र citations in a commentary, detected from
+  // context at build time (tools/build_references.py -> _references/<slug>.json)
+  // and marked by reference-links.js. This is the flag the old lexical
+  // marking should have been: turning it off leaves the text plain, turning it
+  // on adds only claims that survived a citation frame AND a lookup in the
+  // dhātupāṭha / sūtrapāṭha / kośa registry.
+  showReferenceLinks: true,
   showPratikaLinks: true,  // प्रतीक links between a commentary and the verse (pratika.js)
+  // सन्धिच्छेदः marks on commentary prose (commentary-sandhi.js +
+  // _commentary_sandhi/<slug>.json). Built only for the granthas asked
+  // for; a grantha with no file simply shows no marks.
+  showCommentarySandhi: true,
   showPadaccheda: true     // पदच्छेदः chip on a verse (render.js + _padaccheda/)
 };
 window.FEATURE_FLAGS = FEATURE_FLAGS;

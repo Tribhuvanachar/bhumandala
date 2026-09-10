@@ -190,6 +190,35 @@ def is_protected(text, start, end):
     return False
 
 
+#: Distinctions that separate two spellings of the same word in practice:
+#: vowel length, the three sibilants, and the nasals. Used ONLY to retrieve
+#: candidates — never to decide a match, which is checked against the exact
+#: normalised form afterwards.
+_FOLD = {
+    'ी': 'ि', 'ू': 'ु', 'ॄ': 'ृ', 'ॣ': 'ॢ', 'आ': 'अ', 'ई': 'इ', 'ऊ': 'उ',
+    'ॠ': 'ऋ', 'ॡ': 'ऌ',
+    'ष': 'श', 'स': 'श', 'ण': 'न', 'ङ': 'न', 'ञ': 'न', 'ं': 'न',
+    'ब': 'व', 'ळ': 'ल',
+}
+
+
+def fold(text):
+    """A coarse key for finding candidates when a citation is spelled slightly
+    differently from the corpus.
+
+    संज्ञायां भॄतॄ is quoted for 3.2.46 संज्ञायां भृतॄवृजि…, differing only in
+    the length of one vowel. An exact matcher finds nothing; a fuzzy matcher
+    finds too much. Folding the distinctions that actually vary in print —
+    vowel length, sibilants, nasals, ब/व — retrieves the right candidate and
+    leaves the deciding to the exact comparison.
+
+    Strictly one character in, one character out, so a span found in the
+    folded string maps through normalize_with_map's offsets unchanged. A fold
+    that deleted characters would silently misplace every highlight."""
+    out = normalize(text)
+    return ''.join(_FOLD.get(c, c) for c in out)
+
+
 def strip_marks(word):
     """A single word reduced to its canonical form, offsets discarded."""
     return normalize(word)
