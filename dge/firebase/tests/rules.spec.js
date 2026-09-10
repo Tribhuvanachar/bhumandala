@@ -255,6 +255,60 @@ describe('users — role management by admins', () => {
   });
 });
 
+describe('bootstrap allowlist — the first superadmin', () => {
+  // The chicken-and-egg these rules exist to break: a new account is
+  // 'basic', and nobody may change their own role, so nobody can ever make
+  // the first superadmin from inside the app.
+  //
+  // WHAT THESE TESTS PIN. The repository ships with BOTH allowlists empty,
+  // which is the state that matters most: an empty allowlist must grant
+  // nobody anything, or every fork of this project would hand its author
+  // superadmin on every deployment. A populated list cannot be exercised
+  // here without editing the rules file the suite loads, so these assert
+  // the closed default and the exact shape of the escape hatch; the
+  // populated case is checked by hand after a deploy (FIREBASE_SETUP.md §4).
+
+  test('with the allowlist empty, nobody may claim superadmin for themselves', async () => {
+    await assertFails(asUser(UID_BASIC).doc(`users/${UID_BASIC}`).update({ role: 'superadmin' }));
+    await assertFails(asUser(UID_ADMIN).doc(`users/${UID_ADMIN}`).update({ role: 'superadmin' }));
+  });
+
+  test('an existing superadmin still may not CHANGE their own role', async () => {
+    // The bootstrap rule is scoped to the allowlist, not to "anyone who is
+    // already a superadmin" — a self-role-CHANGE stays shut for everybody.
+    //
+    // Writing the value it already holds is a different thing and does
+    // succeed, by the pre-existing self-edit rule: request.resource.data.role
+    // == resource.data.role holds, and a write that changes nothing has an
+    // empty affectedKeys(), which hasOnly() accepts. That is a no-op, not an
+    // escalation, so it is not asserted against here — a first draft of this
+    // test did assert it and was wrong.
+    await assertFails(asUser(UID_SUPER).doc(`users/${UID_SUPER}`).update({ role: 'basic' }));
+    await assertFails(asUser(UID_ADMIN).doc(`users/${UID_ADMIN}`).update({ role: 'superadmin' }));
+  });
+
+  test('a signed-out visitor may not claim anything', async () => {
+    await assertFails(asAnon().doc(`users/${UID_BASIC}`).update({ role: 'superadmin' }));
+  });
+
+  test('the escape hatch is role-only: a claim may not smuggle other fields', async () => {
+    // Even for an allowlisted account this must fail, because hasOnly(['role'])
+    // rejects the write outright. Asserted against a non-allowlisted user
+    // too, so the test is meaningful with the shipped empty list.
+    await assertFails(asUser(UID_BASIC).doc(`users/${UID_BASIC}`)
+      .update({ role: 'superadmin', displayName: 'Sneaky' }));
+  });
+
+  test('the escape hatch is superadmin-only: no other role may be self-assigned', async () => {
+    await assertFails(asUser(UID_BASIC).doc(`users/${UID_BASIC}`).update({ role: 'admin' }));
+    await assertFails(asUser(UID_BASIC).doc(`users/${UID_BASIC}`).update({ role: 'sponsor' }));
+  });
+
+  test('ordinary self-edits still work — the new rule took nothing away', async () => {
+    await assertSucceeds(asUser(UID_BASIC).doc(`users/${UID_BASIC}`).update({ displayName: 'Renamed' }));
+  });
+});
+
 describe('users — deletes', () => {
   test('nobody may delete a profile, not even a superadmin', async () => {
     await assertFails(asUser(UID_BASIC).doc(`users/${UID_BASIC}`).delete());

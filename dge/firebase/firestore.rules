@@ -35,12 +35,70 @@ service cloud.firestore {
         : null;
     }
 
-    function isSuperadmin() {
-      return callerRole() == 'superadmin';
+    // --- BOOTSTRAP ALLOWLIST ---------------------------------------------
+    //
+    // THE PROBLEM THIS SOLVES. A new account is created with role 'basic',
+    // and the rules below deliberately forbid changing your OWN role --
+    // that is what stops a visitor promoting themselves. Together those two
+    // facts mean the FIRST superadmin cannot be made from inside the app at
+    // all: to grant a role you must already have one. Until 10 Sep 2026 the
+    // only way out was editing users/<uid>.role by hand in the Firebase
+    // console, which is fine as a documented one-time step and confusing as
+    // an unexplained "Missing or insufficient permissions".
+    //
+    // WHY IT LIVES HERE, in the rules file, and not in a Firestore document
+    // an admin screen could edit: this list decides who may become the
+    // first superadmin. Anything editable from inside the app is editable
+    // by whoever already got in, which is precisely the trust this list is
+    // supposed to establish. Changing it takes console/repo access and a
+    // rules deploy, and that is the point, not an inconvenience.
+    //
+    // ---- FILL ONE OF THESE IN, THEN DEPLOY -------------------------------
+    // Prefer the UID: it is an opaque identifier rather than personal data,
+    // it cannot be spoofed by anyone who controls an email address, and it
+    // is safe to keep in a public repository. Find yours in the app under
+    // My Account (it has a Copy button), or in the Firebase console under
+    // Authentication → Users.
+    //
+    //   return ['jCjtKS2MaCPGeyGUSnqcxOuij...'];   <- your real uid
+    //
+    // Both lists are EMPTY on purpose. An empty allowlist grants nobody
+    // anything, so a fork or a fresh deployment of this repository starts
+    // closed rather than trusting whoever wrote this file.
+    function bootstrapUids() {
+      return [];
+    }
+    // The email alternative. Requires a VERIFIED email on the sign-in token
+    // (Google sign-in carries one; a phone-OTP account carries none), so an
+    // unverified or self-asserted address can never match. Note that an
+    // address written here is published wherever this repository is.
+    function bootstrapEmails() {
+      return [];
+    }
+    // The email claims are checked inline rather than through
+    // tokenEmailVerified() below, so this function does not depend on
+    // where in the file that one happens to be declared.
+    function isBootstrapAdmin() {
+      return isSignedIn()
+        && (request.auth.uid in bootstrapUids()
+            || (('email_verified' in request.auth.token)
+                && request.auth.token.email_verified == true
+                && ('email' in request.auth.token)
+                && request.auth.token.email in bootstrapEmails()));
     }
 
+    // Bootstrap is checked FIRST in both of these, which also means the
+    // bootstrap account never pays for the callerRole() document read.
+    function isSuperadmin() {
+      return isBootstrapAdmin() || callerRole() == 'superadmin';
+    }
+
+    // Bootstrap counts as admin too, not only as superadmin. Without this a
+    // bootstrap account could change roles but could not READ the user list
+    // to find anyone to change -- the Manage Users screen would still be
+    // empty and still look broken.
     function isAdmin() {
-      return callerRole() in ['admin', 'superadmin'];
+      return isBootstrapAdmin() || callerRole() in ['admin', 'superadmin'];
     }
 
     // The fields a person is allowed to change on their OWN profile.
@@ -126,6 +184,20 @@ service cloud.firestore {
       // changes someone else's role" as two independent, non-overlapping
       // permissions — neither one lets a person touch their own role.
       allow update: if isSuperadmin() && !isOwner(uid);
+
+      // The one exception to "never your own role": a bootstrap-allowlisted
+      // account claiming superadmin for the first time. Narrow on purpose --
+      //   * only that account's OWN document,
+      //   * only the `role` field (hasOnly), so nothing else rides along,
+      //   * and only the value 'superadmin'.
+      // It is a one-way door out of the chicken-and-egg, not a self-service
+      // role switcher: this rule cannot be used to set any other role, and
+      // it cannot be used by anyone the allowlist does not name. With both
+      // lists empty -- how this repository ships -- it grants nobody
+      // anything at all.
+      allow update: if isBootstrapAdmin() && isOwner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['role'])
+        && request.resource.data.role == 'superadmin';
 
       // No client-side deletes in this basic version.
       allow delete: if false;
