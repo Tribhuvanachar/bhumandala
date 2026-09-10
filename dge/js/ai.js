@@ -1477,6 +1477,7 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal .dsm-full-link{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--muted-text);}',
     '.dge-word-modal .dsm-section-label{font-size:11px;font-weight:700;color:var(--muted-text);text-transform:uppercase;letter-spacing:.4px;margin:16px 0 6px;border-top:1px solid var(--card-border);padding-top:12px;}',
     '.dge-word-modal .dsm-pada-listed{opacity:.72;font-style:italic;}',
+    '.dge-word-modal .dsm-krt-alt{margin:-8px 0 12px;font-size:11.5px;opacity:.85;}',
     '.dge-word-modal .dsm-kosha-entry{padding:6px 0;font-size:12.5px;line-height:1.55;border-bottom:1px dashed var(--card-border);}',
     '.dge-word-modal .dsm-kosha-entry b{color:var(--accent-red);}',
     '.dge-word-modal .dsm-kosha-more{width:100%;margin-top:8px;}',
@@ -1778,15 +1779,52 @@ function dgeShabdaExactHtml(it, cellIndex) {
 // prakriya.js's krdanta.html view uses, not just a link to go read it on
 // another page. Resolves to null (not a fallback message) on a miss --
 // dgeOpenShabdaForSelection's fallback chain decides what happens next.
-function dgeShabdaKrtHtml(surface, hit) {
+// Which of several homographic roots to show FIRST. The only evidence in the
+// building is how often each root is attested in this corpus by forms that are
+// NOT ambiguous — tools/build_dhatu_prayoga_index.py writes exactly that as
+// root_weights.json. डुकृञ् करणे is written unambiguously 17,049 times
+// (करोति, चकार, कुर्वन्ति), कृञ् हिंसायाम् 110, so कृत्वा leads with "to do".
+// Absent the file, order is left as the index gave it rather than guessed at.
+let DGE_ROOT_WEIGHTS_PROMISE = null;
+function dgeRootWeights() {
+  if (!DGE_ROOT_WEIGHTS_PROMISE) {
+    DGE_ROOT_WEIGHTS_PROMISE = fetch('data/vedanga/vyakarana/dhatu_prayoga/root_weights.json', { cache: 'force-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { return (d && d.weights) || {}; })
+      .catch(function () { return {}; });
+  }
+  return DGE_ROOT_WEIGHTS_PROMISE;
+}
+window.dgeRankDhatuCandidates = function (list) {
+  if (!list || list.length < 2) return Promise.resolve(list || []);
+  return dgeRootWeights().then(function (w) {
+    return list.slice().sort(function (a, b) {
+      const d = (w[b.c] || 0) - (w[a.c] || 0);
+      return d || String(a.c).localeCompare(String(b.c));
+    });
+  }).catch(function () { return list; });
+};
+
+function dgeShabdaKrtHtml(surface, hit, all) {
   const code = hit.c, krtKey = hit.k, rootPart = code.split('.')[0];
   return fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + code + '.json')
     .then(r => r.ok ? r.json() : null)
     .then(function (d) {
       const k = d && d.krt && d.krt.find(x => x.k === krtKey);
       if (!k) return null;
+      // Say plainly that another root writes this too, rather than presenting
+      // one reading as the answer.
+      const others = (all || []).filter(function (x) { return x.c !== code; });
+      const alt = others.length
+        ? '<div class="dsm-sub dsm-krt-alt">' + others.length + ' other root' + (others.length === 1 ? '' : 's') +
+          ' write' + (others.length === 1 ? 's' : '') + ' this same form — ' +
+          others.map(function (x) {
+            return '<a href="vyakarana/krdanta.html#' + dgeShabdaEsc(x.c) + ':' + dgeShabdaEsc(x.k) + '" target="_blank">' + dgeShabdaEsc(x.c) + '</a>';
+          }).join(', ') + '. This one is the most attested in the library.</div>'
+        : '';
       return '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
         '<div class="dsm-sub">कृदन्तः · ' + dgeShabdaEsc(DGE_KRT_NAME[krtKey] || krtKey) + ' (' + dgeShabdaEsc(DGE_KRT_NAME_EN[krtKey] || '') + ') · from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '"</div>' +
+        alt +
         dgeShabdaStepsHtml(k.s) +
         '<a class="dsm-full-link" href="vyakarana/krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>' +
         dgeShabdaWhereElseLink(surface);
@@ -2037,8 +2075,16 @@ window.dgeOpenShabdaForSelection = function(e) {
     return fetch('data/vedanga/vyakarana/prakriya/krtindex/' + cp + '.json')
       .then(r => r.ok ? r.json() : null)
       .then(function (m) {
+        // A kṛdanta spelling can belong to several roots — कृत्वा is the ktvā
+        // of both 05.0007 "to injure" and 08.0010 "to do" — so the index
+        // returns a list. The old single-record shape is still accepted.
         const hit = m && m[word];
-        return hit ? dgeShabdaKrtHtml(word, hit) : null;
+        if (!hit) return null;
+        const list = Array.isArray(hit) ? hit : [hit];
+        if (!list.length) return null;
+        return dgeRankDhatuCandidates(list).then(function (ranked) {
+          return dgeShabdaKrtHtml(word, ranked[0], ranked);
+        });
       })
       .catch(() => null);
   }).catch(() => null)
@@ -2409,25 +2455,36 @@ window.dgeOpenDhatuForSelection = function(e) {
       dgeShowDhatuNotFound(body, word);
       return;
     }
-    dgeRenderDhatuCandidate(body, word, hits, 0, myReq);
-    // Chips render immediately with codes and relabel themselves with each
-    // root's name and meaning as soon as the list arrives -- the paradigm the
-    // reader came for is never held up waiting on it.
-    if (hits.length > 1) {
-      dgeFetchDhatuListByCode().then(function () {
-        if (myReq !== window.dgeDhatuReqSeq) return;
-        const box = body.querySelector('.dsm-cands');
-        if (!box) return;
-        const on = box.querySelector('.dsm-cand.on');
-        const idx = on ? parseInt(on.dataset.dhatuCand, 10) : 0;
-        box.outerHTML = dgeDhatuCandidateChipsHtml(hits, idx);
-        body.querySelectorAll('[data-dhatu-cand]').forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            dgeRenderDhatuCandidate(body, word, hits, parseInt(btn.dataset.dhatuCand, 10), myReq);
+    // Which candidate opens FIRST is the whole of the lead's original report
+    // ("clicking cakre should return all matching dhatus … rather than
+    // defaulting to himsa"): the chips have offered every root since 8 Sep,
+    // but the one shown on arrival was whichever the index happened to list
+    // first. Now it is the root this library actually attests most.
+    // The chips and the panel MUST share one array: they address each other by
+    // index, and ranking one but not the other means a chip opens a different
+    // root than it names.
+    dgeRankDhatuCandidates(hits).then(function (ranked) {
+      if (myReq !== window.dgeDhatuReqSeq) return;
+      dgeRenderDhatuCandidate(body, word, ranked, 0, myReq);
+      // Chips render immediately with codes and relabel themselves with each
+      // root's name and meaning as soon as the list arrives -- the paradigm the
+      // reader came for is never held up waiting on it.
+      if (ranked.length > 1) {
+        dgeFetchDhatuListByCode().then(function () {
+          if (myReq !== window.dgeDhatuReqSeq) return;
+          const box = body.querySelector('.dsm-cands');
+          if (!box) return;
+          const on = box.querySelector('.dsm-cand.on');
+          const idx = on ? parseInt(on.dataset.dhatuCand, 10) : 0;
+          box.outerHTML = dgeDhatuCandidateChipsHtml(ranked, idx);
+          body.querySelectorAll('[data-dhatu-cand]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              dgeRenderDhatuCandidate(body, word, ranked, parseInt(btn.dataset.dhatuCand, 10), myReq);
+            });
           });
         });
-      });
-    }
+      }
+    });
   });
 };
 

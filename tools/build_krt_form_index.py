@@ -36,10 +36,21 @@ forms per stem shape, not a full paradigm:
     भवन् — and irregular enough that guessing it wrong would be worse than
     not indexing it at all) are indexed ONLY as their bare stem.
 
-Ambiguity is handled the same deliberate way as build_prakriya_form_index.py:
-first-write-wins, roots scanned in Dhātupāṭha code order, so a form shared by
-two roots' kṛt-derivations lands on the lower-code root — a heuristic, not a
-guarantee, documented rather than hidden.
+AMBIGUITY: EVERY ROOT, NOT THE LOWEST-NUMBERED ONE. This used to be
+first-write-wins over roots in Dhātupāṭha code order — documented as a
+heuristic, and wrong in the single most common case in the language. कृत्वा
+is the ktvā of both कृ॒ञ् हिंसायाम् (05.0007, "to injure") and डुकृ॒ञ् करणे
+(08.0010, "to do"). Code order files it under 05.0007, so every "having done"
+in the corpus was counted as an injuring: 29,938 occurrences on a root that
+means the opposite of what the reader is looking at (reported by the project
+lead, 9 Sep 2026).
+
+There is no honest way to pick one here, so this picks none: a form maps to
+the LIST of every (root, kṛt-pratyaya) that produces it. The readers already
+know how to offer a choice — the Dhātu popup has shown all matching roots
+since 8 Sep — and tools/build_dhatu_prayoga_index.py uses the list to
+separate occurrences it can attribute with certainty from ones it cannot.
+The same change was made to build_prakriya_form_index.py for tiṅanta forms.
 
 Sharded by first Devanagari codepoint, same scheme as formindex/, so one
 word-click fetches one small shard.
@@ -92,7 +103,7 @@ def main():
         print(f'no per-root files found under {PRAKRIYA_DIR}', file=sys.stderr)
         return 1
 
-    flat = {}  # surface form -> {"c": code, "k": krt type}
+    flat = {}  # surface form -> [{"c": code, "k": krt type}, ...] (all readings)
     roots_seen = 0
     for path in root_files:
         with open(path, encoding='utf-8') as fh:
@@ -109,8 +120,12 @@ def main():
                 continue
             for f in surface_forms(stem, krt_type):
                 f = f.strip()
-                if f and f not in flat:
-                    flat[f] = {'c': code, 'k': krt_type}
+                if not f:
+                    continue
+                entry = {'c': code, 'k': krt_type}
+                bucket = flat.setdefault(f, [])
+                if entry not in bucket:
+                    bucket.append(entry)
 
     shards = {}
     for form, hit in flat.items():
@@ -122,12 +137,17 @@ def main():
         with open(os.path.join(OUT_DIR, cp + '.json'), 'w', encoding='utf-8') as fh:
             json.dump(shard, fh, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
 
+    ambiguous = sum(1 for v in flat.values() if len({e['c'] for e in v}) > 1)
     manifest = {
         '_readme': (
             'Reverse index for dge/js/shabda.js\'s krt-form fallback (a Shabda '
             'word-tool click that misses the nominal Sabdapatha database but is '
-            'actually a krdanta): surface form -> {"c": Dhatupatha root code, '
-            '"k": krt pratyaya name}. Built by tools/build_krt_form_index.py from '
+            'actually a krdanta): surface form -> [{"c": Dhatupatha root code, '
+            '"k": krt pratyaya name}, ...], one entry per root that produces the '
+            'form. A single-element list is the common case; a form with several '
+            'is genuinely ambiguous and callers must offer the choice rather than '
+            'take the first (krtva is the ktva of BOTH 05.0007 "to injure" and '
+            '08.0010 "to do"). Built by tools/build_krt_form_index.py from '
             'the per-root prakriya files\' own "krt" array. NOT a full declension '
             'engine -- see the build script\'s own docstring for exactly which '
             'surface forms are generated per stem shape and which krt types are '
@@ -136,6 +156,7 @@ def main():
         ),
         'rootsWithKrt': roots_seen,
         'distinctForms': len(flat),
+        'formsWithMoreThanOneRoot': ambiguous,
         'shardCount': len(shards),
     }
     with open(os.path.join(OUT_DIR, 'manifest.json'), 'w', encoding='utf-8') as fh:

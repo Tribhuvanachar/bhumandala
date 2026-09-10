@@ -173,8 +173,12 @@
   // CDN precisely so this cannot go quiet on a bad connection. If it is
   // somehow absent, the marks stand down outside Devanagari rather than
   // guessing: an unmarked page is honest, a wrongly marked one is not.
+  // Every id in config.js's SCRIPT_OPTIONS must appear here, or the marks
+  // stand down in that script with nothing to say why. 'hindi' and 'marathi'
+  // are Devanagari under another name (see transliteration.js), so they are
+  // not transliterated at all — a round trip would be lossy for nothing.
   var SCRIPT_SCHEME = {
-    devanagari: 'devanagari', deva: 'devanagari',
+    devanagari: 'devanagari', deva: 'devanagari', hindi: 'devanagari', marathi: 'devanagari',
     iast: 'iast', kannada: 'kannada', telugu: 'telugu',
     tamil: 'tamil', malayalam: 'malayalam', gujarati: 'gujarati',
     bengali: 'bengali', oriya: 'oriya', gurmukhi: 'gurmukhi', hk: 'hk', slp1: 'slp1'

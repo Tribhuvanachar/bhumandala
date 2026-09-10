@@ -97,6 +97,10 @@
 
 /* 7 Sep 2026: corpus occurrences (dhatu_prayoga) */
 .pk-usage{display:inline-block;margin-left:4px;font-size:10.5px;font-weight:700;color:var(--accent);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:0 6px;vertical-align:middle;white-space:nowrap}
+/* A cell attested only by a spelling some other root also writes: the certain
+   count is 0, and the badge should not look like an earned one. */
+.pk-usage-shared{color:var(--muted);font-weight:600}
+.pk-usage sup{font-size:8.5px;opacity:.75;margin-left:1px}
 .pk-usage-sum{margin:8px 0;padding:8px 12px;border-left:3px solid var(--accent);background:var(--panel2);border-radius:0 10px 10px 0;font-size:13.5px;line-height:1.7}
 .pk-usage-block{margin-top:14px}
 .pk-ex{padding-left:22px;margin:6px 0}
