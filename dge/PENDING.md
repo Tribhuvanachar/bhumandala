@@ -44,9 +44,23 @@ complete record, not just a live queue.
   (`vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` and
   `shaunakiya_chaturadhyayika/data.json` are both empty stubs). Ingesting the Sanskrit
   Library XML is a parsing task, not OCR, so no Gemini cost gate applies to that step itself;
-  one would apply only if a scanned-image fallback is later needed for Layers B/C. No code
-  or corpus data written yet; do not start implementation before that prerequisite and the
-  open questions in the document's §10 are resolved.
+  one would apply only if a scanned-image fallback is later needed for Layers B/C. **Update,
+  11 Sep 2026:** Layer A was actually pulled and inspected. It turns out not to be a
+  downloadable TEI/XML file at all — "First XML Edition" describes the source's internal
+  editing process; public access is one undocumented JSON endpoint
+  (`sanskritlibrary.org/LoadText?text=fgveda_prAtiSAKya&texttype=forTranslation`) behind the
+  reader page's JavaScript, reverse-engineered by reading `sl.js`/`sl.model.js` rather than
+  found in any published API. One inspection fetch (318 KB, 1,067 sūtras, SLP1-transliterated,
+  with a scholarly cross-reference apparatus, "Version 0.1," several fields marked `[?]` or
+  empty) confirmed paṭala 10 = 22 sūtras and paṭala 11 = 71 sūtras exactly, and verified
+  several specific sūtras — including the catuḥkrama sūtra, now precisely cited as
+  `RVPr_11.19` — word-for-word against text that had appeared unattributed in the original
+  Gemini-derived review: real, not fabricated. Full details, the verified-sample table, and
+  the access-ethics note (an explicit go-ahead is needed before scripting a full 1,067-sūtra
+  bulk pull through this same undocumented endpoint, vs. contacting Sanskrit Library
+  directly for the underlying TEI XML) are in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md`
+  §4a/§4a.1. No code or corpus data written yet; do not start implementation before that
+  go-ahead and the other open questions in the document's §10 are resolved.
 
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
