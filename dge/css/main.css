@@ -1092,3 +1092,10 @@ sup.tp-fnref:target a, .tp-fnref:target { background: var(--accent-glow, rgba(20
 .dge-sandhi-piece.dge-src-n { background: rgba(127,127,127,.14); }
 .dge-sandhi-piece.dge-src-u { background: rgba(127,127,127,.14); border-bottom: 2px dotted var(--accent-red); }
 .dge-sandhi-plus { opacity: .55; }
+/* Upasarga peeling in the Dhātu popup: what was taken off the front, and the
+   meaning that prefix gives this particular root. */
+.dge-upasarga-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0 4px; }
+.dge-upasarga { padding: 1px 7px; border-radius: 5px; background: rgba(127,127,127,.16);
+  border-bottom: 2px dotted var(--accent-red); }
+.dge-upasarga-artha { margin: 4px 0 8px; padding: 7px 11px; border-left: 3px solid var(--accent-red);
+  background: var(--card-bg); border-radius: 0 6px 6px 0; font-size: 13px; line-height: 1.55; }
