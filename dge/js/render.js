@@ -170,6 +170,77 @@ window.dgeShowCommentaryTab = function(shlokaIndex, cKey, btnEl) {
   if (btnEl) btnEl.classList.add('active');
 };
 
+// The commentary bar, above the verses rather than behind the 💬 icon in the
+// top bar. The project lead, on finding a text whose commentaries he had not
+// realised were there: the availability notice "disappears too quickly and
+// should point to the exact place to click", and the availability and its
+// click options belong "above sloka renderings instead of the global menu".
+//
+// So this replaces a one-shot toast with something that does not go away: the
+// names of every commentary this text carries, each one a switch, sitting
+// where the reader is already looking. The 💬 picker still works and stays in
+// sync -- this is a second, unmissable way in, not a replacement.
+//
+// Both in-file commentaries (metadata.availableCommentaries) and stitched
+// sibling layers (layer-stitch.js) are listed, because from the reader's side
+// the difference between "in this file" and "in the folder next door" is not
+// one they should have to know about.
+function dgeCommentaryBarEntries() {
+  const meta = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata) || {};
+  const available = meta.availableCommentaries || {};
+  const keys = Object.keys(available);
+  if (typeof window.dgeStitchedAvailableKeys === 'function') {
+    window.dgeStitchedAvailableKeys().forEach(k => { if (keys.indexOf(k) === -1) keys.push(k); });
+  }
+  return keys.map(k => {
+    const name = available[k] || k;
+    return {
+      key: k,
+      label: typeof applyTransliteration === 'function' ? applyTransliteration(name, activeScript) : name,
+      on: typeof selectedCommentaries !== 'undefined' && selectedCommentaries.has(k)
+    };
+  });
+}
+
+function dgeRenderCommentaryBar() {
+  const bar = document.getElementById('commentaryAvailableBar');
+  if (!bar) return;
+  const entries = dgeCommentaryBarEntries();
+  if (!entries.length) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
+  const onCount = entries.filter(e => e.on).length;
+  const pills = entries.map(e =>
+    `<button type="button" class="dge-cbar-pill${e.on ? ' on' : ''}" data-ckey="${e.key}" aria-pressed="${e.on}" ` +
+    `title="${e.on ? 'Hide' : 'Show'} this commentary under every verse" ` +
+    `onclick="dgeToggleCommentarySelection('${e.key}')">${e.label}</button>`).join('');
+  // "All"/"None" is one button, not two: whichever of them is the useful
+  // next move is the one shown.
+  const bulk = onCount === entries.length
+    ? `<button type="button" class="dge-cbar-bulk" onclick="window.dgeSetAllCommentaries(false)">✕ hide all</button>`
+    : `<button type="button" class="dge-cbar-bulk" onclick="window.dgeSetAllCommentaries(true)">show all ${entries.length}</button>`;
+  const lead = onCount
+    ? `<span class="dge-cbar-label">📖 भाष्यटीकाः · showing ${onCount} of ${entries.length}</span>`
+    : `<span class="dge-cbar-label">📖 भाष्यटीकाः · this text has ${entries.length} commentar${entries.length === 1 ? 'y' : 'ies'} — tap a name to read ${entries.length === 1 ? 'it' : 'one'} under each verse</span>`;
+  bar.className = 'dge-cbar' + (onCount ? '' : ' dge-cbar-idle');
+  bar.innerHTML = `${lead}${pills}${entries.length > 1 ? bulk : ''}`;
+  bar.style.display = 'flex';
+}
+window.dgeRenderCommentaryBar = dgeRenderCommentaryBar;
+
+// The bar's bulk switch. setCommentaryView() does the same job but also
+// closes the 💬 popup, which is wrong when the tap came from the bar and no
+// popup is open.
+window.dgeSetAllCommentaries = function (on) {
+  const available = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.availableCommentaries) || {};
+  const keys = Object.keys(available);
+  if (typeof window.dgeStitchedAvailableKeys === 'function') {
+    window.dgeStitchedAvailableKeys().forEach(k => { if (keys.indexOf(k) === -1) keys.push(k); });
+  }
+  selectedCommentaries = on ? new Set(keys) : new Set();
+  dgeSyncCommentaryPopupState();
+  if (typeof window.dgeEnsureStitchedLayers === 'function') window.dgeEnsureStitchedLayers();
+  dgeRescrollToActiveCard();
+};
+
 // Re-anchors the scroll position to the active card after a commentary
 // selection change re-renders the list at a new (shorter or taller)
 // height -- shared by both the quick actions and the per-item toggle
@@ -832,6 +903,8 @@ function renderList() {
 
   dgeUpdateSingleViewNav(fIds);
   dgeUpdateListViewNav(fIds, needsPaging);
+
+  dgeRenderCommentaryBar();
 
   // धातु/कोश word marking (highlight-words.js). Deliberately AFTER the DOM is
   // in place and deliberately not awaited: the answer needs a fetch, and a

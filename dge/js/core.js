@@ -1159,16 +1159,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // (selectedCommentaries starts empty, see state.js) -- a reader who
 // never notices the small 💬 "Commentary Options" icon in the top bar can
 // read an entire Stotra or Veda text and never discover real bhashya
-// content sits right there for it. One-time toast, gated per grantha (not
-// per visit) via nsKey so it never nags on a text the reader has already
-// been shown this for.
+// content sits right there for it.
+//
+// This used to be a one-shot toast. The lead's verdict on it (9 Sep 2026):
+// it "disappears too quickly and should point to the exact place to click".
+// A message that is gone before it is read, pointing at an icon rather than
+// at something tappable, is worse than none -- so the standing bar above the
+// verses (render.js dgeRenderCommentaryBar) carries the signal instead, and
+// carries the switches with it. This is now only the first-visit nudge that
+// draws the eye to that bar, and it is still gated per grantha via nsKey so
+// it never nags on a text the reader has already been shown it for.
 function dgeNoticeCommentaryAvailable() {
   const available = window.stotraData && window.stotraData.metadata && window.stotraData.metadata.availableCommentaries;
   if (!available || !Object.keys(available).length) return;
   const seenKey = (typeof nsKey === 'function') ? nsKey('commentaryNoticeSeen') : null;
   if (!seenKey || localStorage.getItem(seenKey) === 'true') return;
   localStorage.setItem(seenKey, 'true');
-  if (typeof showToast === 'function') showToast('📖 Commentary is available for this text — tap 💬 above to view it.');
+  const bar = document.getElementById('commentaryAvailableBar');
+  if (!bar) return;
+  bar.classList.add('dge-cbar-nudge');
+  setTimeout(() => bar.classList.remove('dge-cbar-nudge'), 6000);
 }
 
 function initApp() {
