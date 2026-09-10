@@ -1223,6 +1223,24 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **10 Sep 2026, ~10:40 pm IST — 📖 Prepare a book / PDF, phase 1 (the print path).** `dge/js/book-builder.js` (pure spec → HTML,
+  no DOM, so a server renderer can call it unchanged), `dge/js/book-ui.js` (the picking sheet), `dge/css/book-print.css`
+  (A5/A4 @page, mirrored margins, cover, TOC, running foot, watermark). Sources: whole grantha, verse range, starred verses,
+  studied verses, or an explicit id list (which is how a corpus-search selection will arrive). Title/subtitle/compiler/dedication.
+  Cover + footer imprint always; diagonal watermark per export, as chosen. Gated on a new `book` capability in Access Control.
+  - **Why the browser typesets it, decided rather than defaulted:** jsPDF and pdfmake place glyphs one code point at a time and do
+    not shape Indic conjuncts — क्ष, ज्ञ, repha and every saṃyuktākṣara would come out broken, confidently and invisibly to anyone
+    who cannot read Devanagari. Verified for real: a 7-page A5 PDF rendered through Chromium's own print pipeline, conjuncts correct.
+  - **Phase 2, agreed and not built:** a Cloud Function running headless Chromium over the SAME document for a one-tap `.pdf`
+    download. Needs Blaze + cold-start handling. Nothing in phase 1 is thrown away by it.
+  - **Open:** corpus-search → book (`dgeBookSources.ids` is ready; global-search has no "mark these hits" UI yet); multi-grantha
+    books (the spec takes `sections[]` already, the UI offers one); per-section commentary choice.
+
+- **10 Sep 2026 — the 🔑 Access menu is hidden from visitors.** It was shown to everyone and advertised "Admin Access" to every
+  anonymous reader. Now `display:none` in the markup, revealed by `dgeRevealAccessMenu()` for EITHER admin tier (not gated on the
+  superadmin check — "Log out (clear access)" lives in that menu and an admin-passkey holder must be able to reach it), and
+  re-run by the sign-in bridge so a real admin account gets it without a reload. `?superadmin=CODE` still works for a first entry.
+
 - **10 Sep 2026, ~9:10 pm IST — bootstrap allowlist in firestore.rules, as asked.** `bootstrapUids()` / `bootstrapEmails()`, folded into BOTH
   `isSuperadmin()` and `isAdmin()` (admin too, or a bootstrap account could change roles but not read the user list to find anyone),
   plus one narrow extra `allow update` letting a listed account set its OWN `role`, only via `hasOnly(['role'])`, only to

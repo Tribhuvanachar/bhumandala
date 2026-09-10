@@ -482,6 +482,7 @@ function dgeBridgeRoleToAdminTools(role) {
     }
   } catch (e) { /* localStorage unavailable (private mode, etc.) — admin tools just stay hidden */ }
   if (typeof window.dgeRevealAdminTools === 'function') window.dgeRevealAdminTools();
+  if (typeof window.dgeRevealAccessMenu === 'function') window.dgeRevealAccessMenu();
 }
 window.dgeBridgeRoleToAdminTools = dgeBridgeRoleToAdminTools;
 

@@ -102,6 +102,24 @@ function dgeRevealAdminTools() {
 }
 window.dgeRevealAdminTools = dgeRevealAdminTools;
 
+// The 🔑 Access menu is hidden from visitors in the markup (see index.html).
+// It comes back for an admin device — EITHER tier, deliberately not gated on
+// dgeRevealAdminTools's superadmin check, because "Log out (clear access)"
+// lives in that menu and an admin-passkey holder must be able to reach it to
+// hand the device back. ?superadmin=CODE is still handled by
+// dgeCheckSuperadminGate below, so a first entry needs no visible button.
+function dgeRevealAccessMenu() {
+  let admin = false;
+  try {
+    admin = localStorage.getItem('acharyaAuthorized') === 'true' ||
+            localStorage.getItem('is_superadmin') === 'true';
+  } catch (e) { /* private mode: menu stays hidden */ }
+  const btn = document.getElementById('accessKeyBtn');
+  if (btn) btn.style.display = admin ? 'flex' : 'none';
+}
+window.dgeRevealAccessMenu = dgeRevealAccessMenu;
+document.addEventListener('DOMContentLoaded', dgeRevealAccessMenu);
+
 document.addEventListener('DOMContentLoaded', dgeRevealAdminTools);
 
 // ---------------------------------------------------------------

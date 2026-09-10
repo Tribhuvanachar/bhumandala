@@ -279,8 +279,12 @@
   // One row per capability. Only 'copy' exists today; the shape is a map so
   // adding a second is a row here and a dgeRoleCan() call at the point of use,
   // not another config surface.
+  // What a role may DO. One row per capability; adding another is a line
+  // here plus a dgeRoleCan() call at the point of use, not a new config
+  // surface. Content lives in the gates panel above — this is features.
   var CAPABILITY_DEFS = [
-    { id: 'copy', label: 'Copy text', hint: 'Copy a word, a sentence or a verse out of the reader.' }
+    { id: 'copy', label: 'Copy text', hint: 'Copy a word, a sentence or a verse out of the reader.' },
+    { id: 'book', label: 'Prepare a book / PDF', hint: 'Build a watermarked book from a grantha, a range, or their own marked verses, and print it to PDF.' }
   ];
   function renderCaps() {
     var list = $('#capsList');
