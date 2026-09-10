@@ -17,28 +17,36 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
-- **Rigveda Śākala Krama-pāṭha generator — spec corrected, blocked on data (10 Sep 2026).**
-  A first-draft prompt (from Gemini) for generating Krama-pāṭha from Pada-pāṭha was reviewed
-  against the actual structure of Śaunaka's Ṛgveda-Prātiśākhya and found to skip most of the
-  tradition-specific machinery (treated Krama as naive adjacent-word pairing, hard-coded
-  Parigraha as a universal `word + iti` formula, would have used generic Pāṇinian sandhi as
-  authoritative, flattened the accent system to udātta/anudātta/svarita, mixed colour and
-  audio-timestamp concerns into the generator itself). The corrected specification —
-  authoritative rule hierarchy, the Krama-Paṭala (ch. 10, 22 sūtras) + Kramahetu-Paṭala
-  (ch. 11, 71 sūtras, incl. the explicit Śākala catuḥkrama practice) as first-class phases,
-  a rule-driven predicate model instead of static word lists, a script-independent accent
-  enum with room for dīrgha-svarita/pracaya/kampa, mandatory per-unit provenance citing
-  sūtra numbers, and a required GENERATE-vs-VALIDATE mode pair — is written up in full at
-  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md`. **Blocked on two prerequisites, not yet
-  done:** (1) a Rigveda Śākala Pada-pāṭha dataset (doesn't exist — `shakala_shakha/` has
-  `samhita/` only); (2) the Ṛgveda-Prātiśākhya's own sūtra text, at minimum the Krama-Paṭala
-  and Kramahetu-Paṭala (`vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` and
-  `shaunakiya_chaturadhyayika/data.json` are both empty stubs; the digitization source is
-  already logged above under "Śikṣā + Prātiśākhya" — `archive.org/details/pratisakhyarigv00sarmgoog`,
-  Śaunaka's text w/ Uvaṭa's commentary, public domain — OCR of it needs a Gemini cost
-  estimate + the lead's go-ahead per the standing rule before it's run). No code or corpus
-  data written yet; do not start implementation before both prerequisites and the open
-  questions in that document's §10 are resolved.
+- **Rigveda Śākala Krama-pāṭha generator — spec corrected twice, blocked on one prerequisite
+  (10 Sep 2026).** A first-draft prompt (from Gemini) for generating Krama-pāṭha from
+  Pada-pāṭha was reviewed against the actual structure of Śaunaka's Ṛgveda-Prātiśākhya and
+  found to skip most of the tradition-specific machinery (treated Krama as naive
+  adjacent-word pairing, hard-coded Parigraha as a universal `word + iti` formula, would have
+  used generic Pāṇinian sandhi as authoritative, flattened the accent system to
+  udātta/anudātta/svarita, mixed colour and audio-timestamp concerns into the generator
+  itself). The corrected specification — authoritative rule hierarchy, the Krama-Paṭala
+  (ch. 10, 22 sūtras) + Kramahetu-Paṭala (ch. 11, 71 sūtras, incl. the explicit Śākala
+  catuḥkrama practice) as first-class phases, a rule-driven predicate model instead of static
+  word lists, a script-independent accent enum with room for dīrgha-svarita/pracaya/kampa,
+  mandatory per-unit provenance citing sūtra numbers, and a required GENERATE-vs-VALIDATE
+  mode pair — is written up in full at `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md`. **A
+  second pass corrected the spec's own first-draft error**: it had wrongly claimed the
+  Rigveda Śākala Pada-pāṭha doesn't exist — it does (accented `pada_patha` field on all
+  10,552 mantras already in `samhita/mandala_01..10/data.json`, cross-validated 96.61%
+  against VedaWeb; see `dge/veda_toolkit/README.md`) — and replaced a single unverified
+  archive.org-PDF citation with a three-layer, live-checked Prātiśākhya sourcing plan
+  (Sanskrit Library TEI/XML as the canonical machine-readable base — Peter M. Scharf, 2010,
+  CC BY-NC-SA 3.0 — cross-checked against VedaViṣṭāram's Uvaṭa Bhāṣya/Viṣṇumitra Vṛtti
+  edition and the RV-Prātiśākhya project's independent rendering) plus a concrete per-paṭala
+  rule-database file/schema layout, in the document's §4a. **Genuinely blocked on one
+  remaining prerequisite:** the Ṛgveda-Prātiśākhya's own sūtra text — at minimum the
+  Krama-Paṭala and Kramahetu-Paṭala — is still not digitized
+  (`vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` and
+  `shaunakiya_chaturadhyayika/data.json` are both empty stubs). Ingesting the Sanskrit
+  Library XML is a parsing task, not OCR, so no Gemini cost gate applies to that step itself;
+  one would apply only if a scanned-image fallback is later needed for Layers B/C. No code
+  or corpus data written yet; do not start implementation before that prerequisite and the
+  open questions in the document's §10 are resolved.
 
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
