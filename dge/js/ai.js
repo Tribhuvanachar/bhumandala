@@ -1385,6 +1385,26 @@ function dgeSelectedWordText() {
   // correct fallback rather than a stale guess.
   return window.lastSelectedText || '';
 }
+
+// What the word tools should LOOK UP, as opposed to what the reader tapped.
+//
+// Every index they consult is Devanagari-keyed -- the verb form index, the
+// शब्दपाठः, the कोश, the corpus search index -- so with the display script set
+// to Kannada, Telugu or IAST, every one of these tools answered "not found"
+// for words that are plainly in the data. (Found while making the धातु/कोश
+// marks work in every script, 10 Sep 2026: the mark appeared and the tap it
+// promised then failed.) The modals themselves are Devanagari surfaces
+// throughout -- paradigms, derivations, Dhatupatha entries -- so the
+// Devanagari reading is also the right thing to show in them.
+//
+// highlight-words.js owns the conversion (and its cache); absent, this is the
+// identity function and behaviour is exactly what it was.
+function dgeLookupWordText() {
+  const word = dgeSelectedWordText();
+  if (!word || typeof window.dgeToDevanagariWord !== 'function') return word;
+  return window.dgeToDevanagariWord(word) || word;
+}
+window.dgeLookupWordText = dgeLookupWordText;
 function dgeHideActionTooltip() {
   const tooltip = document.getElementById('actionTooltip');
   if (tooltip) tooltip.style.display = 'none';
@@ -1456,6 +1476,7 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal .dsm-empty a{color:var(--accent-red);}',
     '.dge-word-modal .dsm-full-link{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--muted-text);}',
     '.dge-word-modal .dsm-section-label{font-size:11px;font-weight:700;color:var(--muted-text);text-transform:uppercase;letter-spacing:.4px;margin:16px 0 6px;border-top:1px solid var(--card-border);padding-top:12px;}',
+    '.dge-word-modal .dsm-pada-listed{opacity:.72;font-style:italic;}',
     '.dge-word-modal .dsm-kosha-entry{padding:6px 0;font-size:12.5px;line-height:1.55;border-bottom:1px dashed var(--card-border);}',
     '.dge-word-modal .dsm-kosha-entry b{color:var(--accent-red);}',
     '.dge-word-modal .dsm-kosha-more{width:100%;margin-top:8px;}',
@@ -1986,7 +2007,7 @@ function dgeWireShabdaKoshaMore(body) {
 window.dgeShabdaReqSeq = window.dgeShabdaReqSeq || 0;
 window.dgeOpenShabdaForSelection = function(e) {
   if (e) e.preventDefault();
-  const word = dgeSelectedWordText();
+  const word = dgeLookupWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
   dgeEnsureShabdaModal();
@@ -2074,7 +2095,7 @@ function dgeEnsureSandhiModal() {
 }
 window.dgeOpenVidyutSandhiForSelection = function (e) {
   if (e) e.preventDefault();
-  const word = dgeSelectedWordText();
+  const word = dgeLookupWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
   function fallbackToAi() {
@@ -2191,6 +2212,28 @@ function dgeDhatuPadaOf(d, key, form) {
     return null;
   }
   return null;
+}
+
+// The line under the word: which pada THIS form is, not which pada the
+// Dhatupatha record happens to be labelled.
+//
+// Found live, 10 Sep 2026: गच्छति opened with "from ग॒मॢँ 'गतौ' · गणः 1 ·
+// आत्मनेपदम्" while its own derivation two lines below applied 1.3.78
+// शेषात् कर्तरि परस्मैपदम् and the paradigm printed परस्मैपद endings. The
+// header was reading the shipped Dhatupatha record's `pada` field, which for
+// this root says आत्मनेपदम्; the engine disagrees. Rather than pick a winner
+// silently, the derivation's answer for the form in hand leads (it is the one
+// the tables below actually follow) and the listed one is named beside it, so
+// a reader who knows the Dhatupatha reading is not left thinking we lost it.
+function dgeDhatuHeaderPada(d, key, form) {
+  const listed = (d && d.pada) || '';
+  const derived = dgeDhatuPadaOf(d, key, form);
+  if (!derived) return dgeShabdaEsc(listed);
+  const name = derived === 'A' ? 'आत्मनेपदम्' : 'परस्मैपदम्';
+  if (!listed || listed === name) return dgeShabdaEsc(name);
+  return dgeShabdaEsc(name) +
+    ' <span class="dsm-pada-listed" title="the pada this root carries in the shipped धातुपाठः, which the derivation of this form does not follow">' +
+    '(धातुपाठे ' + dgeShabdaEsc(listed) + ')</span>';
 }
 
 // One table per pada when a root is उभयपदी. The lead: "visual separation or
@@ -2339,7 +2382,7 @@ function dgeDhatuLexiconHtml(entry) {
 window.dgeDhatuReqSeq = window.dgeDhatuReqSeq || 0;
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
-  const word = dgeSelectedWordText();
+  const word = dgeLookupWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
   dgeEnsureDhatuModal();
@@ -2406,7 +2449,7 @@ function dgeRenderDhatuCandidate(body, word, hits, index, myReq, opts) {
         '<div class="dsm-word deva">' + dgeShabdaEsc(opts.heading || word) + '</div>' +
         (opts.beforeSub || '') +
         dgeDhatuCandidateChipsHtml(hits, index) +
-        '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
+        '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeDhatuHeaderPada(d, hit.k, word) + '</div>' +
         '<div id="ddmUpasargaArtha"></div>' +
         dgeDhatuFormsHtml(d, hit.k) +
         '<div id="ddmSteps"></div>' +
@@ -2518,7 +2561,7 @@ function dgeDhatuCandidateChipsHtml(hits, index) {
 // than building a second index that would drift from it.
 window.dgeOpenCorpusSearchForSelection = function(e) {
   if (e) e.preventDefault();
-  const word = dgeSelectedWordText();
+  const word = dgeLookupWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
   if (typeof window.DGEGlobalSearch === 'object' && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(word);
