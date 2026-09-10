@@ -257,6 +257,20 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display:
    never appears on a word already carrying a citation or a pratīka. A thin
    dotted rule under the join rather than a fill, so a paragraph with many of
    them still reads as a paragraph. */
+/* 📖 Prepare-a-book sheet (book-ui.js). Plain stacked groups rather than a
+   multi-column form: this is filled in on a phone as often as a desktop, and
+   a publisher's choices are few enough to read straight down. */
+.dge-bb-group { border-top: 1px solid var(--card-border); padding: 12px 0 4px; }
+.dge-bb-group:first-of-type { border-top: 0; padding-top: 0; }
+.dge-bb-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--muted-text); margin-bottom: 8px; }
+.dge-bb-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px; padding: 6px 0; cursor: pointer; }
+.dge-bb-row input[type="radio"], .dge-bb-row input[type="checkbox"] { width: 17px; height: 17px; flex: none; margin: 0; }
+.dge-bb-row input:disabled + *, .dge-bb-row:has(input:disabled) { opacity: .45; cursor: default; }
+.dge-bb-n { margin-left: auto; font-size: 11px; color: var(--muted-text); font-variant-numeric: tabular-nums; }
+.dge-bb-hint { font-size: 11px; color: var(--muted-text); flex: 1 1 100%; }
+.dge-bb-num { width: 66px; font-size: 13px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); }
+.dge-bb-in { display: block; width: 100%; box-sizing: border-box; margin-bottom: 8px; font-size: 13px; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; }
+
 .dge-sandhi { border-bottom: 1px dotted var(--muted-text); cursor: help; }
 @media (hover: none) { .dge-sandhi { cursor: pointer; } }
 

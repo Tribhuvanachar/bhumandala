@@ -41,7 +41,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.85.0">
+<link rel="stylesheet" href="css/main.css?v=4.87.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -284,6 +284,11 @@
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya/index.html'">🪶 Kāvyāni</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa-sahitya/views/index.html'">🎶 Dasa Sahitya</div>
             <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dvaita-grantha-anukramani/index.html'">📚 द्वैतवेदान्तग्रन्थानुक्रमणी · Grantha Index</div>
+            <!-- Shown to everyone; dgeOpenBookBuilder refuses with an
+                 explanation unless the viewer's role has been granted the
+                 'book' capability. Hiding it entirely would leave a reader
+                 who HAS been granted it unable to find the thing. -->
+            <div class="pop-item" id="prepareBookItem" onclick="window.togglePopup('sectionsPopup'); window.dgeOpenBookBuilder()">📖 Prepare a book / PDF</div>
           </div>
         </div>
 
@@ -296,8 +301,17 @@
              anchor-side positioning to get wrong for a plain modal trigger. -->
         <button class="btn-top" id="accountBtn" data-topbar="account" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤 <span class="btn-top-label">My Account</span></button>
 
+        <!-- 10 Sep 2026, the lead: "do we really require the last menu option
+             named Access?" For a visitor, no. It was shown to EVERYONE and
+             advertised "Admin Access" / "Super Admin Access" to every
+             anonymous reader — reasonable when a passkey was the only way in,
+             and a door with a sign on it now that a real account carries the
+             role and reveals the tools by itself (user-auth.js's
+             dgeBridgeRoleToAdminTools). Hidden by default; admin-editor.js
+             reveals it for an admin device, and ?superadmin=CODE in the URL
+             still works for a first entry, so nothing became unreachable. -->
         <div style="position:relative;" data-topbar="access">
-          <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑 <span class="btn-top-label">Access</span></button>
+          <button class="btn-top" id="accessKeyBtn" style="display:none;" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑 <span class="btn-top-label">Access</span></button>
           <div class="popup popup-top" id="accessPopup">
             <div class="popup-label">Access</div>
             <div class="pop-item" id="adminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔒 Admin Access</div>
@@ -1103,6 +1117,20 @@
   </div>
 </div>
 
+<!-- 📖 Prepare book (book-ui.js / book-builder.js). The reader picks the
+     verses, the commentaries and the title page; the book opens in its own
+     tab and the browser's own print engine turns it into a PDF — which is
+     the only way Devanagari conjuncts come out right (see book-builder.js). -->
+<div class="modal-overlay" id="bookBuilderModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📖 Prepare a book</h3>
+      <button class="btn-sm" onclick="window.closeModal('bookBuilderModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" id="bookBuilderBody"></div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="userRolesModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
@@ -1407,6 +1435,8 @@
 <script src="js/pratika.js?v=1.0.0"></script>
 <script src="js/reference-links.js?v=1.0.0"></script>
 <script src="js/commentary-sandhi.js?v=1.0.0"></script>
+<script src="js/book-builder.js?v=1.0.0"></script>
+<script src="js/book-ui.js?v=1.0.0"></script>
 <script src="js/ai.js?v=4.85.0"></script>
 <script src="js/genie.js?v=1"></script>
 <script src="js/sandhi.js?v=1"></script>
@@ -1441,7 +1471,7 @@
      "loading" and core.js's later boot code (including the ?SMV= query
      abbreviation routing it was first noticed against) never run. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" async></script>
-<script src="js/admin-editor.js?v=4.61.5"></script>
+<script src="js/admin-editor.js?v=4.87.0"></script>
 <script src="js/config-editor.js?v=4.85.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
@@ -1480,7 +1510,7 @@
      default false). Since the feature is off for every deployment that
      hasn't done the Firebase setup, static tags here would mean every
      visitor downloading several hundred KB of SDK that never runs. -->
-<script src="js/user-auth.js?v=4.87.0"></script>
+<script src="js/user-auth.js?v=4.88.0"></script>
 <script src="js/user-roles.js?v=4.87.0"></script>
 <!-- 8 Sep 2026: role-based content gating (admin/access-control.html manages
      it). Loaded unconditionally like the two scripts above it -- cheap
