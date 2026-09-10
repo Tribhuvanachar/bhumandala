@@ -17,6 +17,29 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
+- **Rigveda Śākala Krama-pāṭha generator — spec corrected, blocked on data (10 Sep 2026).**
+  A first-draft prompt (from Gemini) for generating Krama-pāṭha from Pada-pāṭha was reviewed
+  against the actual structure of Śaunaka's Ṛgveda-Prātiśākhya and found to skip most of the
+  tradition-specific machinery (treated Krama as naive adjacent-word pairing, hard-coded
+  Parigraha as a universal `word + iti` formula, would have used generic Pāṇinian sandhi as
+  authoritative, flattened the accent system to udātta/anudātta/svarita, mixed colour and
+  audio-timestamp concerns into the generator itself). The corrected specification —
+  authoritative rule hierarchy, the Krama-Paṭala (ch. 10, 22 sūtras) + Kramahetu-Paṭala
+  (ch. 11, 71 sūtras, incl. the explicit Śākala catuḥkrama practice) as first-class phases,
+  a rule-driven predicate model instead of static word lists, a script-independent accent
+  enum with room for dīrgha-svarita/pracaya/kampa, mandatory per-unit provenance citing
+  sūtra numbers, and a required GENERATE-vs-VALIDATE mode pair — is written up in full at
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md`. **Blocked on two prerequisites, not yet
+  done:** (1) a Rigveda Śākala Pada-pāṭha dataset (doesn't exist — `shakala_shakha/` has
+  `samhita/` only); (2) the Ṛgveda-Prātiśākhya's own sūtra text, at minimum the Krama-Paṭala
+  and Kramahetu-Paṭala (`vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` and
+  `shaunakiya_chaturadhyayika/data.json` are both empty stubs; the digitization source is
+  already logged above under "Śikṣā + Prātiśākhya" — `archive.org/details/pratisakhyarigv00sarmgoog`,
+  Śaunaka's text w/ Uvaṭa's commentary, public domain — OCR of it needs a Gemini cost
+  estimate + the lead's go-ahead per the standing rule before it's run). No code or corpus
+  data written yet; do not start implementation before both prerequisites and the open
+  questions in that document's §10 are resolved.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead
