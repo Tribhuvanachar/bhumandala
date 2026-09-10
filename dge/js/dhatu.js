@@ -84,12 +84,20 @@
       +'<div class="rbody">'+ (open?bodyHTML(it):"") +'</div>'
     +'</article>';
   }
-  // 7 Sep 2026: corpus usage (tools/build_dhatu_prayoga_index.py → dhatu_prayoga/manifest.json):
-  // [occurrences, attested cells] per root, shown as a pill and as a sort.
+  // 7 Sep 2026: corpus usage (tools/build_dhatu_prayoga_index.py → dhatu_prayoga/manifest.json).
+  // 10 Sep 2026 the shape became [certain, shared, attested cells]: `certain` is
+  // occurrences of forms only THIS root can write, `shared` occurrences of a
+  // homograph several roots can. The pill and the sort show certain alone --
+  // adding the two would be double-counting, since the same कृत्वा is in the
+  // shared column of both 05.0007 and 08.0010.
   function usagePill(id){
     var u=state.usage&&state.usage[id];
     if(!u) return '';
-    return '<span class="rusage" title="'+u[0].toLocaleString()+' occurrences in the library across '+u[1]+' forms — open the row for examples">'+u[0].toLocaleString()+'×</span>';
+    var certain=u[0]|0, shared=u[1]|0, cells=u[2]|0;
+    var t=certain.toLocaleString()+' occurrences of forms only this root can write, across '+cells+' forms';
+    if(shared) t+=' — plus '+shared.toLocaleString()+' on forms another root can write too, which cannot be attributed either way';
+    return '<span class="rusage'+(certain===0&&shared?' rusage-shared':'')+'" title="'+t+' — open the row for examples">'+
+      certain.toLocaleString()+'×'+(shared?'<sup title="shared with another root">~</sup>':'')+'</span>';
   }
   function bodyHTML(it){
     var devCls = state.script==="iast"?"":"deva";
@@ -115,7 +123,7 @@
       +'<a class="btn ai" href="rupasiddhi.html#'+it.id+'" title="उपसर्ग-योजना, सनादि, सर्वे 11 लकाराः, कृदन्त-declensions — every form derived live, step by step">✨ रूपसिद्धिः · उपसर्गैः</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
       +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
-      +((state.usage&&state.usage[it.id])?'<a class="btn ai" href="prakriya.html#'+it.id+'" title="Every attested form of this root with example verses (धातुप्रयोगसूची)">📚 प्रयोगाः · '+state.usage[it.id][0].toLocaleString()+' in '+state.usage[it.id][1]+' forms</a>':'')
+      +((state.usage&&state.usage[it.id])?'<a class="btn ai" href="prakriya.html#'+it.id+'" title="Every attested form of this root with example verses (धातुप्रयोगसूची)">📚 प्रयोगाः · '+state.usage[it.id][0].toLocaleString()+' in '+(state.usage[it.id][2]|0)+' forms</a>':'')
       +'<button class="btn" data-dh-more="'+it.id+'" title="More actions for this root" aria-label="More actions for '+esc(tl(it.dhatu))+'">⋯ More</button>'
       +'</div>';
     if(state.vset && state.vset[it.id]){

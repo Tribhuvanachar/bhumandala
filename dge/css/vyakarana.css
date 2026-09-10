@@ -126,6 +126,10 @@
 
 /* 7 Sep 2026: corpus usage pill on dhātu rows (dhatu_prayoga manifest) */
 .rusage{margin-left:auto;font-size:11px;font-weight:700;color:var(--accent);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:1px 7px;white-space:nowrap}
+/* A root attested ONLY by forms some other root can write too: the count is
+   0 and the pill should not read as confidently as an earned one. */
+.rusage-shared{color:var(--muted);font-weight:600}
+.rusage sup{font-size:9px;opacity:.8;margin-left:1px}
 
 /* 7 Sep 2026: any-stem declension generator (shabda-gen.js) */
 #sg-sec{margin:14px 0}

@@ -104,9 +104,19 @@
     USAGE = null;
     return fetch(usageUrl(code), { cache: 'force-cache' }).then(r => (r.ok ? r.json() : null)).then(u => { USAGE = u; return u; }).catch(() => null);
   }
+  // n = occurrences of a form only this root can write. sn = occurrences of a
+  // form several roots can, counted in full against each of them (10 Sep 2026).
+  // The two are never added: the same कृत्वा is in the sn of both 05.0007 and
+  // 08.0010, and adding them is exactly the arithmetic that reported 29,938
+  // "having done"s as a root meaning "to injure".
   function usageBadge(key) {
     const f = USAGE && USAGE.forms && USAGE.forms[key];
-    return f ? '<span class="pk-usage" title="' + f.n.toLocaleString() + ' occurrences in the library">' + f.n.toLocaleString() + '×</span>' : '';
+    if (!f) return '';
+    const sn = f.sn || 0;
+    const t = f.n.toLocaleString() + ' occurrences in the library' +
+      (sn ? ' — and ' + sn.toLocaleString() + ' more of a spelling another root also writes, which cannot be attributed either way' : '');
+    return '<span class="pk-usage' + (!f.n && sn ? ' pk-usage-shared' : '') + '" title="' + t + '">' +
+      f.n.toLocaleString() + '×' + (sn ? '<sup>~' + sn.toLocaleString() + '</sup>' : '') + '</span>';
   }
   function readerLink(slug, unit, word) {
     let u = '../index.html?path=' + encodeURIComponent(slug);
@@ -119,8 +129,13 @@
     const f = USAGE && USAGE.forms && USAGE.forms[key];
     if (!f) return '<p class="pk-note">No occurrence of this form found in the library (exact, word-bounded matches only — sandhi-joined uses are not counted).</p>';
     const ex = f.e || [];
+    const sn = f.sn || 0;
+    const shareNote = sn
+      ? ' · <em>' + sn.toLocaleString() + ' further occurrence' + (sn === 1 ? '' : 's') +
+        ' of this spelling belong to this root OR to another that writes it identically — they are not counted above, and the examples below marked so are among them</em>'
+      : '';
     return '<div class="pk-usage-block"><h3 class="pk-h2 deva">प्रयोगाः <span class="pk-sub">' + esc(label || '') + ' · ' + f.n.toLocaleString() + ' in the library' +
-      (ex.length < f.n ? ', first ' + ex.length + ' shown' : '') + (f.amb ? ' · <em>this form also reads as another word; counts may include it</em>' : '') + '</span></h3><ol class="pk-ex">' +
+      (ex.length < f.n ? ', first ' + ex.length + ' shown' : '') + shareNote + '</span></h3><ol class="pk-ex">' +
       ex.map(e => '<li><span class="deva pk-ex-snip">' + esc(e[3]).replace(esc(e[2]), '<mark>' + esc(e[2]) + '</mark>') + '</span> ' +
         '<a class="pk-ex-ref" href="' + readerLink(e[0], e[1], e[2]) + '" title="' + esc(e[0]) + '">' + esc(e[4] || e[0]) + (e[1] ? ' · ' + esc(e[1]) : '') + ' ↗</a></li>').join('') +
       '</ol></div>';
@@ -130,7 +145,9 @@
     const keys = Object.keys(USAGE.forms || {}).filter(k => view === 'krdanta' ? k.indexOf('krt:') === 0 : k.indexOf('krt:') !== 0);
     if (!keys.length) return '';
     const shown = keys.sort((a, b) => USAGE.forms[b].n - USAGE.forms[a].n).slice(0, 8);
-    return '<div class="pk-usage-sum"><b>धातुप्रयोगसूची</b> · ' + USAGE.total.toLocaleString() + ' occurrences of ' + USAGE.cells + ' forms in the library · most used: ' +
+    const shared = USAGE.shared || 0;
+    return '<div class="pk-usage-sum"><b>धातुप्रयोगसूची</b> · ' + USAGE.total.toLocaleString() + ' occurrences of ' + USAGE.cells + ' forms in the library' +
+      (shared ? ' <span class="muted">(+' + shared.toLocaleString() + ' on spellings shared with another root)</span>' : '') + ' · most used: ' +
       shown.map(k => '<span class="deva">' + esc((USAGE.forms[k].e[0] || [])[2] || k) + '</span> <span class="muted">' + USAGE.forms[k].n.toLocaleString() + '</span>').join(', ') + '</div>';
   }
 

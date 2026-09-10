@@ -348,9 +348,24 @@
     fetch("../data/vedanga/vyakarana/prakriya/krtindex/"+cp+".json").then(function(r){
       return r.ok ? r.json() : null;
     }).then(function(m){
+      // The index lists EVERY root that writes this kṛdanta form (कृत्वा is
+      // both 05.0007 "to injure" and 08.0010 "to do"). This page can only
+      // navigate to one, so it goes to the root the library actually attests
+      // most — dhatu_prayoga/root_weights.json, counted from forms that are
+      // not ambiguous. Older single-record shape still accepted.
       var hit=m && m[w];
-      if(hit){ location.href="krdanta.html#"+hit.c+":"+hit.k; }
-      else { tryCompoundFallback(surface); }
+      if(!hit){ tryCompoundFallback(surface); return; }
+      var list=Array.isArray(hit)?hit:[hit];
+      if(!list.length){ tryCompoundFallback(surface); return; }
+      if(list.length===1){ location.href="krdanta.html#"+list[0].c+":"+list[0].k; return; }
+      fetch("../data/vedanga/vyakarana/dhatu_prayoga/root_weights.json",{cache:"force-cache"})
+        .then(function(r){ return r.ok?r.json():null; })
+        .then(function(d){
+          var wt=(d&&d.weights)||{};
+          list.sort(function(a,b){ return (wt[b.c]||0)-(wt[a.c]||0) || String(a.c).localeCompare(String(b.c)); });
+          location.href="krdanta.html#"+list[0].c+":"+list[0].k;
+        })
+        .catch(function(){ location.href="krdanta.html#"+list[0].c+":"+list[0].k; });
     }).catch(function(){ tryCompoundFallback(surface); });
   }
 

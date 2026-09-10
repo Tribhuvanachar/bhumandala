@@ -82,13 +82,17 @@ function dgeDhatuChipsHtml(id, shloka) {
   for (const k of keys) { if (hits[k]) { list = hits[k]; break; } }
   if (!list || !list.length) return '';
   const chips = list.slice(0, 12).map(h => {
-    const [word, code, key, amb] = h;
+    // `amb` was a 0/1 flag and is now the NUMBER of roots that write this
+    // spelling (build_dhatu_prayoga_index.py, 10 Sep 2026); `alts` lists the
+    // others. Both readings of the old shape still work: 1 is falsy-adjacent
+    // only in that a certain chip carries no fourth element at all.
+    const [word, code, key, amb, alts] = h;
     const krt = key.indexOf('krt:') === 0;
     const page = krt ? 'krdanta' : 'prakriya';
     const cell = krt ? key.slice(4) : key;
     const lak = krt ? 'कृदन्त' : (DGE_LAKARA_SHORT[key.split('.')[0]] || key.split('.')[0]);
     return `<a class="dge-dhatu-chip${amb ? ' amb' : ''}" href="vyakarana/${page}.html#${code}:${cell}" onclick="event.stopPropagation()" ` +
-      `title="धातुः ${code} · ${lak}${amb ? ' · also reads as another word' : ''}">${word}<small>${lak}</small></a>`;
+      `title="धातुः ${code} · ${lak}${amb > 1 ? ` · this spelling is also a form of ${amb - 1} other root${amb > 2 ? 's' : ''}${Array.isArray(alts) && alts.length ? ' (' + alts.join(', ') + ')' : ''} — shown here as the one this library attests most` : (amb ? ' · also reads as another word' : '')}">${word}<small>${lak}</small></a>`;
   }).join('');
   return `<div class="dge-dhatu-row" title="धातुरूपाणि in this verse — tap a form for its derivation and other uses">${chips}${list.length > 12 ? `<span class="dge-dhatu-more">+${list.length - 12}</span>` : ''}</div>`;
 }

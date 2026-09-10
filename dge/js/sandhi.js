@@ -94,7 +94,8 @@ function dgeRenderSandhiResult(sentence) {
 
 window.dgeOpenSandhiForSelection = function (e) {
   if (e) e.preventDefault();
-  const selected = dgeSelectedWordText();
+  // Devanagari reading, not the on-screen spelling — see dgeLookupWordText in ai.js.
+  const selected = (typeof window.dgeLookupWordText === 'function') ? window.dgeLookupWordText() : dgeSelectedWordText();
   if (!selected) { if (typeof showToast === 'function') showToast('Select a word or phrase first.'); return; }
   dgeHideActionTooltip();
 

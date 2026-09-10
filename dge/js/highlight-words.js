@@ -101,17 +101,48 @@
     return shardCache[name];
   }
 
-  // words -> { word: mask }, fetching only the shards those words actually
-  // land in. Deduplicated, so a page of 25 verses costs the same as one verse
-  // for every shard they share.
+  // The lookup key for a word as it appears on screen: normalised, then
+  // carried back to Devanagari if the reader is in another script.
+  function keyFor(raw) {
+    var w = normalise(raw);
+    if (!w) return '';
+    if (scriptIsDevanagari()) return w;
+    // Normalise again after transliterating: a danda survives the round trip
+    // in some schemes and would otherwise be part of the key.
+    return normalise(toDevanagari(w));
+  }
+  window.dgeWordMarkKey = keyFor;
+
+  // The Devanagari reading of a word as it appears on screen, for anything
+  // that has to look it up in this library's data. Every index the word tools
+  // consult -- the verb form index, the शब्दपाठः, the कोश, the corpus search
+  // index -- is Devanagari-keyed, so a reader in Kannada or IAST was looking
+  // up a spelling that could not be there. Exported from here because this is
+  // where the transliteration and its cache already live.
+  //
+  // A round trip is not always lossless, and this does not pretend otherwise:
+  // Tamil writes क ख ग घ with one letter, so a word carried into Tamil and
+  // back may come back as a different word, and it simply will not be found.
+  // The other scripts the reader can choose are one-to-one with Devanagari.
+  window.dgeToDevanagariWord = function (word) {
+    var w = String(word == null ? '' : word);
+    if (!w || scriptIsDevanagari() || !canTransliterate()) return w;
+    return toDevanagari(w) || w;
+  };
+
+  // words -> { word-as-given: mask }, fetching only the shards those words
+  // actually land in. Deduplicated, so a page of 25 verses costs the same as
+  // one verse for every shard they share. Keyed back by the caller's own
+  // spelling, so a caller in IAST never has to know a Devanagari key existed.
   function wordMarks(words) {
     return manifest().then(function (m) {
-      var need = {}, wanted = {};
+      var need = {}, keyOf = {};
       words.forEach(function (raw) {
-        var w = normalise(raw);
-        if (w.length < 2) return;
-        wanted[w] = shardNameFor(w, m);
-        need[wanted[w]] = 1;
+        if (Object.prototype.hasOwnProperty.call(keyOf, raw)) return;
+        var k = keyFor(raw);
+        if (k.length < 2) { keyOf[raw] = ''; return; }
+        keyOf[raw] = k;
+        need[shardNameFor(k, m)] = 1;
       });
       var names = Object.keys(need);
       if (!names.length) return {};
@@ -119,9 +150,11 @@
         var bySharded = {};
         names.forEach(function (n, i) { bySharded[n] = shards[i] || {}; });
         var out = {};
-        Object.keys(wanted).forEach(function (w) {
-          var mask = bySharded[wanted[w]][w];
-          if (mask) out[w] = mask;
+        Object.keys(keyOf).forEach(function (raw) {
+          var k = keyOf[raw];
+          if (!k) return;
+          var mask = bySharded[shardNameFor(k, m)][k];
+          if (mask) out[raw] = mask;
         });
         return out;
       });
@@ -129,25 +162,62 @@
   }
   window.dgeWordMarks = wordMarks;
 
+  // ---- reading a word in whatever script it is on screen ------------------
   // The index is keyed by Devanagari, because that is what the corpus and the
-  // dictionaries are written in. When the reader has switched the display to
-  // IAST or Kannada, the words on screen are transliterations and nothing
-  // would match — so the marks stand down rather than appearing to have
-  // examined the text and found nothing in it. (The seam for lifting this:
-  // transliterate each word back before lookup, or key the index by SLP1 and
-  // convert on both sides. Either needs a transliteration table the reader
-  // page can rely on offline, which is a separate piece of work.)
-  function scriptIsDevanagari() {
-    var s = window.activeScript || 'devanagari';
-    return s === 'devanagari' || s === 'deva';
+  // dictionaries are written in. A reader in IAST or Kannada is looking at
+  // transliterations, so the word has to be carried back to Devanagari before
+  // the lookup can be attempted at all — otherwise the marks simply never
+  // appear, with nothing to say why.
+  //
+  // Sanscript is vendored (js/vendor/README.md) rather than fetched from a
+  // CDN precisely so this cannot go quiet on a bad connection. If it is
+  // somehow absent, the marks stand down outside Devanagari rather than
+  // guessing: an unmarked page is honest, a wrongly marked one is not.
+  // Every id in config.js's SCRIPT_OPTIONS must appear here, or the marks
+  // stand down in that script with nothing to say why. 'hindi' and 'marathi'
+  // are Devanagari under another name (see transliteration.js), so they are
+  // not transliterated at all — a round trip would be lossy for nothing.
+  var SCRIPT_SCHEME = {
+    devanagari: 'devanagari', deva: 'devanagari', hindi: 'devanagari', marathi: 'devanagari',
+    iast: 'iast', kannada: 'kannada', telugu: 'telugu',
+    tamil: 'tamil', malayalam: 'malayalam', gujarati: 'gujarati',
+    bengali: 'bengali', oriya: 'oriya', gurmukhi: 'gurmukhi', hk: 'hk', slp1: 'slp1'
+  };
+
+  function activeScheme() {
+    return SCRIPT_SCHEME[window.activeScript || 'devanagari'] || null;
+  }
+
+  function scriptIsDevanagari() { return activeScheme() === 'devanagari'; }
+
+  function canTransliterate() {
+    return !!(window.Sanscript && typeof window.Sanscript.t === 'function') && !!activeScheme();
+  }
+
+  // Transliteration is per distinct word and memoised for the life of the
+  // page: a commentary repeats the same particles hundreds of times, and
+  // Sanscript.t is not free.
+  // Keyed by scheme as well as word: the same string means different things in
+  // IAST and in Kannada, and the reader can switch script without a reload.
+  var toDevaCache = {};
+  function toDevanagari(word) {
+    var scheme = activeScheme();
+    if (scheme === 'devanagari') return word;
+    var key = scheme + '\u0000' + word;
+    if (Object.prototype.hasOwnProperty.call(toDevaCache, key)) return toDevaCache[key];
+    var out = '';
+    try { out = window.Sanscript.t(word, scheme, 'devanagari') || ''; } catch (e) { out = ''; }
+    toDevaCache[key] = out;
+    return out;
   }
 
   function marksEnabled() {
+    var scriptOk = scriptIsDevanagari() || canTransliterate();
     try {
       var flags = typeof window.dgeGetEffectiveFeatureFlags === 'function'
         ? window.dgeGetEffectiveFeatureFlags() : (window.FEATURE_FLAGS || {});
-      return flags.showWordMarks !== false && scriptIsDevanagari();
-    } catch (e) { return scriptIsDevanagari(); }
+      return flags.showWordMarks !== false && scriptOk;
+    } catch (e) { return scriptOk; }
   }
   window.dgeWordMarksEnabled = marksEnabled;
 
@@ -164,6 +234,8 @@
       var list = hits[k];
       if (!list || !list.length) return;
       list.forEach(function (h) {
+        // These come from the corpus index and are always Devanagari, whatever
+        // script the page is displaying — no transliteration on this side.
         var w = normalise(Array.isArray(h) ? h[0] : (h && h.word));
         if (w) out[w] = 1;
       });
@@ -210,9 +282,8 @@
     return wordMarks(texts).then(function (marks) {
       var n = 0;
       spans.forEach(function (el, i) {
-        var w = normalise(texts[i]);
-        var mask = marks[w] || 0;
-        if (verseDhatus[w]) mask |= MARK_DHATU;
+        var mask = marks[texts[i]] || 0;
+        if (verseDhatus[keyFor(texts[i])]) mask |= MARK_DHATU;
         // Mark the span either way: '0' records "checked, nothing to show",
         // which is what keeps a second pass from re-querying every word.
         el.setAttribute('data-dge-mark', String(mask));

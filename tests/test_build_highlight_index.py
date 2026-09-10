@@ -196,6 +196,66 @@ class ClientAgreement(unittest.TestCase):
             self.assertIn(key, self.js)
 
 
+class MultiScriptClient(unittest.TestCase):
+    """The marks have to appear whatever script the reader is displaying. The
+    index stays Devanagari-keyed; the client carries the word back to it."""
+
+    def setUp(self):
+        base = os.path.join(os.path.dirname(__file__), "..", "dge")
+        with open(os.path.join(base, "js", "highlight-words.js"), encoding="utf-8") as fh:
+            self.js = fh.read()
+        self.base = base
+
+    def test_the_client_transliterates_before_looking_up(self):
+        self.assertIn("toDevanagari", self.js)
+        self.assertIn("window.Sanscript.t(word, scheme, 'devanagari')", self.js)
+
+    def test_every_script_the_reader_can_pick_has_a_scheme(self):
+        # A script id present in the picker but missing from SCRIPT_SCHEME
+        # makes the marks stand down in that script with nothing to say why —
+        # which is exactly what Hindi and Marathi did when this was written.
+        import re
+        with open(os.path.join(self.base, "js", "config.js"), encoding="utf-8") as fh:
+            config = fh.read()
+        block = config.split("const SCRIPT_OPTIONS = [", 1)[1].split("];", 1)[0]
+        ids = re.findall(r"id:\s*'([a-z0-9_]+)'", block)
+        self.assertGreaterEqual(len(ids), 8, "SCRIPT_OPTIONS did not parse")
+        table = self.js.split("var SCRIPT_SCHEME = {", 1)[1].split("};", 1)[0]
+        keys = set(re.findall(r"([a-z0-9_]+)\s*:", table))
+        for script in ids:
+            self.assertIn(script, keys, "no transliteration scheme for script %r" % script)
+
+    def test_sanscript_is_vendored_not_fetched_from_a_cdn(self):
+        # The marks and the reader's own script setting both depend on it; a
+        # CDN that does not answer must not be able to turn either off.
+        vendored = os.path.join(self.base, "js", "vendor", "sanscript-1.3.3.min.js")
+        self.assertTrue(os.path.exists(vendored))
+        self.assertGreater(os.path.getsize(vendored), 50000)
+
+    def test_no_page_still_loads_sanscript_from_a_cdn(self):
+        import glob as _glob
+        offenders = []
+        for path in _glob.glob(os.path.join(self.base, "**", "*.html"), recursive=True):
+            if "node_modules" in path:
+                continue
+            with open(path, encoding="utf-8") as fh:
+                html = fh.read()
+            for line in html.splitlines():
+                if "sanscript" in line and ("cdn.jsdelivr.net" in line or "unpkg.com" in line):
+                    offenders.append(os.path.relpath(path, self.base))
+                    break
+        self.assertEqual(offenders, [])
+
+    def test_the_word_tools_look_up_the_devanagari_reading(self):
+        # Every index they consult is Devanagari-keyed, so in Kannada or IAST
+        # they answered "not found" for words plainly in the data.
+        with open(os.path.join(self.base, "js", "ai.js"), encoding="utf-8") as fh:
+            ai = fh.read()
+        self.assertIn("function dgeLookupWordText()", ai)
+        self.assertEqual(ai.count("const word = dgeLookupWordText();"), 4)
+        self.assertIn("window.dgeToDevanagariWord", self.js)
+
+
 class ShippedIndex(unittest.TestCase):
     """The committed index itself — a build that never ran is a feature that
     silently does nothing."""
