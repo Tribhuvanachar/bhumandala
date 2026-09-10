@@ -290,8 +290,42 @@ window.dgeSuperadminBootstrapHtml = function(opts) {
             : '<li>Open the Firebase console → Firestore Database → <code>users</code></li>') +
     '<li>Change the <code>role</code> field from <code>basic</code> to <code>superadmin</code></li>' +
     '<li>Come back and reload this page</li></ol>' +
-    '<p style="margin:0; opacity:.75;">From then on every other role is granted from 👥 Manage Users — this is a one-time step. ' +
-    'See FIREBASE_SETUP.md §4.</p></div>';
+    '<p style="margin:0 0 10px; opacity:.75;">From then on every other role is granted from 👥 Manage Users — this is a one-time step. ' +
+    'See FIREBASE_SETUP.md §4.</p>' +
+    // The shortcut, when the deployment has a bootstrap allowlist configured
+    // (firestore.rules bootstrapUids / bootstrapEmails). The button does not
+    // know whether this account is on that list -- nothing client-side can
+    // know that without duplicating the list into public JS, which would
+    // defeat keeping it in the rules. So it simply TRIES the write: allowed
+    // for a listed account, refused for everyone else, and the refusal is
+    // the same message they are already reading.
+    '<button type="button" class="btn-sm" onclick="window.dgeClaimSuperadmin(this)">Try claiming super admin</button>' +
+    '<div id="dgeClaimResult" style="margin-top:8px;"></div>' +
+    '<p style="margin:8px 0 0; font-size:11px; opacity:.6;">Works only once an allowlist is configured and deployed ' +
+    '(firestore.rules → <code>bootstrapUids</code>). Otherwise use the console steps above.</p></div>';
+};
+
+/**
+ * Attempt the one-time self-promotion the bootstrap rule allows. Writes
+ * ONLY the role field, because that is all the rule permits — anything else
+ * in the same write is rejected outright by its hasOnly(['role']).
+ */
+window.dgeClaimSuperadmin = async function(btn) {
+  const out = document.getElementById('dgeClaimResult');
+  const say = (msg, ok) => { if (out) out.innerHTML = '<span style="color:' + (ok ? 'inherit' : 'var(--accent-red,#c00)') + ';">' + msg + '</span>'; };
+  const user = (window.firebase && firebase.auth && firebase.auth().currentUser) || window.dgeCurrentUser;
+  if (!user || !user.uid) { say('Sign in first.', false); return; }
+  if (btn) { btn.disabled = true; btn.textContent = 'Claiming…'; }
+  try {
+    await firebase.firestore().collection('users').doc(user.uid).update({ role: 'superadmin' });
+    say('Done — reloading…', true);
+    if (typeof location !== 'undefined' && location.reload) setTimeout(() => location.reload(), 700);
+  } catch (e) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Try claiming super admin'; }
+    say(window.dgeIsPermissionError(e)
+      ? 'Refused — this account is not on the bootstrap allowlist. Use the console steps above, or add it to firestore.rules and deploy.'
+      : 'Failed: ' + String((e && e.message) || e), false);
+  }
 };
 
 window.dgeCopyUid = function(uid, btn) {

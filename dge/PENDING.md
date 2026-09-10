@@ -1223,6 +1223,19 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **10 Sep 2026, ~9:10 pm IST — bootstrap allowlist in firestore.rules, as asked.** `bootstrapUids()` / `bootstrapEmails()`, folded into BOTH
+  `isSuperadmin()` and `isAdmin()` (admin too, or a bootstrap account could change roles but not read the user list to find anyone),
+  plus one narrow extra `allow update` letting a listed account set its OWN `role`, only via `hasOnly(['role'])`, only to
+  `'superadmin'`. **Both lists ship EMPTY** — a fork of this repo must grant its author nothing — so the lead fills one in and
+  deploys (`firebase deploy --only firestore:rules`). The uid form is documented as preferred: opaque rather than personal data,
+  safe in a public repo, unspoofable by anyone who takes over an email. The lead's own address was deliberately NOT committed —
+  their git identity uses the GitHub noreply alias and the address appears nowhere in the tree, so publishing it was not mine to do.
+  `dgeClaimSuperadmin()` (My Account) just tries the write rather than duplicating the list into public JS. 71/71 rules tests pass
+  against the real emulator, which does run in this sandbox (`firebase emulators:exec --only firestore`).
+  - One pre-existing behaviour found while testing and left alone: writing your role to the value it ALREADY holds succeeds, because
+    `affectedKeys()` is empty and `hasOnly()` accepts that. It is a no-op, not an escalation; a first draft of the test asserted
+    against it and was wrong.
+
 - **10 Sep 2026, ~7:20 pm IST — the first-superadmin dead end, explained in the app instead of only in a doc.**
   The lead, holding BOTH 🔑 passkeys: "my account shows I am a normal user ... manage roles says not enough permission ...
   not sure where to set the roles, which url". Both symptoms are one cause and the design is correct, not broken:

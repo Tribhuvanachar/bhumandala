@@ -254,10 +254,49 @@ a completely different matter and must never go in this file.)
 That's all for Google Sign-In. Reload — a 👤 icon appears in the toolbar.
 Signing in creates `users/<uid>` with `role: "basic"`.
 
-**Becoming the first superadmin:** nobody starts as one, on purpose. Sign
-in once, then in the Firestore console open `users/<your-uid>` and change
-`role` to `superadmin` by hand. From then on you can promote others from
-the in-app 👥 Manage Users screen.
+**Becoming the first superadmin:** nobody starts as one, on purpose — a new
+account is `basic`, and the rules forbid changing your *own* role, which is
+what stops a visitor promoting themselves. That leaves a chicken-and-egg
+(to grant a role you must already have one), and there are two ways out.
+
+*The manual way, no deploy needed.* Sign in once, then in the Firestore
+console open `users/<your-uid>` and change `role` to `superadmin` by hand
+(pencil icon on the `role` row; keep the type `string`). Your uid is shown
+in the app under **My Account**, with a Copy button and a direct link to
+your own document.
+
+*The bootstrap allowlist, if you would rather not touch the console again.*
+`firestore.rules` has two lists, **both empty as shipped** so that a fork of
+this repository grants nobody anything:
+
+```
+function bootstrapUids() {
+  return [];                     // <- put your uid here: ['abc123…']
+}
+function bootstrapEmails() {
+  return [];                     // <- or a VERIFIED email: ['you@example.com']
+}
+```
+
+Prefer the uid. It is an opaque identifier rather than personal data, so it
+is safe in a public repository, and it cannot be matched by anyone who gains
+control of an email address. The email path additionally requires
+`email_verified` on the sign-in token, so an unverified or self-asserted
+address never matches.
+
+Fill one in and deploy (`cd dge/firebase && firebase deploy --only
+firestore:rules`). An allowlisted account then counts as admin *and*
+superadmin immediately, and may make its promotion permanent with the
+**Try claiming super admin** button in the same My Account panel — a write
+the rules allow only for a listed account, only on its own document, only
+on the `role` field, and only to the value `superadmin`.
+
+Either way it is a one-time step: from then on every other role is granted
+from the in-app 👥 Manage Users screen.
+
+**Removing bootstrap access** means editing that list and deploying again —
+deliberately, since a standing grant that could be revoked from inside the
+app would be revocable by whoever already got in.
 
 ## 5. Phone verification — picking a channel
 
