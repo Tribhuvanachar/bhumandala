@@ -870,6 +870,8 @@ function renderList() {
       </div>
       ${pathaChipHtml}
       ${pathaViewHtml}
+      ${dgePadacchedaChipHtml(i, shloka)}
+      ${dgePadacchedaViewHtml(i, shloka)}
       ${tirthaChipHtml}
       ${bhagavataChipHtml}
       ${dhatuChipsHtml}
@@ -914,6 +916,12 @@ function renderList() {
   // in place and deliberately not awaited: the answer needs a fetch, and a
   // verse must never wait on a colour. Absent module = no marks, no error.
   if (typeof window.dgeApplyWordMarks === 'function') window.dgeApplyWordMarks(listEl);
+
+  // प्रतीकाः (pratika.js): the verse's own words where a commentary quotes
+  // them back, and the link between the two. Pure DOM and string work over
+  // spans that are already in place, so unlike the word marks it needs no
+  // fetch and no lazy observation.
+  if (typeof window.dgePratikaMarkAll === 'function') window.dgePratikaMarkAll(listEl);
 }
 
 // The page bar sits above the list and again below it (#listViewNavBottom),
@@ -1037,6 +1045,87 @@ window.dgeSetLayoutMode = function (mode, announce) {
 // loadShloka() to select/play that verse; an ambiguous full-card tap
 // would collide with that existing behaviour.
 // The 🕮 source-view toggle (see the srcBtnHtml comment in renderList).
+// पदच्छेदः — the verse with its sandhi joins opened out.
+//
+// Two sources, and the reader is told which is which, because they are not
+// the same kind of claim. A `padaccheda` on the verse itself is an editor's:
+// it is shown plainly. Anything from _padaccheda/<slug>.json is this
+// repository's own segmenter (tools/padaccheda.py) and is labelled as
+// analysis — measured at 55% exact against the 3,941 editor padacchedas the
+// Aṣṭādhyāyī ships, on ordinary verse noticeably better, and in neither case
+// something to print as though an editor had signed it.
+//
+// Only the tokens that actually split are listed. A verse whose every word
+// stands alone has nothing to show and gets no chip, rather than a panel
+// repeating the verse back.
+function dgePadacchedaRows(id, shloka) {
+  const editor = shloka.padaccheda;
+  if (Array.isArray(editor) && editor.length) {
+    return { source: 'editor', rows: [editor.map(String)] };
+  }
+  if (typeof editor === 'string' && editor.trim()) {
+    return { source: 'editor', rows: [editor.split(/\s*[+·]\s*|\s{2,}/).filter(Boolean)] };
+  }
+  const data = window.dgePadaccheda;
+  if (!data || !data.units) return null;
+  const keys = [String(id)];
+  if (shloka.unitId) { keys.push(shloka.unitId); if (shloka.unitNo) keys.push(shloka.unitId + '#' + shloka.unitNo); }
+  for (const k of keys) {
+    if (data.units[k] && data.units[k].length) return { source: data.source || 'engine', rows: data.units[k] };
+  }
+  return null;
+}
+
+function dgePadacchedaChipHtml(id, shloka) {
+  if (typeof dgeGetEffectiveFeatureFlags === 'function' &&
+      dgeGetEffectiveFeatureFlags().showPadaccheda === false) return '';
+  const got = dgePadacchedaRows(id, shloka);
+  if (!got) return '';
+  const engine = got.source !== 'editor';
+  const title = engine
+    ? 'पदच्छेदः — where this verse joins two words into one written form. Worked out by this library’s own segmenter, not by an editor.'
+    : 'पदच्छेदः as this edition gives it';
+  return `<div class="dge-tp-place-row"><button type="button" class="dge-patha-chip dge-pc-chip" onclick="event.stopPropagation(); window.dgeTogglePadacchedaView(this)" title="${title}">पदच्छेदः${engine ? ' <span class="dge-pc-auto">≈</span>' : ''} <span class="dge-tp-arrow">▾</span></button></div>`;
+}
+
+function dgePadacchedaViewHtml(id, shloka) {
+  if (typeof dgeGetEffectiveFeatureFlags === 'function' &&
+      dgeGetEffectiveFeatureFlags().showPadaccheda === false) return '';
+  const got = dgePadacchedaRows(id, shloka);
+  if (!got) return '';
+  const t = (x) => (typeof applyTransliteration === 'function' ? applyTransliteration(String(x), activeScript) : String(x));
+  const engine = got.source !== 'editor';
+  const body = got.rows.map(row => {
+    // An engine row is [written token, piece, piece …]; an editor row is just
+    // the pieces, with nothing to point back at.
+    const joined = engine ? row.slice(1) : row;
+    const head = engine
+      ? `<span class="dge-pc-src deva">${dgeEsc(t(row[0]))}</span><span class="dge-pc-eq">=</span>`
+      : '';
+    return `<div class="dge-pc-row">${head}<span class="dge-pc-parts deva">` +
+      joined.map(w => `<span class="dge-pc-part">${dgeEsc(t(w))}</span>`).join('<span class="dge-pc-plus">+</span>') +
+      `</span></div>`;
+  }).join('');
+  const note = engine
+    ? '<div class="dge-pc-note">worked out by this library’s segmenter from its own word lists — not an editor’s reading</div>'
+    : '';
+  return `<div class="dge-pcview" hidden><div class="dge-patha-label">पदच्छेदः</div>${body}${note}</div>`;
+}
+
+// Minimal escape for the few strings this file interpolates itself.
+function dgeEsc(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+window.dgeTogglePadacchedaView = function (btnEl) {
+  const card = btnEl.closest('.shloka-card');
+  const v = card && card.querySelector('.dge-pcview');
+  if (!v) return;
+  v.hidden = !v.hidden;
+  const arrow = btnEl.querySelector('.dge-tp-arrow');
+  if (arrow) arrow.textContent = v.hidden ? '▾' : '▴';
+};
+
 window.dgeTogglePathaView = function (btnEl) {
   const card = btnEl.closest('.shloka-card');
   const v = card && card.querySelector('.dge-pathaview');

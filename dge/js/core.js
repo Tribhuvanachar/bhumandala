@@ -1143,6 +1143,17 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(r => (r.ok ? r.json() : null)).then(h => { window.dgeDhatuHits = h || null; if (h && typeof renderList === 'function') renderList(); })
             .catch(() => { window.dgeDhatuHits = null; });
         } catch (e) { window.dgeDhatuHits = null; }
+        // पदच्छेदः for this grantha (tools/build_padaccheda.py,
+        // _padaccheda/<slug>.json): which written tokens are two or more words
+        // joined by sandhi, and what they are. One small fetch per grantha;
+        // absent = the verse simply has no पदच्छेदः chip.
+        try {
+          const pcSlug = window.dgeGranthaSlug(window.jsonFileName.startsWith('dge/') ? window.jsonFileName : 'dge/' + window.jsonFileName);
+          fetch('data/_padaccheda/' + pcSlug.replace(/\//g, '__') + '.json', { cache: 'force-cache' })
+            .then(r => (r.ok ? r.json() : null))
+            .then(d => { window.dgePadaccheda = d || null; if (d && typeof renderList === 'function') renderList(); })
+            .catch(() => { window.dgePadaccheda = null; });
+        } catch (e) { window.dgePadaccheda = null; }
         if (typeof dgeMountContentEditorControls === 'function') dgeMountContentEditorControls();
       })
       .catch(err => {
