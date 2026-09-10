@@ -413,7 +413,8 @@ const FEATURE_FLAG_CHECKBOX_IDS = {
   showPreloadButton: 'flagShowPreloadButton',
   showSpeedControl: 'flagShowSpeedControl',
   showDhatuChips: 'flagShowDhatuChips',
-  showWordMarks: 'flagShowWordMarks'
+  showWordMarks: 'flagShowWordMarks',
+  showPratikaLinks: 'flagShowPratikaLinks'
 };
 
 const SCRIPT_OPTION_CHECKBOX_IDS = {

@@ -914,6 +914,12 @@ function renderList() {
   // in place and deliberately not awaited: the answer needs a fetch, and a
   // verse must never wait on a colour. Absent module = no marks, no error.
   if (typeof window.dgeApplyWordMarks === 'function') window.dgeApplyWordMarks(listEl);
+
+  // प्रतीकाः (pratika.js): the verse's own words where a commentary quotes
+  // them back, and the link between the two. Pure DOM and string work over
+  // spans that are already in place, so unlike the word marks it needs no
+  // fetch and no lazy observation.
+  if (typeof window.dgePratikaMarkAll === 'function') window.dgePratikaMarkAll(listEl);
 }
 
 // The page bar sits above the list and again below it (#listViewNavBottom),

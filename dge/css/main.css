@@ -195,6 +195,29 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display:
 .dge-word.dge-word-picked, .dge-word.dge-search-hit { box-shadow: none; }
 .dge-word.dge-word-picked { box-shadow: 0 0 0 1px var(--accent-gold, #e8b24d); }
 
+/* प्रतीकाः — the verse's own words where a commentary quotes them back
+   (pratika.js). Two strengths, because they are two different acts: a word
+   the commentator explicitly picks out (कान्तायेति, or a lemma followed by
+   इत्यर्थः) is a citation and reads as one; the same word recurring bare at
+   the head of its gloss is quieter. Neither competes with the धातु/कोश marks
+   above -- those colour the background, these mark the baseline, so a word
+   can carry both without becoming unreadable. */
+.dge-pratika { border-bottom: 1.5px dotted var(--pratika-line); cursor: pointer; }
+.dge-pratika:not(.dge-pratika-echo) { font-weight: 700; color: var(--pratika-text); }
+.dge-pratika-echo { border-bottom-style: dotted; opacity: .95; }
+.dge-mula-word[data-mula-idx] { cursor: pointer; }
+
+/* The live link between the two. Deliberately an outline rather than another
+   background: the word underneath may already be carrying a धातु or कोश tint,
+   and a second fill would just muddy it. */
+.dge-pratika-sync,
+.dge-word.dge-pratika-sync { outline: 2px solid var(--pratika-line); outline-offset: 1px; border-radius: 2px; background: var(--pratika-glow); }
+@media (hover: none) {
+  /* No hover on a touch screen: the tap does the work, and a :hover rule left
+     active there sticks the highlight on until something else is tapped. */
+  .dge-pratika:hover { background: none; }
+}
+
 /* The legend under the verse list, so the colours are learnable rather than
    decorative. Hidden with the marks themselves. */
 .dge-mark-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 10px 2px 0; font-size: 11.5px; color: var(--muted-text); }

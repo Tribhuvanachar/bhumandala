@@ -49,6 +49,10 @@
      size on a phone, a full-strength fill would fight the Devanagari. */
   --mark-dhatu-bg: rgba(90,190,140,0.18); --mark-dhatu-line: #5ABE8C;
   --mark-kosha-bg: rgba(120,170,240,0.16); --mark-kosha-line: #78AAF0;
+  /* प्रतीक: the commentary quoting the verse. Warm, because it belongs to the
+     text rather than to the grammar tooling the two marks above serve. */
+  --pratika-text: #F0C674; --pratika-line: rgba(240,198,116,0.75);
+  --pratika-glow: rgba(240,198,116,0.14);
 }
 
 /* Each theme block below matches html.theme-X as well as body.theme-X so
@@ -69,6 +73,8 @@ html.theme-traditional, body.theme-traditional {
   --muted-text: #8a7a63;
   --mark-dhatu-bg: rgba(31,111,92,0.13); --mark-dhatu-line: #1F6F5C;
   --mark-kosha-bg: rgba(38,89,168,0.12); --mark-kosha-line: #2659A8;
+  --pratika-text: #8A5A00; --pratika-line: rgba(138,90,0,0.65);
+  --pratika-glow: rgba(138,90,0,0.10);
 }
 
 /* (7 Sep 2026: the Minimal, Vibrant and Dark Glass palettes were removed --
@@ -95,6 +101,10 @@ html.theme-vandana, body.theme-vandana {
      size on a phone, a full-strength fill would fight the Devanagari. */
   --mark-dhatu-bg: rgba(90,190,140,0.18); --mark-dhatu-line: #5ABE8C;
   --mark-kosha-bg: rgba(120,170,240,0.16); --mark-kosha-line: #78AAF0;
+  /* प्रतीक: the commentary quoting the verse. Warm, because it belongs to the
+     text rather than to the grammar tooling the two marks above serve. */
+  --pratika-text: #F0C674; --pratika-line: rgba(240,198,116,0.75);
+  --pratika-glow: rgba(240,198,116,0.14);
 }
 
 } /* @layer tokens */
