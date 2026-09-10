@@ -94,6 +94,15 @@
   </div>
 
   <div class="acPanel">
+    <h2>Capabilities</h2>
+    <p class="hint">A gate decides what a role may <b>see</b>. A capability decides what it may
+      <b>do</b>. Tick the roles that may copy text out of the reader — a word, a sentence or a whole
+      verse, from the right-click menu and the 🕉️ Genie row. An admin always can. With nothing ticked,
+      nobody else can, which is exactly how the site behaved before this panel existed.</p>
+    <div id="capsList"></div>
+  </div>
+
+  <div class="acPanel">
     <h2>Test it</h2>
     <p class="hint">Instant check against the gates above, including any unsaved edits — the fast
       create-role → grant-access → test loop, no second account needed. This checks the DRAFT you see
@@ -122,7 +131,7 @@
 </main>
 
 <script src="../dge/js/config.js?v=1"></script>
-<script src="../dge/js/role-access.js?v=1"></script>
+<script src="../dge/js/role-access.js?v=1.1.0"></script>
 <script>
 (function(){
   'use strict';
@@ -162,6 +171,7 @@
   // never itself change what a real visitor sees.
   var ROLES = [];   // [{id,label,builtin}]
   var GATES = [];   // [{prefix,allowRoles:[id,...]}]
+  var CAPS = {};    // { capability: [role id, ...] } -- what a role may DO
   var auth = null, db = null;
   var REAL_ROLE = null;
 
@@ -258,9 +268,43 @@
       return { id: r.id, label: r.label, builtin: window.dgeFixedRoleIds().indexOf(r.id) >= 0 };
     });
     GATES = window.dgeCurrentRoleGates();
+    CAPS = window.dgeAllCapabilities();
     renderRoles();
     renderGates();
+    renderCaps();
     renderPreviewRoleOptions();
+  }
+
+  // ---- capabilities panel ----
+  // One row per capability. Only 'copy' exists today; the shape is a map so
+  // adding a second is a row here and a dgeRoleCan() call at the point of use,
+  // not another config surface.
+  var CAPABILITY_DEFS = [
+    { id: 'copy', label: 'Copy text', hint: 'Copy a word, a sentence or a verse out of the reader.' }
+  ];
+  function renderCaps() {
+    var list = $('#capsList');
+    list.innerHTML = CAPABILITY_DEFS.map(function (c) {
+      var granted = CAPS[c.id] || [];
+      return '<div class="roleRow" style="align-items:flex-start; flex-wrap:wrap">' +
+        '<span class="roleId">' + esc(c.id) + '</span>' +
+        '<span class="roleLabel" style="flex:1 1 220px">' + esc(c.hint) + '</span>' +
+        '<span style="flex:1 1 100%; display:flex; flex-wrap:wrap; gap:10px; margin-top:6px">' +
+        ROLES.map(function (r) {
+          return '<label style="font-size:12px"><input type="checkbox" data-cap="' + esc(c.id) + '" ' +
+            'data-role="' + esc(r.id) + '"' + (granted.indexOf(r.id) >= 0 ? ' checked' : '') + '> ' +
+            esc(r.label || r.id) + '</label>';
+        }).join('') + '</span></div>';
+    }).join('');
+    list.querySelectorAll('input[data-cap]').forEach(function (cb) {
+      cb.onchange = function () {
+        var cap = cb.getAttribute('data-cap'), role = cb.getAttribute('data-role');
+        var arr = CAPS[cap] || (CAPS[cap] = []);
+        var at = arr.indexOf(role);
+        if (cb.checked && at < 0) arr.push(role);
+        if (!cb.checked && at >= 0) arr.splice(at, 1);
+      };
+    });
   }
 
   // ---- roles panel ----
@@ -280,7 +324,8 @@
         if (used && !confirm('"' + id + '" is used in at least one content gate. Remove the role and strip it from those gates too?')) return;
         ROLES = ROLES.filter(function (r) { return r.id !== id; });
         GATES.forEach(function (g) { g.allowRoles = (g.allowRoles || []).filter(function (rid) { return rid !== id; }); });
-        renderRoles(); renderGates(); renderPreviewRoleOptions();
+        Object.keys(CAPS).forEach(function (c) { CAPS[c] = (CAPS[c] || []).filter(function (rid) { return rid !== id; }); });
+        renderRoles(); renderGates(); renderCaps(); renderPreviewRoleOptions();
       };
     });
   }
@@ -293,7 +338,7 @@
     if (ROLES.some(function (r) { return r.id === id; })) { alert('That role id already exists.'); return; }
     ROLES.push({ id: id, label: label, builtin: false });
     idEl.value = ''; labelEl.value = '';
-    renderRoles(); renderPreviewRoleOptions();
+    renderRoles(); renderCaps(); renderPreviewRoleOptions();
   };
 
   // ---- gates panel ----
@@ -369,7 +414,7 @@
     stateEl.textContent = 'Saving…';
     try {
       var customRoles = ROLES.filter(function (r) { return !r.builtin; }).map(function (r) { return { id: r.id, label: r.label }; });
-      await window.dgeSaveRoleAccessConfig(customRoles, GATES);
+      await window.dgeSaveRoleAccessConfig(customRoles, GATES, CAPS);
       stateEl.textContent = 'Saved — live for every visitor now.';
     } catch (e) {
       console.error('[AccessControl] Save failed:', e);

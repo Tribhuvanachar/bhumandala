@@ -1223,6 +1223,38 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **10 Sep 2026, ~6:45 pm IST — go-live scaffolding for 17 Sep: a published shelf, a real "view as a general user", role admin, word-tool admin, granted copy.**
+  - **The shelf.** `admin/config/library-overrides.json` gained a `shelf` block — an ALLOW-list (`dgeMatchShelf`/`dgeIsOffShelf` in
+    `role-access.js`, wired into `dgeIsHiddenPath`, `global-search.js`'s hit filter and `core.js`'s direct-`?path=` guard).
+    Live: Sumadhva Vijaya, Raghavendra Vijaya, Tīrtha Prabandha, plus a slot for Mani Manjari that costs nothing until its data
+    lands. Everything else — including the rest of SarvaMula, DvaitaVedanta and SetuTila — is private. **The lead excluded the
+    wider Sarvamūla shelf when asked; adding `"SarvaMula"` to `allow` opens all of it in one edit.** Paths are DISPLAY paths
+    (post-`moves`); search maps a hit's real slug through `moves` before judging it, which is the one leak that would have made
+    the shelf pointless.
+  - **Preview.** `dge/js/preview-mode.js` + `dgeEnterPreview`/`dgeExitPreview`. Entering PARKS the two admin localStorage flags
+    that nine separate files read directly, then reloads — so admin tools, the AI word tools, admin-only search hits and copy all
+    go away without patching nine call sites (and without missing the tenth added next month). The banner is the only way out and
+    is therefore inline-styled straight into `<body>`. A tab closed mid-preview restores itself on next load, which is why
+    `preview-mode.js` is loaded in `<head>` ahead of `config.js`.
+  - **Roles.** `user-roles.js` now offers custom roles (it read `AUTH_CONFIG.roles` alone, so a role just created to gate a
+    section with could not be granted to anyone), exports the list as TSV for a spreadsheet, and takes a pasted email→role block
+    back with a per-row result. `dgeParseRolePaste` is pure and tested (11 cases).
+  - **Word tools.** Site Settings grew a Word tools section. `appConfig.wordActions` had been read by `config.js` and written by
+    nothing, so "turn Sandhi/Samasa off for everyone" genuinely had no page — the honest answer to the lead's "from which admin
+    page, I'm not sure" was *nowhere*.
+  - **Copy.** Now a role-granted capability (`config/roleAccess.capabilities.copy`, a Capabilities panel in
+    admin/access-control.html, `dgeRoleCan`). `copy-guard.js` consults it instead of admin-only, and two new WORD_ACTIONS
+    entries (`copyWord`, `copySentence`) appear in the 🕉️ row for a granted role. Copy was never in that registry at all,
+    despite `contextual-actions.js`'s own comment claiming it was.
+  - **Also fixed, both reported by the lead:** the Explore popup and nav rail pointed at the old flat `vyakarana/<tool>.html`
+    pages, so the three-view choosers built for Dhātu / Śabda / Aṣṭādhyāyī / Dāsa Sāhitya were reachable from nowhere (only
+    Guru Paramparā's was wired). `menu.json` already named the right URLs but it only ever filters and reorders existing markup.
+    And the 💬 Commentary button is out of the top bar — the commentary bar above the verses carries the same switches.
+  - **Open for a next session:** the shelf, like every gate in this app, is UI-level — a corpus `data.json` is still a public
+    static file on Hosting, so a determined visitor with a direct file URL can still read it. Real enforcement means serving
+    corpus text through an authenticated proxy, which is a different hosting architecture (the same caveat `role-access.js` has
+    carried since 8 Sep). Also: Mani Manjari's data is not loaded yet, and `capabilities` currently has exactly one entry (copy).
+
 - **10 Sep 2026, ~3:55 pm IST — commentary references reworked: a lexical match is no longer evidence.**
   Generic word marking (`showWordMarks`) stays off; what replaces it is `tools/reference_detect.py` (धातु beside its own
   artha, कोश named in a citation frame, सूत्र quoted verbatim), `tools/build_references.py` → `dge/data/_references/<slug>.json`,

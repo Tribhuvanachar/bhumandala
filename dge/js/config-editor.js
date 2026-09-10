@@ -13,7 +13,7 @@
 //   - deleting the overrides file restores every default instantly
 //   - config.js stays the single source of structure, hand-edited as before
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config-editor.js'] = 'v1.2 (new toggle for appConfig.showCopyrightGatedCommentaries -- the super-admin control for the Mahabharata Kannada/Tatparya Nirnaya copyright gate)';
+window.DGE_VERSIONS['config-editor.js'] = 'v1.3 (10 Sep 2026: a Word tools section -- appConfig.wordActions was read by config.js and written by nothing, so "turn Sandhi/Samasa off for everyone" had no page to do it on) \u00b7 v1.2 (toggle for appConfig.showCopyrightGatedCommentaries)';
 
 const DGE_CONFIG_OVERRIDES_PATH = 'admin/config/config-overrides.json';
 // What's New is content rather than a setting, and lives in its own file so
@@ -57,7 +57,13 @@ function dgeBuildDraft() {
       showCopyrightGatedCommentaries: app.showCopyrightGatedCommentaries === true,
       contactEmail: app.contactEmail || '',
       sarvamoolaProjectText: app.sarvamoolaProjectText || '',
-      audioBaseUrl: app.audioBaseUrl || ''
+      audioBaseUrl: app.audioBaseUrl || '',
+      // Which word tools the 🕉️ Genie row offers, for EVERY visitor.
+      // Shipped defaults live in WORD_ACTIONS (config.js); this object only
+      // holds the ones an admin has deliberately overridden, so a tool added
+      // to the registry later arrives switched to its own default rather than
+      // silently off because an old save didn't mention it.
+      wordActions: Object.assign({}, app.wordActions || {})
     },
     SPONSOR_CONFIG: {
       enabled: sp.enabled !== false,
@@ -325,12 +331,47 @@ function dgeRenderConfigEditor() {
       </div>
     </div>`).join('');
 
+  // Word tools (the 🕉️ Genie row on a selection). The precedence this edits
+  // is the MIDDLE one of three: shipped default < this global admin setting <
+  // a reader's own per-device override (⚙️ → 🎛️). Asked for directly, 10 Sep
+  // 2026 -- "those must be globally configurable ... either enabled or
+  // disabled to all users; currently where do I do it, from which admin page
+  // I'm not sure" -- and the honest answer was nowhere: appConfig.wordActions
+  // was read by config.js and written by nothing.
+  const registry = (window.WORD_ACTIONS || []);
+  const wa = d.appConfig.wordActions || {};
+  const POWERED_NOTE = {
+    own: 'this project’s own offline data',
+    gemini: 'a paid Gemini call — shown only to authorised accounts even when on',
+    external: 'sends the selected text to a third-party service'
+  };
+  const wordToolRows = registry.length ? registry.map(a => {
+    const on = (wa[a.id] !== undefined) ? !!wa[a.id] : !!a.enabled;
+    const overridden = wa[a.id] !== undefined && !!wa[a.id] !== !!a.enabled;
+    return `<label style="display:flex; align-items:flex-start; gap:8px; margin-bottom:10px; cursor:pointer;">
+      <input type="checkbox" ${on ? 'checked' : ''}
+             onchange="window.dgeConfigSet('appConfig.wordActions.${a.id}', this.checked)"
+             style="width:20px; height:20px; flex:none; margin-top:1px;">
+      <span style="font-size:13px; line-height:1.35;">
+        <b>${dgeEsc(a.icon || '')} ${dgeEsc(a.label)}</b>
+        ${overridden ? '<span style="font-size:10px; opacity:.7;"> · changed from default</span>' : ''}
+        <br><span style="font-size:11px; color:var(--muted-text);">${dgeEsc(a.title || '')}
+        — ${dgeEsc(POWERED_NOTE[a.powered] || a.powered || '')}</span>
+      </span>
+    </label>`;
+  }).join('') : '<p class="hint">config.js did not load, so the tool list is unavailable.</p>';
+
   el.innerHTML =
     `<p class="hint" style="margin-top:0;">These settings are saved to
       <code>admin/config/config-overrides.json</code>, a plain data file — never to
       <code>config.js</code>. A mistake here can only change text, never break
       the app, and "Reset all" restores every default.</p>` +
     dgeSection('General', general, true) +
+    dgeSection('Word tools (🕉️ Genie row)',
+      `<p class="hint" style="margin-top:0;">Which tools appear when a reader selects a word,
+        for <b>everyone</b>. A reader can still switch one off on their own device
+        (⚙️ → 🎛️), but cannot switch on one you have turned off here.</p>` +
+      wordToolRows) +
     dgeSection('Support / Sponsorship',
       dgeToggle('SPONSOR_CONFIG.enabled', d.SPONSOR_CONFIG.enabled, 'Show the Support section') +
       dgeField('SPONSOR_CONFIG.introText', d.SPONSOR_CONFIG.introText, 'Intro text', '', true) +

@@ -1280,6 +1280,83 @@ document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);
 var DGE_WORD_CONTAINERS = '.shloka-text, .commentary-block';
 window.DGE_WORD_CONTAINERS = DGE_WORD_CONTAINERS;
 
+/* --- Copy, from the 🕉️ Genie row ----------------------------------------
+ *
+ * Added 10 Sep 2026 on the lead's report that right-clicking a word gave no
+ * way to copy it. Both handlers are registered in config.js's WORD_ACTIONS
+ * with requiresCapability:'copy', so they appear only for a role that has
+ * been granted it (role-access.js) -- an admin always, others by grant.
+ *
+ * The clipboard write is deliberately NOT a document 'copy' event:
+ * copy-guard.js intercepts those for anyone without the capability, and
+ * routing an explicitly-granted Copy button back through the same guard it
+ * is exempt from would be a loop waiting to happen.
+ */
+function dgeCopyToClipboard(text, okMessage) {
+  if (!text) { if (typeof showToast === 'function') showToast('Nothing selected.'); return; }
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) { /* reported below */ }
+    ta.remove();
+  };
+  const done = () => { if (typeof showToast === 'function') showToast(okMessage || 'Copied.'); };
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done).catch(() => { fallback(); done(); });
+    } else { fallback(); done(); }
+  } catch (e) { fallback(); done(); }
+}
+window.dgeCopyToClipboard = dgeCopyToClipboard;
+
+window.dgeCopySelectionText = function(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  const txt = (typeof window.dgeSelectedWordText === 'function' && window.dgeSelectedWordText())
+    || window.dgeRobustSelectedText() || (window.lastSelectedText || '');
+  dgeCopyToClipboard(String(txt).trim(), 'Copied.');
+};
+
+/* The sentence a word sits in. A Sanskrit sentence ends at a daṇḍa, so the
+   span is cut at । or ॥ (and at Latin sentence punctuation, since a
+   commentary's English gloss lives in the same block). Falls back to the
+   whole block when there is no daṇḍa anywhere -- a verse line is a
+   reasonable answer to "copy the sentence" and an empty clipboard is not. */
+window.dgeCopySentenceAroundSelection = function(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  let node = null;
+  try {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount) {
+      const c = sel.getRangeAt(0).startContainer;
+      node = c.nodeType === 3 ? c.parentElement : c;
+    }
+  } catch (e) { /* fall through */ }
+  const host = node && node.closest ? node.closest(DGE_WORD_CONTAINERS) : null;
+  if (!host) { window.dgeCopySelectionText(event); return; }
+  const full = (host.innerText || host.textContent || '').replace(/\s+/g, ' ').trim();
+  const word = String((typeof window.dgeSelectedWordText === 'function' && window.dgeSelectedWordText())
+    || window.dgeRobustSelectedText() || '').trim();
+  let sentence = full;
+  if (word) {
+    const at = full.indexOf(word);
+    if (at >= 0) {
+      const before = full.slice(0, at);
+      const after = full.slice(at + word.length);
+      const cutL = Math.max(before.lastIndexOf('।'), before.lastIndexOf('॥'),
+                            before.lastIndexOf('. '), before.lastIndexOf('? '), before.lastIndexOf('! '));
+      const ends = [after.indexOf('।'), after.indexOf('॥'), after.indexOf('. ')].filter(i => i >= 0);
+      const cutR = ends.length ? Math.min.apply(null, ends) : -1;
+      sentence = (cutL >= 0 ? before.slice(cutL + 1) : before) + word +
+                 (cutR >= 0 ? after.slice(0, cutR + 1) : after);
+    }
+  }
+  dgeCopyToClipboard(sentence.trim(), 'Sentence copied.');
+};
+
 window.dgeRobustSelectedText = function() {
   let raw = '';
   try { raw = (window.getSelection().toString() || '').trim(); } catch (e) { return ''; }

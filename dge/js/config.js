@@ -506,7 +506,24 @@ const WORD_ACTIONS = [
     title: 'Find every other place this word or phrase appears in the library' },
   { id: 'sandhiLive', icon: '🔗', label: 'Sandhi (Live)', handler: 'dgeOpenSandhiForSelection',
     wordOnly: true, powered: 'external', enabled: false,
-    title: 'Live sandhi split via a third-party service' }
+    title: 'Live sandhi split via a third-party service' },
+  // Copy, 10 Sep 2026. The lead's report: right-clicking a word offered no way
+  // to copy it -- only the Genie sheet opened. It genuinely was missing: this
+  // row is built from WORD_ACTIONS and Copy was never in it, even though
+  // contextual-actions.js's own comment claimed not to duplicate "the
+  // Shabda/Dhatu/Sandhi/Copy/Ask-Acharya buttons above".
+  //
+  // `requiresCapability` is new and is what makes these two different from
+  // every other entry: copy is granted per ROLE (role-access.js's dgeRoleCan),
+  // so an admin can decide who may take text out. An admin always may; with
+  // nothing configured, nobody else does -- which is exactly the behaviour
+  // copy-guard.js already had.
+  { id: 'copyWord', icon: '📋', label: 'Copy', handler: 'dgeCopySelectionText',
+    wordOnly: false, powered: 'own', enabled: true, requiresCapability: 'copy',
+    title: 'Copy the selected word or phrase' },
+  { id: 'copySentence', icon: '📄', label: 'Copy sentence', handler: 'dgeCopySentenceAroundSelection',
+    wordOnly: false, powered: 'own', enabled: true, requiresCapability: 'copy',
+    title: 'Copy the whole sentence this word sits in' }
 ];
 window.WORD_ACTIONS = WORD_ACTIONS;
 
@@ -533,7 +550,17 @@ window.dgeGetEffectiveWordActions = function () {
                     : a.enabled;
       return Object.assign({}, a, { enabled: enabled });
     })
-    .filter(function (a) { return a.enabled && (a.powered !== 'gemini' || aiOk); });
+    .filter(function (a) {
+      if (!a.enabled) return false;
+      if (a.powered === 'gemini' && !aiOk) return false;
+      // A capability-gated tool needs the grant as well as the switch. No
+      // role-access.js on this page (the standalone grammar pages) means no
+      // capability system, so those tools simply don't offer it.
+      if (a.requiresCapability) {
+        return typeof window.dgeRoleCan === 'function' && window.dgeRoleCan(a.requiresCapability);
+      }
+      return true;
+    });
 };
 
 // Which scripts/languages appear in the 🔠 script selector, and in what

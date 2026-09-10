@@ -1056,6 +1056,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // The go-live shelf, on a DIRECT link. dgeIsHiddenPath keeps an
+    // off-shelf grantha out of the drawer and global-search keeps it out of
+    // results, but neither covers a bookmark, an old share link or a search
+    // engine's cached URL -- and a launch where "hidden" means "hidden
+    // unless you already have the link" is not the thing that was asked
+    // for. Same honest caveat as every other gate in this app: the
+    // data.json is a public static file, so this stops the SITE showing it,
+    // not the file existing. The shelf is written in display paths, so the
+    // catalog entry's own display path is what gets judged -- and an admin
+    // (not previewing) passes, exactly as everywhere else.
+    if (typeof window.dgeIsOffShelf === 'function' && entry) {
+      const shelfPath = (typeof window.dgeEffectiveDisplayPath === 'function')
+        ? window.dgeEffectiveDisplayPath(slug) : slug;
+      if (window.dgeIsOffShelf(shelfPath)) {
+        const titleEl = document.getElementById('stotraTitle');
+        const cardEl = document.getElementById('shlokaList');
+        if (titleEl) titleEl.innerText = 'Not Available Yet';
+        if (cardEl) cardEl.innerText = 'This text is not part of the published library yet.';
+        if (typeof window.dgeRenderStitchChrome === 'function') window.dgeRenderStitchChrome();
+        return;
+      }
+    }
+
     function fetchGranthaData(attempt) {
       // The timestamp query param alone already guarantees a fresh fetch
       // (it's a URL the browser has never cached) — cache:'no-store' on
