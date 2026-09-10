@@ -72,7 +72,10 @@ const MSG91_TEMPLATE_ID = defineString('MSG91_TEMPLATE_ID', { default: '' });
 // access token, scoped to this one repository, with Actions: read and write
 // and nothing else. A classic PAT with `repo` scope would hand whoever
 // reaches this function the whole account -- see FIREBASE_SETUP.md SS12.
-const GITHUB_DISPATCH_TOKEN = defineSecret('GITHUB_DISPATCH_TOKEN');
+// Named GH_ rather than GITHUB_ because GitHub Actions refuses to let a
+// repository secret's name start with the reserved GITHUB_ prefix --
+// discovered 10 Sep 2026 when the console rejected creating it outright.
+const GITHUB_DISPATCH_TOKEN = defineSecret('GH_DISPATCH_TOKEN');
 const GITHUB_REPO = defineString('GITHUB_REPO', { default: 'Tribhuvanachar/bhumandala' });
 
 // The donation/supporter system's own secrets and config. Both Cashfree
