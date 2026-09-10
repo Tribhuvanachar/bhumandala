@@ -26,7 +26,7 @@ based on situations." §4 covers exactly what that switch is.
 | `createDonation` / `paymentWebhook` / `getDonationStatus` Cloud Functions | ✅ built, exercised end to end against the `mock` gateway (§6) |
 | Firestore rules for the 8 new collections | ✅ built, 21 rules-emulator tests |
 | **Cashfree and Razorpay credentials** | ❌ neither exists in this deployment — both adapters are code-complete and unit-tested against synthetic fixtures matching each gateway's documented shapes, but NEITHER has been exercised against a real sandbox account. See §4's honesty note. |
-| Donation frontend page (`dge/donate.html` or similar) | ❌ not started |
+| Donation frontend page (`dge/donate.html`) | ✅ built 10 Sep 2026 — calls `createDonation`/`getDonationStatus` directly, branches on `checkout.gateway` (razorpay/cashfree/mock), never trusts a gateway's own return redirect for success (see §10) |
 | Real transactional email | ❌ not started — `console` provider only |
 | Rate limiting on `createDonation`/`paymentWebhook` | ❌ not started — flagged as a gap, see §8 |
 | Supporter magic-link auth, entitlements actually granted | ❌ not started — Phase 3/4, deliberately deferred |
@@ -307,3 +307,45 @@ This is the lead's checklist, not something an AI session can complete:
       needs to name the ones that are actually approved and configured
 - [ ] International payment capability, if wanted, separately approved
       by that gateway — never enabled by frontend code alone
+
+## 10. The donation page (`dge/donate.html`), what it does and doesn't do
+
+Self-contained (own inline CSS, no dependency on `config.js` or `user-auth.js`
+— it duplicates the public `FIREBASE_CONFIG` values, which is fine per that
+file's own comment that they're not secret), reachable at `dge/donate.html`.
+No sign-in required — `createDonation`/`getDonationStatus` are both public
+callables by design (§0 of this doc, `enforceAppCheck: false`).
+
+- Sends `name`/`email`/`phone`/`country`(`'IN'`)/`pan`(optional)/`amount`/
+  `purpose`/`displayName`/`displayAmount` to `createDonation`. Never sends a
+  `gateway` field — which gateway actually runs is a deployment config
+  decision (`PAYMENT_GATEWAY`/`PAYMENT_GATEWAYS_ENABLED`), not something the
+  frontend should hardcode.
+- Branches on the returned `checkout.gateway`:
+  - `mock` — shows a plain "test mode, nothing was charged" banner with the
+    donation reference. This is what actually happens today, since neither
+    real gateway has credentials yet.
+  - `razorpay` — loads Checkout.js and opens it with `keyId`/`orderId`/
+    `amount`/`currency` from the response; on the modal's own success
+    callback, redirects to `?ref=<reference>`.
+  - `cashfree` — loads the v3 SDK and calls `cashfree.checkout()` with
+    `paymentSessionId`; Cashfree owns the redirect back via `returnUrl`'s
+    `{order_id}` placeholder (substituted by Cashfree itself, since our
+    `donationReference` IS the Cashfree `order_id` — see
+    `lib/payment-providers.js`).
+  - `CASHFREE_MODE` (`'sandbox'` in the page's own script) has to be flipped
+    to `'production'` by hand once real, live Cashfree credentials are
+    configured — the client has no way to ask the server which
+    `CASHFREE_ENV` is set.
+- On load, a `?ref=` in the URL always re-verifies through
+  `getDonationStatus` — never a gateway's own query params or the fact that
+  its checkout redirected back at all. This is the one rule §0/§7 insist on
+  everywhere else in this feature, carried through to the one place a
+  browser actually sees a result.
+
+**Still not done, before this should be linked from the site nav or shared
+publicly:** rate limiting (§7 — this page makes it directly reachable by
+anyone), real credentials for at least one gateway (above), and the
+compliance checklist above. Right now it is reachable only by direct URL,
+which is enough to test the `mock` path end to end but not yet something to
+publish a link to.
