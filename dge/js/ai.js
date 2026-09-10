@@ -1262,6 +1262,20 @@ document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);
 // handling at the drag's edges). Falls back to the raw selection string
 // when the DOM doesn't have word spans (e.g. selection made outside any
 // .shloka-text) so nothing regresses where the boundary doesn't exist.
+// The element a run of .dge-word spans belongs to. A multi-word drag is only
+// rejoined within ONE of these, so a selection that runs from the verse into
+// the commentary below it falls back to the raw string rather than silently
+// splicing two different texts together.
+//
+// 9 Sep 2026: .commentary-block joined .shloka-text here. Commentary text now
+// carries word spans too (render.js), and the lead's report was that selecting
+// a word in a commentary "restricts options to commentary-related choices
+// rather than allowing full linguistic analysis" -- half of which was this:
+// with no recognised container, a commentary selection fell back to the raw
+// browser string and never resolved to a word.
+var DGE_WORD_CONTAINERS = '.shloka-text, .commentary-block';
+window.DGE_WORD_CONTAINERS = DGE_WORD_CONTAINERS;
+
 window.dgeRobustSelectedText = function() {
   let raw = '';
   try { raw = (window.getSelection().toString() || '').trim(); } catch (e) { return ''; }
@@ -1278,7 +1292,7 @@ window.dgeRobustSelectedText = function() {
     const endWord = nodeToWord(range.endContainer);
     if (!startWord || !endWord) return raw;
     if (startWord === endWord) return startWord.textContent.trim() || raw;
-    const container = startWord.closest('.shloka-text');
+    const container = startWord.closest(DGE_WORD_CONTAINERS);
     if (!container || !container.contains(endWord)) return raw;
     const words = Array.from(container.querySelectorAll('.dge-word'));
     const si = words.indexOf(startWord), ei = words.indexOf(endWord);
@@ -1316,7 +1330,7 @@ window.dgeApplyWordSelectionHighlight = function(range) {
     if (startWord === endWord) {
       words = [startWord];
     } else {
-      const container = startWord.closest('.shloka-text');
+      const container = startWord.closest(DGE_WORD_CONTAINERS);
       if (!container || !container.contains(endWord)) return false;
       const all = Array.from(container.querySelectorAll('.dge-word'));
       const si = all.indexOf(startWord), ei = all.indexOf(endWord);
@@ -1336,6 +1350,25 @@ function dgeClearWordSelectionHighlight() {
   window._dgeHighlightedWords = null;
 }
 window.dgeClearWordSelectionHighlight = dgeClearWordSelectionHighlight;
+
+// Opens the word sheet on ONE word span, as if the reader had selected it.
+// Rather than building the sheet a second way, this makes a real selection
+// over the span and lets the selectionchange handler above do everything it
+// already does -- positioning, the picked-word highlight, which tools apply.
+// Used by the commentary tap handler (contextual-actions.js): a tap that
+// lands on a word is a word selection, not a request for the commentary's
+// own menu.
+window.dgeOpenWordToolsForElement = function (el) {
+  if (!el) return false;
+  try {
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    return true;
+  } catch (e) { return false; }
+};
 
 function dgeSelectedWordText() {
   try {

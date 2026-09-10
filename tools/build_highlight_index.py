@@ -23,6 +23,13 @@ characters deep, which is what turns a 3.5 MB fetch into a ~10 KB one. The
 gloss, the paradigm, the root: all still come from the full indexes, but
 only once the reader actually taps the word.
 
+COVERAGE IS DELIBERATELY CONSERVATIVE. The कोश headwords here come from the
+dictionaries shipped IN THIS REPO; at runtime the reader's tap resolves
+against appConfig.koshaDataBase, a larger mirror on a CDN. That asymmetry is
+the safe direction: every word this marks is one the tap can answer, and
+words only the CDN set knows go unmarked rather than marked-and-empty. If
+the two are ever brought level, rebuild from whichever is the superset.
+
 WHAT A MARK MEANS, AND WHAT IT DOES NOT. A highlight is a promise that
 tapping gets you somewhere, not a claim of analysis. A कोश mark means the
 written form IS a headword — an inflected form in a commentary generally is
