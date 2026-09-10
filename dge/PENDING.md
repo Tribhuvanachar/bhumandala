@@ -1223,6 +1223,29 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **10 Sep 2026, ~3:55 pm IST — commentary references reworked: a lexical match is no longer evidence.**
+  Generic word marking (`showWordMarks`) stays off; what replaces it is `tools/reference_detect.py` (धातु beside its own
+  artha, कोश named in a citation frame, सूत्र quoted verbatim), `tools/build_references.py` → `dge/data/_references/<slug>.json`,
+  and `dge/js/reference-links.js` (`showReferenceLinks`). Commentary sandhi splitting ships beside it
+  (`tools/build_padaccheda.py --commentary` → `_commentary_sandhi/<slug>.json`, `dge/js/commentary-sandhi.js`,
+  `showCommentarySandhi`), gated to clitic and written-visarga seams and guarded against cutting a pratīka, a protected
+  phrase (इत्यर्थः) or a detected citation.
+  - **Rebuild commands, because the frequency corpus changes the answer:**
+    `python3 tools/build_references.py` (whole library, ~10 s) and
+    `python3 tools/build_padaccheda.py --paths kavya_alankara --vigraha kavya_alankara/sumadhva_vijaya --commentary kavya_alankara/sumadhva_vijaya`.
+    Note that `--paths` narrows the corpus `corpus_frequency()` counts, and a narrower count changes which splits clear the
+    gate — running `build_padaccheda.py` with different `--paths` than the last build will churn `_padaccheda/` for reasons
+    that have nothing to do with the change being made. The exact command above is the one the committed data came from.
+  - **Open for a next session:** commentary sandhi is built for Sumadhva Vijaya only, as the pilot pattern this project
+    already used for समासविग्रहः — extend once it has been read in anger. Three sūtra citations are knowingly missed
+    (see the commit message): an edition spelling variant (शतृशनचौ for शतृशानचौ), a citation truncated mid-word
+    (संज्ञायां भॄतॄ), and 6.1.9 सन्यङोः at 7 normalised characters, below the quote floor. Four lexicons are named in
+    commentaries but not held by the library (Medinī, Dhanañjaya, Viśvaprakāśa, Halāyudha — `_citation_registry.json`'s
+    `unresolved` block); those references are marked but deliberately not clickable.
+  - **Not built, deliberately:** a शब्द detector. The lead's own architectural point — Dhātu/Kośa/Sūtra are different
+    because the commentator is explicitly citing a source that can be validated against an authoritative list; an ordinary
+    word is not, and adding a fourth automatic detector would rebuild the ambiguity this whole pass removed.
+
 - **7 Sep 2026, 10:50 pm IST — Kamadhenu Experiment A finished (attempt 4, bf16).** Records: `kamadhenu/reports/experiment_a/`
   (run/eval/job JSON), weights + 13 A/B pairs in the private Hub repo `SarvamulaOrg/kamadhenu-voice-a`. Waiting on the lead's
   listening verdict. Next for a session: Phase 13 HUMAN_REVIEW.csv, a Space engine that loads `model.wrapper.safetensors`,

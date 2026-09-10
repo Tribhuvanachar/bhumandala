@@ -225,6 +225,41 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display:
 .dge-pratika-echo { border-bottom-style: dotted; opacity: .95; }
 .dge-mula-word[data-mula-idx] { cursor: pointer; }
 
+/* सन्दर्भाः — the places a commentary CITES a scholarly source
+   (reference-links.js, built by tools/build_references.py). NOT the old
+   generic word marking: that coloured any word present in a database and was
+   wrong far more often than right. These three marks are claims that the
+   commentator is quoting something, each validated against the authoritative
+   list, so they are allowed to look like links.
+
+   Three types, three tints, one shared shape: a tinted background with a
+   solid underline. A citation usually runs over several words, so the rounded
+   ends are put on the first and last word only and the middle stays square --
+   the run reads as one mark rather than a row of separate boxes. */
+.dge-ref {
+  --ref-bg: var(--mark-kosha-bg); --ref-line: var(--mark-kosha-line);
+  background: var(--ref-bg); box-shadow: inset 0 -2px 0 var(--ref-line); padding: 0 1px;
+}
+.dge-ref[data-ref-href] { cursor: pointer; }
+.dge-ref-dhatu { --ref-bg: var(--mark-dhatu-bg); --ref-line: var(--mark-dhatu-line); }
+.dge-ref-kosha { --ref-bg: var(--mark-kosha-bg); --ref-line: var(--mark-kosha-line); }
+.dge-ref-sutra { --ref-bg: var(--mark-sutra-bg); --ref-line: var(--mark-sutra-line); }
+.dge-ref-start { border-top-left-radius: 4px; border-bottom-left-radius: 4px; padding-left: 2px; }
+.dge-ref-end { border-top-right-radius: 4px; border-bottom-right-radius: 4px; padding-right: 2px; }
+/* A "probable" reading keeps its type colour but is drawn thinner and without
+   a fill, so a reader can see which links the build step was sure of without
+   opening anything. */
+.dge-ref-medium { background: none; box-shadow: inset 0 -1px 0 var(--ref-line); }
+
+/* सन्धिः — a commentary word that is two words written as one
+   (commentary-sandhi.js). The quietest of the three marks on purpose: it says
+   only "there is a join here", which is true of a great deal of prose, and it
+   never appears on a word already carrying a citation or a pratīka. A thin
+   dotted rule under the join rather than a fill, so a paragraph with many of
+   them still reads as a paragraph. */
+.dge-sandhi { border-bottom: 1px dotted var(--muted-text); cursor: help; }
+@media (hover: none) { .dge-sandhi { cursor: pointer; } }
+
 /* The live link between the two. Deliberately an outline rather than another
    background: the word underneath may already be carrying a धातु or कोश tint,
    and a second fill would just muddy it. */
