@@ -1096,15 +1096,27 @@ function dgePadacchedaViewHtml(id, shloka) {
   const t = (x) => (typeof applyTransliteration === 'function' ? applyTransliteration(String(x), activeScript) : String(x));
   const engine = got.source !== 'editor';
   const body = got.rows.map(row => {
-    // An engine row is [written token, piece, piece …]; an editor row is just
-    // the pieces, with nothing to point back at.
-    const joined = engine ? row.slice(1) : row;
+    // An engine row is [written token, seams, piece, piece …]; an editor row
+    // is just the pieces, with nothing to point back at.
+    const joined = engine ? row.slice(2) : row;
+    const seams = engine ? String(row[1] || '') : '';
     const head = engine
       ? `<span class="dge-pc-src deva">${dgeEsc(t(row[0]))}</span><span class="dge-pc-eq">=</span>`
       : '';
-    return `<div class="dge-pc-row">${head}<span class="dge-pc-parts deva">` +
-      joined.map(w => `<span class="dge-pc-part">${dgeEsc(t(w))}</span>`).join('<span class="dge-pc-plus">+</span>') +
-      `</span></div>`;
+    // Two different operations, and the mark says which: '+' where sandhi
+    // fused two words, '-' where a compound's members were written together.
+    // नारायणाय + अखिल-कारणाय is both at once.
+    let parts = '';
+    joined.forEach((w, k) => {
+      if (k) {
+        const samasa = seams.charAt(k - 1) === '-';
+        parts += samasa
+          ? '<span class="dge-pc-hyphen" title="समासः · members of one compound">-</span>'
+          : '<span class="dge-pc-plus" title="सन्धिः · two words joined">+</span>';
+      }
+      parts += `<span class="dge-pc-part">${dgeEsc(t(w))}</span>`;
+    });
+    return `<div class="dge-pc-row">${head}<span class="dge-pc-parts deva">${parts}</span></div>`;
   }).join('');
   const note = engine
     ? '<div class="dge-pc-note">worked out by this library’s segmenter from its own word lists — not an editor’s reading</div>'

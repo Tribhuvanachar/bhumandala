@@ -59,6 +59,39 @@ DEVA_WORD = re.compile(r'[ऀ-ॣ०-ॿ]+')
 TRAIL = re.compile(r'[।॥०-९\s]+$')
 
 
+def load_morphology():
+    """(stems, avyaya, inflected, verbs) from _morph's own records.
+
+    A samāsa's non-final members are prātipadikas — bare stems with no case
+    ending — while two words joined by sandhi are each complete. That is the
+    whole difference between a hyphen and a plus, and _morph's subanta records
+    name the lemma each form came from, so it can be read off the data instead
+    of guessed from the shape of the word."""
+    stems, avyaya, inflected, verbs = set(), set(), set(), set()
+    for path in glob.glob(os.path.join(MORPH, '*.json')):
+        if os.path.basename(path) == 'manifest.json':
+            continue
+        with open(path, encoding='utf-8') as fh:
+            shard = json.load(fh)
+        for form, records in shard.items():
+            if not isinstance(records, list):
+                continue
+            for rec in records:
+                if not isinstance(rec, list) or not rec:
+                    continue
+                if rec[0] == 's':
+                    if len(rec) > 1:
+                        stems.add(rec[1])
+                    if len(rec) >= 4 and rec[3]:
+                        inflected.add(form)
+                elif rec[0] == 'a':
+                    avyaya.add(form)
+                elif rec[0] == 't':
+                    inflected.add(form)
+                    verbs.add(form)
+    return stems, avyaya, inflected, verbs
+
+
 def load_vocab():
     """Every word this library can recognise: कोश headwords and verb forms from
     the highlight index, plus the declined nominal forms only _morph carries.
@@ -155,16 +188,28 @@ def iter_data_files(paths=None):
         yield path
 
 
-def split_text(seg, text):
-    """[[piece, …], …] for the tokens in this unit that have an analysis."""
+def split_text(seg, text, vigraha=False):
+    """[[token, seams, piece, …], …] for the tokens that have an analysis.
+
+    `seams` is one character per join, in order: '+' where two words were
+    fused by sandhi, '-' where a compound's members were written together.
+    Two different operations, and a reader should be able to tell which is
+    which at a glance — नारायणाय + अखिल-कारणाय is a sandhi join whose second
+    half is itself a compound."""
     out = []
     for match in DEVA_WORD.finditer(text.replace('<br>', ' ')):
         token = TRAIL.sub('', match.group(0))
         if not token or not is_devanagari(token):
             continue
-        got = seg.confident_split(token)
-        if got:
-            out.append([token] + [w for w, _rule in got])
+        if vigraha:
+            got = seg.analyse(token)
+            if got:
+                out.append([got['token'], ''.join(got['seams'])] + got['pieces'])
+        else:
+            got = seg.confident_split(token)
+            if got:
+                pieces = [w for w, _rule in got]
+                out.append([token, '+' * (len(pieces) - 1)] + pieces)
     return out
 
 
@@ -218,18 +263,22 @@ def main(argv=None):
     ap.add_argument('--paths', default='', help='comma-separated data/ prefixes to build (default: all)')
     ap.add_argument('--evaluate', action='store_true', help='score against the shipped editor padacchedas and stop')
     ap.add_argument('--limit', type=int, default=0, help='stop after this many granthas (for a quick look)')
+    ap.add_argument('--vigraha', default='', help='comma-separated data/ prefixes to ALSO break compounds in')
     ap.add_argument('--out', default=OUT_DIR)
     args = ap.parse_args(argv)
     paths = [p.strip() for p in args.paths.split(',') if p.strip()]
+    vigraha_paths = [p.strip() for p in args.vigraha.split(',') if p.strip()]
 
     t0 = time.time()
     vocab, n_index = load_vocab()
+    stems, avyaya, inflected, verbs = load_morphology()
     print(f'{len(vocab):,} words of vocabulary '
           f'({n_index:,} from the highlight index, {len(vocab) - n_index:,} declensions from _morph)')
+    print(f'{len(stems):,} stems, {len(avyaya):,} indeclinables, {len(verbs):,} verb forms')
     print('counting corpus frequencies…', flush=True)
     freq = corpus_frequency(paths)
     print(f'  {len(freq):,} distinct written words')
-    seg = Segmenter(vocab, freq)
+    seg = Segmenter(vocab, freq, stems, avyaya, inflected, verbs)
 
     if args.evaluate:
         return evaluate(seg)
@@ -244,9 +293,11 @@ def main(argv=None):
             continue
         slug = os.path.relpath(os.path.dirname(path), DATA)
         found = {}
+
+        want_vigraha = bool(vigraha_paths) and any(slug.startswith(v) for v in vigraha_paths)
         for uid, text in unit_texts(doc):
             units += 1
-            rows = split_text(seg, text)
+            rows = split_text(seg, text, want_vigraha)
             if rows:
                 found[uid] = rows
                 splits += len(rows)
@@ -257,6 +308,7 @@ def main(argv=None):
         with open(os.path.join(args.out, name), 'w', encoding='utf-8') as fh:
             json.dump({'slug': slug, 'source': 'engine',
                        'tool': 'tools/build_padaccheda.py',
+                       'vigraha': want_vigraha,
                        'units': found},
                       fh, ensure_ascii=False, separators=(',', ':'))
         if args.limit and files >= args.limit:
