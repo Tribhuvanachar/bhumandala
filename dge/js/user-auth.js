@@ -194,6 +194,34 @@ function dgeUpdateAccountUI() {
     if (nameEl) nameEl.textContent = window.dgeCurrentUser.displayName || window.dgeCurrentUser.phoneNumber || window.dgeCurrentUser.email || 'Signed in';
     if (roleEl) roleEl.textContent = window.dgeCurrentUserRole || 'basic';
 
+    // Device access vs account role. A person holding the 🔑 passkeys sees
+    // every admin tool but is still 'basic' to Firestore, which refuses
+    // their writes -- the lead hit exactly this and had no way to tell the
+    // two apart ("I have logged in as admin and superadmin, yet my account
+    // shows I am a normal user"). Both are named here, and where they
+    // disagree the one-time fix is spelled out rather than left to a doc.
+    const devEl = document.getElementById('accountDeviceAccess');
+    const noteEl = document.getElementById('accountRoleNote');
+    let dev = [];
+    try {
+      if (localStorage.getItem('is_superadmin') === 'true') dev.push('super admin');
+      else if (localStorage.getItem('acharyaAuthorized') === 'true') dev.push('admin');
+    } catch (e) { /* private mode */ }
+    if (devEl) devEl.textContent = dev.length ? dev.join(', ') + ' access (🔑 passkey)' : 'reader';
+    const role = window.dgeCurrentUserRole || 'basic';
+    const needsBootstrap = dev.length && role !== 'superadmin' && role !== 'admin';
+    if (noteEl) {
+      if (needsBootstrap && typeof window.dgeSuperadminBootstrapHtml === 'function') {
+        noteEl.innerHTML = window.dgeSuperadminBootstrapHtml({
+          uid: window.dgeCurrentUser.uid, email: window.dgeCurrentUser.email
+        });
+        noteEl.style.display = 'block';
+      } else {
+        noteEl.style.display = 'none';
+        noteEl.innerHTML = '';
+      }
+    }
+
     // WhatsApp consent row — only meaningful once we have a number to
     // message, so it stays hidden for an email-only account.
     const waRow = document.getElementById('whatsappOptInRow');

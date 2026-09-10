@@ -23,7 +23,7 @@
 // the visitor signs in) so reading two small config docs costs nothing
 // beyond what's already paid.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['role-access.js'] = 'v1.0 (Firestore-backed content gates + preview-as-role)';
+window.DGE_VERSIONS['role-access.js'] = 'v1.2 (10 Sep 2026: the first-superadmin explainer -- device passkey vs account role) \u00b7 v1.1 (go-live shelf + capabilities) \u00b7 v1.0 (Firestore-backed content gates + preview-as-role)';
 
 // config/roles      -> { list: [{ id, label }, ...] }
 // config/roleAccess  -> { gates: [{ prefix, allowRoles: [id, ...] }, ...] }
@@ -231,6 +231,86 @@ window.dgeSaveRoleAccessConfig = async function(customRoles, gates, capabilities
   dgeAllRoles = list;
   dgeRoleAccessGates = cleanGates;
   dgeRoleCapabilities = cleanCaps;
+};
+
+/* --- The first superadmin -------------------------------------------------
+ *
+ * There are TWO separate ideas of "admin" in this app and they are easy to
+ * mistake for one another — the lead did, 10 Sep 2026: "I am an admin
+ * myself and have logged in as admin and superadmin, yet my account shows
+ * I am a normal user."
+ *
+ *   Device access   the 🔑 Access passkeys (localStorage acharyaAuthorized /
+ *                   is_superadmin). They decide what this BROWSER shows.
+ *                   Nothing about them reaches Firestore.
+ *
+ *   Account role    users/<uid>.role in Firestore. It is what
+ *                   firestore.rules actually enforces (callerRole()), so it
+ *                   is the only thing that decides whether a write is
+ *                   allowed — reading the user list, changing someone's
+ *                   role, saving a content gate.
+ *
+ * A new account is created with role 'basic' and the rules forbid anyone
+ * from changing their OWN role. That is deliberate — it is what stops a
+ * visitor promoting themselves — but it means the very first superadmin
+ * cannot be made from inside the app at all. It has to be set once, by
+ * hand, in the Firebase console; after that the Manage Users screen
+ * promotes everyone else.
+ *
+ * FIREBASE_SETUP.md §4 has always said so. What was missing is the app
+ * saying so at the moment it matters: until now a passkey-holding admin
+ * opening Manage Users just got "Missing or insufficient permissions" and
+ * no way forward. This builds that explanation, with the person's own uid
+ * in it, so the three places that can hit the wall all say the same thing.
+ */
+window.dgeSuperadminBootstrapHtml = function(opts) {
+  const o = opts || {};
+  const uid = o.uid || '';
+  const project = o.projectId || (window.FIREBASE_CONFIG && window.FIREBASE_CONFIG.projectId) || '';
+  const esc = (v) => String(v == null ? '' : v).replace(/[&<>"]/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // Deep link straight to this person's own profile document, so the fix is
+  // a click and one field rather than a hunt through a collection.
+  const docUrl = (project && uid)
+    ? 'https://console.firebase.google.com/project/' + encodeURIComponent(project) +
+      '/firestore/databases/-default-/data/~2Fusers~2F' + encodeURIComponent(uid)
+    : (project ? 'https://console.firebase.google.com/project/' + encodeURIComponent(project) + '/firestore/data' : '');
+  return '' +
+    '<div style="border:1px solid var(--card-border,#666); border-radius:8px; padding:12px; font-size:13px; line-height:1.5;">' +
+    '<div style="font-weight:700; margin-bottom:6px;">Your account role is not <code>superadmin</code> yet</div>' +
+    '<p style="margin:0 0 8px;">The 🔑 Access passkeys unlock this <b>browser</b>. Firestore enforces the ' +
+    '<b>account</b> role instead, and a new account starts as <code>basic</code>. The rules deliberately ' +
+    'stop anyone changing their own role, so the first superadmin is set once by hand.</p>' +
+    (uid ? '<p style="margin:0 0 8px;">Your account id:<br><code style="user-select:all; word-break:break-all;">' + esc(uid) + '</code> ' +
+      '<button type="button" class="btn-sm" onclick="window.dgeCopyUid(\'' + esc(uid) + '\', this)">Copy</button></p>' : '') +
+    '<ol style="margin:0 0 8px; padding-left:18px;">' +
+    (docUrl ? '<li>Open <a href="' + esc(docUrl) + '" target="_blank" rel="noopener" ' +
+              'style="color:var(--accent-gold,#B9821F); font-weight:700; text-decoration:underline;">' +
+              'your profile document in the Firebase console ↗</a></li>'
+            : '<li>Open the Firebase console → Firestore Database → <code>users</code></li>') +
+    '<li>Change the <code>role</code> field from <code>basic</code> to <code>superadmin</code></li>' +
+    '<li>Come back and reload this page</li></ol>' +
+    '<p style="margin:0; opacity:.75;">From then on every other role is granted from 👥 Manage Users — this is a one-time step. ' +
+    'See FIREBASE_SETUP.md §4.</p></div>';
+};
+
+window.dgeCopyUid = function(uid, btn) {
+  const done = () => { if (btn) { const t = btn.textContent; btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = t; }, 1500); } };
+  try {
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(uid).then(done).catch(done); return; }
+  } catch (e) { /* fall through */ }
+  const ta = document.createElement('textarea');
+  ta.value = uid; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch (e) { /* ignore */ }
+  ta.remove(); done();
+};
+
+/** True when a Firestore error is the rules refusing, not a network fault. */
+window.dgeIsPermissionError = function(e) {
+  const code = (e && (e.code || e.name)) || '';
+  const msg = String((e && e.message) || e || '');
+  return code === 'permission-denied' || /insufficient permission|permission-denied|PERMISSION_DENIED/i.test(msg);
 };
 
 /* --- Capabilities: what a role may DO ------------------------------------

@@ -1075,7 +1075,14 @@
 
       <div id="accountSignedIn" style="display:none;">
         <p style="font-size:14px; font-weight:700; margin:0 0 4px 0;" id="accountName"></p>
-        <p style="font-size:12px; color:var(--muted-text); margin:0 0 16px 0;">Role: <strong id="accountRole"></strong></p>
+        <p style="font-size:12px; color:var(--muted-text); margin:0 0 4px 0;">Account role: <strong id="accountRole"></strong></p>
+        <!-- The 🔑 passkeys and the account role are two different systems and
+             look identical from here: an admin holding both passkeys still
+             reads "Role: basic", because that is the Firestore role the
+             security rules enforce. Naming both, and explaining the gap when
+             there is one, is the whole point of these two lines. -->
+        <p style="font-size:12px; color:var(--muted-text); margin:0 0 10px 0;">This device: <strong id="accountDeviceAccess"></strong></p>
+        <div id="accountRoleNote" style="display:none; margin:0 0 16px 0;"></div>
 
         <!-- Consent for WhatsApp broadcasts. Shown only to accounts that
              actually have a phone number, and only where the deployment
@@ -1459,7 +1466,7 @@
 <!-- role-access.js first: library.js hands it the go-live shelf as soon as
      library-overrides.json lands, and global-search.js does the same on the
      pages that have no library tree. -->
-<script src="js/role-access.js?v=1.1.0"></script>
+<script src="js/role-access.js?v=1.2.0"></script>
 <script src="js/library.js?v=4.82.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
@@ -1473,8 +1480,8 @@
      default false). Since the feature is off for every deployment that
      hasn't done the Firebase setup, static tags here would mean every
      visitor downloading several hundred KB of SDK that never runs. -->
-<script src="js/user-auth.js?v=4.83.0"></script>
-<script src="js/user-roles.js?v=4.85.0"></script>
+<script src="js/user-auth.js?v=4.86.0"></script>
+<script src="js/user-roles.js?v=4.86.0"></script>
 <!-- 8 Sep 2026: role-based content gating (admin/access-control.html manages
      it). Loaded unconditionally like the two scripts above it -- cheap
      (no SDK of its own; it borrows user-auth.js's) and every one of its
