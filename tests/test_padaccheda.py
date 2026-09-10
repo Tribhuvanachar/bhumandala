@@ -141,6 +141,101 @@ class Confidence(unittest.TestCase):
         self.assertIsNotNone(seg(freq={}).confident_split("कान्तायेति"))
 
 
+class SamasaVigraha(unittest.TestCase):
+    """Breaking a compound is not the same operation as undoing sandhi, and the
+    mark between the pieces has to say which one happened."""
+
+    VOCAB = VOCAB | {"पूर्व", "शैल", "शिखरे", "श्री", "प्राण", "नाथाय",
+                     "कल्याण", "गुण", "गुणा", "धाम्ने", "मेखला", "कान्त",
+                     "कान्ता", "अय", "सभा", "जि", "तानि",
+                     "धर्म", "क्षेत्रे", "एक", "कल्याणगुणैकधाम्ने"}
+    STEMS = {"पूर्व", "शैल", "धर्म", "श्री", "कल्याण", "गुण", "गुणा", "जगत्",
+             "एक", "मेखला", "कान्त", "कान्ता", "सभा", "विकटा"}
+    AVYAYA = {"इव"}
+    INFLECTED = {"शिखरे", "क्षेत्रे", "नाथाय", "धाम्ने", "कान्ताय", "तानि",
+                 "प्रसिद्धा", "महान्तः", "गृहे"}
+    VERBS = {"अभूत्"}
+
+    def seg(self):
+        freq = {w: 50 for w in self.VOCAB | self.STEMS}
+        return p.Segmenter(self.VOCAB, freq, self.STEMS, self.AVYAYA,
+                           self.INFLECTED, self.VERBS)
+
+    def rendered(self, token):
+        got = self.seg().analyse(token)
+        if not got:
+            return None
+        out = got["pieces"][0]
+        for i, seam in enumerate(got["seams"]):
+            out += seam + got["pieces"][i + 1]
+        return out
+
+    def test_a_compound_is_marked_with_hyphens(self):
+        self.assertEqual(self.rendered("पूर्वशैलशिखरे"), "पूर्व-शैल-शिखरे")
+
+    def test_a_compound_already_in_the_lexicon_is_still_broken_out(self):
+        # धर्मक्षेत्रे is one word and the sandhi search rightly refuses to cut
+        # it; the compound search has to override that, because the question
+        # "what is this made of" is a different question.
+        self.assertIsNone(self.seg().split("धर्मक्षेत्रे"))
+        self.assertEqual(self.rendered("धर्मक्षेत्रे"), "धर्म-क्षेत्रे")
+
+    def test_a_compound_carrying_sandhi_inside_it(self):
+        # कल्याण + गुण + एक + धाम्ने is written कल्याणगुणैकधाम्ने, गुण + एक
+        # fused to गुणै by वृद्धिः. A concatenation-only splitter misses every
+        # long compound, since most of them do this.
+        self.assertEqual(self.rendered("कल्याणगुणैकधाम्ने"), "कल्याण-गुण-एक-धाम्ने")
+
+    def test_the_bare_stem_wins_over_the_commoner_word(self):
+        # गुणा is also a word, and the corpus writes it MORE often than गुण.
+        # A compound member is the bare stem; frequency is the wrong judge of
+        # a question grammar has already settled.
+        self.assertIn("गुण-एक", self.rendered("कल्याणगुणैकधाम्ने"))
+
+    def test_sandhi_and_compound_in_one_token(self):
+        # नारायणाय + अखिलकारणाय, whose second half is itself अखिल-कारणाय.
+        seg = p.Segmenter(
+            self.VOCAB | {"नारायणाय", "अखिल", "कारणाय", "अखिलकारणाय"},
+            {w: 50 for w in ("नारायणाय", "अखिल", "कारणाय", "अखिलकारणाय")},
+            self.STEMS | {"अखिल"}, self.AVYAYA,
+            self.INFLECTED | {"नारायणाय", "कारणाय"}, self.VERBS)
+        got = seg.analyse("नारायणायाखिलकारणाय")
+        self.assertEqual(got["pieces"], ["नारायणाय", "अखिल", "कारणाय"])
+        self.assertEqual(got["seams"], ["+", "-"])
+
+    def test_an_indeclinable_on_either_side_is_a_word_boundary(self):
+        # मेखला is a stem, so looking only leftward marks मेखलेव as मेखला-इव.
+        # इव is a whole word and the join is sandhi.
+        self.assertEqual(self.rendered("मेखलेव"), "मेखला+इव")
+
+    def test_iti_is_a_word_boundary_though_the_morphology_calls_it_a_lemma(self):
+        seg = p.Segmenter(self.VOCAB | {"कान्ताय", "इति"},
+                          {"कान्ताय": 50, "इति": 900},
+                          self.STEMS, self.AVYAYA, self.INFLECTED, self.VERBS)
+        got = seg.analyse("कान्तायेति")
+        self.assertEqual(got["seams"], ["+"])
+
+    def test_plain_abutment_inside_one_token_is_a_compound_seam(self):
+        # प्राण is used 2,664 times in the corpus and is in no subanta record
+        # as a lemma, so the lemma lookup gets श्री-प्राण-नाथाय wrong at the
+        # second seam. The rule that produced the seam does not.
+        seg = p.Segmenter(self.VOCAB, {w: 50 for w in self.VOCAB},
+                          self.STEMS, self.AVYAYA, self.INFLECTED, self.VERBS)
+        got = seg.analyse("श्रीप्राणनाथाय")
+        self.assertEqual(got["pieces"], ["श्री", "प्राण", "नाथाय"])
+        self.assertEqual(got["seams"], ["-", "-"])
+
+    def test_a_short_word_is_not_pulled_apart_into_two_lexicon_entries(self):
+        # कान्ताय is a dative, not कान्ता + अय; नैच्छत् is one verb form.
+        self.assertIsNone(self.seg().vigraha("कान्ताय"))
+
+    def test_a_two_character_member_is_refused_but_the_numerals_are_not(self):
+        # सभा-जि-तानि was the damage: जि is a real root, तानि a real form,
+        # the whole thing nonsense. एक has to survive the same rule.
+        self.assertIn("एक", p.Segmenter.VIGRAHA_SHORT_MEMBERS)
+        self.assertGreaterEqual(p.Segmenter.VIGRAHA_MIN_MEMBER, 3)
+
+
 class Rules(unittest.TestCase):
     def test_the_junction_table_keeps_both_readings_of_a_shared_form(self):
         # गुणः ओ = अ + उ and the visarga ओ = अः + अ are both true. A dict keyed

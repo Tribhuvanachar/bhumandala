@@ -207,6 +207,10 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display:
 .dge-pc-parts { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px; color: var(--text-sanskrit); }
 .dge-pc-part { font-weight: 600; }
 .dge-pc-plus { color: var(--accent-gold); opacity: .8; }
+/* A compound seam is a quieter mark than a sandhi one on purpose: the pieces
+   either side of '-' are members of a single word, and the eye should read
+   them as one run. '+' separates two words and may breathe. */
+.dge-pc-hyphen { color: var(--muted-text); opacity: .9; margin: 0 -1px; }
 .dge-pc-note { margin-top: 6px; font-size: 10.5px; color: var(--muted-text); font-style: italic; }
 
 /* प्रतीकाः — the verse's own words where a commentary quotes them back
