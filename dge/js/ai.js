@@ -1402,7 +1402,11 @@ function dgeSelectedWordText() {
 function dgeLookupWordText() {
   const word = dgeSelectedWordText();
   if (!word || typeof window.dgeToDevanagariWord !== 'function') return word;
-  return window.dgeToDevanagariWord(word) || word;
+  // Multi-word selections are transliterated word by word: Sanscript handles a
+  // whole string, but the Tamil/Bengali candidate resolution below is per word.
+  return word.split(/(\s+)/).map(function (piece) {
+    return /\s/.test(piece) ? piece : (window.dgeToDevanagariWord(piece) || piece);
+  }).join('') || word;
 }
 window.dgeLookupWordText = dgeLookupWordText;
 function dgeHideActionTooltip() {

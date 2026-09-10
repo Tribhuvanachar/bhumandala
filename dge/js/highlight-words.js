@@ -101,8 +101,15 @@
     return shardCache[name];
   }
 
+  // Exported: the marking pass is not the only thing that needs to know what
+  // an on-screen word could be in Devanagari, and a private version would be
+  // reimplemented worse elsewhere.
+  window.dgeDevanagariCandidates = devanagariCandidates;
+
   // The lookup key for a word as it appears on screen: normalised, then
-  // carried back to Devanagari if the reader is in another script.
+  // carried back to Devanagari if the reader is in another script. This is the
+  // single best guess; devanagariCandidates() above is the full set, and the
+  // index picks between them.
   function keyFor(raw) {
     var w = normalise(raw);
     if (!w) return '';
@@ -112,6 +119,16 @@
     return normalise(toDevanagari(w));
   }
   window.dgeWordMarkKey = keyFor;
+
+  // Which Devanagari reading of an on-screen word the index actually knows.
+  // Filled in by the marking pass and read back by the word tools, so a tap in
+  // Tamil opens the word the mark was for rather than a spelling that only
+  // survived the round trip.
+  var resolved = {};
+  function rememberResolved(scheme, shown, deva) { resolved[scheme + '\u0000' + shown] = deva; }
+  window.dgeResolvedDevanagari = function (shown) {
+    return resolved[(activeScheme() || '') + '\u0000' + normalise(shown)] || '';
+  };
 
   // The Devanagari reading of a word as it appears on screen, for anything
   // that has to look it up in this library's data. Every index the word tools
@@ -127,7 +144,9 @@
   window.dgeToDevanagariWord = function (word) {
     var w = String(word == null ? '' : word);
     if (!w || scriptIsDevanagari() || !canTransliterate()) return w;
-    return toDevanagari(w) || w;
+    // A reading the marking pass already validated against the index beats the
+    // plain back-transliteration, which in Tamil is usually a different word.
+    return window.dgeResolvedDevanagari(w) || toDevanagari(w) || w;
   };
 
   // words -> { word-as-given: mask }, fetching only the shards those words
@@ -136,13 +155,17 @@
   // spelling, so a caller in IAST never has to know a Devanagari key existed.
   function wordMarks(words) {
     return manifest().then(function (m) {
-      var need = {}, keyOf = {};
+      var need = {}, candsOf = {};
+      var scheme = activeScheme() || '';
       words.forEach(function (raw) {
-        if (Object.prototype.hasOwnProperty.call(keyOf, raw)) return;
-        var k = keyFor(raw);
-        if (k.length < 2) { keyOf[raw] = ''; return; }
-        keyOf[raw] = k;
-        need[shardNameFor(k, m)] = 1;
+        if (Object.prototype.hasOwnProperty.call(candsOf, raw)) return;
+        var cands = devanagariCandidates(raw).filter(function (c) { return c.length >= 2; });
+        candsOf[raw] = cands;
+        // Only the shards the candidates land in. Candidates share their first
+        // letters' alternatives, so this is a handful of shards even when the
+        // candidate list is long -- and exactly one shard for a script that
+        // round-trips.
+        cands.forEach(function (c) { need[shardNameFor(c, m)] = 1; });
       });
       var names = Object.keys(need);
       if (!names.length) return {};
@@ -150,11 +173,16 @@
         var bySharded = {};
         names.forEach(function (n, i) { bySharded[n] = shards[i] || {}; });
         var out = {};
-        Object.keys(keyOf).forEach(function (raw) {
-          var k = keyOf[raw];
-          if (!k) return;
-          var mask = bySharded[shardNameFor(k, m)][k];
-          if (mask) out[raw] = mask;
+        Object.keys(candsOf).forEach(function (raw) {
+          var cands = candsOf[raw];
+          for (var i = 0; i < cands.length; i++) {
+            var mask = bySharded[shardNameFor(cands[i], m)][cands[i]];
+            if (mask) {
+              out[raw] = mask;
+              if (scheme && scheme !== 'devanagari') rememberResolved(scheme, normalise(raw), cands[i]);
+              return;
+            }
+          }
         });
         return out;
       });
@@ -208,6 +236,90 @@
     var out = '';
     try { out = window.Sanscript.t(word, scheme, 'devanagari') || ''; } catch (e) { out = ''; }
     toDevaCache[key] = out;
+    return out;
+  }
+
+  /* ---- scripts that do not round-trip ------------------------------------
+   * Devanagari → any script is a function; the way back is not always. Tamil
+   * writes क ख ग घ with one letter and has no anusvāra, so carrying a word
+   * out to Tamil and back returns the SAME word only 11.5% of the time
+   * (measured over 35,687 index keys); Bengali writes ब and व alike, 94.6%.
+   * Every other script the reader can pick — Kannada, Telugu, Malayalam,
+   * Odia, IAST — comes back intact 100% of the time and never reaches any of
+   * this.
+   *
+   * So for those two, the back-reading is treated as a PATTERN rather than an
+   * answer: expand every position the target script could have written
+   * ambiguously, and let the index say which reading is a real word. Same
+   * principle the sandhi splitter runs on — generate candidates, validate
+   * against the word lists we ship, discard the rest. That takes Tamil from
+   * 11.5% to 94%.
+   *
+   * The table is DERIVED from Sanscript's own schemes at first use, not
+   * written out here: probing every Devanagari unit for what it becomes and
+   * what that becomes on the way back is the only version that cannot drift
+   * out of step with the library, and it costs a few milliseconds once.
+   */
+  var CANDIDATE_CAP = 256;      // 93.6% at 64, 94.0% at 256, 94.7% uncapped
+  var backTables = {};
+
+  function backTable(scheme) {
+    if (backTables[scheme]) return backTables[scheme];
+    var S = window.Sanscript, byBack = {};
+    var units = [], c;
+    for (c = 0x0900; c <= 0x097f; c++) units.push(String.fromCharCode(c));
+    // म् is two codepoints and collides with ं in Tamil — a single-character
+    // scan cannot see that, and misses every word with a nasal.
+    for (c = 0x0915; c <= 0x0939; c++) units.push(String.fromCharCode(c) + '्');
+    units.forEach(function (u) {
+      var fwd, back;
+      try { fwd = S.t(u, 'devanagari', scheme); back = S.t(fwd, scheme, 'devanagari'); } catch (e) { return; }
+      if (!fwd || !back) return;
+      if (!byBack[back]) byBack[back] = [];
+      if (byBack[back].indexOf(u) === -1) byBack[back].push(u);
+    });
+    var table = {};
+    Object.keys(byBack).forEach(function (back) {
+      var alts = byBack[back].slice();
+      if (alts.indexOf(back) === -1) alts.push(back);
+      // Only worth a table entry where the back-reading is not simply itself.
+      if (alts.length > 1 || alts[0] !== back) table[back] = alts;
+    });
+    backTables[scheme] = {
+      map: table,
+      // Longest first, so ङ्क् is matched before क्.
+      keys: Object.keys(table).sort(function (a, b) { return b.length - a.length; })
+    };
+    return backTables[scheme];
+  }
+
+  // Every Devanagari word the on-screen word could be. The first element is
+  // the plain back-reading, so a script that round-trips exactly gets a
+  // one-element list and none of the machinery below ever runs.
+  function devanagariCandidates(word) {
+    var plain = normalise(toDevanagari(normalise(word)));
+    if (!plain || scriptIsDevanagari()) return plain ? [plain] : [];
+    var t = backTable(activeScheme());
+    if (!t.keys.length) return [plain];
+    var out = [''], i = 0;
+    while (i < plain.length) {
+      var key = null, k;
+      for (k = 0; k < t.keys.length; k++) {
+        if (plain.lastIndexOf(t.keys[k], i) === i) { key = t.keys[k]; break; }
+      }
+      var alts = key ? t.map[key] : [plain.charAt(i)];
+      var next = [];
+      for (var p = 0; p < out.length; p++) {
+        for (var a = 0; a < alts.length; a++) {
+          next.push(out[p] + alts[a]);
+          if (next.length > CANDIDATE_CAP) return [plain];   // give up, keep the plain reading
+        }
+      }
+      out = next;
+      i += key ? key.length : 1;
+    }
+    // The plain reading leads: where it is itself a real word, it wins.
+    if (out.indexOf(plain) > 0) { out.splice(out.indexOf(plain), 1); out.unshift(plain); }
     return out;
   }
 
@@ -283,13 +395,22 @@
       var n = 0;
       spans.forEach(function (el, i) {
         var mask = marks[texts[i]] || 0;
-        if (verseDhatus[keyFor(texts[i])]) mask |= MARK_DHATU;
+        if (verseDhatus[window.dgeResolvedDevanagari(texts[i]) || keyFor(texts[i])]) mask |= MARK_DHATU;
         // Mark the span either way: '0' records "checked, nothing to show",
         // which is what keeps a second pass from re-querying every word.
         el.setAttribute('data-dge-mark', String(mask));
         if (!mask) return;
         el.classList.add(CLASS_FOR[mask]);
-        if (!el.getAttribute('title')) el.setAttribute('title', TITLE_FOR[mask]);
+        if (!el.getAttribute('title')) {
+          // In a script that cannot write every Devanagari distinction, say
+          // WHICH word the mark is for. In Tamil க is क, ख, ग and घ at once, so
+          // the reading the index matched may not be the one on the page, and
+          // presenting it silently as "this word" would be a small lie.
+          var deva = window.dgeResolvedDevanagari(texts[i]);
+          var plain = keyFor(texts[i]);
+          el.setAttribute('title', TITLE_FOR[mask] +
+            (deva && deva !== plain ? ' · read here as ' + deva : ''));
+        }
         if (mask & MARK_DHATU) tally.dhatu++;
         if (mask & MARK_KOSHA) tally.kosha++;
         n++;

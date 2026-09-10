@@ -10,7 +10,8 @@ and for "matched koshas in the commentary" to carry the same mark. Both
 answers already exist in this repo, but neither in a shape a renderer can
 consult:
 
-  prakriya/formindex/       204,970 verb forms, bucketed by FIRST LETTER
+  prakriya/formindex/       204,970 tiṅanta forms, and prakriya/krtindex/
+  prakriya/krtindex/        48,886 kṛdantas, both bucketed by FIRST LETTER
                             ONLY — the अ shard alone is 3.5 MB. Fetching it
                             to decide the colour of one word is absurd.
   kosha/<cat>/<dict>/e/     the dictionaries themselves, 54 MB of glosses,
@@ -51,6 +52,7 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KOSHA_DIR = os.path.join(REPO, 'dge', 'data', 'kosha')
 FORM_DIR = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana', 'prakriya', 'formindex')
+KRT_DIR = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana', 'prakriya', 'krtindex')
 OUT_DIR = os.path.join(REPO, 'dge', 'data', '_highlight')
 
 # Sanskrit-headword categories. `reverse/` is MW English-Sanskrit, whose
@@ -117,18 +119,29 @@ def kosha_headwords(kosha_dir=KOSHA_DIR):
     return out
 
 
-def verb_forms(form_dir=FORM_DIR):
-    """Every inflected verb form the prakriya index knows."""
+def verb_forms(form_dir=FORM_DIR, krt_dir=KRT_DIR):
+    """Every verb form the reader can tap and get an answer for.
+
+    BOTH indexes, not just the finite one. formindex holds tiṅanta forms
+    (गच्छति, चकार); krtindex holds kṛdantas — कृत्वा, गत्वा, कृतम्, लब्धव्य —
+    words that are verb-derived and everywhere in the corpus. Marking only the
+    first meant कृत्वा, the single most common absolutive in the language, was
+    left unmarked while the Śabda tool answers it perfectly. The mark is a
+    promise that tapping gets you somewhere; it has to cover everything that
+    does."""
     out = set()
-    for path in sorted(glob.glob(os.path.join(form_dir, '*.json'))):
-        if os.path.basename(path) == 'manifest.json':
+    for d in (form_dir, krt_dir):
+        if not d or not os.path.isdir(d):
             continue
-        with open(path, encoding='utf-8') as fh:
-            shard = json.load(fh)
-        for form in shard:
-            w = normalise(form)
-            if w and is_devanagari(w):
-                out.add(w)
+        for path in sorted(glob.glob(os.path.join(d, '*.json'))):
+            if os.path.basename(path) == 'manifest.json':
+                continue
+            with open(path, encoding='utf-8') as fh:
+                shard = json.load(fh)
+            for form in shard:
+                w = normalise(form)
+                if w and is_devanagari(w):
+                    out.add(w)
     return out
 
 

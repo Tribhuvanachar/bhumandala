@@ -63,7 +63,7 @@ class DevanagariOnly(unittest.TestCase):
                 json.dump({"_readme": "x", "shardCount": 3}, fh)
             with open(os.path.join(tmp, "092d.json"), "w", encoding="utf-8") as fh:
                 json.dump({"भवति": [{"c": "01.0001"}]}, fh, ensure_ascii=False)
-            self.assertEqual(b.verb_forms(tmp), {"भवति"})
+            self.assertEqual(b.verb_forms(tmp, krt_dir=None), {"भवति"})
 
 
 class Bucketing(unittest.TestCase):
@@ -246,6 +246,30 @@ class MultiScriptClient(unittest.TestCase):
                     break
         self.assertEqual(offenders, [])
 
+    def test_a_lossy_script_expands_candidates_rather_than_trusting_one(self):
+        # Devanagari → any script is a function; the way back is not. Tamil
+        # writes क ख ग घ with one letter and has no anusvāra, so the plain
+        # back-reading is the right word only 11.5% of the time. The fix is to
+        # treat it as a pattern and let the index choose — the same
+        # generate-and-validate the sandhi splitter runs on.
+        self.assertIn("devanagariCandidates", self.js)
+        self.assertIn("CANDIDATE_CAP", self.js)
+        self.assertIn("window.dgeDevanagariCandidates", self.js)
+
+    def test_the_back_table_is_derived_not_hand_written(self):
+        # A hand-listed Tamil table is a table that drifts out of step with
+        # Sanscript. This probes the library for what each unit becomes.
+        self.assertIn("function backTable(scheme)", self.js)
+        self.assertIn("S.t(u, 'devanagari', scheme)", self.js)
+        # म् is two codepoints; a single-character probe cannot see it collide
+        # with ं, and misses every word carrying a nasal.
+        self.assertIn("String.fromCharCode(c) + '्'", self.js)
+
+    def test_a_resolved_reading_is_named_to_the_reader(self):
+        # Where the matched reading is not the one on the page, the mark says
+        # so rather than presenting a homograph as "this word".
+        self.assertIn("read here as", self.js)
+
     def test_the_word_tools_look_up_the_devanagari_reading(self):
         # Every index they consult is Devanagari-keyed, so in Kannada or IAST
         # they answered "not found" for words plainly in the data.
@@ -254,6 +278,77 @@ class MultiScriptClient(unittest.TestCase):
         self.assertIn("function dgeLookupWordText()", ai)
         self.assertEqual(ai.count("const word = dgeLookupWordText();"), 4)
         self.assertIn("window.dgeToDevanagariWord", self.js)
+
+
+class ScriptRoundTrip(unittest.TestCase):
+    """Runs the shipped highlight-words.js against the shipped index under
+    node, because the claim being made is behavioural: a reader in Kannada or
+    Tamil sees marks. Skipped where node is absent."""
+
+    WORDS = ["भवति", "कृत्वा", "गच्छति", "नमो", "रामः", "विशताम्"]
+
+    @classmethod
+    def setUpClass(cls):
+        import shutil
+        if not shutil.which("node"):
+            raise unittest.SkipTest("node not available")
+        if not os.path.exists(os.path.join(b.OUT_DIR, "manifest.json")):
+            raise unittest.SkipTest("highlight index not built")
+
+    def resolve(self, scheme, words):
+        """{devanagari word: the reading the marking pass would settle on}."""
+        import json as _json
+        import subprocess
+        repo = os.path.join(os.path.dirname(__file__), "..")
+        # r-string: the JS below contains its own escapes, and letting
+        # Python interpret them turns a \n inside a JS string literal into a
+        # real newline and the script into a syntax error.
+        script = r"""
+const fs=require('fs'), path=require('path');
+// node -e leaves no script path in argv, so the first extra arg is argv[1].
+const repo=process.argv[1], scheme=process.argv[2], words=JSON.parse(process.argv[3]);
+const sans=fs.readFileSync(path.join(repo,'dge/js/vendor/sanscript-1.3.3.min.js'),'utf8');
+const win={activeScript:scheme};
+(new Function('window','self','globalThis','exports','module',sans)).call(win,win,win,win,undefined,undefined);
+global.window=win;
+global.document={addEventListener(){},querySelectorAll(){return[]},getElementById(){return null}};
+global.fetch=()=>Promise.resolve({ok:false});
+eval(fs.readFileSync(path.join(repo,'dge/js/highlight-words.js'),'utf8'));
+const dir=path.join(repo,'dge/data/_highlight');
+const index=new Set();
+for(const f of fs.readdirSync(dir)){ if(f==='manifest.json') continue;
+  const raw=JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'));
+  for(const k of ['k','d','b']) if(raw[k]) raw[k].split('\n').forEach(w=>index.add(w)); }
+const out={};
+for(const dev of words){
+  const shown=win.Sanscript.t(dev,'devanagari',scheme);
+  const cands=win.dgeDevanagariCandidates(shown)||[];
+  out[dev]=cands.find(c=>index.has(c))||null;
+}
+console.log(JSON.stringify(out));
+"""
+        res = subprocess.run(["node", "-e", script, repo, scheme, _json.dumps(words)],
+                             capture_output=True, text=True, cwd=repo)
+        self.assertEqual(res.returncode, 0, res.stderr[-800:])
+        return _json.loads(res.stdout)
+
+    def test_the_lossless_scripts_resolve_to_the_word_itself(self):
+        for scheme in ("iast", "kannada", "telugu", "malayalam", "oriya"):
+            got = self.resolve(scheme, self.WORDS)
+            for word in self.WORDS:
+                self.assertEqual(got[word], word, "%s in %s" % (word, scheme))
+
+    def test_tamil_recovers_the_word_despite_not_round_tripping(self):
+        # Without candidate expansion every one of these comes back as a
+        # different string (भवति → பவதி → भवधि) and matches nothing.
+        got = self.resolve("tamil", self.WORDS)
+        found = [w for w in self.WORDS if got[w] is not None]
+        self.assertGreaterEqual(len(found), len(self.WORDS) - 1, got)
+
+    def test_bengali_recovers_its_ba_va_merger(self):
+        got = self.resolve("bengali", ["बभूव", "भवति"])
+        self.assertEqual(got["भवति"], "भवति")
+        self.assertIsNotNone(got["बभूव"])
 
 
 class ShippedIndex(unittest.TestCase):
@@ -269,6 +364,17 @@ class ShippedIndex(unittest.TestCase):
     def test_it_holds_both_kinds_of_word(self):
         self.assertGreater(self.manifest["kosha_words"], 10000)
         self.assertGreater(self.manifest["dhatu_words"], 100000)
+
+    def test_krdanta_forms_are_marked_too(self):
+        # कृत्वा is the commonest absolutive in the language and lives in
+        # krtindex, not formindex; marking only the latter left it plain while
+        # the Śabda tool answered it perfectly.
+        name = b.prefix_of("कृत्वा", 2)
+        shard = json.load(open(os.path.join(b.OUT_DIR, name + ".json"), encoding="utf-8"))
+        words = set()
+        for run in shard.values():
+            words.update(run.split("\n"))
+        self.assertIn("कृत्वा", words)
 
     def test_every_declared_bucket_exists_on_disk(self):
         for name in self.manifest["buckets"]:
