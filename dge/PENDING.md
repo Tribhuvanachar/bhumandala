@@ -1223,6 +1223,23 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **10 Sep 2026, ~7:20 pm IST — the first-superadmin dead end, explained in the app instead of only in a doc.**
+  The lead, holding BOTH 🔑 passkeys: "my account shows I am a normal user ... manage roles says not enough permission ...
+  not sure where to set the roles, which url". Both symptoms are one cause and the design is correct, not broken:
+  - **🔑 passkeys** (`localStorage.acharyaAuthorized` / `is_superadmin`) decide what a BROWSER shows. They never reach Firestore.
+  - **`users/<uid>.role`** is what `firestore.rules`' `callerRole()` enforces, so it alone decides whether a write is allowed.
+  - A new account is created `basic`, and the rules forbid changing your OWN role (that is what stops self-promotion) — so the
+    FIRST superadmin cannot be made from inside the app. FIREBASE_SETUP.md §4 has always said to set it once by hand in the
+    Firebase console; the app just never said so at the moment it mattered.
+  Now: `dgeSuperadminBootstrapHtml()` (role-access.js) builds one explanation carrying the person's own uid, a Copy button and a
+  deep link straight to their profile doc in the console, and it is shown in all three places that hit the wall — My Account
+  (which now names "Account role" and "This device" separately), Manage Users when the list read is refused, and
+  access-control.html when a save is refused. `dgeIsPermissionError()` distinguishes a rules refusal from a network fault so a
+  genuine outage still reports itself as one.
+  - **Open, and deliberately NOT done unprompted:** a bootstrap allowlist in the rules (a named email treated as superadmin) would
+    remove the console step entirely, but it is a security-relevant rules change and needs the lead's say-so plus a rules deploy.
+    Offered, not built.
+
 - **10 Sep 2026, ~6:45 pm IST — go-live scaffolding for 17 Sep: a published shelf, a real "view as a general user", role admin, word-tool admin, granted copy.**
   - **The shelf.** `admin/config/library-overrides.json` gained a `shelf` block — an ALLOW-list (`dgeMatchShelf`/`dgeIsOffShelf` in
     `role-access.js`, wired into `dgeIsHiddenPath`, `global-search.js`'s hit filter and `core.js`'s direct-`?path=` guard).

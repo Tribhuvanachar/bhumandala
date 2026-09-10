@@ -95,6 +95,19 @@ async function dgeRenderUserRolesList(filterText) {
       </div>`).join('');
   } catch (e) {
     console.error('[UserRoles] Failed to load users:', e);
+    // "Missing or insufficient permissions" here almost always means one
+    // thing: this person holds the 🔑 superadmin PASSKEY (which is why the
+    // screen opened at all) but their Firestore ACCOUNT role is still
+    // 'basic'. The rules enforce the account role, so the read is refused.
+    // A bare error string left the lead stuck with no way forward; say what
+    // is actually wrong and how to fix it once.
+    if (typeof window.dgeIsPermissionError === 'function' && window.dgeIsPermissionError(e)) {
+      body.innerHTML = window.dgeSuperadminBootstrapHtml({
+        uid: window.dgeCurrentUser && window.dgeCurrentUser.uid,
+        email: window.dgeCurrentUser && window.dgeCurrentUser.email
+      });
+      return;
+    }
     body.innerHTML = `<p style="font-size:12px; color:var(--accent-red);">Couldn't load users: ${dgeRolesEsc(e.message || e)}</p>`;
   }
 }
@@ -262,6 +275,16 @@ window.dgeChangeUserRole = async function(uid, newRole) {
     if (typeof showToast === 'function') showToast('Role updated.');
   } catch (e) {
     console.error('[UserRoles] Role change failed:', e);
+    if (typeof window.dgeIsPermissionError === 'function' && window.dgeIsPermissionError(e)) {
+      const body = document.getElementById('userRolesBody');
+      if (body) {
+        body.innerHTML = window.dgeSuperadminBootstrapHtml({
+          uid: window.dgeCurrentUser && window.dgeCurrentUser.uid,
+          email: window.dgeCurrentUser && window.dgeCurrentUser.email
+        });
+        return;
+      }
+    }
     if (typeof showToast === 'function') showToast('Could not change role: ' + (e.message || e));
     await dgeRenderUserRolesList(); // re-render so the dropdown reflects what's actually stored, not the rejected attempt
   }

@@ -131,7 +131,7 @@
 </main>
 
 <script src="../dge/js/config.js?v=1"></script>
-<script src="../dge/js/role-access.js?v=1.1.0"></script>
+<script src="../dge/js/role-access.js?v=1.2.0"></script>
 <script>
 (function(){
   'use strict';
@@ -418,6 +418,23 @@
       stateEl.textContent = 'Saved — live for every visitor now.';
     } catch (e) {
       console.error('[AccessControl] Save failed:', e);
+      // The page opens on a passkey, but SAVING is enforced by
+      // firestore.rules against the signed-in account's stored role. Those
+      // are two different things and the difference is invisible until a
+      // save is refused -- so when it is, say exactly why.
+      if (window.dgeIsPermissionError && window.dgeIsPermissionError(e)) {
+        stateEl.textContent = '';
+        var note = document.getElementById('saveBootstrapNote');
+        if (!note) {
+          note = document.createElement('div');
+          note.id = 'saveBootstrapNote';
+          note.style.marginTop = '12px';
+          stateEl.parentNode.appendChild(note);
+        }
+        var u = (window.firebase && firebase.auth && firebase.auth().currentUser) || null;
+        note.innerHTML = window.dgeSuperadminBootstrapHtml({ uid: u && u.uid, email: u && u.email });
+        return;
+      }
       stateEl.textContent = 'Save failed: ' + (e.message || e);
     }
   };
