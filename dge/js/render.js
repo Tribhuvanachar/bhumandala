@@ -915,6 +915,9 @@ function renderList() {
   // धातु/कोश word marking (highlight-words.js). Deliberately AFTER the DOM is
   // in place and deliberately not awaited: the answer needs a fetch, and a
   // verse must never wait on a colour. Absent module = no marks, no error.
+  // Generic lexical marking is revoked (config.js showWordMarks). The call
+  // stays because the module honours the flag and clears anything already
+  // marked, which is what makes turning it back on work as well as off.
   if (typeof window.dgeApplyWordMarks === 'function') window.dgeApplyWordMarks(listEl);
 
   // प्रतीकाः (pratika.js): the verse's own words where a commentary quotes

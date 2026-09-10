@@ -435,7 +435,18 @@ const FEATURE_FLAGS = {
   showPreloadButton: true, // "📥 Preload All Audio" button in 🛠 Tools
   showSpeedControl: true,  // playback speed slider in 🛠 Tools
   showDhatuChips: true,    // धातुरूपाणि chip row under a verse (render.js)
-  showWordMarks: true,     // धातु/कोश background marks on words (highlight-words.js)
+  // REVOKED 10 Sep 2026 by the project lead, and the reasoning is right: a
+  // lexical match is not evidence of a reference. One Sanskrit surface form
+  // can be a noun, a verb form, a kṛdanta, half of a sandhi join, and an
+  // entry in a dictionary all at once — तन्त्राणि and भावः are ordinary words
+  // that happen to sit in the dhātu data — so colouring every word that
+  // appears in a list told a reader something that was not true.
+  // The machinery stays (highlight-words.js is unchanged and still serves the
+  // word tools' script conversion); only the automatic marking is off. What
+  // replaces it is context-first detection: see reference-detect.js, where a
+  // link is made because the commentator is visibly CITING something, and
+  // only then validated against the authoritative list.
+  showWordMarks: false,    // धातु/कोश background marks on words (highlight-words.js)
   showPratikaLinks: true,  // प्रतीक links between a commentary and the verse (pratika.js)
   showPadaccheda: true     // पदच्छेदः chip on a verse (render.js + _padaccheda/)
 };
