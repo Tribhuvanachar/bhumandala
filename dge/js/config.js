@@ -436,7 +436,8 @@ const FEATURE_FLAGS = {
   showSpeedControl: true,  // playback speed slider in 🛠 Tools
   showDhatuChips: true,    // धातुरूपाणि chip row under a verse (render.js)
   showWordMarks: true,     // धातु/कोश background marks on words (highlight-words.js)
-  showPratikaLinks: true   // प्रतीक links between a commentary and the verse (pratika.js)
+  showPratikaLinks: true,  // प्रतीक links between a commentary and the verse (pratika.js)
+  showPadaccheda: true     // पदच्छेदः chip on a verse (render.js + _padaccheda/)
 };
 window.FEATURE_FLAGS = FEATURE_FLAGS;
 

@@ -195,6 +195,20 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display:
 .dge-word.dge-word-picked, .dge-word.dge-search-hit { box-shadow: none; }
 .dge-word.dge-word-picked { box-shadow: 0 0 0 1px var(--accent-gold, #e8b24d); }
 
+/* पदच्छेदः — the verse with its sandhi joins opened out (render.js). Reuses
+   the .dge-patha-chip shape the बन्नञ्जे-पाठः chip already established, since
+   both are "the same verse, read another way"; the ≈ marks the ones this
+   library worked out rather than an editor. */
+.dge-pc-chip .dge-pc-auto { opacity: .7; font-weight: 400; }
+.dge-pcview { margin: 6px 2px 2px; padding: 8px 10px; border: 1px dashed var(--card-border); border-radius: var(--radius-md); background: var(--card-bg); }
+.dge-pc-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 6px; padding: 3px 0; font-size: 14px; }
+.dge-pc-src { color: var(--muted-text); }
+.dge-pc-eq { color: var(--muted-text); margin: 0 2px; }
+.dge-pc-parts { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px; color: var(--text-sanskrit); }
+.dge-pc-part { font-weight: 600; }
+.dge-pc-plus { color: var(--accent-gold); opacity: .8; }
+.dge-pc-note { margin-top: 6px; font-size: 10.5px; color: var(--muted-text); font-style: italic; }
+
 /* प्रतीकाः — the verse's own words where a commentary quotes them back
    (pratika.js). Two strengths, because they are two different acts: a word
    the commentator explicitly picks out (कान्तायेति, or a lemma followed by
