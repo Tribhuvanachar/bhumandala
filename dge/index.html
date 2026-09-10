@@ -495,6 +495,11 @@
   <!-- Just below the shloka display, not up in the page header, so the
        toggle sits next to the content it edits. -->
   <div id="contentEditorMount" class="content-editor-mount"></div>
+  <!-- Which commentaries this text carries, and the switch for each, above
+       the verses rather than behind the 💬 icon in the top bar (render.js
+       dgeRenderCommentaryBar). Replaces the one-shot toast that "disappears
+       too quickly". Hidden for a text with no commentary at all. -->
+  <div id="commentaryAvailableBar" class="dge-cbar" style="display:none"></div>
   <div class="shloka-list" id="shlokaList"></div>
   <!-- Legend for the धातु/कोश word marks (highlight-words.js). Rendered only
        once a page actually carries marks, so a text with none stays clean. -->

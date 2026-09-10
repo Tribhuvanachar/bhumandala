@@ -39,8 +39,12 @@
   // Must match normalise() in tools/build_highlight_index.py exactly: the two
   // sides are looking each other up, and a punctuation mark stripped on one
   // side but not the other is a silent miss for every word ending in a danda.
-  var STRIP_CHARS = '।॥॰,.;:!?"\'()[]{}—–\\-…*​‌‍⁠';
-  var STRIP_RE = new RegExp('^[' + STRIP_CHARS + '\\s]+|[' + STRIP_CHARS + '\\s]+$', 'g');
+  var STRIP_CHARS = '।॥॰,.;:!?"\'()[]{}—–-…*​‌‍⁠';
+  // Every character escaped individually rather than dropped into the class
+  // as written: '–-…' would otherwise read as a RANGE from U+2013 to U+2026
+  // and quietly strip a dozen characters nobody listed.
+  var STRIP_CLASS = STRIP_CHARS.replace(/[.*+?^${}()|[\]\\\-]/g, '\\$&');
+  var STRIP_RE = new RegExp('^[' + STRIP_CLASS + '\\s]+|[' + STRIP_CLASS + '\\s]+$', 'g');
 
   function normalise(word) {
     var w = String(word || '').replace(STRIP_RE, '');

@@ -323,6 +323,18 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
     if (sel && sel.toString().trim().length > 0) return;
     var block = e.target.closest('.commentary-block');
     if (!block) return;
+    // A tap that lands on a WORD is a word selection, not a request for the
+    // commentary's own menu. The lead's report (9 Sep 2026): selecting a word
+    // in a commentary "restricts options to commentary-related choices rather
+    // than allowing full linguistic analysis" -- on a phone a tap on a word is
+    // just a tap, so this handler swallowed it and offered copy/ask-about-this-
+    // commentary instead of शब्द/धातु/कोश. Section 7's own hierarchy already
+    // says WORD outranks the commentary level; this makes a tap obey it too,
+    // the way a drag-selection always did. The commentary menu still answers a
+    // tap on the block's margins, its title, or the gaps between words.
+    var word = e.target.closest('.dge-word');
+    if (word && typeof window.dgeOpenWordToolsForElement === 'function' &&
+        window.dgeOpenWordToolsForElement(word)) return;
     var card = block.closest('.shloka-card');
     var shlokaId = card && card.id ? parseInt(card.id.split('-')[1], 10) : (window.contextShlokaId || window.activeId);
     var cKey = block.getAttribute('data-ckey') || null;

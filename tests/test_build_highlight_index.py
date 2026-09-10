@@ -157,6 +157,45 @@ class Manifest(unittest.TestCase):
             self.assertFalse(os.path.exists(os.path.join(tmp, "deadbeef.json")))
 
 
+class ClientAgreement(unittest.TestCase):
+    """dge/js/highlight-words.js recomputes the lookup key and the shard name
+    independently. Neither side errors when they drift -- words simply stop
+    being marked -- so the shared constants are pinned against the JS source
+    itself rather than against a comment describing it."""
+
+    def setUp(self):
+        path = os.path.join(os.path.dirname(__file__), "..", "dge", "js", "highlight-words.js")
+        with open(path, encoding="utf-8") as fh:
+            self.js = fh.read()
+
+    def test_the_punctuation_both_sides_strip_is_the_same_set(self):
+        import re
+        m = re.search(r"var STRIP_CHARS = '(.*)';", self.js)
+        self.assertIsNotNone(m, "STRIP_CHARS not found in highlight-words.js")
+        js_chars = m.group(1).replace("\\'", "'")
+        self.assertEqual(set(js_chars), set(b.STRIP),
+                         "STRIP differs between the builder and the reader")
+
+    def test_the_mark_bits_are_the_same_numbers(self):
+        self.assertIn("var MARK_KOSHA = %d;" % b.MARK_KOSHA, self.js)
+        self.assertIn("var MARK_DHATU = %d;" % b.MARK_DHATU, self.js)
+
+    def test_the_client_reads_the_directory_this_writes(self):
+        self.assertIn("'data/_highlight'", self.js)
+        self.assertTrue(b.OUT_DIR.endswith(os.path.join("dge", "data", "_highlight")))
+
+    def test_the_client_walks_down_for_a_declared_deep_prefix(self):
+        # prefix_of(word, 3) on the Python side; the JS must ask for depth 3
+        # on exactly the prefixes the manifest lists, or a split bucket's
+        # words become unreachable.
+        self.assertIn("m.deep.indexOf(name) !== -1", self.js)
+        self.assertIn("prefixOf(word, 3)", self.js)
+
+    def test_the_client_expands_the_same_three_run_keys(self):
+        for key in ("'k'", "'d'", "'b'"):
+            self.assertIn(key, self.js)
+
+
 class ShippedIndex(unittest.TestCase):
     """The committed index itself — a build that never ran is a feature that
     silently does nothing."""
