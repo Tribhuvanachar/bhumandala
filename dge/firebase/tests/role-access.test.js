@@ -179,3 +179,145 @@ describe('preview-as-role — superadmin only', () => {
     assert.equal(w.dgeGetPreviewRole(), null);
   });
 });
+
+// --- The go-live shelf ---------------------------------------------------
+//
+// A gate closes a path to some roles. The shelf does the opposite and is
+// the shape the 17 Sep 2026 launch needs: everything is closed except a
+// named handful. The failure that matters is a shelf that accidentally
+// opens something -- a whole section going public because a prefix matched
+// one character too loosely -- so that is what these check hardest.
+
+describe('dgeMatchShelf — the go-live allow-list', () => {
+  const ALLOW = [
+    'SarvaMula/kavya/sumadhva_vijaya',
+    'SarvaMula/kavya/raghavendra_vijaya',
+    'SarvaMula/kavya/tirtha_prabandha'
+  ];
+
+  test('no shelf configured -> everything is on it', () => {
+    const w = loadRoleAccess();
+    assert.equal(w.dgeMatchShelf('anything/at/all', []), true);
+    assert.equal(w.dgeMatchShelf('anything/at/all', null), true);
+  });
+
+  test('an allowed path itself is on the shelf', () => {
+    const w = loadRoleAccess();
+    assert.equal(w.dgeMatchShelf('SarvaMula/kavya/sumadhva_vijaya', ALLOW), true);
+  });
+
+  test('a descendant of an allowed path is on the shelf', () => {
+    // Each sarga has to render, not just the work.
+    const w = loadRoleAccess();
+    assert.equal(w.dgeMatchShelf('SarvaMula/kavya/sumadhva_vijaya/sarga_1', ALLOW), true);
+  });
+
+  test('an ancestor of an allowed path is on the shelf', () => {
+    // Otherwise the drawer has no folder to open and the shelf shows nothing.
+    const w = loadRoleAccess();
+    assert.equal(w.dgeMatchShelf('SarvaMula', ALLOW), true);
+    assert.equal(w.dgeMatchShelf('SarvaMula/kavya', ALLOW), true);
+  });
+
+  test('a sibling under an allowed ancestor is NOT on the shelf', () => {
+    // The whole point: SarvaMula's own granthas stay private while the three
+    // kāvyas under it go live.
+    const w = loadRoleAccess();
+    assert.equal(w.dgeMatchShelf('SarvaMula/sutra_prasthana/anuvyakhyana/mula', ALLOW), false);
+    assert.equal(w.dgeMatchShelf('SarvaMula/kavya/something_else', ALLOW), false);
+  });
+
+  test('an unrelated section is NOT on the shelf', () => {
+    const w = loadRoleAccess();
+    ['darshana/vedanta/dvaita/DvaitaVedanta',
+     'darshana/vedanta/dvaita/SetuTila/mula_granthas/atharvana',
+     'vedas/rigveda', 'dasa_sahitya'].forEach(p => {
+      assert.equal(w.dgeMatchShelf(p, ALLOW), false, p);
+    });
+  });
+
+  test('a path that merely shares a prefix STRING is not on the shelf', () => {
+    // 'SarvaMulaX' must not ride in on 'SarvaMula'. This is the bug that
+    // would silently publish a section.
+    const w = loadRoleAccess();
+    assert.equal(w.dgeMatchShelf('SarvaMulaOther/kavya', ALLOW), false);
+    assert.equal(w.dgeMatchShelf('SarvaMula/kavya/sumadhva_vijaya_notes', ALLOW), false);
+  });
+});
+
+describe('dgeIsOffShelf — who the shelf applies to', () => {
+  const SHELF = { enabled: true, allow: ['SarvaMula/kavya/sumadhva_vijaya'], openToRoles: [] };
+
+  test('an unconfigured or disabled shelf hides nothing', () => {
+    const w = loadRoleAccess();
+    w.dgeSetShelfConfig(null);
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), false);
+    w.dgeSetShelfConfig({ enabled: false, allow: ['SarvaMula'] });
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), false);
+    w.dgeSetShelfConfig({ enabled: true, allow: [] });
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), false);
+  });
+
+  test('an ordinary visitor is held to the shelf', () => {
+    const w = loadRoleAccess();
+    w.dgeSetShelfConfig(SHELF);
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), true);
+    assert.equal(w.dgeIsOffShelf('SarvaMula/kavya/sumadhva_vijaya/sarga_1'), false);
+  });
+
+  test('a role named in openToRoles sees the whole library', () => {
+    const w = loadRoleAccess();
+    w.dgeSetShelfConfig({ enabled: true, allow: ['SarvaMula/kavya/sumadhva_vijaya'], openToRoles: ['scholar'] });
+    w.dgeCurrentUserRole = 'scholar';
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), false);
+    w.dgeCurrentUserRole = 'basic';
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), true);
+  });
+
+  test('a previewing superadmin IS held to the shelf', () => {
+    // The reason preview exists: an admin has to be able to see the launch
+    // exactly as a visitor sees it, shelf included.
+    const w = loadRoleAccess();
+    w.localStorage.setItem('is_superadmin', 'true');
+    w.dgeSetShelfConfig(SHELF);
+    w.dgeSetPreviewRole('basic');
+    assert.equal(w.dgeIsOffShelf('vedas/rigveda'), true);
+    w.dgeClearPreviewRole();
+  });
+});
+
+// --- Capabilities: what a role may DO ------------------------------------
+//
+// Gates answer "may this person SEE this path". Capabilities answer "may
+// this person copy text". The rule that matters is the default: an
+// ungranted capability is CLOSED, which is how copy-guard.js already
+// behaved before capabilities existed, so a deployment that never opens
+// this panel keeps exactly its old behaviour.
+
+describe('dgeRoleCan — copy and other granted capabilities', () => {
+  test('with nothing configured, an ordinary visitor may not', () => {
+    const w = loadRoleAccess();
+    assert.equal(w.dgeRoleCan('copy'), false);
+  });
+
+  test('an admin device may, configured or not', () => {
+    const w = loadRoleAccess();
+    w.localStorage.setItem('acharyaAuthorized', 'true');
+    assert.equal(w.dgeRoleCan('copy'), true);
+  });
+
+  test('a previewing superadmin is held to the previewed role', () => {
+    const w = loadRoleAccess();
+    w.localStorage.setItem('is_superadmin', 'true');
+    assert.equal(w.dgeRoleCan('copy'), true);
+    w.dgeSetPreviewRole('basic');
+    assert.equal(w.dgeRoleCan('copy'), false, 'preview must not keep the admin bypass');
+    w.dgeClearPreviewRole();
+  });
+
+  test('a capability is unknown until the config names it', () => {
+    const w = loadRoleAccess();
+    assert.deepEqual(plain(w.dgeRoleCapabilityRoles('copy')), []);
+    assert.deepEqual(plain(w.dgeAllCapabilities()), {});
+  });
+});

@@ -30,6 +30,10 @@ window.DGE_VERSIONS['role-access.js'] = 'v1.0 (Firestore-backed content gates + 
 // Both documents are optional — an unconfigured deployment behaves exactly
 // as before this file existed (no roles beyond AUTH_CONFIG.roles, no gates).
 let dgeRoleAccessGates = [];   // [{ prefix, allowRoles }]
+// { capability: [role id, ...] } -- what a role may DO, as opposed to what it
+// may see. Same Firestore doc as the gates (config/roleAccess), same
+// public-read/superadmin-write rule.
+let dgeRoleCapabilities = {};
 let dgeAllRoles = null;        // [{ id, label }] once loaded; null = not loaded yet
 let dgeRoleAccessLoadPromise = null;
 
@@ -75,6 +79,62 @@ window.dgeIsRoleGatedPath = function(path, role, gates) {
   return allow.indexOf(role || DGE_ANONYMOUS_ROLE) < 0;
 };
 
+/* --- The go-live shelf ---------------------------------------------------
+ *
+ * A gate says "this path is closed to these roles". The shelf says the
+ * opposite and is the shape a launch actually needs: EVERYTHING is closed
+ * except a named handful. Asked for directly, 10 Sep 2026, for the 17 Sep
+ * go-live — Sumadhva Vijaya, Raghavendra Vijaya and Tīrtha Prabandha
+ * visible, "rest must be hidden ... the DvaitaVedanta and SetuTila".
+ *
+ * Enumerating what to hide would have meant listing ~590 leaves and being
+ * wrong the first time a grantha is added; a shelf is wrong in the safe
+ * direction, because a text nobody remembered to list stays private rather
+ * than going live by accident.
+ *
+ * TWO DIRECTIONS COUNT AS ON-SHELF, and both are needed for the tree to
+ * work. A DESCENDANT of an allowed path is on the shelf (each sarga of
+ * Sumadhva Vijaya). So is an ANCESTOR — SarvaMula and SarvaMula/kavya must
+ * survive for the drawer to have anything to open, even though the rest of
+ * SarvaMula does not.
+ */
+window.dgeMatchShelf = function(path, allow) {
+  if (!Array.isArray(allow) || !allow.length) return true;   // no shelf configured = everything open
+  const p = String(path || '');
+  if (!p) return true;
+  return allow.some(entry => {
+    const a = String(entry || '');
+    if (!a) return false;
+    return p === a || p.indexOf(a + '/') === 0 || a.indexOf(p + '/') === 0;
+  });
+};
+
+//: The shelf, once library.js has read library-overrides.json. Held here
+//: rather than reached for through library.js so admin/access-control.html
+//: — which never loads library.js — can still preview against it.
+let dgeShelfConfig = null;
+window.dgeSetShelfConfig = function(shelf) {
+  dgeShelfConfig = (shelf && shelf.enabled && Array.isArray(shelf.allow) && shelf.allow.length) ? shelf : null;
+};
+window.dgeGetShelfConfig = function() { return dgeShelfConfig; };
+
+/**
+ * True when the shelf hides `path` from whoever is looking. Same bypass
+ * rule as the role gates: a real admin sees everything, but an admin who
+ * has switched into preview does NOT — seeing the shelf exactly as a
+ * visitor sees it is the entire point of previewing.
+ */
+window.dgeIsOffShelf = function(path) {
+  const shelf = dgeShelfConfig;
+  if (!shelf) return false;
+  const open = Array.isArray(shelf.openToRoles) ? shelf.openToRoles : [];
+  const preview = window.dgeGetPreviewRole();
+  if (!preview && typeof dgeIsAdmin === 'function' && dgeIsAdmin()) return false;
+  const role = window.dgeEffectiveGatingRole();
+  if (open.indexOf(role) >= 0) return false;
+  return !window.dgeMatchShelf(path, shelf.allow);
+};
+
 // --- Firestore loading --------------------------------------------------
 
 /**
@@ -114,6 +174,7 @@ window.dgeLoadRoleAccessConfig = function() {
       const custom = (rolesDoc && Array.isArray(rolesDoc.list)) ? rolesDoc.list.filter(r => r && r.id && !fixed.some(f => f.id === r.id)) : [];
       dgeAllRoles = fixed.concat(custom);
       dgeRoleAccessGates = (gatesDoc && Array.isArray(gatesDoc.gates)) ? gatesDoc.gates : [];
+      dgeRoleCapabilities = (gatesDoc && gatesDoc.capabilities && typeof gatesDoc.capabilities === 'object') ? gatesDoc.capabilities : {};
     } catch (e) {
       console.error('[RoleAccess] Failed to load config/roles or config/roleAccess:', e);
       dgeAllRoles = dgeFixedRoles();
@@ -147,7 +208,7 @@ window.dgeCurrentRoleGates = function() {
  * this call is the real check, enforced server-side regardless of what
  * this function's caller believes about itself.
  */
-window.dgeSaveRoleAccessConfig = async function(customRoles, gates) {
+window.dgeSaveRoleAccessConfig = async function(customRoles, gates, capabilities) {
   if (typeof firebase === 'undefined' || !firebase.apps || !firebase.apps.length) {
     throw new Error('Firebase is not initialized.');
   }
@@ -159,9 +220,53 @@ window.dgeSaveRoleAccessConfig = async function(customRoles, gates) {
     allowRoles: Array.isArray(g.allowRoles) ? g.allowRoles.slice() : []
   }));
   await db.collection('config').doc('roles').set({ list, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
-  await db.collection('config').doc('roleAccess').set({ gates: cleanGates, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+  const cleanCaps = {};
+  Object.keys(capabilities || {}).forEach(k => {
+    if (Array.isArray(capabilities[k])) cleanCaps[k] = capabilities[k].slice();
+  });
+  await db.collection('config').doc('roleAccess').set({
+    gates: cleanGates, capabilities: cleanCaps,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
   dgeAllRoles = list;
   dgeRoleAccessGates = cleanGates;
+  dgeRoleCapabilities = cleanCaps;
+};
+
+/* --- Capabilities: what a role may DO ------------------------------------
+ *
+ * Gates answer "may this person SEE this path". Capabilities answer "may
+ * this person copy text" -- a different question with the same
+ * grant-by-role shape, so it rides in the same Firestore document rather
+ * than growing a second config surface.
+ *
+ * COPY, specifically. copy-guard.js used to allow copying to admins and
+ * nobody else, which meant a scholar the lead trusted had no way to take a
+ * word into their own notes. The lead's choice, 10 Sep 2026: copy is
+ * granted per role, "so I decide per person". An UNCONFIGURED capability
+ * is closed to everyone but an admin -- the same direction the shelf
+ * takes, and the same direction copy-guard already took.
+ */
+window.dgeRoleCapabilityRoles = function(cap) {
+  const v = dgeRoleCapabilities[cap];
+  return Array.isArray(v) ? v.slice() : [];
+};
+window.dgeAllCapabilities = function() { return Object.assign({}, dgeRoleCapabilities); };
+
+window.dgeRoleCan = function(cap) {
+  const preview = window.dgeGetPreviewRole();
+  // A real admin can do everything; a previewing one is held to the role
+  // they picked, which is the whole point of previewing.
+  if (!preview && typeof dgeIsAdmin === 'function' && dgeIsAdmin()) return true;
+  if (!preview) {
+    try {
+      if (localStorage.getItem('acharyaAuthorized') === 'true' ||
+          localStorage.getItem('is_superadmin') === 'true') return true;
+    } catch (e) { /* private mode */ }
+  }
+  const allowed = dgeRoleCapabilities[cap];
+  if (!Array.isArray(allowed) || !allowed.length) return false;
+  return allowed.indexOf(window.dgeEffectiveGatingRole()) >= 0;
 };
 
 // --- Preview-as-role (superadmin testing) -------------------------------
@@ -175,6 +280,9 @@ window.dgeSaveRoleAccessConfig = async function(customRoles, gates) {
 // dgeIsHiddenByRoleGate below reads the real role first and only consults
 // the preview when that real check already passed.
 const DGE_PREVIEW_ROLE_KEY = 'dge.previewRole';
+const DGE_PREVIEW_STASH_KEY = 'dge.previewStash';
+const DGE_PREVIEW_ADMIN_FLAGS = ['acharyaAuthorized', 'is_superadmin'];
+
 
 // Deliberately reads localStorage directly rather than calling the
 // library.js-defined dgeIsSuperAdmin() -- this file is loaded on
@@ -182,8 +290,84 @@ const DGE_PREVIEW_ROLE_KEY = 'dge.previewRole';
 // check has to work there without depending on script load order across
 // files that otherwise have nothing to do with each other.
 function dgeRoleAccessIsSuperAdmin() {
-  try { return localStorage.getItem('is_superadmin') === 'true'; } catch (e) { return false; }
+  try {
+    if (localStorage.getItem('is_superadmin') === 'true') return true;
+    // While a preview is running the real admin flags are parked (see
+    // dgeEnterPreview below), so the live flag is deliberately absent. The
+    // stash is what says this device is really a superadmin -- without
+    // consulting it, entering preview would immediately lock the previewer
+    // out of their own exit.
+    const stash = JSON.parse(localStorage.getItem(DGE_PREVIEW_STASH_KEY) || 'null');
+    return !!(stash && stash.is_superadmin === 'true');
+  } catch (e) { return false; }
 }
+
+/* --- "View as a general user" -------------------------------------------
+ *
+ * The ask, 10 Sep 2026: "I as a developer cum admin am viewing all the
+ * options available, at the same time I want to simply switch over to a
+ * general user mode who would not see any of those special features or
+ * options."
+ *
+ * Setting a preview role alone was never enough for that. It changed the
+ * CONTENT gates and nothing else, so an admin previewing 'basic' still saw
+ * the 🛡️ Admin Tools menu, the Gemini word tools, the admin-only search
+ * hits, the pending-leaves toggle and their own copy permissions -- i.e.
+ * still not what a visitor sees.
+ *
+ * WHAT MAKES IT TOTAL. Nine different files decide "is this an admin?" by
+ * reading the same two localStorage flags directly. Rather than route nine
+ * call sites through a new helper -- and miss the tenth that gets written
+ * next month -- entering preview PARKS those flags and exiting puts them
+ * back. Every admin check in the app, including ones nobody remembers,
+ * then answers "no" on its own.
+ *
+ * SURVIVING A CLOSED TAB. The preview role lives in sessionStorage (one
+ * tab, gone on close) but the stash has to be in localStorage or a crash
+ * mid-preview would take an admin's own access with it. So the stash is
+ * restored automatically whenever it exists with no live preview beside it,
+ * which is exactly the state a closed-and-reopened tab leaves behind.
+ */
+function dgePreviewStashAdminFlags() {
+  try {
+    if (localStorage.getItem(DGE_PREVIEW_STASH_KEY)) return;   // already parked
+    const stash = {};
+    DGE_PREVIEW_ADMIN_FLAGS.forEach(k => { stash[k] = localStorage.getItem(k); });
+    localStorage.setItem(DGE_PREVIEW_STASH_KEY, JSON.stringify(stash));
+    DGE_PREVIEW_ADMIN_FLAGS.forEach(k => localStorage.removeItem(k));
+  } catch (e) { /* private mode: preview still gates content, just not chrome */ }
+}
+
+function dgePreviewRestoreAdminFlags() {
+  try {
+    const raw = localStorage.getItem(DGE_PREVIEW_STASH_KEY);
+    if (!raw) return;
+    const stash = JSON.parse(raw) || {};
+    DGE_PREVIEW_ADMIN_FLAGS.forEach(k => {
+      if (stash[k] == null) localStorage.removeItem(k);
+      else localStorage.setItem(k, stash[k]);
+    });
+    localStorage.removeItem(DGE_PREVIEW_STASH_KEY);
+  } catch (e) { /* ignore */ }
+}
+window.dgePreviewRestoreAdminFlags = dgePreviewRestoreAdminFlags;
+
+/**
+ * Enter/leave the preview. Both reload, deliberately: a dozen modules read
+ * the admin flags once at boot, and re-deriving every one of them in place
+ * would be a far larger change than starting the page again.
+ */
+window.dgeEnterPreview = function(role) {
+  if (!dgeRoleAccessIsSuperAdmin()) { if (typeof showToast === 'function') showToast('Super admin access required.'); return; }
+  dgePreviewStashAdminFlags();
+  try { sessionStorage.setItem(DGE_PREVIEW_ROLE_KEY, role || DGE_ANONYMOUS_ROLE); } catch (e) {}
+  if (typeof location !== 'undefined' && location.reload) location.reload();
+};
+window.dgeExitPreview = function() {
+  try { sessionStorage.removeItem(DGE_PREVIEW_ROLE_KEY); } catch (e) {}
+  dgePreviewRestoreAdminFlags();
+  if (typeof location !== 'undefined' && location.reload) location.reload();
+};
 
 window.dgeSetPreviewRole = function(role) {
   if (!dgeRoleAccessIsSuperAdmin()) { if (typeof showToast === 'function') showToast('Super admin access required.'); return; }

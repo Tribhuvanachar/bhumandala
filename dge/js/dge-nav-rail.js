@@ -47,11 +47,15 @@
     { id: "kavya", group: "read", label: "Kāvya", glyph: "का", href: "dge/kavya/index.html" },
     { id: "tirtha", group: "read", label: "Tīrtha", glyph: "ती", href: "dge/tirtha/index.html" },
     { id: "guru-parampara", group: "read", label: "Guru Paramparā", glyph: "गु", href: "dge/guru-parampara/index.html" },
-    { id: "dasa-sahitya", group: "read", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/index.html" },
+    { id: "dasa-sahitya", group: "read", label: "Dāsa Sāhitya", glyph: "दा", href: "dge/dasa-sahitya/views/index.html" },
     { id: "dvaita-grantha-anukramani", group: "read", label: "Grantha Anukramaṇī", glyph: "द्वै", href: "dge/dvaita-grantha-anukramani/index.html" },
-    { id: "ashtadhyayi", group: "tools", label: "Aṣṭādhyāyī", glyph: "अ", href: "dge/vyakarana/ashtadhyayi.html" },
-    { id: "dhatu", group: "tools", label: "Dhātu", glyph: "ध", href: "dge/vyakarana/dhatu.html" },
-    { id: "shabda", group: "tools", label: "Śabda", glyph: "श", href: "dge/vyakarana/shabda.html" },
+    // 10 Sep 2026: these four open their "choose a view" page rather than the
+    // one old flat page. Three layouts each were built for all of them and
+    // linked from nowhere -- the lead found only Guru Paramparā wired up.
+    // Every chooser links back to its own classic page.
+    { id: "ashtadhyayi", group: "tools", label: "Aṣṭādhyāyī", glyph: "अ", href: "dge/vyakarana/ashtadhyayi/index.html" },
+    { id: "dhatu", group: "tools", label: "Dhātu", glyph: "ध", href: "dge/vyakarana/dhatu/index.html" },
+    { id: "shabda", group: "tools", label: "Śabda", glyph: "श", href: "dge/vyakarana/shabda/index.html" },
     { id: "rupasiddhi", group: "tools", label: "Rūpasiddhi", glyph: "रू", href: "dge/vyakarana/rupasiddhi.html" },
     { id: "chandas", group: "tools", label: "Chandas", glyph: "छ", href: "dge/vyakarana/chandas.html" },
     { id: "unadi", group: "tools", label: "Uṇādi-sūtra", glyph: "उ", href: "dge/vyakarana/unadi.html" },

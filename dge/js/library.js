@@ -612,7 +612,7 @@ function dgeLocalizeNumerals(text) {
 // granthas' display paths, so an added folder appears here automatically
 // once anything is MOVED under it and is simply absent while empty --
 // carried in the shape so the two tools stay field-for-field in sync.
-let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {}, adds: [] };
+let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {}, adds: [], shelf: null };
 // True only while a super-admin's UNEXPORTED Library Manager draft (this
 // browser's localStorage, see admin/library.html) is being overlaid in
 // place of the committed file -- drives the "draft preview" notice in
@@ -631,7 +631,12 @@ function dgeNormalizeOverrides(ov) {
     // Hide-from-CORPUS-SEARCH list (1 Sep 2026): read by global-search.js,
     // not by this tree — carried in the shape so the manager draft-drift
     // comparison below stays field-for-field accurate.
-    searchHidden: Array.isArray(ov.searchHidden) ? ov.searchHidden : []
+    searchHidden: Array.isArray(ov.searchHidden) ? ov.searchHidden : [],
+    // The go-live shelf (10 Sep 2026): an ALLOW-list, the opposite direction
+    // from `hidden` above and the shape a launch needs -- everything is
+    // private except a named handful. See dgeMatchShelf in role-access.js
+    // for why ancestors of an allowed path stay visible too.
+    shelf: (ov.shelf && typeof ov.shelf === 'object') ? ov.shelf : null
   };
 }
 // Order-insensitive fingerprint, mirroring admin/library.html's ovKey() --
@@ -650,6 +655,11 @@ async function dgeLoadLibraryOverrides() {
     const ov = await fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (ov) {
       dgeLibOverrides = dgeNormalizeOverrides(ov);
+      // role-access.js owns the shelf CHECK (it needs the effective role and
+      // the preview state); this file owns the shelf DATA, because the
+      // curator's own file is where it belongs. Handing it over here keeps
+      // both halves where they make sense.
+      if (typeof window.dgeSetShelfConfig === 'function') window.dgeSetShelfConfig(dgeLibOverrides.shelf);
       dgeOverlayManagerDraft(ov.updatedAt);
       return;
     }
@@ -732,6 +742,9 @@ function dgeIsHiddenPath(path) {
   // never loaded (or a deployment has no gates configured) this is a
   // no-op, same as before this existed.
   if (typeof window.dgeIsHiddenByRoleGate === 'function' && window.dgeIsHiddenByRoleGate(path)) return true;
+  // The go-live shelf -- an allow-list, so this is the check that hides the
+  // ~590 leaves nobody named rather than the handful somebody did.
+  if (typeof window.dgeIsOffShelf === 'function' && window.dgeIsOffShelf(path)) return true;
   return false;
 }
 
@@ -752,6 +765,10 @@ function dgeEffectiveDisplayPath(realSlug) {
   const rel = realSlug.slice(best.length).replace(/^\//, '');
   return dest ? (rel ? dest + '/' + rel : dest) : rel;
 }
+
+// core.js needs this to judge a DIRECT ?path= link against the go-live
+// shelf, which is written in display paths.
+window.dgeEffectiveDisplayPath = dgeEffectiveDisplayPath;
 
 function dgePinRank(path) {
   const i = dgeLibOverrides.pinned.indexOf(path);

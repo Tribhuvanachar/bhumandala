@@ -94,7 +94,7 @@ function dgeRevealAdminTools() {
   // that always toast "not set up yet" (see openUserRolesModal in
   // user-roles.js and admin/access-control.html's own gate).
   if (window.AUTH_CONFIG && window.AUTH_CONFIG.enabled) {
-    ['adminUserRolesItem', 'adminAccessControlItem'].forEach(id => {
+    ['adminUserRolesItem', 'adminAccessControlItem', 'adminViewAsItem'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'flex';
     });

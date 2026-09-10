@@ -535,15 +535,49 @@
   // Library tree's own hidden list). Admins still see the hits, exactly
   // like the admin-only grantha filter beside it in render().
   var gsSearchHidden = null;
+  // The same file also carries `moves` and the go-live `shelf`. Search hits
+  // are keyed by a grantha's REAL taxonomy slug, while the shelf is written
+  // in DISPLAY paths (what the Library drawer shows, after moves) -- so a
+  // hit has to be mapped through `moves` before the shelf can judge it.
+  // Without that, searching would happily return every SetuTila verse the
+  // drawer is hiding, which is the one leak that would make the whole
+  // go-live shelf pointless.
+  var gsMoves = {};
   try {
     fetch(new URL('admin/config/library-overrides.json', GS_ROOT).href, { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (ov) { gsSearchHidden = (ov && Array.isArray(ov.searchHidden)) ? ov.searchHidden : []; })
+      .then(function (ov) {
+        gsSearchHidden = (ov && Array.isArray(ov.searchHidden)) ? ov.searchHidden : [];
+        gsMoves = (ov && ov.moves && typeof ov.moves === 'object') ? ov.moves : {};
+        // role-access.js owns the shelf check; on the reader library.js has
+        // already handed it the config, but ashtadhyayi.html/dhatu.html load
+        // neither, so this hands it over there. Idempotent either way.
+        if (typeof window.dgeSetShelfConfig === 'function') window.dgeSetShelfConfig(ov && ov.shelf);
+      })
       .catch(function () { gsSearchHidden = []; });
   } catch (e) { gsSearchHidden = []; }
+
+  // Mirrors dgeEffectiveDisplayPath() in library.js: longest matching source
+  // prefix wins, so moving a deep subfolder isn't shadowed by a move of one
+  // of its ancestors.
+  function gsDisplayPath(realSlug) {
+    var best = null;
+    Object.keys(gsMoves).forEach(function (src) {
+      if (realSlug === src || realSlug.indexOf(src + '/') === 0) {
+        if (!best || src.length > best.length) best = src;
+      }
+    });
+    if (!best) return realSlug;
+    var dest = gsMoves[best];
+    var rel = realSlug.slice(best.length).replace(/^\//, '');
+    return dest ? (rel ? dest + '/' + rel : dest) : rel;
+  }
+
   function gsIsSearchHiddenHit(h) {
     var g = (h && h.grantha) || '';
-    return (gsSearchHidden || []).some(function (p) { return g === p || g.indexOf(p + '/') === 0; });
+    if ((gsSearchHidden || []).some(function (p) { return g === p || g.indexOf(p + '/') === 0; })) return true;
+    if (typeof window.dgeIsOffShelf === 'function' && window.dgeIsOffShelf(gsDisplayPath(g))) return true;
+    return false;
   }
 
   function ensureIndex() {
