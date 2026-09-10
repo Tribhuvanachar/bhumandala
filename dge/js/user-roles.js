@@ -6,7 +6,7 @@
 // here. No pagination yet (loads up to 200 most-recently-active users) —
 // fine to start with, revisit once real volume makes that a problem.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['user-roles.js'] = 'v1.1 (10 Sep 2026: custom roles in the dropdown, a spreadsheet round-trip -- copy the sheet out, paste email\u2192role back in) \u00b7 v1.0 (List + search + change role)';
+window.DGE_VERSIONS['user-roles.js'] = 'v1.2 (10 Sep 2026: CSV sheet download + file upload, names as well as roles, header-driven columns; toolbar no longer collapses on a phone) \u00b7 v1.1 (custom roles, spreadsheet round-trip) \u00b7 v1.0 (List + search + change role)';
 
 function dgeRolesEsc(s) {
   const d = document.createElement('div');
@@ -77,11 +77,15 @@ async function dgeRenderUserRolesList(filterText) {
     // lead's ask. Only rows whose email the provider verified (emailVerified
     // true, or a legacy Google profile whose email predates the flag).
     const exportable = rows.filter(u => u.email && (u.emailVerified === true || u.emailVerified === undefined));
-    body.innerHTML = `<div style="display:flex; gap:8px; align-items:center; margin:0 0 8px;">
-        <span style="font-size:11px; color:var(--muted-text);">${rows.length} shown · ${exportable.length} with a verified email</span>
-        <button class="btn-sm" style="margin-left:auto; font-size:11px;" onclick="window.dgeExportUserRolesTsv()" title="Everyone shown, as tab-separated text — paste straight into a spreadsheet">⬇ Sheet (TSV)</button>
-        <button class="btn-sm" style="font-size:11px;" onclick="window.dgeOpenBulkRolePaste()" title="Paste an email/role column back from your spreadsheet">📋 Paste roles</button>
-        <button class="btn-sm" style="font-size:11px;" onclick="window.dgeExportVerifiedEmails()" title="CSV of every listed user with a verified email">⬇ Emails (CSV)</button>
+    // The count sits on its own full-width line and the buttons wrap under
+    // it. Before this it shared one nowrap flex row with three buttons, and
+    // on a phone the text was squeezed into a ~60px column reading one word
+    // per line ("2 / shown / · 2 / with / a / verified / email") — reported
+    // 10 Sep 2026 with a screenshot.
+    body.innerHTML = `<div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 8px;">
+        <span style="flex:1 1 100%; font-size:11px; color:var(--muted-text);">${rows.length} shown · ${exportable.length} with a verified email</span>
+        <button class="btn-sm" style="font-size:11px;" onclick="window.dgeExportUserSheet()" title="Everyone shown, as a CSV that opens straight in Excel — edit the name and role columns and upload it back">⬇ Download sheet</button>
+        <button class="btn-sm" style="font-size:11px;" onclick="window.dgeOpenBulkRolePaste()" title="Upload the edited sheet, or paste rows from it">⬆ Upload / paste</button>
       </div>` + rows.map(u => `
       <div style="border-top:1px dashed var(--card-border); padding:10px 0; display:flex; align-items:center; gap:8px;">
         <div style="flex:1; min-width:0;">
@@ -116,55 +120,108 @@ async function dgeRenderUserRolesList(filterText) {
 //: typo becomes a reported row rather than a role nobody can ever match.
 let dgeUserRolesKnown = [];
 /**
- * Parse a block pasted out of a spreadsheet into {email, role} rows.
+ * Split one spreadsheet line into cells. Tabs (a spreadsheet copy) or
+ * commas (a CSV file), with quoted cells honoured so a name containing a
+ * comma survives the round trip.
+ */
+function dgeSplitRow(line) {
+  if (line.indexOf('\t') >= 0) return line.split('\t').map(c => c.trim());
+  const cells = [];
+  let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQ) {
+      if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+      else if (ch === '"') inQ = false;
+      else cur += ch;
+    } else if (ch === '"') inQ = true;
+    else if (ch === ',') { cells.push(cur.trim()); cur = ''; }
+    else cur += ch;
+  }
+  cells.push(cur.trim());
+  return cells;
+}
+
+/**
+ * Parse a block pasted or uploaded from a spreadsheet into
+ * {email, role, name} rows.
  *
- * Pure and exported so it can be tested without Firebase. Deliberately
- * generous about SHAPE and strict about CONTENT: a spreadsheet copy arrives
- * tab-separated, a hand-typed list comma-separated, and either may or may not
- * carry the header row this tool exported. Extra columns (displayName, the
- * old role) are ignored -- which is what makes "export the sheet, edit the
- * role column, paste it back" work without deleting anything first.
+ * Pure and exported so it can be tested without Firebase. Two modes, and
+ * which one applies is decided by the first line:
+ *
+ *   HEADER MODE   the first line names its columns (it contains "email"
+ *                 and at least one of "role"/"name"). Columns are then read
+ *                 BY NAME, in any order, and a displayName column can be
+ *                 applied as well as a role. This is what the Download
+ *                 sheet button produces, so the ordinary edit-and-upload
+ *                 round trip always lands here.
+ *
+ *   LOOSE MODE    no recognisable header — a list someone typed. The email
+ *                 is found by shape and the role is the RIGHTMOST cell that
+ *                 names a role we know (taking the last cell outright would
+ *                 pick up a trailing date column). Names are NOT applied in
+ *                 this mode: guessing which free-text cell is a person's
+ *                 name from an unlabelled list is exactly the kind of
+ *                 confident wrong answer that overwrites real data.
  */
 window.dgeParseRolePaste = function(text, knownRoles) {
   const known = (knownRoles || []).map(r => String(r).toLowerCase());
+  const lines = String(text || '').split(/\r?\n/);
+  const firstIdx = lines.findIndex(l => l.trim());
+  if (firstIdx < 0) return [];
+
+  const head = dgeSplitRow(lines[firstIdx]).map(c => c.toLowerCase().replace(/[^a-z]/g, ''));
+  const col = { email: head.indexOf('email'), role: head.indexOf('role') };
+  col.name = head.indexOf('displayname') >= 0 ? head.indexOf('displayname') : head.indexOf('name');
+  const headerMode = col.email >= 0 && (col.role >= 0 || col.name >= 0);
+
   const rows = [];
-  String(text || '').split(/\r?\n/).forEach((line, i) => {
+  lines.forEach((line, i) => {
     if (!line.trim()) return;
-    const cells = line.split(/\t|,/).map(c => c.trim().replace(/^"|"$/g, ''));
-    const email = (cells.find(c => c.indexOf('@') > 0) || '').toLowerCase();
-    // The role is the last cell that names a role we actually know. Taking
-    // "the last cell" outright would pick up a trailing timestamp column.
-    let role = null;
-    for (let k = cells.length - 1; k >= 0; k--) {
-      if (known.indexOf(cells[k].toLowerCase()) >= 0) { role = cells[k].toLowerCase(); break; }
+    if (headerMode && i === firstIdx) return;                 // the header itself
+    const cells = dgeSplitRow(line);
+    let email = '', role = null, name = null;
+    if (headerMode) {
+      email = (cells[col.email] || '').toLowerCase();
+      const r = col.role >= 0 ? (cells[col.role] || '').toLowerCase() : '';
+      role = known.indexOf(r) >= 0 ? r : (r ? null : undefined);
+      if (col.name >= 0) name = cells[col.name] || '';
+    } else {
+      email = (cells.find(c => c.indexOf('@') > 0) || '').toLowerCase();
+      for (let k = cells.length - 1; k >= 0; k--) {
+        if (known.indexOf(cells[k].toLowerCase()) >= 0) { role = cells[k].toLowerCase(); break; }
+      }
+      if (!email && role === null) return;                    // blank or a stray header
     }
-    if (!email && !role) return;                       // blank or a header line
-    rows.push({ line: i + 1, email: email, role: role, raw: line.trim() });
+    if (!email && role == null && name == null) return;
+    rows.push({ line: i + 1, email: email, role: role === undefined ? null : role, name: name, raw: line.trim() });
   });
   return rows;
 };
 
-window.dgeExportUserRolesTsv = async function() {
+window.dgeExportUserSheet = async function() {
   try {
     const db = firebase.firestore();
     const snap = await db.collection('users').orderBy('lastLoginAt', 'desc').limit(1000).get();
-    // Tab-separated, not comma: pasting TSV into Excel/Sheets lands in
-    // columns with no import dialogue, which is the whole point of offering
-    // it beside the CSV export.
-    const lines = ['email\tdisplayName\trole\tphone\tlastLogin'];
+    // CSV with a UTF-8 BOM rather than TSV: Excel double-click-opens this
+    // straight into columns AND reads the BOM as "this is UTF-8", without
+    // which a Devanagari or Kannada displayName arrives as mojibake and
+    // gets saved back that way. The header row is what makes the upload
+    // side read columns by NAME, so edit cells freely but keep it.
+    const cell = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const lines = ['email,displayName,role,phone,lastLogin'];
     snap.forEach(doc => {
       const u = doc.data();
       const last = u.lastLoginAt && u.lastLoginAt.toDate ? u.lastLoginAt.toDate().toISOString().slice(0, 10) : '';
-      lines.push([u.email || '', u.displayName || '', u.role || '', u.phoneNumber || '', last]
-        .map(v => String(v).replace(/[\t\r\n]/g, ' ')).join('\t'));
+      lines.push([u.email || '', u.displayName || '', u.role || '', u.phoneNumber || '', last].map(cell).join(','));
     });
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([lines.join('\n') + '\n'], { type: 'text/tab-separated-values' }));
-    a.download = 'dge-users-' + new Date().toISOString().slice(0, 10) + '.tsv';
+    a.href = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\r\n') + '\r\n'], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'dge-users-' + new Date().toISOString().slice(0, 10) + '.csv';
     document.body.appendChild(a); a.click(); a.remove();
-    if (typeof showToast === 'function') showToast((lines.length - 1) + ' user(s) exported. Edit the role column and paste it back.');
+    if (typeof showToast === 'function') showToast((lines.length - 1) + ' user(s) exported. Edit the name and role columns, then upload it back.');
   } catch (e) {
-    console.error('[UserRoles] TSV export failed:', e);
+    console.error('[UserRoles] Sheet export failed:', e);
     if (typeof showToast === 'function') showToast('Export failed: ' + (e.message || e));
   }
 };
@@ -176,14 +233,22 @@ window.dgeOpenBulkRolePaste = function() {
     : ((window.AUTH_CONFIG && window.AUTH_CONFIG.roles) || ['basic']);
   body.innerHTML = `
     <div style="font-size:12px; color:var(--muted-text); margin-bottom:8px;">
-      Paste rows copied from your spreadsheet — one person per line, with the email
-      and the role in any two columns. Tabs or commas both work, a header row is
-      ignored, and extra columns are left alone. Nothing is written until you press Apply.
+      Upload the sheet you downloaded and edited, or paste rows from it. Keep the
+      <b>header row</b> — it is what lets the columns be read by name, so a
+      <code>displayName</code> as well as a <code>role</code> can be applied, in any
+      column order. Without a header, only email and role are read.
+      Nothing is written until you press Apply.
     </div>
     <div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">
       Roles you can use: ${known.map(r => `<code>${dgeRolesEsc(r)}</code>`).join(' ')}
     </div>
-    <textarea id="dgeBulkRoleText" rows="9" placeholder="someone@example.com&#9;Ravi&#9;subscriber"
+    <label class="btn-sm" style="display:inline-block; cursor:pointer; margin-bottom:8px;">
+      ⬆ Choose a .csv / .tsv file
+      <input type="file" id="dgeBulkRoleFile" accept=".csv,.tsv,.txt,text/csv,text/plain"
+             style="display:none;" onchange="window.dgeLoadBulkRoleFile(this)">
+    </label>
+    <span id="dgeBulkRoleFileName" style="font-size:11px; color:var(--muted-text); margin-left:6px;"></span>
+    <textarea id="dgeBulkRoleText" rows="9" placeholder="email,displayName,role&#10;someone@example.com,Ravi,subscriber"
       style="width:100%; box-sizing:border-box; font:12px/1.4 ui-monospace,monospace; padding:8px;
              border:1px solid var(--card-border); border-radius:6px;
              background:var(--bg-main); color:var(--text-primary);"></textarea>
@@ -192,6 +257,29 @@ window.dgeOpenBulkRolePaste = function() {
       <button class="btn-sm" onclick="window.dgeRenderUserRolesListPublic()">Cancel</button>
     </div>
     <div id="dgeBulkRoleResult" style="margin-top:10px; font-size:12px;"></div>`;
+};
+
+/* The file goes into the same textarea the paste path uses, so there is one
+   parser, one preview and one Apply — and the admin can still eyeball or
+   correct what the file contained before anything is written. */
+window.dgeLoadBulkRoleFile = function(input) {
+  const file = input && input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function () {
+    // Strip a UTF-8 BOM: Excel writes one back out, and left in place it
+    // would glue itself to the first header cell so "email" never matches.
+    const text = String(reader.result || '').replace(/^\ufeff/, '');
+    const ta = document.getElementById('dgeBulkRoleText');
+    if (ta) ta.value = text;
+    const label = document.getElementById('dgeBulkRoleFileName');
+    if (label) label.textContent = file.name + ' — ' + text.split(/\r?\n/).filter(l => l.trim()).length + ' line(s) loaded. Check, then Apply.';
+  };
+  reader.onerror = function () {
+    const label = document.getElementById('dgeBulkRoleFileName');
+    if (label) label.textContent = 'Could not read that file.';
+  };
+  reader.readAsText(file, 'utf-8');
 };
 
 window.dgeApplyBulkRolePaste = async function() {
@@ -204,37 +292,50 @@ window.dgeApplyBulkRolePaste = async function() {
   if (!rows.length) { out.innerHTML = '<span style="color:var(--accent-red);">Nothing to apply.</span>'; return; }
 
   // Resolve emails to uids from the LIVE collection rather than the last
-  // render: the paste may name someone who signed in since the list loaded.
-  let byEmail = {};
+  // render: the sheet may name someone who signed in since it was downloaded.
+  let byEmail = {}, current = {};
   try {
     const db = firebase.firestore();
     const snap = await db.collection('users').orderBy('lastLoginAt', 'desc').limit(1000).get();
     snap.forEach(doc => {
-      const e = (doc.data().email || '').toLowerCase();
-      if (e) byEmail[e] = doc.id;
+      const d = doc.data();
+      const e = (d.email || '').toLowerCase();
+      if (e) { byEmail[e] = doc.id; current[e] = d; }
     });
   } catch (e) {
     out.innerHTML = '<span style="color:var(--accent-red);">Could not read the user list: ' + dgeRolesEsc(e.message || e) + '</span>';
     return;
   }
 
+  const me = (window.dgeCurrentUser && window.dgeCurrentUser.uid) || null;
   const results = [];
-  let applied = 0;
+  let applied = 0, unchanged = 0;
   for (const r of rows) {
     if (!r.email) { results.push([r.line, r.raw, 'no email in this line']); continue; }
-    if (!r.role) { results.push([r.line, r.raw, 'no role I recognise in this line']); continue; }
     const uid = byEmail[r.email];
     if (!uid) { results.push([r.line, r.email, 'no account with that email has signed in yet']); continue; }
+    const now = current[r.email] || {};
+    const patch = {};
+    if (r.role && r.role !== now.role) patch.role = r.role;
+    if (r.name != null && r.name !== '' && r.name !== now.displayName) patch.displayName = r.name;
+    if (!Object.keys(patch).length) { unchanged++; continue; }
+    // The rules forbid changing your OWN role, so say so rather than
+    // letting Firestore reject the whole row with a bare permission error.
+    if (patch.role && uid === me) {
+      results.push([r.line, r.email, 'that is your own account — nobody may change their own role']);
+      continue;
+    }
     try {
-      await firebase.firestore().collection('users').doc(uid).update({ role: r.role });
+      await firebase.firestore().collection('users').doc(uid).update(patch);
       applied++;
-      results.push([r.line, r.email, '→ ' + r.role, true]);
+      results.push([r.line, r.email, Object.keys(patch).map(k => k + ' → ' + patch[k]).join(', '), true]);
     } catch (e) {
       results.push([r.line, r.email, 'refused: ' + (e.message || e)]);
     }
   }
   out.innerHTML =
-    `<div style="font-weight:700; margin-bottom:6px;">${applied} of ${rows.length} applied.</div>` +
+    `<div style="font-weight:700; margin-bottom:6px;">${applied} changed, ${unchanged} already up to date, ` +
+    `${rows.length - applied - unchanged} not applied.</div>` +
     results.map(x => `<div style="padding:2px 0; color:${x[3] ? 'inherit' : 'var(--accent-red)'};">
         <span style="opacity:.6;">line ${x[0]}</span> ${dgeRolesEsc(x[1])} — ${dgeRolesEsc(x[2])}</div>`).join('') +
     `<button class="btn-sm" style="margin-top:10px;" onclick="window.dgeRenderUserRolesListPublic()">← Back to the list</button>`;

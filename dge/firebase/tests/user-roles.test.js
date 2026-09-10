@@ -41,80 +41,118 @@ const plain = (v) => JSON.parse(JSON.stringify(v));
 
 const ROLES = ['basic', 'subscriber', 'sponsor', 'scholar', 'admin', 'superadmin'];
 
-describe('dgeParseRolePaste', () => {
-  test('a tab-separated spreadsheet paste, header and all', () => {
+describe('dgeParseRolePaste — header mode (the download-edit-upload round trip)', () => {
+  test('columns are read by NAME, so a name and a role both apply', () => {
     const w = loadUserRoles();
     const rows = w.dgeParseRolePaste(
-      'email\tdisplayName\trole\tphone\tlastLogin\n' +
-      'ravi@example.com\tRavi\tscholar\t\t2026-09-10\n' +
-      'sita@example.com\tSita\tsponsor\t\t2026-09-09\n', ROLES);
-    assert.equal(rows.length, 2, 'the header row carries neither an email nor a role');
-    assert.deepEqual(plain(rows.map(r => [r.email, r.role])),
-      [['ravi@example.com', 'scholar'], ['sita@example.com', 'sponsor']]);
+      'email,displayName,role,phone,lastLogin\n' +
+      '"ravi@example.com","Ravi Kumar","scholar","","2026-09-10"\n', ROLES);
+    assert.equal(rows.length, 1);
+    assert.deepEqual(plain([rows[0].email, rows[0].name, rows[0].role]),
+      ['ravi@example.com', 'Ravi Kumar', 'scholar']);
   });
 
-  test('a comma-separated hand-typed list works too', () => {
+  test('column ORDER does not matter', () => {
     const w = loadUserRoles();
-    const rows = w.dgeParseRolePaste('ravi@example.com, scholar', ROLES);
-    assert.deepEqual(plain(rows.map(r => [r.email, r.role])), [['ravi@example.com', 'scholar']]);
+    const rows = w.dgeParseRolePaste('role,email,displayName\nsponsor,sita@example.com,Sita', ROLES);
+    assert.deepEqual(plain([rows[0].email, rows[0].name, rows[0].role]),
+      ['sita@example.com', 'Sita', 'sponsor']);
   });
 
+  test('a quoted name containing a comma survives the round trip', () => {
+    // The reason CSV parsing is real rather than a .split(',').
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('email,displayName,role\n"a@b.com","Rao, K. V.",scholar', ROLES);
+    assert.equal(rows[0].name, 'Rao, K. V.');
+  });
+
+  test('a doubled quote inside a name is unescaped', () => {
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('email,displayName\n"a@b.com","He said ""hi"""', ROLES);
+    assert.equal(rows[0].name, 'He said "hi"');
+  });
+
+  test('a tab-separated sheet is read the same way', () => {
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('email\tdisplayName\trole\nravi@example.com\tRavi\tscholar', ROLES);
+    assert.deepEqual(plain([rows[0].email, rows[0].name, rows[0].role]), ['ravi@example.com', 'Ravi', 'scholar']);
+  });
+
+  test('an unknown role in the role column is reported, never applied', () => {
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('email,role\nravi@example.com,archivist', ROLES);
+    assert.equal(rows[0].role, null, 'a typo must surface as a failed row, not a silent write');
+    assert.equal(rows[0].email, 'ravi@example.com');
+  });
+
+  test('an EMPTY role cell means "leave the role alone", not "clear it"', () => {
+    // Someone editing only the name column must not wipe everyone's role.
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('email,displayName,role\nravi@example.com,Ravi,', ROLES);
+    assert.equal(rows[0].role, null);
+    assert.equal(rows[0].name, 'Ravi');
+  });
+
+  test('the header row itself is never treated as a person', () => {
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('email,displayName,role\nravi@example.com,Ravi,scholar', ROLES);
+    assert.equal(rows.length, 1);
+  });
+
+  test('roles and emails are lowercased so a spreadsheet’s capitals still match', () => {
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('Email,Role\nRavi@Example.COM,Scholar', ROLES);
+    assert.deepEqual(plain([rows[0].email, rows[0].role]), ['ravi@example.com', 'scholar']);
+  });
+});
+
+describe('dgeParseRolePaste — loose mode (a list somebody typed)', () => {
   test('email is matched by shape, not by column position', () => {
     const w = loadUserRoles();
     const rows = w.dgeParseRolePaste('scholar\tRavi\travi@example.com', ROLES);
-    assert.deepEqual(plain(rows.map(r => [r.email, r.role])), [['ravi@example.com', 'scholar']]);
+    assert.deepEqual(plain([rows[0].email, rows[0].role]), ['ravi@example.com', 'scholar']);
+  });
+
+  test('a comma-separated hand-typed list works', () => {
+    const w = loadUserRoles();
+    const rows = w.dgeParseRolePaste('ravi@example.com, scholar', ROLES);
+    assert.deepEqual(plain([rows[0].email, rows[0].role]), ['ravi@example.com', 'scholar']);
   });
 
   test('a trailing date column is not mistaken for the role', () => {
-    // Taking "the last cell" outright is the obvious wrong implementation.
     const w = loadUserRoles();
     const rows = w.dgeParseRolePaste('ravi@example.com\tRavi\tscholar\t\t2026-09-10', ROLES);
     assert.equal(rows[0].role, 'scholar');
   });
 
-  test('the OLD role column is overridden by the edited one to its right', () => {
-    // Export gives ...role..., the admin adds a new column; the rightmost
-    // known role wins, which is what makes "edit and paste back" work.
+  test('the rightmost known role wins, so an edited column beats the old one', () => {
     const w = loadUserRoles();
     const rows = w.dgeParseRolePaste('ravi@example.com\tRavi\tbasic\tscholar', ROLES);
     assert.equal(rows[0].role, 'scholar');
   });
 
-  test('an unknown role is reported, never applied', () => {
+  test('NO name is inferred without a header', () => {
+    // Guessing which unlabelled cell is a person's name would overwrite real
+    // data with a confident wrong answer.
     const w = loadUserRoles();
-    const rows = w.dgeParseRolePaste('ravi@example.com\tarchivist', ROLES);
-    assert.equal(rows.length, 1);
-    assert.equal(rows[0].role, null, 'a typo must surface as a failed row, not a silent write');
-    assert.equal(rows[0].email, 'ravi@example.com');
-  });
-
-  test('roles and emails are lowercased so a spreadsheet’s capitals still match', () => {
-    const w = loadUserRoles();
-    const rows = w.dgeParseRolePaste('Ravi@Example.COM\tScholar', ROLES);
-    assert.deepEqual(plain([rows[0].email, rows[0].role]), ['ravi@example.com', 'scholar']);
-  });
-
-  test('quotes from a CSV export are stripped', () => {
-    const w = loadUserRoles();
-    const rows = w.dgeParseRolePaste('"ravi@example.com","Ravi","scholar"', ROLES);
-    assert.deepEqual(plain([rows[0].email, rows[0].role]), ['ravi@example.com', 'scholar']);
+    const rows = w.dgeParseRolePaste('ravi@example.com\tRavi\tscholar', ROLES);
+    assert.equal(rows[0].name, null);
   });
 
   test('blank lines and stray whitespace are skipped', () => {
     const w = loadUserRoles();
-    const rows = w.dgeParseRolePaste('\n  \nravi@example.com\tscholar\n\n', ROLES);
-    assert.equal(rows.length, 1);
+    assert.equal(w.dgeParseRolePaste('\n  \nravi@example.com\tscholar\n\n', ROLES).length, 1);
   });
 
   test('line numbers are kept so a failed row can be pointed at', () => {
     const w = loadUserRoles();
-    const rows = w.dgeParseRolePaste('email\trole\nravi@example.com\tscholar', ROLES);
+    const rows = w.dgeParseRolePaste('email,role\nravi@example.com,scholar', ROLES);
     assert.equal(rows[0].line, 2);
   });
 
   test('nothing at all parses to nothing', () => {
     const w = loadUserRoles();
-    assert.deepEqual(w.dgeParseRolePaste('', ROLES).length, 0);
-    assert.deepEqual(w.dgeParseRolePaste(null, ROLES).length, 0);
+    assert.equal(w.dgeParseRolePaste('', ROLES).length, 0);
+    assert.equal(w.dgeParseRolePaste(null, ROLES).length, 0);
   });
 });
