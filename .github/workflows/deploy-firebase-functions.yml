@@ -134,5 +134,10 @@ jobs:
           else
             TARGET="functions"
           fi
-          firebase deploy --only "$TARGET" --project "$PID" --non-interactive
+          # --force also auto-sets an Artifact Registry cleanup policy for build images in
+          # asia-south1 on first deploy -- without it, firebase-tools exits 1 AFTER a fully
+          # successful function deploy just because that one-time policy step was skipped,
+          # which looks like a failure even when every function deployed fine. Discovered
+          # 10 Sep 2026 on the first deploy that got functions created at all.
+          firebase deploy --only "$TARGET" --project "$PID" --non-interactive --force
           echo "Functions deployed to project $PID (region asia-south1, per functions/index.js setGlobalOptions)"
