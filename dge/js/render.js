@@ -75,7 +75,7 @@ window.dgePadaBreak = dgePadaBreak;
 const DGE_LAKARA_SHORT = { Lat: 'लट्', Lit: 'लिट्', Lut: 'लुट्', Lrt: 'लृट्', Lot: 'लोट्', Lan: 'लङ्', VidhiLin: 'विधिलिङ्', AshirLin: 'आशीर्लिङ्', Lun: 'लुङ्', Lrn: 'लृङ्' };
 function dgeDhatuChipsHtml(id, shloka) {
   const hits = window.dgeDhatuHits;
-  if (!hits || (typeof dgeGetEffectiveFeatureFlags === 'function' && dgeGetEffectiveFeatureFlags().dhatuChips === false)) return '';
+  if (!hits || (typeof dgeGetEffectiveFeatureFlags === 'function' && dgeGetEffectiveFeatureFlags().showDhatuChips === false)) return '';
   const keys = [String(id)];
   if (shloka.unitId) { keys.push(shloka.unitId); if (shloka.unitNo) keys.push(shloka.unitId + '#' + shloka.unitNo); }
   let list = null;
@@ -561,6 +561,13 @@ function renderList() {
             blocks.push({ cKey, name: convertedName,
               html: `<div class="commentary-block dge-gold-wrapper" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${goldBadge}</div>${highlightText(goldResult.pillGridHtml, pattern)}${highlightText(goldResult.bodyHtml, pattern)}</div>` });
           } else {
+            // Word-tap spans on the commentary too, not just the mūla: the
+            // reader asked for कोश matches inside a commentary to be marked,
+            // and for a word selected there to offer the same analysis a word
+            // in the verse does. Both need the word to be its own element.
+            // The Gold-Standard branch above is deliberately NOT wrapped --
+            // it already carries a verified word-by-word mapping of its own,
+            // and a second, cruder one layered over it would fight it.
             // Small "AI" badge -- see dgeIsAiGeneratedCommentaryKey in
             // core.js for the naming convention this checks. Distinct from
             // (and in addition to) the "(Gemini, unreviewed)" text already
@@ -570,7 +577,7 @@ function renderList() {
             const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
               ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
             blocks.push({ cKey, name: convertedName,
-              html: `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>` });
+              html: `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${dgeWrapWordsForTap(highlightText(convertedText, pattern))}</div>` });
           }
         }
       });
@@ -825,6 +832,11 @@ function renderList() {
 
   dgeUpdateSingleViewNav(fIds);
   dgeUpdateListViewNav(fIds, needsPaging);
+
+  // धातु/कोश word marking (highlight-words.js). Deliberately AFTER the DOM is
+  // in place and deliberately not awaited: the answer needs a fetch, and a
+  // verse must never wait on a colour. Absent module = no marks, no error.
+  if (typeof window.dgeApplyWordMarks === 'function') window.dgeApplyWordMarks(listEl);
 }
 
 // The page bar sits above the list and again below it (#listViewNavBottom),

@@ -96,6 +96,10 @@ window.applyFeatureFlags = function() {
     if (el) el.style.display = opt.enabled ? '' : 'none';
   });
 
+  // renderList() rebuilds the cards, which is what applies the धातु/कोश word
+  // marks and the धातुरूपाणि chip row: both are baked into the card's HTML
+  // rather than toggled by a style rule, so switching either flag has to go
+  // back through the renderer.
   if (typeof renderList === 'function') renderList();
 };
 

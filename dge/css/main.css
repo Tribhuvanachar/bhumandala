@@ -178,6 +178,31 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-dhatu-row { display:
    selects something else. */
 .dge-word.dge-search-hit { background: var(--accent-glow, rgba(232, 178, 77, .4)); border-radius: 3px; outline: 2px solid var(--accent-red, #e2664a); outline-offset: 1px; }
 
+/* धातु/कोश word marks -- highlight-words.js, applied as a post-render pass
+   over the same .dge-word spans. The mark says "tapping this gets you
+   somewhere": a verb form we hold the derivation for (धातु), a word that is
+   a dictionary headword (कोश), or both. Deliberately quieter than
+   .dge-search-hit above -- a search hit is one word the reader asked for,
+   these are many words the page is offering, and the two must never be
+   confused at a glance. A word carrying both marks takes the धातु tint and
+   the कोश underline rather than a third colour nobody could learn. */
+.dge-word.dge-mark-dhatu,
+.dge-word.dge-mark-both { background: var(--mark-dhatu-bg); border-radius: 3px; box-shadow: inset 0 -2px 0 var(--mark-dhatu-line); }
+.dge-word.dge-mark-kosha { background: var(--mark-kosha-bg); border-radius: 3px; box-shadow: inset 0 -2px 0 var(--mark-kosha-line); }
+.dge-word.dge-mark-both { box-shadow: inset 0 -2px 0 var(--mark-kosha-line), inset 0 -4px 0 var(--mark-dhatu-line); }
+/* The live selection and the search hit are momentary and reader-driven;
+   they win over a standing mark rather than blending with it. */
+.dge-word.dge-word-picked, .dge-word.dge-search-hit { box-shadow: none; }
+.dge-word.dge-word-picked { box-shadow: 0 0 0 1px var(--accent-gold, #e8b24d); }
+
+/* The legend under the verse list, so the colours are learnable rather than
+   decorative. Hidden with the marks themselves. */
+.dge-mark-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 10px 2px 0; font-size: 11.5px; color: var(--muted-text); }
+.dge-mark-legend .dge-mark-key { display: inline-flex; align-items: center; gap: 5px; }
+.dge-mark-legend .dge-mark-swatch { width: 16px; height: 12px; border-radius: 3px; display: inline-block; }
+.dge-mark-legend .dge-mark-swatch.k-dhatu { background: var(--mark-dhatu-bg); box-shadow: inset 0 -2px 0 var(--mark-dhatu-line); }
+.dge-mark-legend .dge-mark-swatch.k-kosha { background: var(--mark-kosha-bg); box-shadow: inset 0 -2px 0 var(--mark-kosha-line); }
+
 /* Secondary state = small badges next to the shloka number, never a
    border — so favorite/doubt/notes/snippets never compete with the
    progress border above (section 4: "completed + favorite + doubt

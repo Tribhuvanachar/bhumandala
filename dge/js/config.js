@@ -433,7 +433,9 @@ const FEATURE_FLAGS = {
   showThemePicker: true,
   showScriptPicker: true,
   showPreloadButton: true, // "📥 Preload All Audio" button in 🛠 Tools
-  showSpeedControl: true   // playback speed slider in 🛠 Tools
+  showSpeedControl: true,  // playback speed slider in 🛠 Tools
+  showDhatuChips: true,    // धातुरूपाणि chip row under a verse (render.js)
+  showWordMarks: true      // धातु/कोश background marks on words (highlight-words.js)
 };
 window.FEATURE_FLAGS = FEATURE_FLAGS;
 

@@ -42,6 +42,13 @@
   --top-bar-bg: rgba(11,9,7,0.78); --top-bar-border: rgba(232,178,77,0.16);
   --glass-blur: 18px; --accent-glow: rgba(232,178,77,0.34);
   --muted-text: #8B7A63;
+  /* Word marks (highlight-words.js). Cool against a warm saffron ground, so
+     a marked word reads as a different KIND of thing from the accent colours
+     the page already spends on headings and the search hit — not as a louder
+     one. Tint plus an underline: the tint alone is too weak to see at reading
+     size on a phone, a full-strength fill would fight the Devanagari. */
+  --mark-dhatu-bg: rgba(90,190,140,0.18); --mark-dhatu-line: #5ABE8C;
+  --mark-kosha-bg: rgba(120,170,240,0.16); --mark-kosha-line: #78AAF0;
 }
 
 /* Each theme block below matches html.theme-X as well as body.theme-X so
@@ -60,6 +67,8 @@ html.theme-traditional, body.theme-traditional {
   --top-bar-bg: rgba(255,253,249,0.90); --top-bar-border: #EEE3CB;
   --glass-blur: 10px; --accent-glow: rgba(174,35,31,0.22);
   --muted-text: #8a7a63;
+  --mark-dhatu-bg: rgba(31,111,92,0.13); --mark-dhatu-line: #1F6F5C;
+  --mark-kosha-bg: rgba(38,89,168,0.12); --mark-kosha-line: #2659A8;
 }
 
 /* (7 Sep 2026: the Minimal, Vibrant and Dark Glass palettes were removed --
@@ -79,6 +88,13 @@ html.theme-vandana, body.theme-vandana {
   --top-bar-bg: rgba(11,9,7,0.78); --top-bar-border: rgba(232,178,77,0.16);
   --glass-blur: 18px; --accent-glow: rgba(232,178,77,0.34);
   --muted-text: #8B7A63;
+  /* Word marks (highlight-words.js). Cool against a warm saffron ground, so
+     a marked word reads as a different KIND of thing from the accent colours
+     the page already spends on headings and the search hit — not as a louder
+     one. Tint plus an underline: the tint alone is too weak to see at reading
+     size on a phone, a full-strength fill would fight the Devanagari. */
+  --mark-dhatu-bg: rgba(90,190,140,0.18); --mark-dhatu-line: #5ABE8C;
+  --mark-kosha-bg: rgba(120,170,240,0.16); --mark-kosha-line: #78AAF0;
 }
 
 } /* @layer tokens */

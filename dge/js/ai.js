@@ -411,7 +411,9 @@ const FEATURE_FLAG_CHECKBOX_IDS = {
   showThemePicker: 'flagShowThemePicker',
   showScriptPicker: 'flagShowScriptPicker',
   showPreloadButton: 'flagShowPreloadButton',
-  showSpeedControl: 'flagShowSpeedControl'
+  showSpeedControl: 'flagShowSpeedControl',
+  showDhatuChips: 'flagShowDhatuChips',
+  showWordMarks: 'flagShowWordMarks'
 };
 
 const SCRIPT_OPTION_CHECKBOX_IDS = {
