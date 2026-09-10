@@ -411,7 +411,9 @@ const FEATURE_FLAG_CHECKBOX_IDS = {
   showThemePicker: 'flagShowThemePicker',
   showScriptPicker: 'flagShowScriptPicker',
   showPreloadButton: 'flagShowPreloadButton',
-  showSpeedControl: 'flagShowSpeedControl'
+  showSpeedControl: 'flagShowSpeedControl',
+  showDhatuChips: 'flagShowDhatuChips',
+  showWordMarks: 'flagShowWordMarks'
 };
 
 const SCRIPT_OPTION_CHECKBOX_IDS = {
@@ -2315,7 +2317,22 @@ window.dgeOpenDhatuForSelection = function(e) {
 
   dgeFindDhatuFormHits(word).then(function (hits) {
     if (myReq !== window.dgeDhatuReqSeq) return; // a newer word was opened meanwhile
-    if (!hits.length) { dgeShowDhatuNotFound(body, word); return; }
+    if (!hits.length) {
+      // Nothing matched the written form, so try peeling an upasarga off it.
+      // The Dhatupatha stores bare roots -- गम् is indexed, समागच्छति is not
+      // -- so a prefixed verb is invisible to a direct lookup no matter how
+      // complete the index is. See dge/js/vyakarana-runtime.js.
+      if (typeof window.dgePeelUpasarga === 'function') {
+        window.dgePeelUpasarga(word).then(function (peels) {
+          if (myReq !== window.dgeDhatuReqSeq) return;
+          if (!peels.length) { dgeShowDhatuNotFound(body, word); return; }
+          dgeRenderDhatuPeeled(body, word, peels, 0, myReq);
+        });
+        return;
+      }
+      dgeShowDhatuNotFound(body, word);
+      return;
+    }
     dgeRenderDhatuCandidate(body, word, hits, 0, myReq);
     // Chips render immediately with codes and relabel themselves with each
     // root's name and meaning as soon as the list arrives -- the paradigm the
@@ -2342,7 +2359,8 @@ window.dgeOpenDhatuForSelection = function(e) {
 // between. Each chip carries the root's own अर्थ, which is the whole point:
 // क्रुञ् "हिंसायाम्" and डुकृञ् "करणे" both yield चक्रे, and only the meaning
 // tells a reader which one their sentence means.
-function dgeRenderDhatuCandidate(body, word, hits, index, myReq) {
+function dgeRenderDhatuCandidate(body, word, hits, index, myReq, opts) {
+  opts = opts || {};
   const hit = hits[index];
   const rootPart = hit.c.split('.')[0];
   fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + hit.c + '.json')
@@ -2352,13 +2370,26 @@ function dgeRenderDhatuCandidate(body, word, hits, index, myReq) {
       const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
       if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
       body.innerHTML =
-        '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
+        '<div class="dsm-word deva">' + dgeShabdaEsc(opts.heading || word) + '</div>' +
+        (opts.beforeSub || '') +
         dgeDhatuCandidateChipsHtml(hits, index) +
         '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
+        '<div id="ddmUpasargaArtha"></div>' +
         dgeDhatuFormsHtml(d, hit.k) +
         '<div id="ddmSteps"></div>' +
         '<a class="dsm-full-link" href="vyakarana/prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>' +
         '<div id="ddmLexicon"></div>';
+      if (opts.upasarga && typeof window.dgeUpasargaArtha === 'function') {
+        window.dgeUpasargaArtha(hit.c, opts.upasarga).then(function (a) {
+          if (myReq !== window.dgeDhatuReqSeq || !a) return;
+          const box = body.querySelector('#ddmUpasargaArtha');
+          if (!box || !box.isConnected) return;
+          box.innerHTML = '<div class="dge-upasarga-artha"><span class="deva">' +
+            dgeShabdaEsc(a.upasarga) + ' + ' + dgeShabdaEsc(d.dhatu) + '</span> — ' +
+            dgeShabdaEsc(a.artha) + '</div>';
+        });
+      }
+      if (typeof opts.onReady === 'function') opts.onReady(body);
       body.querySelectorAll('[data-dhatu-cand]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           dgeRenderDhatuCandidate(body, word, hits, parseInt(btn.dataset.dhatuCand, 10), myReq);
@@ -2374,6 +2405,43 @@ function dgeRenderDhatuCandidate(body, word, hits, index, myReq) {
       });
     })
     .catch(function () { if (myReq === window.dgeDhatuReqSeq) dgeShowDhatuNotFound(body, word); });
+}
+
+// A prefixed verb: the popup shows what was peeled off, the bare root's own
+// paradigm, and -- the part that matters -- the meaning THIS upasarga gives
+// THIS root. सम् + गम् is not "to go", it is "to unite", and showing the bare
+// gloss beside समागच्छति would be quietly wrong.
+function dgeRenderDhatuPeeled(body, word, peels, index, myReq) {
+  var peel = peels[index];
+  var hits = peel.roots;
+  var chips = peels.length < 2 ? '' :
+    '<div class="dsm-cands"><div class="dsm-cands-note">' + peels.length +
+    ' ways to read this prefix — tap to compare</div>' +
+    peels.map(function (p, i) {
+      return '<button type="button" class="dsm-cand deva' + (i === index ? ' on' : '') +
+        '" data-dhatu-peel="' + i + '">' + dgeShabdaEsc(p.upasarga + ' + ' + p.rest) + '</button>';
+    }).join('') + '</div>';
+
+  dgeRenderDhatuCandidate(body, peel.rest, hits, 0, myReq, {
+    heading: word,
+    beforeSub: chips +
+      '<div class="dge-upasarga-row">' +
+      '<span class="dge-upasarga deva">' + dgeShabdaEsc(peel.upasarga) + '</span>' +
+      '<span class="dge-sandhi-plus">+</span>' +
+      '<span class="dge-sandhi-piece dge-src-v deva">' + dgeShabdaEsc(peel.rest) + '</span>' +
+      (peel.sutra ? '<span class="dge-sutra-ref" data-sutra="' + dgeShabdaEsc(peel.sutra) +
+        '" role="button" tabindex="0">' + dgeShabdaEsc(peel.rule) + ' · ' + dgeShabdaEsc(peel.sutra) + '</span>'
+        : '<span class="dsm-muted">' + dgeShabdaEsc(peel.rule) + '</span>') +
+      '</div>',
+    upasarga: peel.upasarga,
+    onReady: function (el) {
+      el.querySelectorAll('[data-dhatu-peel]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          dgeRenderDhatuPeeled(body, word, peels, parseInt(btn.dataset.dhatuPeel, 10), myReq);
+        });
+      });
+    }
+  });
 }
 
 // The Dhatupatha list, once per page, keyed by code -- so a chip can name its
