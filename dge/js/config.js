@@ -308,12 +308,13 @@ window.ADMIN_NEW_FILE_EXTENSIONS = ADMIN_NEW_FILE_EXTENSIONS;
 
 // Admin access levels — each superadmin URL code is bound to a specific
 // root path it can NEVER navigate above, even by tapping "Up" repeatedly.
-// This code (2) is scoped to only the dge/ website folder — it cannot
-// reach the repo root or any sibling folder. A future code with wider
-// reach would get its own entry here with a different (or empty, for
-// full-repo) rootPath — not something to hand out casually.
+// An empty rootPath means the actual repository root (bhumandala) — no
+// restriction at all. Requested directly by the project lead, 11 Sep 2026:
+// the admin file manager was defaulting to (and capping "Up" at) dge/,
+// hiding the rest of the repo (tools/, admin/, kamadhenu_dataset/, etc.)
+// from the one account that needs to reach all of it.
 const ADMIN_ACCESS_LEVELS = {
-  '2': { rootPath: 'dge', label: 'DGE Website Admin' }
+  '2': { rootPath: '', label: 'Bhumandala Repo Admin' }
 };
 window.ADMIN_ACCESS_LEVELS = ADMIN_ACCESS_LEVELS;
 

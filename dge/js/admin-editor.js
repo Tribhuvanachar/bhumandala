@@ -14,18 +14,22 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.20 (Move Selected: select several files/folders, then browse anywhere in your allowed tree — the selection now survives navigation instead of clearing — and drop them all at the folder you land on in one commit. Same Git Data API move used by single-item drag-and-drop, extended to many sources landing on one destination.)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.21 (Cut/Copy/Paste: select several files/folders, then Cut or Copy them — a clipboard bar stays visible while you browse anywhere in your allowed tree (survives closing the modal and even a page reload) — then Paste Here drops or duplicates them all in one commit. Copy keeps the source; Cut removes it and is consumed on paste. Replaces the earlier one-shot "Move Selected".)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
 let dgeAdminDragSourcePath = null;
 let dgeAdminSortMode = 'name'; // 'name' | 'modified' — toggled via dgeAdminToggleSort()
 let dgeAdminSelectedItems = new Map(); // path -> type, cleared on every navigate (selection is per-folder)
-// Separate from dgeAdminSelectedItems on purpose: once "Move Selected" is
-// tapped, the chosen items must survive folder navigation (that's the whole
-// point — browse elsewhere to find the destination) while the checkbox
-// selection itself still resets per-folder as before. null = not picking.
-let dgeAdminMovePickItems = null;
+// Cut/Copy clipboard — deliberately NOT cleared on navigate (that's the
+// whole point: browse elsewhere to find the destination) and persisted to
+// localStorage so it survives closing the modal or reloading the page.
+// { mode: 'cut'|'copy', items: [{path,type}] } | null
+let dgeAdminClipboard = null;
+try {
+  const dgeAdminSavedClipboard = localStorage.getItem('admin_clipboard');
+  if (dgeAdminSavedClipboard) dgeAdminClipboard = JSON.parse(dgeAdminSavedClipboard);
+} catch (e) { dgeAdminClipboard = null; }
 
 // ---------------------------------------------------------------
 // Superadmin gate
@@ -62,8 +66,14 @@ window.dgeShowSuperAdminAccessPrompt = function() {
 // The path this device's access code is bound to — navigation can never
 // go above this, regardless of what's clicked or dragged. Defaults to
 // 'dge' (the narrowest, safest scope) if nothing was ever granted.
+//
+// Deliberately NOT `localStorage.getItem(...) || 'dge'`: a full-repo grant
+// stores '' (empty string, meaning "no restriction"), and '' is falsy —
+// the || would have silently replaced it with 'dge' again, undoing the
+// grant. Only an actually-absent key (never granted at all) falls back.
 function dgeAdminGetRootPath() {
-  return localStorage.getItem('admin_root_path') || 'dge';
+  const stored = localStorage.getItem('admin_root_path');
+  return stored !== null ? stored : 'dge';
 }
 
 function dgeAdminGetName() {
@@ -469,6 +479,7 @@ window.openAdminEditor = function() {
   // dgeAdminCurrentPath survives a close (the modal only hides, it
   // doesn't reset any state) so this just needs to not override it.
   dgeAdminNavigate(dgeAdminCurrentPath || dgeAdminGetRootPath());
+  dgeAdminUpdateClipboardBar();
 };
 
 window.saveAdminGithubToken = function() {
@@ -516,9 +527,13 @@ async function dgeAdminNavigate(path) {
     const allParts = path.split('/').filter(Boolean);
     const visibleParts = allParts.slice(rootParts.length);
     let acc = root;
-    let crumbHtml = `<span class="admin-crumb" data-path="${root}" onclick="window.dgeAdminNavigateClick('${root}')" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${root}')">${root || '/'}</span>`;
+    // An empty root is the repo root itself (bhumandala) — label it as
+    // such rather than a bare "/", and don't let the next segment pick up
+    // a leading slash from an empty accumulator ("" + "/dge" = "/dge",
+    // an invalid path one level narrower than intended).
+    let crumbHtml = `<span class="admin-crumb" data-path="${root}" onclick="window.dgeAdminNavigateClick('${root}')" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${root}')">${root || 'bhumandala'}</span>`;
     visibleParts.forEach(p => {
-      acc += '/' + p;
+      acc = acc ? acc + '/' + p : p;
       const dest = acc;
       crumbHtml += ` / <span class="admin-crumb" data-path="${dest}" onclick="window.dgeAdminNavigateClick('${dest}')" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${dest}')">${p}</span>`;
     });
@@ -599,7 +614,7 @@ async function dgeAdminNavigate(path) {
     }).join('') || `<div class="note-preview-box" style="margin:0;">Empty folder.</div>`;
 
     dgeAdminUpdateSelectionBar();
-    dgeAdminUpdateMovePickBar();
+    dgeAdminUpdateClipboardBar();
   } catch (e) {
     // A 404 here usually means this folder just stopped existing — most
     // often because its last remaining file was deleted, and Git doesn't
@@ -1725,63 +1740,157 @@ async function dgeAdminBatchMove(items, destFolder) {
   return { moved, blocked };
 }
 
-function dgeAdminUpdateMovePickBar() {
-  const bar = document.getElementById('adminMovePickBar');
-  const countEl = document.getElementById('adminMovePickCount');
+// ---------------------------------------------------------------
+// Multi-select + batch copy — same planning as batch move, but only the
+// "add at destination" tree entries are kept; the "clear the old path"
+// entries (sha: null) are dropped, so the source is left untouched.
+// ---------------------------------------------------------------
+async function dgeAdminBatchCopy(items, destFolder) {
+  if (!items.length) return { copied: 0, blocked: [] };
+
+  const treeData = await dgeGithubGetRecursiveTree();
+  if (treeData && treeData.truncated) {
+    throw new Error('GitHub truncated its file listing for this repository, so a safe copy cannot be planned. Copy fewer/smaller items, or do this one with git.');
+  }
+  const tree = (treeData || {}).tree || [];
+
+  const allEntries = [];
+  const claimedDest = new Set();
+  const blocked = [];
+  let copied = 0;
+
+  items.forEach(item => {
+    const name = item.path.split('/').pop();
+    const newPath = destFolder ? destFolder + '/' + name : name;
+    if (newPath === item.path) {
+      blocked.push(`"${item.path}" is already in that folder`);
+      return;
+    }
+    const plan = window.dgeAdminMoveTreeEntries(tree, item.path, newPath);
+    if (plan.blocked.length) {
+      blocked.push(`"${item.path}": ${plan.blocked[0]}`);
+      return;
+    }
+    const additions = plan.entries.filter(e => e.sha !== null);
+    const collides = additions.some(e => claimedDest.has(e.path));
+    if (collides) {
+      blocked.push(`"${newPath}" collides with another selected item's destination`);
+      return;
+    }
+    additions.forEach(e => claimedDest.add(e.path));
+    allEntries.push(...additions);
+    copied += additions.length;
+  });
+
+  if (!allEntries.length) {
+    throw new Error(blocked[0] || 'Nothing to copy.');
+  }
+
+  const head = await dgeGithubGetBranchHead();
+  const newTree = await dgeGithubCreateTree(head.commit.commit.tree.sha, allEntries);
+  const message = dgeAdminBuildCommitMessage(
+    items.length === 1 ? `Copy ${items[0].path} to ${destFolder || '/'}` : `Copy ${items.length} item(s) to ${destFolder || '/'}`
+  );
+  const newCommit = await dgeGithubCreateCommit(message, newTree.sha, head.commit.sha);
+  await dgeGithubUpdateRef(newCommit.sha);
+  return { copied, blocked };
+}
+
+// ---------------------------------------------------------------
+// Cut / Copy / Paste clipboard. Saved to localStorage (not just the
+// in-memory dgeAdminMovePickItems this replaced) so it survives closing
+// the modal AND a full page reload — "remember it" was the explicit ask.
+// Cut is consumed by the next successful Paste (classic cut behavior);
+// Copy stays in the clipboard so it can be pasted into more than one
+// destination, until something new is cut/copied or it's cleared.
+// ---------------------------------------------------------------
+function dgeAdminSaveClipboard() {
+  try {
+    if (dgeAdminClipboard) localStorage.setItem('admin_clipboard', JSON.stringify(dgeAdminClipboard));
+    else localStorage.removeItem('admin_clipboard');
+  } catch (e) { /* ignore — clipboard just won't survive a reload this time */ }
+}
+
+function dgeAdminUpdateClipboardBar() {
+  const bar = document.getElementById('adminClipboardBar');
+  const countEl = document.getElementById('adminClipboardCount');
   if (!bar) return;
-  const active = !!(dgeAdminMovePickItems && dgeAdminMovePickItems.length);
+  const active = !!(dgeAdminClipboard && dgeAdminClipboard.items && dgeAdminClipboard.items.length);
   bar.style.display = active ? 'flex' : 'none';
   if (active && countEl) {
-    countEl.textContent = `Choosing a destination for ${dgeAdminMovePickItems.length} item(s) — browse into any folder below, then tap "Move Here".`;
+    const verb = dgeAdminClipboard.mode === 'cut' ? 'Cut' : 'Copied';
+    countEl.textContent = `${verb}: ${dgeAdminClipboard.items.length} item(s) — browse into any folder, then tap "Paste Here".`;
   }
 }
-window.dgeAdminUpdateMovePickBar = dgeAdminUpdateMovePickBar;
+window.dgeAdminUpdateClipboardBar = dgeAdminUpdateClipboardBar;
 
-// Tapping "Move Selected" hands the current checkbox selection off to the
-// pick-mode list and clears the checkboxes — from here on, tapping a folder
-// row navigates into it like normal (dgeAdminRowClick only intercepts taps
-// when dgeAdminSelectedItems is non-empty, and it's empty now) instead of
-// toggling selection, so the whole repo tree is reachable as a destination.
-window.dgeAdminMoveSelectedStart = function() {
+// Cut/Copy hand the current checkbox selection off to the clipboard and
+// clear the checkboxes — from here on, tapping a folder row navigates
+// into it like normal (dgeAdminRowClick only intercepts taps when
+// dgeAdminSelectedItems is non-empty, and it's empty now), so the whole
+// repo tree is reachable as a destination to paste into.
+window.dgeAdminCutSelected = function() {
   const items = Array.from(dgeAdminSelectedItems.entries()).map(([path, type]) => ({ path, type }));
   if (!items.length) return;
-  dgeAdminMovePickItems = items;
+  dgeAdminClipboard = { mode: 'cut', items };
+  dgeAdminSaveClipboard();
   dgeAdminSelectedItems.clear();
   dgeAdminUpdateSelectionBar();
-  dgeAdminUpdateMovePickBar();
+  dgeAdminUpdateClipboardBar();
+  if (typeof showToast === 'function') showToast(`Cut ${items.length} item(s) — browse to a folder and tap Paste Here.`);
 };
 
-window.dgeAdminMoveCancelPick = function() {
-  dgeAdminMovePickItems = null;
-  dgeAdminUpdateMovePickBar();
+window.dgeAdminCopySelected = function() {
+  const items = Array.from(dgeAdminSelectedItems.entries()).map(([path, type]) => ({ path, type }));
+  if (!items.length) return;
+  dgeAdminClipboard = { mode: 'copy', items };
+  dgeAdminSaveClipboard();
+  dgeAdminSelectedItems.clear();
+  dgeAdminUpdateSelectionBar();
+  dgeAdminUpdateClipboardBar();
+  if (typeof showToast === 'function') showToast(`Copied ${items.length} item(s) — browse to a folder and tap Paste Here. You can paste it again elsewhere too.`);
 };
 
-window.dgeAdminMoveHere = async function() {
-  if (!dgeAdminMovePickItems || !dgeAdminMovePickItems.length) return;
+window.dgeAdminClearClipboard = function() {
+  dgeAdminClipboard = null;
+  dgeAdminSaveClipboard();
+  dgeAdminUpdateClipboardBar();
+};
+
+window.dgeAdminPasteHere = async function() {
+  if (!dgeAdminClipboard || !dgeAdminClipboard.items.length) return;
+  const { mode, items } = dgeAdminClipboard;
   const dest = dgeAdminCurrentPath;
-  const items = dgeAdminMovePickItems;
+  const verb = mode === 'cut' ? 'Move' : 'Copy';
   const names = items.map(i => i.path.split('/').pop()).join(', ');
-  if (!confirm(`Move ${items.length} item(s) into "${dest || '/'}"?\n${names}\nThis can't be undone from here.`)) return;
+  const warn = mode === 'cut' ? "\nThis can't be undone from here." : '';
+  if (!confirm(`${verb} ${items.length} item(s) into "${dest || '/'}"?\n${names}${warn}`)) return;
 
   try {
     dgeAdminShowWorking();
-    const result = await dgeAdminBatchMove(items, dest);
-    const wasOpenFileAffected = dgeAdminOpenFilePath && items.some(i =>
-      i.path === dgeAdminOpenFilePath || (i.type === 'dir' && dgeAdminOpenFilePath.startsWith(i.path + '/'))
-    );
-    if (wasOpenFileAffected) window.dgeAdminCloseFileEditor();
-    dgeAdminMovePickItems = null;
-    dgeAdminUpdateMovePickBar();
+    const result = mode === 'cut' ? await dgeAdminBatchMove(items, dest) : await dgeAdminBatchCopy(items, dest);
+    const count = mode === 'cut' ? result.moved : result.copied;
+
+    if (mode === 'cut') {
+      const wasOpenFileAffected = dgeAdminOpenFilePath && items.some(i =>
+        i.path === dgeAdminOpenFilePath || (i.type === 'dir' && dgeAdminOpenFilePath.startsWith(i.path + '/'))
+      );
+      if (wasOpenFileAffected) window.dgeAdminCloseFileEditor();
+      dgeAdminClipboard = null; // a cut is consumed by its paste; a copy stays for pasting elsewhere
+      dgeAdminSaveClipboard();
+    }
+    dgeAdminUpdateClipboardBar();
+
     if (result.blocked.length) {
       const more = result.blocked.length > 1 ? ` (+${result.blocked.length - 1} more)` : '';
-      if (typeof showToast === 'function') showToast(`Moved ${result.moved} file(s). Skipped: ${result.blocked[0]}${more}`);
+      if (typeof showToast === 'function') showToast(`${verb}d ${count} file(s). Skipped: ${result.blocked[0]}${more}`);
     } else if (typeof showToast === 'function') {
-      showToast(`Moved ${items.length} item(s) (${result.moved} file(s)) into "${dest || '/'}" in one commit.`);
+      showToast(`${verb}d ${items.length} item(s) (${count} file(s)) into "${dest || '/'}" in one commit.`);
     }
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
     dgeAdminHideWorking();
-    if (typeof showToast === 'function') showToast('Move failed: ' + e.message);
+    if (typeof showToast === 'function') showToast(`${verb} failed: ` + e.message);
   }
 };
 

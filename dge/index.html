@@ -1307,14 +1307,15 @@
       <div id="adminSelectionBar" style="display:none; align-items:center; gap:8px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:8px 10px; margin-bottom:10px; flex-wrap:wrap;">
         <span id="adminSelectionCount" style="font-size:12px; font-weight:700;">0 selected</span>
         <button class="btn-sm" style="margin-left:auto;" onclick="window.dgeAdminClearSelection()">Clear</button>
-        <button class="btn-sm" onclick="window.dgeAdminMoveSelectedStart()">📥 Move Selected</button>
+        <button class="btn-sm" onclick="window.dgeAdminCutSelected()">✂️ Cut</button>
+        <button class="btn-sm" onclick="window.dgeAdminCopySelected()">📋 Copy</button>
         <button class="btn-sm" style="color:var(--accent-red);" onclick="window.dgeAdminDeleteSelected()">🗑️ Delete Selected</button>
       </div>
 
-      <div id="adminMovePickBar" style="display:none; align-items:center; gap:8px; background:var(--accent-red); color:#fff; border-radius:8px; padding:10px; margin-bottom:10px; position:sticky; top:0; z-index:6; box-shadow:0 4px 10px rgba(0,0,0,0.15); flex-wrap:wrap;">
-        <span id="adminMovePickCount" style="font-size:12px; font-weight:700; flex:1 1 200px;"></span>
-        <button class="btn-sm" onclick="window.dgeAdminMoveHere()">📁 Move Here</button>
-        <button class="btn-sm" onclick="window.dgeAdminMoveCancelPick()">✖ Cancel</button>
+      <div id="adminClipboardBar" style="display:none; align-items:center; gap:8px; background:var(--accent-red); color:#fff; border-radius:8px; padding:10px; margin-bottom:10px; position:sticky; top:0; z-index:6; box-shadow:0 4px 10px rgba(0,0,0,0.15); flex-wrap:wrap;">
+        <span id="adminClipboardCount" style="font-size:12px; font-weight:700; flex:1 1 200px;"></span>
+        <button class="btn-sm" onclick="window.dgeAdminPasteHere()">📥 Paste Here</button>
+        <button class="btn-sm" onclick="window.dgeAdminClearClipboard()">✖ Clear</button>
       </div>
 
       <div id="adminEditorBreadcrumb" style="font-size:11px; color:var(--muted-text); margin-bottom:10px; word-break:break-all;"></div>
