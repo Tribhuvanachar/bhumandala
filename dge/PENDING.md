@@ -17,8 +17,9 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
-- **Rigveda Śākala Krama-pāṭha generator — spec corrected twice, blocked on one prerequisite
-  (10 Sep 2026).** A first-draft prompt (from Gemini) for generating Krama-pāṭha from
+- **Rigveda Śākala Krama-pāṭha generator — spec corrected, Prātiśākhya sūtra text now
+  ingested (10–11 Sep 2026).** A first-draft prompt (from Gemini) for generating Krama-pāṭha
+  from
   Pada-pāṭha was reviewed against the actual structure of Śaunaka's Ṛgveda-Prātiśākhya and
   found to skip most of the tradition-specific machinery (treated Krama as naive
   adjacent-word pairing, hard-coded Parigraha as a universal `word + iti` formula, would have
@@ -38,29 +39,34 @@ complete record, not just a live queue.
   (Sanskrit Library TEI/XML as the canonical machine-readable base — Peter M. Scharf, 2010,
   CC BY-NC-SA 3.0 — cross-checked against VedaViṣṭāram's Uvaṭa Bhāṣya/Viṣṇumitra Vṛtti
   edition and the RV-Prātiśākhya project's independent rendering) plus a concrete per-paṭala
-  rule-database file/schema layout, in the document's §4a. **Genuinely blocked on one
-  remaining prerequisite:** the Ṛgveda-Prātiśākhya's own sūtra text — at minimum the
-  Krama-Paṭala and Kramahetu-Paṭala — is still not digitized
-  (`vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` and
-  `shaunakiya_chaturadhyayika/data.json` are both empty stubs). Ingesting the Sanskrit
-  Library XML is a parsing task, not OCR, so no Gemini cost gate applies to that step itself;
-  one would apply only if a scanned-image fallback is later needed for Layers B/C. **Update,
-  11 Sep 2026:** Layer A was actually pulled and inspected. It turns out not to be a
+  rule-database file/schema layout, in the document's §4a.
+
+  **Update, 11 Sep 2026 — Layer A pulled and ingested.** Layer A turned out not to be a
   downloadable TEI/XML file at all — "First XML Edition" describes the source's internal
   editing process; public access is one undocumented JSON endpoint
   (`sanskritlibrary.org/LoadText?text=fgveda_prAtiSAKya&texttype=forTranslation`) behind the
   reader page's JavaScript, reverse-engineered by reading `sl.js`/`sl.model.js` rather than
-  found in any published API. One inspection fetch (318 KB, 1,067 sūtras, SLP1-transliterated,
-  with a scholarly cross-reference apparatus, "Version 0.1," several fields marked `[?]` or
-  empty) confirmed paṭala 10 = 22 sūtras and paṭala 11 = 71 sūtras exactly, and verified
-  several specific sūtras — including the catuḥkrama sūtra, now precisely cited as
-  `RVPr_11.19` — word-for-word against text that had appeared unattributed in the original
-  Gemini-derived review: real, not fabricated. Full details, the verified-sample table, and
-  the access-ethics note (an explicit go-ahead is needed before scripting a full 1,067-sūtra
-  bulk pull through this same undocumented endpoint, vs. contacting Sanskrit Library
-  directly for the underlying TEI XML) are in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md`
-  §4a/§4a.1. No code or corpus data written yet; do not start implementation before that
-  go-ahead and the other open questions in the document's §10 are resolved.
+  found in any published API. A first inspection fetch confirmed paṭala 10 = 22 sūtras and
+  paṭala 11 = 71 sūtras exactly, and verified several specific sūtras — including the
+  catuḥkrama sūtra, now precisely cited as `11.19` — word-for-word against text that had
+  appeared unattributed in the original Gemini-derived review: real, not fabricated. **The
+  lead then approved a full bulk pull** ("bulk pull it," 11 Sep 2026): all 1,067 sūtras
+  across all 18 paṭalas are now ingested into
+  `vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` (`library.json` updated to
+  `populated: true`), via `tools/pratishakhya/import_rv_pratishakhya.py`
+  (methodology/licensing/access-ethics record in the sibling `SOURCES.md`), checked by
+  `tests/test_rv_pratishakhya_import.py`. Building the real importer caught and fixed a
+  mistake in the architecture doc's own earlier verified-sample table — a truncated sūtra
+  quote and two silently-guessed `[?]`-marked characters — documented in the doc's §4a.1
+  correction note rather than quietly overwritten. 258 of 1,067 sūtras (24%) carry the
+  source's own OCR-uncertainty marker and are shipped with `has_uncertain_reading: true` and
+  empty Devanagari/IAST rather than a guessed reading. `shaunakiya_chaturadhyayika/data.json`
+  (a separate work, the Atharvaveda-Prātiśākhya) is untouched by this import. **Still open,
+  not blocking further spec work but blocking the actual rule engine:** cross-check the
+  uncertain-reading sūtras against Layer B (VedaViṣṭāram) or C (the RV-Prātiśākhya project),
+  and turn cited sūtra text into real `conditions`/`action`/`exceptions` rule logic — this
+  ingestion is text-in-repo, not rules-in-engine. Full details in
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §4b and its open questions in §10.
 
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First

@@ -24,6 +24,16 @@ corrected spec a future session should build against — not the naive prompt._
 > go-ahead before it's automated further. The good news: doing this **independently
 > confirmed real sūtra text**, including the exact sūtras quoted (unattributed) in the
 > original Gemini-derived review — see §4a's verified-sample table.
+>
+> **Update, 11 Sep 2026, ~1:20 am IST (Part IV) — bulk pull done, with the lead's go-ahead.**
+> New §4b: all 1,067 sūtras are now in
+> `dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json`, via
+> `tools/pratishakhya/import_rv_pratishakhya.py` (methodology in the sibling `SOURCES.md`),
+> checked by `tests/test_rv_pratishakhya_import.py`. Building the real importer also caught a
+> mistake in Part III's own verified-sample table — see the correction note right above that
+> table — which is now fixed. This is the sūtra *text* landing in the repo, cited and
+> attributed; turning it into rule logic the generator can run is still future work (§6.1,
+> §8, §10).
 
 ---
 
@@ -132,12 +142,13 @@ missed the per-mantra field actually holding the text.
 | Needed | Current state |
 |---|---|
 | Rigveda Śākala **Pada-pāṭha** dataset | **Done.** Accented `pada_patha` field (alongside `samhita_patha`) on all 10,552 mantras in `dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01..10/data.json`. Sourced from the `FourVedas.xlsx` spreadsheet (Virendra Agarwal's "Digitisation of Vedas" / VedaKosh, via sanskritdocuments.org, used with explicit permission) and cross-validated at 96.61% exact match against the independent VedaWeb TEI dataset (`diagnostics/validate_fourvedas.py`, every sampled mismatch a known edition variant). Full provenance and the accent-codepoint convention (core Devanagari block `U+0951`/`U+0952`, not the Vedic Extensions block — see §6.2) are in `dge/veda_toolkit/README.md` §1–3. Independently cross-checkable: `github.com/vishvasa`'s Rigveda repo carries a per-sūkta Śākala Saṃhitā (2,226 files vs our 10 mandala-level files per `tools/reports/vishvasa_gap_report.md`) — not yet inspected for word-level agreement, and its org page (checked 10 Sep 2026) shows no dedicated Krama-pāṭha or Prātiśākhya repo, so it is a Pada/Saṃhitā cross-check candidate only, not a source for §4a below. |
-| Ṛgveda-Prātiśākhya **sūtra text** (Krama-Paṭala + Kramahetu-Paṭala at minimum) | Still not digitized. `dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json` and the sibling `shaunakiya_chaturadhyayika/data.json` are both empty stubs (`"items": []`) — category placeholders only. §4a replaces the first version's single archive.org citation with a three-layer sourcing plan. |
+| Ṛgveda-Prātiśākhya **sūtra text** (Krama-Paṭala + Kramahetu-Paṭala at minimum) | **Done, §4b.** All 1,067 sūtras across all 18 paṭalas are now in `rigveda_pratishakhya/data.json` (the sibling `shaunakiya_chaturadhyayika/data.json` is a separate work, the Atharvaveda-Prātiśākhya, untouched by this import). What's *not* done yet: cross-checking the 258 sūtras with an unresolved source-marked reading against Layers B/C, and turning sūtra text into executable rule logic (§6.1) — this ingestion is text-in-repo, not rules-in-engine. |
 
-**Sequencing implication:** the Pada-pāṭha prerequisite is satisfied. The remaining blocker
-is the Prātiśākhya sūtra text itself (§4a) — building the rule engine against paraphrase or
-a secondary site's summary alone risks baking in exactly the kind of un-sourced
-simplification this document exists to avoid.
+**Sequencing implication:** both the Pada-pāṭha and the Prātiśākhya sūtra text prerequisites
+are now satisfied (§4b). What building the rule engine still needs, and does not have yet, is
+the *interpretation* step — turning cited sūtra text into `conditions`/`action`/`exceptions`
+rule logic (§6.1) checked against Layer B or C — not paraphrased or guessed, which is exactly
+the kind of un-sourced simplification this document exists to avoid.
 
 **Gemini-cost note (CLAUDE.md standing rule) still applies conditionally:** the Sanskrit
 Library XML edition (§4a Layer A) is already machine-readable TEI, so ingesting it is a
@@ -214,18 +225,30 @@ text per Cardona 1993–94):
 | `RVPr_10.12` | उपस्थितम् सेतिकरणम् |
 | `RVPr_10.16` | समासान् तु पुनर्वचने इङ्ग्येत् |
 | `RVPr_10.18` | सन्धिः न अर्धर्चयोः भवेत् |
-| `RVPr_10.20` | प्रश्लेषः च प्रगृह्यस्य प्रकृत्या स्युः परिग्रहे |
 | `RVPr_10.21` | शौद्धाक्षरागमः अपैति |
-| `RVPr_10.22` | रिफितानि ऊष्मणः अघोषे दूभावः स्वधितिः इव च |
 | `RVPr_11.19` | चतुःक्रमः तु आचरितः अत्र शाकलैः |
 
-**This matters beyond confirming the source works:** every one of these is, word-for-word
-(modulo the sandhi a printed edition applies across word boundaries), a sūtra that appeared
-unattributed and unnumbered in the original Gemini-derived review that started this whole
-document. They are real — not fabricated by that review — and now have exact citations
-(the catuḥkrama sūtra, for instance, is specifically **`RVPr_11.19`**, not merely "somewhere
-in Kramahetu"). That review's instinct to insist on primary-source verification was correct;
-this is that verification actually done.
+**Correction to this table, made while writing the real importer (§4b): 10.20 and 10.22 were
+wrongly shown here as clean Devanagari.** The source marks a character uncertain (`[?]`) in
+both — `nakArasya [?]zmavat vfttam ... praSlezaH ca pragfhyasya prakftyA syuH parigrahe .`
+for 10.20 (note this is also the *whole* numbered sūtra; the review's quoted clause,
+"praśleṣaśca pragṛhyasya prakṛtyā syuḥ parigrahe," is only its second half — the traditional
+edition the review's quotes came from apparently numbers that clause on its own, one of the
+sub-sūtra-counting differences flagged below) — and `... riPitAni [?]zmaRaH aGoze d[?]BAvaH
+svaDitiH iva ca .` for 10.22. An earlier pass through this document guessed `[?]` = ū (a
+reasonable-looking guess — `[?]zmaRaH` is almost certainly `ūṣmaṇaḥ` — but a guess, not read
+off the source) and printed the guessed Devanagari here without saying so. That was wrong to
+do even informally; §4b's actual dataset does not do it, and marks both `has_uncertain_reading:
+true` with empty Devanagari/IAST until a human checks Layer B or C.
+
+**This matters beyond confirming the source works:** every one of the sūtras in the table
+above is, word-for-word, a sūtra that appeared unattributed and unnumbered in the original
+Gemini-derived review that started this whole document. They are real — not fabricated by
+that review — and now have exact citations (the catuḥkrama sūtra, for instance, is
+specifically **`RVPr_11.19`**, not merely "somewhere in Kramahetu"). That review's instinct
+to insist on primary-source verification was correct; this is that verification actually
+done — including finding the two places (10.20's truncation, the `[?]` guess) where extra
+care was still needed.
 
 **Real paṭala/sūtra counts from Layer A** (vs. the secondary-source table in §2.1 — some
 disagree, notably paṭala 2; paṭalas 10 and 11, the ones this document cares most about,
@@ -266,55 +289,63 @@ record Layer A's licence and attribution on the ingested rule data itself (see t
 `crosscheck` fields in the schema below), not just in this document, and do not assume a
 different licence for Layers B or C without checking each site's own terms first.
 
-**What to actually ingest, once approved:** do not dump any layer's raw text into a prompt
-context. Extract into one structured rule database, one file per paṭala, so every rule is
-individually addressable and citable from the generator's `provenance.rules` (§6.3):
+## 4b. Ingestion done (11 Sep 2026) — what's actually in the repo now
 
-```
-dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/
-├── metadata.json
-├── patala-01-samjna-paribhasha.json
-├── patala-02-samhita.json
-├── patala-03-svara.json
-├── patala-04-sandhi.json
-├── patala-05-nati.json
-├── patala-06-dhvanyagama.json
-├── patala-07-pluti.json
-├── patala-08-pluti.json
-├── patala-09-pluti.json
-├── patala-10-krama.json
-├── patala-11-kramahetu.json
-└── ... (12–18 as later needed; not blocking for Krama work)
-```
+The project lead approved the bulk pull ("bulk pull it," 11 Sep 2026). All 1,067 sūtras are
+now in `dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json`, replacing the
+empty stub from §4. The importer is `tools/pratishakhya/import_rv_pratishakhya.py`, with the
+full methodology in `tools/pratishakhya/SOURCES.md` — that file, not this section, is now the
+authoritative record of how to re-run it; this section just summarizes what's true today.
 
-Each rule, at minimum — now with one real entry, verified against Layer A on 11 Sep 2026
-(§4a.1), as a concrete worked example rather than a hypothetical shape:
+**One deliberate deviation from the per-paṭala file layout sketched in §4a's earlier draft:**
+every sibling Śikṣā work in this repo (`paniniya_shiksha/data.json`,
+`shodashasloki_shiksha/data.json`, etc.) is one `data.json` per work, with a top-level
+`{schema, default_author, source, source_url, licence, note, items}` shape — not a file per
+chapter. 1,067 items is not too large for that convention (the Ṛgveda Saṃhitā's mandala files
+already hold 2,006 items each), so the actual output follows the house pattern instead of
+introducing a new one. `library.json`'s catalog entry is updated to `"populated": true` with
+matching `source`/`facets`.
+
+Each item's real shape (not the earlier hypothetical schema — this is what
+`import_rv_pratishakhya.py` actually writes, one real entry shown):
 
 ```json
 {
-  "id": "RVPr_10.20",
+  "id": "10.7",
   "patala": 10,
-  "sutra": 20,
-  "text_devanagari": "प्रश्लेषः च प्रगृह्यस्य प्रकृत्या स्युः परिग्रहे",
-  "text_slp1": "praSlezaH ca pragfhyasya prakftyA syuH parigrahe",
+  "patala_name": "Krama",
+  "sutra": 7,
+  "text_devanagari": "अन्तःपदम् च येषाम् स्यात् विकारः अनन्यकारितः एतानि परिगृह्णीयात्।",
+  "text_iast": "antaḥpadam ca yeṣām syāt vikāraḥ ananyakāritaḥ etāni parigṛhṇīyāt|",
+  "text_slp1": "antaHpadam ca yezAm syAt vikAraH ananyakAritaH etAni parigfhRIyAt .",
+  "has_uncertain_reading": false,
+  "apparatus": {"cross_ref": "", "allusions_in": "[?]Pr.", "allusions_to": "[?]Pr.", "parallels": "", "comments": ""},
+  "has_cross_reference_content": false,
   "domain": "krama",
-  "conditions": [],
-  "action": [],
-  "exceptions": [],
-  "source": "Sanskrit Library, ed. Peter M. Scharf 2010 (Version 0.1), CC BY-NC-SA 3.0; text per Cardona 1993–94 — sanskritlibrary.org/catalogsText/fgveda_prAtiSAKya.html",
-  "crosscheck": "vedavishtaram.in (Uvaṭa Bhāṣya + Viṣṇumitra Vṛtti) — not yet done for this sūtra"
+  "crosscheck": ""
 }
 ```
 
-`conditions`/`action`/`exceptions` are the still-unfinished part of the schema: they encode
-what the sūtra actually *means* for the rule engine (here, roughly, "in Parigraha, a
-Pragṛhya word's original quality prevails through Praśleṣa" — but that reading is this
-session's own gloss, not yet checked against Uvaṭa's Bhāṣya, so it is deliberately **not**
-written into the `action` field above). Leave those three empty rather than guessed until a
-crosscheck against Layer B or C backs the interpretation — an empty field is an honest gap; a
-plausible-sounding paraphrase is not. `text_devanagari`/`text_slp1`, by contrast, can be
-filled directly from Layer A once it's actually transcribed — that part is a real citation,
-not an interpretation.
+What's deliberately **not** filled in, and why:
+
+- **`crosscheck`** is empty on every item — it records once a sūtra has actually been checked
+  against Layer B or C, and pre-filling it would misrepresent work not done.
+- **258 of 1,067 items (24%) have `has_uncertain_reading: true`** and empty
+  `text_devanagari`/`text_iast` — wherever the source's own `[?]` marker appears (see the
+  correction two paragraphs above §4b for why this document does not paper over that with a
+  guess). `text_slp1` always has the raw text, `[?]` included, as ground truth.
+- **The `conditions`/`action`/`exceptions` fields from the original hypothetical schema (§6.1)
+  are not part of this ingestion at all.** This pull gets the sūtra *text* into the repo,
+  cited and attributed; turning a sūtra's text into a rule the generator can execute is
+  interpretation, and stays a separate, later step per §6.1's "cite a rule `id`... predicates
+  are code that applies those rules, not a second place to restate them."
+- **`apparatus`** (cross-references to the Taittirīya-/Vājasaneyi-Prātiśākhyas and to Ṛgveda
+  verses) is kept as raw SLP1, not transliterated — it carries its own Vedic-accent notation
+  that a plain SLP1→Devanagari pass would corrupt.
+
+Verified with `tests/test_rv_pratishakhya_import.py` (total count, paṭala 10/11 counts, the
+nine hand-checked sūtras in the table above, and — explicitly — that 10.20/10.22 are *not*
+silently filled in).
 
 ---
 
@@ -384,9 +415,11 @@ requiresNati(word, context)
 requiresDhvanyagama(word, context)
 ```
 
-Each predicate's non-trivial branches should cite a rule `id` from the paṭala-keyed rule
-database in §4a (e.g. `RVPr_10.20`) — that database is the source of truth for rule text and
-conditions; predicates are code that *applies* those rules, not a second place to restate
+Each predicate's non-trivial branches should cite a rule `id` from the ingested sūtra text in
+§4b (e.g. `10.20`, matching that file's actual `"id": "patala.sutra"` format — `RVPr_10.20`
+below and elsewhere in this document is this document's own citation convention for talking
+about a sūtra, not the literal `id` string in the data) — that dataset is the source of truth
+for rule text; predicates are code that *applies* those rules, not a second place to restate
 them.
 
 Where a dictionary is used as a cache, structure it by the kind of evidence backing each
@@ -487,9 +520,12 @@ is not optional polish — see §8, it gates every corpus-wide run.
 
 Do not run the generator over the whole Rigveda before this sequence, in order:
 
-1. Get the lead's go-ahead for a full pull of paṭalas 10–11 through Layer A's endpoint
-   (§4a.1), then ingest that sūtra text into the rule database (§4a), cross-checked against
-   Layers B and C — the Pada-pāṭha prerequisite is already satisfied (§4).
+1. **Done (§4b).** The lead approved a full pull through Layer A's endpoint; all 1,067
+   sūtras (paṭalas 10–11 included) are now in `rigveda_pratishakhya/data.json`. Still open:
+   cross-check the 24% marked `has_uncertain_reading` (and ideally the rest too) against
+   Layers B/C, and turn cited sūtra text into actual `conditions`/`action`/`exceptions` rule
+   logic (§6.1) — that interpretation step has not been done. The Pada-pāṭha prerequisite was
+   already satisfied (§4).
 2. Implement RV 1.1.1 only.
 3. Generate its Krama-pāṭha; compare against an independently attested Krama text for RV
    1.1.1 (VALIDATE mode, §7).
@@ -543,20 +579,26 @@ Kept as a short index back to the full review, not restated in full here:
     found it is an undocumented JSON endpoint, not a downloadable TEI/XML file (§4a.1);
     confirmed paṭalas 10 and 11 sūtra counts (22, 71) exactly against the source itself; and
     verified, word-for-word, several specific sūtras that had appeared unattributed in the
-    original review — they were real, not fabricated, and now have exact `RVPr_N.M` citations.
+    original review — they were real, not fabricated, and now have exact citations.
+19. (Part IV, 11 Sep 2026) Bulk pull done, with the lead's go-ahead: all 1,067 sūtras are now
+    in `rigveda_pratishakhya/data.json` (§4b). Caught and fixed, while building the real
+    importer, a mistake in Part III's own verified-sample table: 10.20 was quoted as only
+    its second clause, and 10.20/10.22 had their source-marked `[?]` uncertain characters
+    silently guessed rather than left unresolved — the shipped data does not repeat either
+    error (§4a.1's correction note, `tools/pratishakhya/SOURCES.md`).
 
 ---
 
 ## 10. Open questions for the project lead
 
-- Approve a full pull of paṭalas 10–11 (93 sūtras) through Layer A's undocumented endpoint
-  (§4a.1) — one inspection fetch of the whole 1,067-sūtra document has already been made;
-  a full structured ingestion is a bigger, repeatable automated use of the same endpoint and
-  should get an explicit go-ahead first, per the access-ethics note in §4a.1. Alternative:
-  contact Sanskrit Library directly for the underlying TEI XML.
-- Approve the three-layer Prātiśākhya sourcing plan in §4a (Sanskrit Library XML as
-  canonical base, VedaViṣṭāram + the RV-Prātiśākhya project as cross-checks), including the
-  CC BY-NC-SA 3.0 attribution/share-alike obligation that comes with Layer A.
+- ~~Approve a full pull of paṭalas 10–11 through Layer A's undocumented endpoint.~~ **Done —
+  approved 11 Sep 2026 ("bulk pull it"), all 1,067 sūtras ingested, §4b.**
+- Cross-check the 258 `has_uncertain_reading` sūtras (and, over time, the rest) against Layer
+  B (VedaViṣṭāram) or Layer C (the RV-Prātiśākhya project) — none of that verification has
+  been done yet, only the pull itself.
+- Approve turning cited sūtra text into actual rule logic (`conditions`/`action`/`exceptions`,
+  §6.1) once paṭalas 10–11 specifically are ready for that — this pull only got the text in,
+  not the interpretation.
 - Confirm an independently attested Krama-pāṭha source to use as the VALIDATE-mode ground
   truth for RV 1.1.1 and subsequent sūktas — `github.com/vishvasa`'s Rigveda repo was
   checked (10 Sep 2026) and does not appear to carry one, so this is still open.

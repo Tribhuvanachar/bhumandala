@@ -15710,10 +15710,15 @@
   },
   {
    "path": "dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json",
-   "populated": false,
+   "populated": true,
    "title": "Rigveda Pratishakhya",
+   "source": {
+    "source": "The Sanskrit Library, \"Rgveda-Pratisakhya: First XML Edition\", ed. Peter M. Scharf, 2010, Version 0.1 (text per George Cardona's 1993-94 digital edition)",
+    "source_url": "https://sanskritlibrary.org/catalogsText/fgveda_prAtiSAKya.html",
+    "licence": "Creative Commons Attribution Non-Commercial Share Alike 3.0 (CC BY-NC-SA 3.0)"
+   },
    "facets": {
-    "default_author": "unspecified"
+    "default_author": "Saunaka (traditional attribution; not confirmed by name on the Sanskrit Library catalog card)"
    }
   },
   {
