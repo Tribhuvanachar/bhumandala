@@ -14,13 +14,18 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.19 (Recent Activity: every commit can be targeted for Undo, not just the most recent — a real per-commit revert that leaves unrelated commits alone, with conflict detection if a later change touched the same file. Also: request-sequencing guard on file-open, so a slow-resolving earlier fetch can never overwrite a faster later one\'s content in the editor.)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.20 (Move Selected: select several files/folders, then browse anywhere in your allowed tree — the selection now survives navigation instead of clearing — and drop them all at the folder you land on in one commit. Same Git Data API move used by single-item drag-and-drop, extended to many sources landing on one destination.)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
 let dgeAdminDragSourcePath = null;
 let dgeAdminSortMode = 'name'; // 'name' | 'modified' — toggled via dgeAdminToggleSort()
 let dgeAdminSelectedItems = new Map(); // path -> type, cleared on every navigate (selection is per-folder)
+// Separate from dgeAdminSelectedItems on purpose: once "Move Selected" is
+// tapped, the chosen items must survive folder navigation (that's the whole
+// point — browse elsewhere to find the destination) while the checkbox
+// selection itself still resets per-folder as before. null = not picking.
+let dgeAdminMovePickItems = null;
 
 // ---------------------------------------------------------------
 // Superadmin gate
@@ -594,6 +599,7 @@ async function dgeAdminNavigate(path) {
     }).join('') || `<div class="note-preview-box" style="margin:0;">Empty folder.</div>`;
 
     dgeAdminUpdateSelectionBar();
+    dgeAdminUpdateMovePickBar();
   } catch (e) {
     // A 404 here usually means this folder just stopped existing — most
     // often because its last remaining file was deleted, and Git doesn't
@@ -1658,6 +1664,126 @@ async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
   if (typeof showToast === 'function') showToast(`Moved ${n} file(s) in one commit.`);
   return n;
 }
+
+// ---------------------------------------------------------------
+// Multi-select + batch move — several sources, one destination folder,
+// one commit. Each source keeps its own basename at the destination
+// (same rule single drag-and-drop uses); a source already blocked (name
+// collision, moving a folder into itself, etc.) is skipped and reported
+// rather than failing the whole batch, since the rest are still valid.
+// ---------------------------------------------------------------
+async function dgeAdminBatchMove(items, destFolder) {
+  if (!items.length) return { moved: 0, blocked: [] };
+
+  const treeData = await dgeGithubGetRecursiveTree();
+  if (treeData && treeData.truncated) {
+    throw new Error('GitHub truncated its file listing for this repository, so a safe move cannot be planned. Move fewer/smaller items, or do this one with git.');
+  }
+  const tree = (treeData || {}).tree || [];
+
+  const allEntries = [];
+  const claimedDest = new Set();
+  const blocked = [];
+  let moved = 0;
+
+  items.forEach(item => {
+    const name = item.path.split('/').pop();
+    const newPath = destFolder ? destFolder + '/' + name : name;
+    if (newPath === item.path) {
+      blocked.push(`"${item.path}" is already in that folder`);
+      return;
+    }
+    const plan = window.dgeAdminMoveTreeEntries(tree, item.path, newPath);
+    if (plan.blocked.length) {
+      blocked.push(`"${item.path}": ${plan.blocked[0]}`);
+      return;
+    }
+    // Two selected items landing on the same destination (e.g. same-named
+    // folders from different parents) would silently overwrite one
+    // another in the merged tree — catch it before it's staged.
+    const collides = plan.entries.some(e => e.sha !== null && claimedDest.has(e.path));
+    if (collides) {
+      blocked.push(`"${newPath}" collides with another selected item's destination`);
+      return;
+    }
+    plan.entries.forEach(e => { if (e.sha !== null) claimedDest.add(e.path); });
+    allEntries.push(...plan.entries);
+    moved += plan.moved;
+  });
+
+  if (!allEntries.length) {
+    throw new Error(blocked[0] || 'Nothing to move.');
+  }
+
+  const head = await dgeGithubGetBranchHead();
+  const newTree = await dgeGithubCreateTree(head.commit.commit.tree.sha, allEntries);
+  const message = dgeAdminBuildCommitMessage(
+    items.length === 1 ? `Move ${items[0].path} to ${destFolder || '/'}` : `Move ${items.length} item(s) to ${destFolder || '/'}`
+  );
+  const newCommit = await dgeGithubCreateCommit(message, newTree.sha, head.commit.sha);
+  await dgeGithubUpdateRef(newCommit.sha);
+  return { moved, blocked };
+}
+
+function dgeAdminUpdateMovePickBar() {
+  const bar = document.getElementById('adminMovePickBar');
+  const countEl = document.getElementById('adminMovePickCount');
+  if (!bar) return;
+  const active = !!(dgeAdminMovePickItems && dgeAdminMovePickItems.length);
+  bar.style.display = active ? 'flex' : 'none';
+  if (active && countEl) {
+    countEl.textContent = `Choosing a destination for ${dgeAdminMovePickItems.length} item(s) — browse into any folder below, then tap "Move Here".`;
+  }
+}
+window.dgeAdminUpdateMovePickBar = dgeAdminUpdateMovePickBar;
+
+// Tapping "Move Selected" hands the current checkbox selection off to the
+// pick-mode list and clears the checkboxes — from here on, tapping a folder
+// row navigates into it like normal (dgeAdminRowClick only intercepts taps
+// when dgeAdminSelectedItems is non-empty, and it's empty now) instead of
+// toggling selection, so the whole repo tree is reachable as a destination.
+window.dgeAdminMoveSelectedStart = function() {
+  const items = Array.from(dgeAdminSelectedItems.entries()).map(([path, type]) => ({ path, type }));
+  if (!items.length) return;
+  dgeAdminMovePickItems = items;
+  dgeAdminSelectedItems.clear();
+  dgeAdminUpdateSelectionBar();
+  dgeAdminUpdateMovePickBar();
+};
+
+window.dgeAdminMoveCancelPick = function() {
+  dgeAdminMovePickItems = null;
+  dgeAdminUpdateMovePickBar();
+};
+
+window.dgeAdminMoveHere = async function() {
+  if (!dgeAdminMovePickItems || !dgeAdminMovePickItems.length) return;
+  const dest = dgeAdminCurrentPath;
+  const items = dgeAdminMovePickItems;
+  const names = items.map(i => i.path.split('/').pop()).join(', ');
+  if (!confirm(`Move ${items.length} item(s) into "${dest || '/'}"?\n${names}\nThis can't be undone from here.`)) return;
+
+  try {
+    dgeAdminShowWorking();
+    const result = await dgeAdminBatchMove(items, dest);
+    const wasOpenFileAffected = dgeAdminOpenFilePath && items.some(i =>
+      i.path === dgeAdminOpenFilePath || (i.type === 'dir' && dgeAdminOpenFilePath.startsWith(i.path + '/'))
+    );
+    if (wasOpenFileAffected) window.dgeAdminCloseFileEditor();
+    dgeAdminMovePickItems = null;
+    dgeAdminUpdateMovePickBar();
+    if (result.blocked.length) {
+      const more = result.blocked.length > 1 ? ` (+${result.blocked.length - 1} more)` : '';
+      if (typeof showToast === 'function') showToast(`Moved ${result.moved} file(s). Skipped: ${result.blocked[0]}${more}`);
+    } else if (typeof showToast === 'function') {
+      showToast(`Moved ${items.length} item(s) (${result.moved} file(s)) into "${dest || '/'}" in one commit.`);
+    }
+    dgeAdminNavigate(dgeAdminCurrentPath);
+  } catch (e) {
+    dgeAdminHideWorking();
+    if (typeof showToast === 'function') showToast('Move failed: ' + e.message);
+  }
+};
 
 // ---------------------------------------------------------------
 // Delete
