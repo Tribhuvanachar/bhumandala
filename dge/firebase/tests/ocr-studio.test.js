@@ -250,3 +250,169 @@ describe('textOf', () => {
     assert.equal(S.textOf('  <b> x </b>  '), 'x');
   });
 });
+
+// ---------------------------------------------------------------------------
+// THE THREE ENGINES
+//
+// DGE reads scans with three different engines, and which one a book wants is
+// a judgement made by looking, not a constant in code. The comparison model
+// below is what lets a person look: one row per engine, always the same three
+// rows in the same order, each carrying its own reading of the same page.
+// ---------------------------------------------------------------------------
+describe('engines', () => {
+  test('exactly the three that actually read a scan', () => {
+    assert.deepEqual(S.ENGINE_IDS.slice().sort(), ['sarvam', 'tesseract', 'vision']);
+  });
+
+  test('GEMINI IS NOT AN ENGINE — it proofreads Vision, it never reads a scan', () => {
+    assert.equal(S.ENGINE_IDS.indexOf('gemini'), -1);
+    // and a staged file naming a Gemini model is therefore Vision output
+    assert.equal(S.stagedEngine({ model: 'gemini-flash-latest' }), 'vision');
+  });
+
+  test('only Sarvam keeps the layout, only Tesseract is free and local', () => {
+    assert.equal(S.engineMeta('sarvam').layout, true);
+    assert.equal(S.engineMeta('vision').layout, false);
+    assert.equal(S.engineMeta('tesseract').layout, false);
+    assert.equal(S.engineMeta('tesseract').key, null);
+    assert.equal(S.engineMeta('tesseract').runsIn, 'browser');
+    assert.equal(S.engineMeta('sarvam').runsIn, 'workflow');
+    assert.equal(S.engineMeta('vision').runsIn, 'workflow');
+  });
+
+  test('a staged file is read into the slot of the engine that made it', () => {
+    assert.equal(S.stagedEngine({ engine: 'sarvam-docai' }), 'sarvam');
+    assert.equal(S.stagedEngine({ engine: 'vision' }), 'vision');
+    assert.equal(S.stagedEngine({ ocr_engine: 'Tesseract.js 5' }), 'tesseract');
+    assert.equal(S.stagedEngine({}), '');
+    assert.equal(S.stagedEngine(null), '');
+  });
+
+  test('an unknown engine id still yields a usable row rather than throwing', () => {
+    const m = S.engineMeta('whatever');
+    assert.equal(m.id, 'whatever');
+    assert.equal(typeof m.label, 'string');
+  });
+});
+
+describe('agreement', () => {
+  test('identical readings agree completely', () => {
+    assert.equal(S.agreement('राम कृष्ण गोविन्द', 'राम कृष्ण गोविन्द'), 1);
+  });
+
+  test('line breaks in different places do not count as disagreement', () => {
+    assert.equal(S.agreement('राम कृष्ण\nगोविन्द', 'राम\nकृष्ण गोविन्द'), 1);
+  });
+
+  test('a misread word pulls it down but not to zero', () => {
+    const a = S.agreement('राम कृष्ण गोविन्द', 'राम कष्ण गोविन्द');
+    assert.ok(a > 0.5 && a < 1, 'expected partial agreement, got ' + a);
+  });
+
+  test('nothing in common is zero; two empties are one', () => {
+    assert.equal(S.agreement('अ आ', 'क ख'), 0);
+    assert.equal(S.agreement('', ''), 1);
+    assert.equal(S.agreement('अ', ''), 0);
+  });
+});
+
+describe('comparison', () => {
+  const sarvam = [{ page: 1, html: '<h2>प्रथमो मन्त्रः</h2><p>ईशा वास्यमिदं सर्वम्</p>' },
+                  { page: 2, html: '<p>द्वितीयम्</p>' }];
+  const vision = [{ page: 1, html: '<p>प्रथमो मन्त्रः</p><p>ईशा वास्यमिदं सर्वम्</p>' }];
+
+  test('all three rows exist even when only one engine has been run', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }]);
+    assert.deepEqual(c.engines.map((e) => e.id), ['sarvam', 'vision', 'tesseract']);
+    assert.deepEqual(c.engines.map((e) => e.loaded), [true, false, false]);
+  });
+
+  test('rows keep their order whichever engine loaded first', () => {
+    const a = S.buildComparison([{ id: 'tesseract', pages: vision }, { id: 'sarvam', pages: sarvam }]);
+    const b = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'tesseract', pages: vision }]);
+    assert.equal(a.engines.map((e) => e.id).join(','), b.engines.map((e) => e.id).join(','));
+  });
+
+  test('the layout-preserving engine is chosen by default when it is there', () => {
+    const c = S.buildComparison([{ id: 'vision', pages: vision }, { id: 'sarvam', pages: sarvam }]);
+    assert.equal(c.chosen, 'sarvam');
+  });
+
+  test('with no layout engine loaded, the first loaded one is chosen', () => {
+    const c = S.buildComparison([{ id: 'vision', pages: vision }]);
+    assert.equal(c.chosen, 'vision');
+  });
+
+  test('nothing loaded chooses nothing rather than guessing', () => {
+    const c = S.buildComparison([]);
+    assert.equal(c.chosen, '');
+    assert.equal(S.chosenDoc(c), null);
+    assert.deepEqual(Object.keys(c.pages), []);
+  });
+
+  test('pages are the union across engines, in order', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    assert.equal(c.pages.join(','), '1,2');
+  });
+
+  test('choosing an engine that read nothing is refused', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }]);
+    assert.equal(S.chooseEngine(c, 'tesseract'), false);
+    assert.equal(c.chosen, 'sarvam');
+  });
+
+  test('choosing a loaded engine switches what the styling half works on', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    assert.equal(S.chooseEngine(c, 'vision'), true);
+    assert.equal(c.chosen, 'vision');
+    assert.equal(S.chosenDoc(c).blocks[0].srcTag, 'p');
+  });
+
+  test('one page, one row per engine, with the scan-side blocks it read', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    const rows = S.comparePage(c, 1);
+    assert.equal(rows.length, 3);
+    assert.deepEqual(rows.map((r) => r.id), ['sarvam', 'vision', 'tesseract']);
+    assert.equal(rows[0].blocks.length, 2);
+    assert.equal(rows[1].blocks.length, 2);
+    assert.equal(rows[2].blocks.length, 0);
+  });
+
+  test('agreement is measured against the chosen reading, and the chosen row is 1', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    const rows = S.comparePage(c, 1);
+    assert.equal(rows[0].agreement, 1);          // sarvam is chosen
+    // Vision read the same words, only as <p> instead of <h2> — same text.
+    assert.equal(rows[1].agreement, 1);
+    assert.equal(rows[2].agreement, null);       // nothing loaded, no claim made
+  });
+
+  test('an engine that read a page the others did not still shows on that page', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    const rows = S.comparePage(c, 2);
+    assert.equal(rows[0].blocks.length, 1);
+    assert.equal(rows[1].blocks.length, 0);
+  });
+
+  test('stats describe how much and how richly each engine read', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    assert.equal(c.engines[0].stats.headings, 1);   // sarvam saw the heading
+    assert.equal(c.engines[1].stats.headings, 0);   // vision flattened it
+    assert.equal(c.engines[0].stats.pages, 2);
+    assert.ok(c.engines[0].stats.chars > 0);
+  });
+
+  test('THE SOURCE TAG SURVIVES THE CHOICE — styling one engine cannot edit another', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }, { id: 'vision', pages: vision }]);
+    const sd = c.engines[0].doc;
+    S.applyClass(sd, sd.blocks[0].id, 'title', 'all');
+    assert.equal(c.engines[0].doc.blocks[0].srcTag, 'h2');
+    assert.equal(c.engines[1].doc.blocks[0].cls, 'body');
+  });
+
+  test('pageText joins a page into one reading for comparison', () => {
+    const c = S.buildComparison([{ id: 'sarvam', pages: sarvam }]);
+    assert.equal(S.pageText(c.engines[0].doc, 2), 'द्वितीयम्');
+    assert.equal(S.pageText(null, 1), '');
+  });
+});

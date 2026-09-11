@@ -22,6 +22,15 @@
  * every block carrying it without touching a single block's own markup —
  * which is what makes it a style rather than formatting.
  *
+ * THREE ENGINES, NOT ONE. DGE reads a scan with Sarvam Document AI (keeps
+ * the layout), Google Cloud Vision (flat text) or Tesseract.js (free, WASM,
+ * in this tab). Which one a particular book wants is a judgement made by
+ * looking at all three, so the studio holds a document per engine and shows
+ * them one beneath the other, each beside the page it read, until a person
+ * picks one. Only then does the styling half above have anything to work on.
+ * Gemini is not among them: it proofreads Vision's text afterwards and never
+ * reads a scan.
+ *
  * PURE. No DOM, no fetch. The page is the shell; every rule about what
  * changes when you click something lives here, where it can be tested.
  */
@@ -125,6 +134,235 @@
       });
     });
     return { blocks: blocks, styles: defaultStyles() };
+  }
+
+  // ------------------------------------------------------------------------
+  // THE THREE ENGINES
+  //
+  // DGE does not have "an OCR". It has three readers with different strengths,
+  // and which one is right is a per-book judgement a scholar has to make by
+  // looking, not something to decide once in code. So the studio holds all
+  // three and lets the person choose.
+  //
+  // Gemini is deliberately NOT in this list. It never reads a scan — it
+  // proofreads Vision's flat text afterwards (tools/gemini_ocr_commentary.py,
+  // lakshmi_kaumudi_ocr.py, vasu_kaumudi_ocr.py all run PDF -> Vision -> Gemini).
+  // Listing it as a fourth engine would invite a comparison that has no
+  // meaning, and it is the one stage that costs real money per token.
+  // ------------------------------------------------------------------------
+  const ENGINES = [
+    {
+      id: 'sarvam',
+      label: 'Sarvam Document AI',
+      blurb: 'Indian-language scans, layout kept',
+      layout: true,
+      runsIn: 'workflow',
+      where: '.github/workflows/ocr-sarvam.yml → tools/sarvam_docai.py',
+      key: 'SARVAM_API_KEY',
+      cost: 'paid · per page from the prepaid balance on dashboard.sarvam.ai'
+    },
+    {
+      id: 'vision',
+      label: 'Google Cloud Vision',
+      blurb: 'DOCUMENT_TEXT_DETECTION, flat text',
+      layout: false,
+      runsIn: 'workflow',
+      where: '.github/workflows/ocr-vision-pages.yml → tools/vision_ocr_pages.py',
+      key: 'VISION_API_KEY',
+      cost: 'paid · per page'
+    },
+    {
+      id: 'tesseract',
+      label: 'Tesseract.js',
+      blurb: 'free, in-browser WASM, needs a language hint',
+      layout: false,
+      runsIn: 'browser',
+      where: 'dge/convert/tesseract-check.js',
+      key: null,
+      cost: 'free · runs on this machine, sends nothing'
+    }
+  ];
+
+  const ENGINE_IDS = ENGINES.map((e) => e.id);
+
+  function engineMeta(id) {
+    return ENGINES.find((e) => e.id === id) ||
+      { id: String(id || 'unknown'), label: String(id || 'Unknown engine'), blurb: '',
+        layout: false, runsIn: 'unknown', where: '', key: null, cost: '' };
+  }
+
+  /**
+   * Which engine produced a staged file.
+   *
+   * Reads the file's own `engine` field first — sarvam_docai.py writes
+   * "sarvam-docai" there. Older Vision+Gemini stagers wrote only `model`,
+   * naming the Gemini model that PROOFREAD the page; those files are Vision
+   * output, so a gemini model name resolves to 'vision' rather than inventing
+   * a fourth engine. Returns '' when nothing in the file says.
+   */
+  function stagedEngine(staged) {
+    const hay = [
+      staged && staged.engine, staged && staged.ocr_engine, staged && staged.model
+    ].map((v) => String(v == null ? '' : v).toLowerCase()).join(' ');
+    if (/sarvam/.test(hay)) return 'sarvam';
+    if (/tesseract/.test(hay)) return 'tesseract';
+    if (/vision|gemini/.test(hay)) return 'vision';
+    return '';
+  }
+
+  /** Words, normalised, for comparing two engines' reading of the same page. */
+  function words(text) {
+    return String(text || '')
+      .normalize('NFC')
+      .replace(/[।॥.,;:!?"'()\[\]—–-]/g, ' ')
+      .split(/\s+/)
+      .filter(Boolean);
+  }
+
+  /**
+   * How much two readings agree, 0..1 — a Dice coefficient over word bags.
+   *
+   * Deliberately not an edit distance: at page scale that is millions of
+   * operations per pair and this runs for every engine pair on every page.
+   * A word bag also survives the difference that matters least here — the two
+   * engines breaking lines in different places — while still collapsing when
+   * one of them has genuinely misread the script.
+   */
+  function agreement(a, b) {
+    const wa = words(a), wb = words(b);
+    if (!wa.length && !wb.length) return 1;
+    if (!wa.length || !wb.length) return 0;
+    const bag = new Map();
+    wa.forEach((w) => bag.set(w, (bag.get(w) || 0) + 1));
+    let shared = 0;
+    wb.forEach((w) => {
+      const n = bag.get(w) || 0;
+      if (n > 0) { bag.set(w, n - 1); shared++; }
+    });
+    return (2 * shared) / (wa.length + wb.length);
+  }
+
+  /** What to show on an engine's row header: how much it read, and how richly. */
+  function engineStats(doc) {
+    const blocks = (doc && doc.blocks) || [];
+    let chars = 0, headings = 0;
+    blocks.forEach((b) => {
+      chars += (b.text || '').length;
+      if (/^h[1-6]$/.test(b.srcTag)) headings++;
+    });
+    return {
+      blocks: blocks.length,
+      chars: chars,
+      headings: headings,
+      pages: pagesIn(doc).length
+    };
+  }
+
+  function pagesIn(doc) {
+    const seen = [];
+    ((doc && doc.blocks) || []).forEach((b) => {
+      const p = b.page == null ? 1 : b.page;
+      if (seen.indexOf(p) < 0) seen.push(p);
+    });
+    return seen.sort(function (a, b) { return a - b; });
+  }
+
+  /**
+   * Hold one document per engine, side by side, with one of them chosen.
+   *
+   * `sources` is a list of {id, pages, label?} — pages in the same shape
+   * docFromPages takes. Engines with nothing loaded still appear, so the row
+   * for an engine you have not run is visible and says why it is empty
+   * instead of silently not being there.
+   *
+   * The engines come back in ENGINES order, always the same three rows in the
+   * same places: a comparison whose rows move around between loads is not a
+   * comparison.
+   */
+  function buildComparison(sources) {
+    const byId = {};
+    (sources || []).forEach((s) => {
+      if (!s || !s.id) return;
+      byId[s.id] = s;
+    });
+    const engines = ENGINES.map((meta) => {
+      const src = byId[meta.id];
+      const doc = src && src.pages ? docFromPages(src.pages) : null;
+      return {
+        id: meta.id,
+        label: meta.label,
+        meta: meta,
+        doc: doc,
+        loaded: !!doc && doc.blocks.length > 0,
+        source: (src && src.label) || '',
+        stats: doc ? engineStats(doc) : { blocks: 0, chars: 0, headings: 0, pages: 0 }
+      };
+    });
+    const loaded = engines.filter((e) => e.loaded);
+    return {
+      engines: engines,
+      // Default to the richest thing actually loaded, preferring an engine
+      // that kept the layout — that is the output the styling half of the
+      // studio can do anything with.
+      chosen: (loaded.find((e) => e.meta.layout) || loaded[0] || { id: '' }).id,
+      pages: allPages(engines)
+    };
+  }
+
+  function allPages(engines) {
+    const seen = [];
+    engines.forEach((e) => {
+      pagesIn(e.doc).forEach((p) => { if (seen.indexOf(p) < 0) seen.push(p); });
+    });
+    return seen.sort(function (a, b) { return a - b; });
+  }
+
+  /** Adopt one engine's reading. Refuses an engine with nothing loaded. */
+  function chooseEngine(cmp, id) {
+    const e = (cmp && cmp.engines || []).find((x) => x.id === id);
+    if (!e || !e.loaded) return false;
+    cmp.chosen = id;
+    return true;
+  }
+
+  function chosenDoc(cmp) {
+    const e = (cmp && cmp.engines || []).find((x) => x.id === cmp.chosen);
+    return (e && e.doc) || null;
+  }
+
+  /** One engine's blocks for one page. */
+  function pageBlocks(doc, page) {
+    return ((doc && doc.blocks) || []).filter((b) => (b.page == null ? 1 : b.page) === page);
+  }
+
+  function pageText(doc, page) {
+    return pageBlocks(doc, page).map((b) => b.text).join('\n');
+  }
+
+  /**
+   * The comparison itself: one row per engine for a single page, in engine
+   * order, each carrying that engine's blocks and how far it agrees with the
+   * chosen engine. The agreement is against the CHOSEN one rather than
+   * pairwise between all three, because the question a person is actually
+   * asking is "if I take this one, what am I disagreeing with".
+   */
+  function comparePage(cmp, page) {
+    const ref = pageText(chosenDoc(cmp), page);
+    return (cmp && cmp.engines || []).map((e) => {
+      const blocks = pageBlocks(e.doc, page);
+      const text = blocks.map((b) => b.text).join('\n');
+      return {
+        id: e.id,
+        label: e.label,
+        meta: e.meta,
+        loaded: e.loaded,
+        chosen: e.id === cmp.chosen,
+        blocks: blocks,
+        text: text,
+        chars: text.length,
+        agreement: e.id === cmp.chosen ? 1 : (blocks.length ? agreement(ref, text) : null)
+      };
+    });
   }
 
   /** Every block the OCR tagged the same way as this one. */
@@ -233,6 +471,9 @@
   return {
     BLOCK_TAGS, defaultStyles, classify, parseBlocks, docFromPages,
     blocksLike, applyClass, counts, ruleFor, styleCss, exportHtml,
-    toMergeBlocks, textOf, escapeHtml
+    toMergeBlocks, textOf, escapeHtml,
+    ENGINES, ENGINE_IDS, engineMeta, stagedEngine, words, agreement,
+    engineStats, pagesIn, buildComparison, chooseEngine, chosenDoc,
+    pageBlocks, pageText, comparePage
   };
 }));
