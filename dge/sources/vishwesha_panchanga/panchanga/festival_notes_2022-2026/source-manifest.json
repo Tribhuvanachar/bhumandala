@@ -9,7 +9,7 @@
   "method": "apk_asset",
   "content_type": "text/csv (custom, YYYY-DD-Mon-notes per line)",
   "retrieved_at": "2026-09-11",
-  "row_count": 793,
+  "row_count": 794,
   "date_coverage": "2022 to 2026, special-day/festival annotations only (not full five-anga daily Panchanga)",
   "rights_status": "UNKNOWN - official Vishwesha Panchanga app; no explicit licence/redistribution terms observed",
   "verification_status": "PARTIAL - incomplete acquisition",

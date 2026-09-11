@@ -6049,3 +6049,43 @@ server be hit," not a puzzle to keep solving. srsmatha.org's old
 locked; `www.srsmatha.org/srsapp/?p=srsmatha` (the old jQuery-era site) is
 still live and 200s, lower priority since the current 2.0.0 app's packaged
 JSON is already the better-structured source per the architecture doc.
+
+## Panchāṅga acquisition: formalized into re-runnable scripts (11 Sep 2026, 4:24 pm IST)
+
+Project lead said to keep making progress independently. Picked the most
+directly useful next thing: today's three manual Panchāṅga extractions
+(Uttarādi, SRS, Vishwesha) were one-off shell/python sessions, not
+anything a future session could re-run against next year's app version
+without redoing the archaeology from scratch — the actual "syncer" ask
+from the start of this thread, still undone. Fixed that.
+
+New `tools/panchanga/acquire_{uttaradi,srs,vishwesha}.py`, each: verifies
+the given APK's package name matches (refuses a wrong-app mix-up rather
+than silently extracting garbage), pulls the packaged asset(s), derives
+the real date range from the data itself rather than trusting the app's
+version string, and archives to `dge/sources/.../<derived-range>/` with
+a manifest — shared logic in `tools/panchanga/acquire_common.py`.
+Idempotent by design: re-running against the identical APK is a no-op;
+landing on a folder that already holds a *different* acquisition raises
+rather than silently overwriting (architecture doc §24's rule enforced in
+code, not just as a comment).
+
+Tested all three against today's own APKs as the correctness check — all
+three correctly reported `already_acquired` with the exact row
+counts/date ranges from this morning's manual work, confirming the
+scripts reproduce it exactly. One real bug caught in the process: the
+Vishwesha manifest's `row_count` was 793 from this morning's `wc -l`,
+which undercounts by one when a file's last line has no trailing newline
+(confirmed: `vss4.vss` doesn't). The script's `splitlines()`-based count
+(794) is correct; fixed the stored manifest directly since the file
+itself wasn't touched (hash matched, so `already_acquired` fired) —
+purely a metadata correction, no data change.
+
+Documented per-source limits in `tools/panchanga/README.md` rather than
+letting the scripts imply more coverage than they have: Udupi has no
+script (no APK supplied at all), Tithi Nirṇaya/Vyāsarāja Sosale have no
+script (no native code to extract from in the copies acquired so far),
+Sode has no script (server-backed, not a packaged asset — a website-crawl
+or authorized-API approach is a different kind of tool, not this pattern).
+
+`./run_tests.sh`: same pre-existing 3 failures/14 errors, nothing new.
