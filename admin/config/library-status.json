@@ -403,12 +403,12 @@
   "darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_vakyaviveka": 153,
   "darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/mula": 32,
   "darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/yamaka_bharata/mula": 1,
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/mula": 371,
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/parishishta": 36,
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_sara_sangraha_kannada": 30,
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_tippani": 104,
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_vishnutirtha": 344,
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/upodghata": 4,
+  "bhagavata_saroddhara/mula": 371,
+  "bhagavata_saroddhara/parishishta": 36,
+  "bhagavata_saroddhara/tika_sara_sangraha_kannada": 30,
+  "bhagavata_saroddhara/tika_tippani": 104,
+  "bhagavata_saroddhara/tika_vishnutirtha": 344,
+  "bhagavata_saroddhara/upodghata": 4,
   "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavato_nirdoshatvalakshanam/mula": 17,
   "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedaparanyeva_khalu_brahmasutrani/mula": 26,
   "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/mula": 36,
@@ -2950,27 +2950,27 @@
   "darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/yamaka_bharata/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/14142/923/itahas/1-yama/malma"
   },
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/mula": {
+  "bhagavata_saroddhara/mula": {
    "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
    "licence": "Text of Śrī Viṣṇutīrtha (18th c.), public domain; scan courtesy of the edition's publisher"
   },
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/parishishta": {
+  "bhagavata_saroddhara/parishishta": {
    "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
    "licence": "Text of Śrī Viṣṇutīrtha (18th c.), public domain; scan courtesy of the edition's publisher"
   },
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_sara_sangraha_kannada": {
+  "bhagavata_saroddhara/tika_sara_sangraha_kannada": {
    "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
    "licence": "Text of Śrī Viṣṇutīrtha (18th c.), public domain; scan courtesy of the edition's publisher"
   },
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_tippani": {
+  "bhagavata_saroddhara/tika_tippani": {
    "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
    "licence": "Text of Śrī Viṣṇutīrtha (18th c.), public domain; scan courtesy of the edition's publisher"
   },
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_vishnutirtha": {
+  "bhagavata_saroddhara/tika_vishnutirtha": {
    "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
    "licence": "Text of Śrī Viṣṇutīrtha (18th c.), public domain; scan courtesy of the edition's publisher"
   },
-  "darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/upodghata": {
+  "bhagavata_saroddhara/upodghata": {
    "source": "Rarest Archiver scan of the Acharya Vidyadhishthanam (Bengaluru) edition",
    "licence": "Text of Śrī Viṣṇutīrtha (18th c.), public domain; scan courtesy of the edition's publisher"
   },

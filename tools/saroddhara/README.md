@@ -9,7 +9,7 @@ A  OCR          Vision  : .github/workflows/ocr-vision-pages.yml  → branch ocr
 B  merge        python3 tools/saroddhara/ocr_merge.py --vision vision/pages.json --tess-dir tess --png-dir hi --out merged
                 (Tesseract boxes = geometry; Vision = text; footnote rule; header/heading/verse/ref/footnote regions; agreement A–E)
 C  build        python3 tools/saroddhara/build_saroddhara.py --work <dir> --write-data
-                → dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/{mula,tika_vishnutirtha,tippani,sara_sangraha_kannada,parishishta}
+                → dge/data/bhagavata_saroddhara/{mula,tika_vishnutirtha,tippani,sara_sangraha_kannada,parishishta}
                 → <dir>/verify_input/verify_queue.json + verify_queue.html + crops/   (what a human / local Gemini must check)
                 → <dir>/build_report.json
 D  verify       open verify_queue.html (offline), answer, Export answers.json → verify_output/
