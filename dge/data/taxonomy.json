@@ -4368,6 +4368,1861 @@
       "taittiriya_bhashya": {},
       "talavakara_bhashya": {}
      }
+    },
+    "Anandamakaranda": {
+     "achara_and_ancillary_granthas": {
+      "jayanti_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "kanduka_stuti": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "krishnamrita_maharnava": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "nakha_stuti": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीविश्वपतितीर्थाः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीछलारितीर्थाः"
+       }
+      },
+      "nyasa_paddhati": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "sadachara_smriti": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "tantrasara_sangraha": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "tithi_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "yamaka_bharata": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "yati_pranava_kalpa": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "dasha_prakarana_granthas": {
+      "karma_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "katha_lakshana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीपद्मनाभतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीजयतीर्थः"
+       }
+      },
+      "mayavada_khandana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "pramana_lakshana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "prapancha_mithyatvanumana_khandana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "tattva_sankhyana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "tattva_viveka": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "tattvodyota": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "upadhi_khandana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "vishnu_tattva_vinirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "dvadasha_stotra": {
+      "mula": {
+       "_schema": "grantha_mula_text",
+       "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+      },
+      "tika_jayatirtha": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीजयतीर्थः"
+      },
+      "tippani": {
+       "_schema": "grantha_tippani_text",
+       "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+      }
+     },
+     "gita_prasthana": {
+      "gita_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_english_boray": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Dr. Giridhar Boray"
+       },
+       "tika_english_nadgouda": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Prof. Gururao V. Nadgouda & Smt. Indira Nadgouda"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "gita_tatparya_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "itihasa_purana_tatparya_nirnaya": {
+      "bhagavata_tatparya_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "mahabharata_tatparya_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "rig_bhashya": {
+      "mula": {
+       "_schema": "grantha_mula_text",
+       "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+      },
+      "tika_jayatirtha": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीजयतीर्थः"
+      },
+      "tippani": {
+       "_schema": "grantha_tippani_text",
+       "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+      }
+     },
+     "sutra_prasthana": {
+      "anubhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "anuvyakhyana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "brahma_sutra_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "nyaya_vivarana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "upanishad_prasthana": {
+      "aitareyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "brihadaranyakopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "chandogyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "ishavasyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "kathopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "kenopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "mandukyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "mundakopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "prashnopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "taittiriyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tippani": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     }
+    },
+    "DvaitaVedantaIn": {
+     "dasha_prakarana_granthas": {
+      "karma_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_karmaprakasha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_panchika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "katha_lakshana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_kathalakshanam": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_panchika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "mayavada_khandana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mandaramanjari": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीब्रह्मण्यतीर्थपूज्यपादशिष्यश्रीव्यासतीर्थविरचिता"
+       },
+       "tika_mayavadaparashu": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यनाथयतिविरचितः"
+       },
+       "tika_nivasatirthatippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवेणुपल्ली श्रीनिवासतीर्थविरचिता"
+       }
+      },
+      "pramana_lakshana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_pramanalakshanam": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyarthakaumudi": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थकृता"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री पाण्डुरङ्गि केशवाचार्यविरचितम्"
+       }
+      },
+      "prapancha_mithyatvanumana_khandana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_gururajiyatippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पाण्डुरङ्गी केशवाचार्यविरचितम्"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mithyatvanumanakhandanaparashu": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यनाथतीर्थविरचितः"
+       },
+       "tika_nivasatirthiyatippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "व्यासतीर्थयतिना विरचिता"
+       }
+      },
+      "tattva_sankhyana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavacandrika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीपाण्डुरङ्गी केशवभट्टारकविरचिता"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_bhavavarnanam": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री विजयीन्द्रतीर्थविरचितं"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_kashitippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री काशी तिम्मण्णाचार्यविरचिता"
+       },
+       "tika_tatvasankhyanatikatippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री यदुपत्याचार्यविरचिता"
+       },
+       "tika_tatvasankhyanatippanam": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यधर्मतीर्थविरचितं"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री बिदरह•ी श्रीनिवासतीर्थविरचितं"
+       }
+      },
+      "tattva_viveka": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_dvaitadyumani": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_govindiya": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_gururajiya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीपाण्डुरङ्गिकेशवाचार्यकृता"
+       },
+       "tika_janardanabhattiya": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mula": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_naropantiya": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_raghavendratirtha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vedeshatirtha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vijayindrabhikshu": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "tattvodyota": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mandaramanjari": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीव्यासतीर्थयतिविरचिता"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "बिदरह•ी श्रीनिवासतीर्थविरचितं"
+       }
+      },
+      "upadhi_khandana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mandaramanjari": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीब्रह्मण्यतीर्थपूज्यपादशिष्यश्रीव्यासतीर्थविरचिता"
+       },
+       "tika_nivasatirthiyatippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "आत्मभेदस्य सत्यमिथ्योपाधिकृतत्वमेव"
+       },
+       "tika_parashunamnitippani": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमत्सत्यनाथतीर्थविरचिता"
+       }
+      },
+      "vishnu_tattva_vinirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavabodha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_laghuprabha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_tattvamanjari": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyarthadipika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vishamapadavakyarthavivriti": {
+        "_schema": "grantha_tika_text"
+       }
+      }
+     },
+     "gita_prasthana": {
+      "gita_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavabodha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीरघूत्तमतीर्थप्रणीता"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_bhavadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थविरचिता"
+       },
+       "tika_bhavapradipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीपद्मनाभतीर्थकृता"
+       },
+       "tika_bhavaprakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "उमर्जीकृष्णाचार्यविरचितः"
+       },
+       "tika_bhavaratnakosha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अपि त्रैलोक्यराज्यस्य हेतोः किं नु महीकृते।।"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनरहरितीर्थविरचिता"
+       },
+       "tika_prameyadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_vakyarthapradipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीपाण्डुरङ्गिकेशवाचार्यविरचितः"
+       }
+      },
+      "gita_tatparya_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_bhavaprakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री सत्यप्रज्ञतीर्थविरचितः"
+       },
+       "tika_gita": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_kiranavali": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_nyayadeepika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_nyayadipakiranavali": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "ताम्रपर्णी श्रीनिवासेन विरचिता"
+       },
+       "tika_nyayadipikabhavaprakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री सत्यप्रज्ञतीर्थविरचितः"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीपद्मनाभतीर्थविरचिता"
+       },
+       "tika_tatparya": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyaviveka": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यनाथयति विरचितः"
+       }
+      }
+     },
+     "itihasa_prasthana": {
+      "mahabharata_tatparya_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_anantabhatta": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "अनन्तभट्टीया (श्रीअनन्तभट्ट)"
+       },
+       "tika_bharatshri": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "भारतश्री"
+       },
+       "tika_bhavachandrika": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "भावचन्द्रिका"
+       },
+       "tika_bhavavivrti": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "भावविवृतिः"
+       },
+       "tika_chatti": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "चट्टी / जम्बुखण्डी (श्रीलक्ष्मीनृसिंहाचार्य)"
+       },
+       "tika_janardana": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "जनार्दनीया (श्रीजनार्दनभट्ट)"
+       },
+       "tika_kanthakoddhara": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "कण्ठकोद्धारः"
+       },
+       "tika_madhusudana": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "मधुसूदनीया (श्रीमधुसूदन)"
+       },
+       "tika_sangraha": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "टीकासङ्ग्रहः"
+       },
+       "tika_satyabhinava": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "सत्याभिनवतीर्थीया — दुर्घटार्थप्रकाशिका"
+       },
+       "tika_satyadharma": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "सत्यधर्मीया"
+       },
+       "tika_tamraparni": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "ताम्रपर्णीया"
+       },
+       "tika_vadiraja": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "वादिराजतीर्थीया (श्रीवादिराजतीर्थ)"
+       },
+       "tika_varadaraja": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "वरदराजीया (श्रीवरदराजाचार्य)"
+       },
+       "tika_vedangatirtha": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "वेदाङ्गतीर्थीया"
+       },
+       "tika_vyasatirtha": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "व्यासतीर्थीया — भावपञ्चिका (श्रीव्यासतीर्थ)"
+       }
+      },
+      "yamaka_bharata": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "later_acharyas": {
+      "bhagavato_nirdoshatvalakshanam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीसत्यप्रमोदतीर्थः"
+       }
+      },
+      "bhedaparanyeva_khalu_brahmasutrani": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीसत्यध्यानतीर्थः"
+       }
+      },
+      "bhedojjivana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       },
+       "tika_bhavapradipa": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_bhedacandrika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_bhedacintaratnam": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_bhedasanjivini": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_kashitimmannacarya": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_sharkarashrinivasacarya": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "brahmasutranyayasamgraha": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीविजयीन्द्रतीर्थः"
+       }
+      },
+      "candrikamandanam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीसत्यध्यानतीर्थः"
+       },
+       "tika_ramasubba": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "dvaita_dyumani": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_dvaitadyumani": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       }
+      },
+      "karmavijaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीसत्यात्मतीर्थः"
+       },
+       "tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ दलकृत्यचिन्तापूर्वकं व्यभिचारस्यासम्भवदुक्तिकत्वप्रदर्शनेन बुद्धिपूर्वमित्यस्य टीकोक्तवैयर्थ्यस्थैर्यप्रतिपादनम् | अर्थसङ्कोचे न सार्थक्ये मूल"
+       },
+       "tika_karmanirnayanamna_acarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "कर्मनिर्णयनाम्न आचार्य"
+       },
+       "tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"ना म्न आचार्य"
+       },
+       "tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "सिद्धान्तेऽदूषणस्याप्यप्रसिद्धविशेषणत्वस्यासिद्धिसङ्कीर्णतादशायां दोषत्वोपपत्तिरिति उपपादनपूर्वकं प्र"
+       }
+      },
+      "madhvamukhalankara": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीवनमालिदासः"
+       }
+      },
+      "madhvasiddhantasara": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीवेदगर्भपद्मनाभसूरिः"
+       }
+      },
+      "nyaya_sudha": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_anuvyakhyanam": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_na_ca_tata": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "न च तत्"
+       },
+       "tika_nivasatirthiya": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_nyayasudha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_parimala": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_pra": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "प्रा"
+       },
+       "tika_sheshavakyarthacandrika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री पाण्डुरङ्गीकेशवाचार्यविरचिता"
+       },
+       "tika_sudha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyarthacandrika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyartharatnamala": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री श्रीनिवासतीर्थविरचितं"
+       },
+       "tika_yadupatyam": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "nyayamrita": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       },
+       "tika_nyayakalpalata": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीकूर्मनरहरिआचार्यविरचिता"
+       },
+       "tika_nyayamritakantakoddhara": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पाण्डुरङ्गि आनन्दभट्टारकविरचितः"
+       },
+       "tika_nyayamritam": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_nyayamritamadhuri": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "मन्नारी कृष्णाचार्यविरचिता"
+       },
+       "tika_nyayamritaprakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थविरचितः"
+       },
+       "tika_nyayamritasaugandhyam": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "वनमालिमिश्रविरचितम्"
+       },
+       "tika_nyayamritatarangini": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीव्यासरामाचार्यविरचिता"
+       }
+      },
+      "padarthasangraha": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीवेदगर्भपद्मनाभसूरिः"
+       }
+      },
+      "pramana_paddhati": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_abhinavamritam": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यनाथतीर्थविरचितम्"
+       },
+       "tika_adarsha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीव्यासपुरी नरसिंहविरचितः"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_jayatirthavijaya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजनार्दनविरचिता"
+       },
+       "tika_vakyarthamanjari": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थविरचिता"
+       },
+       "tika_vedeshabhikshu": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवेदेशभिक्षु विरचित"
+       },
+       "tika_vijayindratirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीविजयीन्द्रतीर्थ विरचिता"
+       },
+       "tika_vittalabhatta": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीविट्टलभट्ट विरचिता"
+       }
+      },
+      "purushasuktam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_satyapramoda": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यप्रमोदतीर्थः"
+       },
+       "tika_surottama": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसुरोत्तमतीर्थः"
+       }
+      },
+      "sarvasiddhantasarasaravivecanam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीविजयीन्द्रतीर्थः"
+       }
+      },
+      "shrimanmadhvasiddhantasaroddhara": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीविजयीन्द्रतीर्थः"
+       }
+      },
+      "shrimannyayasudhamandanam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीसत्यप्रमोदतीर्थः"
+       }
+      },
+      "shrivijayindravijayavaibhavam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीसत्यप्रमोदतीर्थः"
+       }
+      },
+      "tantradipika": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       }
+      },
+      "tarka_tandava": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_nyayadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रयतिविरचितः"
+       },
+       "tika_tarkatandavam": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_yuktiratnakara": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "tatparya_chandrika": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       },
+       "tika_candrikabindu": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यप्रियतीर्थविरचितः"
+       },
+       "tika_candrikavivriti": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यानन्दतीर्थविरचिता"
+       },
+       "tika_pandurangi": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पाण्डुरङ्गि केशवाचार्यविरचिता"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री राघवेन्द्रतीर्थविरचिता"
+       },
+       "tika_tatparyachandrika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       }
+      },
+      "vadavali": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_bhavadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रयतिकृता"
+       },
+       "tika_prakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थविरचितः"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री उमर्जी तिरुमलाचार्यसुतकृष्णविरचितं"
+       }
+      },
+      "vagvajra": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीपादराजगुरुसार्वभौमः"
+       }
+      }
+     },
+     "purana_prasthana": {
+      "bhagavata_tatparya_nirnaya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhagavataprakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री यादवार्यविरचिता"
+       },
+       "tika_catti": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीचट्टी विरचिता"
+       },
+       "tika_chalari": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीमद्भागवतटिप्पणी छलारी शेषाचार्यविरचिता"
+       },
+       "tika_durghatabhavadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "सत्याभिनवयतिकृता"
+       },
+       "tika_iti_shri_chalari_sheshacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "इति श्री छलारी शेषाचार्य"
+       },
+       "tika_lingeri": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीमद्भागवतटिप्पणी लिङ्गेरी श्रीनिवासाचार्यविरचिता"
+       },
+       "tika_lingheri": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "।। इति श्रीछलारी शेषाचार्यकृतायां"
+       },
+       "tika_mandanandini": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीव्यासतत्वज्ञविरचिता"
+       },
+       "tika_nivasatirthiya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री वंशपल्ली श्रीनिवासतीर्थविरचिता"
+       },
+       "tika_padaratnavali": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीविजयध्वजतीर्थः"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "।। इति श्रीमद्भागवतटीकायां विजयध्वजतीर्थभिक्षुविरचितायां"
+       },
+       "tika_prameyacandrika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "भवता भगवद्विषयधर्माचरणं कृतं"
+       },
+       "tika_satyadharma": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीमद्भागवतटिप्पणी श्रीसत्यधर्मकृता"
+       },
+       "tika_satyadharmiya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "।। इति श्रीमद्भागवतटीकायां विजयध्वजतीर्थभिक्षुकृतायां"
+       },
+       "tika_sumanoranjini": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पितुर्वसुदेवस्य ज्ञातिभिः सार्धं साकं सात्वतां पतिः क्व वासं कृतवान्"
+       },
+       "tika_virodhoddhara": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पाङ्घरी श्रीनिवासाचार्यकृतः"
+       },
+       "tika_virododdhara": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पाङ्घरी श्रीनिवासाचार्यकृत"
+       }
+      }
+     },
+     "sruti_prasthana": {
+      "rig_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "sutra_prasthana": {
+      "anubhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "anuvyakhyana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      },
+      "brahma_sutra_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_abhinavacandrika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavabodha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_bhavadipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_gurvarthadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रतीर्थः"
+       },
+       "tika_pandurangi_shrinivasacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "पाण्डुरङ्गि श्रीनिवासाचार्य"
+       },
+       "tika_sattarkadipavali": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       },
+       "tika_sharkara_shrinivasacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "शर्करा श्रीनिवासाचार्य"
+       },
+       "tika_shriraghuttamatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीरघूत्तमतीर्थ"
+       },
+       "tika_shrivadirajatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवादिराजतीर्थः"
+       },
+       "tika_tamraparni_shrinivasacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "ताम्रपर्णी श्रीनिवासाचार्य"
+       },
+       "tika_tattvapradipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीत्रिविक्रमपण्डिताचार्यः"
+       },
+       "tika_tattvaprakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_tattvaprakashikabhavabodha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीरघूत्तमतीर्थविरचितः"
+       },
+       "tika_tattvaprakashikavivriti": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री पाण्डुरङ्गि केशवाचार्य विरचिता"
+       },
+       "tika_tattvaprradipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "।। इति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचिते"
+       },
+       "tika_tattvasubodhini": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyarthamancari": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "शर्करा श्रीनिवासाचार्यविरचिता"
+       },
+       "tika_vakyarthamanjari": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vakyarthamuktavali": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivriti": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "nyaya_vivarana": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavabodha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_nigudharthaprabodhini": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री बालाचार्यविरचिता"
+       },
+       "tika_panchika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       }
+      },
+      "omkara_vada": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       }
+      }
+     },
+     "upanishad_prasthana": {
+      "aitareyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavapradipa": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "भगवन्तरायकृतः"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "brihadaranyakopanishadbhashyam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhavabodhatippani": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_khandartha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "chandogyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_chandogyopanishatkhandartha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "( मुख्यप्राणरूपप्रतीके देवकृताध्यात्मभगवदुपासना)"
+       },
+       "tika_khandartha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_padarthakaumudi": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवेदेशभिक्षुविरचिता"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "ishavasyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "kathopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_raghavendratirthakhandartha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vadirajatirtha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vamanapanditacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ वामनपण्डिताचार्यविरचितकाठकोपनिषद्भाष्यटीका"
+       },
+       "tika_varadatirtha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_varadatirthakhandartha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vedeshatirtha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vedeshatirthakhandartha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vyasatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अथ श्रीव्यासतीर्थविरचितकाठकभाष्यटीका"
+       }
+      },
+      "kenopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_shriraghavendrayati": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रयति"
+       },
+       "tika_shrisatyapriyatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यप्रियतीर्थ"
+       },
+       "tika_shrivamanapandita": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवामनपण्डित"
+       },
+       "tika_shrivaradatirthabhikshu": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवरदतीर्थभिक्षु"
+       },
+       "tika_shrivedeshatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवेदेशतीर्थ"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचितम्"
+       }
+      },
+      "mandukyopanishadbhashyam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_shrinivasatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थ"
+       },
+       "tika_shrivyasatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीव्यासतीर्थः"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "mundakopanishadbhashyam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_padarthadipika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_shrinivasatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थ"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "shatprashnopanishadbhashyam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_anantabhatta": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "अनन्तभट्ट"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_gudhakartrikashatprashnabhashyatikatippani": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mankalidharmarajacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "मङ्कालीधर्मराजाचार्य"
+       },
+       "tika_panchika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_shrinivasatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीश्रीनिवासतीर्थ"
+       },
+       "tika_shriraghavendrayati": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रयति"
+       },
+       "tika_shrisatyaprajnatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीसत्यप्रज्ञतीर्थ"
+       },
+       "tika_shrivamanapanditacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीवामनपण्डिताचार्य"
+       },
+       "tika_tamraparnishrinivasacarya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "ताम्रपर्णीश्रीनिवासाचार्य"
+       },
+       "tika_upanishat": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_vivarana": {
+        "_schema": "grantha_tika_text"
+       }
+      },
+      "taittiriyopanishad_bhashya": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+       },
+       "tika_khandartha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "॥ श्री राघवेन्द्रयतिविरचिततैत्तिरीयोपनिषत्खण्डार्थः"
+       },
+       "tika_nivasatirthiyakhandartha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_padarthadipika": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_prakashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "सर्वैर्देवैरीड्यं विष्ण्वाख्यं सर्वदैमि सुप्रेष्ठम् ॥ श्री वादिराजयतिविरचितभाष्यप्रकाशिका"
+       },
+       "tika_taittiriyopanishat": {
+        "_schema": "grantha_tika_text"
+       }
+      }
+     }
     }
    },
    "advaita": {
@@ -6716,6 +8571,10 @@
     "siddhanta_kaumudi": {
      "_schema": "grantha_tika_text",
      "_default_author": "Bhaṭṭoji Dīkṣita"
+    },
+    "vasu_kaumudi": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Śrīśa Chandra Vasu"
     }
    },
    "aindra_school": {},
@@ -7971,5 +9830,983 @@
     "_default_author": "author/sect unconfirmed -- see dge/PENDING.md"
    }
   }
+ },
+ "DvaitaVedanta": {
+  "Itara": {
+   "Bhagavata_Saroddhara": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "महर्षिवेदव्यासः"
+    },
+    "parishishta": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Sri Vishnu Tirtha"
+    },
+    "tika_sara_sangraha_kannada": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Editor (Kannada)"
+    },
+    "tika_tippani": {
+     "_schema": "grantha_tippani_text",
+     "_default_author": "Editor (Acharya Vidyadhishthanam edition)"
+    },
+    "tika_vishnutirtha": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Sri Vishnu Tirtha (Jayatirtha, avadhūta)"
+    },
+    "upodghata": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Editor / Sri Vishnu Tirtha (caritam)"
+    }
+   },
+   "DasaSahitya": {
+    "composers": {
+     "acalanamdadasa": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಅಚಲಾನಂದದಾಸ"
+     },
+     "aihole_vemkatesa": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಐಹೊಳೆ ವೆಂಕಟೇಶ"
+     },
+     "ambabayi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಅಂಬಾಬಾಯಿ"
+     },
+     "anamtadrisaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಅನಂತಾದ್ರೀಶರು"
+     },
+     "anyadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಅನ್ಯದಾಸರು"
+     },
+     "askihala_govimda": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಅಸ್ಕಿಹಾಳ ಗೋವಿಂದ"
+     },
+     "asuri_ramasvamiayyamgar": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಅಸೂರಿ ರಾಮಸ್ವಾಮಿಅಯ್ಯಂಗಾರ್"
+     },
+     "badannayyacaryaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಬಡಣ್ಣಯ್ಯಾಚಾರ್ಯರು"
+     },
+     "bagepalli_sesadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಬಾಗೇಪಲ್ಲಿ ಶೇಷದಾಸರು"
+     },
+     "belle_dasappayya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಬೆಳ್ಳೆ ದಾಸಪ್ಪಯ್ಯ"
+     },
+     "beluru_vaikumthadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಬೇಲೂರು ವೈಕುಂಠದಾಸರು"
+     },
+     "beteraya_diksitaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಬೇಟೆರಾಯ ದೀಕ್ಷಿತರು"
+     },
+     "bhatakala_appayya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಭಟಕಳ ಅಪ್ಪಯ್ಯ"
+     },
+     "bhavatarakaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಭಾವತರಕರು"
+     },
+     "bhimasamkara": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಭೀಮಾಶಂಕರ"
+     },
+     "bhupati_vithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಭೂಪತಿ ವಿಠಲರು"
+     },
+     "bolara_vasudevayya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಬೋಳಾರಾ ವಾಸುದೇವಯ್ಯ"
+     },
+     "cannapattanada_ahobaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಚನ್ನಪಟ್ಟಣದ ಅಹೋಬಲದಾಸರು"
+     },
+     "cidanamda_avadhutaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಚಿದಾನಂದ ಅವಧೂತರು"
+     },
+     "dhanvanthri": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Dhanvanthri"
+     },
+     "durga": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Durga"
+     },
+     "galagaliavvanavaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗಲಗಲಿಅವ್ವನವರು"
+     },
+     "gopala_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Gopala Dasaru"
+     },
+     "gopalaryaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗೋಪಾಲಾರ್ಯರು"
+     },
+     "gopativithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗೋಪತಿವಿಠಲರು"
+     },
+     "govimdadasa": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗೋವಿಂದದಾಸ"
+     },
+     "gumdamma": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುಂಡಮ್ಮ"
+     },
+     "gurugovimdavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುಗೋವಿಂದವಿಠಲರು"
+     },
+     "guruimdiresaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುಇಂದಿರೇಶರು"
+     },
+     "gurujagannathadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುಜಗನ್ನಾಥದಾಸರು"
+     },
+     "gurupranesavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುಪ್ರಾಣೇಶವಿಠಲರು"
+     },
+     "gururamalimga": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುರಾಮಲಿಂಗ"
+     },
+     "gururamavithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುರಾಮವಿಠಲ"
+     },
+     "gurutamdevaradagopalavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುತಂದೆವರದಗೋಪಾಲವಿಠಲರು"
+     },
+     "guruvijayaviththalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಗುರುವಿಜಯವಿಠ್ಠಲರು"
+     },
+     "hanumesavithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಹನುಮೇಶವಿಠಲ"
+     },
+     "harapanahalli_bheemavva": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Harapanahalli Bheemavva"
+     },
+     "hasanmukha_vithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಹಸನ್ಮುಖ ವಿಠಲರು"
+     },
+     "helavanakatte_giriyamma": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Helavanakatte Giriyamma"
+     },
+     "henneramgadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಹೆನ್ನೆರಂಗದಾಸರು"
+     },
+     "hosakere_cidambarayyanavaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಹೊಸಕೆರೆ ಚಿದಂಬರಯ್ಯನವರು"
+     },
+     "imdiresaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಇಂದಿರೇಶರು"
+     },
+     "jagannatha_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Jagannatha Dasaru"
+     },
+     "jakkappayyanavaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಜಕ್ಕಪ್ಪಯ್ಯನವರು"
+     },
+     "jayesavithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಜಯೇಶವಿಠಲ"
+     },
+     "jnanabodakaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಜ್ಞಾನಬೋದಕರು"
+     },
+     "kadarumdalagi_hanumayya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕದರುಂಡಲಗಿ ಹನುಮಯ್ಯ"
+     },
+     "kadarumdalagisaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕದರುಂಡಲಗೀಶರು"
+     },
+     "kakhamdaki_sri_krsnadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಕೃಷ್ಣದಾಸರು"
+     },
+     "kakhamdaki_sri_mahipatirayaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಮಹಿಪತಿರಾಯರು"
+     },
+     "kalasada_sumdaramma": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕಳಸದ ಸುಂದರಮ್ಮ"
+     },
+     "kamalapativiththalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕಮಲಪತಿವಿಠ್ಠಲರು"
+     },
+     "kanaka_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Kanaka Dasaru"
+     },
+     "kankanaa_kaara": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Kankanaa Kaara"
+     },
+     "karki_kesavadasa": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕರ್ಕಿ ಕೇಶವದಾಸ"
+     },
+     "karpara_naraharidasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕಾರ್ಪರ ನರಹರಿದಾಸರು"
+     },
+     "kavi_laksmisa": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕವಿ ಲಕ್ಷ್ಮೀಶ"
+     },
+     "kavi_paramadevadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕವಿ ಪರಮದೇವದಾಸರು"
+     },
+     "keladi_vemkanna_kavi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕೆಳದಿ ವೆಂಕಣ್ಣ ಕವಿ"
+     },
+     "kesavaviththalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕೇಶವವಿಠ್ಠಲರು"
+     },
+     "kosala_purisara": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕೋಸಲ ಪುರೀಶರ"
+     },
+     "krsnavithaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಕೃಷ್ಣವಿಠಲದಾಸರು"
+     },
+     "laksminarayanarayaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಲಕ್ಷ್ಮೀನಾರಯಣರಾಯರು"
+     },
+     "mahanithivithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಮಹಾನಿಥಿವಿಠಲ"
+     },
+     "mahipathi_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Mahipathi Dasaru"
+     },
+     "malige_ramgasvamidasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಮಳಿಗೆ ರಂಗಸ್ವಾಮಿದಾಸರು"
+     },
+     "mohana_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Mohana Dasaru"
+     },
+     "muddumohanavithaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಮುದ್ದುಮೋಹನವಿಠಲದಾಸರು"
+     },
+     "namjanagudu_tirumalamba": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ನಂಜನಗೂಡು ತಿರುಮಲಾಂಬಾ"
+     },
+     "narasimha": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ನರಸಿಂಹ"
+     },
+     "narasimha_jagannatha_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Narasimha (Jagannatha Dasaru)"
+     },
+     "narasimhavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ನರಸಿಂಹವಿಠಲರು"
+     },
+     "narayanadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ನಾರಾಯಣದಾಸರು"
+     },
+     "nidaguruki_jivubayi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ನಿಡಗುರುಕಿ ಜೀವೂಬಾಯಿ"
+     },
+     "orabayi_laksmidevamma": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಓರಬಾಯಿ ಲಕ್ಷ್ಮೀದೇವಮ್ಮ"
+     },
+     "pamduramga": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಪಾಂಡುರಂಗ"
+     },
+     "parisistam": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಪರಿಶಿಷ್ಟಂ"
+     },
+     "pavamje_laksminarnappayya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಪಾವಂಜೆ ಲಕ್ಷ್ಮೀನಾರ್ಣಪ್ಪಯ್ಯ"
+     },
+     "pradyumnatirtharu": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಪ್ರದ್ಯುಮ್ನತೀರ್ಥರು"
+     },
+     "pranesha_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Pranesha Dasaru"
+     },
+     "prasanna_srinivasadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಪ್ರಸನ್ನ ಶ್ರೀನಿವಾಸದಾಸರು"
+     },
+     "prasanna_venkata_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Prasanna Venkata Dasaru"
+     },
+     "purandara_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Purandara Dasaru"
+     },
+     "radhabayi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಾಧಾಬಾಯಿ"
+     },
+     "raghavendra": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Raghavendra"
+     },
+     "raghuramavithaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಘುರಾಮವಿಠಲದಾಸರು"
+     },
+     "rajagopaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಾಜಗೋಪಾಲದಾಸರು"
+     },
+     "ramadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಾಮದಾಸರು"
+     },
+     "ramapativithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಮಾಪತಿವಿಠಲರು"
+     },
+     "ramgadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಂಗದಾಸರು"
+     },
+     "ramgesavithaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರಂಗೇಶವಿಠಲದಾಸರು"
+     },
+     "rukmamgadaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ರುಕ್ಮಾಂಗದರು"
+     },
+     "sadanamdaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸದಾನಂದರು"
+     },
+     "samasarmaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶಾಮಶರ್ಮರು"
+     },
+     "samasumdara_vithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶಾಮಸುಂದರ ವಿಠಲ"
+     },
+     "samkarabhatta_agnihotri": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶಂಕರಭಟ್ಟ ಅಗ್ನಿಹೋತ್ರಿ"
+     },
+     "sampattayyamgar": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸಂಪತ್ತಯ್ಯಂಗಾರ್"
+     },
+     "samtibayi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶಾಂತಿಬಾಯಿ"
+     },
+     "saraguru_vemkatavaradaryaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸರಗೂರು ವೆಂಕಟವರದಾರ್ಯರು"
+     },
+     "sarasabayi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸರಸಾಬಾಯಿ"
+     },
+     "sarasvati_bayi": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸರಸ್ವತಿ ಬಾಯಿ"
+     },
+     "shyama_sundara_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Shyama Sundara Dasaru"
+     },
+     "siddhagurutripuramtaka": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸಿದ್ಧಗುರುತ್ರಿಪುರಾಂತಕ"
+     },
+     "sirigovimdavithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸಿರಿಗೋವಿಂದವಿಠಲ"
+     },
+     "sirigurutamdevaradavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸಿರಿಗುರುತಂದೆವರದವಿಠಲರು"
+     },
+     "sirivatsamkitaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸಿರಿವತ್ಸಾಂಕಿತರು"
+     },
+     "sirivithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಸಿರಿವಿಠಲರು"
+     },
+     "sivaramaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶಿವರಾಮರು"
+     },
+     "sri_kapila_devara_stotra": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Sri Kapila Devara Stotra"
+     },
+     "sri_mukhya_prana_devara_stotra": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Sri Mukhya Prana Devara Stotra"
+     },
+     "sri_narasimha_devara": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Sri Narasimha Devara"
+     },
+     "sri_parvathi_devi_sthothra": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Sri Parvathi Devi Sthothra"
+     },
+     "sridavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶ್ರೀದವಿಠಲರು"
+     },
+     "srinidhivithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶ್ರೀನಿಧಿವಿಠಲರು"
+     },
+     "sripadarajaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Sripadarajaru"
+     },
+     "sripati": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶ್ರೀಪತಿ"
+     },
+     "srisa_kesavadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶ್ರೀಶ ಕೇಶವದಾಸರು"
+     },
+     "srisapranesavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಶ್ರೀಶಪ್ರಾಣೇಶವಿಠಲರು"
+     },
+     "tamde_muddumohana_vithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ತಂದೆ ಮುದ್ದುಮೋಹನ ವಿಠಲರು"
+     },
+     "tamde_srinarahari": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ತಂದೆ ಶ್ರೀನರಹರಿ"
+     },
+     "tamdevaradagopalavithalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ತಂದೆವರದಗೋಪಾಲವಿಠಲರು"
+     },
+     "timmappadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ತಿಮ್ಮಪ್ಪದಾಸರು"
+     },
+     "tulasi_devi_purandara_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Tulasi Devi (Purandara Dasaru)"
+     },
+     "tulasiramadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ತುಳಸೀರಾಮದಾಸರು"
+     },
+     "tupaki_vemkataramanacarya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ತುಪಾಕಿ ವೆಂಕಟರಮಣಾಚಾರ್ಯ"
+     },
+     "untitled": {
+      "_schema": "dasa_pada_text"
+     },
+     "uragadrivasavithaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಉರಗಾದ್ರಿವಾಸವಿಠಲದಾಸರು"
+     },
+     "vadirajaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Vadirajaru"
+     },
+     "varadesavithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವರದೇಶವಿಠಲ"
+     },
+     "varahatimmappa": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವರಹತಿಮ್ಮಪ್ಪ"
+     },
+     "varavaniramarayadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವರಾವಾಣಿರಾಮರಾಯದಾಸರು"
+     },
+     "vayudevara_avathara_traya": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Vayudevara Avathara Traya"
+     },
+     "vemkatadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವೆಂಕಟದಾಸರು"
+     },
+     "vemkatavaradaryaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವೆಂಕಟವರದಾರ್ಯರು"
+     },
+     "vemkatesavitthala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವೆಂಕಟೇಶವಿಟ್ಠಲ"
+     },
+     "vemkatrav": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವೆಂಕಟ್ರಾವ್"
+     },
+     "venugopaladasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವೇಣುಗೋಪಾಲದಾಸರು"
+     },
+     "vidyakamtayatigalu": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿದ್ಯಾಕಾಂತಯತಿಗಳು"
+     },
+     "vidyaprasannatirtharu": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿದ್ಯಾಪ್ರಸನ್ನತೀರ್ಥರು"
+     },
+     "vidyaratnakaratirtharu": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿದ್ಯಾರತ್ನಾಕರತೀರ್ಥರು"
+     },
+     "vijaya_dasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Vijaya Dasaru"
+     },
+     "vijaya_ramacamdravithala": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿಜಯ ರಾಮಚಂದ್ರವಿಠಲ"
+     },
+     "vijayimdratirtharu": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿಜಯೀಂದ್ರತೀರ್ಥರು"
+     },
+     "viranarayana": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವೀರನಾರಾಯಣ"
+     },
+     "visvapati": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿಶ್ವಪತಿ"
+     },
+     "visvemdratirtha": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವಿಶ್ವೆಂದ್ರತೀರ್ಥ"
+     },
+     "vivaha": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Vivaha"
+     },
+     "vyasarayaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "Vyasarayaru"
+     },
+     "vyasatatvajnadasaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವ್ಯಾಸತತ್ವಜ್ಞದಾಸರು"
+     },
+     "vyasaviththalaru": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ವ್ಯಾಸವಿಠ್ಠಲರು"
+     },
+     "yadugiriyamma": {
+      "_schema": "dasa_pada_text",
+      "_default_author": "ಯದುಗಿರಿಯಮ್ಮ"
+     }
+    },
+    "harikathamrutasara": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasaru"
+    }
+   },
+   "Kavya": {
+    "raghavendra_vijaya": {
+     "sarga_1": {},
+     "sarga_10": {},
+     "sarga_2": {},
+     "sarga_3": {},
+     "sarga_4": {},
+     "sarga_5": {},
+     "sarga_6": {},
+     "sarga_7": {},
+     "sarga_8": {},
+     "sarga_9": {}
+    },
+    "sumadhva_vijaya": {
+     "sarga_1": {},
+     "sarga_10": {},
+     "sarga_11": {},
+     "sarga_12": {},
+     "sarga_13": {},
+     "sarga_14": {},
+     "sarga_15": {},
+     "sarga_16": {},
+     "sarga_2": {},
+     "sarga_3": {},
+     "sarga_4": {},
+     "sarga_5": {},
+     "sarga_6": {},
+     "sarga_7": {},
+     "sarga_8": {},
+     "sarga_9": {}
+    },
+    "tirtha_prabandha": {
+     "dakshina_prabandha": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "श्रीवादिराजतीर्थः"
+     },
+     "paschima_prabandha": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "श्रीवादिराजतीर्थः"
+     },
+     "purva_prabandha": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "श्रीवादिराजतीर्थः"
+     },
+     "uttara_prabandha": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "श्रीवादिराजतीर्थः"
+     }
+    }
+   },
+   "Stotra": {
+    "prahlada_kruta_narasimha": {},
+    "vishnu_sahasranama": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Maharshi Veda Vyasa (Mahābhārata, Anuśāsana Parva 149)"
+     }
+    }
+   },
+   "Svapna_Vrindavana_Akhyana": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "Sri Vadiraja Tirtha"
+   },
+   "YuktiMallika": {
+    "_schema": "grantha_prakarana_text",
+    "_default_author": "Sri Vadiraja Tirtha"
+   },
+   "krishnacharitra_manjari": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "श्रीराघवेन्द्रतीर्थः"
+    }
+   },
+   "sumadhva_vijaya": {
+    "tika_iti_shrimadvedangamuni": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "इति श्रीमद्वेदाङ्गमुनि"
+    },
+    "tika_iti_shrinarayanapanditacarya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "इति श्रीनारायणपण्डिताचार्य"
+    },
+    "tika_mandopakarini": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीछलारिशेषाचार्यविरचिता"
+    },
+    "tika_padarthadipikodbodhika": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीविश्वपतितीथंविरचिता"
+    },
+    "tika_prakashika": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीनारायणपण्डिताचार्यः"
+    },
+    "tika_shrichalarisheshacarya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीछलारिशेषाचार्य"
+    }
+   },
+   "vedavyasa_gadya": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Yādavārya (यादवार्यः)"
+    }
+   },
+   "yukti_mallika": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "श्रीमद्वादिराजतीर्थः"
+    },
+    "tika_satyapramoda": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीसत्यप्रमोदतीर्थः"
+    },
+    "tika_surottama": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीसुरोत्तमतीर्थः"
+    }
+   }
+  },
+  "SarvaMula": {
+   "achara_granthas": {
+    "jayanti_kalpa": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "tika_kannada": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "ಶ್ರೀ ಅಗ್ರಹಾರ ನಾರಾಯಣ ತಂತ್ರಿ"
+     }
+    },
+    "krishnamruta_maharnava": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "nyasa_paddhati": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "sadacharasmriti": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "tantrasara": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "yati_pranava_kalpa": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "dasha_prakarana_granthas": {
+    "karma_nirnaya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "katha_lakshana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "mayavada_khandana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "pramana_lakshana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "prapancha_mithyatva_anumana_khandana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "tattvasankhyana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "tattvaviveka": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "tattvodyota": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "upadhi_khandhana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "vishnu_tattva_nirnaya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "gita_prasthana": {
+    "gita_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "gita_tatparya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "itihasa_prasthana": {
+    "mahabharata_tatparya_nirnaya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "yamaka_bharata": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "mula_granthas": {
+    "atharvana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "gita": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "isha": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "kathaka": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "manduka": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "prashna": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "sutra": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "taittiriya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "talavakara": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "purana_prasthana": {
+    "bhagavata_tatparya_nirnaya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "shruti_prasthana": {
+    "rg_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "stotra_granthas": {
+    "dvadasha_stotra": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "nakhastuti_kandukastuti_more": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "sutra_prasthana": {
+    "anu_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "anuvyakhyana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "brahmasutra_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "nyaya_vivarana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   },
+   "upanishat_prasthana": {
+    "aitareya_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "atharvana_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "brihad_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "chhaandogyopnishdbhaashym": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "ishavasya_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "kathaka_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "manduka_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "shatprashna_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "taittiriya_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "talavakara_bhashya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    }
+   }
+  }
+ },
+ "Vyasaraja_Pratishta_Hanuma": {
+  "_schema": "dasa_pada_text",
+  "_default_author": "Vyasaraja Pratishte Anjaneya %E0%B2%B5%E0%B3%8D%E0%B2%Af%E0%B2%Be%E0%B2%B8%E0%B2%B0%E0%B2%Be%E0%B2%9C %E0%B2%Aa%E0%B3%8D%E0%B2%B0%E0%B2%A4%E0%B2%Bf%E0%B2%B7%E0%B3%8D%E0%B2%A0%E0%B3%86 %E0%B2%86"
  }
 }
