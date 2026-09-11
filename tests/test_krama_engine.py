@@ -17,7 +17,7 @@ from sanskrit_phonology import (  # noqa: E402
 )
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound, requires_parigraha,
-    get_sthita, get_upasthita, get_sthitopasthita,
+    get_sthita, get_upasthita, get_sthitopasthita, detect_bahumadhyagata,
 )
 from krama_engine import generate_ardharca, generate_verse, split_into_ardharcas  # noqa: E402
 
@@ -154,8 +154,88 @@ class Predicates(unittest.TestCase):
         self.assertFalse(needs)
 
     def test_sthitopasthita_uses_combined_form(self):
+        # पुरोहितम् ends in a consonant (म्), so its real sandhi with इति
+        # is a plain pass-through with no visible change other than the
+        # two words fusing into one written run -- see
+        # test_sthitopasthita_applies_real_sandhi_not_a_fixed_template
+        # below for why this must be real samhita_join output, not a
+        # hand-picked space-separated template.
         result = get_sthitopasthita("पुरःऽहितम्", "पुरोहितम्")
-        self.assertEqual(result, "पुरोहितम् इति पुरःऽहितम्")
+        self.assertEqual(result, "पुरोहितमिति पुरःऽहितम्")
+
+    def test_sthitopasthita_applies_real_sandhi_not_a_fixed_template(self):
+        # Found 11 Sep 2026 by contrasting two of Uvata's own worked
+        # examples: 10.8's "ca iti ca" -> "cEti ca" (ordinary a+i->e guNa
+        # sandhi) and 10.16's "purojitI iti" -> "purojitIti" (I+i->I) both
+        # show REAL sandhi at the word+iti junction for non-pragrhya words
+        # -- the previous "word + literal space + iti" template was wrong
+        # for anything but the two pragrhya examples it happened to be
+        # checked against (vibhAvaso, bAhU -- see the pragrhya-bypass test
+        # below). This must go through samhita_join for real, not a
+        # hand-written guNa-sandhi special case.
+        self.assertEqual(get_sthitopasthita("च"), "चेति च")
+        self.assertEqual(get_sthitopasthita("वा"), "वेति वा")
+        self.assertEqual(get_sthitopasthita("चित्"), "चिदिति चित्")
+        self.assertEqual(get_upasthita("च"), "चेति")
+
+    def test_sthitopasthita_bypasses_sandhi_for_pragrhya_words(self):
+        # The other half of the same finding: sandhi must NOT apply when
+        # the word is pragrhya, since pragrhya vowels are defined to
+        # resist external sandhi -- Uvata's own counter-examples, both
+        # independently pragrhya for a documented reason (vibhAvaso:
+        # vocative -o, sutra 1.68; bAhU: dual -U, Paatala 1's
+        # morphological class), show NO change at all before iti.
+        self.assertEqual(
+            get_sthitopasthita("विभावसो", apply_sandhi=False), "विभावसो इति विभावसो"
+        )
+        self.assertEqual(get_upasthita("बाहू", apply_sandhi=False), "बाहू इति")
+        # Sanity check: WITHOUT the bypass, this engine's ordinary sandhi
+        # rules do NOT know about pragrhya and would wrongly apply the
+        # eco'yavAyAvaH diphthong-substitution rule to word-final "o" --
+        # confirming apply_sandhi=False is doing real work here, not a
+        # no-op.
+        self.assertNotEqual(
+            get_sthitopasthita("विभावसो", apply_sandhi=True), "विभावसो इति विभावसो"
+        )
+
+
+class Bahumadhyagata(unittest.TestCase):
+    """sutra 10.8's own worked examples: "narA ca zaMsam" (-> "cEti ca"),
+    "zunaH cit zepam" (-> "ciditi cit"), "narA vA zaMsam" (-> "vEti vA") --
+    a small, closed, source-cited particle class (ca/vA/cit), NOT a general
+    parser for arbitrary multi-word compound-phrase membership. See
+    detect_bahumadhyagata()'s own docstring for the "mo Su NaH" sub-case
+    this does NOT cover."""
+
+    def test_detects_middle_particle_with_neighbours_on_both_sides(self):
+        self.assertEqual(detect_bahumadhyagata(["नरा", "च", "शंसम्"]), {1})
+        self.assertEqual(detect_bahumadhyagata(["शुनः", "चित्", "शेपम्"]), {1})
+        self.assertEqual(detect_bahumadhyagata(["नरा", "वा", "शंसम्"]), {1})
+
+    def test_does_not_fire_at_either_end_of_the_word_list(self):
+        # "in the middle of many words" requires a neighbour on both
+        # sides -- a particle at position 0 or the last position has no
+        # "middle" to occupy under this sutra.
+        self.assertEqual(detect_bahumadhyagata(["च", "शंसम्"]), set())
+        self.assertEqual(detect_bahumadhyagata(["शंसम्", "च"]), set())
+
+    def test_does_not_fire_for_ordinary_words(self):
+        self.assertEqual(detect_bahumadhyagata(["अग्निम्", "ईळे", "यज्ञस्य"]), set())
+
+    def test_generate_ardharca_auto_detects_without_a_manual_flag(self):
+        # Regression test for Test G in validate_krama_rv1_1.py: previously
+        # requires_parigraha() only accepted a caller-supplied
+        # is_bahumadhyagata bool with no derivation function at all.
+        units = generate_ardharca(["नरा", "च", "शंसम्", "दैव्यम्"])
+        parigraha_units = [u for u in units if u["type"] == "parigraha"]
+        ca_unit = next(u for u in parigraha_units if u["for_word"] == "च")
+        self.assertEqual(ca_unit["text"], "चेति च")
+        self.assertIn("10.8", ca_unit["rule"])
+
+    def test_explicit_empty_override_suppresses_auto_detection(self):
+        units = generate_ardharca(["नरा", "च", "शंसम्", "दैव्यम्"], bahumadhyagata_positions=set())
+        for_words = [u.get("for_word") for u in units if u["type"] == "parigraha"]
+        self.assertNotIn("च", for_words)
 
 
 class GenerateArdharca(unittest.TestCase):
@@ -194,7 +274,7 @@ class GenerateArdharca(unittest.TestCase):
         units = generate_ardharca(["आ", "मन्द्रम्", "वरेण्यम्"])
         self.assertEqual(units[-1]["type"], "parigraha")
         self.assertIn("10.9", units[-1]["rule"])
-        self.assertEqual(units[-1]["text"], "वरेण्यम् इति वरेण्यम्")
+        self.assertEqual(units[-1]["text"], "वरेण्यमिति वरेण्यम्")
 
 
 class GenerateVerse(unittest.TestCase):

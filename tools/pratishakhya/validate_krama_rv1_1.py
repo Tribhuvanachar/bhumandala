@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from sanskrit_phonology import samhita_join  # noqa: E402
-from pratishakhya_classify import requires_parigraha, get_sthitopasthita  # noqa: E402
+from pratishakhya_classify import requires_parigraha, get_sthitopasthita, detect_bahumadhyagata  # noqa: E402
 from krama_engine import generate_ardharca  # noqa: E402
 
 RESULTS = []
@@ -57,7 +57,7 @@ def test_b():
     units = generate_ardharca(["देवम्", "पुरःऽहितम्", "यज्ञस्य"])
     parigraha = next(u for u in units if u["type"] == "parigraha")
     generated = parigraha["text"]
-    expected = "पुरोहितम् इति पुरःऽहितम्"
+    expected = "पुरोहितमिति पुरःऽहितम्"
     status = "PASS" if generated == expected else "FAIL"
     report(
         "Test B -- compound Parigraha",
@@ -66,15 +66,19 @@ def test_b():
         generated,
         status,
         "10.7 (avagṛhya compound triggers Parigraha), 10.14 (sthitopasthita: combined "
-        "form + iti + split form), 10.16 (the repeat shows the avagraha split, not the "
-        "combined form, for the second occurrence)",
+        "form + iti + split form, real sandhi at the word+iti junction per Uvaṭa's own "
+        "'purojitI iti' -> 'purojitIti' on 10.16), 10.16 (the repeat shows the avagraha "
+        "split, not the combined form, for the second occurrence)",
         f"पुरःऽहितम् -> resolve_compound gives पुरोहितम् (combined) -> "
         f"get_sthitopasthita('पुरःऽहितम्', 'पुरोहितम्') = {generated!r}",
         "parse_compound() detects the avagraha (10.7); requires_parigraha() cites 10.7 "
         "for it; krama_engine._parigraha_unit() calls resolve_compound() (the real "
         "sandhi engine, not a lookup table) to get the combined form, then "
-        "get_sthitopasthita() assembles combined+iti+split per 10.14/10.16. No "
-        "per-word Parigraha string is hardcoded anywhere in this path.",
+        "get_sthitopasthita() joins combined+iti via real samhita_join (11 Sep 2026: "
+        "fixed from a fixed 'word SPACE iti' template, which only happened to match "
+        "Uvaṭa's two PRAGṚHYA examples -- see the module's own docstring) and appends "
+        "the bare split form per 10.16. No per-word Parigraha string is hardcoded "
+        "anywhere in this path.",
     )
 
 
@@ -83,7 +87,7 @@ def test_c():
     units = generate_ardharca(words)
     needs, reasons = requires_parigraha(words[-1], len(words) - 1, len(words))
     generated = get_sthitopasthita(words[-1]) if needs else "(no parigraha triggered)"
-    expected = "ऋत्विजम् इति ऋत्विजम्"
+    expected = "ऋत्विजमिति ऋत्विजम्"
     status = "PASS" if generated == expected and needs else "FAIL"
     report(
         "Test C -- ardharca final",
@@ -111,7 +115,7 @@ def test_d():
     # since it's the last word given) also the ardharca-final word, so 10.9
     # independently requires a 4th Parigraha unit for it -- that is a separate,
     # correctly-firing rule, not a deviation from Uvata's example.
-    expected = "आ मन्द्रम् | मन्द्रमा वरेण्यम् | आ वरेण्यम् | वरेण्यम् इति वरेण्यम्"
+    expected = "आ मन्द्रम् | मन्द्रमा वरेण्यम् | आ वरेण्यम् | वरेण्यमिति वरेण्यम्"
     status = "PASS" if generated == expected else "FAIL"
     report(
         "Test D -- आ (single highest-priority special case)",
@@ -187,21 +191,49 @@ def test_f():
 
 
 def test_g():
+    # 11 Sep 2026: read Uvata's own bhashya on 10.8 directly (previously
+    # only the bare sutra text "bahumadhyagatAni ca" was on file, with no
+    # worked example to build from -- this test's original "nArAzaMsam iti
+    # nArAzaMsam" expectation was a guess made without that citation, and
+    # did not actually match any example Uvata gives). The bhashya cites
+    # "narA ca zaMsam" (Samhita: "narAzaMsam", which LOOKS like a single
+    # compound word but is Pada-patha three separate words) with the
+    # explicit worked resolution "ca iti ca" -- the middle particle gets
+    # its own Parigraha, not the whole fused-looking string.
+    words = ["नरा", "च", "शंसम्", "दैव्यम्"]
+    positions = detect_bahumadhyagata(words)
+    units = generate_ardharca(words)
+    ca_unit = next((u for u in units if u.get("for_word") == "च"), None)
+    generated = ca_unit["text"] if ca_unit else "(no bahumadhyagata parigraha found)"
+    expected = "चेति च"
+    status = "PASS" if generated == expected and positions == {1} else "FAIL"
     report(
         "Test G -- Bahumadhyagata (auto-discovery)",
-        "नराशंसम् (needs to be discovered as bahumadhyagata from its position inside "
-        "a multi-word compound phrase, not from a caller-supplied flag)",
-        "नराशंसम् इति नराशंसम् -- discovered without a manual flag",
-        "(requires_parigraha() only accepts a caller-supplied is_bahumadhyagata bool; "
-        "there is no detect_bahumadhyagata() that derives it from the word sequence)",
-        "UNRESOLVED",
-        "10.8 (bahumadhyagata triggers Parigraha)",
-        "not implemented",
-        "pratishakhya_classify.requires_parigraha()'s own docstring states this "
-        "limitation explicitly: it takes is_bahumadhyagata as a parameter because this "
-        "module does not itself parse multi-word compound-phrase membership. Building "
-        "detect_bahumadhyagata() is Priority-1 item 8 in the spec's sec.23 -- deferred, "
-        "not silently assumed solved.",
+        "नरा । च । शंसम् । दैव्यम् (Uvaṭa's own bhāṣya on 10.8: 'narA ca zaMsam "
+        "daivyam' -- Samhita 'narAzaMsam' reads like one compound word but is three "
+        "separate Pada words; the middle particle 'ca' would otherwise be lost inside "
+        "the fused-looking run)",
+        expected,
+        generated,
+        status,
+        "10.8 (bahumadhyagatAni ca -- a word 'situated in the middle of many words' "
+        "still requires its own Parigraha), 10.14 (sthitopasthita, with real sandhi "
+        "per the get_sthitopasthita fix above: ca+iti -> cEti, ordinary guNa sandhi)",
+        f"detect_bahumadhyagata({words!r}) = {positions!r} -> "
+        f"requires_parigraha('च', 1, 4, is_bahumadhyagata=True) fires 10.8 -> "
+        f"get_sthitopasthita('च') = {generated!r}",
+        "pratishakhya_classify.detect_bahumadhyagata() recognizes a small, source-cited "
+        "closed particle class (ca/vA/cit -- Uvaṭa's own three worked examples on 10.8: "
+        "'ca iti ca', 'cit iti cit' from 'zunaH cit zepam', 'vA iti vA' from 'narA vA "
+        "zaMsam') sitting between two other words, and krama_engine.generate_ardharca() "
+        "now calls it automatically when bahumadhyagata_positions isn't supplied by the "
+        "caller -- no manual flag needed for this closed class. This is a narrow, "
+        "source-grounded derivation, not a general parser for arbitrary multi-word "
+        "compound-phrase membership: a fourth example in the same bhāṣya passage ('mo "
+        "Su NaH' -> 'mo iti mo, su iti su') looks like a different pattern (retroflexion "
+        "restoration on retake, closer to Test F) that this session could not confidently "
+        "fit to the same mechanism and did NOT implement -- see "
+        "RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md.",
     )
 
 

@@ -59,7 +59,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from sanskrit_phonology import samhita_join, resolve_compound, transliterate_word, strip_zwnj_markers  # noqa: E402
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound,
-    requires_parigraha, get_sthitopasthita,
+    requires_parigraha, get_sthitopasthita, detect_bahumadhyagata,
 )
 
 
@@ -128,7 +128,17 @@ _TRIGGER_REASON_LABELS = {
 def _parigraha_unit(word_deva, reasons):
     compound = parse_compound(word_deva)
     combined_form = strip_zwnj_markers(resolve_compound(word_deva)[0]) if compound["is_compound"] else word_deva
-    text = get_sthitopasthita(word_deva, combined_form)
+    # apply_sandhi=False only when this module can independently confirm
+    # pragrhya status from is_pragrhya()'s own (context-free) lexical
+    # check -- see get_upasthita()'s docstring for why pragrhya words are
+    # the one case that must NOT take ordinary word+iti sandhi. This is a
+    # real, stated limitation: is_pragrhya() called without context misses
+    # the morphological/contextual classes (dual, vocative), so a Parigraha
+    # word that's pragrhya for one of THOSE reasons will still (incorrectly)
+    # get sandhi applied here -- no case actually exercised by this engine
+    # yet needs that context, so not silently working around it.
+    word_pragrhya, _ = is_pragrhya(word_deva)
+    text = get_sthitopasthita(word_deva, combined_form, apply_sandhi=not word_pragrhya)
     return {
         "type": "parigraha",
         "text": text,
@@ -155,14 +165,16 @@ def _parigraha_unit(word_deva, reasons):
 def generate_ardharca(words, bahumadhyagata_positions=None):
     """words: list of bare Devanagari pada words for one ardharca (no
     accents needed -- they're stripped by the phonology layer anyway).
-    bahumadhyagata_positions: optional set of indices the caller has
-    independently determined to be 10.8 bahumadhyagata-triggering (this
-    engine does not itself parse multi-word compound-phrase membership --
-    see pratishakhya_classify.requires_parigraha's docstring).
+    bahumadhyagata_positions: optional override; if omitted (None), this is
+    computed automatically via pratishakhya_classify.detect_bahumadhyagata()
+    (10.8's own closed particle class -- ca/vA/cit -- see that function's
+    docstring for what it does and does not cover). Pass an explicit set,
+    including the empty set, to bypass auto-detection.
 
     Returns a list of unit dicts, in recitation order.
     """
-    bahumadhyagata_positions = bahumadhyagata_positions or set()
+    if bahumadhyagata_positions is None:
+        bahumadhyagata_positions = detect_bahumadhyagata(words)
     n = len(words)
     units = []
     i = 0
@@ -249,7 +261,10 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
 def generate_verse(ardharcas, bahumadhyagata_positions=None):
     """ardharcas: list of word-lists (one per ardharca). No sandhi crosses
     an ardharca boundary (sutra 10.18) -- enforced structurally here by
-    processing each ardharca independently and never joining across."""
+    processing each ardharca independently and never joining across.
+    bahumadhyagata_positions, if omitted, is auto-detected independently
+    per ardharca (see generate_ardharca's docstring) since positions are
+    indices into each ardharca's own word list."""
     return [generate_ardharca(words, bahumadhyagata_positions) for words in ardharcas]
 
 
@@ -266,5 +281,10 @@ if __name__ == "__main__":
 
     print("\n=== Test D: sutra 10.3 monosyllable (reconstructed pattern) ===")
     units = generate_ardharca(["आ", "मन्द्रम्", "वरेण्यम्"])
+    for u in units:
+        print(u["type"], "|", u["text"], "|", u["rule"])
+
+    print("\n=== Test G: sutra 10.8 bahumadhyagata, auto-detected (Uvata's 'narA ca zaMsam') ===")
+    units = generate_ardharca(["नरा", "च", "शंसम्", "दैव्यम्"])
     for u in units:
         print(u["type"], "|", u["text"], "|", u["rule"])

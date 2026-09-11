@@ -189,13 +189,20 @@ def compare_against_old(new_items):
         for a_idx, (old_ardharca, new_ardharca) in enumerate(zip(old_item["ardharcas"], new_item["ardharcas"])):
             old_texts = [u["text"] for u in old_ardharca["units"]]
             new_texts = [u["text"] for u in new_ardharca["units"]]
+            old_types = [u.get("type") for u in old_ardharca["units"]]
+            new_types = [u.get("type") for u in new_ardharca["units"]]
             max_len = max(len(old_texts), len(new_texts))
             diffs = []
             for i in range(max_len):
                 ot = old_texts[i] if i < len(old_texts) else None
                 nt = new_texts[i] if i < len(new_texts) else None
                 if ot != nt:
-                    diffs.append({"unit_index_within_ardharca": i, "old": ot, "new": nt})
+                    diffs.append({
+                        "unit_index_within_ardharca": i,
+                        "old": ot, "new": nt,
+                        "old_type": old_types[i] if i < len(old_types) else None,
+                        "new_type": new_types[i] if i < len(new_types) else None,
+                    })
             if diffs:
                 verse_all_match = False
             ardharca_reports.append({

@@ -235,6 +235,44 @@ complete record, not just a live queue.
   that range. Not acted on without one. Full detail in
   `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.10.
 
+  **Update, 11 Sep 2026 — Layer C spot-check on the RV 1.1.7 gap, no code change.** Self-directed
+  follow-up: fetched Layer C's (sites.google.com/view/rv-pratishakhya) gloss of sūtras 2.24/2.27
+  as a third independent source, again supporting the general aḥ→a/āḥ→ā derivation reading over
+  Gemini's full-elision-before-ā citation. Also caught a framing error in the original §6.6
+  finding: RV 1.1.7's "bharantaḥ"+"ā" is actually followed by a third Pada word, "imasi", and
+  "emasi" in the attested text is just ordinary guṇa sandhi of ā+imasi, not a mystery. What
+  remains open is narrower: why the visarga-derived "a" doesn't itself then sandhi with the
+  following ā. Documented as §6.11.
+
+  **Update, 11 Sep 2026 — fifth round: real sandhi at the Parigraha iti-junction, sūtra 10.8
+  auto-detection, and a new scoped prompt for what's still stuck.** Per the lead's "keep doing
+  solid coding+testing on the Krama generator; send stuck items to Gemini/ChatGPT as a scoped
+  prompt" instruction. Read Uvaṭa's own bhāṣya on 10.8–10.11 and 11.23/11.37–43 directly (not
+  previously pulled). Two real, source-verified fixes: (1) `get_sthitopasthita`/`get_upasthita`
+  were rendering "word इति word" as a fixed unsandhied template that happened to only match
+  Uvaṭa's two PRAGṚHYA examples (विभावसो, बाहू); his own NON-pragṛhya examples on 10.8/10.16
+  ("चेति च", "चिदिति चित्", "वेति वा", "पुरोजितीति") show real sandhi applies at that junction
+  unless the word is pragṛhya — fixed to call the real `samhita_join` engine, verified it
+  reproduces all four citations exactly. This changes every Parigraha unit's rendering across
+  the corpus (e.g. "पुरोहितम् इति पुरःऽहितम्" → "पुरोहितमिति पुरःऽहितम्"); re-ran
+  `regenerate_krama_rv_1_1.py` and confirmed no new phonology regressions (only the two
+  already-documented §6.6 differences remain at the pair level). (2) Implemented sūtra 10.8's
+  bahumadhyagata auto-detection for real (`detect_bahumadhyagata()`), replacing Test G's old
+  guessed expectation (which matched no actual citation) with Uvaṭa's real worked examples
+  (ca/vā/cit) — Test G now legitimately PASSES (6/8 PASS, up from 5/8). Updated the stale
+  "≥7 of 9 verses exact-match against the old hand-aligned file" test, which could never pass
+  again post-fix by construction, with a check that every remaining diff is one of the two
+  already-known cases. Two harder items surfaced with strong new sourcing but NOT implemented —
+  sūtra 11.23's ṇatva-restoration-on-retake (needs either a narrow special case or a general
+  Pāṇinian retroflexion-at-a-distance rule this project has no expertise in yet) and sūtra
+  11.43's śuddhākṣara-augment insertion (सुश्चन्द्र/परिष्कृण्वन् → restored सुचन्द्र/परिकृण्वन्
+  on retake) — plus a real, well-scoped open question about whether sūtra 10.10–11 narrows the
+  EXISTING 10.3 आ-exception mechanism to only fire adjacent to the ardharca-final word. All three
+  sent out as `tools/pratishakhya/GEMINI_CHATGPT_TASK_PROMPT_V3.md`, a fully self-contained
+  (all three source files embedded) scoped prompt, per the lead's standing offer to route stuck
+  items externally rather than guess. Full detail in
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.12.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

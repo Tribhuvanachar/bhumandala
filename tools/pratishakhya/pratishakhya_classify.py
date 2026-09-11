@@ -14,7 +14,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from sanskrit_phonology import transliterate_word, ALL_VOWELS, DIPHTHONGS  # noqa: E402
+from sanskrit_phonology import (  # noqa: E402
+    transliterate_word, ALL_VOWELS, DIPHTHONGS, samhita_join, strip_zwnj_markers,
+)
 
 # Paatala 1's closed pragrhya lexical class (asme, yuSme, tve, amii and
 # their like) plus the dual-in-ii/uu/e morphological class -- see
@@ -113,8 +115,8 @@ def is_monosyllable_avasana(token_deva):
 def requires_parigraha(token_deva, position_in_ardharca, ardharca_length, is_bahumadhyagata=False):
     """position_in_ardharca: 0-based index. Returns (bool, reasons_list)
     where reasons_list cites which of 10.7 (avagrhya)/10.8 (bahumadhyagata,
-    caller-supplied since this module doesn't itself parse multi-word
-    compound-phrase membership)/10.9 (ardharca-final) fired."""
+    normally supplied by the caller via detect_bahumadhyagata() rather than
+    parsed here)/10.9 (ardharca-final) fired."""
     reasons = []
     if parse_compound(token_deva)["is_compound"]:
         reasons.append("10.7")
@@ -125,28 +127,87 @@ def requires_parigraha(token_deva, position_in_ardharca, ardharca_length, is_bah
     return bool(reasons), reasons
 
 
+# sutra 10.8's own worked examples ("bahumadhyagata"): Uvata's bhaashya
+# cites exactly three particles that sit "in the middle of many words" and
+# each get their own Parigraha citation -- "ca iti ca" (narA ca zaMsam ->
+# naraashaMsam), "cit iti cit" (zunaH cit zepam -> zunaHzepam), "vA iti vA"
+# (narA vA zaMsam) -- plus a fourth example (mo Su NaH) this session could
+# not confidently parse as the same pattern (see
+# RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md's bahumadhyagata section) and is
+# NOT included here. A small, named, source-cited closed class, like
+# MONOSYLLABLE_AVASANA_SLP1 above -- not a general parse of "compound
+# phrase membership" (this module still cannot do that; see
+# detect_bahumadhyagata()'s own docstring).
+BAHUMADHYAGATA_LEXICAL_SLP1 = {"ca", "vA", "cit"}
+
+
+def detect_bahumadhyagata(words_deva):
+    """Returns the set of 0-based indices in words_deva that sutra 10.8
+    ("bahumadhyagatAni ca") requires Parigraha for: an occurrence of one of
+    BAHUMADHYAGATA_LEXICAL_SLP1's particles that has a word on BOTH sides
+    (Uvata's "bahUnAM padAnAM madhyagatAni" -- situated in the middle of
+    several words -- is satisfied by having two neighbours at all, per the
+    worked examples, which are all 3-word runs: narA ca zaMsam, zunaH cit
+    zepam, narA vA zaMsam). A particle at either end of the word list has
+    no "middle" position to occupy and is not covered by this sutra (it
+    would be handled, if at all, by 10.7/10.9 like any other word).
+
+    This is a real but NARROW derivation: it only recognizes the closed
+    particle class Uvata's own examples name, not arbitrary multi-word
+    compound-phrase membership in general (this module has no parser for
+    that) -- see RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md for what's still
+    open here (the "mo Su NaH" sub-case, which does not fit this pattern)."""
+    positions = set()
+    for i in range(1, len(words_deva) - 1):
+        if transliterate_word(words_deva[i]) in BAHUMADHYAGATA_LEXICAL_SLP1:
+            positions.add(i)
+    return positions
+
+
 def get_sthita(token_deva):
     """10.13: the bare word alone (its own pada-patha spelling, avagraha
     included if it's a compound -- 10.16's split-in-the-repeat form)."""
     return token_deva
 
 
-def get_upasthita(token_deva):
-    """10.12: word + iti, no sandhi between them (per Uvata's own
-    worked example on 10.14, 'vibhaavaso iti vibhaavaso')."""
-    return f"{token_deva} इति"
+def get_upasthita(token_deva, apply_sandhi=True):
+    """10.12: word + iti. Ordinary sandhi (real samhita_join, not a fixed
+    string template) applies between the word and iti UNLESS the word is
+    pragrhya -- found 11 Sep 2026 by contrasting two of Uvata's own
+    examples: 10.8's "ca iti ca" -> "cEti ca" (ordinary a+i->e guNa sandhi
+    for the non-pragrhya particle ca) and 10.16's "purojitI iti" ->
+    "purojitIti" (I+i->I sandhi for a non-pragrhya compound), against
+    10.14's "vibhAvaso iti" (NO sandhi) and 10.12's "bAhU iti" (NO sandhi)
+    -- both of those words ARE pragrhya (vibhAvaso: vocative -o, sutra
+    1.68; bAhU: dual -U, Paatala 1's morphological class), which is
+    exactly why pragrhya vowels are defined to resist external sandhi.
+    Caller passes apply_sandhi=False when it has independently determined
+    (via is_pragrhya(), usually with context this module can't supply on
+    its own) that token_deva is pragrhya."""
+    if not apply_sandhi:
+        return f"{token_deva} इति"
+    joined = samhita_join(token_deva, "इति")
+    return strip_zwnj_markers(joined["surface"])
 
 
-def get_sthitopasthita(token_deva, combined_form_deva=None):
+def get_sthitopasthita(token_deva, combined_form_deva=None, apply_sandhi=True):
     """10.14: sthita + upasthita given together. If the word is an
     avagrhya compound (10.16: the repeat shows the avagraha split),
     combined_form_deva should be supplied as the already-samhita-joined
     (non-split) rendering -- see krama_engine.py, which computes that via
-    sanskrit_phonology.resolve_compound before calling this."""
-    compound = parse_compound(token_deva)
+    sanskrit_phonology.resolve_compound before calling this.
+
+    Only the FIRST word+iti junction takes real sandhi (see
+    get_upasthita()'s docstring for why, and apply_sandhi's meaning) --
+    the second (repeated) occurrence is always the bare, unsandhied pada
+    form, per 10.16's own point: the repeat is what SHOWS the split/pure
+    form, so it must not itself be resandhied with the preceding iti (this
+    matches every one of Uvata's own citations: "cEti ca" not "cEticaH",
+    "purojitIti puraH-jitI" not a further-joined form)."""
     first_form = combined_form_deva if combined_form_deva else token_deva
     second_form = token_deva  # bare pada form, split if it's a compound (10.16)
-    return f"{first_form} इति {second_form}"
+    first_part = get_upasthita(first_form, apply_sandhi=apply_sandhi)
+    return f"{first_part} {second_form}"
 
 
 if __name__ == "__main__":
@@ -164,3 +225,8 @@ if __name__ == "__main__":
     print("requires_parigraha('पुरःऽहितम्', 2, 6) =", requires_parigraha("पुरःऽहितम्", 2, 6))
     print("requires_parigraha('ऋत्विजम्', 5, 6) =", requires_parigraha("ऋत्विजम्", 5, 6))
     print("get_sthitopasthita('पुरःऽहितम्', 'पुरोहितम्') =", get_sthitopasthita("पुरःऽहितम्", "पुरोहितम्"))
+    print("get_sthitopasthita('च') [Uvata: 'cEti ca'] =", get_sthitopasthita("च"))
+    print("get_sthitopasthita('विभावसो', apply_sandhi=False) [Uvata: 'vibhAvaso iti vibhAvaso'] =",
+          get_sthitopasthita("विभावसो", apply_sandhi=False))
+    print("detect_bahumadhyagata(['नरा', 'च', 'शंसम्']) =",
+          detect_bahumadhyagata(["नरा", "च", "शंसम्"]))

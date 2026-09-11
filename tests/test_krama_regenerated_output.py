@@ -158,12 +158,34 @@ class KramaRegeneratedOutput(unittest.TestCase):
         self.assertIsNotNone(comparison)
         ids = [r["id"] for r in comparison]
         self.assertEqual(ids, [f"1.1.{n}" for n in range(1, 10)])
-        exact = [r for r in comparison if r["status"] == "EXACT_MATCH"]
-        # 7 of 9 verses are known, documented exact matches (see
-        # dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.6); this is not an
-        # arbitrary threshold -- it's this specific known-good baseline, and a
-        # regression below it should fail this test rather than pass silently.
-        self.assertGreaterEqual(len(exact), 7)
+
+    def test_pair_level_diffs_against_hand_aligned_output_are_the_two_known_ones(self):
+        # 11 Sep 2026: get_sthitopasthita() was fixed to apply real sandhi
+        # at the word+iti junction (previously a fixed "word SPACE iti"
+        # template, which only matched Uvata's two PRAGRHYA examples -- see
+        # pratishakhya_classify.py's own docstring and
+        # RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md). That makes EVERY
+        # parigraha-type unit differ from the old hand-aligned file, which
+        # used the wrong template throughout -- so the previous "7 of 9
+        # verses match exactly" baseline no longer means anything (0 of 9
+        # verses can match exactly now, by construction, regardless of
+        # whether anything is actually wrong). What this test checks
+        # instead: no NEW divergence was introduced in the actual pairing/
+        # phonology (non-Parigraha) logic -- every pair-type diff must
+        # still be one of the two already-documented cases from sec.6.6
+        # (1.1.2's 10.3 firing on a second, previously-unflagged position;
+        # 1.1.7's still-open visarga-before-aa gap, whose index shift
+        # cascades into the two neighbouring units of the same ardharca).
+        comparison = self.data["comparison_against_hand_aligned_output"]
+        known_pair_level_verses = {"1.1.2", "1.1.7"}
+        for verse in comparison:
+            for ardharca in verse["ardharcas"]:
+                for diff in ardharca["diffs"]:
+                    unit_type = diff.get("new_type") or diff.get("old_type")
+                    if unit_type in PARIGRAHA_LIKE:
+                        continue  # expected everywhere, from the sandhi fix
+                    with self.subTest(id=verse["id"], diff=diff):
+                        self.assertIn(verse["id"], known_pair_level_verses)
 
     def test_provenance_fields_present(self):
         for key in ("engine_source", "pada_samhita_source", "note"):

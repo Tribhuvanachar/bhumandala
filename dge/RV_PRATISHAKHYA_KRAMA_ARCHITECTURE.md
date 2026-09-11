@@ -1077,6 +1077,88 @@ reflect this more precise, narrower question rather than the original, now-resol
 
 ---
 
+### 6.12 Fifth round (11 Sep 2026) — real sandhi at the Parigraha iti-junction, and
+
+sutra 10.8's bahumadhyagata auto-detection
+
+Self-directed continuation, per the lead's "whatever needs to be done, keep on doing it, solid
+coding+testing" instruction. Read Uvaṭa's own bhāṣya on 10.8-10.11 directly (previously only the
+bare sūtra text was on file for these; §6.6 only had 10.3's bhāṣya) looking for the next
+concretely buildable item from Test F/G/H (§6.6's UNRESOLVED trio). Two real fixes came out of
+it, both backed by Uvaṭa's own worked examples, not inference:
+
+**Fix 1 — `get_sthitopasthita`/`get_upasthita` were rendering "word इति word" as a fixed,
+unsandhied string template.** That happened to match Uvaṭa's only two examples this engine had
+been checked against so far (10.14's "vibhāvaso iti vibhāvaso", 10.12's "bāhū iti") — but both of
+those words are independently pragṛhya (vibhāvaso: vocative -o, sūtra 1.68; bāhū: dual -ū,
+Paṭala 1's morphological class), which is exactly *why* they resist sandhi. Reading 10.8's own
+bhāṣya surfaced three more examples that are NOT pragṛhya and DO show ordinary sandhi at the
+word+iti junction: "ca iti ca" → **"cेति च"** (a+i→e guṇa), "cit iti cit" → **"चिदिति चित्"**
+(t→d voicing before a vowel), "vā iti vā" → **"वेति वा"** (ā+i→e guṇa) — and 10.16's own
+compound example, "purojitī iti" → **"पुरोजितीति"** (ī+i→ī). All four independently confirm the
+same rule: real sandhi applies at this junction unless the word is pragṛhya. Fixed
+`get_upasthita`/`get_sthitopasthita` to call `samhita_join` for real (with an `apply_sandhi=False`
+bypass the caller passes when it independently knows the word is pragṛhya via `is_pragrhya()`),
+verified the phonology engine reproduces all four citations exactly (`चेति`, `चिदिति`,
+`वेति`, `पुरोजितीति`) with no new special-casing needed, and confirmed the two pragṛhya
+citations reproduce correctly too with `apply_sandhi=False`. This changes every existing
+Parigraha unit's rendering (e.g. Test B: `पुरोहितम् इति पुरःऽहितम्` → `पुरोहितमिति पुरःऽहितम्`,
+since word-final म् simply doesn't combine visibly with a following vowel — a pass-through, not
+a further error). Re-ran `regenerate_krama_rv_1_1.py`: the one already-known phonology gap
+(1.1.7's chain-reconstruction mismatch) is unchanged, and the only non-Parigraha-unit
+differences against the old hand-aligned file are the two already-documented ones from §6.6
+(1.1.2's 10.3 firing, 1.1.7's gap) — confirmed by diffing with unit-type information, not by
+eyeballing. `tests/test_krama_regenerated_output.py`'s stale "≥7 of 9 verses exact-match" check
+(which can never pass again now that the correct rendering differs from the old file's
+convention at every single Parigraha unit) was replaced with a check that every remaining
+PAIR-level (non-Parigraha) diff is one of the two already-known cases — a check that still fails
+loudly on a genuinely new regression, unlike a threshold that had quietly become unfalsifiable.
+
+**Fix 2 — Test G (10.8 bahumadhyagata) implemented for real, replacing a guess.** The test's
+previous "नराशंसम् इति नराशंसम्" expectation was written before this bhāṣya was read and does
+not match any citation Uvaṭa actually gives. His real examples describe something more specific:
+"नरा च शंसं दैव्यम्" (three separate Pada words) surfaces in Saṃhitā as "नराशंसम्", which *looks*
+like one compound word — and the sūtra's point is that the small middle word (च) must still get
+its own Parigraha, or it would be lost inside the fused-looking run. `detect_bahumadhyagata()`
+(new, in `pratishakhya_classify.py`) recognizes a small, source-cited closed particle class
+(ca/vā/cit — Uvaṭa's own three examples: नरा-च-शंसम्, शुनः-चित्-शेपम्, नरा-वा-शंसम्) sitting
+between two other words in the list; `krama_engine.generate_ardharca()` now calls it
+automatically whenever `bahumadhyagata_positions` isn't supplied, so no manual flag is needed for
+this class any more (the parameter still exists for an explicit override/bypass). Verified
+against the actual test input (`generate_ardharca(["नरा","च","शंसम्","दैव्यम्"])`) reproducing
+`चेति च` exactly. Test G now legitimately **PASSES** (6 PASS / 2 UNRESOLVED, up from 5/3).
+
+**What this does NOT cover, left explicitly open**: Uvaṭa's bhāṣya on 10.8 has a *fourth* example
+in the same passage — "मो षु णः" → "मो इति मो। सु इति सु" — that does not fit the same
+ca/vā/cit pattern (it looks like a retroflexion-*restoration* case, सु reverting from the
+sandhi-retroflexed षु on retake, much closer to Test F's still-open territory than to Test G's).
+Not implemented; flagged rather than force-fit into `detect_bahumadhyagata()`.
+
+**A second, unresolved question surfaced but NOT acted on**: sūtra 10.10 ("न आकारम् प्रागतः
+अननुनासिकम्" — one should not do ordinary Parigraha of a non-nasal आ that comes "प्रागतः" —
+immediately before — the ardharca-final word) and 10.11 ("प्रत्यादाय एव तं ब्रूयात् उत्तरेण पुनः
+सह" — instead, take it back and say it again together with what follows) look like they might be
+the actual textual basis for the confirm-pair half of the existing sūtra-10.3 mechanism
+(`krama_engine.py`'s `monosyllable_confirm_pair`) — and might mean that mechanism should be
+scoped to only fire when the monosyllable is adjacent (in the *remaining* Krama-retake sequence,
+after 10.3's own skip) to the ardharca-final word specifically, not generally anywhere a
+monosyllable-avasāna word occurs (which is how it's currently implemented and how RV 1.1.2's
+इह case, not itself ardharca-final-adjacent, triggers it). Whether "प्रागतः अर्धर्चान्त्यात्"
+is a real independent restriction or just redescribes the same configuration 10.3 already
+covers could not be settled with confidence from the bhāṣya prose alone — flagged in §10, not
+guessed at either way.
+
+Test F (10.21/11.23 restoration) and Test H (10.22/11.37-43 Śuddhākṣara/rephi derivation) remain
+UNRESOLVED and were deliberately not attempted this round: both would need either (a) modelling
+ṇatva/retroflexion-at-a-distance (a real, non-trivial slice of Pāṇinian grammar this engine has
+none of yet — getting it wrong is worse than leaving it open) or (b) resolving the "मो षु णः"
+ambiguity above — exactly the kind of narrow, well-defined, citation-backed question this
+session is better off putting to an external model as a scoped, code-and-citation-only prompt
+(per the lead's standing offer) than guessing at alone. See
+`tools/pratishakhya/GEMINI_CHATGPT_TASK_PROMPT_V3.md` for that prompt.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -1302,13 +1384,36 @@ Kept as a short index back to the full review, not restated in full here:
   file for the unrelated, already-explained 10.3-generalization reason in §6.6, even though
   chain reconstruction itself now matches DGE's attested text for 1.1.2 exactly. Two different
   metrics; do not conflate them.)
-- (Added 11 Sep 2026, Part V) Priority-0 items 10.10–10.11 (आ before ardharca-final Parigraha,
-  distinct from 10.3), 10.21/11.23 restoration as an explicit function (currently 10.21's
-  segmental effects are folded implicitly into `samhita_join`, not a separately named
-  restoration step, and 11.23's principle has no function at all — Test F in
-  `validate_krama_rv1_1.py` reports this UNRESOLVED), and Priority-1 items 10.8 bahumadhyagata
-  auto-detection, 10.20/10.22 Pragṛhya/Rephī restoration as named functions, and 11.25/11.37–43
-  remain open — not started.
+- (Added 11 Sep 2026, Part V; **10.8 done, §6.12**) Priority-0 items 10.10–10.11 (आ before
+  ardharca-final Parigraha, distinct from 10.3), 10.21/11.23 restoration as an explicit function
+  (currently 10.21's segmental effects are folded implicitly into `samhita_join`, not a
+  separately named restoration step, and 11.23's principle has no function at all — Test F in
+  `validate_krama_rv1_1.py` reports this UNRESOLVED), and Priority-1 items 10.20/10.22
+  Pragṛhya/Rephī restoration as named functions, and 11.25/11.37–43 remain open — not started.
+  ~~10.8 bahumadhyagata auto-detection~~ **Done 11 Sep 2026 (§6.12):
+  `pratishakhya_classify.detect_bahumadhyagata()`, backed directly by Uvaṭa's own three worked
+  examples on 10.8 (ca/vā/cit); Test G now PASSES.** One sub-case from the same bhāṣya passage
+  ("मो षु णः") did NOT fit this pattern and is still open, folded into the Test F/10.21
+  restoration question below since it looks like the same kind of retroflexion-restoration-on-
+  retake issue.
+- (Added 11 Sep 2026, §6.12) A specific, well-scoped reading of 10.10–10.11's own bhāṣya
+  ("न आकारम् प्रागतः अननुनासिकम्" / "प्रत्यादाय एव तं ब्रूयात् उत्तरेण पुनः सह") raises a real
+  question about the EXISTING sūtra-10.3 आ-exception mechanism (`krama_engine.py`'s
+  `monosyllable_retake_tri_unit`/`monosyllable_confirm_pair`, in production use since §6.6):
+  10.10 conditions the "don't do ordinary Parigraha, instead re-cite together with what follows"
+  behaviour on the monosyllable being "प्रागतः" (immediately before) the ARDHARCA-FINAL word
+  specifically — but the current code fires this mechanism whenever ANY word about to be
+  retaken was preceded by a monosyllable, anywhere in the ardharca (which is how it correctly
+  reproduces RV 1.1.2's इह case, itself NOT ardharca-final-adjacent). Whether 10.10's
+  "प्रागतः अर्धर्चान्त्यात्" is describing a genuinely narrower condition than 10.3 alone
+  establishes, or just redescribing — from the retake sequence's own point of view, after 10.3's
+  skip — the same configuration 10.3's own worked example (मन्द्रम्/आ/वरेण्यम्, where वरेण्यम्
+  does happen to be that example's own last word) already illustrates, could not be settled with
+  confidence from Uvaṭa's bhāṣya prose alone. Do NOT narrow the existing mechanism from this
+  alone — it currently matches every attested case this engine has actually been run against
+  (RV 1.1's 1.1.2 and 1.1.7) — but this needs an authoritative reading before scaling past RV 1.1
+  finds a case where the two readings actually diverge. Sent to Gemini/ChatGPT as part of
+  `tools/pratishakhya/GEMINI_CHATGPT_TASK_PROMPT_V3.md`.
 
 - ~~The `indic_transliteration` SLP1 scheme's "र्ऋ"/"रृ" collision.~~ **Fixed, Part VII/VIII
   (§6.8–6.9): a ZWNJ marker, verified to survive 10 consecutive re-joins (checked after every
