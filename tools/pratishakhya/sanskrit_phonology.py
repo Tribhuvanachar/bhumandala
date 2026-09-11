@@ -85,13 +85,39 @@ VRDDHI_OF_A_PLUS = {"e": "E", "E": "E", "o": "O", "O": "O"}
 YAN_OF = {"i": "y", "I": "y", "u": "v", "U": "v", "f": "r", "F": "r"}
 
 
+# ZWNJ (zero-width non-joiner, U+200C) marks a "bare consonant immediately
+# before an independent vowel" boundary so it SURVIVES being fed back
+# through deva_to_slp1/slp1_to_deva an arbitrary number of times (e.g. by
+# reconstruct_chain() building up a whole ardharca) without collapsing
+# into the ambiguous "consonant + dependent vowel-matra" reading -- see
+# _finish_consonant_then_vowel(). Verified empirically (11 Sep 2026,
+# external review) that indic_transliteration passes ZWNJ through
+# deva_to_slp1/slp1_to_deva unchanged at BOTH ends and does not merge a
+# vowel across it, across at least 4 consecutive re-joins. It is invisible
+# when rendered (a real, standard Unicode formatting character, not a
+# hack character), but MUST be stripped before any string-equality
+# comparison against externally-attested text or any other consumer that
+# will not itself re-join the string further -- see strip_zwnj_markers().
+ZWNJ = "‌"
+
+
 def deva_to_slp1(s):
-    s = s.replace("‌", "").replace("‍", "")
+    s = s.replace("‍", "")  # strip ZWJ only -- ZWNJ must survive, see above
     return sanscript.transliterate(s, sanscript.DEVANAGARI, sanscript.SLP1)
 
 
 def slp1_to_deva(s):
     return sanscript.transliterate(s, sanscript.SLP1, sanscript.DEVANAGARI)
+
+
+def strip_zwnj_markers(s):
+    """Call this on any samhita_join/reconstruct_chain "surface" string that
+    is a FINAL output -- i.e. will be displayed, stored in JSON, or
+    compared against externally-attested text, and will NOT itself be fed
+    back into samhita_join as a w1/w2 argument. Never call it on a string
+    that IS going to be re-joined -- that would silently reintroduce the
+    r/f collision the marker exists to prevent."""
+    return s.replace(ZWNJ, "")
 
 
 def strip_accents_slp1(s):
@@ -234,7 +260,10 @@ def reconstruct_chain(words_deva):
         r = samhita_join(combined, w, resolve_w1_compound=False)
         combined = r["surface"]
         rules.append(r["rule"])
-    return combined, rules
+    # combined still carries any ZWNJ markers needed to survive the loop
+    # above (see _finish_consonant_then_vowel) -- this return value IS the
+    # final output (nothing re-joins it further), so strip them here, once.
+    return strip_zwnj_markers(combined), rules
 
 
 def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False, resolve_w1_compound=True):
@@ -411,12 +440,22 @@ def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False, resolve_w1_compound=Tru
         if first2 in ALL_VOWELS:
             if last1 in DIPHTHONGS:
                 # e/o/ai/au + vowel: eNaH padantaad ati (a specifically
-                # elides with avagraha); other following vowels -> ay/av
-                # insertion (approximated uniformly here).
+                # elides with avagraha, Panini 6.1.109) for the +a case.
+                # For any OTHER following vowel, Panini 6.1.78
+                # (eco'yavAyAvaH) REPLACES the diphthong itself with
+                # a/a/A/A + the glide (e->ay, o->av, ai/E->Ay, au/O->Av) --
+                # a real bug, found via external review 11 Sep 2026 and
+                # confirmed against standard Paninian grammar (not
+                # dependent on either reviewer's say-so): this branch used
+                # to keep last1 UNCHANGED and merely append the glide
+                # after it (e.g. "vane"+"indraH" -> "vaneyindraH", an
+                # extra vowel that shouldn't be there), instead of
+                # replacing it (correct: "vanayindraH"). Confirmed by
+                # reproducing the bug directly before fixing it.
                 if first2 == "a":
                     return _finish(s1 + "'" + s2[1:], "eng_a_class_before_a_elided", w1_deva, w2_deva)
-                glide = {"e": "y", "E": "y", "o": "v", "O": "v"}[last1]
-                return _finish(s1 + glide + s2, "eng_a_class_before_other_vowel", w1_deva, w2_deva)
+                replacement = {"e": "ay", "E": "Ay", "o": "av", "O": "Av"}[last1]
+                return _finish(s1[:-1] + replacement + s2, "eng_a_class_before_other_vowel", w1_deva, w2_deva)
             joined = join_vowel_vowel(last1, first2)
             if joined:
                 result, rule = joined
@@ -449,10 +488,19 @@ def _finish_consonant_then_vowel(prefix_slp1, suffix_slp1, rule, w1_deva, w2_dev
     whole string in one pass already does that correctly, so only the
     f/F case needs the separate-transliterate-then-concatenate
     workaround (verified: transliterating a string that ends in a bare
-    consonant always ends in an explicit virama)."""
+    consonant always ends in an explicit virama).
+
+    A ZWNJ is inserted at the boundary (external review, 11 Sep 2026):
+    without it, this correct Devanagari output, if fed back into
+    samhita_join a second time (reconstruct_chain() does exactly this),
+    gets re-transliterated to SLP1 as one flat "rf"/"rF" and can render
+    back WRONG (as the dependent-matra reading) on that second pass --
+    confirmed as a real bug before this fix, and confirmed the ZWNJ
+    survives at least 4 consecutive re-joins after it. See strip_zwnj_markers()
+    -- callers that will not re-join this string further must call it."""
     if suffix_slp1[0] not in ("f", "F"):
         return _finish(prefix_slp1 + suffix_slp1, rule, w1_deva, w2_deva)
-    deva = slp1_to_deva(prefix_slp1) + slp1_to_deva(suffix_slp1)
+    deva = slp1_to_deva(prefix_slp1) + ZWNJ + slp1_to_deva(suffix_slp1)
     return {"surface": deva, "rule": rule, "confidence": "high", "note": "",
             "w1": w1_deva, "w2": w2_deva}
 

@@ -11,7 +11,7 @@
     "special_exception_count": 2,
     "unresolved_count": 4,
     "candidate_reconstruction_count": 2,
-    "chain_reconstruction_mismatch_count": 2,
+    "chain_reconstruction_mismatch_count": 1,
     "invariant_check": {
       "formula": "pair_count + monosyllable_retake_tri_unit_count == sum(len(ardharca.pada_words) - 1)",
       "pair_count": 69,
@@ -490,9 +490,9 @@
             }
           ],
           "chain_reconstruction": {
-            "computed": "अग्निः पूर्वेभिरृषिभिरीड्यो नूतनैरुत",
+            "computed": "अग्निः पूर्वेभिर्ऋषिभिरीड्यो नूतनैरुत",
             "attested": "अग्निः पूर्वेभिर्ऋषिभिरीड्यो नूतनैरुत",
-            "status": "DIFFERS",
+            "status": "EXACT_MATCH",
             "rules_used": [
               "visarga_iu_class_before_unvoiced_consonant",
               "visarga_iu_class_before_vowel",
@@ -500,7 +500,7 @@
               "visarga_a_class_before_voiced",
               "visarga_diphthong_class_before_vowel"
             ],
-            "note": "The phonology engine's own chained reconstruction of this ardharca's continuous text does not match DGE's attested samhita_patha -- a real, checkable phonology discrepancy (see dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.6 for which specific ones are already understood and why)."
+            "note": ""
           }
         },
         {

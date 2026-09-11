@@ -56,7 +56,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from sanskrit_phonology import samhita_join, resolve_compound, transliterate_word  # noqa: E402
+from sanskrit_phonology import samhita_join, resolve_compound, transliterate_word, strip_zwnj_markers  # noqa: E402
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound,
     requires_parigraha, get_sthitopasthita,
@@ -97,7 +97,12 @@ def split_into_ardharcas(verse_id, pada_words, samhita_patha_stripped):
     cum_lens = [cum]
     for i in range(1, len(pada_words)):
         pair = samhita_join(pada_words[i - 1], pada_words[i])
-        delta = len(pair["surface"].replace(" ", "")) - len(pada_words[i - 1])
+        # strip_zwnj_markers: this length calc is a final consumer (not a
+        # re-join), and ZWNJ is a real character for len() purposes even
+        # though it renders zero-width -- left in, it would throw off the
+        # length-alignment heuristic by one character wherever it occurs.
+        surface = strip_zwnj_markers(pair["surface"])
+        delta = len(surface.replace(" ", "")) - len(pada_words[i - 1])
         cum += delta
         cum_lens.append(cum)
     n1 = min(range(len(cum_lens)), key=lambda i: abs(cum_lens[i] - target_len)) + 1
@@ -122,7 +127,7 @@ _TRIGGER_REASON_LABELS = {
 
 def _parigraha_unit(word_deva, reasons):
     compound = parse_compound(word_deva)
-    combined_form = resolve_compound(word_deva)[0] if compound["is_compound"] else word_deva
+    combined_form = strip_zwnj_markers(resolve_compound(word_deva)[0]) if compound["is_compound"] else word_deva
     text = get_sthitopasthita(word_deva, combined_form)
     return {
         "type": "parigraha",
@@ -182,7 +187,7 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
             # itself sandhi-joined to aa in this tri-unit's first component).
             units.append({
                 "type": "monosyllable_retake_tri_unit",
-                "text": f"{tri_join['surface']} {w2}",
+                "text": f"{strip_zwnj_markers(tri_join['surface'])} {w2}",
                 "rule": ["10.3", tri_join["rule"]],
                 "confidence": "low",
                 # Not canonical output: this is this session's own generalization
@@ -200,7 +205,7 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
             })
             units.append({
                 "type": "monosyllable_confirm_pair",
-                "text": second_join["surface"],
+                "text": strip_zwnj_markers(second_join["surface"]),
                 "rule": ["10.3", second_join["rule"]],
                 "confidence": "low",
                 "status": "candidate_reconstruction",
@@ -222,7 +227,7 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
         pair = samhita_join(w1, w2, w1_is_pragrhya=w1_pragrhya)
         units.append({
             "type": "pair",
-            "text": pair["surface"],
+            "text": strip_zwnj_markers(pair["surface"]),
             "rule": "10.2",
             "phonology_rule": pair["rule"],
             "status": "canonical",

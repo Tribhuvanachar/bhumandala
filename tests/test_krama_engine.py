@@ -11,7 +11,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools" / "pratishakhya"))
 
-from sanskrit_phonology import samhita_join, resolve_compound, reconstruct_chain  # noqa: E402
+from sanskrit_phonology import (  # noqa: E402
+    samhita_join, resolve_compound, reconstruct_chain, strip_zwnj_markers,
+)
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound, requires_parigraha,
     get_sthita, get_upasthita, get_sthitopasthita,
@@ -42,6 +44,39 @@ class SamhitaJoin(unittest.TestCase):
         # compound word.
         result = samhita_join("पुरःऽहितम्", "यज्ञस्य")
         self.assertEqual(result["surface"], "पुरोहितं यज्ञस्य")
+
+    def test_diphthong_before_other_vowel_replaces_not_appends(self):
+        # Regression test for a real bug found via external review (11 Sep
+        # 2026), confirmed against standard Paninian grammar (6.1.78,
+        # eco'yavAyAvaH) independent of either reviewer's say-so: e/o/ai/au
+        # before a vowel OTHER than "a" must be REPLACED by a/a/A/A + the
+        # glide, not kept unchanged with a glide merely appended after it
+        # (the old code gave "वनेयिन्द्रः", an extra vowel that shouldn't
+        # be there, instead of the correct "वनयिन्द्रः").
+        self.assertEqual(samhita_join("वने", "इन्द्रः")["surface"], "वनयिन्द्रः")
+        self.assertEqual(samhita_join("तस्मै", "इति")["surface"], "तस्मायिति")
+
+    def test_diphthong_before_a_still_elides(self):
+        # The +a branch (Panini 6.1.109) is unaffected by the above fix.
+        result = samhita_join("सूनवे", "अग्ने")
+        self.assertEqual(result["surface"], "सूनवेऽग्ने")
+
+    def test_bare_consonant_before_independent_vowel_survives_two_joins(self):
+        # Regression test for a real bug found while building
+        # chain-reconstruction validation (11 Sep 2026): the correct
+        # Devanagari output of one join, when fed back into a SECOND
+        # samhita_join call, used to lose the distinction between a bare
+        # consonant before an independent vowel ("र्ऋ") and that same
+        # consonant with a dependent vowel-matra ("रृ") -- both collapse to
+        # the identical SLP1 string in the indic_transliteration library.
+        # Fixed with a ZWNJ marker (external review) that survives being
+        # fed through samhita_join an arbitrary number of times; it must be
+        # stripped via strip_zwnj_markers() at the point nothing re-joins
+        # the string further (what reconstruct_chain()'s own return does).
+        first = samhita_join("अग्निः", "पूर्वेभिः")
+        second = samhita_join(first["surface"], "ऋषिभिः", resolve_w1_compound=False)
+        third = samhita_join(second["surface"], "ईड्यः", resolve_w1_compound=False)
+        self.assertEqual(strip_zwnj_markers(third["surface"]), "अग्निः पूर्वेभिर्ऋषिभिरीड्यः")
 
     def test_visarga_a_class_before_voiced(self):
         result = samhita_join("देवः", "देवेभिः")
@@ -185,6 +220,15 @@ class ReconstructChain(unittest.TestCase):
 
     def test_empty_input(self):
         self.assertEqual(reconstruct_chain([]), ("", []))
+
+    def test_reproduces_rv_1_1_2_ardharca_1_exactly(self):
+        # Regression test for the r/f ZWNJ fix, through the real function
+        # (reconstruct_chain() strips the marker at its own return, so the
+        # caller never needs to know it was involved).
+        computed, _rules = reconstruct_chain(
+            ["अग्निः", "पूर्वेभिः", "ऋषिऽभिः", "ईड्यः", "नूतनैः", "उत"]
+        )
+        self.assertEqual(computed, "अग्निः पूर्वेभिर्ऋषिभिरीड्यो नूतनैरुत")
 
 
 if __name__ == "__main__":

@@ -177,6 +177,25 @@ complete record, not just a live queue.
   history) and was NOT attempted this pass, plus the standing acceptance criterion §10 now
   records verbatim from that review.
 
+  **Update, 11 Sep 2026 — third round, a self-contained code+data prompt, two real fixes
+  shipped after independent verification.** Sent Gemini and ChatGPT a self-contained prompt
+  (actual code, sūtra text, and two failing test cases embedded, no repo access needed) asking
+  for a concrete patch plus three philology questions. Every answer was checked against this
+  project's own already-ingested sources before acting, not accepted on authority — that
+  caught a real citation error even in an otherwise-correct answer (Gemini's Q2 cited "RPr
+  1.74" for "vocative o is pragṛhya"; this project's own corpus shows the actual sūtra is 1.68
+  — right substance, wrong citation). Two real fixes were adopted and confirmed working:
+  Gemini's ZWNJ-marker fix for the र्ऋ/रृ transliteration collision (tested across 4
+  consecutive joins, not just the 2 that exposed it, before accepting it — chain
+  reconstruction is now **17 of 18** RV 1.1 ardharcas, up from 16), and a diphthong-glide bug
+  (e/o/ai/au before a non-a vowel was appending a glide instead of replacing the diphthong)
+  independently confirmed against standard Pāṇinian grammar (6.1.78) rather than either AI's
+  say-so. Two other Gemini Task-C claims were checked and found to be already fixed by the
+  prior round (not new bugs). Gemini's Q3 citation (RPr 2.27, for RV 1.1.7's visarga-before-आ
+  gap) was checked against this project's own Paṭala-2 data and found not to clearly support
+  the specific claim — not adopted; the gap remains open with a citation to verify rather than
+  none. Full detail in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.8.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

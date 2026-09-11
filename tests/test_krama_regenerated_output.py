@@ -137,6 +137,22 @@ class KramaRegeneratedOutput(unittest.TestCase):
                     self.assertIn(cr["status"], ("EXACT_MATCH", "DIFFERS"))
                     self.assertIsInstance(cr["computed"], str)
 
+    def test_chain_reconstruction_matches_at_least_17_of_18(self):
+        # Known, documented baseline (see sec.6.7/6.8 of the architecture
+        # doc): after the r/f ZWNJ fix and the diphthong-glide fix (11 Sep
+        # 2026, from external review), 17 of 18 ardharcas match exactly.
+        # The one known remaining mismatch is RV 1.1.7 ardharca 1's
+        # visarga-before-aa gap, still genuinely unresolved (no sutra
+        # citation found yet) -- not something this test should silently
+        # let regress further.
+        mismatches = [
+            (v["id"], a_idx)
+            for v in self.data["items"]
+            for a_idx, a in enumerate(v["ardharcas"])
+            if a["chain_reconstruction"]["status"] == "DIFFERS"
+        ]
+        self.assertLessEqual(len(mismatches), 1, f"unexpected new mismatches: {mismatches}")
+
     def test_comparison_against_hand_aligned_output_present(self):
         comparison = self.data["comparison_against_hand_aligned_output"]
         self.assertIsNotNone(comparison)

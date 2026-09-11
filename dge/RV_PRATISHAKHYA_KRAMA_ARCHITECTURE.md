@@ -786,6 +786,103 @@ dedicated engineering, not a rushed patch layered onto already-uncertain philolo
 
 ---
 
+### 6.8 Third round (11 Sep 2026) — a self-contained code+data task prompt, verified against
+    this repo's own primary sources before acting on any answer
+
+Sent a self-contained prompt (embedded code, sūtra text, and two failing test cases — no repo
+access needed) to Gemini and ChatGPT, asking for (A) a concrete patch for the SLP1 र्ऋ/रृ
+collision, (B) three narrow philology questions, (C) an open-ended critique. Both answered; the
+discipline applied here was the same as every round before it — **verify each claim against
+this repo's own already-ingested primary sources before adopting it**, not accept either
+answer on authority. That check caught a real citation error even in an otherwise-correct
+answer (below), which is exactly why this discipline is not optional.
+
+**Adopted, verified, and shipped:**
+- **Gemini's Task A fix (ZWNJ marker) works, confirmed empirically, not just plausible.**
+  Inserting U+200C (zero-width non-joiner) at the boundary in
+  `_finish_consonant_then_vowel()`, and stripping it only at true output boundaries (a new
+  `strip_zwnj_markers()`, called by `reconstruct_chain()`'s own return and by every place
+  `krama_engine.py` turns a `samhita_join` surface into final unit text or a length
+  measurement), was tested directly: a synthetic 4-hop chain of `f`/`F`-triggering joins in a
+  row preserves the boundary correctly at every hop (not just the 2 hops the original bug
+  report showed) before this was accepted, matching what the review round that requested this
+  fix (§6.7) explicitly demanded ("demonstrate the fix survives N consecutive joins, not just
+  one"). Chain-reconstruction validation went from 16/18 to **17/18** ardharcas exactly
+  matching DGE's attested text as a direct result.
+- **A second, independent real bug**, found via the same external round but confirmed against
+  standard Pāṇinian grammar (6.1.78 *eco'yavāyāvaḥ*) rather than either AI's authority alone:
+  `samhita_join`'s diphthong-before-non-a-vowel branch kept the diphthong unchanged and merely
+  *appended* a glide after it (e.g. `vane`+`indraḤ` → `वनेयिन्द्रः`, an extra vowel), instead of
+  *replacing* e/o/ai/au with a/a/A/A + the glide (correct: `वनयिन्द्रः`). Fixed; no RV 1.1 test
+  case happened to exercise this branch before, which is exactly why it went undetected across
+  two prior review rounds.
+
+**Checked and found already fixed (not new bugs) — reported back rather than "fixed" twice:**
+- Gemini's "Avagraha Collision" (Task C): reproduced the exact scenario described
+  (`devaH`+`atra`→`devo'tra` mid-chain, then continuing the chain further) directly — it
+  already works correctly, because `reconstruct_chain()`'s `resolve_w1_compound=False` fix
+  from the *previous* round (§6.7) already covers any embedded elision-avagraha regardless of
+  which rule produced it, not only the one case that round happened to find first.
+- Gemini's "Accent Stripping Fragility" (Task C): tested directly — `deva_to_slp1` passes Vedic
+  accent marks (U+0951/U+0952) through completely unchanged as literal combining characters, it
+  does not convert them to any ASCII SLP1 equivalent, so `strip_accents_slp1` finding them
+  *after* transliteration (the existing order) works correctly. This claim was checked and
+  found to not hold.
+
+**Checked and found a real error in an otherwise-good answer:** Gemini's Q2 answer (does
+ordinary sandhi apply between a word and "iti" in sthitopasthita, except for pragṛhya words)
+cited **"RPr 1.74"** for "vocative 'o' is pragṛhya." This project's own already-ingested,
+VedaViṣṭāram-sourced corpus was checked directly: **1.74 is "upottamaṃ nānudāttaṃ na padyam"**
+(an accent-placement rule, unrelated) — the actual sūtra stating "ओकार आमन्त्रितजः प्रगृह्यः"
+("the vowel o arising from vocative is pragṛhya") is **1.68**. The underlying substantive claim
+is independently well-supported by this repo's own data even so — 1.68 states exactly that
+rule, and 1.73 ("asme yuṣme tve amī") matches this project's own already-implemented
+`PRAGRHYA_LEXICAL_SLP1` class exactly — but the citation itself was simply wrong, and would
+have been repeated uncritically if not checked. **Not yet implemented**: this Q2 answer implies
+`get_sthitopasthita()`'s current unconditional no-sandhi rendering is wrong for any
+non-pragṛhya Parigraha word (e.g. `पुरोहितम्` + `इति` should arguably fuse to `पुरोहितमिति`,
+not stay `पुरोहितम् इति`, since पुरोहितम् isn't pragṛhya) — a real, high-impact claim if true,
+but inferred rather than directly cited (both of this project's own attested examples,
+`vibhāvaso` and `bāhū`, happen to be pragṛhya words, so their showing no sandhi doesn't prove
+sandhi is required elsewhere; it's equally consistent with "no sandhi ever, regardless"). Left
+as an explicitly open, sharpened question rather than silently rewriting Parigraha rendering
+for all of RV 1.1 on an inference — see §10.
+
+**Checked and NOT adopted** — Gemini's Q3 answer ("RPr 2.27" licenses full visarga-lopa before
+ā): this project's own ingested Paṭala 2 corpus (which for most of Paṭala 2 has only a
+`vedavishtaram_sutra_text` field with `has_uncertain_reading: true`, not a fully cross-checked
+entry like Paṭala 10–11's) was checked directly. Sūtra 2.27's actual text
+("hrasvapūrvas tu so 'kāram") and its neighbours (2.24: "visarjanīyo 'raphito dīrghapūrvaḥ
+svarodayaḥ ākāram") appear to describe how visarga-preceded-by-long-vs-short-vowel contributes
+an "ā"/"a" sound in deriving the GENERAL a-class visarga→o outcome already implemented — not a
+special *full-elision* rule specific to a following ā, as Gemini's paraphrase claimed. This
+does not confirm Gemini is wrong, only that the claim doesn't clearly hold up against this
+repo's own primary text, given the sūtra's own uncertain-reading flag and lack of a
+cross-checked Bhāṣya gloss for Paṭala 2 (only Paṭala 10–11 have had that cross-check pass, per
+§4c). **No code change made** on this basis — RV 1.1.7's visarga-before-आ gap remains
+genuinely open, now sharpened with a specific citation to check rather than resolved.
+
+**Checked and NOT adopted (ChatGPT's Task C additions)**: ChatGPT's own follow-up critique
+(reviewing the prompt before it was sent, not reviewing an answer) raised further points,
+mostly already covered by the fixes above (the r/f collision "is a state-representation bug",
+addressed by the ZWNJ marker — a scoped fix, not the full internal phonological representation
+ChatGPT argued for; the risk that other Devanagari round-trip ambiguities exist beyond r/f,
+noted as a real, general risk this fix's *pattern* — mark-at-creation, strip-at-final-output —
+generalizes to if found, not proven exhaustively covered), plus items requiring real sūtra
+research not attempted this pass: the `t`+vowel and `t`+voiced-consonant branches being "too
+broad" (plausible — Paṭala 4's actual conditions for `t`-assimilation are more specific than
+"any voiced consonant," but this project hasn't cross-checked Paṭala 4's own sūtra text against
+these branches yet, so no change was made rather than guess); `YAN_OF`'s dissimilar-vowel
+condition being "too generic" a stand-in for named Vedic classes (already stated as a known,
+explicit gap in `sanskrit_phonology.py`'s own module docstring — praśliṣṭa/kṣaipra/abhinihita/
+prakṛtibhāva are named as out of scope there); and lexical exceptions being checked before
+general phonological classification (a fair architectural point — the exception tables ARE a
+priority-ordered override, by design, since they exist precisely to catch attested
+irregularities the general rules would otherwise misfire on — but reordering this without a
+concrete failure case it currently causes was not attempted).
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -892,6 +989,20 @@ Kept as a short index back to the full review, not restated in full here:
     between "र्ऋ" and "रृ" that only manifests two joins deep). Chain reconstruction now matches
     DGE's attested text on 16 of 18 RV 1.1 ardharcas, up from an unverified claim of 69/70 made
     in an earlier, uncommitted ad hoc check.
+22. (Part VII, 11 Sep 2026) Sent a self-contained code+data task prompt to Gemini and ChatGPT
+    (§6.8) and verified every answer against this project's own primary sources before acting.
+    Adopted two real, now-confirmed-working fixes: a ZWNJ marker resolving the र्ऋ/रृ collision
+    (empirically tested across 4 consecutive joins, not just the 2 that exposed it — chain
+    reconstruction now 17/18) and a diphthong-glide bug independently confirmed against
+    Pāṇini 6.1.78. Checked and found two of Gemini's other claims already fixed by the prior
+    round, not new bugs. Caught a real citation error even in an otherwise-correct answer
+    (Gemini's Q2 cited RPr 1.74 for "vocative o is pragṛhya"; this project's own corpus shows
+    that's actually 1.68) — the substance was right, the citation wasn't, and only checking
+    directly against already-ingested primary text caught it. Declined to adopt Gemini's Q3
+    citation (RPr 2.27) after checking it against this project's own (uncertain-reading,
+    not-yet-cross-checked) Paṭala 2 data and finding it doesn't clearly support the specific
+    claim made. RV 1.1.7's visarga-before-आ gap remains open, now with a citation to verify
+    rather than none.
 
 ---
 
@@ -919,15 +1030,33 @@ Kept as a short index back to the full review, not restated in full here:
   word-level cross-check against DGE's own Pada/Saṃhitā data before the Krama work leans on
   it, or whether the existing 96.61%-validated VedaWeb cross-check is sufficient.
 
-- (Added 11 Sep 2026, Part V) The visarga-before-आ gap found in RV 1.1.7 (§6.6) needs either a
-  Prātiśākhya sūtra that specifically licenses Vedic visarga-lopa in this environment (search
-  paṭalas 2–4 more carefully — this project's cross-check so far focused on paṭalas 10–11) or
-  confirmation from Layer B/C that this is genuinely `bahulaṃ chandasi` free variation with no
-  single derivable rule.
+- (Added 11 Sep 2026, Part V; updated Part VII) The visarga-before-आ gap found in RV 1.1.7
+  (§6.6) needs either a Prātiśākhya sūtra that specifically licenses Vedic visarga-lopa in this
+  environment or confirmation this is genuinely `bahulaṃ chandasi` free variation with no
+  single derivable rule. Gemini's Part VII answer proposed RPr 2.27, but checking that sūtra's
+  own text (and 2.24's) in this project's already-ingested corpus did not clearly support the
+  specific claim (full elision before ā specifically) — Paṭala 2 overall is one of the paṭalas
+  this project's VedaViṣṭāram cross-check pass (§4c) never reached, so most of its sūtras
+  (including 2.24/2.27) still carry `has_uncertain_reading: true` and no Bhāṣya gloss. Cross-
+  checking Paṭala 2 the way Paṭala 10–11 already were would likely resolve both this and the
+  Q2 question below in one pass.
+- (Added 11 Sep 2026, Part VII) Sharpened question from Gemini's Q2 answer: is
+  `get_sthitopasthita()`'s current unconditional "no sandhi between word and iti" rendering
+  actually wrong for non-pragṛhya Parigraha words? Both of this project's two attested examples
+  (`vibhāvaso`, `bāhū`) happen to be pragṛhya, so neither proves "no sandhi" as opposed to
+  "no sandhi only because pragṛhya independently blocks it." If the latter is correct, every
+  Parigraha unit for a non-pragṛhya word (the large majority — e.g. `पुरोहितम्` + `इति`) may
+  need real `samhita_join`-computed sandhi between the two rather than the current bare
+  juxtaposition. High-impact if true; not implemented on an inference alone — needs a citation
+  or example covering a non-pragṛhya Parigraha word specifically.
 - (Added 11 Sep 2026, Part V) Decide whether to delete `generate_krama_rv_1_1.py` and its
   `PARIGRAHA_FORMS`/`VERSES` hardcoded data now that the real engine (§6.6) reproduces 7/9
   verses exactly and explains the other 2 — left in place pending the lead's review of the
-  1.1.2/1.1.7 discrepancies.
+  1.1.2/1.1.7 discrepancies. (Note: this 7/9 count is against the OLD hand-aligned output and
+  is unaffected by Part VII's chain-reconstruction fixes — 1.1.2 still differs from the old
+  file for the unrelated, already-explained 10.3-generalization reason in §6.6, even though
+  chain reconstruction itself now matches DGE's attested text for 1.1.2 exactly. Two different
+  metrics; do not conflate them.)
 - (Added 11 Sep 2026, Part V) Priority-0 items 10.10–10.11 (आ before ardharca-final Parigraha,
   distinct from 10.3), 10.21/11.23 restoration as an explicit function (currently 10.21's
   segmental effects are folded implicitly into `samhita_join`, not a separately named
