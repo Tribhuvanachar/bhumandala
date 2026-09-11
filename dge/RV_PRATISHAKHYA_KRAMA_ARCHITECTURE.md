@@ -1149,10 +1149,9 @@ Kept as a short index back to the full review, not restated in full here:
   auto-detection, 10.20/10.22 Pragṛhya/Rephī restoration as named functions, and 11.25/11.37–43
   remain open — not started.
 
-- (Added 11 Sep 2026, Part VI, from the second review — §6.7) The one still-open real bug: the
-  `indic_transliteration` SLP1 scheme's "र्ऋ"/"रृ" collision. A proper fix needs either a
-  private marker that survives round-tripping through that scheme, or bypassing it for this one
-  character class — not attempted yet; flagged precisely rather than papered over.
+- ~~The `indic_transliteration` SLP1 scheme's "र्ऋ"/"रृ" collision.~~ **Fixed, Part VII/VIII
+  (§6.8–6.9): a ZWNJ marker, verified to survive 10 consecutive re-joins (checked after every
+  individual join) before being trusted. Chain reconstruction is now 17/18 RV 1.1 ardharcas.**
 - (Added 11 Sep 2026, Part VI) A real Kramahetu (Paṭala 11) evaluation layer — an explicit
   `krama_decision` object per ardharca naming which Paṭala-11 sūtras were checked and why
   ordinary two-step Krama (vs. dvikrama/trikrama/pañcakrama) was selected — does not exist yet;
