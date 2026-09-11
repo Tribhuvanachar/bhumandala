@@ -1411,10 +1411,94 @@ async function dgeAdminGetFileContentSafe(path) {
   return { content: content.replace(/\n/g, ''), sha: file.sha };
 }
 
+/**
+ * The tree entries that move `oldPath` to `newPath`, given a repository tree.
+ *
+ * WHY THIS IS PURE. It is the whole correctness of a move -- which blobs go
+ * where, which paths are cleared, what is refused -- so it is a plain function
+ * over a tree listing, testable without a token or a network.
+ *
+ * THE KEY POINT: a git move NEVER TOUCHES CONTENT. A tree entry is
+ * {path, mode, type, sha}, so the new path simply reuses the EXISTING blob
+ * sha and the old path is cleared with sha:null. Nothing is downloaded and
+ * nothing is uploaded -- a 68 MB file moves as fast as a 1 KB one. The old
+ * per-file loop fetched every file into the browser and pushed it back,
+ * which is where the minutes went.
+ *
+ * Returns { entries, moved, blocked }. `blocked` is non-empty when the move
+ * must not proceed.
+ */
+window.dgeAdminMoveTreeEntries = function (tree, oldPath, newPath) {
+  const blobs = (tree || []).filter(t => t && t.type === 'blob');
+  const under = p => p === oldPath || p.indexOf(oldPath + '/') === 0;
+  const hits = blobs.filter(t => under(t.path));
+
+  const blocked = [];
+  if (!hits.length) blocked.push(`nothing at "${oldPath}"`);
+  if (newPath === oldPath) blocked.push('the source and destination are the same path');
+  // Moving a folder inside itself would build a tree that contains its own
+  // parent and loses the rest -- refuse rather than produce it.
+  if (newPath.indexOf(oldPath + '/') === 0) blocked.push('a folder cannot be moved inside itself');
+
+  // A submodule is a commit pointer, not a blob; it has no content to
+  // re-point and moving it this way would silently drop it.
+  if ((tree || []).some(t => t && t.type === 'commit' && under(t.path))) {
+    blocked.push('the selection contains a submodule');
+  }
+
+  const destinations = new Set(blobs.map(t => t.path));
+  const entries = [];
+  hits.forEach(t => {
+    const rel = t.path === oldPath ? '' : t.path.slice(oldPath.length + 1);
+    const dest = rel ? newPath + '/' + rel : newPath;
+    if (destinations.has(dest) && !under(dest)) {
+      blocked.push(`"${dest}" already exists`);
+      return;
+    }
+    // mode is carried over, not assumed: an executable (100755) or a symlink
+    // (120000) that came back as a plain 100644 would be quietly corrupted.
+    entries.push({ path: dest, mode: t.mode || '100644', type: 'blob', sha: t.sha });
+    entries.push({ path: t.path, mode: t.mode || '100644', type: 'blob', sha: null });
+  });
+
+  return { entries, moved: hits.length, blocked };
+};
+
+/**
+ * Move a file or a whole folder in ONE commit.
+ *
+ * Replaces a loop that did GET-content + PUT + DELETE per file -- three API
+ * calls and TWO commits each. Renaming 177 files that way was ~531 requests
+ * and ~354 commits; this is five requests and one commit, whatever the count.
+ *
+ * It is also atomic, which matters more than the speed. The old loop could
+ * die halfway and leave both folders half-populated (it did, on 11 Sep 2026),
+ * and a retry with no idempotency wrote the same move twice.
+ */
+async function dgeAdminMovePath(oldPath, newPath, message) {
+  const treeData = await dgeGithubGetRecursiveTree();
+  // A truncated listing means the descendant set is incomplete, and moving on
+  // it would leave files behind at the old path with no sign anything was
+  // missed. Refuse: a half-move is worse than a failed one.
+  if (treeData && treeData.truncated) {
+    throw new Error('GitHub truncated its file listing for this repository, so a safe move cannot be planned. Move a smaller folder, or do this one with git.');
+  }
+
+  const plan = window.dgeAdminMoveTreeEntries((treeData || {}).tree || [], oldPath, newPath);
+  if (plan.blocked.length) throw new Error(plan.blocked[0]);
+
+  const head = await dgeGithubGetBranchHead();
+  const newTree = await dgeGithubCreateTree(head.commit.commit.tree.sha, plan.entries);
+  const newCommit = await dgeGithubCreateCommit(message, newTree.sha, head.commit.sha);
+  await dgeGithubUpdateRef(newCommit.sha);
+  return plan.moved;
+}
+
+// Kept as the single-file entry point so existing callers read unchanged.
+// Both shapes are the same operation now -- git has no notion of a folder,
+// only of paths, so "move a folder" was always "move every file under it".
 async function dgeAdminMoveOneFile(oldPath, newPath, message) {
-  const { content, sha } = await dgeAdminGetFileContentSafe(oldPath);
-  await dgeGithubPutFile(newPath, content, message);
-  await dgeGithubDeleteFile(oldPath, message, sha);
+  return dgeAdminMovePath(oldPath, newPath, message);
 }
 
 // Downloads a folder and everything in it as a single .zip, built
@@ -1569,16 +1653,10 @@ window.dgeAdminDownloadFolderZip = async function(folderPath) {
 };
 
 async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
-  const tree = await dgeGithubGetRecursiveTree();
-  const descendants = tree.tree.filter(t => t.type === 'blob' && t.path.startsWith(oldFolderPath + '/'));
-  if (descendants.length === 0) {
-    throw new Error(`GitHub's current file tree shows no files under "${oldFolderPath}" — nothing to move. Try 🔄 Refresh first if you just changed something in this folder.`);
-  }
-  for (const entry of descendants) {
-    const relative = entry.path.slice(oldFolderPath.length + 1);
-    const newPath = newFolderPath + '/' + relative;
-    await dgeAdminMoveOneFile(entry.path, newPath, dgeAdminBuildCommitMessage(`Move ${entry.path} to ${newPath}`));
-  }
+  const n = await dgeAdminMovePath(oldFolderPath, newFolderPath,
+    dgeAdminBuildCommitMessage(`Move ${oldFolderPath} to ${newFolderPath}`));
+  if (typeof showToast === 'function') showToast(`Moved ${n} file(s) in one commit.`);
+  return n;
 }
 
 // ---------------------------------------------------------------
