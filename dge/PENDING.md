@@ -5773,3 +5773,60 @@ Task tracking for all of this is in the session's live task list (Drive
 access, Panchāṅga sync design, Phase 2 extraction, HKS, Vyāsarāja
 Hanuma+GPS, Vādirāja Vijaya, Ashtadhyayi sync, UM Stotra) rather than
 duplicated here.
+
+## Ashtadhyayi.com drift check: built the tool, found and fixed real gaps (11 Sep 2026, 1:07 pm IST)
+
+Picked this up as the next item ("whatever's easier" — UM Stotra turned out
+to be a dead end first, see below). Confirmed there's no Ashtadhyayi.com
+APK worth using (the one in the Drive batch is `com.ashtadhyayi.twa`, a bare
+Trusted Web Activity wrapper, nothing bundled) — so "sync" here means
+`ashtadhyayi-com/data` on GitHub, the same repo `import_ashtadhyayi_corpora.py`
+already pulls from. `add_repo` confirmed this session's git proxy serves
+anonymous clones of public repos directly (no attach needed) even though it
+isn't in the session's attached-repo list; the GitHub REST API itself is
+blocked without attaching, so the checker below works entirely off a local
+shallow clone rather than the API.
+
+Built `tools/vyakarana/check_ashtadhyayi_drift.py`: for the 4 corpora that
+already record a `source_commit` (phitsutra/ganapatha/linganushasana/unadi),
+compares recorded vs current HEAD and diffs content directly — all 4 came
+back byte-identical, no drift. For Mahābhāṣya and Vasu's English
+translation (`ashtadhyayi/mahabhashya_patanjali`, `ashtadhyayi/vasu`), which
+predate that convention and never recorded a commit at all, it diffs by
+sutra reference instead. First run flagged nearly every Vasu entry as
+"changed" — false alarm: our importer already strips the raw `<i>/<b>` HTML
+tags ashtadhyayi.com's own file still carries, so every entry differed only
+by markup. Fixed the checker to normalize both sides the same way before
+comparing (`strip_markup`) — real re-run: **zero content drift on anything
+we already have**, but **11 sutras missing from Mahābhāṣya and 21 missing
+from Vasu** that exist upstream now (all 11 of the Mahābhāṣya gaps are a
+subset of the 21 Vasu ones — these look like sutras ashtadhyayi.com added
+after our original pull, not something our importer botched).
+
+Wrote `tools/vyakarana/backfill_ashtadhyayi_drift.py` to add exactly those
+gaps — additions only, confirmed it never touches an existing entry. New
+entries get the same enrichment shape as their neighbours (`tags`, `author`,
+`tika_title`, the `comments_on` cross-reference to `sutrapatha`), which are
+constant/derived per corpus, not guessed — checked several existing entries
+first to confirm the pattern before writing it into 32 new records.
+**First attempt used `json.dump(..., indent=1)` and blew up a one-line
+diff into a 116,000-line one** by reformatting the entire file — both
+files were originally minified single-line JSON. Caught it via `git diff
+--stat` before committing, reverted, rewrote to match the original compact
+format (`separators=(", ", ": ")`, no indent) — final diff is 2 lines
+changed per file. Also caught and fixed a second bug from the same rewrite:
+a stray `"count": null` key that doesn't belong in either file's schema at
+all (a leftover conditional that should never have written anything when
+the key was already absent). Re-ran the drift checker after backfilling:
+clean across all 6 tracked/untracked corpora. Ran `./run_tests.sh` before
+and after (with `git stash`) to confirm the 3 failures/14 errors already on
+this branch are pre-existing and unrelated to this change, not something
+introduced here.
+
+**UM Stotra (`com.digilearn.umstotra`), tried first, turned out blocked, not
+easy:** no `lib/` folder (same missing-native-code problem as
+Uttaradi/Tithi Nirṇaya/Vyāsarāja Sosale) *and* zero packaged stotra content
+of any kind — the app is entirely Firebase-backed (only Firebase/Firestore
+client-library boilerplate found in the APK, no local data). Nothing to
+extract statically; moved to the blocked pile alongside the missing-native-lib
+group.
