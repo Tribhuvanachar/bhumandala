@@ -82,11 +82,11 @@ class TestRequiredCrossReferenceCases(unittest.TestCase):
     """The exact five cases named in the review brief."""
 
     def test_brahmasutra_1_1_2_target_unit_exists_in_the_real_corpus(self):
-        # ब्रह्मसूत्रे १.१.२ -> darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/
+        # ब्रह्मसूत्रे १.१.२ -> darshana/vedanta/dvaita/Anandamakaranda/sutra_prasthana/
         #   brahma_sutra_bhashya/mula, unit id "BS_C01_S01_V02" (Chapter/
         #   Section/Verse -- the real id shape, not a plain dotted number).
         data = _load_json(os.path.join(
-            DGE_DATA, "darshana", "vedanta", "dvaita", "SarvaMula",
+            DGE_DATA, "darshana", "vedanta", "dvaita", "Anandamakaranda",
             "sutra_prasthana", "brahma_sutra_bhashya", "mula", "data.json"))
         ids = {item.get("id") for item in data.get("items", [])}
         self.assertIn("BS_C01_S01_V02", ids)

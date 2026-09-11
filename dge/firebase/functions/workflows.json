@@ -337,7 +337,7 @@
    "source_ids": [
     "anandamakaranda"
    ],
-   "feeds": "darshana/vedanta/dvaita/SarvaMula — 38 works, 127 files",
+   "feeds": "darshana/vedanta/dvaita/Anandamakaranda — 38 works, 127 files",
    "importer": "import-anandamakaranda",
    "blurb": "Reads the wiki's recent-changes list. The Import button checks every work's revision, merges what maps one-to-one, snapshots the rest with a block diff, and opens a pull request.",
    "writes": "nothing",

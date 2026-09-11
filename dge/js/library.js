@@ -56,6 +56,11 @@ const DGE_PATH_LABELS = {
   // second Sarvamula edition. PascalCase matches the actual folder names
   // on disk post-rename -- confirmed directly, not assumed.
   SarvaMula: 'सर्वमूलग्रन्थाः',
+  // 11 Sep 2026: the on-disk folder became Anandamakaranda (after the site
+  // that feeds it) so the name SarvaMula could be reused for the library's
+  // own top-level grouping. Both keys resolve to the same label while the
+  // restructure settles; neither is a rename of the other.
+  Anandamakaranda: 'सर्वमूलग्रन्थाः',
   DvaitaVedanta: 'द्वैतवेदान्तः', SetuTila: 'सेतुतिला',
   sarvadarshana_sangraha: 'सर्वदर्शनसङ्ग्रहः',
 

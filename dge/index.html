@@ -535,7 +535,11 @@
        the verses rather than behind the 💬 icon in the top bar (render.js
        dgeRenderCommentaryBar). Replaces the one-shot toast that "disappears
        too quickly". Hidden for a text with no commentary at all. -->
-  <div id="commentaryAvailableBar" class="dge-cbar" style="display:none"></div>
+  <!-- A <details>, not a <div>: with 8 commentaries on a text like the Rigveda
+       each pill wraps to its own row on a phone, and the reader had to scroll
+       past a full screen of buttons to reach verse 1. Collapsed on narrow
+       screens, open on wide ones -- see dgeRenderCommentaryBar. -->
+  <details id="commentaryAvailableBar" class="dge-cbar" style="display:none"></details>
   <div class="shloka-list" id="shlokaList"></div>
   <!-- Legend for the धातु/कोश word marks (highlight-words.js). Rendered only
        once a page actually carries marks, so a text with none stays clean. -->

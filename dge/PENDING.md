@@ -3845,7 +3845,7 @@ Still open, in the order I would take them:
   already present elsewhere in this corpus).
   **New, out-of-scope finding from the same sweep**: `SarvaMula` — a
   different, already-existing corpus/importer under
-  `dge/data/darshana/vedanta/dvaita/SarvaMula/`, unrelated to `dv_parse.py`
+  `dge/data/darshana/vedanta/dvaita/Anandamakaranda/`, unrelated to `dv_parse.py`
   — has the identical bug, 32 more fake items (`sutra_prasthana/
   anuvyakhyana/mula` ×16, `sutra_prasthana/nyaya_vivarana/mula` ×16, ids
   prefixed `BSNV_...` not `DV_...`). Not touched here: different pipeline,

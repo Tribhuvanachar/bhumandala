@@ -462,7 +462,7 @@ BS_C01_S01_V02` link, on both desktop (1280×900) and a real Pixel 5 viewport:
   <button class="dge-er-x" data-er-close aria-label="Close">✕</button></div>
 <div class="dge-er-loc">अध्यायः 1 · पादः 1 · सूत्रम् 2</div>
 <div class="dge-er-actions">
-  <a href="/dge/index.html?path=darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/
+  <a href="/dge/index.html?path=darshana/vedanta/dvaita/Anandamakaranda/sutra_prasthana/
 brahma_sutra_bhashya/mula&jumpVedicId=BS_C01_S01_V02">Open in DGE →</a>
   <button type="button" data-er-search>Search this reference</button>
 </div>

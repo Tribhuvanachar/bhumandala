@@ -40,3 +40,18 @@ lead, in force since then:
    (`gemini-flash-latest` vs `-lite`); batch pages so the fixed prompt +
    schema overhead amortises; never re-run a paid stage whose output is
    already staged and committed.
+
+## Screenshot before merging
+
+**Every UI change gets a screenshot at phone width (400px) AND desktop before it
+goes to main** — asked for directly, 11 Sep 2026, after a commentary bar that
+looked fine on a desktop turned out to fill an entire phone screen.
+
+Take it in the real browser (Chromium at `/opt/pw-browsers/chromium-1194/`,
+`playwright-core` in the scratchpad), not a mental model of the CSS. Dismiss the
+onboarding modal first — `window.dgeSkipOnboarding()` — or the shot is of the
+modal. Measure as well as look: element height, whether the first verse is
+above the fold, and `document.documentElement.scrollWidth > window.innerWidth`
+for horizontal overflow.
+
+A layout that needs a phone to be judged cannot be judged without one.

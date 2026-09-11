@@ -374,7 +374,7 @@
     "note": "A MediaWiki; the newest main-namespace revision id plus the wiki's page count."
    },
    "feeds": [
-    "darshana/vedanta/dvaita/SarvaMula (47 works with wiki provenance; merged one-to-one or snapshotted by sync-anandamakaranda.yml)"
+    "darshana/vedanta/dvaita/Anandamakaranda (47 works with wiki provenance; merged one-to-one or snapshotted by sync-anandamakaranda.yml)"
    ],
    "importer": "sync-anandamakaranda.yml",
    "config": "dge/convert/urlimport.js",

@@ -31,7 +31,7 @@ global.window.addEventListener = () => {};
 // assertions need, so the test does not depend on the whole file loading.
 global.window.dgeSegLabel = (seg) => ({
   darshana: 'दर्शनानि', vedanta: 'वेदान्तः', dvaita: 'द्वैतम्',
-  SarvaMula: 'सर्वमूलग्रन्थाः', achara_and_ancillary_granthas: 'आचारादिग्रन्थाः',
+  Anandamakaranda: 'सर्वमूलग्रन्थाः', achara_and_ancillary_granthas: 'आचारादिग्रन्थाः',
   jayanti_nirnaya: 'जयन्तीनिर्णयः',
 }[seg] || seg);
 require(%s);
@@ -57,34 +57,34 @@ def nodes(html):
 
 
 def test_a_grantha_with_no_curated_lineage_still_gets_a_strip():
-    r = render("darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula")
+    r = render("darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas/jayanti_nirnaya/mula")
     assert r["display"] == "flex"
     assert nodes(r["html"]) == ["दर्शनानि", "वेदान्तः", "द्वैतम्", "सर्वमूलग्रन्थाः",
                                 "आचारादिग्रन्थाः", "जयन्तीनिर्णयः"]
 
 
 def test_every_ancestor_links_into_the_library_at_its_own_depth():
-    r = render("darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula")
+    r = render("darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas/jayanti_nirnaya/mula")
     import re
     hrefs = re.findall(r'href="index\.html\?libraryPath=([^"]+)"', r["html"])
     from urllib.parse import unquote
     assert [unquote(h) for h in hrefs] == [
         "darshana", "darshana/vedanta", "darshana/vedanta/dvaita",
-        "darshana/vedanta/dvaita/SarvaMula",
-        "darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas",
+        "darshana/vedanta/dvaita/Anandamakaranda",
+        "darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas",
     ]
 
 
 def test_the_label_table_wins_over_a_synthesised_metadata_title():
     # core.js fills metadata.title from the folder when data.json has none, so
     # karma_nirnaya's reads "Mula" -- worse than useless as the current node.
-    r = render("darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula",
+    r = render("darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas/jayanti_nirnaya/mula",
                metadata_title="Mula")
     assert nodes(r["html"])[-1] == "जयन्तीनिर्णयः"
 
 
 def test_the_grantha_itself_is_the_current_node_not_a_link():
-    r = render("darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/jayanti_nirnaya/mula")
+    r = render("darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas/jayanti_nirnaya/mula")
     assert 'lineage-current">जयन्तीनिर्णयः<' in r["html"]
     assert "jayanti_nirnaya</a>" not in r["html"]
 

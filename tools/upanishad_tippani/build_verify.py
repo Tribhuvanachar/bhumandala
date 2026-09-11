@@ -27,7 +27,7 @@ BOOKS = {
     "prashna":    {"vision": ["prashna_upanishad_bhashya_tippani"],    "dge": DV / "shatprashnopanishadbhashyam",    "title": "षट्प्रश्नोपनिषद्भाष्यम् — 13 व्याख्याः"},
     "taittiriya": {"vision": ["taittiriya_upanishad_bhashya_tippani"], "dge": DV / "taittiriyopanishad_bhashya",     "title": "तैत्तिरीयोपनिषद्भाष्यम् — 6 टिप्पण्यः"},
     "tantrasara": {"vision": ["tantrasara_sangraha_tippani_a", "tantrasara_sangraha_tippani_b"],
-                   "dge": [ROOT / "dge/data/darshana/vedanta/dvaita/SarvaMula/achara_and_ancillary_granthas/tantrasara_sangraha",
+                   "dge": [ROOT / "dge/data/darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas/tantrasara_sangraha",
                            ROOT / "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/tantrasara"],
                    "title": "तन्त्रसारसङ्ग्रहः (2017, प्रह्लादाचार्य जोशी) — 4 टिप्पण्यः"},
 }

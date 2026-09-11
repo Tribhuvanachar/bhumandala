@@ -114,7 +114,7 @@ const DGE_LEGACY_SLUGS = {
   // Resolution is a single pass, not a chain (see dgeUpgradeLegacySlug
   // below) -- every entry here must point straight at the CURRENT
   // location, never at an older name that itself needed upgrading.
-  'sarvamoola_grantha':     'darshana/vedanta/dvaita/SarvaMula',
+  'sarvamoola_grantha':     'darshana/vedanta/dvaita/Anandamakaranda',
   // 9 Sep 2026 — Sumadhva Vijaya. The DvaitaVedanta extraction of this work
   // produced six tika folders and no mula, each "item" a whole sarga as one
   // wall of text with the verses it comments on buried inside it (the site
@@ -199,7 +199,7 @@ const DGE_LEGACY_SLUGS = {
   // with the same pass's other renames. stotra/pns became stotra/
   // PrahladaKrutaNarasimha for the same reason.
   'dvaitavedanta':                       'darshana/vedanta/dvaita/DvaitaVedanta',
-  'darshana/vedanta/dvaita/sarvamula':   'darshana/vedanta/dvaita/SarvaMula',
+  'darshana/vedanta/dvaita/sarvamula':   'darshana/vedanta/dvaita/Anandamakaranda',
   'stotra/pns':                          'stotra/PrahladaKrutaNarasimha',
   // 25 Aug 2026 Purana restructure: purana/<X> split into purana/maha_purana/
   // (the 18 traditional Mahapuranas, plus the Bhagavata-Madhva variant and
