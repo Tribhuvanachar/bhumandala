@@ -6089,3 +6089,51 @@ Sode has no script (server-backed, not a packaged asset — a website-crawl
 or authorized-API approach is a different kind of tool, not this pattern).
 
 `./run_tests.sh`: same pre-existing 3 failures/14 errors, nothing new.
+
+## Uttarādi's own parampara_table: 42-pontiff enrichment, all matched and cross-verified (11 Sep 2026, 4:30 pm IST)
+
+Kept going per the lead's "make progress, I'll check back" — the already-
+archived `um_app_seed.db` also has a `parampara_table` (42 rows,
+Madhvāchārya through the present pontiff), each with a real narrative bio,
+an official recitation audio URL (`cdn.umath.in`), invocation ślokas, and
+succession metadata (preceptor, years in pīṭha, bṛndāvana location,
+contact details). Real, rich, primary-source content straight from the
+maṭha's own app — a natural extension of the Moola Pratima work into the
+Guru Parampara side.
+
+**Matched all 42 rows to existing `parampara.json` nodes by name, then
+verified the match two independent ways before trusting it** — this
+corpus has enough recurring pontifical names across different maṭhas
+(Vedavyāsa, Vidyādhīśa, Vēdanidhi, Kavīndra, Raghuvarya, Raghūttama etc.
+each appear more than once, in *different* lineages) that a name match
+alone is not safe:
+1. Every matched node's `matha` field must be `uttaradi` or `core`. This
+   *caught 3 real wrong matches*: my first pass picked the bare-id node
+   for Vedavyāsa/Vidyādhīśa/Vēdanidhi Tīrtha, which turned out to belong
+   to Shirur/Kāṇīyūru/Ādamāru respectively — different maṭhas' pontiffs
+   who happen to share the name. Found the actual `_u`-suffixed Uttarādi
+   nodes instead once the check flagged it.
+2. Independently, the resolved node sequence's own `guru` links were
+   checked against the app's row order — all 41 consecutive pairs matched
+   with zero discrepancies, which wouldn't have happened if any match
+   were still wrong.
+
+**Not merged into `parampara.json`'s nodes directly** — that file is
+hand-curated (its own `meta.primary_reference` already lists "official
+matha websites," so this is legitimately in scope, but a script shouldn't
+be the one hand-editing 42 nodes of a carefully curated primary file).
+Followed the same pattern this project already uses for
+`brindavana_images.json`: a separate, keyed-by-node-id companion file,
+`dge/guru-parampara/data/uttaradi_app_profiles.json`, built by
+`tools/build_uttaradi_parampara_profiles.py`. HTML content stripped to
+plain text via the same helper as `build_pratima.py` -- caught and fixed
+an `&nbsp;`-not-unescaped bug in both scripts' copy of that helper while
+checking the output (pratima.json itself had no entities in practice, so
+no data changed there, but the fix is real for future runs).
+
+Not yet done: no UI shows this data (same as pratima.json — display is a
+separate task); `works`/`aradhane` fields exist in the source but weren't
+cross-checked against parampara.json's existing `works` list per node
+(kept in the companion file's own `aradhane`/no separate `works` field,
+avoiding a naming collision that could look like an authoritative
+override of the hand-curated list).

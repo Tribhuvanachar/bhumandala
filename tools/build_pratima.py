@@ -28,6 +28,7 @@ Usage: python3 tools/build_pratima.py
 """
 from __future__ import annotations
 
+import html
 import json
 import os
 import re
@@ -48,14 +49,15 @@ def slugify(text):
     return _SLUG_STRIP.sub("-", text.lower()).strip("-") or "unnamed"
 
 
-def strip_html(html):
+def strip_html(raw_html):
     """Convert the app's rendered HTML (blockquote/p/ol/li/br) to plain text:
     <br> and block boundaries become newlines, everything else is dropped."""
-    if not html:
+    if not raw_html:
         return None
-    text = _BR.sub("\n", html)
+    text = _BR.sub("\n", raw_html)
     text = re.sub(r"</(p|li|blockquote)>", "\n", text)
     text = _TAG.sub("", text)
+    text = html.unescape(text)
     text = "\n".join(_WS.sub(" ", line).strip() for line in text.splitlines())
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
     return text or None
