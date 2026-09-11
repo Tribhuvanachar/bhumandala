@@ -61,12 +61,28 @@ complete record, not just a live queue.
   correction note rather than quietly overwritten. 258 of 1,067 sūtras (24%) carry the
   source's own OCR-uncertainty marker and are shipped with `has_uncertain_reading: true` and
   empty Devanagari/IAST rather than a guessed reading. `shaunakiya_chaturadhyayika/data.json`
-  (a separate work, the Atharvaveda-Prātiśākhya) is untouched by this import. **Still open,
-  not blocking further spec work but blocking the actual rule engine:** cross-check the
-  uncertain-reading sūtras against Layer B (VedaViṣṭāram) or C (the RV-Prātiśākhya project),
-  and turn cited sūtra text into real `conditions`/`action`/`exceptions` rule logic — this
-  ingestion is text-in-repo, not rules-in-engine. Full details in
-  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §4b and its open questions in §10.
+  (a separate work, the Atharvaveda-Prātiśākhya) is untouched by this import.
+
+  **Update, 11 Sep 2026 — cross-checked against VedaViṣṭāram, two real bugs caught and
+  fixed.** `tools/pratishakhya/crosscheck_vedavishtaram.py` attached VedaViṣṭāram's sūtra
+  text + Uvaṭa's Bhāṣya to 1,007 of 1,067 items, hand-resolved 24 of paṭala 10–11's 26
+  uncertain sūtras (each with a citation of exactly how — direct match or a named
+  corpus-internal pattern, never a guess; the other 2 stay deliberately unresolved, one a
+  genuine edition variant, one with no independent confirmation), and resolved 85 more
+  elsewhere in the corpus by unambiguous automated matching (135 sūtras remain unresolved,
+  down from 258). Along the way, caught and fixed: (1) Sanskrit Library's SLP1 uses `x` for
+  the Vedic retroflex lateral ळ, not standard SLP1's vocalic ऌ — this had been silently
+  mis-transliterating 35 sūtras since the very first import (confirmed via VedaViṣṭāram's
+  own Bhāṣya, which names the grammarian व्याळि in plain unambiguous Devanagari); (2) the
+  automated resolver had a real matching bug where an uncertain character at a word's edge
+  let an unanchored regex swallow the wrong span — caught concretely on sūtra 1.39 coming
+  back with a visibly duplicated phrase, now fixed and guarded by a regression test. Full
+  details in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §4c.
+
+  **Still open, blocking the actual rule engine:** turn the now-annotated sūtra text (text +
+  Uvaṭa's Bhāṣya) into real `conditions`/`action`/`exceptions` rule logic for paṭala 10–11 —
+  nothing blocks starting this now. See the document's §10 for the rest of the open
+  questions (Layer C cross-check, the 135 still-unresolved sūtras outside paṭala 10–11).
 
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First

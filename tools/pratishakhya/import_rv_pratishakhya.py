@@ -108,6 +108,17 @@ def parse_line(line):
     return patala, sutra, sutra_text_slp1, apparatus
 
 
+# Sanskrit Library's SLP1 uses lowercase "x" for the Vedic retroflex
+# lateral flap ळa (only found in the Rgveda Sakala tradition), not
+# standard SLP1's vocalic ḷ (which this corpus never uses -- confirmed:
+# no uppercase "X" appears anywhere in it). Confirmed against
+# VedaVishtaram's own Uvata Bhasya on 3.23/3.28, which spells the word
+# plainly as व्याळिः (vyALiH, "the teacher VyALi") in unambiguous
+# Devanagari with no transliteration ambiguity -- indic_transliteration's
+# standard SLP1 scheme reads "x" as vocalic ḷ instead and garbles it.
+# indic_transliteration's own SLP1 scheme already spells this sound "L"
+# (-> ळ / ḻ, correctly composing with a following vowel matra), so
+# remap Sanskrit Library's "x" to that before transliterating.
 def transliterate_sutra(slp1_text):
     """Devanagari + IAST rendering, or (None, None) if the source itself
     marks a reading uncertain -- see the module docstring on "[?]"."""
@@ -116,7 +127,7 @@ def transliterate_sutra(slp1_text):
     # "." = a danda (verse/clause boundary); "[,]" = a lighter pada break.
     # Neither is SLP1 alphabet, so render them directly rather than feed
     # them to the transliterator.
-    parts = slp1_text.replace("[,]", ",").split()
+    parts = slp1_text.replace("[,]", ",").replace("x", "L").split()
     deva_parts, iast_parts = [], []
     for tok in parts:
         if tok in (".", ","):

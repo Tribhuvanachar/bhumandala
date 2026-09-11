@@ -345,7 +345,65 @@ What's deliberately **not** filled in, and why:
 
 Verified with `tests/test_rv_pratishakhya_import.py` (total count, paṭala 10/11 counts, the
 nine hand-checked sūtras in the table above, and — explicitly — that 10.20/10.22 are *not*
-silently filled in).
+silently filled in). **Superseded by §4c below** for 10.20/10.22 specifically: they are now
+resolved, via VedaViṣṭāram, not left uncertain.
+
+---
+
+## 4c. VedaViṣṭāram cross-check and uncertain-reading resolution (11 Sep 2026)
+
+Done with the project lead's direction to cross-check the uncertain-reading sūtras reliably,
+not randomly. `tools/pratishakhya/crosscheck_vedavishtaram.py` (full methodology and its own
+limits in its module docstring — read that before trusting anything below) fetches Layer B
+(VedaViṣṭāram, `vedavishtaram.in/lakshanam/rp.html` — Śaunaka's text with Uvaṭa's Bhāṣya and
+Viṣṇumitra's Vṛtti) and:
+
+1. **Attaches Layer B's sūtra text + Uvaṭa's Bhāṣya to every item** where a same-index entry
+   exists (1,007 of 1,067) — new `vedavishtaram_sutra_text` / `vedavishtaram_bhashya` fields.
+   This is the raw material §6.1's future rule-logic work will interpret from — not sūtra
+   text in isolation, but with the traditional commentary attached.
+2. **Resolved 24 of paṭala 10–11's 26 `has_uncertain_reading` sūtras by hand**, each with a
+   citation of exactly how (direct VedaViṣṭāram match, or an explicit corpus-internal pattern
+   like "pūrva confirmed directly 6+ times elsewhere in this text" — never a silent guess).
+   The other 2 (10.3, 11.8) are deliberately still unresolved: 10.3 shows a genuine apparent
+   edition variant (VedaViṣṭāram reads `ई` where Layer A implies `ईम्`), and 11.8's uncertain
+   word has no independent confirmation anywhere checked. Both carry a `crosscheck` note
+   explaining why, not a blank field that looks unchecked.
+3. **Resolved 85 more uncertain sūtras outside paṭala 10–11** by an automated same-index
+   substring match, accepted only when unambiguous — explicitly *not* trusted with the
+   paṭala-10–11-style pattern inference, since the same-index correspondence itself isn't
+   verified outside those two chapters (§4a.1's paṭala-2 count mismatch, 82 vs. 41, is exactly
+   the kind of boundary drift that makes pattern-based inference unsafe elsewhere).
+4. **135 sūtras remain genuinely unresolved** (down from 258) — left that way rather than
+   forced, per the same "an empty field is an honest gap" principle as everywhere else in
+   this document.
+
+**Two real bugs caught and fixed while building this, not silently avoided:**
+
+- **Sanskrit Library's SLP1 uses lowercase `x` for the Vedic retroflex lateral **ळ**** (only
+  found in the Rigveda Śākala tradition), not standard SLP1's vocalic ऌ. This was silently
+  mis-transliterating 35 sūtras across the corpus (e.g. `vyAxiH` → the nonsense "व्याऌइः"
+  instead of "व्याळिः") since the very first import — caught only while investigating this
+  cross-check, confirmed against VedaViṣṭāram's own Uvaṭa Bhāṣya, which spells the word out
+  unambiguously as व्याळिः, "the teacher Vyāḷi" (a named phonetic authority, fittingly cited
+  in paṭala 3's accent rules). Fixed in `import_rv_pratishakhya.py`'s `transliterate_sutra`
+  (remap `x`→`L`, which `indic_transliteration`'s own SLP1 scheme already spells correctly).
+- **The automated same-index resolver initially had a real matching bug**: when an uncertain
+  character sat at the very edge of its word (an empty "pre" or "post" anchor), an unanchored
+  empty-string regex component matched the *leftmost* position satisfying the rest of the
+  pattern — which is usually one character early, swallowing everything back to the start of
+  the sūtra. Caught concretely on 1.39, which came back as "प्रथमपञ्चमौ च द्वौ
+  **प्रथमपञ्चमौ च द्वा** ऊष्मणाम्" (visibly duplicated) instead of the correct
+  "प्रथमपञ्चमौ च द्वौ ऊष्मणाम्." Fixed with an explicit word-boundary anchor
+  (`(?:^|(?<=\s))`) plus a hard cap on the resolved span length, and guarded by
+  `test_algorithmic_resolution_does_not_swallow_neighbouring_words` so it can't regress
+  silently.
+
+Both bugs are a reminder that "reliable" here means checked output, not just a fetched
+source — every one of the 85 automated resolutions was read over by eye before being trusted
+(§4c's table would be too long to reproduce here; see the item list this session produced
+while reviewing them, and `tools/pratishakhya/crosscheck_vedavishtaram.py`'s
+`P10_11_RESOLUTIONS` table for the paṭala 10–11 reasoning specifically).
 
 ---
 
@@ -593,12 +651,17 @@ Kept as a short index back to the full review, not restated in full here:
 
 - ~~Approve a full pull of paṭalas 10–11 through Layer A's undocumented endpoint.~~ **Done —
   approved 11 Sep 2026 ("bulk pull it"), all 1,067 sūtras ingested, §4b.**
-- Cross-check the 258 `has_uncertain_reading` sūtras (and, over time, the rest) against Layer
-  B (VedaViṣṭāram) or Layer C (the RV-Prātiśākhya project) — none of that verification has
-  been done yet, only the pull itself.
+- ~~Cross-check the `has_uncertain_reading` sūtras against Layer B or C.~~ **Done for paṭala
+  10–11 (24 of 26 resolved, 2 genuinely left open) and 85 more sūtras elsewhere in the corpus
+  — §4c.** 135 sūtras remain unresolved outside paṭala 10–11; revisit if/when work reaches
+  those paṭalas, not blocking Krama work now.
+- Cross-check against Layer C (the RV-Prātiśākhya project) too, as a third independent source
+  — not done yet; VedaViṣṭāram alone was enough to resolve the paṭala 10–11 cases actually
+  needed so far, but Layer C stays valuable as a check on VedaViṣṭāram itself (which has its
+  own small errors — see §4c's note on 11.59's apparent typo).
 - Approve turning cited sūtra text into actual rule logic (`conditions`/`action`/`exceptions`,
-  §6.1) once paṭalas 10–11 specifically are ready for that — this pull only got the text in,
-  not the interpretation.
+  §6.1) for paṭala 10–11 — the sūtra text plus Uvaṭa's Bhāṣya are now both in the data (§4c);
+  this is genuinely the next step, not blocked on anything further.
 - Confirm an independently attested Krama-pāṭha source to use as the VALIDATE-mode ground
   truth for RV 1.1.1 and subsequent sūktas — `github.com/vishvasa`'s Rigveda repo was
   checked (10 Sep 2026) and does not appear to carry one, so this is still open.
