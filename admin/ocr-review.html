@@ -9,7 +9,7 @@
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OCR Review · DGE (scholar)</title>
-<link rel="stylesheet" href="css/ocr-review.css?v=1">
+<link rel="stylesheet" href="css/ocr-review.css?v=2">
 <link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
 <link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
@@ -351,22 +351,76 @@
     var clsBadge = u.cls ? '<span class="badge ' + (/accept|matched/.test(u.cls) ? 'ok' : /review|partial|new/.test(u.cls) ? 'warn' : 'bad') + '">' + esc(u.cls) + '</span>' : '';
     var decBadge = d ? '<span class="badge ' + (d.decision === 'reject' ? 'bad' : 'ok') + '">' + esc(d.decision) + (d.by ? ' · ' + esc(d.by) : '') + '</span>' : '<span class="badge plain">undecided</span>';
     el.innerHTML = '<div class="top"><b>' + esc(u.id) + '</b>' + (u.page != null ? '<span>p.' + esc(u.page) + '</span>' : '') + '<span class="badge plain">' + esc(u.kind) + '</span>' + clsBadge + decBadge + '</div>' +
-      (u.html ? '<div class="render"></div>' : '') +
+      (u.html ? '<div class="rendertools">' +
+        '<button class="tbtn" data-cmd="bold" title="Bold the selection — this is how a प्रतीक is marked">B</button>' +
+        '<button class="tbtn" data-cmd="italic" title="Italic"><i>I</i></button>' +
+        '<button class="tbtn" data-blk="h2" title="Make this line a heading">H2</button>' +
+        '<button class="tbtn" data-blk="h3" title="Sub-heading">H3</button>' +
+        '<button class="tbtn" data-blk="p" title="Ordinary paragraph">¶</button>' +
+        '<button class="tbtn" data-blk="blockquote" title="Indent as a quotation">❝</button>' +
+        '<button class="tbtn" data-cmd="removeFormat" title="Strip formatting from the selection">✗</button>' +
+        '<span class="tsep"></span>' +
+        '<button class="tbtn" data-revert="1" title="Throw away edits and go back to what the OCR produced">↺ revert</button>' +
+        '<span class="thint">Edit here — headings, paragraphs and indentation are kept.</span></div>' +
+        '<div class="render" contenteditable="true" spellcheck="false"></div>' : '') +
       (u.two ? '<label class="f">Verse (sa)</label><textarea data-field="sa">' + esc(d && d.fields && d.fields.sa != null ? d.fields.sa : u.sa) + '</textarea><label class="f">Commentary</label>' : '') +
       '<textarea data-field="text">' + esc(d && d.decision === "edit" && d.text != null ? d.text : u.text) + '</textarea>' +
       (u.alt ? '<details class="alt"><summary>Other OCR reading</summary><pre>' + esc(u.alt) + '</pre></details>' : '') +
       (u.note ? '<div class="alt">Pipeline note: ' + esc(u.note) + '</div>' : '') +
       '<div class="actions"><button class="btn ok" data-a="accept">✅ Accept</button><button class="btn gh" data-a="edit">✏️ Save edit</button><button class="btn danger" data-a="reject">❌ Reject</button>' +
       '<input type="text" data-field="note" placeholder="note (optional)" value="' + esc(d ? d.note || "" : "") + '"></div>';
-    if (u.html) { var r = $(".render", el); var doc = new DOMParser().parseFromString(u.html, "text/html"); $$("script,style,iframe,object", doc).forEach(function(x){ x.remove(); }); $$("*", doc).forEach(function(x){ Array.prototype.slice.call(x.attributes).forEach(function(a){ if (/^on/i.test(a.name) || a.name === "href" || a.name === "src") x.removeAttribute(a.name); }); }); r.innerHTML = doc.body.innerHTML; }
+    if (u.html) { var r = $(".render", el); var doc = new DOMParser().parseFromString((d && d.html != null ? d.html : u.html), "text/html"); $$("script,style,iframe,object", doc).forEach(function(x){ x.remove(); }); $$("*", doc).forEach(function(x){ Array.prototype.slice.call(x.attributes).forEach(function(a){ if (/^on/i.test(a.name) || a.name === "href" || a.name === "src") x.removeAttribute(a.name); }); }); r.innerHTML = doc.body.innerHTML; }
     $$("textarea", el).forEach(function(t){ t.oninput = function(){ t.classList.add("dirty"); }; });
+    // Structured editing. Until 11 Sep 2026 the rendered layout was shown and
+    // the EDIT was a flat textarea beneath it -- so a reviewer could see that
+    // Sarvam had kept the headings and paragraphs, and then lost every one of
+    // them the moment they corrected a letter. The whole point of running a
+    // layout-preserving engine was being thrown away at the last step.
+    var rend = $(".render", el);
+    if (rend) {
+      rend.oninput = function(){ rend.classList.add("dirty"); };
+      // Keep the plain-text box in step, so the merge tool and every
+      // downstream consumer that only understands text stay correct.
+      var syncText = function(){
+        var ta = $("textarea[data-field=text]", el);
+        if (ta) { ta.value = (rend.innerText || "").replace(/\n{3,}/g, "\n\n").trim(); ta.classList.add("dirty"); }
+      };
+      rend.addEventListener("blur", syncText);
+      $$(".rendertools .tbtn", el).forEach(function(b){
+        // mousedown, not click: the button must not take focus away from the
+        // editable region or the selection is gone before the command runs.
+        b.onmousedown = function(ev){
+          ev.preventDefault();
+          if (b.dataset.revert) {
+            var doc2 = new DOMParser().parseFromString(u.html, "text/html");
+            $$("script,style,iframe,object", doc2).forEach(function(x){ x.remove(); });
+            rend.innerHTML = doc2.body.innerHTML;
+            rend.classList.add("dirty"); syncText(); return;
+          }
+          rend.focus();
+          if (b.dataset.cmd) document.execCommand(b.dataset.cmd, false, null);
+          else if (b.dataset.blk) document.execCommand("formatBlock", false, b.dataset.blk);
+          rend.classList.add("dirty"); syncText();
+        };
+      });
+    }
     $$("[data-a]", el).forEach(function(b){
       b.onclick = function(){
         var a = b.dataset.a;
         var text = $("textarea[data-field=text]", el).value;
+        var editedHtml = rend ? rend.innerHTML : null;
+        var htmlChanged = !!(rend && editedHtml !== u.html);
         var rec = { decision: a, by: reviewer(), at: nowIso(), note: $("input[data-field=note]", el).value.trim() };
         if (a === "edit") { rec.text = text; if (u.two) rec.fields = { sa: $("textarea[data-field=sa]", el).value, commentary: text }; }
-        if (a === "accept" && text.trim() !== (u.text || "").trim()) { rec.decision = "edit"; rec.text = text; if (u.two) rec.fields = { sa: $("textarea[data-field=sa]", el).value, commentary: text }; }
+        // "Accept" on a unit whose text OR structure was touched is really an
+        // edit -- recorded as one so the provenance is honest.
+        if (a === "accept" && (text.trim() !== (u.text || "").trim() || htmlChanged)) {
+          rec.decision = "edit"; rec.text = text;
+          if (u.two) rec.fields = { sa: $("textarea[data-field=sa]", el).value, commentary: text };
+        }
+        // The structured form rides along with every non-reject decision, so
+        // the layer keeps its headings and paragraphs, not just a flat string.
+        if (rec.decision !== "reject" && rend) rec.html = editedHtml;
         DEC[u.id] = rec; DIRTY = true; draft();
         var next = el.nextElementSibling;
         renderUnits();
@@ -414,6 +468,33 @@
     say.className = r.ok ? "say ok" : "say bad";
     say.textContent = r.ok ? "Merge started — a pull request appears in a few minutes (Actions → OCR review — merge)." : "GitHub said " + r.status;
   }
+
+  // --- Self-test hook -----------------------------------------------------
+  // Opening this page with ?selftest=1 exposes the unit renderer so a browser
+  // test can exercise the structured editor without a GitHub token or a real
+  // staged file. Guarded by the query parameter and it only ever EXPOSES what
+  // is already here -- it grants no access, reads no repository, and is inert
+  // on a normal load. Added 11 Sep 2026 alongside the editor, because the
+  // alternative was shipping an editing surface nothing had ever driven.
+  try {
+    if (/[?&]selftest=1\b/.test(location.search)) {
+      window.dgeOcrReviewSelfTest = {
+        load: function (units) {
+          UNITS = units; DEC = {};
+          var g = document.querySelector(".gate"); if (g) g.style.display = "none";
+          // #app ships display:none and is revealed by start(); the hook has
+          // to do the same or every control is present but unclickable.
+          var m = document.getElementById("app"); if (m) m.style.display = "block";
+          // #work is revealed only once a staged file is chosen from GitHub;
+          // the hook supplies the units directly, so it reveals it too.
+          var w = document.getElementById("work"); if (w) w.style.display = "grid";
+          renderUnits();
+          return UNITS.length;
+        },
+        decisions: function () { return DEC; }
+      };
+    }
+  } catch (e) { /* never let a test hook break the page */ }
 })();
 </script>
 </body>
