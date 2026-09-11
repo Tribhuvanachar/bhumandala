@@ -92,7 +92,7 @@ jobs:
           python3 tools/anandamakaranda/sync_anandamakaranda.py "${ARGS[@]}"
 
       - name: Guard — no lost items, nothing outside SarvaMūla
-        run: python3 tools/sync_guard.py --scope dge/data/darshana/vedanta/dvaita/SarvaMula --allow admin/config/sync --max-files 120
+        run: python3 tools/sync_guard.py --scope dge/data/darshana/vedanta/dvaita/Anandamakaranda --allow admin/config/sync --max-files 120
 
       - name: Validate
         run: python3 tools/validate_data.py && python3 tools/audit_library.py
@@ -109,6 +109,6 @@ jobs:
             snapshotted to `_sync/anandamakaranda.json` (composite layers) by
             `sync-anandamakaranda.yml`. The run summary says which, block by block.
           add-paths: |
-            dge/data/darshana/vedanta/dvaita/SarvaMula/**
+            dge/data/darshana/vedanta/dvaita/Anandamakaranda/**
             admin/config/sync/anandamakaranda.state.json
           delete-branch: true

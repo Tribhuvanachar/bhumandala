@@ -36,7 +36,7 @@ sutras, two ways:
 Ranking is this project's own priority, not frequency: the Madhva lineage
 first --
 
-  rank 0  सर्वमूलम् (darshana/vedanta/dvaita/SarvaMula)
+  rank 0  सर्वमूलम् (darshana/vedanta/dvaita/Anandamakaranda)
   rank 1  the wider Dvaita corpus (darshana/vedanta/dvaita/DvaitaVedanta/**:
           Sumadhva Vijaya, Yuktimallika, Nyaya Sudha, the later acharyas' works)
   rank 2  dasa_sahitya (Vyasakuta/Haridasa works)
@@ -96,7 +96,7 @@ DEVDIG = {ord(a): str(i) for i, a in enumerate('०१२३४५६७८९')
 
 
 def rank_of(slug):
-    if slug.startswith('darshana/vedanta/dvaita/SarvaMula'):
+    if slug.startswith('darshana/vedanta/dvaita/Anandamakaranda'):
         return 0
     if slug.startswith('darshana/vedanta/dvaita/DvaitaVedanta'):
         return 1

@@ -125,7 +125,7 @@ authorised."*
 | DvaitaVedanta (`dvaitavedanta.in`) | `darshana/vedanta/dvaita/DvaitaVedanta/` | **630 MiB** | 338 | 0 of 316 ❌ |
 | Advaita Sharada (`advaitasharada.sringeri.net`) | `darshana/vedanta/advaita/` | **155 MiB** | 51 | 0 of 51 ❌ |
 | SetuTila (`setutila.in`) | `darshana/vedanta/dvaita/SetuTila/` | 67 MiB | 47 | 47 of 47 ✔ (but still downloadable) |
-| Anandamakaranda (`anandamakaranda.in`) | `darshana/vedanta/dvaita/SarvaMula/` | 26 MiB | 127 | 0 of 47 ❌ |
+| Anandamakaranda (`anandamakaranda.in`) | `darshana/vedanta/dvaita/Anandamakaranda/` | 26 MiB | 127 | 0 of 47 ❌ |
 
 **Total ≈ 878 MiB.** Note SarvaMula is mixed — it holds Madhva's own mūla texts alongside
 Anandamakaranda-sourced material, so it needs per-entry classification, not a blanket move.

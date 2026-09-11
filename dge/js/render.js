@@ -221,13 +221,45 @@ function dgeRenderCommentaryBar() {
   const bulk = onCount === entries.length
     ? `<button type="button" class="dge-cbar-bulk" onclick="window.dgeSetAllCommentaries(false)">✕ hide all</button>`
     : `<button type="button" class="dge-cbar-bulk" onclick="window.dgeSetAllCommentaries(true)">show all ${entries.length}</button>`;
+  // The summary is the whole control when collapsed, so it stays short enough
+  // for one line on a 400px screen -- a count, not a sentence. The instruction
+  // moved into the body, where it is next to the names it is about.
   const lead = onCount
     ? `<span class="dge-cbar-label">📖 भाष्यटीकाः · showing ${onCount} of ${entries.length}</span>`
-    : `<span class="dge-cbar-label">📖 भाष्यटीकाः · this text has ${entries.length} commentar${entries.length === 1 ? 'y' : 'ies'} — tap a name to read ${entries.length === 1 ? 'it' : 'one'} under each verse</span>`;
+    : `<span class="dge-cbar-label">📖 भाष्यटीकाः · ${entries.length} commentar${entries.length === 1 ? 'y' : 'ies'}</span>`;
+  const hint = onCount ? '' :
+    `<span class="dge-cbar-hint">tap a name to read ${entries.length === 1 ? 'it' : 'one'} under each verse</span>`;
   bar.className = 'dge-cbar' + (onCount ? '' : ' dge-cbar-idle');
-  bar.innerHTML = `${lead}${pills}${entries.length > 1 ? bulk : ''}`;
-  bar.style.display = 'flex';
+  // <summary> is the whole control on a phone. A text like the Rigveda has 8
+  // commentaries, each pill long enough to take its own row at 400px, so the
+  // flat bar pushed the first verse a full screen down. The summary carries
+  // the count so the collapsed state still says what is behind it.
+  const caret = `<span class="dge-cbar-caret" aria-hidden="true"></span>`;
+  bar.innerHTML =
+    `<summary class="dge-cbar-summary">${lead}${caret}</summary>` +
+    `<div class="dge-cbar-body">${hint}${pills}${entries.length > 1 ? bulk : ''}</div>`;
+  bar.style.display = 'block';
+  dgeSyncCommentaryBarOpen(bar);
 }
+
+// Open on a wide screen, collapsed on a phone -- but never fighting a reader
+// who has said otherwise. <details> cannot be forced open from CSS, so the
+// `open` attribute is set here; once the reader toggles it themselves that
+// choice wins for the rest of the session.
+const DGE_CBAR_OPEN_KEY = 'dge_cbar_open';
+function dgeSyncCommentaryBarOpen(bar) {
+  let stored = null;
+  try { stored = sessionStorage.getItem(DGE_CBAR_OPEN_KEY); } catch (e) { /* private mode */ }
+  if (stored === '1' || stored === '0') { bar.open = stored === '1'; return; }
+  bar.open = window.matchMedia('(min-width: 760px)').matches;
+}
+window.dgeSyncCommentaryBarOpen = dgeSyncCommentaryBarOpen;
+
+document.addEventListener('toggle', function (e) {
+  const bar = e.target;
+  if (!bar || bar.id !== 'commentaryAvailableBar') return;
+  try { sessionStorage.setItem(DGE_CBAR_OPEN_KEY, bar.open ? '1' : '0'); } catch (err) { /* private mode */ }
+}, true);
 window.dgeRenderCommentaryBar = dgeRenderCommentaryBar;
 
 // The bar's bulk switch. setCommentaryView() does the same job but also

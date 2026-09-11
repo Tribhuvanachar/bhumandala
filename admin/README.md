@@ -173,13 +173,13 @@ recognise:
 | `ancillary/pratishakhya` | `vedanga/shiksha/pratishakhya` |
 | `sutras/kalpa_sutras` | `vedanga/kalpa` |
 | `vyakarana` | `vedanga/vyakarana` — merged beside the grammatical schools |
-| `sarvamoola_grantha` | `darshana/vedanta/dvaita/SarvaMula` |
+| `sarvamoola_grantha` | `darshana/vedanta/dvaita/Anandamakaranda` |
 | `shankara_bhashya` | `darshana/vedanta/advaita/shankara_bhashya` |
 | `itihasas` / `puranas` / `stotras` / `koshas` | `itihasa` / `purana` / `stotra` / `kosha` |
 | `smritis` / `dharmashastra` | `smriti_dharma/smriti` / `smriti_dharma/dharmashastra` |
 | `kavya` | `kavya_alankara` |
 | `dvaitavedanta` (23 Aug 2026) | `darshana/vedanta/dvaita/DvaitaVedanta` — admin-only, see `entry.hidden` in `library.json` |
-| `darshana/vedanta/dvaita/sarvamula` (23 Aug 2026) | `darshana/vedanta/dvaita/SarvaMula` |
+| `darshana/vedanta/dvaita/sarvamula` (23 Aug 2026) | `darshana/vedanta/dvaita/Anandamakaranda` |
 | `stotra/pns` (23 Aug 2026) | `stotra/PrahladaKrutaNarasimha` |
 | `pancharatra_agama` | `agama/pancharatra` |
 | `dasakuta` / `vyasakuta` | `dasa_sahitya/dasakuta` / `dasa_sahitya/vyasakuta` |

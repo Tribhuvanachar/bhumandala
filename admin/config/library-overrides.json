@@ -20,7 +20,7 @@
   "SarvaMula/stotra/prahlada_kruta_narasimha": "प्रह्लादकृतनृसिंहस्तोत्रम्"
  },
  "order": {
-  "darshana/vedanta/dvaita/SarvaMula/rig_bhashya": [
+  "darshana/vedanta/dvaita/Anandamakaranda/rig_bhashya": [
    "tika_jayatirtha",
    "mula",
    "tippani"
@@ -54,7 +54,7 @@
  "moves": {
   "dasa_sahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam/yuktimallika",
   "dasa_sahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaVedanta/others/svapna_vrindavana_akhyana",
-  "darshana/vedanta/dvaita/SarvaMula": "SarvaMula",
+  "darshana/vedanta/dvaita/Anandamakaranda": "SarvaMula",
   "kavya_alankara/sumadhva_vijaya": "SarvaMula/kavya/sumadhva_vijaya",
   "kavya_alankara/raghavendra_vijaya": "SarvaMula/kavya/raghavendra_vijaya",
   "stotra/PrahladaKrutaNarasimha": "SarvaMula/stotra/prahlada_kruta_narasimha"

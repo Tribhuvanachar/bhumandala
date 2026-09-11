@@ -154,7 +154,7 @@ class LibraryAuthorNormalisation(unittest.TestCase):
 
     def test_scope_covers_the_dvaita_subtree_only(self):
         # The lead's rule: not the Vedas, not kavya, not dasa sahitya.
-        self.assertTrue("dge/data/darshana/vedanta/dvaita/SarvaMula/x/data.json"
+        self.assertTrue("dge/data/darshana/vedanta/dvaita/Anandamakaranda/x/data.json"
                         .startswith(s.LIBRARY_AUTHOR_SCOPE))
         for outside in ("dge/data/veda/rigveda/mula/data.json",
                         "dge/data/kavya/raghuvamsha/mula/data.json",

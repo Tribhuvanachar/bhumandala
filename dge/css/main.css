@@ -1130,7 +1130,21 @@ body.dge-app-view .shloka-list { gap: 20px; }
    Everything this text has, and the switch for each, where the reader is
    already looking -- rather than a toast that has gone by the time they read
    it and an icon in a top bar they have to find first. */
-.dge-cbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 2px 10px; padding: 8px 10px; border: 1px solid var(--card-border); border-radius: var(--radius-md); background: var(--card-bg); }
+/* The commentary bar is a <details>: collapsed on a phone, open on a desktop.
+   A text like the Rigveda offers 8 commentaries and each pill is long enough
+   to take its own row at 400px, which pushed the first verse a full screen
+   down. The pills themselves are unchanged -- only their container folds. */
+.dge-cbar { display: block; margin: 0 2px 10px; padding: 8px 10px; border: 1px solid var(--card-border); border-radius: var(--radius-md); background: var(--card-bg); }
+.dge-cbar-summary { display: flex; align-items: center; gap: 6px; cursor: pointer; list-style: none; }
+.dge-cbar-summary::-webkit-details-marker { display: none; }
+.dge-cbar-summary:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; border-radius: var(--radius-sm); }
+/* The caret is the affordance -- without it a collapsed bar reads as a label
+   rather than something to tap. margin-left:auto pins it to the right edge
+   however long the summary text runs. */
+.dge-cbar-caret { margin-left: auto; flex: none; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--muted-text); transition: transform var(--t-fast) var(--ease); }
+.dge-cbar[open] .dge-cbar-caret { transform: rotate(180deg); }
+.dge-cbar-body { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding-top: 8px; }
+.dge-cbar-hint { flex: 1 0 100%; font-size: 11px; color: var(--muted-text); margin-bottom: 2px; }
 .dge-cbar-label { font-size: 11.5px; font-weight: 600; color: var(--muted-text); margin-right: 2px; }
 .dge-cbar-pill { font-family: var(--font-ui); font-size: 11.5px; font-weight: 700; padding: 5px 11px; border-radius: var(--radius-pill); border: 1px solid var(--card-border); background: transparent; color: var(--text-primary); cursor: pointer; transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease); }
 .dge-cbar-pill:hover { border-color: var(--accent-gold); }
