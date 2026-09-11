@@ -55,14 +55,24 @@ silently producing a wrong answer with ordinary-looking confidence:
 
 A SECOND gap, previously listed here, was FOUND AND FIXED (11 Sep 2026,
 external review, then independently verified before accepting): the
-indic_transliteration library's SLP1 scheme cannot distinguish "र्ऋ" (a
-bare consonant, then an independent vowel) from "रृ" (that same consonant
-with a DEPENDENT vowel-matra) -- both round-trip to the identical SLP1
-string ("rf"). Fixed with a ZWNJ marker inserted at the boundary by
+indic_transliteration library's SLP1 scheme cannot distinguish a bare
+consonant + an independent vowel letter (e.g. "र्ऋ") from that same
+consonant + a DEPENDENT vowel-matra (e.g. "रृ") -- both round-trip to the
+identical SLP1 string. This collision is verified to hold for EVERY vowel
+class, not only vocalic r/rr (a second review round correctly rejected an
+earlier, too-narrow claim here that it was unique to r/f -- see
+tests/test_krama_engine.py's SLP1BareConsonantVowelCollision class).
+_finish_consonant_then_vowel() only special-cases f/F because that is the
+only vowel class this project's own attested text actually needs the
+independent-letter form for (checked against 3 real examples, not
+assumed -- see that function's own docstring); the collision existing
+more broadly at the transliteration level does not by itself mean this
+engine mishandles other vowel classes, and no case where it does has been
+found. Fixed with a ZWNJ marker inserted at the boundary by
 _finish_consonant_then_vowel() and stripped only at true final-output
 points by strip_zwnj_markers() -- see both functions' docstrings. Tested
-across 4 consecutive re-joins (not just the 2 that originally exposed the
-bug) before this was accepted as a real fix, not just a plausible one.
+across 10 consecutive re-joins, checked after every individual join (not
+just the final one) before this was accepted as a real fix.
 """
 import re
 from indic_transliteration import sanscript
@@ -477,18 +487,41 @@ def _finish(slp1_result, rule, w1_deva, w2_deva, confidence="high", note=""):
 def _finish_consonant_then_vowel(prefix_slp1, suffix_slp1, rule, w1_deva, w2_deva):
     """Like _finish, but for cases where prefix_slp1 ends in a BARE
     consonant (typically a visarga->r insertion) immediately before
-    suffix_slp1. Confirmed against DGE's own attested samhita_patha
-    (RV 1.1.2's puurvebhiH+RSibhiH -> puurvebhir.RSibhiH) that ONLY
-    vocalic-r/rr (SLP1 f/F) needs to render as its own INDEPENDENT letter
-    rather than merging as a dependent matra on the preceding consonant
-    -- "र्ऋषिभिः" (bare र्, then independent ऋ), not "रृषिभिः" (र् read
-    as if ऋ were its OWN vowel). Every other vowel (verified against
-    RV 1.1.2's RSibhiH+iiDyaH -> RSibhir.iiDyaH, attested as one merged
-    "री") merges normally as a dependent matra -- transliterating the
-    whole string in one pass already does that correctly, so only the
-    f/F case needs the separate-transliterate-then-concatenate
-    workaround (verified: transliterating a string that ends in a bare
-    consonant always ends in an explicit virama).
+    suffix_slp1.
+
+    IMPORTANT CORRECTION (a second external review round, 11 Sep 2026,
+    correctly rejected an earlier claim -- made in an even earlier version
+    of this docstring -- that vocalic-r/rr (f/F) is "uniquely" ambiguous
+    here): the underlying SLP1 collision (a bare consonant + independent
+    vowel letter transliterates identically to that consonant + a
+    DEPENDENT vowel-matra) is verified to hold for EVERY vowel class, not
+    only f/F -- see tests/test_krama_engine.py's
+    SLP1BareConsonantVowelCollision.test_collision_exists_for_every_vowel_class_not_only_vocalic_r.
+    So f/F is not special because it is uniquely ambiguous at the
+    transliteration level; every vowel is equally ambiguous there.
+
+    What f/F actually IS special for: DGE's own attested Samhita-patha
+    text, checked character-by-character (not assumed) for every real
+    example available in this project's data, shows the INDEPENDENT-
+    letter rendering is the one actually used ONLY for vocalic r/rr in
+    this environment ("पूर्वेभिर्ऋषिभिः" -- bare र्, then independent ऋ,
+    U+090B, not the dependent matra U+0943). The two other real examples
+    available (both from RV 1.1.2) show the DEPENDENT-matra form instead:
+    "र्+ई" -> "री" (dependent ी, not independent ई) and "र्+उ" -> "रु"
+    (dependent ु, attested "नूतनैरुत", not independent उ) -- i.e. this
+    module's ordinary default behaviour (concatenate as one SLP1 string,
+    let the library render the dependent matra) is ALREADY correct for
+    those, confirmed against real text, not merely untested. This is a
+    real (if limited -- only 3 attested data points, all from RV 1.1.2)
+    Devanagari TYPESETTING fact specific to vocalic r/rr's dependent-matra
+    glyph (likely because ृ is small and easily missed, especially under
+    Vedic accent marks, while ि/ी/ु/ू/े/ो are visually larger), not an
+    SLP1-level fact -- see tests/test_krama_engine.py's
+    SLP1BareConsonantVowelCollision class for the full reasoning and both
+    verifications. If a future example is found where another vowel class
+    ALSO needs the independent-letter form, extend this function's
+    condition then, backed by that reproduced case -- do not extend it
+    speculatively without one.
 
     A ZWNJ is inserted at the boundary (external review, 11 Sep 2026):
     without it, this correct Devanagari output, if fed back into
@@ -496,8 +529,10 @@ def _finish_consonant_then_vowel(prefix_slp1, suffix_slp1, rule, w1_deva, w2_dev
     gets re-transliterated to SLP1 as one flat "rf"/"rF" and can render
     back WRONG (as the dependent-matra reading) on that second pass --
     confirmed as a real bug before this fix, and confirmed the ZWNJ
-    survives at least 4 consecutive re-joins after it. See strip_zwnj_markers()
-    -- callers that will not re-join this string further must call it."""
+    survives 10 consecutive re-joins, checked after every individual join
+    not just the final one (a second review round's stronger test).
+    See strip_zwnj_markers() -- callers that will not re-join this string
+    further must call it."""
     if suffix_slp1[0] not in ("f", "F"):
         return _finish(prefix_slp1 + suffix_slp1, rule, w1_deva, w2_deva)
     deva = slp1_to_deva(prefix_slp1) + ZWNJ + slp1_to_deva(suffix_slp1)

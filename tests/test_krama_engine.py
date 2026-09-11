@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools" / "pratisha
 
 from sanskrit_phonology import (  # noqa: E402
     samhita_join, resolve_compound, reconstruct_chain, strip_zwnj_markers,
+    deva_to_slp1, slp1_to_deva, ZWNJ,
 )
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound, requires_parigraha,
@@ -77,6 +78,22 @@ class SamhitaJoin(unittest.TestCase):
         second = samhita_join(first["surface"], "ऋषिभिः", resolve_w1_compound=False)
         third = samhita_join(second["surface"], "ईड्यः", resolve_w1_compound=False)
         self.assertEqual(strip_zwnj_markers(third["surface"]), "अग्निः पूर्वेभिर्ऋषिभिरीड्यः")
+
+    def test_zwnj_marker_present_after_every_one_of_10_consecutive_joins(self):
+        # Stronger version of the "survives 4/10 joins" claim (11 Sep 2026,
+        # a second external review round): asserts the invariant holds
+        # after EVERY individual join, not just by comparing the final
+        # result. One ZWNJ is added per join that hits the f/F branch, so
+        # the running count must equal the join index throughout, not just
+        # "at least one present".
+        words = ["पूर्वेभिः"] + ["ऋषिभिः"] * 10
+        combined = words[0]
+        for i, w in enumerate(words[1:], start=1):
+            r = samhita_join(combined, w, resolve_w1_compound=False)
+            combined = r["surface"]
+            self.assertEqual(combined.count(ZWNJ), i, f"wrong ZWNJ count after join {i}: {combined!r}")
+        final = strip_zwnj_markers(combined)
+        self.assertEqual(final, "पूर्वेभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिर्ऋषिभिः")
 
     def test_visarga_a_class_before_voiced(self):
         result = samhita_join("देवः", "देवेभिः")
@@ -245,6 +262,63 @@ class ReconstructChain(unittest.TestCase):
             ["अग्निः", "पूर्वेभिः", "ऋषिऽभिः", "ईड्यः", "नूतनैः", "उत"]
         )
         self.assertEqual(computed, "अग्निः पूर्वेभिर्ऋषिभिरीड्यो नूतनैरुत")
+
+
+class SLP1BareConsonantVowelCollision(unittest.TestCase):
+    """A second external review round (11 Sep 2026) correctly rejected a
+    prior claim that the r/f (vocalic-r) collision is "a unique artifact"
+    -- it is NOT: EVERY vowel collides the same way at the pure SLP1
+    transliteration level (a bare consonant + independent vowel letter is
+    indistinguishable from that consonant + a dependent vowel-matra, for
+    every vowel, not just f/F). That correction is verified below.
+
+    But a transliteration-level collision existing is not automatically an
+    ENGINE bug: samhita_join only special-cases f/F in
+    _finish_consonant_then_vowel(), and the question that actually matters
+    is whether letting every OTHER vowel fall through to the ordinary
+    (dependent-matra) rendering ever produces a WRONG result. Checked
+    against every real attested example available in this project's own
+    data for the visarga-derived-consonant-before-vowel environment (not
+    invented cases): DGE's own attested RV 1.1.2 Samhita-patha shows
+    "र्+ई" -> "री" (dependent matra) and "र्+उ" -> "रु" (dependent matra)
+    -- both confirmed correct by character-by-character inspection of the
+    real Unicode codepoints, not assumed. "र्+ऋ" is the only one of the
+    three actually-attested cases needing the independent-letter form.
+    This is real (if limited) evidence the current scope is correct, not
+    merely untested luck -- but it is NOT proof for every vowel/context
+    this engine hasn't yet exercised, and should be revisited if/when
+    scaling finds a counterexample."""
+
+    def test_collision_exists_for_every_vowel_class_not_only_vocalic_r(self):
+        # Pure transliteration-level fact, independent of this engine's
+        # own behaviour: a bare consonant immediately followed by an
+        # INDEPENDENT vowel letter is indistinguishable, in SLP1, from
+        # that same consonant with a DEPENDENT vowel-matra, for every
+        # vowel class -- not a property unique to f/F.
+        pairs = [
+            ("क्अ", "क"), ("क्इ", "कि"), ("क्ई", "की"), ("क्उ", "कु"),
+            ("क्ऊ", "कू"), ("क्ए", "के"), ("क्ऐ", "कै"), ("क्ओ", "को"),
+            ("क्औ", "कौ"), ("क्ऋ", "कृ"), ("क्ॠ", "कॄ"),
+        ]
+        for independent_form, dependent_form in pairs:
+            with self.subTest(independent=independent_form, dependent=dependent_form):
+                self.assertNotEqual(independent_form, dependent_form)
+                self.assertEqual(
+                    deva_to_slp1(independent_form), deva_to_slp1(dependent_form),
+                    f"expected a collision between {independent_form!r} and {dependent_form!r}",
+                )
+
+    def test_other_vowel_classes_default_to_the_attested_dependent_matra_form(self):
+        # Engine-reachability check: does the "not f/F" default path in
+        # _finish_consonant_then_vowel() actually match DGE's own attested
+        # text for the other vowel classes it's exercised against? These
+        # are the two real (not synthetic) cases available -- see class
+        # docstring for the exact codepoint verification.
+        diphthong_visarga_before_u = samhita_join("नूतनैः", "उत")
+        self.assertEqual(diphthong_visarga_before_u["surface"], "नूतनैरुत")  # attested RV 1.1.2
+
+        iu_class_visarga_before_i = samhita_join("अग्निः", "इन्द्रः")
+        self.assertEqual(iu_class_visarga_before_i["surface"], "अग्निरिन्द्रः")  # standard textbook form
 
 
 if __name__ == "__main__":

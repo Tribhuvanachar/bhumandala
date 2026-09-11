@@ -196,6 +196,27 @@ complete record, not just a live queue.
   the specific claim — not adopted; the gap remains open with a citation to verify rather than
   none. Full detail in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.8.
 
+  **Update, 11 Sep 2026 — fourth round, Gemini's actual Round 2 answer plus a Claude-authored
+  critique of it, both checked directly.** Gemini's D1 (the ZWNJ fix survives 10 joins) was
+  verified correct. Its D2 conclusion ("the र्ऋ collision is unique to vocalic r/rr") was
+  checked directly and found FALSE — the critique document's core objection was right: a bare
+  consonant before an independent vowel collides with that consonant + a dependent vowel-matra
+  for every vowel class, not only r/rr (now a permanent test,
+  `SLP1BareConsonantVowelCollision`). But going one step further than the critique document's
+  own next step — checking whether this transliteration-level fact is an actual ENGINE bug,
+  not just assuming it is — found it isn't: three real RV 1.1.2 examples, verified by Unicode
+  codepoint inspection, show this engine's existing scope (special-case only f/F) is already
+  correct, because DGE's own attested text uses the dependent-matra form for the other two
+  attested cases ("र्+ई"→"री", "र्+उ"→"रु"). No speculative widening of
+  `_finish_consonant_then_vowel` was made; both its docstring and the module docstring were
+  corrected to state the real (typesetting-convention) reason for its scope instead of the
+  disproven "uniquely ambiguous" framing. Also flagged that the critique document's blanket
+  rejection of Gemini's Pāṇini 8.3.17/8.3.19 citation (for the still-open RV 1.1.7 gap) was
+  procedurally fair for that specific prompt's rule but too quick to discard substantively — it's
+  a real sūtra and "Śākalya" is this recension's own namesake — recorded as an open lead to
+  verify in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §10, not adopted or dismissed. Full
+  detail in that doc's §6.9.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

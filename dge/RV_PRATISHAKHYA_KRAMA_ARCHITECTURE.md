@@ -883,6 +883,65 @@ concrete failure case it currently causes was not attempted).
 
 ---
 
+### 6.9 Fourth round (11 Sep 2026) — Gemini's Round 2 answer, then a Claude-authored critique of
+    it, both checked directly rather than either trusted
+
+The lead relayed Gemini's answer to the Round 2 prompt (§6.8), plus a document (apparently
+another Claude session's review of that answer) arguing Gemini's D2 conclusion should be
+rejected. Rather than trust either verdict, every checkable claim was reproduced directly.
+
+**Gemini's D1 (10-join survival) was correct and is now the permanent test.** Verified Gemini's
+own proposed test runs and passes against the real engine exactly as claimed.
+`tests/test_krama_engine.py`'s `test_zwnj_marker_present_after_every_one_of_10_consecutive_joins`
+now asserts the ZWNJ count after *every* individual join (not just comparing the final result,
+which the critique document correctly pointed out was a weaker test than the prompt asked for).
+
+**Gemini's D2 conclusion ("the rf collision is a unique artifact... no other collisions exist")
+was checked directly and found FALSE — the critique document's core objection is correct.**
+Built the exact collision matrix the critique proposed
+(`tests/test_krama_engine.py`'s `SLP1BareConsonantVowelCollision.
+test_collision_exists_for_every_vowel_class_not_only_vocalic_r`) and ran it: a bare consonant
+before an independent vowel letter transliterates identically to that consonant with a
+DEPENDENT vowel-matra, for **every** vowel class (अ/इ/ई/उ/ऊ/ए/ऐ/ओ/औ/ऋ/ॠ), not only vocalic r/rr.
+Gemini tested anusvāra/candrabindu, avagraha, and vowel length (all genuinely collision-free,
+confirmed) but never tested the specific category the prompt named — "other independent-
+vowel-after-consonant cases" — and drew a general conclusion its own tests didn't support.
+
+**But the critique document's implied next step (audit `_finish_consonant_then_vowel`'s scope
+for a real defect) was also checked directly, not assumed either way — and no defect was
+found.** A transliteration-level collision existing for every vowel does not by itself mean
+this engine's choice to special-case only f/F is wrong; the real question is whether letting
+every other vowel fall through to the default (dependent-matra) rendering ever produces WRONG
+output. Checked against DGE's own attested Samhita-patha, character-by-character (not assumed):
+RV 1.1.2 has three real (not synthetic) examples of a visarga-derived consonant immediately
+before a vowel — "र्+ऋ" (needs the independent form, the one case already handled), "र्+ई"
+(attested as "री", dependent matra — matches this engine's existing default) and "र्+उ"
+(attested as "रु" in "नूतनैरुत", dependent matra — also matches the default). All three
+confirmed by direct Unicode codepoint inspection of the source data, not inferred. This is a
+genuine, if limited (3 data points, one text), Devanagari **typesetting** convention specific
+to vocalic r/rr's dependent-matra glyph (likely because ृ is small and easily lost under Vedic
+accent marks, unlike the larger ि/ी/ु/ू/े/ो), not an SLP1-level property — so `_finish_
+consonant_then_vowel`'s scope was not widened speculatively (per the critique document's own
+correct instruction: "do not patch this speculatively" / "only fix reproduced defects"). Both
+`sanskrit_phonology.py`'s module docstring and `_finish_consonant_then_vowel`'s own docstring
+were corrected to state this accurately (the earlier, too-narrow "uniquely ambiguous" framing
+was itself part of what needed fixing here).
+
+**E1/E2/E3: the critique document's procedural read (require exact citations, mark UNRESOLVED
+without one) is the correct discipline and was already this project's own standard before the
+document arrived** — §6.8 already declined to adopt Gemini's Q3 citation for the same reason.
+One place the critique document overreached: it dismissed Gemini's E3 invocation of Pāṇini
+8.3.17/8.3.19 ("lopaḥ śākalyasya") as inadmissible purely because it wasn't in the supplied RPr
+excerpt. That procedural point is fair for judging whether Gemini followed *that specific
+prompt's* rule, but 8.3.19 is a real, well-known sūtra, and its namesake ("Śākalya") is
+literally this recension's own name (Ṛgveda **Śākala** śākhā) — dismissing it outright loses a
+promising, checkable lead rather than filing it as one. Recorded in §10 as a citation to
+investigate (does 8.3.17's precise condition — a visarga from final "-as", "apūrvasya",
+specific word classes — actually cover भरन्तः, a plain -तस् nominative?) rather than either
+adopted or discarded.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -1003,6 +1062,21 @@ Kept as a short index back to the full review, not restated in full here:
     not-yet-cross-checked) Paṭala 2 data and finding it doesn't clearly support the specific
     claim made. RV 1.1.7's visarga-before-आ gap remains open, now with a citation to verify
     rather than none.
+23. (Part VIII, 11 Sep 2026) Gemini's Round 2 answer, then a Claude-authored critique of that
+    answer, were both checked directly rather than either trusted (§6.9). The critique correctly
+    caught that Gemini's D2 conclusion ("the र्ऋ collision is unique to vocalic r/rr") was false
+    — reproduced directly: the collision holds for every vowel class. But going further and
+    checking whether that transliteration-level fact was an actual ENGINE bug (not assumed
+    either way) found it wasn't: three real attested RV 1.1.2 examples (checked by Unicode
+    codepoint, not inferred) confirm this project's existing scope (special-case only f/F) is
+    already correct — the two other attested cases ("र्+ई"→"री", "र्+उ"→"रु") both use the
+    dependent-matra form this engine's default already produces. `_finish_consonant_then_vowel`
+    was not widened without a reproduced defect; both its docstring and the module docstring
+    were corrected to state the real (typesetting, not SLP1-uniqueness) reason for its scope
+    accurately. Also declined to fully adopt the critique document's blanket dismissal of
+    Gemini's Pāṇini 8.3.17/8.3.19 citation for RV 1.1.7 — procedurally out of bounds for that
+    specific prompt's rule, but a real, checkable, name-relevant (Śākalya/Śākala) lead that
+    deserves investigation, not discarding — recorded as an open item in §10.
 
 ---
 
@@ -1040,6 +1114,16 @@ Kept as a short index back to the full review, not restated in full here:
   (including 2.24/2.27) still carry `has_uncertain_reading: true` and no Bhāṣya gloss. Cross-
   checking Paṭala 2 the way Paṭala 10–11 already were would likely resolve both this and the
   Q2 question below in one pass.
+- (Added 11 Sep 2026, Part VIII) A second candidate citation for the same RV 1.1.7 gap: Gemini's
+  Round 2 answer invoked Pāṇini 8.3.17 ("bho-bhago-agho-apūrvasya yo'śi") and 8.3.19 ("lopaḥ
+  śākalyasya" — the semivowel arising from this sandhi may optionally elide before a vowel, per
+  the grammarian Śākalya). This wasn't part of the text supplied in that prompt, so it was
+  correctly flagged as not satisfying that specific exercise's citation rule — but it is a real,
+  well-known Pāṇinian sūtra, and "Śākalya" is literally this recension's own namesake (Ṛgveda
+  Śākala śākhā), which makes it a genuinely promising lead, not a fabrication. Not yet verified:
+  whether 8.3.17's precise condition (a visarga from final "-as", specifically in the
+  "apūrvasya" environment, i.e. NOT preceded by अ) actually covers भरन्तः (an ordinary -तस्
+  nominative). Worth checking properly before either adopting or discarding.
 - (Added 11 Sep 2026, Part VII) Sharpened question from Gemini's Q2 answer: is
   `get_sthitopasthita()`'s current unconditional "no sandhi between word and iti" rendering
   actually wrong for non-pragṛhya Parigraha words? Both of this project's two attested examples
