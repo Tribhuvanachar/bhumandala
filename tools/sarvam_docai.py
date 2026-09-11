@@ -90,7 +90,17 @@ def slice_pdf(pdf: str, first: int, last: int, out: str) -> None:
     """One PDF holding pages first..last, with pdfseparate/pdfunite (poppler)
     or qpdf, whichever the runner has."""
     if subprocess.call(["which", "qpdf"], stdout=subprocess.DEVNULL) == 0:
-        subprocess.check_call(["qpdf", "--empty", "--pages", pdf, f"{first}-{last}", "--", out])
+        # qpdf exits 3 for "succeeded with warnings" and 2 for a real error.
+        # A scanned book almost always warns about something cosmetic — the
+        # Raghavendra Vijaya scan reports an object count one off from its
+        # highest object number — and the slice is written correctly anyway.
+        # check_call treated that 3 as fatal, so the run died before it
+        # reached Sarvam at all. Accept 3, and let 2 raise as it should.
+        rc = subprocess.call(["qpdf", "--empty", "--pages", pdf, f"{first}-{last}", "--", out])
+        if rc == 3:
+            log(f"  qpdf warned on {os.path.basename(pdf)} but wrote the slice; continuing")
+        elif rc != 0:
+            raise subprocess.CalledProcessError(rc, "qpdf")
         return
     with tempfile.TemporaryDirectory() as td:
         subprocess.check_call(["pdfseparate", "-f", str(first), "-l", str(last), pdf, os.path.join(td, "p-%d.pdf")])

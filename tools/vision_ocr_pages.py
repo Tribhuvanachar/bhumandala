@@ -52,7 +52,11 @@ def main():
         else:
             for p, r, (w, h) in zip(chunk, res, dims):
                 done[p] = {"page": p, "width": w, "height": h, "dpi": a.dpi, "text": r.get("text", ""), "words": r.get("words", [])}
+        # "engine" names the reader, so admin/ocr-studio.html can put this file
+        # in the right engine's slot. Without it stagedEngine() finds nothing to
+        # go on and the Load button drops Vision's output into the Sarvam row.
         data = {"_readme": "Raw Google Vision DOCUMENT_TEXT_DETECTION per PDF page (no proofreading). Produced by tools/vision_ocr_pages.py.",
+                "engine": "vision",
                 "pdf": os.path.basename(a.pdf), "dpi": a.dpi, "language_hints": hints, "pages": [done[k] for k in sorted(done)]}
         json.dump(data, open(out, "w", encoding="utf-8"), ensure_ascii=False)
         print(f"  {len(done)} pages done ({time.time()-t0:.0f}s)", flush=True)
