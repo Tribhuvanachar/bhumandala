@@ -461,7 +461,8 @@
     "svarga_khanda": {},
     "patala_khanda": {},
     "uttara_khanda": {},
-    "kriya_yoga_sara_khanda": {}
+    "kriya_yoga_sara_khanda": {},
+    "brahma_khanda": {}
    },
    "vishnu_purana": {
     "amsha_01": {},
@@ -527,7 +528,8 @@
     "prabhasa_khanda": {},
     "revakhanda": {
      "_schema": "grantha_mula_text"
-    }
+    },
+    "ambika_khanda": {}
    },
    "vamana_purana": {
     "purana_mula": {},

@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 2242,
-  "loaded": 1233,
-  "items": 858958
+  "loaded": 1234,
+  "items": 869694
  },
  "sections": {
   "agama": {
@@ -38,8 +38,8 @@
   },
   "purana": {
    "total": 97,
-   "loaded": 49,
-   "items": 131866
+   "loaded": 50,
+   "items": 142602
   },
   "shastra": {
    "total": 32,
@@ -1922,7 +1922,7 @@
   "purana/maha_purana/vamana_purana/purana_mula": 4516,
   "purana/maha_purana/vamana_purana/saromahatmya": 0,
   "purana/maha_purana/varaha_purana": 39,
-  "purana/maha_purana/vayu_purana": 0,
+  "purana/maha_purana/vayu_purana": 10736,
   "purana/maha_purana/vishnu_purana/amsha_01": 1393,
   "purana/maha_purana/vishnu_purana/amsha_02": 780,
   "purana/maha_purana/vishnu_purana/amsha_03": 815,
@@ -4532,6 +4532,10 @@
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Varāhapurāṇa",
    "licence": "CC-BY 4.0"
+  },
+  "purana/maha_purana/vayu_purana": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B5%E0%A4%BE%E0%A4%AF%E0%A5%81%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
   },
   "purana/maha_purana/vishnu_purana/amsha_01": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
