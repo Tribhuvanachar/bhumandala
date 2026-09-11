@@ -151,6 +151,32 @@ complete record, not just a live queue.
   restoration, and Priority-1 items 10.8/10.20/10.22/11.25/11.37–43, are not yet implemented
   (§6.6, §10). Full-Rigveda scaling has not started, per the spec's own explicit gate.
 
+  **Update, 11 Sep 2026 — second review pass ("chatgpt review"), epistemic auditability.**
+  A second, independent review of the first regenerated-output run argued the deeper problem
+  wasn't the individual wrong strings but that the JSON gave no way to tell canonical output
+  from a guess, or a checked fact from an unchecked one (16 numbered points). Checking each
+  one against the actual code and data (not taking the review on trust either): its specific
+  count-bug claim was wrong (both `pada_count` and `pair_count` were already internally
+  consistent), but the complaint underneath was fair — the arithmetic tying them together was
+  nowhere visible. Fixed that (`build_counts()` now asserts and ships its own invariant) plus
+  several real gaps: every unit now carries `"status"` (`"canonical"` vs
+  `"candidate_reconstruction"`) alongside `"confidence"`, so "the classifier is sure" can never
+  again be read as "this is verified correct"; Parigraha units now state their `"retake_state"`
+  (`STHITOPASTHITA`, 10.14) and named `"trigger_reasons"` instead of a bare sūtra-number list;
+  and a real VALIDATE-mode check (`sanskrit_phonology.reconstruct_chain()`, folding the sandhi
+  engine across a WHOLE ardharca and diffing against DGE's attested `samhita_patha`) replaced a
+  first, flawed attempt at per-unit substring matching. Building that check properly caught two
+  real, now-fixed phonology bugs (a chained string's own elision-avagraha misread as a
+  Pada-pāṭha compound; lexical exceptions only matching a bare word, never mid-chain) and
+  precisely diagnosed — rather than patched — one further real, still-open bug (an SLP1
+  round-trip collision between "र्ऋ" and "रृ" in the `indic_transliteration` library, two joins
+  deep). Chain reconstruction now matches DGE's attested text on 16 of 18 RV 1.1 ardharcas.
+  Full detail in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.7, including the explicit list
+  of what the review correctly flagged as still missing (a real Paṭala-11 Kramahetu evaluation
+  layer, the `restore_*` family, a structured Svara object, full per-unit transformation
+  history) and was NOT attempted this pass, plus the standing acceptance criterion §10 now
+  records verbatim from that review.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

@@ -32,6 +32,37 @@ see krama_engine.py for the Krama-Paṭala rule citations layered on top of
 this module's output) plus, where accuracy is uncertain, an explicit
 low-confidence flag -- never a silent guess presented as equal-confidence
 to an attested case.
+
+TWO KNOWN, UNRESOLVED GAPS surfaced by chain-reconstruction validation
+(reconstruct_chain(), checked against DGE's own attested samhita_patha by
+tools/pratishakhya/regenerate_krama_rv_1_1.py) -- named here rather than
+silently producing a wrong answer with ordinary-looking confidence:
+
+1. RV 1.1.7's "bharantaH"+"aa" -> attested "bharanta emasi" shows the
+   visarga dropping ENTIRELY before this aa, not converting to "o" as the
+   general a-class-visarga-before-voiced rule (this module's own
+   "visarga_a_class_before_voiced") gives ("bharanto aa"). Neither this
+   engine's classical answer nor a-guess is confirmed correct -- this
+   looks like a Vedic-specific visarga-lopa variant (the Prati'saakhya's
+   own "bahulam chandasi" latitude) not yet backed by a specific sutra in
+   krama_kramahetu_rules.json. Do not add an ad hoc special case for this
+   without first finding which sutra (if any) actually licenses it.
+2. The indic_transliteration library's SLP1 scheme cannot distinguish
+   "र्ऋ" (a bare consonant, then an independent vowel -- e.g. from a
+   visarga-to-r insertion before a vocalic-r/rr word) from "रृ" (that same
+   consonant with a DEPENDENT vowel-matra) -- both round-trip to the
+   identical SLP1 string ("rf"). _finish_consonant_then_vowel() works
+   around this for a SINGLE join by keeping the two chunks as separate
+   Devanagari strings, but once that correct output is fed back into
+   samhita_join a second time (as reconstruct_chain() does, building up a
+   whole ardharca), it gets re-transliterated to SLP1 as one piece,
+   collapsing the distinction -- confirmed via RV 1.1.2's chain
+   ("puurvebhi-r-Rzibhi..." loses its virama on the second hop, rendering
+   "पूर्वेभिरृषिभिः" instead of "पूर्वेभिर्ऋषिभिः"). A real fix needs
+   either a private marker that survives round-tripping through this
+   scheme, or bypassing indic_transliteration's SLP1 for this one
+   character class -- not attempted here; flagging it precisely was
+   judged more valuable than a rushed patch.
 """
 import re
 from indic_transliteration import sanscript
@@ -125,6 +156,24 @@ IRREGULAR_LENGTHENING_BEFORE_CONSONANT = {
 }
 
 
+def _match_lexical_suffix(s1, table):
+    """Both lexical-exception tables above are keyed by a single bare
+    pada word's SLP1 form -- but s1 may be a longer chained string (see
+    reconstruct_chain()) ending in that word, not the word alone. Checking
+    equality only (s1 == key) silently fails to fire the exception for
+    every position except the very start of a chain -- a real bug found
+    11 Sep 2026. Returns (prefix, matched_key) if s1 is exactly key or
+    ends in " "+key, else None; prefix is whatever text (possibly empty)
+    precedes the matched word and must be preserved in the result."""
+    if s1 in table:
+        return "", s1
+    for key in table:
+        suffix = " " + key
+        if s1.endswith(suffix):
+            return s1[: -len(key)], key
+    return None
+
+
 def resolve_compound(word_deva):
     """If word_deva is a Pada-patha avagrhya compound (contains the
     avagraha 'ऽ'), compute its own internally-combined (samhita) surface
@@ -140,13 +189,55 @@ def resolve_compound(word_deva):
     combined = segments[0]
     rules = []
     for seg in segments[1:]:
-        r = samhita_join(combined, seg)
+        # resolve_w1_compound=False: `combined` is running compound-internal
+        # text, not a fresh Pada-patha word -- for a 3+-segment compound it
+        # could itself pick up an elision-avagraha from an earlier segment
+        # join, which must not be re-read as a second compound to resolve
+        # (see samhita_join's own docstring on this exact failure mode).
+        r = samhita_join(combined, seg, resolve_w1_compound=False)
         combined = r["surface"].replace(" ", "")  # compound-internal join never leaves a gap
         rules.append(r["rule"])
     return combined, segments, rules
 
 
-def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False):
+def reconstruct_chain(words_deva):
+    """Builds ONE continuous samhita-patha string by folding samhita_join
+    across a whole sequence of bare Pada-patha words -- simulating how
+    DGE's own continuous samhita_patha text is actually built (each word's
+    ending sandhi's against the word immediately following it, and only
+    that). This is NOT part of the Krama generator (krama_engine.py
+    computes each retake pair independently and deliberately never chains
+    across a whole ardharca -- Krama pairs are self-contained units, and
+    10.18 forbids sandhi across an ardharca boundary regardless). This
+    function exists for VALIDATION: comparing its output against DGE's own
+    attested samhita_patha is a real, mechanically-checkable test of
+    whether this module's phonology, applied the way continuous text is
+    actually built, reproduces it -- see
+    tools/pratishakhya/regenerate_krama_rv_1_1.py's attest_units(). It is
+    NOT a claim that reproducing DGE's Samhita proves philological
+    correctness against a traditional Krama-patha edition (a separate,
+    still-open question -- architecture doc sec.10).
+
+    Returns (final_surface_deva, rules_used_list)."""
+    if not words_deva:
+        return "", []
+    first = words_deva[0]
+    combined = resolve_compound(first)[0] if "ऽ" in first else first
+    rules = []
+    for w in words_deva[1:]:
+        # resolve_w1_compound=False: `combined` is running chained text, not
+        # a fresh Pada-patha word -- it can legitimately contain an
+        # elision-avagraha from an EARLIER join in this same chain (ordinary
+        # Sanskrit orthography, e.g. "suunave"+"agne" -> "suunave'gne"),
+        # which must not be misread as a Pada-patha compound to resolve
+        # (a real bug found 11 Sep 2026 -- see samhita_join's docstring).
+        r = samhita_join(combined, w, resolve_w1_compound=False)
+        combined = r["surface"]
+        rules.append(r["rule"])
+    return combined, rules
+
+
+def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False, resolve_w1_compound=True):
     """Compute the samhita-patha rendering of the pair (w1, w2), both given
     as bare (unaccented is fine, accented is stripped) Devanagari pada
     words. Returns dict: surface (Devanagari), rule (short id),
@@ -155,8 +246,24 @@ def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False):
     w1_is_pragrhya: if true (per pratishakhya_classify.is_pragrhya), vowel
     sandhi is suppressed for w1's final vowel (10.20/Paatala-1's pragrhya
     definition -- a pragrhya word's vowel does not combine with what
-    follows)."""
-    if "ऽ" in w1_deva:
+    follows).
+
+    resolve_w1_compound: True (default) is correct for w1 = a single bare
+    Pada-patha word that may itself be an avagrhya compound (e.g.
+    "puraH-hitam") -- this is what krama_engine.py's ordinary per-pair use
+    needs. Pass False when w1 is NOT a single pada word but an
+    already-sandhi'd, possibly multi-word chain (e.g. building up a whole
+    ardharca's continuous text by repeated joining): a real bug, found
+    11 Sep 2026 while adding chain-reconstruction validation, is that such
+    a chain can legitimately contain an avagraha of its OWN -- inserted by
+    THIS module's own a-class/eng-class vowel-elision rules to mark an
+    elided word-medial 'a' (ordinary Sanskrit orthography, e.g.
+    "suunave"+"agne" -> "suunave'gne") -- which resolve_compound() then
+    misreads as a Pada-patha compound-split marker, incorrectly collapsing
+    every space in the ENTIRE chain built so far. resolve_compound() is
+    only valid on a genuine single Pada-patha word; running it on running
+    prose text is a category error, not a second legitimate use."""
+    if resolve_w1_compound and "ऽ" in w1_deva:
         w1_deva = resolve_compound(w1_deva)[0]
     if "ऽ" in w2_deva:
         w2_deva = resolve_compound(w2_deva)[0]
@@ -166,16 +273,20 @@ def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False):
         return {"surface": w1_deva + w2_deva, "rule": "empty_input", "confidence": "low",
                 "note": "empty word passed to samhita_join"}
 
-    if s1 in IRREGULAR_LENGTHENING_BEFORE_CONSONANT and s2[0] not in ALL_VOWELS:
-        lengthened = IRREGULAR_LENGTHENING_BEFORE_CONSONANT[s1]
+    lengthening_match = _match_lexical_suffix(s1, IRREGULAR_LENGTHENING_BEFORE_CONSONANT)
+    if lengthening_match and s2[0] not in ALL_VOWELS:
+        prefix, key = lengthening_match
+        lengthened = prefix + IRREGULAR_LENGTHENING_BEFORE_CONSONANT[key]
         return _finish(lengthened + " " + s2, "irregular_lengthening_lexical_exception", w1_deva, w2_deva,
-                        note=f"{w1_deva} is a known lexical exception with an attested lengthened "
+                        note=f"{key} is a known lexical exception with an attested lengthened "
                              "vowel before this word (see IRREGULAR_LENGTHENING_BEFORE_CONSONANT).")
 
-    if s1 in IRREGULAR_VISARGA_STEMS and s2[0] in VOICED_CONSONANTS:
-        base = IRREGULAR_VISARGA_STEMS[s1]  # already ends in "r", attaches directly
+    visarga_match = _match_lexical_suffix(s1, IRREGULAR_VISARGA_STEMS)
+    if visarga_match and s2[0] in VOICED_CONSONANTS:
+        prefix, key = visarga_match
+        base = prefix + IRREGULAR_VISARGA_STEMS[key]  # already ends in "r", attaches directly
         return _finish(base + s2, "irregular_visarga_lexical_exception", w1_deva, w2_deva,
-                        note=f"{w1_deva} is a known lexical exception to the regular a-class "
+                        note=f"{key} is a known lexical exception to the regular a-class "
                              "visarga-before-voiced rule (see IRREGULAR_VISARGA_STEMS).")
 
     last1 = s1[-1]

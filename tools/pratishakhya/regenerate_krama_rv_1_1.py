@@ -10,6 +10,44 @@ transformation traceable to an actual sutra."
 Input: dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json,
 items 1.1.1-1.1.9 ONLY (pada_patha, samhita_patha fields). Nothing else from
 that file, and no per-verse word lists typed by hand anywhere in this script.
+
+Second review pass (11 Sep 2026, "chatgpt review"): the first run of this
+script was correctly flagged for (1) presenting unaudited top-level counts
+with no visible invariant proving them consistent, (2) letting "confidence"
+double as if it meant "verified correct" when it only ever meant "the
+phonology classifier picked a branch it's sure of", and (3) a comparison
+report that keys by flat global index, so one inserted/removed unit
+cascades into many spurious-looking downstream mismatches. This version
+fixes all three: build_counts() now asserts its own invariant rather than
+just reporting numbers; attest_ardharcas() checks each ardharca's FULL
+chained reconstruction (sanskrit_phonology.reconstruct_chain) against DGE's
+own attested samhita_patha, layering this repo's long-planned VALIDATE mode
+(architecture doc sec.7) on top of GENERATE; and compare_against_old() keys
+by (ardharca_index, unit_index_within_ardharca).
+
+A first attempt at attestation compared each ISOLATED 2-word Krama pair
+against the continuous samhita text with a plain substring check -- that
+was itself wrong and is not used here: a word's OWN Krama pair is computed
+against just its one neighbour, but its form in the CONTINUOUS text is
+often governed by a DIFFERENT (later) neighbour, so most "mismatches" that
+check produced were expected divergences, not bugs (e.g. "purohitam" the
+Krama pair vs. "purohitaM" -- anusvara -- in the continuous chain, because
+the continuous text also has yajJasya right after it). Building the
+CORRECT check (chain reconstruction, i.e. actually simulating how the
+continuous text is built by folding samhita_join across a whole ardharca)
+surfaced two real, narrow, now-fixed phonology bugs along the way: (a)
+resolve_compound() misfiring on a chained string's own elision-avagraha,
+collapsing every space built up so far (fixed via samhita_join's new
+resolve_w1_compound=False parameter); (b) the lexical-exception tables
+(IRREGULAR_VISARGA_STEMS etc.) only matching a bare word, never that word
+occurring at the end of a longer chain (fixed via _match_lexical_suffix()).
+One further, real, NOT-yet-fixed bug remains and is documented where it's
+found: the indic_transliteration SLP1 scheme cannot distinguish "र्ऋ"
+(bare consonant, then an independent vowel) from "रृ" (consonant + a
+dependent vowel-matra) -- both round-trip to the identical SLP1 "rf" --
+so a chain that passes back through this module a second time after a
+_finish_consonant_then_vowel() fix can lose that distinction. See
+sanskrit_phonology.py's module docstring for the exact repro.
 """
 import json
 import sys
@@ -17,13 +55,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from krama_engine import split_into_ardharcas, generate_verse  # noqa: E402
+from sanskrit_phonology import reconstruct_chain  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SAMHITA_PATH = ROOT / "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json"
 OLD_OUTPUT_PATH = ROOT / "dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/krama_generated_output.json"
 OUT_PATH = ROOT / "dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/krama_regenerated_output.json"
 
-ACCENT_MARKS = "॒॑"
+ACCENT_MARKS = "॒॑"
 
 
 def strip_accents(s):
@@ -61,6 +100,7 @@ def regenerate_all():
         out_items.append({
             "id": v["id"],
             "pada_words": v["pada_words"],
+            "samhita_patha_stripped": v["samhita_patha_stripped"],
             "ardharca_split_method": split_method,
             "ardharcas": [
                 {"pada_words": words, "units": units}
@@ -68,6 +108,51 @@ def regenerate_all():
             ],
         })
     return out_items
+
+
+def attest_ardharcas(new_items):
+    """VALIDATE-mode pass (architecture doc sec.7), layered on top of
+    GENERATE: for each ardharca, fold sanskrit_phonology.samhita_join
+    across ALL of its words (reconstruct_chain) to build the one
+    continuous string this engine's phonology predicts, and compare it
+    against DGE's own attested samhita_patha for that ardharca. This is a
+    real, mechanically-checkable fact about the PHONOLOGY -- and explicitly
+    NOT the same claim as "this Krama output is philologically correct"
+    (matching DGE's own Samhita only shows internal self-consistency with
+    this repo's other data; agreement with a traditional Krama-patha
+    edition remains the open question in architecture doc sec.10).
+
+    Deliberately NOT checked per-unit against the continuous text: an
+    individual Krama retake pair is computed against only its own
+    neighbour, but that same word's form in the continuous chain is often
+    governed by a DIFFERENT (later) neighbour -- e.g. "purohitam" (the
+    Krama pair, computed against "iiLe" before it) vs. "purohitaM" (the
+    anusvara form the continuous text shows, because "yajJasya" follows
+    it there). Comparing pairs one at a time against continuous text
+    produced many false "mismatches" for exactly this reason before this
+    function existed; the chain reconstruction below avoids that by
+    building the SAME kind of chained text DGE's own data is, so the
+    comparison is apples to apples.
+
+    Mutates each ardharca dict in place, adding a "chain_reconstruction"
+    field."""
+    for item in new_items:
+        parts = [p.strip() for p in item["samhita_patha_stripped"].replace("॥", "।").split("।") if p.strip()]
+        for a_idx, ardharca in enumerate(item["ardharcas"]):
+            computed, rules = reconstruct_chain(ardharca["pada_words"])
+            expected = parts[a_idx] if a_idx < len(parts) else None
+            matched = expected is not None and computed == expected
+            ardharca["chain_reconstruction"] = {
+                "computed": computed,
+                "attested": expected,
+                "status": "EXACT_MATCH" if matched else "DIFFERS",
+                "rules_used": rules,
+                "note": "" if matched else "The phonology engine's own chained reconstruction of this "
+                                            "ardharca's continuous text does not match DGE's attested "
+                                            "samhita_patha -- a real, checkable phonology discrepancy "
+                                            "(see dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.6 for "
+                                            "which specific ones are already understood and why).",
+            }
 
 
 def flatten_pair_and_parigraha_texts(item):
@@ -82,6 +167,12 @@ def flatten_pair_and_parigraha_texts(item):
 
 
 def compare_against_old(new_items):
+    """Keyed by (ardharca_index, unit_index_within_ardharca), not a single
+    flattened per-verse index -- a fix for the 11 Sep 2026 review's point 9:
+    with a flat global index, one inserted/removed unit in ardharca 2 makes
+    every later unit look mismatched even when ardharca 1 is identical and
+    only one real thing changed. Keying per-ardharca contains the blast
+    radius of a genuine difference to the ardharca it actually occurred in."""
     if not OLD_OUTPUT_PATH.exists():
         return None
     old_data = json.loads(OLD_OUTPUT_PATH.read_text(encoding="utf-8"))
@@ -93,33 +184,54 @@ def compare_against_old(new_items):
         if old_item is None:
             report.append({"id": vid, "status": "NO_OLD_VERSION"})
             continue
-        new_texts = flatten_pair_and_parigraha_texts(new_item)
-        old_texts = flatten_pair_and_parigraha_texts(old_item)
-        matches = []
-        max_len = max(len(new_texts), len(old_texts))
-        for i in range(max_len):
-            nt = new_texts[i] if i < len(new_texts) else None
-            ot = old_texts[i] if i < len(old_texts) else None
-            matches.append({"index": i, "old": ot, "new": nt, "match": nt == ot})
-        n_match = sum(1 for m in matches if m["match"])
+        ardharca_reports = []
+        verse_all_match = True
+        for a_idx, (old_ardharca, new_ardharca) in enumerate(zip(old_item["ardharcas"], new_item["ardharcas"])):
+            old_texts = [u["text"] for u in old_ardharca["units"]]
+            new_texts = [u["text"] for u in new_ardharca["units"]]
+            max_len = max(len(old_texts), len(new_texts))
+            diffs = []
+            for i in range(max_len):
+                ot = old_texts[i] if i < len(old_texts) else None
+                nt = new_texts[i] if i < len(new_texts) else None
+                if ot != nt:
+                    diffs.append({"unit_index_within_ardharca": i, "old": ot, "new": nt})
+            if diffs:
+                verse_all_match = False
+            ardharca_reports.append({
+                "ardharca_index": a_idx,
+                "status": "EXACT_MATCH" if not diffs else "DIFFERS",
+                "diffs": diffs,
+            })
+        if len(old_item["ardharcas"]) != len(new_item["ardharcas"]):
+            verse_all_match = False
         report.append({
             "id": vid,
-            "old_unit_count": len(old_texts),
-            "new_unit_count": len(new_texts),
-            "matching_units": n_match,
-            "status": "EXACT_MATCH" if (n_match == max_len and len(old_texts) == len(new_texts)) else "DIFFERS",
-            "diffs": [m for m in matches if not m["match"]],
+            "status": "EXACT_MATCH" if verse_all_match else "DIFFERS",
+            "ardharcas": ardharca_reports,
         })
     return report
 
 
 def build_counts(new_items):
+    """Every count here is cross-checked by an explicit invariant assertion
+    before being returned, per the 11 Sep 2026 review's point 1: a count
+    that merely LOOKS plausible is not the same as one proven consistent
+    with the data it was computed from. If an assertion fails, this
+    function raises rather than silently shipping a wrong number."""
     counts = {"pada_count": 0, "pair_count": 0, "parigraha_count": 0,
-              "ardharca_count": 0, "special_exception_count": 0, "unresolved_count": 0}
+              "ardharca_count": 0, "special_exception_count": 0, "unresolved_count": 0,
+              "candidate_reconstruction_count": 0, "chain_reconstruction_mismatch_count": 0}
+    total_word_boundaries = 0
+    tri_unit_count = 0
     for item in new_items:
         for ardharca in item["ardharcas"]:
             counts["ardharca_count"] += 1
-            counts["pada_count"] += len(ardharca["pada_words"])
+            n_words = len(ardharca["pada_words"])
+            counts["pada_count"] += n_words
+            total_word_boundaries += max(n_words - 1, 0)
+            if ardharca.get("chain_reconstruction", {}).get("status") == "DIFFERS":
+                counts["chain_reconstruction_mismatch_count"] += 1
             for u in ardharca["units"]:
                 if u["type"] == "pair":
                     counts["pair_count"] += 1
@@ -127,13 +239,38 @@ def build_counts(new_items):
                     counts["parigraha_count"] += 1
                 elif u["type"] in ("monosyllable_retake_tri_unit", "monosyllable_confirm_pair"):
                     counts["special_exception_count"] += 1
+                    if u["type"] == "monosyllable_retake_tri_unit":
+                        tri_unit_count += 1
                 if u.get("confidence") == "low":
                     counts["unresolved_count"] += 1
+                if u.get("status") == "candidate_reconstruction":
+                    counts["candidate_reconstruction_count"] += 1
+
+    # INVARIANT: every word-boundary (n-1 per ardharca) is filled by exactly
+    # one of {an ordinary "pair" unit, a "monosyllable_retake_tri_unit"} --
+    # the tri-unit REPLACES the ordinary pair at that boundary (sutra 10.3),
+    # it does not sit alongside it. The tri-unit's own confirming
+    # "monosyllable_confirm_pair" is a deliberate EXTRA unit beyond the
+    # boundary count (Uvata's own example: 2 boundaries -> 3 output units),
+    # so it is intentionally excluded from this sum, not an oversight.
+    assert counts["pair_count"] + tri_unit_count == total_word_boundaries, (
+        f"invariant violated: pair_count ({counts['pair_count']}) + "
+        f"monosyllable_retake_tri_unit count ({tri_unit_count}) != "
+        f"total word-boundaries ({total_word_boundaries})"
+    )
+    counts["invariant_check"] = {
+        "formula": "pair_count + monosyllable_retake_tri_unit_count == sum(len(ardharca.pada_words) - 1)",
+        "pair_count": counts["pair_count"],
+        "monosyllable_retake_tri_unit_count": tri_unit_count,
+        "total_word_boundaries": total_word_boundaries,
+        "holds": True,
+    }
     return counts
 
 
 def main():
     new_items = regenerate_all()
+    attest_ardharcas(new_items)
     comparison = compare_against_old(new_items)
     counts = build_counts(new_items)
 
@@ -145,7 +282,14 @@ def main():
                 "reviewed spec's success criterion. No per-verse pair or Parigraha "
                 "strings are hardcoded anywhere in this pipeline; the only per-verse "
                 "manual input is the two ardharca-split overrides in krama_engine.py's "
-                "ARDHARCA_SPLIT_OVERRIDES, logged there with the reason each was needed.",
+                "ARDHARCA_SPLIT_OVERRIDES, logged there with the reason each was needed. "
+                "Every unit carries independent status/confidence fields, and every "
+                "ardharca carries a chain_reconstruction field -- see krama_engine.py's "
+                "and regenerate_krama_rv_1_1.py's module docstrings for what each one "
+                "does and does NOT establish. Reproducing DGE's own attested "
+                "samhita_patha (chain_reconstruction) is a real, checkable fact but is "
+                "NOT the same claim as philological correctness against a traditional "
+                "Krama-patha edition, which remains open (architecture doc sec.10).",
         "engine_source": "tools/pratishakhya/krama_engine.py",
         "pada_samhita_source": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json",
         "counts": counts,
@@ -157,14 +301,25 @@ def main():
     print("\n=== Counts ===")
     for k, v in counts.items():
         print(f"  {k}: {v}")
-    print("\n=== Comparison against hand-aligned krama_generated_output.json ===")
+    print("\n=== Comparison against hand-aligned krama_generated_output.json (per-ardharca) ===")
     if comparison is None:
         print("  (old output file not found)")
     else:
         for r in comparison:
-            print(f"  {r['id']}: {r['status']} ({r.get('matching_units')}/{r.get('old_unit_count')} units match)")
-            for d in r.get("diffs", []):
-                print(f"      unit {d['index']}: OLD={d['old']!r}  NEW={d['new']!r}")
+            print(f"  {r['id']}: {r['status']}")
+            for ar in r.get("ardharcas", []):
+                if ar["status"] != "EXACT_MATCH":
+                    print(f"    ardharca {ar['ardharca_index']}: DIFFERS")
+                    for d in ar["diffs"]:
+                        print(f"      unit {d['unit_index_within_ardharca']}: OLD={d['old']!r}  NEW={d['new']!r}")
+    print("\n=== Chain reconstruction vs DGE's attested samhita_patha (per-ardharca) ===")
+    for item in new_items:
+        for a_idx, ardharca in enumerate(item["ardharcas"]):
+            cr = ardharca["chain_reconstruction"]
+            if cr["status"] != "EXACT_MATCH":
+                print(f"  {item['id']} ardharca {a_idx}: DIFFERS")
+                print(f"    computed: {cr['computed']!r}")
+                print(f"    attested: {cr['attested']!r}")
 
 
 if __name__ == "__main__":

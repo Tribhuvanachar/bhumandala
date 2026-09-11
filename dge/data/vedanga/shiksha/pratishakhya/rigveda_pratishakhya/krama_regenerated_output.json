@@ -1,6 +1,6 @@
 {
   "schema": "generic",
-  "note": "Krama-patha for RV 1.1 (all 9 verses) computed by tools/pratishakhya/krama_engine.py (real sandhi engine + predicate classifiers) directly from DGE's Pada-patha/Samhita-patha, per the reviewed spec's success criterion. No per-verse pair or Parigraha strings are hardcoded anywhere in this pipeline; the only per-verse manual input is the two ardharca-split overrides in krama_engine.py's ARDHARCA_SPLIT_OVERRIDES, logged there with the reason each was needed.",
+  "note": "Krama-patha for RV 1.1 (all 9 verses) computed by tools/pratishakhya/krama_engine.py (real sandhi engine + predicate classifiers) directly from DGE's Pada-patha/Samhita-patha, per the reviewed spec's success criterion. No per-verse pair or Parigraha strings are hardcoded anywhere in this pipeline; the only per-verse manual input is the two ardharca-split overrides in krama_engine.py's ARDHARCA_SPLIT_OVERRIDES, logged there with the reason each was needed. Every unit carries independent status/confidence fields, and every ardharca carries a chain_reconstruction field -- see krama_engine.py's and regenerate_krama_rv_1_1.py's module docstrings for what each one does and does NOT establish. Reproducing DGE's own attested samhita_patha (chain_reconstruction) is a real, checkable fact but is NOT the same claim as philological correctness against a traditional Krama-patha edition, which remains open (architecture doc sec.10).",
   "engine_source": "tools/pratishakhya/krama_engine.py",
   "pada_samhita_source": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json",
   "counts": {
@@ -9,160 +9,214 @@
     "parigraha_count": 26,
     "ardharca_count": 18,
     "special_exception_count": 2,
-    "unresolved_count": 4
+    "unresolved_count": 4,
+    "candidate_reconstruction_count": 2,
+    "chain_reconstruction_mismatch_count": 2,
+    "invariant_check": {
+      "formula": "pair_count + monosyllable_retake_tri_unit_count == sum(len(ardharca.pada_words) - 1)",
+      "pair_count": 69,
+      "monosyllable_retake_tri_unit_count": 1,
+      "total_word_boundaries": 70,
+      "holds": true
+    }
   },
   "comparison_against_hand_aligned_output": [
     {
       "id": "1.1.1",
-      "old_unit_count": 9,
-      "new_unit_count": 9,
-      "matching_units": 9,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     },
     {
       "id": "1.1.2",
-      "old_unit_count": 12,
-      "new_unit_count": 13,
-      "matching_units": 10,
       "status": "DIFFERS",
-      "diffs": [
+      "ardharcas": [
         {
-          "index": 10,
-          "old": "इह वक्षति",
-          "new": "इहा वक्षति",
-          "match": false
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
         },
         {
-          "index": 11,
-          "old": "वक्षति इति वक्षति",
-          "new": "आ वक्षति",
-          "match": false
-        },
-        {
-          "index": 12,
-          "old": null,
-          "new": "वक्षति इति वक्षति",
-          "match": false
+          "ardharca_index": 1,
+          "status": "DIFFERS",
+          "diffs": [
+            {
+              "unit_index_within_ardharca": 3,
+              "old": "इह वक्षति",
+              "new": "इहा वक्षति"
+            },
+            {
+              "unit_index_within_ardharca": 4,
+              "old": "वक्षति इति वक्षति",
+              "new": "आ वक्षति"
+            },
+            {
+              "unit_index_within_ardharca": 5,
+              "old": null,
+              "new": "वक्षति इति वक्षति"
+            }
+          ]
         }
       ]
     },
     {
       "id": "1.1.3",
-      "old_unit_count": 8,
-      "new_unit_count": 8,
-      "matching_units": 8,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     },
     {
       "id": "1.1.4",
-      "old_unit_count": 12,
-      "new_unit_count": 12,
-      "matching_units": 12,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     },
     {
       "id": "1.1.5",
-      "old_unit_count": 10,
-      "new_unit_count": 10,
-      "matching_units": 10,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     },
     {
       "id": "1.1.6",
-      "old_unit_count": 12,
-      "new_unit_count": 12,
-      "matching_units": 12,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     },
     {
       "id": "1.1.7",
-      "old_unit_count": 12,
-      "new_unit_count": 13,
-      "matching_units": 3,
       "status": "DIFFERS",
-      "diffs": [
+      "ardharcas": [
         {
-          "index": 3,
-          "old": "दिवेदिवे दोषावस्तः",
-          "new": "दिवेदिवे इति दिवेऽदिवे",
-          "match": false
+          "ardharca_index": 0,
+          "status": "DIFFERS",
+          "diffs": [
+            {
+              "unit_index_within_ardharca": 3,
+              "old": "दिवेदिवे दोषावस्तः",
+              "new": "दिवेदिवे इति दिवेऽदिवे"
+            },
+            {
+              "unit_index_within_ardharca": 4,
+              "old": "दोषावस्तः इति दोषाऽवस्तः",
+              "new": "दिवेदिवे दोषावस्तः"
+            },
+            {
+              "unit_index_within_ardharca": 5,
+              "old": "दोषावस्तर्धिया",
+              "new": "दोषावस्तः इति दोषाऽवस्तः"
+            },
+            {
+              "unit_index_within_ardharca": 6,
+              "old": "धिया वयम्",
+              "new": "दोषावस्तर्धिया"
+            },
+            {
+              "unit_index_within_ardharca": 7,
+              "old": "वयम् इति वयम्",
+              "new": "धिया वयम्"
+            },
+            {
+              "unit_index_within_ardharca": 8,
+              "old": null,
+              "new": "वयम् इति वयम्"
+            }
+          ]
         },
         {
-          "index": 4,
-          "old": "दोषावस्तः इति दोषाऽवस्तः",
-          "new": "दिवेदिवे दोषावस्तः",
-          "match": false
-        },
-        {
-          "index": 5,
-          "old": "दोषावस्तर्धिया",
-          "new": "दोषावस्तः इति दोषाऽवस्तः",
-          "match": false
-        },
-        {
-          "index": 6,
-          "old": "धिया वयम्",
-          "new": "दोषावस्तर्धिया",
-          "match": false
-        },
-        {
-          "index": 7,
-          "old": "वयम् इति वयम्",
-          "new": "धिया वयम्",
-          "match": false
-        },
-        {
-          "index": 8,
-          "old": "नमो भरन्तः",
-          "new": "वयम् इति वयम्",
-          "match": false
-        },
-        {
-          "index": 9,
-          "old": "भरन्तो",
-          "new": "नमो भरन्तः",
-          "match": false
-        },
-        {
-          "index": 10,
-          "old": "एमसि",
-          "new": "भरन्तो आ",
-          "match": false
-        },
-        {
-          "index": 11,
-          "old": "इमसि इति इमसि",
-          "new": "एमसि",
-          "match": false
-        },
-        {
-          "index": 12,
-          "old": null,
-          "new": "इमसि इति इमसि",
-          "match": false
+          "ardharca_index": 1,
+          "status": "DIFFERS",
+          "diffs": [
+            {
+              "unit_index_within_ardharca": 1,
+              "old": "भरन्तो",
+              "new": "भरन्तो आ"
+            }
+          ]
         }
       ]
     },
     {
       "id": "1.1.8",
-      "old_unit_count": 8,
-      "new_unit_count": 8,
-      "matching_units": 8,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     },
     {
       "id": "1.1.9",
-      "old_unit_count": 12,
-      "new_unit_count": 12,
-      "matching_units": 12,
       "status": "EXACT_MATCH",
-      "diffs": []
+      "ardharcas": [
+        {
+          "ardharca_index": 0,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        },
+        {
+          "ardharca_index": 1,
+          "status": "EXACT_MATCH",
+          "diffs": []
+        }
+      ]
     }
   ],
   "items": [
@@ -178,6 +232,7 @@
         "होतारम्",
         "रत्नऽधातमम्"
       ],
+      "samhita_patha_stripped": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम् । होतारं रत्नधातमम् ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -195,6 +250,7 @@
               "text": "अग्निमीळे",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -203,6 +259,7 @@
               "text": "ईळे पुरोहितम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -214,6 +271,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -222,6 +284,7 @@
               "text": "पुरोहितं यज्ञस्य",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -230,6 +293,7 @@
               "text": "यज्ञस्य देवम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -238,6 +302,7 @@
               "text": "देवमृत्विजम्",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -249,10 +314,28 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम्",
+            "attested": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम्",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "m_before_vowel_unchanged",
+              "vowel_before_consonant_unchanged",
+              "m_before_consonant_anusvara",
+              "vowel_before_consonant_unchanged",
+              "m_before_vowel_unchanged"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -265,6 +348,7 @@
               "text": "होतारं रत्नधातमम्",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -277,10 +361,25 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound",
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "होतारं रत्नधातमम्",
+            "attested": "होतारं रत्नधातमम्",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "m_before_consonant_anusvara"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -299,6 +398,7 @@
         "इह",
         "वक्षति"
       ],
+      "samhita_patha_stripped": "अग्निः पूर्वेभिर्ऋषिभिरीड्यो नूतनैरुत । स देवाँ एह वक्षति ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -316,6 +416,7 @@
               "text": "अग्निः पूर्वेभिः",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_unvoiced_consonant",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -324,6 +425,7 @@
               "text": "पूर्वेभिर्ऋषिभिः",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_vowel",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -335,6 +437,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -343,6 +450,7 @@
               "text": "ऋषिभिरीड्यः",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_vowel",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -351,6 +459,7 @@
               "text": "ईड्यो नूतनैः",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -359,6 +468,7 @@
               "text": "नूतनैरुत",
               "rule": "10.2",
               "phonology_rule": "visarga_diphthong_class_before_vowel",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -370,10 +480,28 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "अग्निः पूर्वेभिरृषिभिरीड्यो नूतनैरुत",
+            "attested": "अग्निः पूर्वेभिर्ऋषिभिरीड्यो नूतनैरुत",
+            "status": "DIFFERS",
+            "rules_used": [
+              "visarga_iu_class_before_unvoiced_consonant",
+              "visarga_iu_class_before_vowel",
+              "visarga_iu_class_before_vowel",
+              "visarga_a_class_before_voiced",
+              "visarga_diphthong_class_before_vowel"
+            ],
+            "note": "The phonology engine's own chained reconstruction of this ardharca's continuous text does not match DGE's attested samhita_patha -- a real, checkable phonology discrepancy (see dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.6 for which specific ones are already understood and why)."
+          }
         },
         {
           "pada_words": [
@@ -389,6 +517,7 @@
               "text": "स देवान्",
               "rule": "10.2",
               "phonology_rule": "visarga_sa_esa_elision_blocks_further_sandhi",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -397,6 +526,7 @@
               "text": "देवाँ आ",
               "rule": "10.2",
               "phonology_rule": "n_before_vowel_vedic_nasalization_approximated",
+              "status": "canonical",
               "confidence": "low",
               "note": "Approximates the Vedic n-before-vowel nasalization convention (e.g. devān + aa -> devaam-with-candrabindu) without deriving it from Paatala 5/6, which are out of scope for this pass."
             },
@@ -405,6 +535,7 @@
               "text": "एह",
               "rule": "10.2",
               "phonology_rule": "guna",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -416,6 +547,7 @@
                 "savarna_dirgha"
               ],
               "confidence": "low",
+              "status": "candidate_reconstruction",
               "note": "Reconstructed pattern for sutra 10.3's monosyllable exception (this session's own reading of Uvata's example, not an attested source for THIS verse) -- see KRAMA_VERIFICATION_PACKET.md."
             },
             {
@@ -426,6 +558,7 @@
                 "vowel_before_consonant_unchanged"
               ],
               "confidence": "low",
+              "status": "candidate_reconstruction",
               "note": "Reconstructed pattern for sutra 10.3 -- see KRAMA_VERIFICATION_PACKET.md."
             },
             {
@@ -436,10 +569,27 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "स देवाँ एह वक्षति",
+            "attested": "स देवाँ एह वक्षति",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "visarga_sa_esa_elision_blocks_further_sandhi",
+              "n_before_vowel_vedic_nasalization_approximated",
+              "guna",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -455,6 +605,7 @@
         "यशसम्",
         "वीरवत्ऽतमम्"
       ],
+      "samhita_patha_stripped": "अग्निना रयिमश्नवत्पोषमेव दिवेदिवे । यशसं वीरवत्तमम् ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -472,6 +623,7 @@
               "text": "अग्निना रयिम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -480,6 +632,7 @@
               "text": "रयिमश्नवत्",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -488,6 +641,7 @@
               "text": "अश्नवत्पोषम्",
               "rule": "10.2",
               "phonology_rule": "t_before_unvoiced_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -496,6 +650,7 @@
               "text": "पोषमेव",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -504,6 +659,7 @@
               "text": "एव दिवेदिवे",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -516,10 +672,29 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound",
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "अग्निना रयिमश्नवत्पोषमेव दिवेदिवे",
+            "attested": "अग्निना रयिमश्नवत्पोषमेव दिवेदिवे",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "vowel_before_consonant_unchanged",
+              "m_before_vowel_unchanged",
+              "t_before_unvoiced_unchanged",
+              "m_before_vowel_unchanged",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -532,6 +707,7 @@
               "text": "यशसं वीरवत्तमम्",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -544,10 +720,25 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound",
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "यशसं वीरवत्तमम्",
+            "attested": "यशसं वीरवत्तमम्",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "m_before_consonant_anusvara"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -566,6 +757,7 @@
         "देवेषु",
         "गच्छति"
       ],
+      "samhita_patha_stripped": "अग्ने यं यज्ञमध्वरं विश्वतः परिभूरसि । स इद्देवेषु गच्छति ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -584,6 +776,7 @@
               "text": "अग्ने यम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -592,6 +785,7 @@
               "text": "यं यज्ञम्",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -600,6 +794,7 @@
               "text": "यज्ञमध्वरम्",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -608,6 +803,7 @@
               "text": "अध्वरं विश्वतः",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -616,6 +812,7 @@
               "text": "विश्वतः परिभूः",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_unvoiced_velar_labial",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -627,6 +824,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -635,6 +837,7 @@
               "text": "परिभूरसि",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_vowel",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -646,10 +849,29 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "अग्ने यं यज्ञमध्वरं विश्वतः परिभूरसि",
+            "attested": "अग्ने यं यज्ञमध्वरं विश्वतः परिभूरसि",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "vowel_before_consonant_unchanged",
+              "m_before_consonant_anusvara",
+              "m_before_vowel_unchanged",
+              "m_before_consonant_anusvara",
+              "visarga_a_class_before_unvoiced_velar_labial",
+              "visarga_iu_class_before_vowel"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -664,6 +886,7 @@
               "text": "स इत्",
               "rule": "10.2",
               "phonology_rule": "visarga_sa_esa_elision_blocks_further_sandhi",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -672,6 +895,7 @@
               "text": "इद्देवेषु",
               "rule": "10.2",
               "phonology_rule": "t_assimilates_to_following_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -680,6 +904,7 @@
               "text": "देवेषु गच्छति",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -691,10 +916,26 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "स इद्देवेषु गच्छति",
+            "attested": "स इद्देवेषु गच्छति",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "visarga_sa_esa_elision_blocks_further_sandhi",
+              "t_assimilates_to_following_voiced",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -711,6 +952,7 @@
         "आ",
         "गमत्"
       ],
+      "samhita_patha_stripped": "अग्निर्होता कविक्रतुः सत्यश्चित्रश्रवस्तमः । देवो देवेभिरा गमत् ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -727,6 +969,7 @@
               "text": "अग्निर्होता",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_voiced_consonant",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -735,6 +978,7 @@
               "text": "होता कविक्रतुः",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -746,6 +990,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -754,6 +1003,7 @@
               "text": "कविक्रतुः सत्यः",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_sibilant_unresolved",
+              "status": "canonical",
               "confidence": "low",
               "note": "i/u-class visarga before an unvoiced sibilant can assimilate to the sibilant itself in some environments; this engine keeps the visarga rather than guess the assimilated form."
             },
@@ -762,6 +1012,7 @@
               "text": "सत्यश्चित्रश्रवस्तमः",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_sibilant_assimilation_palatal",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -774,10 +1025,28 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound",
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "अग्निर्होता कविक्रतुः सत्यश्चित्रश्रवस्तमः",
+            "attested": "अग्निर्होता कविक्रतुः सत्यश्चित्रश्रवस्तमः",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "visarga_iu_class_before_voiced_consonant",
+              "vowel_before_consonant_unchanged",
+              "visarga_iu_class_before_sibilant_unresolved",
+              "visarga_a_class_sibilant_assimilation_palatal"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -792,6 +1061,7 @@
               "text": "देवो देवेभिः",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -800,6 +1070,7 @@
               "text": "देवेभिरा",
               "rule": "10.2",
               "phonology_rule": "visarga_iu_class_before_vowel",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -808,6 +1079,7 @@
               "text": "आ गमत्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -819,10 +1091,26 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "देवो देवेभिरा गमत्",
+            "attested": "देवो देवेभिरा गमत्",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "visarga_a_class_before_voiced",
+              "visarga_iu_class_before_vowel",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -842,6 +1130,7 @@
         "सत्यम्",
         "अङ्गिरः"
       ],
+      "samhita_patha_stripped": "यदङ्ग दाशुषे त्वमग्ने भद्रं करिष्यसि । तवेत्तत्सत्यमङ्गिरः ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -860,6 +1149,7 @@
               "text": "यदङ्ग",
               "rule": "10.2",
               "phonology_rule": "t_before_vowel_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -868,6 +1158,7 @@
               "text": "अङ्ग दाशुषे",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -876,6 +1167,7 @@
               "text": "दाशुषे त्वम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -884,6 +1176,7 @@
               "text": "त्वमग्ने",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -892,6 +1185,7 @@
               "text": "अग्ने भद्रम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -900,6 +1194,7 @@
               "text": "भद्रं करिष्यसि",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -911,10 +1206,29 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "यदङ्ग दाशुषे त्वमग्ने भद्रं करिष्यसि",
+            "attested": "यदङ्ग दाशुषे त्वमग्ने भद्रं करिष्यसि",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "t_before_vowel_voiced",
+              "vowel_before_consonant_unchanged",
+              "vowel_before_consonant_unchanged",
+              "m_before_vowel_unchanged",
+              "vowel_before_consonant_unchanged",
+              "m_before_consonant_anusvara"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -930,6 +1244,7 @@
               "text": "तवेत्",
               "rule": "10.2",
               "phonology_rule": "guna",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -938,6 +1253,7 @@
               "text": "इत्तत्",
               "rule": "10.2",
               "phonology_rule": "t_before_unvoiced_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -946,6 +1262,7 @@
               "text": "तत्सत्यम्",
               "rule": "10.2",
               "phonology_rule": "t_before_unvoiced_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -954,6 +1271,7 @@
               "text": "सत्यमङ्गिरः",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -965,10 +1283,27 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "तवेत्तत्सत्यमङ्गिरः",
+            "attested": "तवेत्तत्सत्यमङ्गिरः",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "guna",
+              "t_before_unvoiced_unchanged",
+              "t_before_unvoiced_unchanged",
+              "m_before_vowel_unchanged"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -987,6 +1322,7 @@
         "आ",
         "इमसि"
       ],
+      "samhita_patha_stripped": "उप त्वाग्ने दिवेदिवे दोषावस्तर्धिया वयम् । नमो भरन्त एमसि ॥",
       "ardharca_split_method": "manual_override",
       "ardharcas": [
         {
@@ -1005,6 +1341,7 @@
               "text": "उप त्वा",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1013,6 +1350,7 @@
               "text": "त्वाग्ने",
               "rule": "10.2",
               "phonology_rule": "savarna_dirgha",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1021,6 +1359,7 @@
               "text": "अग्ने दिवेदिवे",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1032,6 +1371,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -1040,6 +1384,7 @@
               "text": "दिवेदिवे दोषावस्तः",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1051,6 +1396,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -1059,14 +1409,16 @@
               "text": "दोषावस्तर्धिया",
               "rule": "10.2",
               "phonology_rule": "irregular_visarga_lexical_exception",
+              "status": "canonical",
               "confidence": "high",
-              "note": "दोषावस्तः is a known lexical exception to the regular a-class visarga-before-voiced rule (see IRREGULAR_VISARGA_STEMS)."
+              "note": "dozAvastaH is a known lexical exception to the regular a-class visarga-before-voiced rule (see IRREGULAR_VISARGA_STEMS)."
             },
             {
               "type": "pair",
               "text": "धिया वयम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1078,10 +1430,29 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "उप त्वाग्ने दिवेदिवे दोषावस्तर्धिया वयम्",
+            "attested": "उप त्वाग्ने दिवेदिवे दोषावस्तर्धिया वयम्",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "vowel_before_consonant_unchanged",
+              "savarna_dirgha",
+              "vowel_before_consonant_unchanged",
+              "vowel_before_consonant_unchanged",
+              "irregular_visarga_lexical_exception",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -1096,6 +1467,7 @@
               "text": "नमो भरन्तः",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1104,6 +1476,7 @@
               "text": "भरन्तो आ",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1112,6 +1485,7 @@
               "text": "एमसि",
               "rule": "10.2",
               "phonology_rule": "guna",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1123,10 +1497,26 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "नमो भरन्तो एमसि",
+            "attested": "नमो भरन्त एमसि",
+            "status": "DIFFERS",
+            "rules_used": [
+              "visarga_a_class_before_voiced",
+              "visarga_a_class_before_voiced",
+              "guna"
+            ],
+            "note": "The phonology engine's own chained reconstruction of this ardharca's continuous text does not match DGE's attested samhita_patha -- a real, checkable phonology discrepancy (see dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.6 for which specific ones are already understood and why)."
+          }
         }
       ]
     },
@@ -1142,6 +1532,7 @@
         "स्वे",
         "दमे"
       ],
+      "samhita_patha_stripped": "राजन्तमध्वराणां गोपामृतस्य दीदिविम् । वर्धमानं स्वे दमे ॥",
       "ardharca_split_method": "automatic_length_alignment",
       "ardharcas": [
         {
@@ -1158,6 +1549,7 @@
               "text": "राजन्तमध्वराणाम्",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1166,6 +1558,7 @@
               "text": "अध्वराणां गोपाम्",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1174,6 +1567,7 @@
               "text": "गोपामृतस्य",
               "rule": "10.2",
               "phonology_rule": "m_before_vowel_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1182,6 +1576,7 @@
               "text": "ऋतस्य दीदिविम्",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1193,10 +1588,27 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "राजन्तमध्वराणां गोपामृतस्य दीदिविम्",
+            "attested": "राजन्तमध्वराणां गोपामृतस्य दीदिविम्",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "m_before_vowel_unchanged",
+              "m_before_consonant_anusvara",
+              "m_before_vowel_unchanged",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -1210,6 +1622,7 @@
               "text": "वर्धमानं स्वे",
               "rule": "10.2",
               "phonology_rule": "m_before_consonant_anusvara",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1218,6 +1631,7 @@
               "text": "स्वे दमे",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1229,10 +1643,25 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "वर्धमानं स्वे दमे",
+            "attested": "वर्धमानं स्वे दमे",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "m_before_consonant_anusvara",
+              "vowel_before_consonant_unchanged"
+            ],
+            "note": ""
+          }
         }
       ]
     },
@@ -1250,6 +1679,7 @@
         "नः",
         "स्वस्तये"
       ],
+      "samhita_patha_stripped": "स नः पितेव सूनवेऽग्ने सूपायनो भव । सचस्वा नः स्वस्तये ॥",
       "ardharca_split_method": "manual_override",
       "ardharcas": [
         {
@@ -1268,6 +1698,7 @@
               "text": "स नः",
               "rule": "10.2",
               "phonology_rule": "visarga_sa_esa_elision_blocks_further_sandhi",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1276,6 +1707,7 @@
               "text": "नः पितेव",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_unvoiced_velar_labial",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1287,6 +1719,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -1295,6 +1732,7 @@
               "text": "पितेव सूनवे",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1303,6 +1741,7 @@
               "text": "सूनवेऽग्ने",
               "rule": "10.2",
               "phonology_rule": "eng_a_class_before_a_elided",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1311,6 +1750,7 @@
               "text": "अग्ने सूपायनः",
               "rule": "10.2",
               "phonology_rule": "vowel_before_consonant_unchanged",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1322,6 +1762,11 @@
                 "10.7",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "avagrhya_compound"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             },
@@ -1330,6 +1775,7 @@
               "text": "सूपायनो भव",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_voiced",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1341,10 +1787,29 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "स नः पितेव सूनवेऽग्ने सूपायनो भव",
+            "attested": "स नः पितेव सूनवेऽग्ने सूपायनो भव",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "visarga_sa_esa_elision_blocks_further_sandhi",
+              "visarga_a_class_before_unvoiced_velar_labial",
+              "vowel_before_consonant_unchanged",
+              "eng_a_class_before_a_elided",
+              "vowel_before_consonant_unchanged",
+              "visarga_a_class_before_voiced"
+            ],
+            "note": ""
+          }
         },
         {
           "pada_words": [
@@ -1358,14 +1823,16 @@
               "text": "सचस्वा नः",
               "rule": "10.2",
               "phonology_rule": "irregular_lengthening_lexical_exception",
+              "status": "canonical",
               "confidence": "high",
-              "note": "सचस्व is a known lexical exception with an attested lengthened vowel before this word (see IRREGULAR_LENGTHENING_BEFORE_CONSONANT)."
+              "note": "sacasva is a known lexical exception with an attested lengthened vowel before this word (see IRREGULAR_LENGTHENING_BEFORE_CONSONANT)."
             },
             {
               "type": "pair",
               "text": "नः स्वस्तये",
               "rule": "10.2",
               "phonology_rule": "visarga_a_class_before_unvoiced_velar_labial",
+              "status": "canonical",
               "confidence": "high",
               "note": ""
             },
@@ -1377,10 +1844,25 @@
                 "10.9",
                 "10.14"
               ],
+              "status": "canonical",
+              "trigger_reasons": [
+                "ardharca_final"
+              ],
+              "retake_state": "STHITOPASTHITA",
               "confidence": "medium",
               "note": "Word+iti+word given with no sandhi between the components, per Uvata's own worked example on 10.14 ('vibhaavaso iti vibhaavaso')."
             }
-          ]
+          ],
+          "chain_reconstruction": {
+            "computed": "सचस्वा नः स्वस्तये",
+            "attested": "सचस्वा नः स्वस्तये",
+            "status": "EXACT_MATCH",
+            "rules_used": [
+              "irregular_lengthening_lexical_exception",
+              "visarga_a_class_before_unvoiced_velar_labial"
+            ],
+            "note": ""
+          }
         }
       ]
     }

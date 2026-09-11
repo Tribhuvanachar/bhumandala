@@ -679,6 +679,113 @@ superseded, but it is being left in place one more round in case the lead wants 
 
 ---
 
+### 6.7 Second review pass (11 Sep 2026, "chatgpt review") — epistemic auditability
+
+The lead forwarded a second, independent review (ChatGPT) of §6.6's first regenerated-output
+run, arguing the deeper problem was not the individual wrong strings but that the JSON gave no
+way to tell canonical output from a guess, or a checked fact from an unchecked one — 16 numbered
+points. Two things came out of actually checking each one against the code and data, not just
+the review's prose:
+
+**The review's count claim was itself wrong, but the underlying worry was right.** It stated
+`pada_count` should be 89, not 88, and that `pair_count`(69) vs. `ardharca_count`-implied 70
+pairs was a bug. Recomputing directly from the shipped JSON: `pada_count` (88) is exactly the
+sum of every ardharca's word list — correct. The `pair_count`/boundary gap is not a bug either:
+one ardharca's 10.3 tri-unit legitimately *replaces* an ordinary pair at that boundary (69
+pairs + 1 tri-unit = 70 boundaries, exactly). Both counts were right, but *neither was provable
+from the JSON itself* — there was no visible arithmetic tying them together, so a careful
+reader reasonably suspected a bug that wasn't there. **Fixed**: `regenerate_krama_rv_1_1.py`'s
+`build_counts()` now asserts this invariant explicitly (raises if it ever stops holding) and
+ships the formula and both operands as an `invariant_check` object in the output, rather than
+presenting bare numbers on trust.
+
+**Genuinely new, addressed this pass:**
+- **"confidence" was being read as "verified correct"; it never meant that.** Every unit now
+  carries three independent fields, documented in `krama_engine.py`'s own module docstring so
+  the distinction can't be lost again: `"status"` (`"canonical"` — the general rule engine
+  applied uniformly — vs. `"candidate_reconstruction"` — this session's own generalization of
+  a single cited example, currently only the 10.3 units), `"confidence"` (unchanged: how sure
+  the phonology classifier is it picked the right branch — a claim about the classifier, not
+  the Vedic form), and, per-ARDHARCA (not per-unit — see below), a `"chain_reconstruction"`
+  field from a real VALIDATE-mode check.
+- **Parigraha's rendering was undifferentiated.** Every Parigraha unit now states
+  `"retake_state": "STHITOPASTHITA"` explicitly (10.14 — combined+iti+split together) instead
+  of leaving which sūtra-named state fired implicit in which function happened to be called.
+  `get_sthita`/`get_upasthita` (10.12/10.13) as *distinct* renderings, rather than components
+  of sthitopasthita, remain unexercised by any case found so far — stated as an open scoping
+  question, not silently assumed unnecessary.
+- **Reasons were flattened into an undifferentiated sūtra-number list.** Parigraha units now
+  also carry `"trigger_reasons"`: `["avagrhya_compound"]`/`["bahumadhyagata"]`/
+  `["ardharca_final"]`, human-readable, alongside (not replacing) the sūtra citations.
+- **The comparison report cascaded one real difference into many spurious-looking ones.**
+  `compare_against_old()` now keys by `(ardharca_index, unit_index_within_ardharca)` instead of
+  one flat per-verse index, so a difference in ardharca 2 no longer makes every later unit in a
+  different ardharca look wrong.
+- **A real, working VALIDATE-mode check was built, and building it caught two real bugs.** The
+  review's point that "reproducing DGE Saṃhitā ≠ philologically correct" was already understood
+  (§6.6, §7), but no actual per-unit check had been implemented yet. A first attempt — comparing
+  each isolated 2-word Krama pair against the continuous samhita text via substring match — was
+  itself wrong and is NOT what shipped: a word's Krama pair reflects only its immediate partner,
+  but its form in the continuous text is often governed by a *different, later* neighbour, so
+  most "mismatches" that check produced were expected divergences, not bugs. The correct check —
+  `sanskrit_phonology.reconstruct_chain()`, folding `samhita_join` across a WHOLE ardharca to
+  simulate how continuous text is actually built, then diffing against DGE's attested
+  `samhita_patha` — is what `regenerate_krama_rv_1_1.py`'s `attest_ardharcas()` now runs, and it
+  found:
+  1. **A real bug**: `resolve_compound()` was misfiring on a chained string's own
+     elision-avagraha (e.g. "sūnave'gne", ordinary Sanskrit orthography for an elided medial
+     vowel — not a Pada-pāṭha compound marker), collapsing every space built up in the chain so
+     far. Fixed via `samhita_join`'s new `resolve_w1_compound` parameter (`generate_ardharca`'s
+     own per-pair calls are unaffected — they always pass a fresh bare pada word as w1, where
+     the old default behaviour is correct).
+  2. **A second real bug**: the lexical-exception tables (`IRREGULAR_VISARGA_STEMS`,
+     `IRREGULAR_LENGTHENING_BEFORE_CONSONANT`) matched only a bare word, silently failing to
+     fire for that same word occurring anywhere but the very start of a chain. Fixed via
+     `_match_lexical_suffix()`.
+  3. **A confirmed, still-open bug**, precisely diagnosed rather than patched: the
+     `indic_transliteration` SLP1 scheme cannot distinguish "र्ऋ" (bare consonant, then an
+     independent vowel) from "रृ" (that consonant with a dependent vowel-matra) — both collapse
+     to the identical SLP1 "rf". `_finish_consonant_then_vowel()`'s existing workaround survives
+     exactly one join; a second hop through this module loses it (RV 1.1.2's chain: "...bhi-r-
+     R.si..." → "पूर्वेभिरृषिभिः", missing its virama, instead of "पूर्वेभिर्ऋषिभिः"). Left
+     unresolved rather than rushed — see `sanskrit_phonology.py`'s module docstring for the
+     exact repro.
+  4. **One already-known, still-open gap**, now independently reconfirmed by the SAME
+     mechanism: RV 1.1.7's visarga-before-आ (§6.6's original finding). After the two fixes
+     above, chain reconstruction now matches DGE's attested text on **16 of 18 ardharcas**
+     (the remaining 2 are exactly bugs 3 and 4 above — nothing else).
+
+**Explicitly NOT attempted this pass** — real, substantial, correctly-identified gaps that need
+dedicated engineering, not a rushed patch layered onto already-uncertain philology:
+- A real Kramahetu (Paṭala 11) *evaluation* engine that decides between ordinary/dvikrama/
+  trikrama/pañcakrama, rather than only ever emitting `"10.2"` for ordinary pairs. `krama_engine.py`
+  already states in its own docstring that only a slice of Paṭala 10 plus the 10.3 exception is
+  implemented; the review's ask for an explicit `"krama_decision"` object naming which Paṭala-11
+  sūtras were checked and why none fired is directionally right but has not been built.
+- A `restore_*` family (Prakṛti restoration on retake, Śuddhākṣara, Rephī/Uṣman derivation) as
+  genuine state transitions — Test F/G/H in `validate_krama_rv1_1.py` already report these
+  UNRESOLVED (§6.6); this pass didn't change that.
+- A structured, syllable-level Svara object with transformation provenance — explicitly out of
+  scope per §6.4/architecture Priority 3; accents are stripped, not modelled, at this stage.
+- A full transformation-history object per unit (`{"input": {...}, "phonology": [...], "krama":
+  {...}, "output": ...}`) for every nontrivial unit — a real, worthwhile idea; a lighter version
+  exists already (`phonology_rule` cites the fired rule, `w1`/`w2` are on the raw `samhita_join`
+  return dict though not yet threaded into the shipped JSON's units) but the full structured
+  object was not built.
+- Deriving ardharca boundaries from authoritative structure instead of the length-alignment
+  heuristic. Checked directly against DGE's own data during this pass: `pada_patha` uses the
+  SAME `।` separator between every word AND at the ardharca boundary — it does not mark the
+  boundary distinctly from an ordinary inter-word split — so there is no more authoritative
+  signal already sitting in this repo's data to switch to; a real fix needs either deriving
+  pada-counts from the `chandas` field per meter (itself unverified against real editions) or
+  an external attested source. The two manual overrides stay logged as exactly that, not solved.
+- Auditing every lexical exception's citation as the review's point 16 asks (`basis`, sūtra,
+  commentary, generalizes-or-not) — the code comments already state provenance reasonably well
+  (e.g. `IRREGULAR_VISARGA_STEMS`'s comment cites the exact attested form and verse it came
+  from) but this is not yet surfaced as a structured field in the output JSON itself.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -771,6 +878,20 @@ Kept as a short index back to the full review, not restated in full here:
     before आ in 1.1.7, documented rather than patched blindly). Explicitly did NOT import any
     rule or form from the KYVeda/Taittirīya corpus into this engine, per the lead's strict
     instruction — that corpus was consulted only as a methodological precedent (§10).
+21. (Part VI, 11 Sep 2026) A second independent review (ChatGPT, relayed by the lead) argued the
+    first regenerated-output run gave no way to tell canonical output from a guess, or a checked
+    fact from an unchecked one (§6.7). Its specific count-bug claim was checked directly and
+    found wrong (both counts were already correct) — but the underlying complaint was fair: the
+    arithmetic tying them together was nowhere visible, so it reasonably looked broken. Fixed
+    that plus several real gaps: unit-level `status`/`retake_state`/`trigger_reasons` fields;
+    a per-ardharca `chain_reconstruction` VALIDATE check (§6.7) built to replace a first,
+    flawed per-unit substring-match attempt; and, in building that check properly, two real
+    phonology bugs it caught (a chained string's own elision-avagraha being misread as a
+    Pada-pāṭha compound; lexical exceptions only matching a bare word, never mid-chain) plus one
+    real, still-open bug precisely diagnosed rather than patched (an SLP1 round-trip collision
+    between "र्ऋ" and "रृ" that only manifests two joins deep). Chain reconstruction now matches
+    DGE's attested text on 16 of 18 RV 1.1 ardharcas, up from an unverified claim of 69/70 made
+    in an earlier, uncommitted ad hoc check.
 
 ---
 
@@ -815,6 +936,33 @@ Kept as a short index back to the full review, not restated in full here:
   auto-detection, 10.20/10.22 Pragṛhya/Rephī restoration as named functions, and 11.25/11.37–43
   remain open — not started.
 
-(Note on the sentence above: it described the state as of Part II/III. As of Part IV/V, actual
-ingestion, rule-logic, and now the real generator engine code have all landed — see §4b, §6.5,
-§6.6 for what's shipped, and the items just above for what's still open.)
+- (Added 11 Sep 2026, Part VI, from the second review — §6.7) The one still-open real bug: the
+  `indic_transliteration` SLP1 scheme's "र्ऋ"/"रृ" collision. A proper fix needs either a
+  private marker that survives round-tripping through that scheme, or bypassing it for this one
+  character class — not attempted yet; flagged precisely rather than papered over.
+- (Added 11 Sep 2026, Part VI) A real Kramahetu (Paṭala 11) evaluation layer — an explicit
+  `krama_decision` object per ardharca naming which Paṭala-11 sūtras were checked and why
+  ordinary two-step Krama (vs. dvikrama/trikrama/pañcakrama) was selected — does not exist yet;
+  every ordinary pair currently just cites `"10.2"` with no record that Paṭala 11 was consulted
+  at all. This is a bigger, separate engineering task, not a field to bolt on.
+- (Added 11 Sep 2026, Part VI) A full per-unit transformation-history object (`{"input":...,
+  "phonology":[...], "krama":{...}, "output":...}`), a structured `restore_*` family (Prakṛti
+  restoration on retake, Śuddhākṣara, Rephī/Uṣman), and a syllable-level structured Svara object
+  remain unbuilt — all correctly identified by the second review as real gaps, all explicitly
+  deferred rather than rushed (§6.7 lists exactly what exists in their place today).
+
+**Standing acceptance criterion (added 11 Sep 2026, from the second review, adopted verbatim
+because it is the right bar and should stay written down rather than re-litigated per review):**
+A generated form must never be considered "correct" merely because it reproduces DGE Saṃhitā or
+because a classifier selected it with high confidence. Every nontrivial Krama transformation
+must be justified by an explicit Prātiśākhya rule/state transition, and every unresolved
+interpretation must remain unresolved rather than being emitted as canonical output. This repo's
+`"status"`/`"confidence"`/`"chain_reconstruction"` three-field split (§6.7) is this pass's
+concrete attempt to satisfy that criterion mechanically, not just rhetorically — but the fields
+are only as honest as what populates them, so any new rule or exception added later must keep
+setting them correctly, not just adding a plausible-looking value.
+
+(Note on the sentence above §10's first bullet: it described the state as of Part II/III. As of
+Part IV/V/VI, actual ingestion, rule-logic, and now the real generator engine code (twice
+reviewed and corrected) have all landed — see §4b, §6.5, §6.6, §6.7 for what's shipped, and the
+items just above for what's still open.)

@@ -76,11 +76,17 @@ class KramaRegeneratedOutput(unittest.TestCase):
     def test_counts_are_internally_consistent(self):
         counts = self.data["counts"]
         recomputed = {"pada_count": 0, "pair_count": 0, "parigraha_count": 0,
-                      "ardharca_count": 0, "special_exception_count": 0, "unresolved_count": 0}
+                      "ardharca_count": 0, "special_exception_count": 0, "unresolved_count": 0,
+                      "candidate_reconstruction_count": 0, "chain_reconstruction_mismatch_count": 0}
+        tri_unit_count = 0
+        total_word_boundaries = 0
         for verse in self.data["items"]:
             for ardharca in verse["ardharcas"]:
                 recomputed["ardharca_count"] += 1
                 recomputed["pada_count"] += len(ardharca["pada_words"])
+                total_word_boundaries += max(len(ardharca["pada_words"]) - 1, 0)
+                if ardharca["chain_reconstruction"]["status"] == "DIFFERS":
+                    recomputed["chain_reconstruction_mismatch_count"] += 1
                 for u in ardharca["units"]:
                     if u["type"] == "pair":
                         recomputed["pair_count"] += 1
@@ -88,9 +94,48 @@ class KramaRegeneratedOutput(unittest.TestCase):
                         recomputed["parigraha_count"] += 1
                     elif u["type"] in ("monosyllable_retake_tri_unit", "monosyllable_confirm_pair"):
                         recomputed["special_exception_count"] += 1
+                        if u["type"] == "monosyllable_retake_tri_unit":
+                            tri_unit_count += 1
                     if u.get("confidence") == "low":
                         recomputed["unresolved_count"] += 1
-        self.assertEqual(counts, recomputed)
+                    if u.get("status") == "candidate_reconstruction":
+                        recomputed["candidate_reconstruction_count"] += 1
+        # invariant_check is a derived/reported sub-object, not an independent
+        # count -- compared separately so this test still pins its own formula.
+        invariant_check = counts["invariant_check"]
+        counts_without_invariant = {k: v for k, v in counts.items() if k != "invariant_check"}
+        self.assertEqual(counts_without_invariant, recomputed)
+        self.assertTrue(invariant_check["holds"])
+        self.assertEqual(invariant_check["pair_count"] + invariant_check["monosyllable_retake_tri_unit_count"],
+                          invariant_check["total_word_boundaries"])
+        self.assertEqual(invariant_check["total_word_boundaries"], total_word_boundaries)
+
+    def test_status_field_present_on_every_unit(self):
+        # every unit must declare canonical vs candidate_reconstruction --
+        # a consumer must never have to infer this from "type" or "confidence"
+        # (11 Sep 2026 review point 5).
+        for verse in self.data["items"]:
+            for ardharca in verse["ardharcas"]:
+                for u in ardharca["units"]:
+                    with self.subTest(verse=verse["id"], text=u["text"]):
+                        self.assertIn(u.get("status"), ("canonical", "candidate_reconstruction"))
+
+    def test_parigraha_units_declare_retake_state(self):
+        for verse in self.data["items"]:
+            for ardharca in verse["ardharcas"]:
+                for u in ardharca["units"]:
+                    if u["type"] == "parigraha":
+                        with self.subTest(verse=verse["id"], text=u["text"]):
+                            self.assertEqual(u["retake_state"], "STHITOPASTHITA")
+                            self.assertTrue(u["trigger_reasons"])
+
+    def test_every_ardharca_has_chain_reconstruction(self):
+        for verse in self.data["items"]:
+            for ardharca in verse["ardharcas"]:
+                cr = ardharca["chain_reconstruction"]
+                with self.subTest(verse=verse["id"]):
+                    self.assertIn(cr["status"], ("EXACT_MATCH", "DIFFERS"))
+                    self.assertIsInstance(cr["computed"], str)
 
     def test_comparison_against_hand_aligned_output_present(self):
         comparison = self.data["comparison_against_hand_aligned_output"]

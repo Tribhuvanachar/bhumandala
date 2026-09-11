@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools" / "pratishakhya"))
 
-from sanskrit_phonology import samhita_join, resolve_compound  # noqa: E402
+from sanskrit_phonology import samhita_join, resolve_compound, reconstruct_chain  # noqa: E402
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound, requires_parigraha,
     get_sthita, get_upasthita, get_sthitopasthita,
@@ -23,6 +23,25 @@ class SamhitaJoin(unittest.TestCase):
     def test_ordinary_no_sandhi_needed(self):
         result = samhita_join("अग्निम्", "ईळे")
         self.assertEqual(result["surface"], "अग्निमीळे")
+
+    def test_resolve_w1_compound_false_does_not_misread_a_chain_avagraha(self):
+        # Regression test for a real bug found 11 Sep 2026 while building
+        # chain-reconstruction validation: "सूनवेऽग्ने" here is NOT a
+        # Pada-patha compound -- it's running chained text that already
+        # picked up an avagraha from an earlier elision join (ordinary
+        # Sanskrit orthography). With resolve_w1_compound defaulting True,
+        # samhita_join used to call resolve_compound() on it, which
+        # collapsed every space built up so far. resolve_w1_compound=False
+        # must prevent that.
+        result = samhita_join("स नः पितेव सूनवेऽग्ने", "सूपायनः", resolve_w1_compound=False)
+        self.assertEqual(result["surface"], "स नः पितेव सूनवेऽग्ने सूपायनः")
+
+    def test_resolve_w1_compound_true_still_resolves_a_real_pada_compound(self):
+        # The default (True) must still work for krama_engine.py's ordinary
+        # per-pair use, where w1 legitimately IS a single Pada-patha
+        # compound word.
+        result = samhita_join("पुरःऽहितम्", "यज्ञस्य")
+        self.assertEqual(result["surface"], "पुरोहितं यज्ञस्य")
 
     def test_visarga_a_class_before_voiced(self):
         result = samhita_join("देवः", "देवेभिः")
@@ -140,6 +159,32 @@ class SplitIntoArdharcas(unittest.TestCase):
         )
         self.assertEqual(method, "automatic_length_alignment")
         self.assertEqual(sum(len(a) for a in ardharcas), 8)
+
+
+class ReconstructChain(unittest.TestCase):
+    """reconstruct_chain() is the VALIDATE-mode helper (used by
+    regenerate_krama_rv_1_1.py's attest_ardharcas(), not by the Krama
+    generator itself) that folds samhita_join across a whole word sequence
+    to simulate how continuous samhita_patha text is actually built."""
+
+    def test_reproduces_rv_1_1_1_ardharca_1_exactly(self):
+        computed, _rules = reconstruct_chain(
+            ["अग्निम्", "ईळे", "पुरःऽहितम्", "यज्ञस्य", "देवम्", "ऋत्विजम्"]
+        )
+        self.assertEqual(computed, "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम्")
+
+    def test_does_not_misread_its_own_elision_avagraha_as_a_compound(self):
+        # Regression test for the same bug as
+        # SamhitaJoin.test_resolve_w1_compound_false_does_not_misread_a_chain_avagraha,
+        # exercised through the actual chain-building function rather than
+        # a single hand-constructed call.
+        computed, _rules = reconstruct_chain(
+            ["सः", "नः", "पिताऽइव", "सूनवे", "अग्ने", "सुऽउपायनः", "भव"]
+        )
+        self.assertEqual(computed, "स नः पितेव सूनवेऽग्ने सूपायनो भव")
+
+    def test_empty_input(self):
+        self.assertEqual(reconstruct_chain([]), ("", []))
 
 
 if __name__ == "__main__":

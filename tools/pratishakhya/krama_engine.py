@@ -19,6 +19,38 @@ assumed done):
         -> sutra 10.7-10.9 Parigraha trigger detection (requires_parigraha)
         -> sutra 10.12-10.16 sthita/upasthita/sthitopasthita rendering
         -> Krama output, every unit citing which rule(s) fired
+
+Every unit dict carries THREE independent, non-substitutable signals (per
+the 11 Sep 2026 review of the first regenerated-output run, which found
+"confidence" alone was being read as if it meant "verified correct" --
+it never did, and conflating them is exactly the failure mode flagged):
+
+  "status": "canonical" (produced by applying the general rule engine
+      uniformly to this word sequence) vs "candidate_reconstruction"
+      (this session's own generalization of a SINGLE cited worked example
+      -- currently only sutra 10.3's units -- never independently
+      confirmed against a second source). A consumer that wants only
+      source-confirmed output filters on this field.
+  "confidence" ("high"/"low", set by sanskrit_phonology.samhita_join):
+      how sure the PHONOLOGICAL RULE CLASSIFIER is that it picked the
+      right branch for this segmental context. This says nothing about
+      whether the resulting Vedic form is independently attested.
+  "chain_reconstruction" (added per-ARDHARCA, not per-unit, by
+      tools/pratishakhya/regenerate_krama_rv_1_1.py as a VALIDATE-mode
+      pass, not by this module): whether folding samhita_join across the
+      WHOLE ardharca reproduces DGE's own attested continuous
+      samhita_patha for it. This is a real, checkable fact about the
+      phonology engine, but it is NOT proof of philological correctness
+      either -- reproducing DGE's own Samhita only shows internal
+      self-consistency with this repo's other data, not agreement with an
+      attested Krama-patha edition (still an open question -- see the
+      architecture doc sec.10). It is deliberately per-ardharca rather
+      than per-unit: an individual Krama pair is computed against only
+      its immediate neighbour, but that word's form in the continuous
+      chain often depends on a LATER neighbour too, so per-unit
+      substring-matching against continuous text produces false
+      mismatches (a real mistake made and then fixed in this session --
+      see regenerate_krama_rv_1_1.py's own module docstring).
 """
 import sys
 from pathlib import Path
@@ -72,6 +104,22 @@ def split_into_ardharcas(verse_id, pada_words, samhita_patha_stripped):
     return [pada_words[:n1], pada_words[n1:]], "automatic_length_alignment"
 
 
+# Named trigger reasons for 10.9's own citation list, so a consumer can
+# ask "why did this word get Parigraha" without parsing the "rule" list's
+# sutra-number strings -- a real gap the 11 Sep 2026 review pointed out
+# (point 15: reasons were flattened into an undifferentiated rule-number
+# list). One-to-one with pratishakhya_classify.requires_parigraha's own
+# reasons vocabulary ("10.7"/"10.8"/"10.9"); kept as a separate mapping
+# here rather than changing that module's return shape, since its reasons
+# ARE the sutra citations and are correct as such -- this is presentation,
+# not a second source of truth.
+_TRIGGER_REASON_LABELS = {
+    "10.7": "avagrhya_compound",
+    "10.8": "bahumadhyagata",
+    "10.9": "ardharca_final",
+}
+
+
 def _parigraha_unit(word_deva, reasons):
     compound = parse_compound(word_deva)
     combined_form = resolve_compound(word_deva)[0] if compound["is_compound"] else word_deva
@@ -81,6 +129,18 @@ def _parigraha_unit(word_deva, reasons):
         "text": text,
         "for_word": word_deva,
         "rule": reasons + ["10.14"],
+        "status": "canonical",
+        "trigger_reasons": [_TRIGGER_REASON_LABELS.get(r, r) for r in reasons],
+        # Every Parigraha unit this engine currently produces renders as
+        # sthitopasthita (10.14: combined/sthita form + iti + split/upasthita
+        # form together) -- Uvata's own worked example on 10.14. sthita
+        # (10.12) and upasthita (10.13) alone, as DISTINCT renderings rather
+        # than components of sthitopasthita, are not yet exercised by any
+        # case this engine has actually needed -- get_sthita/get_upasthita
+        # exist in pratishakhya_classify.py but nothing here calls them
+        # standalone. Stated explicitly rather than left implicit in which
+        # function happened to be called (11 Sep 2026 review point 3).
+        "retake_state": "STHITOPASTHITA",
         "confidence": "medium",
         "note": "Word+iti+word given with no sandhi between the components, per Uvata's "
                 "own worked example on 10.14 ('vibhaavaso iti vibhaavaso').",
@@ -125,6 +185,15 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
                 "text": f"{tri_join['surface']} {w2}",
                 "rule": ["10.3", tri_join["rule"]],
                 "confidence": "low",
+                # Not canonical output: this is this session's own generalization
+                # of a single worked example to whatever position it structurally
+                # matches, never independently confirmed against an attested
+                # Krama edition or a second commentarial source. A consumer that
+                # wants only source-confirmed output must filter this status out
+                # rather than treat "type" or "confidence" alone as the gate
+                # (11 Sep 2026 review point 5: an unresolved philological question
+                # must not silently become executable, unflagged behaviour).
+                "status": "candidate_reconstruction",
                 "note": "Reconstructed pattern for sutra 10.3's monosyllable exception "
                         "(this session's own reading of Uvata's example, not an attested "
                         "source for THIS verse) -- see KRAMA_VERIFICATION_PACKET.md.",
@@ -134,6 +203,7 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
                 "text": second_join["surface"],
                 "rule": ["10.3", second_join["rule"]],
                 "confidence": "low",
+                "status": "candidate_reconstruction",
                 "note": "Reconstructed pattern for sutra 10.3 -- see KRAMA_VERIFICATION_PACKET.md.",
             })
             # 10.3 replaces the ordinary retake-PAIR, but 10.9 (ardharca-final
@@ -155,6 +225,7 @@ def generate_ardharca(words, bahumadhyagata_positions=None):
             "text": pair["surface"],
             "rule": "10.2",
             "phonology_rule": pair["rule"],
+            "status": "canonical",
             "confidence": pair["confidence"],
             "note": pair["note"],
         })
