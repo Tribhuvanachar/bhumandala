@@ -213,7 +213,7 @@ def reconstruct_chain(words_deva):
     attested samhita_patha is a real, mechanically-checkable test of
     whether this module's phonology, applied the way continuous text is
     actually built, reproduces it -- see
-    tools/pratishakhya/regenerate_krama_rv_1_1.py's attest_units(). It is
+    tools/pratishakhya/regenerate_krama_rv_1_1.py's attest_ardharcas(). It is
     NOT a claim that reproducing DGE's Samhita proves philological
     correctness against a traditional Krama-patha edition (a separate,
     still-open question -- architecture doc sec.10).
