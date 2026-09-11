@@ -277,7 +277,7 @@
    "source_ids": [
     "setutila"
    ],
-   "feeds": "darshana/vedanta/dvaita/SetuTila — 47 granthas",
+   "feeds": "DvaitaVedanta/SarvaMula — 47 granthas",
    "importer": "extract-setutila",
    "blurb": "Counts published posts and reads the newest modified date through the WordPress API. If it moved, run the SetuTila importer (delta sync).",
    "writes": "nothing",
@@ -307,7 +307,7 @@
    "source_ids": [
     "dvaitavedanta"
    ],
-   "feeds": "darshana/vedanta/dvaita/DvaitaVedanta — 699 granthas",
+   "feeds": "darshana/vedanta/dvaita/DvaitaSahitya — 699 granthas",
    "importer": "sync-dvaitavedanta",
    "blurb": "Cheap check: the union of grantha links found at one seed page per section. For a per-grantha census and text spot-checks use the precise sync check (the Import button here runs it).",
    "writes": "nothing",
@@ -492,7 +492,7 @@
     "dasasahitya_net",
     "meerasubbarao"
    ],
-   "feeds": "dasa_sahitya — 152 composers, 15,863 compositions",
+   "feeds": "DvaitaVedanta/Itara/DasaSahitya — 152 composers, 15,863 compositions",
    "importer": "import-dasa-sahitya",
    "blurb": "Reads the three blogs' RSS feeds for the newest post. If any moved, run the Dāsa Sāhitya importer.",
    "writes": "nothing",

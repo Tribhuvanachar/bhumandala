@@ -9,12 +9,12 @@
  ],
  "labels": {
   "kavya_alankara": "काव्यालङ्कारौ",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others": "सर्वमूलेतर-द्वैतसम्बन्धिग्रन्थाः",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/kavyam": "काव्यम्",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam": "व्याकरणम्",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah": "तर्कः",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam": "प्रकरणानि",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram": "स्तोत्राणि",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others": "सर्वमूलेतर-द्वैतसम्बन्धिग्रन्थाः",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/kavyam": "काव्यम्",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/vyakaranam": "व्याकरणम्",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/tarkah": "तर्कः",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/prakananam": "प्रकरणानि",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/stotram": "स्तोत्राणि",
   "SarvaMula/kavya": "काव्यम्",
   "SarvaMula/stotra": "स्तोत्राणि",
   "SarvaMula/stotra/prahlada_kruta_narasimha": "प्रह्लादकृतनृसिंहस्तोत्रम्"
@@ -25,7 +25,7 @@
    "mula",
    "tippani"
   ],
-  "darshana/vedanta/dvaita/DvaitaVedanta": [
+  "darshana/vedanta/dvaita/DvaitaSahitya": [
    "gita_prasthana",
    "dasha_prakarana_granthas",
    "itihasa_prasthana",
@@ -40,7 +40,7 @@
    "upaveda",
    "agama",
    "darshana",
-   "dasa_sahitya",
+   "DvaitaVedanta/Itara/DasaSahitya",
    "itihasa",
    "kavya_alankara",
    "misc",
@@ -52,29 +52,25 @@
   ]
  },
  "moves": {
-  "dasa_sahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam/yuktimallika",
-  "dasa_sahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaVedanta/others/svapna_vrindavana_akhyana",
-  "darshana/vedanta/dvaita/Anandamakaranda": "SarvaMula",
-  "kavya_alankara/sumadhva_vijaya": "SarvaMula/kavya/sumadhva_vijaya",
-  "kavya_alankara/raghavendra_vijaya": "SarvaMula/kavya/raghavendra_vijaya",
-  "stotra/PrahladaKrutaNarasimha": "SarvaMula/stotra/prahlada_kruta_narasimha"
+  "DvaitaVedanta/Itara/DasaSahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaSahitya/others/prakananam/yuktimallika",
+  "DvaitaVedanta/Itara/DasaSahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaSahitya/others/svapna_vrindavana_akhyana"
  },
  "adds": [
-  "darshana/vedanta/dvaita/DvaitaVedanta/others",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/kavyam",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah",
-  "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam"
+  "darshana/vedanta/dvaita/DvaitaSahitya/others",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/kavyam",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/prakananam",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/stotram",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/tarkah",
+  "darshana/vedanta/dvaita/DvaitaSahitya/others/vyakaranam"
  ],
  "shelf": {
   "_readme": "GO-LIVE SHELF, 17 Sep 2026. An ALLOW-list: a display path that is neither one of these, nor an ancestor of one, nor under one, is hidden from the Library drawer AND from global search for everyone except an admin (and any role named in openToRoles). The opposite direction from `hidden` above, and the right one for a launch -- a grantha nobody remembered to list stays private instead of going live by accident. Paths here are DISPLAY paths (post-`moves`), the same form `hidden` and `labels` use. Set enabled:false to open the whole library again. Matching lives in dgeMatchShelf (dge/js/role-access.js), tested in dge/firebase/tests/role-access.test.js.",
   "enabled": true,
   "allow": [
-   "SarvaMula/kavya/sumadhva_vijaya",
-   "SarvaMula/kavya/mani_manjari",
-   "SarvaMula/kavya/raghavendra_vijaya",
-   "SarvaMula/kavya/tirtha_prabandha"
+   "DvaitaVedanta/Itara/Kavya/sumadhva_vijaya",
+   "DvaitaVedanta/Itara/Kavya/mani_manjari",
+   "DvaitaVedanta/Itara/Kavya/raghavendra_vijaya",
+   "DvaitaVedanta/Itara/Kavya/tirtha_prabandha"
   ],
   "_notAllowedOnPurpose": "Mani Manjari is listed above before its data exists -- an allow entry for a path with no grantha under it costs nothing and means loading it is a data commit with no config change. The wider SarvaMula shelf, DvaitaVedanta and SetuTila are deliberately NOT here (lead's choice, 10 Sep 2026); adding 'SarvaMula' to `allow` opens the whole Sarvamula section in one edit.",
   "openToRoles": []

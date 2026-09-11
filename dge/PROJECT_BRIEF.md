@@ -134,7 +134,7 @@ in digital form.
 - **`importers/`** — Python importers per source, dispatched by
   `importers/dispatch.py`.
 - **`tools/`** — extraction pipelines (`dvaitavedanta`, `vedavani`,
-  `dasa_sahitya`, `audio_admin`), plus `gen_library_status.py`,
+  `DvaitaVedanta/Itara/DasaSahitya`, `audio_admin`), plus `gen_library_status.py`,
   `validate_data.py`, `register_layers.py`.
 - **6 GitHub Actions workflows** — `ingest`, `ingest-commentaries`,
   `reindex` (search index + library status), `import-dasa-sahitya`,

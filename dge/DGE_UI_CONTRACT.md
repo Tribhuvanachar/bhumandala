@@ -474,7 +474,7 @@ What actually changed:
    अष्टाध्यायी), each ancestor linking to `?libraryPath=`, using the same
    pre-built-children markup the component already supported.
 6. **`dge/dasa-sahitya/index.html`**: verified — already a complete,
-   correct, functional 2-level chain (Home › Dāsa Sāhitya). `dasa_sahitya`
+   correct, functional 2-level chain (Home › Dāsa Sāhitya). `DvaitaVedanta/Itara/DasaSahitya`
    is itself a top-level taxonomy root (confirmed against `dge/data/`'s own
    directory layout), so there is no missing ancestor level to add here;
    left structurally as-is, restyled by the Part IV-B pass above.

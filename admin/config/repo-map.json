@@ -339,7 +339,7 @@
   },
   "dasa-sahitya-local-dist": {
    "category": "review-needed",
-   "purpose": "An earlier build of the Dāsa Sāhitya corpus from local (non-scraped) assets, before it was merged onto main directly as dge/data/dasa_sahitya/.",
+   "purpose": "An earlier build of the Dāsa Sāhitya corpus from local (non-scraped) assets, before it was merged onto main directly as dge/data/DvaitaVedanta/Itara/DasaSahitya/.",
    "recommendation": "review",
    "notes": "Not found referenced in any live dge/js/*.js file — the corpus now lives on main directly. Likely safe to delete once confirmed no page still points at it; kept as review rather than delete because it hasn't been individually diff-checked.",
    "snapshot": {
@@ -437,7 +437,7 @@
     "ahead_of_main": 1,
     "behind_main": 826,
     "last_commit_date": "2026-08-21",
-    "last_commit_subject": "data: gemini padaccheda/anvaya/summary for dge/data/kavya_alankara/raghavendra_vijaya (cantos 1)",
+    "last_commit_subject": "data: gemini padaccheda/anvaya/summary for dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya (cantos 1)",
     "last_author": "Tribhuvanachar",
     "checked_at": "2026-09-11 02:35 IST"
    }
@@ -1539,7 +1539,7 @@
       "name": "sarga_path",
       "label": "One sarga's data.json to sample verses from",
       "type": "string",
-      "default": "dge/data/kavya_alankara/raghavendra_vijaya/sarga_2/data.json",
+      "default": "dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya/sarga_2/data.json",
       "required": true
      },
      {
@@ -1627,7 +1627,7 @@
       "name": "sarga_dir",
       "label": "Directory of sarga_N/data.json subfolders to process",
       "type": "string",
-      "default": "dge/data/kavya_alankara/raghavendra_vijaya",
+      "default": "dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya",
       "required": true
      },
      {
@@ -1860,7 +1860,7 @@
       "name": "sarga_dir",
       "label": "Directory of sarga_N/data.json subfolders to process",
       "type": "string",
-      "default": "dge/data/kavya_alankara/raghavendra_vijaya",
+      "default": "dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya",
       "required": true
      },
      {
@@ -1968,7 +1968,7 @@
     "secrets": [],
     "cost": [],
     "scripts": [
-     "tools/dasa_sahitya/import_dasa_sahitya.py"
+     "tools/DvaitaVedanta/Itara/DasaSahitya/import_DvaitaVedanta/Itara/DasaSahitya.py"
     ],
     "missing_scripts": [],
     "writes": [

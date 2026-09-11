@@ -218,7 +218,7 @@
   // 31 Aug 2026 "search inside ANY node of the Library tree, several at
   // once" project-lead ask) and usable at every depth the slugs
   // themselves have: a whole section ('kavya_alankara'), one work
-  // ('kavya_alankara/raghavendra_vijaya'), a single sarga's own grantha.
+  // ('DvaitaVedanta/Itara/Kavya/raghavendra_vijaya'), a single sarga's own grantha.
   function slugInPrefixes(slug, prefixes) {
     for (var p = 0; p < prefixes.length; p++) {
       if (slug === prefixes[p] || slug.indexOf(prefixes[p] + '/') === 0) return true;
@@ -882,7 +882,7 @@
         });
         var giSet = {}, nGi = 0, picked = [], skipped = false;
         // Reported live: कान्ताय's only genuine exact matches in the whole
-        // corpus happen to sit under darshana/vedanta/dvaita/DvaitaVedanta,
+        // corpus happen to sit under darshana/vedanta/dvaita/DvaitaSahitya,
         // which global-search.js's own render() already hides from a
         // non-admin reader post hoc (dgeSearchIsAdminOnlyHit -- a display
         // preference, not real access control, per that comment). Applying

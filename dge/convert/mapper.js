@@ -49,7 +49,7 @@ window.DGE.Mapper = (function () {
     };
     // Optional -- the printed closing verse ("इति ... सर्गः"), when the admin
     // chose to record it separately (matches the existing convention already
-    // used by kavya_alankara/sumadhva_vijaya/sarga_1..8's own data.json files). Not
+    // used by DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1..8's own data.json files). Not
     // every grantha has one; only added when actually supplied.
     if (profile.colophon) metadata.colophon = profile.colophon;
 

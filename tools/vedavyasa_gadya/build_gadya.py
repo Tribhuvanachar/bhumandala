@@ -2,7 +2,7 @@
 """Import Śrī Vedavyāsa Gadyam (Yādavārya, a disciple-devotee of Vedeśa Tīrtha) from sanskritdocuments.org into the
 DvaitaVedanta later-ācāryas shelf as a mūla text:
 
-    dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vedavyasa_gadya/mula/data.json
+    dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vedavyasa_gadya/mula/data.json
 
 Usage:  python3 tools/vedavyasa_gadya/build_gadya.py [--html cached.html]
 The gadya is prose: a chain of dative epithets of Vedavyāsa, each closed by a daṇḍa. One item per epithet
@@ -14,8 +14,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 URL = "https://sanskritdocuments.org/doc_deities_misc/vedavyAsagadyam.html"
-OUT_DIR = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vedavyasa_gadya"
-LIB_PATH = "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vedavyasa_gadya/mula/data.json"
+OUT_DIR = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vedavyasa_gadya"
+LIB_PATH = "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vedavyasa_gadya/mula/data.json"
 AUTHOR = "Yādavārya (यादवार्यः)"
 
 

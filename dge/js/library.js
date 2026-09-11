@@ -25,7 +25,7 @@ const DGE_PATH_LABELS = {
   itihasas: 'इतिहासाः', smritis: 'स्मृतयः', sutras: 'सूत्राणि',
   dharmashastra: 'धर्मशास्त्रम्', pancharatra_agama: 'पाञ्चरात्रागमः',
   sarvamoola_grantha: 'सर्वमूलग्रन्थाः', dasakuta: 'दासकूटः',
-  vyasakuta: 'व्यासकूटः', dasa_sahitya: 'दाससाहित्यम्',
+  vyasakuta: 'व्यासकूटः', DasaSahitya: 'दाससाहित्यम्',
   koshas: 'कोशाः', ancillary: 'अङ्गानि',
 
   // The branches of the recommended DGE taxonomy (DGE_Shastra_Taxonomy.md).
@@ -61,6 +61,11 @@ const DGE_PATH_LABELS = {
   // own top-level grouping. Both keys resolve to the same label while the
   // restructure settles; neither is a rename of the other.
   Anandamakaranda: 'सर्वमूलग्रन्थाः',
+  // The V1 restructure's own segments (11 Sep 2026). Without these the
+  // breadcrumb reads "Itara > Kavya" in Latin beside Devanagari on
+  // either side of it.
+  Itara: 'इतराणि', Kavya: 'काव्यम्', Stotra: 'स्तोत्राणि', DasaSahitya: 'दाससाहित्यम्',
+  DvaitaSahitya: 'द्वैतसाहित्यम्',
   DvaitaVedanta: 'द्वैतवेदान्तः', SetuTila: 'सेतुतिला',
   sarvadarshana_sangraha: 'सर्वदर्शनसङ्ग्रहः',
 
@@ -249,8 +254,8 @@ const DGE_PATH_LABELS = {
   shankara_bhashya: 'शङ्करभाष्यम्', badhanta: 'बाधान्तः', brahmasutranyayasamgraha: 'ब्रह्मसूत्रन्यायसंग्रहः',
   // Dasa Sahitya composers (25 Aug 2026 taxonomy integration) --
   // Devanagari transliteration of each composer's own Kannada name in
-  // dge/data/dasa_sahitya/index.json (generated with indic_transliteration,
-  // the same library tools/dasa_sahitya/*.py uses for the compositions
+  // dge/data/DvaitaVedanta/Itara/DasaSahitya/index.json (generated with indic_transliteration,
+  // the same library tools/DvaitaVedanta/Itara/DasaSahitya/*.py uses for the compositions
   // themselves), plus hand-attested Devanagari for the major composers
   // whose index.json name is Latin (Purandara/Vijaya/Kanaka Dasaru etc.).
   // A handful of singleton, likely-mis-attributed 'composer' entries
@@ -292,14 +297,14 @@ const DGE_PATH_LABELS = {
   // (project lead's own count: ~1055 English names in the library tree).
   // Scoped with a script cross-checked against the real filesystem (many
   // taxonomy.json entries have no folder on disk, and a chunk of the raw
-  // count was metadata keys like dasa_sahitya's label/data/forms, not real
+  // count was metadata keys like DvaitaVedanta/Itara/DasaSahitya's label/data/forms, not real
   // tree nodes -- both excluded). The Dvaita Vedanta commentary sub-folders
   // account for the largest single slice (~554 real folders); all but 33 of
   // those are already absorbed into the stitched multi-tab reader
   // (dgeFoldLayerEntries, layer_manifest.json) and never render as a separate
   // tree label at all -- the 33 real holdouts are included below, read
   // directly off each folder's own data.json content rather than guessed
-  // from its slug. A handful of dasa_sahitya/composers/* entries are left
+  // from its slug. A handful of DvaitaVedanta/Itara/DasaSahitya/composers/* entries are left
   // unlabeled on purpose, same call as the earlier composer batch (a title
   // filed as a composer name, a URL-garbled slug, the honest 'untitled'
   // bucket) -- see dge/PENDING.md.
@@ -712,7 +717,7 @@ function dgeOverlayManagerDraft(committedUpdatedAt) {
 // 23 Aug 2026: per-grantha "hidden" flag written directly onto a
 // library.json entry (distinct from dgeLibOverrides.hidden above, which is
 // an admin-curated path-prefix list read from library-overrides.json) --
-// admin-only content like darshana/vedanta/dvaita/DvaitaVedanta/*, gated
+// admin-only content like darshana/vedanta/dvaita/DvaitaSahitya/*, gated
 // the same way admin-gate.js gates a standalone page. Not real access
 // control -- see that file's own caveat -- but keeps it out of the reader
 // nav and quick-jump for anyone who isn't signed in as admin.
@@ -942,7 +947,7 @@ const DGE_LIBRARY_ICONS = {
   stotra: '🎶', stotras: '🎶',
   agama: '🔥', pancharatra_agama: '🔥',
   vedanga: '📚', ancillary: '📚',
-  dasa_sahitya: '🎵', dasakuta: '🎵', vyasakuta: '🎵',
+  DasaSahitya: '🎵', dasakuta: '🎵', vyasakuta: '🎵',
   upaveda: '🧘', upavedas: '🧘',
   nitishastra: '🏛️',
   dharmashastra: '⚖️',

@@ -293,8 +293,8 @@ both transcripts exactly matched CLAUDE.md's prior recorded results:
 
 | Clip | Sarvam transcript | Latency | resolver.js result |
 |---|---|---|---|
-| `sumadhwa_test.wav` (clean) | "Sumadhwa Vijaya 1.1" | 1900ms | `open_text` → `kavya_alankara/sumadhva_vijaya/sarga_1`, ref "1.1", confidence 0.58 |
-| `sumadhwa_16k.m4a` (noisy) | "Sumadha Open Sumadha Vijaya 1.1" | 1681ms | `open_text` → `kavya_alankara/sumadhva_vijaya/sarga_1`, ref "1.1", confidence 0.58 |
+| `sumadhwa_test.wav` (clean) | "Sumadhwa Vijaya 1.1" | 1900ms | `open_text` → `DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1`, ref "1.1", confidence 0.58 |
+| `sumadhwa_16k.m4a` (noisy) | "Sumadha Open Sumadha Vijaya 1.1" | 1681ms | `open_text` → `DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1`, ref "1.1", confidence 0.58 |
 
 **This is the first full real-audio-in-to-correct-DGE-action proof of the
 whole pipeline** — not a synthetic TTS smoke test, not a text-only
@@ -430,7 +430,7 @@ These closed the remaining gap: 58/64 → 64/64.
 written expecting `unknown`, with notes explicitly saying "expected to
 currently fail until Kannada/Devanagari-script normalization is added."
 That normalization now exists, and both entries correctly resolve to
-`open_text` → `kavya_alankara/sumadhva_vijaya/sarga_1` — the manifest's
+`open_text` → `DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1` — the manifest's
 `expected` blocks were updated to match this **real, verified**
 improvement (not silently left stale). One genuine residual divergence
 remains and is left as-is rather than forced: `02_kannada_003`'s *written*
@@ -465,7 +465,7 @@ ones (see section 10's ask).
 | "sandhi of ityukte" | Yes — `dge/js/sandhi.js:95`, the real "Sandhi (Live)" button (Dharmamitra API) | `sandhi_analysis` (new) | PARTIAL — selection-only |
 | "samāsa of chakrapani" | **No** — confirmed no samasa/compound-analysis function exists anywhere in `dge/js/` | `samasa_analysis` (new) | **STUB** — nothing to point at |
 | "chandas of this shloka" | Page exists (`dge/vyakarana/chandas.html`), no per-shloka JS entry point | `chandas_identify` (new) | **STUB** |
-| "show Vijaya Dasa's hADugaLu" | Yes — `dasa_sahitya/composers/vijaya_dasaru` (library.json), parampara node `vijayadasa`/"Vijaya Dasa" — both verified real, not assumed | `open_text` (existing) | Resolves via the EXISTING pipeline **once phrased with a recognized trigger** ("open" — bare "show" deliberately not added, see below); the exact quoted phrasing has 2 compounding real gaps, documented honestly rather than forced to pass |
+| "show Vijaya Dasa's hADugaLu" | Yes — `DvaitaVedanta/Itara/DasaSahitya/composers/vijaya_dasaru` (library.json), parampara node `vijayadasa`/"Vijaya Dasa" — both verified real, not assumed | `open_text` (existing) | Resolves via the EXISTING pipeline **once phrased with a recognized trigger** ("open" — bare "show" deliberately not added, see below); the exact quoted phrasing has 2 compounding real gaps, documented honestly rather than forced to pass |
 | "download this shloka" / "share this text" | Yes — `copyShlokaText` (render.js), `shareShlokaAudio`/`shareShlokaTextOnly` (snippets.js), `openShareImagePreview` (screenshot.js), all real and confirmed live | `shloka_share_action` (new) | PARTIAL — all 4 functions need the CURRENT shloka id, which the resolver has no access to; app layer must supply it |
 | "make this content correction..." | Partial — Notes exist but are localStorage-only; **no moderation queue anywhere** | `content_correction` (new, 2-turn) | **STUB by design** — see section 9 |
 

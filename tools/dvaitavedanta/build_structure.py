@@ -29,7 +29,7 @@ same id — the set of layers that speak at that point. That last one answers
 shape makes hard to ask.
 
     python tools/dvaitavedanta/build_structure.py \\
-        --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_structure.json
+        --data dge/data/darshana/vedanta/dvaita/DvaitaSahitya --out dge/data/darshana/vedanta/dvaita/DvaitaSahitya/_structure.json
 """
 
 from __future__ import annotations
@@ -102,7 +102,7 @@ def build(data_root: Path) -> dict:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--data", default="dge/data/darshana/vedanta/dvaita/DvaitaVedanta")
+    ap.add_argument("--data", default="dge/data/darshana/vedanta/dvaita/DvaitaSahitya")
     ap.add_argument("--out", required=True)
     args = ap.parse_args(argv)
 

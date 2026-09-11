@@ -113,7 +113,7 @@ _Fetch a corpus from its source and open a pull request (or republish a dist bra
 - **Runs when:** manual
 - **Writes:** opens a pull request
 - **Inputs:** `limit_per_index`, `delay` (default `1.0`)
-- **Code it runs:** `tools/dasa_sahitya/import_dasa_sahitya.py`
+- **Code it runs:** `tools/DvaitaVedanta/Itara/DasaSahitya/import_DvaitaVedanta/Itara/DasaSahitya.py`
 - **Recommendation: KEEP** — Live sources that keep publishing; the RSS probes in check-sources tell you when to run it.
 
 #### `import-kavya.yml` — Kāvya — import from four sites
@@ -192,7 +192,7 @@ _Send text to Gemini for padaccheda, anvaya, summaries, reference resolution or 
 - **Runs when:** manual
 - **Writes:** uploads a run artifact
 - **Costs money:** Gemini (₹ prepaid credits)
-- **Inputs:** `sarga_path` (default `dge/data/kavya_alankara/raghavendra_vijaya/sarga_2/data.json`), `verses` (default `12`), `models` (default `gemini-flash-latest,gemini-flash-lite-latest`), `batch_sizes` (default `1,4,12`), `sweep_model` (default `gemini-flash-latest`), `sweep_batch_size` (default `10`), `sweep_batches` (default `10`), `concurrency_levels` (default `1,5,10,20`)
+- **Inputs:** `sarga_path` (default `dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya/sarga_2/data.json`), `verses` (default `12`), `models` (default `gemini-flash-latest,gemini-flash-lite-latest`), `batch_sizes` (default `1,4,12`), `sweep_model` (default `gemini-flash-latest`), `sweep_batch_size` (default `10`), `sweep_batches` (default `10`), `concurrency_levels` (default `1,5,10,20`)
 - **Code it runs:** `tools/gemini_bench.py`
 - **Recommendation: KEEP** — Small, diagnostic, and the thing that keeps the other four honest about cost. Delete if the settings are considered settled.
 
@@ -202,7 +202,7 @@ _Send text to Gemini for padaccheda, anvaya, summaries, reference resolution or 
 - **Runs when:** manual
 - **Writes:** opens a pull request, commits directly to the branch it ran on
 - **Costs money:** Gemini (₹ prepaid credits)
-- **Inputs:** `sarga_dir` (default `dge/data/kavya_alankara/raghavendra_vijaya`), `cantos` (default `1-10`), `limit`, `model` (default `gemini-flash-lite-latest`), `batch_size` (default `1`), `concurrency` (default `1`), `direct_push` (default `False`)
+- **Inputs:** `sarga_dir` (default `dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya`), `cantos` (default `1-10`), `limit`, `model` (default `gemini-flash-lite-latest`), `batch_size` (default `1`), `concurrency` (default `1`), `direct_push` (default `False`)
 - **Code it runs:** `tools/gemini_deep_analysis.py`, `tools/validate_data.py`
 - **Recommendation: KEEP** — Working pipeline; costs credits — estimate first.
 
@@ -232,7 +232,7 @@ _Send text to Gemini for padaccheda, anvaya, summaries, reference resolution or 
 - **Runs when:** manual
 - **Writes:** opens a pull request, commits directly to the branch it ran on
 - **Costs money:** Gemini (₹ prepaid credits)
-- **Inputs:** `sarga_dir` (default `dge/data/kavya_alankara/raghavendra_vijaya`), `cantos` (default `1-10`), `fields` (default `padaccheda,anvaya,summary`), `limit`, `model` (default `gemini-flash-lite-latest`), `batch_size` (default `10`), `concurrency` (default `1`), `direct_push` (default `False`)
+- **Inputs:** `sarga_dir` (default `dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya`), `cantos` (default `1-10`), `fields` (default `padaccheda,anvaya,summary`), `limit`, `model` (default `gemini-flash-lite-latest`), `batch_size` (default `10`), `concurrency` (default `1`), `direct_push` (default `False`)
 - **Code it runs:** `tools/gemini_summarize.py`, `tools/validate_data.py`
 - **Recommendation: KEEP** — Working pipeline; costs credits — estimate first.
 
@@ -606,7 +606,7 @@ _Diagnostics that answered a question once (is this site reachable, is this scan
 | `claude/firebase-auth-messaging-g88vub` | 1 / 1030 | 2026-08-18 · Claude | "Run the Cloud Functions for the first time, and fix what that found" — 1 commit ahead of main. — Possibly an operational one-off (a manual Functions test) rather than a durable code change. | **review** |
 | `claude/sanskrit-texts-sources-dg-mpmrjy` | 3 / 1017 | 2026-08-23 · Claude | "Cost/feasibility analysis" for Madhva AI Assistant future features — 3 commits ahead of main. — PR #67 closed unmerged; reads as a planning note, not shipped code. | **review-likely-delete** |
 | `cowork/sarvamoola-and-search` | 0 / 1366 · merged | 2026-08-08 · Claude (Cowork) | A large (1,105 unique commits) branch from a Cowork session adding a SarvaMūla corpus + global Sanskrit-aware search — from very early in the project (8 Aug), before this session's own search/library architecture existed. — Not diffed file-by-file given its size; almost certainly superseded by the search/library work done since, but deserves a deliberate look (not an automatic delete) given its size. | **review** |
-| `dasa-sahitya-local-dist` | 2 / 2471 | 2026-08-24 · Claude | An earlier build of the Dāsa Sāhitya corpus from local (non-scraped) assets, before it was merged onto main directly as dge/data/dasa_sahitya/. — Not found referenced in any live dge/js/*.js file — the corpus now lives on main directly. Likely safe to delete once confirmed no page still points at it; kept as review rather than delete because it hasn't been individually diff-checked. | **review** |
+| `dasa-sahitya-local-dist` | 2 / 2471 | 2026-08-24 · Claude | An earlier build of the Dāsa Sāhitya corpus from local (non-scraped) assets, before it was merged onto main directly as dge/data/DvaitaVedanta/Itara/DasaSahitya/. — Not found referenced in any live dge/js/*.js file — the corpus now lives on main directly. Likely safe to delete once confirmed no page still points at it; kept as review rather than delete because it hasn't been individually diff-checked. | **review** |
 | `genie-asr-audio-seed` | 3 / 456 | 2026-08-28 · Claude | "Add 62 real recordings completing the Genie ASR benchmark's audio coverage" — 3 commits ahead of main. — Check whether genie_asr_benchmark/ on main already has this audio, or whether it's still pending. | **review** |
 
 ### 🟢 Safe to delete (fully merged into main) (17)

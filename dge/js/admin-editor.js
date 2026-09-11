@@ -784,7 +784,7 @@ async function dgeAdminValidateGranthaFileEntries(fileEntries) {
   //
   // 23 Aug 2026: the project lead deliberately chose PascalCase for these
   // four folders (SarvaMula/DvaitaVedanta/SetuTila under Vedanta/Dvaita,
-  // and stotra/PrahladaKrutaNarasimha) as the new naming standard going
+  // and DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha) as the new naming standard going
   // forward, so they're exempted here rather than nagging on every future
   // load of this editor.
   const DGE_INTENTIONAL_PASCAL_CASE = new Set([

@@ -16,7 +16,7 @@ Every work lives under `dge/data/`, one directory per work, one
 subdirectory per layer, each holding a single `data.json`:
 
 ```
-dge/data/darshana/vedanta/dvaita/DvaitaVedanta/
+dge/data/darshana/vedanta/dvaita/DvaitaSahitya/
   sutra_prasthana/
     brahma_sutra_bhashya/
       mula/data.json                    ← 571 units

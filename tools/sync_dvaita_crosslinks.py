@@ -246,7 +246,7 @@ def sync_library_authors(aliases, apply_it):
     return planned, unmapped, changed_files
 
 
-DASA_INDEX = "dge/data/dasa_sahitya/index.json"
+DASA_INDEX = "dge/data/DvaitaVedanta/Itara/DasaSahitya/index.json"
 
 
 def dasa_alias_proposals(cat, overrides, aliases, person_of):

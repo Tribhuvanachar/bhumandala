@@ -3,7 +3,7 @@
 
 Scans the grantha corpus (darshana -- which now includes DvaitaVedanta,
 nested under darshana/vedanta/dvaita/ since the 23 Aug 2026 restructure --
-kavya, itihasa, purana, smriti, stotra, dasa_sahitya, ... -- everything
+kavya, itihasa, purana, smriti, stotra, DvaitaVedanta/Itara/DasaSahitya, ... -- everything
 EXCEPT vedanga/vyakarana's
 own commentary layers, whose citing of sutras is their whole job, and the
 non-text datasets kosha/_morph/_synonyms) for real usages of Panini's
@@ -37,9 +37,9 @@ Ranking is this project's own priority, not frequency: the Madhva lineage
 first --
 
   rank 0  सर्वमूलम् (darshana/vedanta/dvaita/Anandamakaranda)
-  rank 1  the wider Dvaita corpus (darshana/vedanta/dvaita/DvaitaVedanta/**:
+  rank 1  the wider Dvaita corpus (darshana/vedanta/dvaita/DvaitaSahitya/**:
           Sumadhva Vijaya, Yuktimallika, Nyaya Sudha, the later acharyas' works)
-  rank 2  dasa_sahitya (Vyasakuta/Haridasa works)
+  rank 2  DvaitaVedanta/Itara/DasaSahitya (Vyasakuta/Haridasa works)
   rank 3  everything else (itihasa, kavya, purana, smriti, ...)
 
 Output: dge/data/vedanga/vyakarana/ashtadhyayi/prayoga_index/a<N>.json, one
@@ -68,7 +68,7 @@ DATA = REPO / 'dge/data'
 SUTRAPATHA = DATA / 'vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json'
 OUT = DATA / 'vedanga/vyakarana/ashtadhyayi/prayoga_index'
 
-SCAN_TOPDIRS = ['darshana', 'dasa_sahitya', 'itihasa',
+SCAN_TOPDIRS = ['darshana', 'DvaitaVedanta/Itara/DasaSahitya', 'itihasa',
                 'kavya_alankara', 'purana', 'smriti_dharma', 'stotra',
                 'nitishastra', 'upaveda', 'agama', 'vedas']
 MIN_QUOTE_NORM = 8
@@ -98,9 +98,9 @@ DEVDIG = {ord(a): str(i) for i, a in enumerate('०१२३४५६७८९')
 def rank_of(slug):
     if slug.startswith('darshana/vedanta/dvaita/Anandamakaranda'):
         return 0
-    if slug.startswith('darshana/vedanta/dvaita/DvaitaVedanta'):
+    if slug.startswith('darshana/vedanta/dvaita/DvaitaSahitya'):
         return 1
-    if slug.startswith('dasa_sahitya'):
+    if slug.startswith('DvaitaVedanta/Itara/DasaSahitya'):
         return 2
     return 3
 
@@ -240,7 +240,7 @@ def main():
                     'tools/build_sutra_prayoga_index.py (its docstring records '
                     'the detection rules and the lineage-first ranking). '
                     'Entry: [slug, unit, quote|ref, rank, snippet, title]. '
-                    'rank: 0 sarvamula, 1 dvaitavedanta, 2 dasa_sahitya, 3 rest.'),
+                    'rank: 0 sarvamula, 1 dvaitavedanta, 2 DvaitaVedanta/Itara/DasaSahitya, 3 rest.'),
         'v': 1,
         'sutrasWithUsages': len(found),
         'usages': sum(len(v) for v in found.values()),

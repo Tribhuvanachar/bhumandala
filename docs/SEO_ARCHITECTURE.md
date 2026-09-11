@@ -43,13 +43,13 @@ the pages can move to object storage or Firebase Hosting later without a single 
 |---|---|
 | `vedas/rigveda/shakala_shakha/samhita/mandala_01` | `/dge/veda/rigveda/samhita/mandala-1/` — sūktas at `…/mandala-1/sukta-1/` |
 | `vedas/atharvaveda/shaunaka_shakha/samhita/kanda_20` | `/dge/veda/atharvaveda/shaunaka-shakha/samhita/kanda-20/sukta-143/` |
-| `kavya_alankara/raghavendra_vijaya/sarga_1` | `/dge/kavya/raghavendra-vijaya/sarga-1/` |
+| `DvaitaVedanta/Itara/Kavya/raghavendra_vijaya/sarga_1` | `/dge/kavya/raghavendra-vijaya/sarga-1/` |
 | `itihasa/mahabharata/adi_parva/mula` | `/dge/itihasa/mahabharata/adi-parva/` — chapters at `…/adi-parva/adhyaya-1/` |
 | `itihasa/ramayana/ayodhya_kanda/saartha` (a layer) | `/dge/itihasa/ramayana/ayodhya-kanda/saartha/` |
 | `purana/maha_purana/bhagavata_purana/skandha_10` | `/dge/purana/maha-purana/bhagavata-purana/skandha-10/adhyaya-14/` |
-| `stotra/PrahladaKrutaNarasimha` | `/dge/stotra/prahladakrutanarasimha/` |
+| `DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha` | `/dge/stotra/prahladakrutanarasimha/` |
 
-Rules: top-level folder renamed by `rootMap` (vedas→veda, kavya_alankara→kavya, dasa_sahitya→dasa, smriti_dharma→smriti …);
+Rules: top-level folder renamed by `rootMap` (vedas→veda, kavya_alankara→kavya, DvaitaVedanta/Itara/DasaSahitya→dasa, smriti_dharma→smriti …);
 `mula` (the default layer) vanishes; a level with a single child everywhere collapses (Ṛgveda has only the Śākala
 śākhā); `mandala_01` → `mandala-1`; lowercase, hyphens, trailing slash; a text longer than ~90 KB is split into
 `part-N/` pages; verses are anchors (`#v-1.1.3`, `#v-12`) inside their section page, not separate URLs (the corpus

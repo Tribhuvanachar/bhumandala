@@ -157,8 +157,8 @@
 <script src="../dge/convert/github.js"></script>
 <script>
 "use strict";
-const BASE = "../dge/data/dasa_sahitya";
-const GH_BASE = "dge/data/dasa_sahitya";
+const BASE = "../dge/data/DvaitaVedanta/Itara/DasaSahitya";
+const GH_BASE = "dge/data/DvaitaVedanta/Itara/DasaSahitya";
 const FORM_LABELS = {pada:"Pada",suladi:"Suladi",ugabhoga:"Ugabhoga",devaranama:"Devaranama",
   aarati:"Aarati",mangala:"Mangala",kolu:"Kolu",shobhane:"Shobhane",laali:"Laali",
   dashavatara:"Dashavatara",sampradaya:"Sampradaya",kavya:"Kavya",
@@ -414,7 +414,7 @@ document.getElementById('saveBtn').onclick = async () => {
   try{
     // Read the manifest FIRST so the slug can reuse the composer's existing
     // folder. The corpus shape is composers/<slug>/data.json with `items`
-    // (see dge/data/dasa_sahitya/composers/*/data.json and schemas.json
+    // (see dge/data/DvaitaVedanta/Itara/DasaSahitya/composers/*/data.json and schemas.json
     // `dasa_pada_text`); the earlier composers/<slug>.json + `compositions`
     // wrote a file the reader never fetched and re-pointed index.json at it.
     const indexPath = `${GH_BASE}/index.json`;

@@ -258,14 +258,14 @@
   "r706": "retain"
  },
  "links": {
-  "r426": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/talavakara/data.json",
-  "r435": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/taittiriya/data.json",
+  "r426": "dge/data/DvaitaVedanta/SarvaMula/mula_granthas/talavakara/data.json",
+  "r435": "dge/data/DvaitaVedanta/SarvaMula/mula_granthas/taittiriya/data.json",
   "r436": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad/bhashya/data.json",
   "r407": "dge/data/agama/natha_hathayoga/natha/amaraughashasana/tika/data.json",
   "r397": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/aitareya_upanishad/bhashya/data.json",
-  "r463": "dge/data/darshana/vedanta/dvaita/SetuTila/mula_granthas/manduka/data.json",
-  "r571": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/sadacharasmriti/data.json",
-  "r572": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/sadacharasmriti/data.json",
-  "r584": "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/krishnamruta_maharnava/data.json"
+  "r463": "dge/data/DvaitaVedanta/SarvaMula/mula_granthas/manduka/data.json",
+  "r571": "dge/data/DvaitaVedanta/SarvaMula/achara_granthas/sadacharasmriti/data.json",
+  "r572": "dge/data/DvaitaVedanta/SarvaMula/achara_granthas/sadacharasmriti/data.json",
+  "r584": "dge/data/DvaitaVedanta/SarvaMula/achara_granthas/krishnamruta_maharnava/data.json"
  }
 }

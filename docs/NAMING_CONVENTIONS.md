@@ -29,7 +29,7 @@ Persons outside it are declared in `dge/data/author_aliases.json` under
 | `taxonomy.json` | `_author_id` beside `_default_author`, cascading like it | new |
 | `library.json` entries | `facets.author_id` (derived by `audit_library.py --fix` from the data.json) | new |
 | `parampara.json` nodes | `id` (unchanged) — `works[].path` gains the library path | pending |
-| `dasa_sahitya/index.json` composers | `author_id` | new |
+| `DvaitaVedanta/Itara/DasaSahitya/index.json` composers | `author_id` | new |
 
 **Display names** come from the person record, never from the field on the
 file: `name_sa` (Devanagari), `name_en` (IAST with diacritics), `name_kn`
@@ -129,5 +129,5 @@ Not done, in the order it should be: (1) grow the alias table over the
 someone who reads the names; (2) `audit_library.py --fix` writing
 `author_id`, `kind`, `parent`; (3) replacing the 39 slug-tail titles and the
 karmavijaya folder names from the source; (4) `works[].path` in the
-paramparā; (5) `dasa_sahitya/index.json` `author_id`; (6) the catalogue page
+paramparā; (5) `DvaitaVedanta/Itara/DasaSahitya/index.json` `author_id`; (6) the catalogue page
 on top of all of it.

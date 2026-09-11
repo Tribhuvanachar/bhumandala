@@ -71,14 +71,14 @@ MAPPING = [
     # --- Dasa Sahitya ------------------------------------------------------
     # Taxonomy note 6: its home is Bhakti / Dasa Sahitya, not inside Dvaita.
     # The two kutas are branches of it rather than top-level siblings.
-    ('dasakuta',                 'dasa_sahitya/dasakuta', 'the two kutas gather under Dasa Sahitya'),
-    ('vyasakuta',                'dasa_sahitya/vyasakuta', 'the two kutas gather under Dasa Sahitya'),
+    ('dasakuta',                 'DvaitaVedanta/Itara/DasaSahitya/dasakuta', 'the two kutas gather under Dasa Sahitya'),
+    ('vyasakuta',                'DvaitaVedanta/Itara/DasaSahitya/vyasakuta', 'the two kutas gather under Dasa Sahitya'),
 ]
 
 # Left where they are, deliberately.
 UNTOUCHED = {
     'vedas':        'instructed to leave alone',
-    'dasa_sahitya': 'already a top-level branch in the recommended taxonomy',
+    'DvaitaVedanta/Itara/DasaSahitya': 'already a top-level branch in the recommended taxonomy',
 }
 
 # Choices in the mapping above that are defensible either way, and are the
