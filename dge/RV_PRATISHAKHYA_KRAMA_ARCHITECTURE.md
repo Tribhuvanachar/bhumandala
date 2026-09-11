@@ -1034,6 +1034,49 @@ and the verified-range boundary.
 
 ---
 
+### 6.11 Layer C spot-check on the RV 1.1.7 gap (11 Sep 2026) — sharpens the question, doesn't
+
+close it
+
+Self-directed follow-up to §6.10, no external prompt: fetched Layer C
+(`sites.google.com/view/rv-pratishakhya/home/rvpr-2`) for its transliteration/English gloss of
+2.24 and 2.27, as a third independent source on the still-open RV 1.1.7 visarga gap. Also
+checked whether Layer C's page (which runs 2.1–2.78, further than VedaViṣṭāram's 2.1–42 but
+still short of Layer A's full 82) had anything for the 2.51–58 pragṛhya-before-iti lead — it
+does have transliteration + English gloss there too, but only a summarized paraphrase was
+captured, not the verbatim text, so that lead is not advanced further by this pass; still
+exactly where §10 left it.
+
+**2.24/2.27, confirmed a third way**: Layer C glosses 2.24 as "an unrhotacized Visarjanīya, if
+preceded by a long vowel and followed by a vowel, becomes ā" (āḥ + vowel → ā + vowel) and 2.27
+as the same for a short-vowel-preceded visarga (aḥ + vowel → a + vowel) — a general derivation
+of visarga into an a/ā *sound*, not a rule keyed to a specific following vowel. This is a third
+independent line (after my own direct reading of the raw sūtra text, and VedaViṣṭāram's clean-
+but-uncommented text) all pointing the same way, and all against Gemini's Round 2 claim that
+2.24/2.27 describe a special *full elision* specifically before a following ā. The rejection of
+that citation (§6.9/Part VIII) stands, now on three legs instead of one.
+
+**What this does *not* do is explain the attested form.** Re-examining RV 1.1.7 (`भरन्तः` + `आ`,
+§6.6) against the real Pada-pāṭha here: the sequence is actually three words, `भरन्तः` + `आ` +
+`इमसि`, not two. The attested continuous form `भरन्त एमसि` decomposes cleanly once seen this way:
+`आ` + `इमसि` → `एमसि` is *ordinary* guṇa vowel sandhi (ā + i → e — textbook, no special rule
+needed). That part of the mystery is resolved, and it was a framing error on this session's own
+part (§6.6 quoting the visible surface form without checking it was two Pada words fused, not
+one). What's left is narrower and still genuinely open: `भरन्तः` + `आ` → `भरन्त` — i.e. per 2.27
+the visarga becomes a bare `a` (`bharantaḥ` → `bharanta`), but that resulting `a` then does
+*not* undergo further vowel sandhi with the immediately following `ā` (which instead skips past
+it to bond with `इमसि`). Ordinary vowel sandhi (a + ā → ā, savarṇa-dīrgha) would predict
+`bharantā` here, not `bharanta` with the following `ā` left untouched by it. A visarga-derived
+`a` behaving as "invisible" to the vowel-sandhi rule that would otherwise apply to it next is a
+known shape of exception in classical Sanskrit generally (compare `rāmaḥ` + `iti` → `rāma iti`,
+not `rāmeti`), but this corpus has no Prātiśākhya sūtra actually cited and checked for it — 2.51
+("words before iti are pragṛhya") is the closest lead already on file and it's about *iti*
+specifically, not this. **No code change made.** The RV 1.1.7 gap in §10 is retitled below to
+reflect this more precise, narrower question rather than the original, now-resolved "why does
+एमसि look shorter than आ+इमसि" framing.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -1211,15 +1254,17 @@ Kept as a short index back to the full review, not restated in full here:
   word-level cross-check against DGE's own Pada/Saṃhitā data before the Krama work leans on
   it, or whether the existing 96.61%-validated VedaWeb cross-check is sufficient.
 
-- (Added 11 Sep 2026, Part V; updated Part VII; updated §6.10) The visarga-before-आ gap found in
-  RV 1.1.7 (§6.6) needs either a Prātiśākhya sūtra that specifically licenses Vedic visarga-lopa
-  in this environment or confirmation this is genuinely `bahulaṃ chandasi` free variation with
-  no single derivable rule. **Still open after the §6.10 Paṭala 2 cross-check**: 2.24/2.27's
-  text is now fully confirmed accurate (no OCR uncertainty), but VedaViṣṭāram carries no Bhāṣya
-  at all for this region, so the interpretive question (general derivation step vs. Gemini's
-  claimed full-elision-before-ā) still has no commentary to settle it. Needs the Sanskrit
-  Library's own critical apparatus (if any translation notes exist there, not yet pulled into
-  this corpus) or a different secondary source.
+- (Added 11 Sep 2026, Part V; updated Part VII; updated §6.10; **narrowed by §6.11**) The RV
+  1.1.7 gap is no longer "why does भरन्तः + आ + इमसि surface as भरन्त एमसि" — the एमसि half is
+  just ordinary guṇa sandhi (आ + इमसि → एमसि) and needs no special rule; §6.11 confirmed this
+  from the actual three-word Pada-pāṭha. What's left, narrower and still open: भरन्तः's visarga
+  becomes a bare `a` before आ (per 2.24/2.27, now confirmed a third independent way by Layer C
+  in §6.11), but that `a` then does *not* itself undergo ordinary vowel sandhi with the
+  following आ (a + ā → ā would predict भरन्ता, not the attested भरन्त). Needs a specific
+  Prātiśākhya citation for "a visarga-derived a does not participate in the next vowel-sandhi
+  step" (a known *shape* of exception in classical Sanskrit generally, e.g. रामः + इति → राम
+  इति not रामेति — but not yet located as a cited sūtra in this corpus) or confirmation this is
+  genuinely `bahulaṃ chandasi` free variation with no single derivable rule.
 - (Added 11 Sep 2026, §6.10) A genuinely new, well-scoped lead for the Q2 question below, found
   while cross-checking Paṭala 2: sūtra 2.51, "prakṛtyā itikaraṇādau pragṛhyāḥ" ("[words] before
   iti-karaṇa are pragṛhya"), sitting in the 40-sūtra block (2.43–82) VedaViṣṭāram doesn't cover
