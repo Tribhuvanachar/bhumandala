@@ -5721,5 +5721,54 @@ audit against a printed edition. Vayu Purana is the one item with a scan-backed 
 verification pass is ever wanted.
 
 **Still not done**: Adi/Brihannaradiya/Nandi/Sanatkumara/Saura Purana (confirmed absent from Wikisource
-itself, not an importer gap — see the 11 Sep survey above); Adhyatma Ramayana's other 5 kandas; Skanda
-Purana's Ambika Khanda.
+itself, not an importer gap — see the 11 Sep survey above); Adhyatma Ramayana's other 5 kandas.
+
+## Skanda Purana's Ambika Khanda + Vamana Purana's Saromahatmya — both landed (11 Sep 2026, follow-up)
+
+Lead's call on the two remaining gaps from the pass above: "I approve it on case by case basis. Don't have
+to worry about license... do whatever it takes. I want all of them in." Both done:
+
+**Vamana Purana, Saromahatmya** — `purana/maha_purana/vamana_purana/saromahatmya`: **26 chapters, 1170
+shlokas**, GRETIL legacy file `1_sanskr/3_purana/vampsm_u.htm` (siglum VamPSm), same `slash_chapter_verse`
+marker as the main text (`// VamPSm_N.M //`) but registered as its OWN `gretil_bulk.json` id
+(`vamana_purana_saromahatmya`) rather than folded into `vamana_purana`'s `legacy_extra` — the two texts
+number their chapters independently starting at 1, and `group_items()` only keys on the numeric ref, not the
+siglum, so merging them silently overwrote main-text adhyaya 1..26 with Saromahatmya content when tested
+under the original registration. Bug found and fixed in the shared engine while building this:
+`gretil_bulk.py`'s `split_header()` didn't recognize this file's `<hr>`-divided (not "# Text"/"-----"
+divided) header, so the full HTML credits/legend block was leaking into chapter 1's text; added a fallback
+that splits on the LAST `<hr>` tag when neither of the existing markers match, engaging only when both
+already fail (no risk to the other 34 registry entries, confirmed by re-running the ones sharing `legacy`/
+`legacy_extra`). Marked "FOR REFERENCE PURPOSES ONLY" by GRETIL itself (source: A.S. Gupta ed., All India
+Kashiraj Trust 1967) — imported anyway per the lead's explicit waiver above; `build_note()`'s licence text is
+left accurate (still says reference-only) since the waiver is about the decision to import, not about
+mischaracterizing the source's own terms.
+
+**Skanda Purana, Ambika Khanda** — `purana/maha_purana/skanda_purana/ambika_khanda`: **183 of 184 chapters,
+12,019 shlokas**. New bespoke importer, `importers/wikisource_skanda_ambika.py` (`wikisource_purana.py`'s
+generic crawler still can't handle this one — see below). Chapter boundaries have no wikitext marker at all
+(the literal string "अध्याय" never occurs mid-chapter); the only signal is each chapter's own closing
+colophon ("इति स्कन्दपुराणे ...-ध्यायः", ordinal word varying), so the parser seeds a running counter from
+each of the 19 sub-pages' own known starting chapter (stated in that page's own index link, e.g. "अध्यायाः
+११-२०") and increments on every colophon match, rather than trying to parse the ordinal words themselves.
+Two real transcription inconsistencies in the source tolerated by widening the colophon regex, both
+confirmed live, not assumed: chapter 3's colophon spells the ending "...तृतीयोघ्यायः" with घ (gha) instead of
+the expected ध (dha); chapter 56's colophon drops the closing visarga entirely ("...षट्पञ्चाशोध्याय", no ः).
+Chapter 184, the very last one, is a genuine gap in the source itself, not a parser miss — sub-page १९'s
+content trails into illegible-manuscript apparatus ("(?)" uncertain readings, runs of dashes for missing
+text) and simply has no chapter 184 content or closing colophon to find.
+
+The bigger discovery this pass: **this khanda's 19 sub-pages are not uniform**. Most (०१-०३, ०५, ०७) are raw
+MS-Word-pasted HTML (`<p class="MsoNormal">...<span lang="SA">...</span></p>`, no `<poem>` tag anywhere) —
+this is what made the generic crawler skip the whole khanda originally, since it only recognizes `<poem>`
+content. But others (०४, ०८, ०९, and every page from १० on) turned out to be the site's ordinary `<poem>`
+wikitext all along. The bespoke parser handles both: it checks for `<poem>` FIRST (a page can carry one
+stray `<p>` — just its own top nav link — alongside real content in a `<poem>` block, so checking `<p>`
+first was an early bug during development that silently returned only that nav link and nothing else), and
+falls back to `<p>`-splitting only when no `<poem>` tag is present. Verse-end dandas also aren't uniform
+across the khanda: space-separated "। । N । ।" on the `<p>`-format pages vs. adjacent "।।N।।" on the
+`<poem>`-format ones — handled with the same 0-2-dandas-either-side pattern already proven permissive enough
+elsewhere in this project's Wikisource imports.
+
+`tools/register_layers.py` + `tools/gen_library_status.py` re-run after both: corpus now 1,277 of 2,244
+leaves loaded, 1,162,854 items total.

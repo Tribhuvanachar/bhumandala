@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 2244,
-  "loaded": 1275,
-  "items": 1149665
+  "loaded": 1277,
+  "items": 1162854
  },
  "sections": {
   "agama": {
@@ -38,8 +38,8 @@
   },
   "purana": {
    "total": 99,
-   "loaded": 91,
-   "items": 422573
+   "loaded": 93,
+   "items": 435762
   },
   "shastra": {
    "total": 32,
@@ -1912,7 +1912,7 @@
   "purana/maha_purana/shiva_purana/uma_samhita": 2695,
   "purana/maha_purana/shiva_purana/vayaviya_samhita": 8292,
   "purana/maha_purana/shiva_purana/vidyeshvara_samhita": 3068,
-  "purana/maha_purana/skanda_purana/ambika_khanda": 0,
+  "purana/maha_purana/skanda_purana/ambika_khanda": 12019,
   "purana/maha_purana/skanda_purana/avantya_khanda": 16203,
   "purana/maha_purana/skanda_purana/brahma_khanda": 10276,
   "purana/maha_purana/skanda_purana/kashi_khanda": 11787,
@@ -1922,7 +1922,7 @@
   "purana/maha_purana/skanda_purana/revakhanda": 7894,
   "purana/maha_purana/skanda_purana/vaishnava_khanda": 13580,
   "purana/maha_purana/vamana_purana/purana_mula": 4516,
-  "purana/maha_purana/vamana_purana/saromahatmya": 0,
+  "purana/maha_purana/vamana_purana/saromahatmya": 1170,
   "purana/maha_purana/varaha_purana": 39,
   "purana/maha_purana/vayu_purana": 10767,
   "purana/maha_purana/vishnu_purana/amsha_01": 1393,
@@ -4646,6 +4646,10 @@
   "purana/maha_purana/shiva_purana/vidyeshvara_samhita": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
   },
+  "purana/maha_purana/skanda_purana/ambika_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/स्कन्दपुराणम्/खण्डः_८_(अम्बिकाखण्डः)",
+   "licence": "CC BY-SA"
+  },
   "purana/maha_purana/skanda_purana/avantya_khanda": {
    "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
    "licence": "CC BY-SA"
@@ -4681,6 +4685,9 @@
   },
   "purana/maha_purana/vamana_purana/purana_mula": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAmanapurANa1-69.txt"
+  },
+  "purana/maha_purana/vamana_purana/saromahatmya": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/3_purana/vampsm_u.htm"
   },
   "purana/maha_purana/varaha_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -5703,10 +5710,6 @@
      "note": "Standard critical Anandashram Sanskrit Series edition, 4 parts (1893-94) -- preferred over the Gita Press/Nag Publishers editions (mostly Sanskrit+Hindi or Sanskrit+English translation) on the same search page."
     }
    ]
-  },
-  "purana/maha_purana/vamana_purana/saromahatmya": {
-   "status": "not_located",
-   "candidates": []
   },
   "smriti_dharma/dharmashastra/chaturvarga_chintamani": {
    "status": "text_available",

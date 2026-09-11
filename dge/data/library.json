@@ -13696,7 +13696,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/vamana_purana/saromahatmya/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Saromahatmya",
       "addedAt": "2026-08-25",
       "facets": {
@@ -18080,7 +18080,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/ambika_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": null,
       "addedAt": "2026-09-11",
       "facets": {
