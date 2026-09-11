@@ -79,10 +79,26 @@ complete record, not just a live queue.
   back with a visibly duplicated phrase, now fixed and guarded by a regression test. Full
   details in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §4c.
 
-  **Still open, blocking the actual rule engine:** turn the now-annotated sūtra text (text +
-  Uvaṭa's Bhāṣya) into real `conditions`/`action`/`exceptions` rule logic for paṭala 10–11 —
-  nothing blocks starting this now. See the document's §10 for the rest of the open
-  questions (Layer C cross-check, the 135 still-unresolved sūtras outside paṭala 10–11).
+  **Update, 11 Sep 2026 — rule logic built for paṭala 10 and 14 of paṭala 11's sūtras.**
+  `tools/pratishakhya/build_krama_rules.py` writes
+  `rigveda_pratishakhya/krama_kramahetu_rules.json`: all 22 paṭala-10 sūtras fully worked out
+  (base pairing algorithm, Parigraha's real scope replacing the naive `word+iti` formula, the
+  `sthita`/`upasthita`/`sthitopasthita` mechanism, ardharca-sandhi prohibition, Pragṛhya-in-
+  Parigraha, Śuddhākṣara-āgama, Rephita) plus 14 directly-extending paṭala-11 sūtras
+  (catuḥkrama 11.19, the default/ayāvana case 11.22–23, the parigraha phonetic-reversion
+  block 11.36–46, sthitopasthita confirmation 11.61). The other 57 paṭala-11 sūtras are
+  classified only (domain/type/one-line summary) — mostly rationale, historical lineage, or
+  grammarians' debate, not new operative content; not force-encoded. Every entry states its
+  basis (Uvaṭa's Bhāṣya) and is explicitly marked NOT validated against any attested
+  Krama-pāṭha text — that's this session's own interpretation, not independently checked.
+  Checked by `tests/test_krama_kramahetu_rules.py`. Full detail in
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.5.
+
+  **Still open:** an actual generator that executes this rule logic against Pada-pāṭha input
+  hasn't been written yet (this is the rule *data*, not the engine code); the VALIDATE-mode
+  ground-truth question (an independently attested Krama text) from §10 is still unresolved;
+  the Layer C cross-check and the 135 still-unresolved sūtras outside paṭala 10–11 also
+  remain (§10).
 
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First

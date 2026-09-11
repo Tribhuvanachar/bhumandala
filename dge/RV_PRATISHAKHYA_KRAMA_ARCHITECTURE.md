@@ -560,6 +560,28 @@ that; leave `rules` empty rather than guess.
   at generation time. Mixing text generation + phonology + svara + audio alignment + UI into
   one function is exactly the kind of premature coupling to avoid.
 
+### 6.5 Rule logic — done for paṭala 10, and 14 of paṭala 11's sūtras (11 Sep 2026)
+
+`tools/pratishakhya/build_krama_rules.py` writes
+`rigveda_pratishakhya/krama_kramahetu_rules.json`: one entry per paṭala 10/11 sūtra (93
+total), each citing its sūtra text and, where fully worked out, `conditions`/`action`/
+`exceptions`/`examples` grounded in Uvaṭa's Bhāṣya (via §4c's cross-check data). All 22
+paṭala-10 sūtras are fully worked out — the base pairing algorithm (10.2), Parigraha's real
+scope (10.7–10.9, replacing the naive `word+iti` formula), the `sthita`/`upasthita`/
+`sthitopasthita` mechanism that formula was standing in for (10.12–10.14), the ardharca-sandhi
+prohibition (10.18), Pragṛhya-in-Parigraha (10.20), Śuddhākṣara-āgama removal (10.21), and
+Rephita (10.22). Of paṭala 11, 14 sūtras that directly extend paṭala 10 operationally are
+worked out the same way (catuḥkrama, 11.19; the default/ayāvana case, 11.22–23; the parigraha
+phonetic-reversion block, 11.36–46; the sthitopasthita confirmation, 11.61); the remaining 57
+are classified (domain/rule type/one-line summary) but not reduced to executable logic — most
+of that material is rationale, historical lineage (11.65 names Prabāhravya as Krama's first
+teacher), or grammarians' debate about *why* the rules are as they are, not new operative
+content. Every entry says explicitly what it rests on (`basis`) and carries
+`"validated_against_attested_krama": false` — this is this session's interpretation of the
+Bhāṣya, not independently checked against any attested Krama-pāṭha output; §7's VALIDATE mode
+is the next real gate, still blocked on §10's open question about a ground-truth source.
+Checked by `tests/test_krama_kramahetu_rules.py`.
+
 ---
 
 ## 7. Two modes
@@ -659,9 +681,11 @@ Kept as a short index back to the full review, not restated in full here:
   — not done yet; VedaViṣṭāram alone was enough to resolve the paṭala 10–11 cases actually
   needed so far, but Layer C stays valuable as a check on VedaViṣṭāram itself (which has its
   own small errors — see §4c's note on 11.59's apparent typo).
-- Approve turning cited sūtra text into actual rule logic (`conditions`/`action`/`exceptions`,
-  §6.1) for paṭala 10–11 — the sūtra text plus Uvaṭa's Bhāṣya are now both in the data (§4c);
-  this is genuinely the next step, not blocked on anything further.
+- ~~Approve turning cited sūtra text into actual rule logic.~~ **Done for paṭala 10 (all 22
+  sūtras) and 14 of paṭala 11's — §6.5.** Review that interpretation (it is this session's own
+  reading of the Bhāṣya, not independently checked) before relying on it, and decide whether
+  the remaining 57 paṭala-11 sūtras (mostly rationale/lineage/debate, not new operative
+  content — see §6.5) are worth the same treatment.
 - Confirm an independently attested Krama-pāṭha source to use as the VALIDATE-mode ground
   truth for RV 1.1.1 and subsequent sūktas — `github.com/vishvasa`'s Rigveda repo was
   checked (10 Sep 2026) and does not appear to carry one, so this is still open.
