@@ -5650,3 +5650,76 @@ per text), not audited chapter-by-chapter.
 **Not started:** actually importing any of this. Vayu Purana is the natural first case (best-sourced,
 explicitly named in part 6 as needing "source identified, e-text not yet secured" → now secured) — scoping
 that import is the next step once the lead confirms priority.
+
+## Sanskrit Wikisource Purana import — full batch landed (11 Sep 2026)
+
+Per the lead's instruction ("bring in all puranas as it is, with source syncers for future"), built and ran
+a registry-driven importer against every text the cross-check above found on Wikisource. **+290,707 verse
+units** across 41 taxonomy leaves (28 filled by the main batch, 4 by the Narada pada split, 1 by the
+Adhyatma Ramayana one-off, 2 brand-new leaves for edition fidelity), plus a 215-verse stotra filed outside
+`purana/` entirely. Corpus-wide totals moved from 869,694 to 1,149,665 items (`admin/config/library-status.json`).
+
+**New tooling** (all under `importers/`, re-runnable — this is the "source syncer": re-running an id
+re-crawls the live wiki and overwrites with whatever's there now):
+- `wikisource_purana.py` — registry-driven (`SPEC` list, same pattern as `gretil_bulk.py`), one generic
+  crawler + parser for ~30 texts. Fetches via **Special:Export** (MediaWiki's bulk endpoint, many pages'
+  wikitext in one POST), not the per-page `action=parse` API — confirmed live that the parse API throttles
+  hard (instant 429s even at a 2s/request pace) while Special:Export was not throttled at all in the same
+  session. Crawl is breadth-first and batched: one export call per tree level, not per leaf page.
+- `wikisource_narada_padas.py` — one-off, partitions Narada Purana's Purvabhaga (one flat 125-adhyaya
+  Wikisource index, no pada-level subpages) into this project's 4 existing pada leaves by chapter-number
+  range (1-41/42-62/63-91/92-125, the traditional Sanaka/Sanandana/Sanatkumara/Sanatana division).
+  `purvabhaga/purana_mula` (sourced elsewhere, already populated) is untouched.
+- `wikisource_adhyatma_ramayana.py` and `wikisource_lalita_sahasranama.py` — one-offs for the two
+  Brahmanda-Purana-adjacent texts, each with its own real markup quirks (below).
+
+**Verse-marker regex needed three live fixes before trusting it broadly** — this text family is far less
+uniform than GRETIL's TEI-ish exports: some texts wrap `।।N।।`, Padma Purana glues the number directly onto
+the last word with no leading danda at all (`"...वः पुनातु१।"`), Bhavishya Purana's Brahma Parva ends a line
+`"... । । N"` (two space-separated single dandas, nothing after the number). Final regex treats the number
+itself as the only reliable anchor, danda placement on either side purely optional — each variant confirmed
+against live output (a first fix that only handled the Padma case silently halved Bhavishya's Brahma Parva
+count, 216→114 chapters, before being caught and fixed properly).
+
+**Per-text results** (chapters/shlokas; `-` = not attempted this pass):
+
+| Text | Chapters | Shlokas | Note |
+|---|---:|---:|---|
+| Vayu Purana (both parts) | 111 | 10,767 | scan-backed on Wikisource; best-sourced item |
+| Bhavishya Purana (4 parvas) | 587 | 26,378 | |
+| Brahmavaivarta Purana (4 khandas) | 279 | 21,318 | |
+| Padma Purana (7 khandas) | 692 | 49,854 | **brahma_khanda is a new taxonomy leaf** — this edition has 7 khandas, project taxonomy only tracked 6 |
+| Garuda Purana (2 remaining khandas) | 77 | 4,837 | purva_khanda (Acharakanda) already had GRETIL content, left alone |
+| Skanda Purana (7 of 8 remaining khandas) | 1,687 | 94,416 | revakhanda already populated, left alone |
+| Skanda Purana, Ambika Khanda | — | — | **failed, not a bug**: this khanda's Wikisource pages are raw MS-Word-pasted HTML (`<p>`/`<span>`), not the site's usual `<poem>` wikitext every other khanda uses; new taxonomy leaf added but left empty with a note. Bonus 8th khanda, not part of the original gap list — deprioritized rather than writing a second parser engine for one khanda |
+| Shiva Purana (4 samhitas + Rudra Samhita's 5 sub-khandas) | 356 | 19,760 | Vidyeshvara/Vayaviya samhitas already populated, left alone |
+| Narada Purana, Purvabhaga padas 1-4 | 125 | 13,129 | partitioned from one Wikisource page; purana_mula untouched |
+| Adhyatma Ramayana (Brahmanda Purana) | 2 (kanda-level) | 1,136 | **partial**: Wikisource's only page for this text holds just Bala and Ayodhya Kanda (confirmed via the site's own search API — no other page exists); Aranya/Kishkindha/Sundara/Yuddha/Uttara Kanda need a different source entirely. Sarga boundaries (marked by ordinal words like "प्रथमः सर्गः", not digits) kept flat within each kanda rather than split out |
+| Vishnudharmottara Purana (3 khandas) | 298 | 22,182 | far more complete than GRETIL's 2-excerpt stub |
+| Ganesha Purana (2 khandas) | 62 | 11,057 | |
+| Devi Bhagavata Purana (Mahatmya + 12 skandhas) | 322 | 18,873 | |
+| **Lalita Sahasranama** | 215 (unnumbered) | — | filed at `dge/data/stotra/lalita_sahasranama/`, **not** under `purana/` — see below |
+
+**Lalita Sahasranama moved out of Purana taxonomy, per the lead's explicit call**: "it's not a purana etc."
+— it's used and known as a standalone stotra, not read as Brahmanda Purana narrative, even though it
+originates there (Uttarakhanda's Hayagriva-Agastya dialogue, the Lalitopakhyana episode). Imported to the
+**global stotra library** (`dge/data/stotra/lalita_sahasranama/`, schema `grantha_mula_text`, matching the
+existing `dge/data/stotra/PrahladaKrutaNarasimha` precedent) instead of the taxonomy's
+`brahmanda_purana/lalitopakhyana_lalita_sahasranama` leaf, which stays empty with a note pointing to the new
+location — kept rather than deleted, since it would still be the right place for the surrounding
+Lalitopakhyana *narrative* frame if that's ever sourced separately (none found on Wikisource this pass).
+This Wikisource transcription carries no verse numbers at all (checked live, zero digits anywhere in either
+section); numbered sequentially by the importer instead of by source.
+
+**Two new taxonomy leaves added for edition fidelity** (`dge/data/taxonomy.json`): `padma_purana/brahma_khanda`
+and `skanda_purana/ambika_khanda` — both are real khandas of this specific edition that the project's
+taxonomy simply hadn't tracked before (Padma has 7 khandas here, not 6; Skanda has 8, not 7).
+
+**Quality tier, same caveat as the 11 Sep survey**: this is raw community-transcribed Wikisource text, not
+scan-verified beyond confirming real chapter content and sane shloka counts per text — no chapter-by-chapter
+audit against a printed edition. Vayu Purana is the one item with a scan-backed Wikisource Index if a
+verification pass is ever wanted.
+
+**Still not done**: Adi/Brihannaradiya/Nandi/Sanatkumara/Saura Purana (confirmed absent from Wikisource
+itself, not an importer gap — see the 11 Sep survey above); Adhyatma Ramayana's other 5 kandas; Skanda
+Purana's Ambika Khanda.

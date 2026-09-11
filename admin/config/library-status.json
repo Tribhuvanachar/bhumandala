@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 2242,
-  "loaded": 1234,
-  "items": 869694
+  "leaves": 2244,
+  "loaded": 1275,
+  "items": 1149665
  },
  "sections": {
   "agama": {
@@ -37,9 +37,9 @@
    "items": 0
   },
   "purana": {
-   "total": 97,
-   "loaded": 50,
-   "items": 142602
+   "total": 99,
+   "loaded": 91,
+   "items": 422573
   },
   "shastra": {
    "total": 32,
@@ -1867,62 +1867,64 @@
   "purana/maha_purana/bhagavata_purana_madhva/skandha_10": 4441,
   "purana/maha_purana/bhagavata_purana_madhva/skandha_11": 1372,
   "purana/maha_purana/bhagavata_purana_madhva/skandha_12": 563,
-  "purana/maha_purana/bhavishya_purana/brahma_parva": 0,
-  "purana/maha_purana/bhavishya_purana/madhyama_parva": 0,
-  "purana/maha_purana/bhavishya_purana/pratisarga_parva": 0,
-  "purana/maha_purana/bhavishya_purana/uttara_parva": 0,
+  "purana/maha_purana/bhavishya_purana/brahma_parva": 8936,
+  "purana/maha_purana/bhavishya_purana/madhyama_parva": 3009,
+  "purana/maha_purana/bhavishya_purana/pratisarga_parva": 5915,
+  "purana/maha_purana/bhavishya_purana/uttara_parva": 8518,
   "purana/maha_purana/brahma_purana": 13788,
-  "purana/maha_purana/brahmanda_purana/adhyatma_ramayana": 0,
+  "purana/maha_purana/brahmanda_purana/adhyatma_ramayana": 1136,
   "purana/maha_purana/brahmanda_purana/lalitopakhyana_lalita_sahasranama": 0,
   "purana/maha_purana/brahmanda_purana/purana_mula": 13747,
-  "purana/maha_purana/brahmavaivarta_purana/brahma_khanda": 0,
-  "purana/maha_purana/brahmavaivarta_purana/ganesha_khanda": 0,
-  "purana/maha_purana/brahmavaivarta_purana/krishna_janma_khanda": 0,
-  "purana/maha_purana/brahmavaivarta_purana/prakriti_khanda": 0,
-  "purana/maha_purana/garuda_purana/brahma_khanda": 0,
+  "purana/maha_purana/brahmavaivarta_purana/brahma_khanda": 1885,
+  "purana/maha_purana/brahmavaivarta_purana/ganesha_khanda": 2676,
+  "purana/maha_purana/brahmavaivarta_purana/krishna_janma_khanda": 11420,
+  "purana/maha_purana/brahmavaivarta_purana/prakriti_khanda": 5337,
+  "purana/maha_purana/garuda_purana/brahma_khanda": 1908,
   "purana/maha_purana/garuda_purana/purva_khanda": 5089,
-  "purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa": 0,
+  "purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa": 2929,
   "purana/maha_purana/kurma_purana/purva_bhaga": 3179,
   "purana/maha_purana/kurma_purana/uttara_bhaga": 2736,
   "purana/maha_purana/linga_purana/purva_bhaga": 6914,
   "purana/maha_purana/linga_purana/uttara_bhaga": 2249,
   "purana/maha_purana/markandeya_purana/devi_mahatmya_durga_saptashati": 540,
   "purana/maha_purana/matsya_purana": 8341,
-  "purana/maha_purana/narada_purana/purvabhaga/pada_01": 0,
-  "purana/maha_purana/narada_purana/purvabhaga/pada_02": 0,
-  "purana/maha_purana/narada_purana/purvabhaga/pada_03": 0,
-  "purana/maha_purana/narada_purana/purvabhaga/pada_04": 0,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_01": 3553,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_02": 3104,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_03": 4630,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_04": 1842,
   "purana/maha_purana/narada_purana/purvabhaga/purana_mula": 13114,
   "purana/maha_purana/narada_purana/uttarabhaga": 2500,
-  "purana/maha_purana/padma_purana/bhumi_khanda": 0,
-  "purana/maha_purana/padma_purana/kriya_yoga_sara_khanda": 0,
-  "purana/maha_purana/padma_purana/patala_khanda": 0,
-  "purana/maha_purana/padma_purana/srishti_khanda": 0,
-  "purana/maha_purana/padma_purana/svarga_khanda": 0,
-  "purana/maha_purana/padma_purana/uttara_khanda": 0,
-  "purana/maha_purana/shiva_purana/kailasa_samhita": 0,
-  "purana/maha_purana/shiva_purana/kotirudra_samhita": 0,
-  "purana/maha_purana/shiva_purana/rudra_samhita/kumara_khanda": 0,
-  "purana/maha_purana/shiva_purana/rudra_samhita/parvati_khanda": 0,
-  "purana/maha_purana/shiva_purana/rudra_samhita/sati_khanda": 0,
-  "purana/maha_purana/shiva_purana/rudra_samhita/srishti_khanda": 0,
-  "purana/maha_purana/shiva_purana/rudra_samhita/yuddha_khanda": 0,
-  "purana/maha_purana/shiva_purana/shatarudra_samhita": 0,
-  "purana/maha_purana/shiva_purana/uma_samhita": 0,
+  "purana/maha_purana/padma_purana/bhumi_khanda": 6616,
+  "purana/maha_purana/padma_purana/brahma_khanda": 1050,
+  "purana/maha_purana/padma_purana/kriya_yoga_sara_khanda": 3045,
+  "purana/maha_purana/padma_purana/patala_khanda": 9632,
+  "purana/maha_purana/padma_purana/srishti_khanda": 11439,
+  "purana/maha_purana/padma_purana/svarga_khanda": 3118,
+  "purana/maha_purana/padma_purana/uttara_khanda": 14954,
+  "purana/maha_purana/shiva_purana/kailasa_samhita": 1290,
+  "purana/maha_purana/shiva_purana/kotirudra_samhita": 2212,
+  "purana/maha_purana/shiva_purana/rudra_samhita/kumara_khanda": 1094,
+  "purana/maha_purana/shiva_purana/rudra_samhita/parvati_khanda": 2730,
+  "purana/maha_purana/shiva_purana/rudra_samhita/sati_khanda": 2331,
+  "purana/maha_purana/shiva_purana/rudra_samhita/srishti_khanda": 1229,
+  "purana/maha_purana/shiva_purana/rudra_samhita/yuddha_khanda": 2984,
+  "purana/maha_purana/shiva_purana/shatarudra_samhita": 2195,
+  "purana/maha_purana/shiva_purana/uma_samhita": 2695,
   "purana/maha_purana/shiva_purana/vayaviya_samhita": 8292,
   "purana/maha_purana/shiva_purana/vidyeshvara_samhita": 3068,
-  "purana/maha_purana/skanda_purana/avantya_khanda": 0,
-  "purana/maha_purana/skanda_purana/brahma_khanda": 0,
-  "purana/maha_purana/skanda_purana/kashi_khanda": 0,
-  "purana/maha_purana/skanda_purana/maheshvara_khanda": 0,
-  "purana/maha_purana/skanda_purana/nagara_khanda": 0,
-  "purana/maha_purana/skanda_purana/prabhasa_khanda": 0,
+  "purana/maha_purana/skanda_purana/ambika_khanda": 0,
+  "purana/maha_purana/skanda_purana/avantya_khanda": 16203,
+  "purana/maha_purana/skanda_purana/brahma_khanda": 10276,
+  "purana/maha_purana/skanda_purana/kashi_khanda": 11787,
+  "purana/maha_purana/skanda_purana/maheshvara_khanda": 12147,
+  "purana/maha_purana/skanda_purana/nagara_khanda": 15168,
+  "purana/maha_purana/skanda_purana/prabhasa_khanda": 13255,
   "purana/maha_purana/skanda_purana/revakhanda": 7894,
-  "purana/maha_purana/skanda_purana/vaishnava_khanda": 0,
+  "purana/maha_purana/skanda_purana/vaishnava_khanda": 13580,
   "purana/maha_purana/vamana_purana/purana_mula": 4516,
   "purana/maha_purana/vamana_purana/saromahatmya": 0,
   "purana/maha_purana/varaha_purana": 39,
-  "purana/maha_purana/vayu_purana": 10736,
+  "purana/maha_purana/vayu_purana": 10767,
   "purana/maha_purana/vishnu_purana/amsha_01": 1393,
   "purana/maha_purana/vishnu_purana/amsha_02": 780,
   "purana/maha_purana/vishnu_purana/amsha_03": 815,
@@ -1931,14 +1933,14 @@
   "purana/maha_purana/vishnu_purana/amsha_06": 493,
   "purana/upa_purana/adi_purana": 0,
   "purana/upa_purana/brihannaradiya_purana": 0,
-  "purana/upa_purana/devi_bhagavata_purana": 0,
-  "purana/upa_purana/ganesha_purana": 0,
+  "purana/upa_purana/devi_bhagavata_purana": 18873,
+  "purana/upa_purana/ganesha_purana": 11057,
   "purana/upa_purana/kalika_purana": 288,
   "purana/upa_purana/nandi_purana": 0,
   "purana/upa_purana/narasimha_purana": 35,
   "purana/upa_purana/sanatkumara_purana": 0,
   "purana/upa_purana/saura_purana": 0,
-  "purana/upa_purana/vishnu_dharmottara_purana": 0,
+  "purana/upa_purana/vishnu_dharmottara_purana": 22182,
   "shastra/bauddha_sahitya/avadana/avadanashataka/mula": 251,
   "shastra/bauddha_sahitya/avadana/divyavadana/mula": 3126,
   "shastra/bauddha_sahitya/avadana/sanghabhedavastu/mula": 128,
@@ -4469,16 +4471,60 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Agnipurāṇa",
    "licence": "CC-BY 4.0"
   },
+  "purana/maha_purana/bhavishya_purana/brahma_parva": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AD%E0%A4%B5%E0%A4%BF%E0%A4%B7%E0%A5%8D%E0%A4%AF%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D%20",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/bhavishya_purana/madhyama_parva": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AD%E0%A4%B5%E0%A4%BF%E0%A4%B7%E0%A5%8D%E0%A4%AF%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D%20",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/bhavishya_purana/pratisarga_parva": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AD%E0%A4%B5%E0%A4%BF%E0%A4%B7%E0%A5%8D%E0%A4%AF%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D%20",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/bhavishya_purana/uttara_parva": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AD%E0%A4%B5%E0%A4%BF%E0%A4%B7%E0%A5%8D%E0%A4%AF%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D%20",
+   "licence": "CC BY-SA"
+  },
   "purana/maha_purana/brahma_purana": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_brahmapurANa-1-246.txt"
   },
+  "purana/maha_purana/brahmanda_purana/adhyatma_ramayana": {
+   "source_url": "https://sa.wikisource.org/wiki/अध्यात्मरामायणम्",
+   "licence": "CC BY-SA"
+  },
   "purana/maha_purana/brahmanda_purana/purana_mula": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_brahmANDapurANa.txt"
+  },
+  "purana/maha_purana/brahmavaivarta_purana/brahma_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%B5%E0%A5%88%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/brahmavaivarta_purana/ganesha_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%B5%E0%A5%88%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/brahmavaivarta_purana/krishna_janma_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%B5%E0%A5%88%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/brahmavaivarta_purana/prakriti_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%B5%E0%A5%88%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/garuda_purana/brahma_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%97%E0%A4%B0%E0%A5%81%E0%A4%A1%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
   },
   "purana/maha_purana/garuda_purana/purva_khanda": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Garuḍapurāṇa",
    "licence": "CC-BY 4.0"
+  },
+  "purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%97%E0%A4%B0%E0%A5%81%E0%A4%A1%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
   },
   "purana/maha_purana/kurma_purana/purva_bhaga": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -4508,11 +4554,91 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Matsyapurāṇa",
    "licence": "CC-BY 4.0"
   },
+  "purana/maha_purana/narada_purana/purvabhaga/pada_01": {
+   "source_url": "https://sa.wikisource.org/wiki/नारदपुराणम्-_पूर्वार्धः",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/narada_purana/purvabhaga/pada_02": {
+   "source_url": "https://sa.wikisource.org/wiki/नारदपुराणम्-_पूर्वार्धः",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/narada_purana/purvabhaga/pada_03": {
+   "source_url": "https://sa.wikisource.org/wiki/नारदपुराणम्-_पूर्वार्धः",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/narada_purana/purvabhaga/pada_04": {
+   "source_url": "https://sa.wikisource.org/wiki/नारदपुराणम्-_पूर्वार्धः",
+   "licence": "CC BY-SA"
+  },
   "purana/maha_purana/narada_purana/purvabhaga/purana_mula": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nAradapurANa.txt"
   },
   "purana/maha_purana/narada_purana/uttarabhaga": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nAradapurANa.txt"
+  },
+  "purana/maha_purana/padma_purana/bhumi_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/padma_purana/brahma_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/padma_purana/kriya_yoga_sara_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/padma_purana/patala_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/padma_purana/srishti_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/padma_purana/svarga_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/padma_purana/uttara_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/kailasa_samhita": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/kotirudra_samhita": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/rudra_samhita/kumara_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/rudra_samhita/parvati_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/rudra_samhita/sati_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/rudra_samhita/srishti_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/rudra_samhita/yuddha_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/shatarudra_samhita": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/shiva_purana/uma_samhita": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
   },
   "purana/maha_purana/shiva_purana/vayaviya_samhita": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
@@ -4520,10 +4646,38 @@
   "purana/maha_purana/shiva_purana/vidyeshvara_samhita": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
   },
+  "purana/maha_purana/skanda_purana/avantya_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/skanda_purana/brahma_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/skanda_purana/kashi_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/skanda_purana/maheshvara_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/skanda_purana/nagara_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/maha_purana/skanda_purana/prabhasa_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
   "purana/maha_purana/skanda_purana/revakhanda": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Skandapurāṇa (Revākhaṇḍa)",
    "licence": "CC-BY 4.0"
+  },
+  "purana/maha_purana/skanda_purana/vaishnava_khanda": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
   },
   "purana/maha_purana/vamana_purana/purana_mula": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAmanapurANa1-69.txt"
@@ -4567,6 +4721,14 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
    "licence": "CC-BY 4.0"
   },
+  "purana/upa_purana/devi_bhagavata_purana": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%A6%E0%A5%87%E0%A4%B5%E0%A5%80%E0%A4%AD%E0%A4%BE%E0%A4%97%E0%A4%B5%E0%A4%A4%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
+  "purana/upa_purana/ganesha_purana": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%97%E0%A4%A3%E0%A5%87%E0%A4%B6%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
+  },
   "purana/upa_purana/kalika_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kālikāpurāṇa",
@@ -4576,6 +4738,10 @@
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Narasiṃhapurāṇa",
    "licence": "CC-BY 4.0"
+  },
+  "purana/upa_purana/vishnu_dharmottara_purana": {
+   "source_url": "https://sa.wikisource.org/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%B7%E0%A5%8D%E0%A4%A3%E0%A5%81%E0%A4%A7%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A5%8B%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A4%B0%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+   "licence": "CC BY-SA"
   },
   "shastra/bauddha_sahitya/avadana/avadanashataka/mula": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -5527,14 +5693,6 @@
     }
    ]
   },
-  "purana/maha_purana/garuda_purana/brahma_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa": {
-   "status": "not_located",
-   "candidates": []
-  },
   "purana/maha_purana/padma_purana": {
    "status": "pdf_ocr_candidate",
    "candidates": [
@@ -5545,34 +5703,6 @@
      "note": "Standard critical Anandashram Sanskrit Series edition, 4 parts (1893-94) -- preferred over the Gita Press/Nag Publishers editions (mostly Sanskrit+Hindi or Sanskrit+English translation) on the same search page."
     }
    ]
-  },
-  "purana/maha_purana/skanda_purana/avantya_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/skanda_purana/brahma_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/skanda_purana/kashi_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/skanda_purana/maheshvara_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/skanda_purana/nagara_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/skanda_purana/prabhasa_khanda": {
-   "status": "not_located",
-   "candidates": []
-  },
-  "purana/maha_purana/skanda_purana/vaishnava_khanda": {
-   "status": "not_located",
-   "candidates": []
   },
   "purana/maha_purana/vamana_purana/saromahatmya": {
    "status": "not_located",

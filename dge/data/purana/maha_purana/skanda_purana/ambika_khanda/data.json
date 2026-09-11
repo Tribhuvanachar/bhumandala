@@ -1,0 +1,7 @@
+{
+ "schema": "itihasa_purana_text",
+ "default_author": "Maharshi Veda Vyasa",
+ "items": [],
+ "purana_class": "mahapurana",
+ "note": "Deliberately still empty. This khanda exists on Sanskrit Wikisource (स्कन्दपुराणम्/खण्डः ८ (अम्बिकाखण्डः)) but its pages use raw MS-Word-pasted HTML (<p>/<span> paragraphs with inline style attributes) instead of the site's usual <poem> wikitext convention every other khanda in this corpus uses -- importers/wikisource_purana.py's generic parser does not handle this format and was not extended for it (this is a bonus 8th khanda added for fidelity to the edition, not part of the original tracked gap list). See dge/PENDING.md, 11 Sep 2026 Wikisource Purana import entry."
+}

@@ -13040,7 +13040,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/bhavishya_purana/brahma_parva/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Brahma Parva",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13051,7 +13051,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/bhavishya_purana/madhyama_parva/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Madhyama Parva",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13062,7 +13062,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/bhavishya_purana/pratisarga_parva/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Pratisarga Parva",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13073,7 +13073,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/bhavishya_purana/uttara_parva/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uttara Parva",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13098,7 +13098,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/brahmanda_purana/adhyatma_ramayana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Adhyatma Ramayana",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13134,7 +13134,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/brahma_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Brahma Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13145,7 +13145,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/ganesha_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Ganesha Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13156,7 +13156,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/krishna_janma_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Krishna Janma Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13167,7 +13167,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/prakriti_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Prakriti Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13178,7 +13178,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/garuda_purana/brahma_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Brahma Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13205,7 +13205,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uttara Khanda Pretakalpa",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13324,7 +13324,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_01/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Pada 01",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13335,7 +13335,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_02/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Pada 02",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13346,7 +13346,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_03/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Pada 03",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13357,7 +13357,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_04/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Pada 04",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13396,7 +13396,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/padma_purana/bhumi_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Bhumi Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13407,7 +13407,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/padma_purana/kriya_yoga_sara_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kriya Yoga Sara Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13418,7 +13418,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/padma_purana/patala_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Patala Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13429,7 +13429,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/padma_purana/srishti_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Srishti Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13440,7 +13440,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/padma_purana/svarga_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Svarga Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13451,7 +13451,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/padma_purana/uttara_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uttara Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13462,7 +13462,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/kailasa_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kailasa Samhita",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13473,7 +13473,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/kotirudra_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kotirudra Samhita",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13484,7 +13484,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/kumara_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kumara Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13495,7 +13495,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/parvati_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Parvati Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13506,7 +13506,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/sati_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Sati Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13517,7 +13517,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/srishti_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Srishti Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13528,7 +13528,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/yuddha_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Yuddha Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13539,7 +13539,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/shatarudra_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shatarudra Samhita",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13550,7 +13550,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/uma_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uma Samhita",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13589,7 +13589,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/avantya_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Avantya Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13600,7 +13600,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/brahma_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Brahma Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13611,7 +13611,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/kashi_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kashi Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13622,7 +13622,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/maheshvara_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Maheshvara Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13633,7 +13633,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/nagara_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Nagara Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13644,7 +13644,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/prabhasa_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Prabhasa Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13671,7 +13671,7 @@
     },
     {
       "path": "dge/data/purana/maha_purana/skanda_purana/vaishnava_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Vaishnava Khanda",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13849,7 +13849,7 @@
     },
     {
       "path": "dge/data/purana/upa_purana/devi_bhagavata_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Devi Bhagavata Purana",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13859,7 +13859,7 @@
     },
     {
       "path": "dge/data/purana/upa_purana/ganesha_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Ganesha Purana",
       "addedAt": "2026-08-25",
       "facets": {
@@ -13929,7 +13929,7 @@
     },
     {
       "path": "dge/data/purana/upa_purana/vishnu_dharmottara_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Vishnu Dharmottara Purana",
       "addedAt": "2026-08-25",
       "facets": {
@@ -18067,6 +18067,35 @@
       "populated": true,
       "title": null,
       "addedAt": "2026-09-11"
+    },
+    {
+      "path": "dge/data/purana/maha_purana/padma_purana/brahma_khanda/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-09-11",
+      "source": {
+        "source_url": "https://sa.wikisource.org/wiki/%E0%A4%AA%E0%A4%A6%E0%A5%8D%E0%A4%AE%E0%A4%AA%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A3%E0%A4%AE%E0%A5%8D",
+        "licence": "CC BY-SA"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/skanda_purana/ambika_khanda/data.json",
+      "populated": false,
+      "title": null,
+      "addedAt": "2026-09-11",
+      "facets": {
+        "purana_class": "mahapurana"
+      }
+    },
+    {
+      "path": "dge/data/stotra/lalita_sahasranama/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-09-11",
+      "source": {
+        "source_url": "https://sa.wikisource.org/wiki/श्री ललितासहस्रनामस्तोत्रम्",
+        "licence": "CC BY-SA"
+      }
     }
   ]
 }
