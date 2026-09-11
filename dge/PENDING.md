@@ -5890,3 +5890,36 @@ dataset risks being incompatible with whatever schema Phase 2 eventually
 needs for Uttaradi's own deity table, Sode's daily-worshipped-deities list,
 etc. This should get wired in as part of that cross-institution decision
 (architecture doc §26), not solved piecemeal per dataset.
+
+## Vādirāja Vijaya: genuinely not found, but a real adjacent gap surfaced (11 Sep 2026, 1:14 pm IST)
+
+Searched properly before giving up on this one: general web search, a
+Devanagari-script search (वादिराजविजय/वादिराज विजय), a site-restricted
+search of dvaitavedanta.in (already a licensed source for this project),
+and — most tellingly — this project's own comprehensive wishlist,
+`dge/data/catalogs/dvaita_grantha_anukramani.json` (the digitised version
+of the project lead's master spreadsheet of desired granthas). Zero hits
+anywhere for "वादिराजविजय" as a distinct title. Combined with the earlier
+finding that the "Vadiraja Vijaya"-titled app doesn't actually contain it
+either (§ two entries up), I'm treating this as genuinely unsourced rather
+than something a better search would turn up — not going to guess a URL to
+close this out, per this project's own standing rule on that.
+
+**Real adjacent find, surfaced along the way:** Vādirāja Tīrtha's other,
+much better-known mahākāvya, **Rukmiṇīśa Vijaya** (19 chapters, 1,241
+verses, a Vaiṣṇava kāvya about Kṛṣṇa and Rukmiṇī — not a biography of
+Vādirāja himself, same as Svāpnavṛndāvanākhyāna isn't), **is already in the
+wishlist catalog as row r2909 with every status field blank — a confirmed,
+tracked, still-unsourced gap**, and a real modern edition exists: a 4-volume
+Sanskrit+English critical edition by T.S. Raghavendran on archive.org
+(https://archive.org/details/rukminisha-vijaya-1-sri-vadiraja-tirtha-t.-s.-raghavendran
+and volumes 2-4 alongside it). Not fetched or verified further this pass
+(that's real OCR/import work, not a quick add) — flagging it because it's
+a plausible reading of what was actually wanted, and because it's a
+genuine, already-tracked gap with an available source, unlike Vādirāja
+Vijaya itself.
+
+Worth asking the project lead directly: was "Vādirāja Vijaya" possibly
+meant as Rukmiṇīśa Vijaya, or is it a real third title (perhaps only in
+manuscript catalogues like the New Catalogus Catalogorum, which wasn't
+searched here)?
