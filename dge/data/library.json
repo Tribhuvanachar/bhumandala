@@ -15747,10 +15747,15 @@
   },
   {
    "path": "dge/data/vedanga/shiksha/pratishakhya/taittiriya_pratishakhya/data.json",
-   "populated": false,
+   "populated": true,
    "title": "Taittiriya Pratishakhya",
+   "source": {
+    "source": "The Sanskrit Library, \"The Taittiriya-Pratisakhya: First XML Edition\", ed. Peter M. Scharf, 2010, Version 0.1 (text per Jost Gippert's TITUS 2008 edition, based on Whitney's 1863 edition)",
+    "source_url": "https://sanskritlibrary.org/catalogsText/titus/vedic/tp.html",
+    "licence": "Creative Commons Attribution Non-Commercial Share Alike 3.0 (CC BY-NC-SA 3.0)"
+   },
    "facets": {
-    "default_author": "unspecified"
+    "default_author": "Traditionally attributed (Taittiriya school); not confirmed by name on the Sanskrit Library catalog card"
    }
   },
   {

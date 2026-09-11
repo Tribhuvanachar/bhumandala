@@ -17,6 +17,36 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
+- **Yajurveda/Atharvaveda Prātiśākhya digitization — Taittirīya done, two more blocked on a
+  Gemini cost approval (11 Sep 2026).** Following on from the Ṛgveda-Prātiśākhya work above,
+  checked whether the Sanskrit Library's undocumented `LoadText` endpoint (the same one used
+  there) also serves the other Prātiśākhyas whose taxonomy stubs have sat empty in
+  `dge/data/vedanga/shiksha/pratishakhya/`. **Taittirīya-Prātiśākhya (Kṛṣṇa Yajurveda):
+  yes** — confirmed live at `sanskritlibrary.org/catalogsText/titus/vedic/tp.html`
+  (abbreviation `titus/vedic/tp`), same CC BY-NC-SA 3.0 terms, text per Jost Gippert's TITUS
+  2008 edition of Whitney's 1863 translation. 545 sūtra/Whitney-translation pairs ingested via
+  `tools/pratishakhya/import_taittiriya_pratishakhya.py` into
+  `taittiriya_pratishakhya/data.json` (`library.json` updated to `populated: true`), checked
+  by `tests/test_taittiriya_pratishakhya_import.py`. **One real limitation, documented rather
+  than papered over:** this digitization carries no traditional adhyāya.sūtra numbering at
+  all (checked directly — no chapter markers anywhere in the source), so items are
+  sequentially numbered (`seq_001`..`seq_545`) rather than citable as "TPr N.M"; mapping to
+  Whitney's printed numbering is real follow-up work, not guessed here.
+
+  **Vājasaneyi-Prātiśākhya (Śukla Yajurveda) and the Atharvaveda-Prātiśākhya (Śaunakīyā
+  Caturādhyāyikā): no comparable source found.** Sanskrit Library has a matching catalog
+  card for the Vājasaneyi one (`sanskritlibrary.org/catalogsText/vajasaneyi_prAtiSAKya.html`)
+  but its `LoadText` abbreviation returns "No such file or directory" — cataloged but never
+  actually uploaded. Nothing at all on Sanskrit Library, GRETIL, or VedaViṣṭāram for the
+  Atharvaveda one. Both remain at the archive.org PDF-scan sources already logged above under
+  "Śikṣā + Prātiśākhya" (Vājasaneyi: `archive.org/details/VajasaneyiPratisakhyaOfKatyayanaVVenkataramaSharma1934`,
+  1934, licence not stated; Atharvaveda: `archive.org/details/jstor-592161`, Whitney's 1862
+  JAOS translation via JSTOR Early Journal Content, OCR text confirmed present but
+  visibly noisy on diacritics). **Per CLAUDE.md's standing Gemini-cost rule, do not run OCR on
+  either without first giving the lead a cost estimate and getting a go-ahead** — this is
+  exactly the kind of paid-OCR staging job that rule exists for; nothing has been run
+  speculatively here.
+
 - **Rigveda Śākala Krama-pāṭha generator — spec corrected, Prātiśākhya sūtra text now
   ingested (10–11 Sep 2026).** A first-draft prompt (from Gemini) for generating Krama-pāṭha
   from
