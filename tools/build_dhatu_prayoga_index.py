@@ -101,7 +101,7 @@ TRAIL = re.compile(r'[।॥०-९0-9\s]+$')
 def rank_of(slug):
     if slug.startswith('darshana/vedanta/dvaita/Anandamakaranda'):
         return 0
-    if slug.startswith('darshana/vedanta/dvaita/DvaitaSahitya'):
+    if slug.startswith('darshana/vedanta/dvaita/DvaitaVedantaIn'):
         return 1
     if slug.startswith('DvaitaVedanta/Itara/DasaSahitya'):
         return 2

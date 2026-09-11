@@ -122,7 +122,7 @@ authorised."*
 
 | Corpus | Path | Size | `data.json` | Flagged today |
 |---|---|---|---|---|
-| DvaitaVedanta (`dvaitavedanta.in`) | `darshana/vedanta/dvaita/DvaitaSahitya/` | **630 MiB** | 338 | 0 of 316 ❌ |
+| DvaitaVedanta (`dvaitavedanta.in`) | `darshana/vedanta/dvaita/DvaitaVedantaIn/` | **630 MiB** | 338 | 0 of 316 ❌ |
 | Advaita Sharada (`advaitasharada.sringeri.net`) | `darshana/vedanta/advaita/` | **155 MiB** | 51 | 0 of 51 ❌ |
 | SetuTila (`setutila.in`) | `DvaitaVedanta/SarvaMula/` | 67 MiB | 47 | 47 of 47 ✔ (but still downloadable) |
 | Anandamakaranda (`anandamakaranda.in`) | `darshana/vedanta/dvaita/Anandamakaranda/` | 26 MiB | 127 | 0 of 47 ❌ |

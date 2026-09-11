@@ -21,7 +21,7 @@ def test_public_urls_unique_and_shaped():
     assert t.url("DvaitaVedanta/Itara/Kavya/raghavendra_vijaya/sarga_1") == "/dge/dvaitavedanta/kavya/raghavendra-vijaya/sarga-1/"
     assert t.url("itihasa/mahabharata/adi_parva/mula") == "/dge/itihasa/mahabharata/adi-parva/"
     for s in slugs:                            # nothing from the licensed corpora leaks into the public tree
-        assert not s.startswith("darshana/vedanta/dvaita/DvaitaSahitya") and not s.startswith("darshana/vedanta/advaita")
+        assert not s.startswith("darshana/vedanta/dvaita/DvaitaVedantaIn") and not s.startswith("darshana/vedanta/advaita")
 
 
 def test_labels_and_transliteration():

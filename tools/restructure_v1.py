@@ -56,7 +56,7 @@ MOVES = [
                                                     "DvaitaVedanta/Itara/Kavya/tirtha_prabandha"),
     ("stotra/PrahladaKrutaNarasimha",               "DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha"),
     # Last: frees the name DvaitaVedanta for the new top-level container.
-    ("darshana/vedanta/dvaita/DvaitaVedanta",       "darshana/vedanta/dvaita/DvaitaSahitya"),
+    ("darshana/vedanta/dvaita/DvaitaVedanta",       "darshana/vedanta/dvaita/DvaitaVedantaIn"),
 ]
 
 # Import leftovers that must never reach the new public tree. _raw holds the

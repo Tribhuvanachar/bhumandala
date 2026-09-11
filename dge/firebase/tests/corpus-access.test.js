@@ -211,7 +211,7 @@ describe('decide — the whole rule', () => {
     // SarvaMula is SetuTila's material now, and it is NOT on the shelf.
     assert.equal(ca.decide('DvaitaVedanta/SarvaMula', null, cfg).allowed, false);
     assert.equal(ca.decide('DvaitaVedanta/Itara/DasaSahitya', null, cfg).allowed, false);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/DvaitaSahitya/others/yuktimallika', null, cfg).allowed, false);
+    assert.equal(ca.decide('darshana/vedanta/dvaita/DvaitaVedantaIn/others/yuktimallika', null, cfg).allowed, false);
     assert.equal(ca.decide('DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha', null, cfg).allowed, false,
       'only the four listed kavyas are live — Itara is not opened wholesale');
   });

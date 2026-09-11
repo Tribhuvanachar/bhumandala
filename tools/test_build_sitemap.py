@@ -38,10 +38,10 @@ class TestGranthaSlug(unittest.TestCase):
 
 class TestIsHiddenPath(unittest.TestCase):
     def test_hidden_when_slug_itself_is_listed(self):
-        self.assertTrue(is_hidden_path("darshana/vedanta/dvaita/DvaitaSahitya", ["darshana/vedanta/dvaita/DvaitaSahitya"]))
+        self.assertTrue(is_hidden_path("darshana/vedanta/dvaita/DvaitaVedantaIn", ["darshana/vedanta/dvaita/DvaitaVedantaIn"]))
 
     def test_hidden_when_an_ancestor_prefix_is_listed(self):
-        self.assertTrue(is_hidden_path("darshana/vedanta/dvaita/DvaitaSahitya/sub", ["darshana/vedanta/dvaita"]))
+        self.assertTrue(is_hidden_path("darshana/vedanta/dvaita/DvaitaVedantaIn/sub", ["darshana/vedanta/dvaita"]))
 
     def test_not_hidden_when_no_prefix_matches(self):
         self.assertFalse(is_hidden_path("agama/kashmir_shaivism/krama", ["darshana/vedanta/dvaita"]))

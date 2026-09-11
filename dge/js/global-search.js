@@ -1685,7 +1685,7 @@
     bar.appendChild(kwRow);
   }
 
-  // 23 Aug 2026: DvaitaVedanta (dge/data/darshana/vedanta/dvaita/DvaitaSahitya/)
+  // 23 Aug 2026: DvaitaVedanta (dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/)
   // is admin-only -- not linked in the Library nav, and per the project lead's
   // explicit ask, should not surface in search results for anyone else
   // either. The 330 MB CDN search index (see INDEX_BASE above) is a separate,
@@ -1695,7 +1695,7 @@
   // one place that reliably holds regardless of what the index contains.
   // Not real access control -- same caveat as admin-gate.js: this hides the
   // hit from the UI, it does not restrict the underlying static JSON file.
-  var ADMIN_ONLY_GRANTHA_PREFIXES = ['darshana/vedanta/dvaita/DvaitaSahitya', 'dvaitavedanta'];
+  var ADMIN_ONLY_GRANTHA_PREFIXES = ['darshana/vedanta/dvaita/DvaitaVedantaIn', 'dvaitavedanta'];
   function dgeSearchIsAdmin() {
     try {
       return localStorage.getItem('acharyaAuthorized') === 'true' ||

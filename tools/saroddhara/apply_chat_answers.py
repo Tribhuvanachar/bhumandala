@@ -26,7 +26,7 @@ import apply_verified  # noqa: E402
 from build_saroddhara import load_bhp, ngram_index, find_in_bhp, ratio  # noqa: E402
 STAGING = ROOT / "dge/data/ocr_staging/bhagavata_saroddhara"
 ANSWERS = STAGING / "verify_output/answers.json"
-MULA = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/mula/data.json"
+MULA = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/mula/data.json"
 BHP = ROOT / "dge/data/purana/maha_purana/bhagavata_purana_madhva"
 
 

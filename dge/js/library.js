@@ -65,7 +65,7 @@ const DGE_PATH_LABELS = {
   // breadcrumb reads "Itara > Kavya" in Latin beside Devanagari on
   // either side of it.
   Itara: 'इतराणि', Kavya: 'काव्यम्', Stotra: 'स्तोत्राणि', DasaSahitya: 'दाससाहित्यम्',
-  DvaitaSahitya: 'द्वैतसाहित्यम्',
+  DvaitaVedantaIn: 'द्वैतसाहित्यम्',
   DvaitaVedanta: 'द्वैतवेदान्तः', SetuTila: 'सेतुतिला',
   sarvadarshana_sangraha: 'सर्वदर्शनसङ्ग्रहः',
 
@@ -717,7 +717,7 @@ function dgeOverlayManagerDraft(committedUpdatedAt) {
 // 23 Aug 2026: per-grantha "hidden" flag written directly onto a
 // library.json entry (distinct from dgeLibOverrides.hidden above, which is
 // an admin-curated path-prefix list read from library-overrides.json) --
-// admin-only content like darshana/vedanta/dvaita/DvaitaSahitya/*, gated
+// admin-only content like darshana/vedanta/dvaita/DvaitaVedantaIn/*, gated
 // the same way admin-gate.js gates a standalone page. Not real access
 // control -- see that file's own caveat -- but keeps it out of the reader
 // nav and quick-jump for anyone who isn't signed in as admin.

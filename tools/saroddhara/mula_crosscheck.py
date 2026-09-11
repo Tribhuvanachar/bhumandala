@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "saroddhara"))
 from build_saroddhara import load_bhp, ratio  # noqa: E402
-BASE = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara"
+BASE = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara"
 OUT = ROOT / "dge/data/ocr_staging/bhagavata_saroddhara/verify_input/mula_crosscheck.json"
 NOISE = str.maketrans("", "", "ऽ")   # avagraha is printed inconsistently
 

@@ -2236,7 +2236,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/karma_nirnaya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/karma_nirnaya/mula/data.json",
    "populated": true,
    "title": "कर्मनिर्णयः — mula",
    "addedAt": "2026-08-24",
@@ -2248,7 +2248,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/karma_nirnaya/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/karma_nirnaya/tika_bhavadipa/data.json",
    "populated": true,
    "title": "कर्मनिर्णयः — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -2260,7 +2260,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/karma_nirnaya/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/karma_nirnaya/tika_jayatirtha/data.json",
    "populated": true,
    "title": "कर्मनिर्णयः — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2272,7 +2272,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/karma_nirnaya/tika_karmaprakasha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/karma_nirnaya/tika_karmaprakasha/data.json",
    "populated": true,
    "title": "कर्मनिर्णयः — tika_karmaprakasha",
    "addedAt": "2026-08-24",
@@ -2284,7 +2284,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/karma_nirnaya/tika_panchika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/karma_nirnaya/tika_panchika/data.json",
    "populated": true,
    "title": "कर्मनिर्णयः — tika_panchika",
    "addedAt": "2026-08-24",
@@ -2296,7 +2296,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/karma_nirnaya/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/karma_nirnaya/tika_vivarana/data.json",
    "populated": true,
    "title": "कर्मनिर्णयः — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -2308,7 +2308,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/katha_lakshana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/katha_lakshana/mula/data.json",
    "populated": true,
    "title": "कथालक्षणम् — mula",
    "addedAt": "2026-08-24",
@@ -2320,7 +2320,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/katha_lakshana/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/katha_lakshana/tika_bhavadipa/data.json",
    "populated": true,
    "title": "कथालक्षणम् — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -2332,7 +2332,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha/data.json",
    "populated": true,
    "title": "कथालक्षणम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2344,7 +2344,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam/data.json",
    "populated": true,
    "title": "कथालक्षणम् — tika_kathalakshanam",
    "source": {
@@ -2355,7 +2355,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/katha_lakshana/tika_panchika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/katha_lakshana/tika_panchika/data.json",
    "populated": true,
    "title": "कथालक्षणम् — tika_panchika",
    "addedAt": "2026-08-24",
@@ -2367,7 +2367,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/katha_lakshana/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/katha_lakshana/tika_vivarana/data.json",
    "populated": true,
    "title": "कथालक्षणम् — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -2379,7 +2379,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/mayavada_khandana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/mayavada_khandana/mula/data.json",
    "populated": true,
    "title": "मायावादखण्डनम् — mula",
    "addedAt": "2026-08-24",
@@ -2391,7 +2391,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha/data.json",
    "populated": true,
    "title": "मायावादखण्डनम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2403,7 +2403,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari/data.json",
    "populated": true,
    "title": "मायावादखण्डनम् — tika_mandaramanjari",
    "addedAt": "2026-08-24",
@@ -2415,7 +2415,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu/data.json",
    "populated": true,
    "title": "मायावादखण्डनम् — tika_mayavadaparashu",
    "addedAt": "2026-08-24",
@@ -2427,7 +2427,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthatippani/data.json",
    "populated": true,
    "title": "मायावादखण्डनम् — tika_nivasatirthatippani",
    "addedAt": "2026-08-24",
@@ -2439,7 +2439,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/pramana_lakshana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/pramana_lakshana/mula/data.json",
    "populated": true,
    "title": "प्रमाणलक्षणम् — mula",
    "addedAt": "2026-08-24",
@@ -2451,7 +2451,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/pramana_lakshana/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/pramana_lakshana/tika_bhavadipa/data.json",
    "populated": true,
    "title": "प्रमाणलक्षणम् — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -2463,7 +2463,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha/data.json",
    "populated": true,
    "title": "प्रमाणलक्षणम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2475,7 +2475,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam/data.json",
    "populated": true,
    "title": "प्रमाणलक्षणम् — tika_pramanalakshanam",
    "source": {
@@ -2486,7 +2486,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi/data.json",
    "populated": true,
    "title": "प्रमाणलक्षणम् — tika_vakyarthakaumudi",
    "addedAt": "2026-08-24",
@@ -2498,7 +2498,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/pramana_lakshana/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/pramana_lakshana/tika_vivarana/data.json",
    "populated": true,
    "title": "प्रमाणलक्षणम् — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -2510,7 +2510,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula/data.json",
    "populated": true,
    "title": "मिथ्यात्वानुमानखण्डनम् — mula",
    "addedAt": "2026-08-24",
@@ -2522,7 +2522,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_gururajiyatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_gururajiyatippani/data.json",
    "populated": true,
    "title": "मिथ्यात्वानुमानखण्डनम् — tika_gururajiyatippani",
    "addedAt": "2026-08-24",
@@ -2534,7 +2534,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha/data.json",
    "populated": true,
    "title": "मिथ्यात्वानुमानखण्डनम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2546,7 +2546,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu/data.json",
    "populated": true,
    "title": "मिथ्यात्वानुमानखण्डनम् — tika_mithyatvanumanakhandanaparashu",
    "addedAt": "2026-08-24",
@@ -2558,7 +2558,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_nivasatirthiyatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_nivasatirthiyatippani/data.json",
    "populated": true,
    "title": "मिथ्यात्वानुमानखण्डनम् — tika_nivasatirthiyatippani",
    "addedAt": "2026-08-24",
@@ -2570,7 +2570,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/mula/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — mula",
    "addedAt": "2026-08-24",
@@ -2582,7 +2582,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavacandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavacandrika/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_bhavacandrika",
    "addedAt": "2026-08-24",
@@ -2594,7 +2594,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavadipa/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -2606,7 +2606,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavavarnanam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavavarnanam/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_bhavavarnanam",
    "addedAt": "2026-08-24",
@@ -2618,7 +2618,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_jayatirtha/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_jayatirtha",
    "facets": {
@@ -2629,7 +2629,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_kashitippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_kashitippani/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_kashitippani",
    "addedAt": "2026-08-24",
@@ -2641,7 +2641,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_tatvasankhyanatikatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_tatvasankhyanatikatippani/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_tatvasankhyanatikatippani",
    "addedAt": "2026-08-24",
@@ -2653,7 +2653,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_tatvasankhyanatippanam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_tatvasankhyanatippanam/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_tatvasankhyanatippanam",
    "addedAt": "2026-08-24",
@@ -2665,7 +2665,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_sankhyana/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_sankhyana/tika_vivarana/data.json",
    "populated": true,
    "title": "तत्त्वसङ्ख्यानम् — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -2677,7 +2677,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/mula/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — mula",
    "addedAt": "2026-08-24",
@@ -2689,7 +2689,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_dvaitadyumani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_dvaitadyumani/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_dvaitadyumani",
    "addedAt": "2026-08-24",
@@ -2701,7 +2701,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_govindiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_govindiya/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_govindiya",
    "addedAt": "2026-08-24",
@@ -2713,7 +2713,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_gururajiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_gururajiya/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_gururajiya",
    "addedAt": "2026-08-24",
@@ -2725,7 +2725,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_janardanabhattiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_janardanabhattiya/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_janardanabhattiya",
    "addedAt": "2026-08-24",
@@ -2737,7 +2737,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2749,7 +2749,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_mula/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_mula",
    "source": {
@@ -2760,7 +2760,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_naropantiya",
    "addedAt": "2026-08-24",
@@ -2772,7 +2772,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_raghavendratirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_raghavendratirtha/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_raghavendratirtha",
    "addedAt": "2026-08-24",
@@ -2784,7 +2784,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_vedeshatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_vedeshatirtha/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_vedeshatirtha",
    "addedAt": "2026-08-24",
@@ -2796,7 +2796,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattva_viveka/tika_vijayindrabhikshu/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattva_viveka/tika_vijayindrabhikshu/data.json",
    "populated": true,
    "title": "तत्त्वोद्योतः — tika_vijayindrabhikshu",
    "addedAt": "2026-08-24",
@@ -2808,7 +2808,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattvodyota/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattvodyota/mula/data.json",
    "populated": true,
    "title": "तत्त्वविवेकः — mula",
    "addedAt": "2026-08-24",
@@ -2820,7 +2820,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattvodyota/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattvodyota/tika_jayatirtha/data.json",
    "populated": true,
    "title": "तत्त्वविवेकः — tika_jayatirtha",
    "facets": {
@@ -2831,7 +2831,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattvodyota/tika_mandaramanjari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattvodyota/tika_mandaramanjari/data.json",
    "populated": true,
    "title": "तत्त्वविवेकः — tika_mandaramanjari",
    "addedAt": "2026-08-24",
@@ -2843,7 +2843,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/tattvodyota/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/tattvodyota/tika_vivarana/data.json",
    "populated": true,
    "title": "तत्त्वविवेकः — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -2855,7 +2855,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/upadhi_khandana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/upadhi_khandana/mula/data.json",
    "populated": true,
    "title": "उपाधिखण्डनम् — mula",
    "addedAt": "2026-08-24",
@@ -2867,7 +2867,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha/data.json",
    "populated": true,
    "title": "उपाधिखण्डनम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2879,7 +2879,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari/data.json",
    "populated": true,
    "title": "उपाधिखण्डनम् — tika_mandaramanjari",
    "addedAt": "2026-08-24",
@@ -2891,7 +2891,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani/data.json",
    "populated": true,
    "title": "उपाधिखण्डनम् — tika_nivasatirthiyatippani",
    "addedAt": "2026-08-24",
@@ -2903,7 +2903,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/upadhi_khandana/tika_parashunamnitippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/upadhi_khandana/tika_parashunamnitippani/data.json",
    "populated": true,
    "title": "उपाधिखण्डनम् — tika_parashunamnitippani",
    "addedAt": "2026-08-24",
@@ -2915,7 +2915,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/mula/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — mula",
    "addedAt": "2026-08-24",
@@ -2927,7 +2927,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavabodha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavabodha/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_bhavabodha",
    "addedAt": "2026-08-24",
@@ -2939,7 +2939,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavadipa/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -2951,7 +2951,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -2963,7 +2963,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_laghuprabha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_laghuprabha/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_laghuprabha",
    "addedAt": "2026-08-24",
@@ -2975,7 +2975,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_tattvamanjari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_tattvamanjari/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_tattvamanjari",
    "addedAt": "2026-08-24",
@@ -2987,7 +2987,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vakyarthadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vakyarthadipika/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_vakyarthadipika",
    "addedAt": "2026-08-24",
@@ -2999,7 +2999,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vishamapadavakyarthavivriti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vishamapadavakyarthavivriti/data.json",
    "populated": true,
    "title": "विष्णुतत्त्वविनिर्णयः — tika_vishamapadavakyarthavivriti",
    "addedAt": "2026-08-24",
@@ -3011,7 +3011,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/mula/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -3023,7 +3023,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhashya",
    "source": {
@@ -3034,7 +3034,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhavabodha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhavabodha/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhavabodha",
    "addedAt": "2026-08-24",
@@ -3046,7 +3046,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhavadipa/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -3058,7 +3058,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhavadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhavadipika/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhavadipika",
    "addedAt": "2026-08-24",
@@ -3070,7 +3070,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhavapradipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhavapradipika/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhavapradipika",
    "addedAt": "2026-08-24",
@@ -3082,7 +3082,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhavaprakasha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhavaprakasha/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhavaprakasha",
    "addedAt": "2026-08-24",
@@ -3094,7 +3094,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_bhavaratnakosha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_bhavaratnakosha/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_bhavaratnakosha",
    "addedAt": "2026-08-24",
@@ -3106,7 +3106,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_prakashika/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -3118,7 +3118,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_prameyadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_prameyadipika/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_prameyadipika",
    "addedAt": "2026-08-24",
@@ -3130,7 +3130,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_bhashya/tika_vakyarthapradipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_bhashya/tika_vakyarthapradipa/data.json",
    "populated": true,
    "title": "गीताभाष्यम् — tika_vakyarthapradipa",
    "addedAt": "2026-08-24",
@@ -3142,7 +3142,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/mula/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — mula",
    "addedAt": "2026-08-24",
@@ -3154,7 +3154,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_bhavadipa/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -3166,7 +3166,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_bhavaprakasha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_bhavaprakasha/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_bhavaprakasha",
    "addedAt": "2026-08-24",
@@ -3178,7 +3178,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_gita/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_gita/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_gita",
    "facets": {
@@ -3189,7 +3189,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavali/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavali/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_kiranavali",
    "addedAt": "2026-08-24",
@@ -3201,7 +3201,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_nyayadeepika",
    "addedAt": "2026-08-24",
@@ -3213,7 +3213,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_nyayadipakiranavali",
    "source": {
@@ -3224,7 +3224,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_nyayadipikabhavaprakasha",
    "addedAt": "2026-08-24",
@@ -3236,7 +3236,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_prakashika/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -3248,7 +3248,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_tatparya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_tatparya/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_tatparya",
    "facets": {
@@ -3259,7 +3259,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/gita_prasthana/gita_tatparya_nirnaya/tika_vakyaviveka/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/gita_prasthana/gita_tatparya_nirnaya/tika_vakyaviveka/data.json",
    "populated": true,
    "title": "गीतातात्पर्यम् — tika_vakyaviveka",
    "addedAt": "2026-08-24",
@@ -3271,7 +3271,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/mula/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — mula",
    "addedAt": "2026-08-24",
@@ -3283,7 +3283,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_anantabhatta/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_anantabhatta/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_anantabhatta",
    "addedAt": "2026-09-04",
@@ -3295,7 +3295,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bharatshri/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bharatshri/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_bharatshri",
    "addedAt": "2026-09-04",
@@ -3307,7 +3307,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavachandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavachandrika/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_bhavachandrika",
    "addedAt": "2026-09-04",
@@ -3319,7 +3319,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavavivrti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_bhavavivrti/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_bhavavivrti",
    "addedAt": "2026-09-04",
@@ -3331,7 +3331,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_chatti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_chatti/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_chatti",
    "addedAt": "2026-09-04",
@@ -3343,7 +3343,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_janardana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_janardana/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_janardana",
    "addedAt": "2026-09-04",
@@ -3355,7 +3355,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_kanthakoddhara/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_kanthakoddhara/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_kanthakoddhara",
    "addedAt": "2026-09-04",
@@ -3367,7 +3367,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_madhusudana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_madhusudana/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_madhusudana",
    "addedAt": "2026-09-04",
@@ -3379,7 +3379,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_sangraha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_sangraha/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_sangraha",
    "addedAt": "2026-09-04",
@@ -3391,7 +3391,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyabhinava/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyabhinava/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_satyabhinava",
    "addedAt": "2026-09-04",
@@ -3403,7 +3403,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyadharma/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_satyadharma/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_satyadharma",
    "addedAt": "2026-09-04",
@@ -3415,7 +3415,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_tamraparni/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_tamraparni/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_tamraparni",
    "addedAt": "2026-09-04",
@@ -3427,7 +3427,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vadiraja/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vadiraja/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_vadiraja",
    "addedAt": "2026-09-04",
@@ -3439,7 +3439,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_varadaraja/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_varadaraja/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_varadaraja",
    "addedAt": "2026-09-04",
@@ -3451,7 +3451,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vedangatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vedangatirtha/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_vedangatirtha",
    "addedAt": "2026-09-04",
@@ -3463,7 +3463,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vyasatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/mahabharata_tatparya_nirnaya/tika_vyasatirtha/data.json",
    "populated": true,
    "title": "महाभारततात्पर्यनिर्णयः — tika_vyasatirtha",
    "addedAt": "2026-09-04",
@@ -3475,7 +3475,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/itihasa_prasthana/yamaka_bharata/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/itihasa_prasthana/yamaka_bharata/mula/data.json",
    "populated": true,
    "title": "यमकभारतम् — mula",
    "addedAt": "2026-08-24",
@@ -3487,7 +3487,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavato_nirdoshatvalakshanam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavato_nirdoshatvalakshanam/mula/data.json",
    "populated": true,
    "title": "भगवतो निर्दोषत्वलक्षणम् — mula",
    "addedAt": "2026-08-24",
@@ -3499,7 +3499,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedaparanyeva_khalu_brahmasutrani/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedaparanyeva_khalu_brahmasutrani/mula/data.json",
    "populated": true,
    "title": "भेदपराण्येव खलु ब्रह्मसूत्राणि — mula",
    "addedAt": "2026-08-24",
@@ -3511,7 +3511,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/mula/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — mula",
    "addedAt": "2026-08-24",
@@ -3523,7 +3523,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/tika_bhavapradipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/tika_bhavapradipa/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — tika_bhavapradipa",
    "facets": {
@@ -3534,7 +3534,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/tika_bhedacandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/tika_bhedacandrika/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — tika_bhedacandrika",
    "facets": {
@@ -3545,7 +3545,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/tika_bhedacintaratnam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/tika_bhedacintaratnam/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — tika_bhedacintaratnam",
    "facets": {
@@ -3556,7 +3556,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/tika_bhedasanjivini/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/tika_bhedasanjivini/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — tika_bhedasanjivini",
    "facets": {
@@ -3567,7 +3567,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/tika_kashitimmannacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/tika_kashitimmannacarya/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — tika_kashitimmannacarya",
    "facets": {
@@ -3578,7 +3578,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhedojjivana/tika_sharkarashrinivasacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhedojjivana/tika_sharkarashrinivasacarya/data.json",
    "populated": true,
    "title": "भेदोज्जीवनम् — tika_sharkarashrinivasacarya",
    "facets": {
@@ -3589,7 +3589,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/brahmasutranyayasamgraha/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/brahmasutranyayasamgraha/mula/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रन्यायसंग्रहः — mula",
    "addedAt": "2026-08-24",
@@ -3601,7 +3601,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/candrikamandanam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/candrikamandanam/mula/data.json",
    "populated": true,
    "title": "चन्द्रिकामण्डनम् — mula",
    "addedAt": "2026-08-24",
@@ -3613,7 +3613,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/candrikamandanam/tika_ramasubba/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/candrikamandanam/tika_ramasubba/data.json",
    "populated": true,
    "title": "चन्द्रिकामण्डनम् — tika_ramasubba",
    "facets": {
@@ -3624,7 +3624,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/dvaita_dyumani/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/dvaita_dyumani/mula/data.json",
    "populated": true,
    "title": "द्वैतद्युमणिः — mula",
    "addedAt": "2026-08-24",
@@ -3636,7 +3636,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/dvaita_dyumani/tika_dvaitadyumani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/dvaita_dyumani/tika_dvaitadyumani/data.json",
    "populated": true,
    "title": "द्वैतद्युमणिः — tika_dvaitadyumani",
    "addedAt": "2026-08-24",
@@ -3648,7 +3648,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/dvaita_dyumani/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/dvaita_dyumani/tika_jayatirtha/data.json",
    "populated": true,
    "title": "द्वैतद्युमणिः — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -3660,7 +3660,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/karmavijaya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/karmavijaya/mula/data.json",
    "populated": true,
    "title": "कर्मविजयः — mula",
    "addedAt": "2026-08-24",
@@ -3672,7 +3672,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_/data.json",
    "populated": true,
    "title": "कर्मविजयः — tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_",
    "source": {
@@ -3683,7 +3683,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/karmavijaya/tika_karmanirnayanamna_acarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/karmavijaya/tika_karmanirnayanamna_acarya/data.json",
    "populated": true,
    "title": "कर्मविजयः — tika_karmanirnayanamna_acarya",
    "addedAt": "2026-08-24",
@@ -3695,7 +3695,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya/data.json",
    "populated": true,
    "title": "कर्मविजयः — tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya",
    "addedAt": "2026-08-24",
@@ -3707,7 +3707,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/karmavijaya/tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/karmavijaya/tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad/data.json",
    "populated": true,
    "title": "कर्मविजयः — tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad",
    "addedAt": "2026-08-24",
@@ -3719,7 +3719,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/krishnacharitra_manjari/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/krishnacharitra_manjari/mula/data.json",
    "populated": true,
    "title": "श्रीकृष्णचरित्रमञ्जरी — mula",
    "addedAt": "2026-09-04",
@@ -3729,7 +3729,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/madhvamukhalankara/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/madhvamukhalankara/mula/data.json",
    "populated": true,
    "title": "मध्वमुखालङ्कारः — mula",
    "addedAt": "2026-08-24",
@@ -3741,7 +3741,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/madhvasiddhantasara/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/madhvasiddhantasara/mula/data.json",
    "populated": true,
    "title": "मध्वसिद्धान्तसारः — mula",
    "addedAt": "2026-08-24",
@@ -3753,7 +3753,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/mula/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — mula",
    "addedAt": "2026-08-24",
@@ -3765,7 +3765,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_anuvyakhyanam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_anuvyakhyanam/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_anuvyakhyanam",
    "addedAt": "2026-08-24",
@@ -3777,7 +3777,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_na_ca_tata/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_na_ca_tata/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_na_ca_tata",
    "facets": {
@@ -3788,7 +3788,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_nivasatirthiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_nivasatirthiya/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_nivasatirthiya",
    "addedAt": "2026-08-24",
@@ -3800,7 +3800,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_nyayasudha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_nyayasudha/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_nyayasudha",
    "addedAt": "2026-08-24",
@@ -3812,7 +3812,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_parimala/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_parimala/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_parimala",
    "source": {
@@ -3823,7 +3823,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_pra/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_pra/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_pra",
    "facets": {
@@ -3834,7 +3834,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_sheshavakyarthacandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_sheshavakyarthacandrika/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_sheshavakyarthacandrika",
    "addedAt": "2026-08-24",
@@ -3846,7 +3846,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_sudha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_sudha/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_sudha",
    "addedAt": "2026-08-24",
@@ -3858,7 +3858,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_vakyarthacandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_vakyarthacandrika/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_vakyarthacandrika",
    "addedAt": "2026-08-24",
@@ -3870,7 +3870,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_vakyartharatnamala/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_vakyartharatnamala/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_vakyartharatnamala",
    "addedAt": "2026-08-24",
@@ -3882,7 +3882,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_vivarana/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -3894,7 +3894,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha/tika_yadupatyam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyaya_sudha/tika_yadupatyam/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधा — tika_yadupatyam",
    "addedAt": "2026-08-24",
@@ -3906,7 +3906,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/mula/data.json",
    "populated": true,
    "title": "न्यायामृतम् — mula",
    "addedAt": "2026-08-24",
@@ -3918,7 +3918,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayakalpalata/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayakalpalata/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayakalpalata",
    "addedAt": "2026-08-24",
@@ -3930,7 +3930,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayamritakantakoddhara/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayamritakantakoddhara/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayamritakantakoddhara",
    "addedAt": "2026-08-24",
@@ -3942,7 +3942,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayamritam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayamritam/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayamritam",
    "facets": {
@@ -3953,7 +3953,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayamritamadhuri/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayamritamadhuri/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayamritamadhuri",
    "addedAt": "2026-08-24",
@@ -3965,7 +3965,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayamritaprakasha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayamritaprakasha/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayamritaprakasha",
    "addedAt": "2026-08-24",
@@ -3977,7 +3977,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayamritasaugandhyam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayamritasaugandhyam/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayamritasaugandhyam",
    "addedAt": "2026-08-24",
@@ -3989,7 +3989,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita/tika_nyayamritatarangini/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/nyayamrita/tika_nyayamritatarangini/data.json",
    "populated": true,
    "title": "न्यायामृतम् — tika_nyayamritatarangini",
    "addedAt": "2026-08-24",
@@ -4001,7 +4001,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/padarthasangraha/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/padarthasangraha/mula/data.json",
    "populated": true,
    "title": "पदार्थसङ्ग्रहः — mula",
    "addedAt": "2026-08-24",
@@ -4013,7 +4013,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/mula/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — mula",
    "addedAt": "2026-08-24",
@@ -4025,7 +4025,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_abhinavamritam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_abhinavamritam/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_abhinavamritam",
    "addedAt": "2026-08-24",
@@ -4037,7 +4037,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_adarsha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_adarsha/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_adarsha",
    "addedAt": "2026-08-24",
@@ -4049,7 +4049,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_bhavadipa/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -4061,7 +4061,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_jayatirthavijaya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_jayatirthavijaya/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_jayatirthavijaya",
    "addedAt": "2026-08-24",
@@ -4073,7 +4073,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_vakyarthamanjari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_vakyarthamanjari/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_vakyarthamanjari",
    "addedAt": "2026-08-24",
@@ -4085,7 +4085,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_vedeshabhikshu/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_vedeshabhikshu/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_vedeshabhikshu",
    "addedAt": "2026-08-24",
@@ -4097,7 +4097,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_vijayindratirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_vijayindratirtha/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_vijayindratirtha",
    "addedAt": "2026-08-24",
@@ -4109,7 +4109,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/pramana_paddhati/tika_vittalabhatta/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/pramana_paddhati/tika_vittalabhatta/data.json",
    "populated": true,
    "title": "प्रमाणपद्धतिः — tika_vittalabhatta",
    "addedAt": "2026-08-24",
@@ -4121,7 +4121,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/purushasuktam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/purushasuktam/mula/data.json",
    "populated": true,
    "title": "पुरुषसूक्तम् — mula",
    "addedAt": "2026-08-24",
@@ -4133,7 +4133,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/purushasuktam/tika_satyapramoda/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/purushasuktam/tika_satyapramoda/data.json",
    "populated": true,
    "title": "पुरुषसूक्तम् — tika_satyapramoda",
    "addedAt": "2026-08-24",
@@ -4145,7 +4145,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/purushasuktam/tika_surottama/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/purushasuktam/tika_surottama/data.json",
    "populated": true,
    "title": "पुरुषसूक्तम् — tika_surottama",
    "addedAt": "2026-08-24",
@@ -4157,7 +4157,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sarvasiddhantasarasaravivecanam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/sarvasiddhantasarasaravivecanam/mula/data.json",
    "populated": true,
    "title": "सर्वसिद्धान्तसारासारविवेचनम् — mula",
    "addedAt": "2026-08-24",
@@ -4169,7 +4169,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/shrimanmadhvasiddhantasaroddhara/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/shrimanmadhvasiddhantasaroddhara/mula/data.json",
    "populated": true,
    "title": "श्रीमन्मध्वसिद्धान्तसारोद्धारः — mula",
    "addedAt": "2026-08-24",
@@ -4181,7 +4181,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/shrimannyayasudhamandanam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/shrimannyayasudhamandanam/mula/data.json",
    "populated": true,
    "title": "श्रीमन्न्यायसुधामण्डनम् — mula",
    "addedAt": "2026-08-24",
@@ -4193,7 +4193,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/shrivijayindravijayavaibhavam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/shrivijayindravijayavaibhavam/mula/data.json",
    "populated": true,
    "title": "श्रीविजयीन्द्रविजयवैभवम् — mula",
    "addedAt": "2026-08-24",
@@ -4205,7 +4205,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tantradipika/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tantradipika/mula/data.json",
    "populated": true,
    "title": "तन्त्रदीपिका — mula",
    "addedAt": "2026-08-24",
@@ -4217,7 +4217,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tarka_tandava/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tarka_tandava/mula/data.json",
    "populated": true,
    "title": "तर्कताण्डवम् — mula",
    "addedAt": "2026-08-24",
@@ -4229,7 +4229,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tarka_tandava/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tarka_tandava/tika_jayatirtha/data.json",
    "populated": true,
    "title": "तर्कताण्डवम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -4241,7 +4241,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tarka_tandava/tika_nyayadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tarka_tandava/tika_nyayadipa/data.json",
    "populated": true,
    "title": "तर्कताण्डवम् — tika_nyayadipa",
    "addedAt": "2026-08-24",
@@ -4253,7 +4253,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tarka_tandava/tika_tarkatandavam/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tarka_tandava/tika_tarkatandavam/data.json",
    "populated": true,
    "title": "तर्कताण्डवम् — tika_tarkatandavam",
    "facets": {
@@ -4264,7 +4264,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tarka_tandava/tika_yuktiratnakara/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tarka_tandava/tika_yuktiratnakara/data.json",
    "populated": true,
    "title": "तर्कताण्डवम् — tika_yuktiratnakara",
    "addedAt": "2026-08-24",
@@ -4276,7 +4276,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tatparya_chandrika/mula/data.json",
    "populated": true,
    "title": "तात्पर्यचन्द्रिका — mula",
    "addedAt": "2026-08-24",
@@ -4288,7 +4288,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika/tika_candrikabindu/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tatparya_chandrika/tika_candrikabindu/data.json",
    "populated": true,
    "title": "तात्पर्यचन्द्रिका — tika_candrikabindu",
    "addedAt": "2026-08-24",
@@ -4300,7 +4300,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika/tika_candrikavivriti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tatparya_chandrika/tika_candrikavivriti/data.json",
    "populated": true,
    "title": "तात्पर्यचन्द्रिका — tika_candrikavivriti",
    "addedAt": "2026-08-24",
@@ -4312,7 +4312,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika/tika_pandurangi/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tatparya_chandrika/tika_pandurangi/data.json",
    "populated": true,
    "title": "तात्पर्यचन्द्रिका — tika_pandurangi",
    "addedAt": "2026-08-24",
@@ -4324,7 +4324,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tatparya_chandrika/tika_prakashika/data.json",
    "populated": true,
    "title": "तात्पर्यचन्द्रिका — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -4336,7 +4336,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika/tika_tatparyachandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/tatparya_chandrika/tika_tatparyachandrika/data.json",
    "populated": true,
    "title": "तात्पर्यचन्द्रिका — tika_tatparyachandrika",
    "facets": {
@@ -4347,7 +4347,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vadavali/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/vadavali/mula/data.json",
    "populated": true,
    "title": "वादावली — mula",
    "addedAt": "2026-08-24",
@@ -4359,7 +4359,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vadavali/tika_bhavadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/vadavali/tika_bhavadipika/data.json",
    "populated": true,
    "title": "वादावली — tika_bhavadipika",
    "source": {
@@ -4370,7 +4370,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vadavali/tika_prakasha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/vadavali/tika_prakasha/data.json",
    "populated": true,
    "title": "वादावली — tika_prakasha",
    "source": {
@@ -4381,7 +4381,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vadavali/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/vadavali/tika_vivarana/data.json",
    "populated": true,
    "title": "वादावली — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -4393,7 +4393,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vagvajra/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/vagvajra/mula/data.json",
    "populated": true,
    "title": "वाग्वज्रः — mula",
    "addedAt": "2026-08-24",
@@ -4405,7 +4405,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/yukti_mallika/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/yukti_mallika/mula/data.json",
    "populated": true,
    "title": "युक्तिमल्लिका — mula",
    "addedAt": "2026-08-24",
@@ -4417,7 +4417,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/yukti_mallika/tika_satyapramoda/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/yukti_mallika/tika_satyapramoda/data.json",
    "populated": true,
    "title": "युक्तिमल्लिका — tika_satyapramoda",
    "addedAt": "2026-08-24",
@@ -4429,7 +4429,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/yukti_mallika/tika_surottama/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/yukti_mallika/tika_surottama/data.json",
    "populated": true,
    "title": "युक्तिमल्लिका — tika_surottama",
    "addedAt": "2026-08-24",
@@ -4441,7 +4441,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/mula/data.json",
    "populated": true,
    "title": "भागवतसारोद्धारः — Mula (Bhāgavata verses)",
    "addedAt": "2026-09-06",
@@ -4454,7 +4454,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/tika_vishnutirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_vishnutirtha/data.json",
    "populated": true,
    "title": "भागवतसारोद्धारः — Svopajña Ṭīkā — Sri Vishnu Tirtha",
    "addedAt": "2026-09-06",
@@ -4467,7 +4467,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/parishishta/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/parishishta/data.json",
    "populated": true,
    "title": "भागवतसारोद्धारः — Parishishta (appendix)",
    "addedAt": "2026-09-06",
@@ -4480,7 +4480,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/tika_tippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_tippani/data.json",
    "populated": true,
    "title": "भागवतसारोद्धारः — Tippani (editor's footnotes)",
    "addedAt": "2026-09-06",
@@ -4493,7 +4493,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/tika_sara_sangraha_kannada/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/tika_sara_sangraha_kannada/data.json",
    "populated": true,
    "title": "भागवतसारोद्धारः — ಸಾರಸಂಗ್ರಹ (Kannada prakaraṇa summaries + front matter)",
    "addedAt": "2026-09-06",
@@ -4506,7 +4506,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/upodghata/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/bhagavata_saroddhara/upodghata/data.json",
    "populated": true,
    "title": "भागवतसारोद्धारः — Upodghāta (Kannada preface, prāstāvika, Viṣṇutīrtha-caritam)",
    "addedAt": "2026-09-06",
@@ -4519,7 +4519,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/vedavyasa_gadya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/later_acharyas/vedavyasa_gadya/mula/data.json",
    "populated": true,
    "title": "श्रीवेदव्यासगद्यम् (Vedavyāsa Gadyam, Yādavārya) — मूलम्",
    "addedAt": "2026-09-06",
@@ -4535,7 +4535,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/mula/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — mula",
    "addedAt": "2026-08-24",
@@ -4547,7 +4547,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_bhagavataprakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_bhagavataprakashika/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_bhagavataprakashika",
    "addedAt": "2026-08-24",
@@ -4559,7 +4559,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_catti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_catti/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_catti",
    "addedAt": "2026-08-24",
@@ -4571,7 +4571,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_chalari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_chalari/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_chalari",
    "addedAt": "2026-08-24",
@@ -4583,7 +4583,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_durghatabhavadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_durghatabhavadipika/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_durghatabhavadipika",
    "addedAt": "2026-08-24",
@@ -4595,7 +4595,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_iti_shri_chalari_sheshacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_iti_shri_chalari_sheshacarya/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_iti_shri_chalari_sheshacarya",
    "addedAt": "2026-08-24",
@@ -4607,7 +4607,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_lingeri/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_lingeri/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_lingeri",
    "addedAt": "2026-08-24",
@@ -4619,7 +4619,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_lingheri/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_lingheri/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_lingheri",
    "addedAt": "2026-08-24",
@@ -4631,7 +4631,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_mandanandini/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_mandanandini/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_mandanandini",
    "addedAt": "2026-08-24",
@@ -4643,7 +4643,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_nivasatirthiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_nivasatirthiya/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_nivasatirthiya",
    "addedAt": "2026-08-24",
@@ -4655,7 +4655,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_padaratnavali/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_padaratnavali/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — पदरत्नावली टीका",
    "addedAt": "2026-08-24",
@@ -4667,7 +4667,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_prakashika/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -4679,7 +4679,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_prameyacandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_prameyacandrika/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_prameyacandrika",
    "addedAt": "2026-08-24",
@@ -4691,7 +4691,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharma/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharma/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_satyadharma",
    "addedAt": "2026-08-24",
@@ -4703,7 +4703,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharmiya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharmiya/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_satyadharmiya",
    "addedAt": "2026-08-24",
@@ -4715,7 +4715,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_sumanoranjini/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_sumanoranjini/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_sumanoranjini",
    "addedAt": "2026-08-24",
@@ -4727,7 +4727,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virodhoddhara/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virodhoddhara/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_virodhoddhara",
    "addedAt": "2026-08-24",
@@ -4739,7 +4739,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virododdhara/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virododdhara/data.json",
    "populated": true,
    "title": "भागवततात्पर्यनिर्णयः — tika_virododdhara",
    "addedAt": "2026-08-24",
@@ -4751,7 +4751,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sruti_prasthana/rig_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sruti_prasthana/rig_bhashya/mula/data.json",
    "populated": true,
    "title": "ऋग्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -4763,7 +4763,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/anubhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/anubhashya/mula/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्राणुभाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -4775,7 +4775,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/anubhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/anubhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्राणुभाष्यम् — tika_bhashya",
    "source": {
@@ -4786,7 +4786,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/anuvyakhyana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/anuvyakhyana/mula/data.json",
    "populated": true,
    "title": "अनुव्याख्यानम् — mula",
    "addedAt": "2026-08-24",
@@ -4798,7 +4798,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/mula/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -4810,7 +4810,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_abhinavacandrika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_abhinavacandrika/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_abhinavacandrika",
    "addedAt": "2026-08-24",
@@ -4822,7 +4822,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_bhashya",
    "source": {
@@ -4833,7 +4833,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_bhavabodha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_bhavabodha/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_bhavabodha",
    "addedAt": "2026-08-24",
@@ -4845,7 +4845,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_bhavadipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_bhavadipa/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_bhavadipa",
    "addedAt": "2026-08-24",
@@ -4857,7 +4857,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_gurvarthadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_gurvarthadipika/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_gurvarthadipika",
    "addedAt": "2026-08-24",
@@ -4869,7 +4869,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_pandurangi_shrinivasacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_pandurangi_shrinivasacarya/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_pandurangi_shrinivasacarya",
    "addedAt": "2026-08-24",
@@ -4881,7 +4881,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_sattarkadipavali/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_sattarkadipavali/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_sattarkadipavali",
    "addedAt": "2026-08-24",
@@ -4893,7 +4893,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_sharkara_shrinivasacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_sharkara_shrinivasacarya/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_sharkara_shrinivasacarya",
    "addedAt": "2026-08-24",
@@ -4905,7 +4905,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_shriraghuttamatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_shriraghuttamatirtha/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_shriraghuttamatirtha",
    "addedAt": "2026-08-24",
@@ -4917,7 +4917,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_shrivadirajatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_shrivadirajatirtha/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_shrivadirajatirtha",
    "addedAt": "2026-08-24",
@@ -4929,7 +4929,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tamraparni_shrinivasacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tamraparni_shrinivasacarya/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tamraparni_shrinivasacarya",
    "addedAt": "2026-08-24",
@@ -4941,7 +4941,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvapradipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tattvapradipika/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tattvapradipika",
    "addedAt": "2026-08-24",
@@ -4953,7 +4953,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashika/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tattvaprakashika",
    "addedAt": "2026-08-24",
@@ -4965,7 +4965,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashikabhavabodha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashikabhavabodha/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tattvaprakashikabhavabodha",
    "addedAt": "2026-08-24",
@@ -4977,7 +4977,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashikavivriti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashikavivriti/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tattvaprakashikavivriti",
    "addedAt": "2026-08-24",
@@ -4989,7 +4989,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprradipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprradipika/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tattvaprradipika",
    "addedAt": "2026-08-24",
@@ -5001,7 +5001,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvasubodhini/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_tattvasubodhini/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_tattvasubodhini",
    "addedAt": "2026-08-24",
@@ -5013,7 +5013,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamancari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamancari/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_vakyarthamancari",
    "addedAt": "2026-08-24",
@@ -5025,7 +5025,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamanjari/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamanjari/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_vakyarthamanjari",
    "addedAt": "2026-08-24",
@@ -5037,7 +5037,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamuktavali/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamuktavali/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_vakyarthamuktavali",
    "addedAt": "2026-08-24",
@@ -5049,7 +5049,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_vivarana/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -5061,7 +5061,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_vivriti/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/brahma_sutra_bhashya/tika_vivriti/data.json",
    "populated": true,
    "title": "ब्रह्मसूत्रभाष्यम् — tika_vivriti",
    "addedAt": "2026-08-24",
@@ -5073,7 +5073,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/nyaya_vivarana/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/nyaya_vivarana/mula/data.json",
    "populated": true,
    "title": "न्यायविवरणम् — mula",
    "addedAt": "2026-08-24",
@@ -5085,7 +5085,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/nyaya_vivarana/tika_bhavabodha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/nyaya_vivarana/tika_bhavabodha/data.json",
    "populated": true,
    "title": "न्यायविवरणम् — tika_bhavabodha",
    "addedAt": "2026-08-24",
@@ -5097,7 +5097,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/nyaya_vivarana/tika_nigudharthaprabodhini/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/nyaya_vivarana/tika_nigudharthaprabodhini/data.json",
    "populated": true,
    "title": "न्यायविवरणम् — tika_nigudharthaprabodhini",
    "addedAt": "2026-08-24",
@@ -5109,7 +5109,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/nyaya_vivarana/tika_panchika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/nyaya_vivarana/tika_panchika/data.json",
    "populated": true,
    "title": "न्यायविवरणम् — tika_panchika",
    "addedAt": "2026-08-24",
@@ -5121,7 +5121,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/omkara_vada/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/sutra_prasthana/omkara_vada/mula/data.json",
    "populated": true,
    "title": "ओङ्कारवादः — mula",
    "addedAt": "2026-08-24",
@@ -5133,7 +5133,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/aitareyopanishad_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/aitareyopanishad_bhashya/mula/data.json",
    "populated": true,
    "title": "ऐतरेयोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5145,7 +5145,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "ऐतरेयोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5156,7 +5156,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhavapradipa/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhavapradipa/data.json",
    "populated": true,
    "title": "ऐतरेयोपनिषद्भाष्यम् — tika_bhavapradipa",
    "addedAt": "2026-08-24",
@@ -5168,7 +5168,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/aitareyopanishad_bhashya/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/aitareyopanishad_bhashya/tika_upanishat/data.json",
    "populated": true,
    "title": "ऐतरेयोपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5179,7 +5179,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/brihadaranyakopanishadbhashyam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/brihadaranyakopanishadbhashyam/mula/data.json",
    "populated": true,
    "title": "बृहदारण्यकोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5191,7 +5191,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhashya/data.json",
    "populated": true,
    "title": "बृहदारण्यकोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5202,7 +5202,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhavabodhatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhavabodhatippani/data.json",
    "populated": true,
    "title": "बृहदारण्यकोपनिषद्भाष्यम् — tika_bhavabodhatippani",
    "addedAt": "2026-08-24",
@@ -5214,7 +5214,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_khandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_khandartha/data.json",
    "populated": true,
    "title": "बृहदारण्यकोपनिषद्भाष्यम् — tika_khandartha",
    "addedAt": "2026-08-24",
@@ -5226,7 +5226,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_upanishat/data.json",
    "populated": true,
    "title": "बृहदारण्यकोपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5237,7 +5237,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/chandogyopanishad_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/chandogyopanishad_bhashya/mula/data.json",
    "populated": true,
    "title": "छान्दोग्योपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5249,7 +5249,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/chandogyopanishad_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/chandogyopanishad_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "छान्दोग्योपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5260,7 +5260,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/chandogyopanishad_bhashya/tika_chandogyopanishatkhandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/chandogyopanishad_bhashya/tika_chandogyopanishatkhandartha/data.json",
    "populated": true,
    "title": "छान्दोग्योपनिषद्भाष्यम् — tika_chandogyopanishatkhandartha",
    "addedAt": "2026-08-24",
@@ -5272,7 +5272,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/chandogyopanishad_bhashya/tika_khandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/chandogyopanishad_bhashya/tika_khandartha/data.json",
    "populated": true,
    "title": "छान्दोग्योपनिषद्भाष्यम् — tika_khandartha",
    "addedAt": "2026-08-24",
@@ -5284,7 +5284,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/chandogyopanishad_bhashya/tika_padarthakaumudi/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/chandogyopanishad_bhashya/tika_padarthakaumudi/data.json",
    "populated": true,
    "title": "छान्दोग्योपनिषद्भाष्यम् — tika_padarthakaumudi",
    "addedAt": "2026-08-24",
@@ -5296,7 +5296,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/chandogyopanishad_bhashya/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/chandogyopanishad_bhashya/tika_upanishat/data.json",
    "populated": true,
    "title": "छान्दोग्योपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5307,7 +5307,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/ishavasyopanishad_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/ishavasyopanishad_bhashya/mula/data.json",
    "populated": true,
    "title": "ईशावास्योपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5319,7 +5319,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/ishavasyopanishad_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/ishavasyopanishad_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "ईशावास्योपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5330,7 +5330,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha/data.json",
    "populated": true,
    "title": "ईशावास्योपनिषद्भाष्यम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -5342,7 +5342,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/ishavasyopanishad_bhashya/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/ishavasyopanishad_bhashya/tika_prakashika/data.json",
    "populated": true,
    "title": "ईशावास्योपनिषद्भाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -5354,7 +5354,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/mula/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5366,7 +5366,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5377,7 +5377,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_raghavendratirthakhandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_raghavendratirthakhandartha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_raghavendratirthakhandartha",
    "addedAt": "2026-08-24",
@@ -5389,7 +5389,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_upanishat/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5400,7 +5400,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_vadirajatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_vadirajatirtha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_vadirajatirtha",
    "addedAt": "2026-08-24",
@@ -5412,7 +5412,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_vamanapanditacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_vamanapanditacarya/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_vamanapanditacarya",
    "addedAt": "2026-08-24",
@@ -5424,7 +5424,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_varadatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_varadatirtha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_varadatirtha",
    "addedAt": "2026-08-24",
@@ -5436,7 +5436,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_varadatirthakhandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_varadatirthakhandartha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_varadatirthakhandartha",
    "addedAt": "2026-08-24",
@@ -5448,7 +5448,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirtha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_vedeshatirtha",
    "addedAt": "2026-08-24",
@@ -5460,7 +5460,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirthakhandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirthakhandartha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_vedeshatirthakhandartha",
    "addedAt": "2026-08-24",
@@ -5472,7 +5472,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kathopanishad_bhashya/tika_vyasatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kathopanishad_bhashya/tika_vyasatirtha/data.json",
    "populated": true,
    "title": "कठोपनिषद्भाष्यम् — tika_vyasatirtha",
    "addedAt": "2026-08-24",
@@ -5484,7 +5484,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/mula/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5496,7 +5496,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5507,7 +5507,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_prakashika/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -5519,7 +5519,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_shriraghavendrayati/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_shriraghavendrayati/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_shriraghavendrayati",
    "addedAt": "2026-08-24",
@@ -5531,7 +5531,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_shrisatyapriyatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_shrisatyapriyatirtha/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_shrisatyapriyatirtha",
    "addedAt": "2026-08-24",
@@ -5543,7 +5543,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_shrivamanapandita/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_shrivamanapandita/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_shrivamanapandita",
    "addedAt": "2026-08-24",
@@ -5555,7 +5555,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_shrivaradatirthabhikshu/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_shrivaradatirthabhikshu/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_shrivaradatirthabhikshu",
    "addedAt": "2026-08-24",
@@ -5567,7 +5567,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_shrivedeshatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_shrivedeshatirtha/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_shrivedeshatirtha",
    "addedAt": "2026-08-24",
@@ -5579,7 +5579,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_upanishat/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5590,7 +5590,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/kenopanishad_bhashya/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/kenopanishad_bhashya/tika_vivarana/data.json",
    "populated": true,
    "title": "तलवकारोपनिषद्भाष्यम् — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -5602,7 +5602,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mandukyopanishadbhashyam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mandukyopanishadbhashyam/mula/data.json",
    "populated": true,
    "title": "माण्डूक्योपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5614,7 +5614,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mandukyopanishadbhashyam/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mandukyopanishadbhashyam/tika_bhashya/data.json",
    "populated": true,
    "title": "माण्डूक्योपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5625,7 +5625,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mandukyopanishadbhashyam/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mandukyopanishadbhashyam/tika_prakashika/data.json",
    "populated": true,
    "title": "माण्डूक्योपनिषद्भाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -5637,7 +5637,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrinivasatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrinivasatirtha/data.json",
    "populated": true,
    "title": "माण्डूक्योपनिषद्भाष्यम् — tika_shrinivasatirtha",
    "addedAt": "2026-08-24",
@@ -5649,7 +5649,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrivyasatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrivyasatirtha/data.json",
    "populated": true,
    "title": "माण्डूक्योपनिषद्भाष्यम् — tika_shrivyasatirtha",
    "addedAt": "2026-08-24",
@@ -5661,7 +5661,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mandukyopanishadbhashyam/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mandukyopanishadbhashyam/tika_upanishat/data.json",
    "populated": true,
    "title": "माण्डूक्योपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5672,7 +5672,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mundakopanishadbhashyam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mundakopanishadbhashyam/mula/data.json",
    "populated": true,
    "title": "मुण्डकोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5684,7 +5684,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mundakopanishadbhashyam/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mundakopanishadbhashyam/tika_bhashya/data.json",
    "populated": true,
    "title": "मुण्डकोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5695,7 +5695,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mundakopanishadbhashyam/tika_padarthadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mundakopanishadbhashyam/tika_padarthadipika/data.json",
    "populated": true,
    "title": "मुण्डकोपनिषद्भाष्यम् — tika_padarthadipika",
    "addedAt": "2026-08-24",
@@ -5707,7 +5707,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mundakopanishadbhashyam/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mundakopanishadbhashyam/tika_prakashika/data.json",
    "populated": true,
    "title": "मुण्डकोपनिषद्भाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -5719,7 +5719,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mundakopanishadbhashyam/tika_shrinivasatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mundakopanishadbhashyam/tika_shrinivasatirtha/data.json",
    "populated": true,
    "title": "मुण्डकोपनिषद्भाष्यम् — tika_shrinivasatirtha",
    "addedAt": "2026-08-24",
@@ -5731,7 +5731,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/mundakopanishadbhashyam/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/mundakopanishadbhashyam/tika_upanishat/data.json",
    "populated": true,
    "title": "मुण्डकोपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5742,7 +5742,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/mula/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5754,7 +5754,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhatta/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhatta/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_anantabhatta",
    "addedAt": "2026-08-24",
@@ -5766,7 +5766,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_bhashya/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5777,7 +5777,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_gudhakartrikashatprashnabhashyatikatippani/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_gudhakartrikashatprashnabhashyatikatippani/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_gudhakartrikashatprashnabhashyatikatippani",
    "addedAt": "2026-08-24",
@@ -5789,7 +5789,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_jayatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_jayatirtha/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_jayatirtha",
    "addedAt": "2026-08-24",
@@ -5801,7 +5801,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_mankalidharmarajacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_mankalidharmarajacarya/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_mankalidharmarajacarya",
    "addedAt": "2026-08-24",
@@ -5813,7 +5813,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_panchika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_panchika/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_panchika",
    "addedAt": "2026-08-24",
@@ -5825,7 +5825,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_prakashika/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -5837,7 +5837,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrinivasatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrinivasatirtha/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_shrinivasatirtha",
    "addedAt": "2026-08-24",
@@ -5849,7 +5849,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shriraghavendrayati/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shriraghavendrayati/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_shriraghavendrayati",
    "addedAt": "2026-08-24",
@@ -5861,7 +5861,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrisatyaprajnatirtha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrisatyaprajnatirtha/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_shrisatyaprajnatirtha",
    "addedAt": "2026-08-24",
@@ -5873,7 +5873,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrivamanapanditacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrivamanapanditacarya/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_shrivamanapanditacarya",
    "addedAt": "2026-08-24",
@@ -5885,7 +5885,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_tamraparnishrinivasacarya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_tamraparnishrinivasacarya/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_tamraparnishrinivasacarya",
    "addedAt": "2026-08-24",
@@ -5897,7 +5897,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_upanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_upanishat/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_upanishat",
    "facets": {
@@ -5908,7 +5908,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/shatprashnopanishadbhashyam/tika_vivarana/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/shatprashnopanishadbhashyam/tika_vivarana/data.json",
    "populated": true,
    "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_vivarana",
    "addedAt": "2026-08-24",
@@ -5920,7 +5920,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/mula/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/mula/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — mula",
    "addedAt": "2026-08-24",
@@ -5932,7 +5932,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/tika_bhashya/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/tika_bhashya/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_bhashya",
    "source": {
@@ -5943,7 +5943,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/tika_khandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/tika_khandartha/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_khandartha",
    "addedAt": "2026-08-24",
@@ -5955,7 +5955,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/tika_nivasatirthiyakhandartha/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/tika_nivasatirthiyakhandartha/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_nivasatirthiyakhandartha",
    "addedAt": "2026-08-24",
@@ -5967,7 +5967,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipika/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_padarthadipika",
    "addedAt": "2026-08-24",
@@ -5979,7 +5979,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/tika_prakashika/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/tika_prakashika/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_prakashika",
    "addedAt": "2026-08-24",
@@ -5991,7 +5991,7 @@
    }
   },
   {
-   "path": "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana/taittiriyopanishad_bhashya/tika_taittiriyopanishat/data.json",
+   "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/taittiriyopanishad_bhashya/tika_taittiriyopanishat/data.json",
    "populated": true,
    "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_taittiriyopanishat",
    "facets": {

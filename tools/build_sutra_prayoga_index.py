@@ -37,7 +37,7 @@ Ranking is this project's own priority, not frequency: the Madhva lineage
 first --
 
   rank 0  सर्वमूलम् (darshana/vedanta/dvaita/Anandamakaranda)
-  rank 1  the wider Dvaita corpus (darshana/vedanta/dvaita/DvaitaSahitya/**:
+  rank 1  the wider Dvaita corpus (darshana/vedanta/dvaita/DvaitaVedantaIn/**:
           Sumadhva Vijaya, Yuktimallika, Nyaya Sudha, the later acharyas' works)
   rank 2  DvaitaVedanta/Itara/DasaSahitya (Vyasakuta/Haridasa works)
   rank 3  everything else (itihasa, kavya, purana, smriti, ...)
@@ -98,7 +98,7 @@ DEVDIG = {ord(a): str(i) for i, a in enumerate('०१२३४५६७८९')
 def rank_of(slug):
     if slug.startswith('darshana/vedanta/dvaita/Anandamakaranda'):
         return 0
-    if slug.startswith('darshana/vedanta/dvaita/DvaitaSahitya'):
+    if slug.startswith('darshana/vedanta/dvaita/DvaitaVedantaIn'):
         return 1
     if slug.startswith('DvaitaVedanta/Itara/DasaSahitya'):
         return 2

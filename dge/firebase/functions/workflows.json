@@ -307,7 +307,7 @@
    "source_ids": [
     "dvaitavedanta"
    ],
-   "feeds": "darshana/vedanta/dvaita/DvaitaSahitya — 699 granthas",
+   "feeds": "darshana/vedanta/dvaita/DvaitaVedantaIn — 699 granthas",
    "importer": "sync-dvaitavedanta",
    "blurb": "Cheap check: the union of grantha links found at one seed page per section. For a per-grantha census and text spot-checks use the precise sync check (the Import button here runs it).",
    "writes": "nothing",

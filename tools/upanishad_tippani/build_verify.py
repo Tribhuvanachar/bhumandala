@@ -17,7 +17,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DV = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana"
+DV = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana"
 BOOKS = {
     "kena":       {"vision": ["kena_upanishad_bhashya_tippani"],       "dge": DV / "kenopanishad_bhashya",           "title": "तलवकार (केन) उपनिषद्भाष्यम् — 8 व्याख्याः"},
     "isha":       {"vision": ["isha_upanishad_bhashya_tippani"],       "dge": DV / "ishavasyopanishad_bhashya",      "title": "ईशावास्योपनिषद्भाष्यम् — 13 व्याख्याः"},

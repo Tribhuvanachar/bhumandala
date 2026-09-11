@@ -9,12 +9,12 @@
  ],
  "labels": {
   "kavya_alankara": "काव्यालङ्कारौ",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others": "सर्वमूलेतर-द्वैतसम्बन्धिग्रन्थाः",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/kavyam": "काव्यम्",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/vyakaranam": "व्याकरणम्",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/tarkah": "तर्कः",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/prakananam": "प्रकरणानि",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/stotram": "स्तोत्राणि",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others": "सर्वमूलेतर-द्वैतसम्बन्धिग्रन्थाः",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/kavyam": "काव्यम्",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/vyakaranam": "व्याकरणम्",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/tarkah": "तर्कः",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/prakananam": "प्रकरणानि",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/stotram": "स्तोत्राणि",
   "SarvaMula/kavya": "काव्यम्",
   "SarvaMula/stotra": "स्तोत्राणि",
   "SarvaMula/stotra/prahlada_kruta_narasimha": "प्रह्लादकृतनृसिंहस्तोत्रम्"
@@ -25,7 +25,7 @@
    "mula",
    "tippani"
   ],
-  "darshana/vedanta/dvaita/DvaitaSahitya": [
+  "darshana/vedanta/dvaita/DvaitaVedantaIn": [
    "gita_prasthana",
    "dasha_prakarana_granthas",
    "itihasa_prasthana",
@@ -52,16 +52,16 @@
   ]
  },
  "moves": {
-  "DvaitaVedanta/Itara/DasaSahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaSahitya/others/prakananam/yuktimallika",
-  "DvaitaVedanta/Itara/DasaSahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaSahitya/others/svapna_vrindavana_akhyana"
+  "DvaitaVedanta/Itara/DasaSahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaVedantaIn/others/prakananam/yuktimallika",
+  "DvaitaVedanta/Itara/DasaSahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaVedantaIn/others/svapna_vrindavana_akhyana"
  },
  "adds": [
-  "darshana/vedanta/dvaita/DvaitaSahitya/others",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/kavyam",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/prakananam",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/stotram",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/tarkah",
-  "darshana/vedanta/dvaita/DvaitaSahitya/others/vyakaranam"
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/kavyam",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/prakananam",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/stotram",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/tarkah",
+  "darshana/vedanta/dvaita/DvaitaVedantaIn/others/vyakaranam"
  ],
  "shelf": {
   "_readme": "GO-LIVE SHELF, 17 Sep 2026. An ALLOW-list: a display path that is neither one of these, nor an ancestor of one, nor under one, is hidden from the Library drawer AND from global search for everyone except an admin (and any role named in openToRoles). The opposite direction from `hidden` above, and the right one for a launch -- a grantha nobody remembered to list stays private instead of going live by accident. Paths here are DISPLAY paths (post-`moves`), the same form `hidden` and `labels` use. Set enabled:false to open the whole library again. Matching lives in dgeMatchShelf (dge/js/role-access.js), tested in dge/firebase/tests/role-access.test.js.",

@@ -179,7 +179,7 @@ recognise:
 | `itihasas` / `puranas` / `stotras` / `koshas` | `itihasa` / `purana` / `stotra` / `kosha` |
 | `smritis` / `dharmashastra` | `smriti_dharma/smriti` / `smriti_dharma/dharmashastra` |
 | `kavya` | `kavya_alankara` |
-| `dvaitavedanta` (23 Aug 2026) | `darshana/vedanta/dvaita/DvaitaSahitya` — admin-only, see `entry.hidden` in `library.json` |
+| `dvaitavedanta` (23 Aug 2026) | `darshana/vedanta/dvaita/DvaitaVedantaIn` — admin-only, see `entry.hidden` in `library.json` |
 | `darshana/vedanta/dvaita/sarvamula` (23 Aug 2026) | `darshana/vedanta/dvaita/Anandamakaranda` |
 | `stotra/pns` (23 Aug 2026) | `DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha` |
 | `pancharatra_agama` | `agama/pancharatra` |

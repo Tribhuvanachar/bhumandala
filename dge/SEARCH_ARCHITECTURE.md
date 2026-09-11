@@ -512,7 +512,7 @@ the registry against real reader traffic.
 | **Citable-work (entity) registry** | `dge/data/dge_entities.json` **(new)** | id → `{aliases, category, canonical_route, reference_scheme, ...}` |
 | Content schemas | `dge/data/schemas.json` | per-schema field contract (referenced by `dge-search.js`'s `classifyContentType`) |
 
-**Access control**: search results from `darshana/vedanta/dvaita/DvaitaSahitya/`
+**Access control**: search results from `darshana/vedanta/dvaita/DvaitaVedantaIn/`
 (admin-only content) are filtered client-side in `global-search.js`'s
 `dgeSearchIsAdminOnlyHit()` — explicitly documented in that file as *not*
 real access control (it hides the hit from the UI; the underlying static

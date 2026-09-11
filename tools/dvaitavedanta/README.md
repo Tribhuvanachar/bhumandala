@@ -146,7 +146,7 @@ resumable/spot-checkable the same way:
 ```bash
 # Spot-check a random sample, reproducibly
 python tools/dvaitavedanta/verify_source_content.py \
-    --data dge/data/darshana/vedanta/dvaita/DvaitaSahitya/dasha_prakarana_granthas \
+    --data dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/dasha_prakarana_granthas \
     --sample 25 --seed 1 --out /tmp/report.json
 
 # Full sweep, CI-friendly (non-zero exit if anything drifted/vanished)

@@ -882,7 +882,7 @@
         });
         var giSet = {}, nGi = 0, picked = [], skipped = false;
         // Reported live: कान्ताय's only genuine exact matches in the whole
-        // corpus happen to sit under darshana/vedanta/dvaita/DvaitaSahitya,
+        // corpus happen to sit under darshana/vedanta/dvaita/DvaitaVedantaIn,
         // which global-search.js's own render() already hides from a
         // non-admin reader post hoc (dgeSearchIsAdminOnlyHit -- a display
         // preference, not real access control, per that comment). Applying
