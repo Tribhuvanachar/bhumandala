@@ -5935,3 +5935,58 @@ reconstruction problem) and deciding taxonomy placement — not sourcing.
 Rukmiṇīśa Vijaya stays exactly where it was, an unrelated, still-real,
 still-unsourced wishlist gap — not pursued further per the lead's
 instruction, dropped from this thread.
+
+## Deity/pratima layer: created, populated with Hanuma + first Moola Pratima batch (11 Sep 2026, 2:42 pm IST)
+
+Project lead's direction: do Hanuma data, then Moola Pratima, one at a
+time. Both landed in one pass since they turned out to need the exact same
+new schema.
+
+**The schema gap flagged earlier is now filled**, deliberately as a new
+file rather than by hand-editing `mathas.json`: that file's own `_readme`
+says it's machine-generated from `parampara.json` and hand-edits get wiped
+on regen. New `tools/build_pratima.py` builds
+`dge/guru-parampara/data/pratima.json` from acquired sources in
+`dge/sources/`, same pattern as `build_guru_parampara_entities.py` but
+explicitly *not* auto-derived from parampara.json -- it's source data, not
+computed. Each entry has `installed_by_saint_id` (parampara.json node id) or
+`matha_id` (mathas.json id), never both -- a pratima is either tied to an
+institution's own seat or to a saint's broader installation network.
+
+**323 Hanuma entries**, unchanged from the earlier archive, ids like
+`vyasaraja-hanuman-achanur-bagalkot`. `gps` left null everywhere: the
+source only gives a Maps share-link and a *local* Plus Code, which can't be
+decoded to real coordinates without a known reference point per entry --
+guessing one risks a wrong pin, worse than no pin.
+
+**6 Uttarādi Moola/Sthāna Pratimā entries**, the first real cross-institution
+data point: Moola Rama, Moola Sita (`moola_pratima`), Digvijaya Rama, Vamsha
+Rama, Prasanna Vittala (`sthana_pratima`), and Vyasamushti/Kurma Saligrama
+(`saligrama`, its own type -- these are unshaped stones, not idols, and the
+app's own text is explicit about that). Pulled from `main_deities_table` in
+the already-archived `um_app_seed.db`. Each carries the real invocation
+śloka, the matha's own descriptive/legendary text (HTML stripped to plain
+text -- `<br>`/block-end tags become newlines, everything else dropped),
+and an `image` field pointing at the matha's own official CDN
+(`cdn.umath.in`) -- referenced by URL, not downloaded/re-hosted, which
+keeps the rights question closer to "linking to the source's own public
+asset" than "redistributing a copy" (still flagged `rights_status: UNKNOWN`
+in the manifest either way, not asserted clean).
+
+`./run_tests.sh` before and after: same pre-existing 3 failures/14 errors,
+nothing new.
+
+**Not done, deliberately:** no UI wiring (no page renders `pratima.json`
+yet -- guru1/2/3.html and the lineage view only know about
+mathas.json/parampara.json today). Scoped this pass to getting the data
+structured and real; display is a separate task once there's more than one
+institution's worth of data to show.
+
+**Next Moola Pratima candidates already sitting in already-archived
+sources, not yet pulled:** none currently -- SRS/Vishwesha/Sode archives
+so far are Panchāṅga-only, no deity tables. The next batch needs either a
+fresh APK's institutional-content tables (Sode's app has explicit
+`/dailyworship`-type endpoints per the architecture doc, still needing a
+network capture) or a website pass (e.g. `sodematha.in/dailyworship.html`,
+already identified as a strong candidate in
+DGE_Madhva_Acquisition_Architecture.md §16).
