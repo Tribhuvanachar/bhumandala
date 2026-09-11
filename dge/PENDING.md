@@ -5923,3 +5923,15 @@ Worth asking the project lead directly: was "Vādirāja Vijaya" possibly
 meant as Rukmiṇīśa Vijaya, or is it a real third title (perhaps only in
 manuscript catalogues like the New Catalogus Catalogorum, which wasn't
 searched here)?
+
+**Resolved by the project lead (11 Sep 2026, 1:18 pm IST): "Vādirāja Vijaya"
+*is* Svāpnavṛndāvanākhyānam** — not a separate title, and not Rukmiṇīśa
+Vijaya either. So the acquisition question is closed: we already have the
+text (raw, archived at
+`dge/sources/vadiraja_vijaya_app/svapnavrindavanakhyana/`, all 22 adhyāyas).
+What's still open is only what was already flagged two entries up: turning
+that raw `.vss` into a proper per-verse `data.json` (the verse-boundary
+reconstruction problem) and deciding taxonomy placement — not sourcing.
+Rukmiṇīśa Vijaya stays exactly where it was, an unrelated, still-real,
+still-unsourced wishlist gap — not pursued further per the lead's
+instruction, dropped from this thread.
