@@ -5830,3 +5830,36 @@ of any kind — the app is entirely Firebase-backed (only Firebase/Firestore
 client-library boilerplate found in the APK, no local data). Nothing to
 extract statically; moved to the blocked pile alongside the missing-native-lib
 group.
+
+## HKS partial-meaning finding: archived, corrected the record, deliberately not merged (11 Sep 2026, 1:10 pm IST)
+
+Followed up on the sandhi 1/26/27 romanized-text-with-glosses finding from
+earlier today. Tried to actually parse it into per-verse commentary and
+stopped: the raw stream has verse text, then `|| N ||` marking the verse
+end, then `#` starting that verse's word-by-word gloss and prose
+commentary, then -- with no delimiter at all -- the next verse's own
+romanized restatement. Splitting automatically risks silently attaching a
+commentary paragraph to the wrong verse, which is exactly the kind of
+mistake this corpus's own standards (real inspection, no guessed
+boundaries) exist to prevent. Chose not to force it.
+
+Instead: archived the raw 33-sandhi dump (only 1/26/27 non-empty) to
+`dge/sources/shri_hks_app/mixed_locale_content/`, and corrected the
+existing ingestion's `source_meta.note` at
+`dge/data/dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara/data.json`
+-- it flatly claimed "No verse-level meaning exists in this source," which
+is now known to be wrong for 3 of the 33 sandhis. Edited via a raw
+string-replace (one exact substring, one occurrence, confirmed before
+writing) rather than a full JSON re-serialize, since the file is 947 items
+of minified single-line JSON and a `json.dump` round-trip would have
+produced a multi-hundred-thousand-line diff for a one-sentence change (same
+mistake caught and avoided in the Ashtadhyayi backfill just before this).
+Diff is 1 line changed, verified still valid JSON with all 947 items intact.
+
+**Open, for whoever picks this up next:** a proper verse-boundary
+reconstruction of the sandhi 1/26/27 content -- likely needs the "word ="
+gloss-line pattern plus a check that new verse text won't itself contain an
+"=" sign, cross-validated against the known Kannada verse count per sandhi
+(sandhi 1's Kannada text already gives an exact verse count to check a
+candidate split against, the same technique this project used for the
+Raghavendra Vijaya canto-boundary problem).
