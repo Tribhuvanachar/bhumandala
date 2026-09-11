@@ -5612,3 +5612,52 @@ The 38 remaps: all 10 Tīrtha Prabandha files (Paścima, not Dakṣiṇa) and 28
 with `--accept-remap` → 131 pairs on the text actually heard. The 5 unresolved (SBS9.5, SBS20.30, SBS1.8,
 SBS31.1, SBS1.16) need a human ear; two of them sound like full Bhāgavata verses the Saroddhāra text does not
 contain. Attempt 4 therefore trained with **28 % wrong pairs**; the rerun waits on the lead's cost go-ahead.
+
+## New workstream: Madhva institutional/Panchāṅga/matrimony acquisition — spec committed, Phase 1 not started (11 Sep 2026, 11:08 am IST)
+
+The project lead handed over a full acquisition architecture for a new DGE
+domain — Panchāṅga preserved per-Maṭha (not a generic astronomical
+engine), Maṭha institutional knowledge (paramparā, deities, branches,
+etc.), and a Madhva matrimonial service — built from static analysis of
+several supplied APKs (Uttarādi, SRS, Udupi, Vishwesha, Tithi Nirṇaya,
+Vyāsarāja, Sode, plus a UM Matrimony bundle). Nothing from it existed in
+this repo yet (checked: no file or commit mentions Pejāvara, Śrīpādarāja,
+Vishwesha, or a source-adapter registry before today), so this is new
+work, not a continuation. Committed the specification as
+`dge/DGE_Madhva_Acquisition_Architecture.md`, with two corrections the
+lead made before any Phase 1 work started:
+
+1. **Śrīpādarāja Maṭha has no app or website currently available to us.**
+   The doc's own §19 findings (a candidate website, a historical Android
+   package name) came from general web verification, not a confirmed
+   live source, so it's wrong to carry it in the active acquisition
+   inventory. Moved to a future-only placeholder: registry status
+   `NOT_YET_ACQUIRED`, no adapter, no Phase 1/2 item, until an actual
+   reachable app or site is confirmed.
+2. **Pejāvara Maṭha and Viśveśa Pañcāṅga are one source, not two.**
+   Viśveśa Pañcāṅga is Pejāvara Adhokshaja Maṭha's own official
+   Panchāṅga (named for its pontiff, Sri Vishwesha Teertha) — same
+   underlying data, different labels. Withdrew the recommendation to
+   separately acquire/analyze a Pejāvara app or site for Panchāṅga; the
+   existing Vishwesha adapter covers it. Pejāvara's own institutional
+   knowledge (history, deities, branches — from `pejavaramatha.in`)
+   is untouched by this, since it's a genuinely separate acquisition
+   from the Panchāṅga question.
+
+Generalized as a standing rule in the doc (§20, §74): one
+institutional/source adapter per actual data source — an institution's
+name and a product's name differing is not evidence of two sources;
+check before registering a second adapter.
+
+**Not done yet, on purpose:** no APK has been analyzed, no adapter code
+written, no emulator/analysis environment provisioned. The lead pointed
+to a Google Drive folder holding the APKs
+(`https://drive.google.com/drive/folders/1Vzcp2sjZT1QjINX8HVAl5CBDML0p6Jo8`)
+for the actual Phase 1 "APK Archaeologist" pass — that's real, multi-step
+work (decompiling seven-plus APKs, possibly an Android emulator, network
+capture) and deserves its own go-ahead rather than being folded silently
+into a documentation commit. Next step, once greenlit: pull the APKs from
+that folder and start Phase 1 in the order §58 now specifies (Udupi →
+Vishwesha → SRS → Uttarādi → Tithi Nirṇaya → Vyāsarāja → Sode), skipping
+Pejāvara and Śrīpādarāja as separate APK targets per the corrections
+above.
