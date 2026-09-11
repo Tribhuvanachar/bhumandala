@@ -299,6 +299,21 @@ complete record, not just a live queue.
   ṇatva-at-a-distance or Śuddhākṣara-derivation engine, which remain open). Full detail in
   `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.13.
 
+  **Update, 11 Sep 2026 — surveyed what's still pending for external help; one resolved directly,
+  one sent out sharpened.** The lead asked whether anything still open could use another AI
+  round. Q2 (word+iti sandhi scope, sūtras 2.51–58) turned out to be resolvable directly: reading
+  the literal sūtra text (no OCR uncertainty for 2.51–55) shows it's about ordinary Saṃhitā-pāṭha
+  occurrences of *iti*/*iva* within the hymns, not Paṭala 10's own Parigraha citation convention
+  — no conflict with the earlier iti-sandhi fix, nothing to send out. RV 1.1.7's residual visarga
+  gap is sharpened with one more piece of evidence found while re-deriving it: this engine's
+  already-validated classical rule predicts "भरन्तो आ" (textbook-correct, matching a documented
+  precedent for सः/एषः), so the attested "भरन्त" is a genuine, real deviation, not a bug — sent
+  as a single, tightly-scoped question, `tools/pratishakhya/GEMINI_CHATGPT_TASK_PROMPT_V4.md`.
+  Everything else still open (general ṇatva/Śuddhākṣara derivation, Kramahetu decision layer,
+  `restore_*` family, etc.) is either already answered as inadvisable to generalize, or a
+  software/data decision, not something stuck on grammar expertise — not re-sent. Full detail in
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.14.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

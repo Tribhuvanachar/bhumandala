@@ -1230,6 +1230,53 @@ output.
 
 ---
 
+### 6.14 Q2 resolved directly (own reading, no external prompt); RV 1.1.7's gap sharpened and
+
+sent out as a fourth, tightly-scoped question
+
+The lead asked whether anything still pending could be helped by external AI; surveying what's
+actually left turned up two things worth separating cleanly first.
+
+**Q2 (does word+iti sandhi apply outside pragṛhya words? sūtras 2.51–58) is resolved — by
+directly reading the literal sūtra text now on file, not by sending it out.** Paṭala 2's own
+text (Layer A, no OCR uncertainty for 2.51–2.55): **2.51** "प्रकृत्या इतिकरणादौ प्रगृह्याः" — words
+are pragṛhya, in their unaltered form, before an *iti-karaṇa*; **2.55** "त्र्यक्षरान्ताः तु न
+इवे" — an exception for trisyllable-final words before *इव specifically*, not इति. Read together
+with **2.48–2.50** (the immediately preceding sūtras, about अन्तःपाद/word-medial phonology in
+ordinary continuous verses) and the total absence of any Krama/Parigraha vocabulary anywhere in
+this stretch, this reads as ordinary **Saṃhitā-pāṭha** phonology — how real occurrences of the
+words *iti* and *iva* WITHIN THE ACTUAL HYMNS interact with an adjacent pragṛhya word — not a
+rule about Paṭala 10's own "word+iti+word" Parigraha-citation convention, which is introduced
+BY the Krama process itself and is a completely different textual layer. This means there is NO
+conflict with the §6.12 fix (real sandhi at the Parigraha iti-junction unless the word is
+pragṛhya) — Uvaṭa's own worked Krama examples (चेति च, चिदिति चित्, वेति वा, पुरोजितीति) are
+still the operative evidence for THAT context, and 2.51–58 is a separate topic this engine
+doesn't currently need to model (it has no Paṭala-2 continuous-recitation pass at all). Not sent
+out; no further action needed unless Paṭala 2 work starts in earnest.
+
+**RV 1.1.7's residual visarga gap is real, and now sharpened with one more piece of evidence
+than §6.11 had.** Re-deriving it from the actual code (not just the sūtra text) found that the
+CLASSICAL rule this engine already implements for a-class visarga before a vowel other than
+short अ (aḥ + vowel → o + that vowel, unchanged and un-fused, e.g. the already-validated "देवः" +
+"देवेभिः" → "देवो देवेभिः") predicts **भरन्तो आ** for भरन्तः+आ — a textbook-correct classical
+form, not a bug. The attested Vedic **भरन्त** (visarga vanishes with no trace, not even "o") is
+a genuine deviation from that ordinary rule, in the same general SHAPE as an existing precedent
+already in this codebase (सः/एषः's specially-legislated visarga-drop-with-no-further-sandhi), but
+this project has no citation naming this specific deviation for an ordinary word before **आ**
+specifically. Sent as `tools/pratishakhya/GEMINI_CHATGPT_TASK_PROMPT_V4.md` — a single, tightly
+focused question (plus one bonus, explicitly-optional question on "मो षु णः"'s grammatical
+status), with the "citation or explicit UNRESOLVED, code must be independently verified before
+being trusted" hard rule that's caught real bugs in every code-bearing round so far.
+
+**Everything else currently open** (a general tag-free ṇatva-at-a-distance rule, the general
+Śuddhākṣara/rephi-rendering derivation, the Kramahetu/Paṭala-11 decision layer, the `restore_*`
+family, structured Svara, full per-unit transformation history, the VALIDATE-mode ground-truth
+source) is either already-answered-as-inadvisable-to-generalize by two independent external
+reviews (§6.13), or a software-design/data-sourcing decision that isn't actually "stuck" waiting
+on grammar expertise — not re-sent, to avoid diluting this round's one real question.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
