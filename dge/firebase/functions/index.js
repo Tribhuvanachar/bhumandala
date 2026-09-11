@@ -26,6 +26,7 @@ const logger = require('firebase-functions/logger');
 const { initializeApp } = require('firebase-admin/app');
 const { getFirestore, FieldValue, Timestamp } = require('firebase-admin/firestore');
 const { getAuth } = require('firebase-admin/auth');
+const { getStorage } = require('firebase-admin/storage');
 
 const otpCore = require('./lib/otp-core');
 const waLib = require('./lib/whatsapp');
@@ -37,6 +38,7 @@ const paymentState = require('./lib/payment-state');
 const { getGateway, assertGatewayAllowed } = require('./lib/payment-providers');
 const receiptCore = require('./lib/receipt-core');
 const { getEmailProvider } = require('./lib/email-providers');
+const corpusAccess = require('./lib/corpus-access');
 
 initializeApp();
 const db = getFirestore();
@@ -1092,6 +1094,324 @@ exports.getDonationStatus = onCall(
       currency: donation.data().currency,
       receiptNumber: receiptSnap.exists ? receiptSnap.data().receiptNumber : null
     };
+  }
+);
+
+// --- The authenticated corpus proxy ----------------------------------
+//
+// WHY THIS EXISTS. Every gate up to now has been UI-level, and role-access.js
+// says so in its own header: the corpus files are public static assets, so
+// anyone who knows or guesses a path can fetch a gated grantha's data.json
+// straight from Hosting. This function is the other architecture — corpus
+// text served from a PRIVATE bucket, one request at a time, with the same
+// shelf/gate decision applied before a byte goes out.
+//
+// It is a SWITCH, not a migration: with corpusBase unset in config.js the
+// reader fetches static files exactly as it does today and this function is
+// never called. Set corpusBase and every corpus read goes through here
+// instead. Nothing else in the reader changes. See dge/CORPUS_PROXY.md.
+//
+// Shape:  GET <base>/<corpus path>/data.json
+//         Authorization: Bearer <Firebase ID token>   (optional)
+//
+// A signed-out visitor is allowed — the library is public, the shelf is what
+// narrows it — so a missing token means the 'anonymous' role rather than a
+// refusal. A token that is present but bad IS refused (401), because
+// silently demoting an expired session to anonymous would show a subscriber
+// a "not found" for a text they pay for.
+const CORPUS_BUCKET = defineString('CORPUS_BUCKET', { default: '' });
+const CORPUS_PREFIX = defineString('CORPUS_PREFIX', { default: 'corpus/' });
+// Where the live shelf is read from, so widening it is a commit + Hosting
+// deploy rather than a function redeploy. Defaults to the project's own
+// Hosting origin; the bundled copy below is the floor if this is unreachable.
+const CORPUS_CONFIG_URL = defineString('CORPUS_CONFIG_URL', { default: '' });
+
+const CORPUS_CONFIG_TTL_MS = 5 * 60 * 1000;
+let corpusConfigCache = null;   // { at, overrides, roleAccess }
+
+/**
+ * The shelf, from Hosting if it answers and from the deployed snapshot if it
+ * does not.
+ *
+ * The bundled snapshot (functions/library-overrides.json, copied in by
+ * deploy-firebase-functions.yml) matters more than it looks: without it, a
+ * config fetch that fails on a cold start leaves the function with no shelf
+ * at all, and "no shelf" means everything is open. Failing open on a network
+ * blip is exactly the failure this whole function exists to prevent. With
+ * the snapshot the worst case is a stale shelf, and a stale shelf is only
+ * wrong in the widening direction — the deploy that narrows it ships the new
+ * snapshot with it.
+ */
+async function corpusOverrides() {
+  const url = CORPUS_CONFIG_URL.value();
+  if (url) {
+    try {
+      const res = await fetch(url, { headers: { accept: 'application/json' } });
+      if (res.ok) return await res.json();
+      logger.warn('corpus config fetch was not ok', { status: res.status });
+    } catch (e) {
+      logger.warn('corpus config fetch failed', { message: e && e.message });
+    }
+  }
+  try {
+    return require('./library-overrides.json');
+  } catch (e) {
+    logger.error('no corpus config at all — the shelf cannot be applied', { message: e && e.message });
+    return null;
+  }
+}
+
+/** Both config sources, cached briefly so a burst of page loads costs one read. */
+async function corpusConfig() {
+  const now = Date.now();
+  if (corpusConfigCache && (now - corpusConfigCache.at) < CORPUS_CONFIG_TTL_MS) {
+    return corpusConfigCache.value;
+  }
+  const [overrides, gatesSnap] = await Promise.all([
+    corpusOverrides(),
+    db.collection('config').doc('roleAccess').get().catch((e) => {
+      logger.warn('roleAccess read failed', { message: e && e.message });
+      return null;
+    })
+  ]);
+  // A config read that failed is NOT the same as a config that says
+  // "nothing is gated". Keep the last good value rather than opening up.
+  if (!overrides && corpusConfigCache) return corpusConfigCache.value;
+  const value = corpusAccess.configFrom(
+    overrides,
+    gatesSnap && gatesSnap.exists ? gatesSnap.data() : (corpusConfigCache ? { gates: corpusConfigCache.value.gates } : null)
+  );
+  corpusConfigCache = { at: now, value };
+  return value;
+}
+
+/** The caller's stored role, or 'anonymous'. Throws a 401-shaped error for a bad token. */
+async function corpusCallerRole(req) {
+  const header = String(req.get('authorization') || req.get('Authorization') || '');
+  const m = /^Bearer\s+(.+)$/i.exec(header.trim());
+  if (!m) return { uid: null, role: corpusAccess.ANONYMOUS };
+  let decoded;
+  try {
+    decoded = await getAuth().verifyIdToken(m[1].trim());
+  } catch (e) {
+    const err = new Error('bad token');
+    err.corpusStatus = 401;
+    throw err;
+  }
+  const snap = await db.collection(USERS).doc(decoded.uid).get();
+  return { uid: decoded.uid, role: (snap.exists && snap.data().role) || 'basic' };
+}
+
+exports.corpusFile = onRequest({ cors: true, maxInstances: 40 }, async (req, res) => {
+  if (req.method === 'OPTIONS') { res.status(204).send(''); return; }
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.status(405).json({ error: 'method' });
+    return;
+  }
+
+  // The response depends on who is asking, so it must never land in a shared
+  // cache. Both headers are needed: Vary alone does not stop a proxy that
+  // ignores it, private alone does not tell a CDN which key to split on.
+  res.set('Cache-Control', 'private, max-age=300');
+  res.set('Vary', 'Authorization');
+
+  const bucketName = CORPUS_BUCKET.value();
+  if (!bucketName) {
+    // The switch is off. Say so plainly — this one is a misconfiguration, not
+    // a refusal, and hiding it would waste somebody's afternoon.
+    res.status(503).json({ error: 'not-configured', hint: 'Set CORPUS_BUCKET to the private corpus bucket.' });
+    return;
+  }
+
+  const raw = req.query && req.query.path ? String(req.query.path) : String(req.path || '').replace(/^\/+/, '');
+  const objectPath = corpusAccess.objectNameFor(raw);
+  if (!objectPath) { res.status(404).json({ error: 'not-found' }); return; }
+
+  let caller;
+  try {
+    caller = await corpusCallerRole(req);
+  } catch (e) {
+    if (e && e.corpusStatus === 401) { res.status(401).json({ error: 'auth' }); return; }
+    logger.error('corpusFile role resolution failed', { message: e && e.message });
+    res.status(500).json({ error: 'internal' });
+    return;
+  }
+
+  const cfg = await corpusConfig();
+  const display = corpusAccess.displayPathFor(objectPath, cfg.moves);
+  const verdict = corpusAccess.decide(display, caller.role, cfg);
+  if (!verdict.allowed) {
+    // 404, not 403, and no reason in the body. "Forbidden" on
+    // darshana/.../SetuTila confirms the text exists and is worth attacking;
+    // a flat not-found tells a prober nothing it did not already know. The
+    // real reason goes to the log, where the lead can read it.
+    logger.info('corpus refused', { path: display, role: caller.role, reason: verdict.reason });
+    res.status(404).json({ error: 'not-found' });
+    return;
+  }
+
+  const objectName = CORPUS_PREFIX.value() + objectPath;
+  try {
+    const file = getStorage().bucket(bucketName).file(objectName);
+    const [meta] = await file.getMetadata();
+    const etag = meta.etag ? String(meta.etag) : null;
+    if (etag) res.set('ETag', etag);
+    if (etag && req.get('if-none-match') === etag) { res.status(304).end(); return; }
+    res.set('Content-Type', 'application/json; charset=utf-8');
+    if (meta.size) res.set('Content-Length', String(meta.size));
+    if (req.method === 'HEAD') { res.status(200).end(); return; }
+    await new Promise((resolve, reject) => {
+      file.createReadStream()
+        .on('error', reject)
+        .on('end', resolve)
+        .pipe(res);
+    });
+  } catch (e) {
+    if (e && (e.code === 404 || e.code === 'ENOENT')) { res.status(404).json({ error: 'not-found' }); return; }
+    logger.error('corpusFile read failed', { object: objectName, message: e && e.message });
+    if (!res.headersSent) res.status(502).json({ error: 'storage' });
+    else res.end();
+  }
+});
+
+// --- Server-side PDF (the Blaze half of the book builder) -------------
+//
+// WHY A SERVER RENDERS THIS AT ALL. dge/js/book-builder.js already produces a
+// finished book and hands it to the browser's own print engine, and that is
+// still the default path — it is free, it needs no account, and it is the
+// only engine in reach that shapes Devanagari conjuncts correctly (jsPDF and
+// pdfmake place glyphs one code point at a time, so क्ष and every other
+// saṃyuktākṣara come out broken). What it cannot do is hand back a FILE. The
+// person has to find Save as PDF in a print dialog, pick the paper, and hope.
+//
+// This is the one-tap version: the same HTML, rendered by the same engine,
+// returned as a .pdf. It needs the Blaze plan because it runs a real browser.
+//
+// THE RISK, STATED PLAINLY. This is a headless Chromium rendering a document
+// a caller sent us. Left alone it would fetch whatever the document points
+// at — an internal URL, a file:// path, a slow endpoint — so every request it
+// makes is aborted unless bookRender.allowedRequest says otherwise, and that
+// allows only data:/blob:/about:blank. JavaScript is off. The client inlines
+// the stylesheet and the imprint icon before posting, so a correct book needs
+// nothing from the network and a document that does was not one of ours.
+const bookRender = require('./lib/book-render');
+
+let puppeteerModule;       // resolved once, lazily — see the catch below
+let browserPromise = null; // one browser per warm instance, not one per request
+
+function getPuppeteer() {
+  if (puppeteerModule === undefined) {
+    try {
+      puppeteerModule = require('puppeteer');
+    } catch (e) {
+      // Deliberately not fatal at load time. puppeteer is a heavy, awkward
+      // dependency (it downloads a browser at install), and a project that
+      // has not installed it should still deploy and run sendOtp, donations
+      // and the corpus proxy. Only this one endpoint goes dark, and it says
+      // why.
+      puppeteerModule = null;
+      logger.warn('puppeteer is not installed — renderBook will answer 503', { message: e && e.message });
+    }
+  }
+  return puppeteerModule;
+}
+
+async function getBrowser() {
+  const puppeteer = getPuppeteer();
+  if (!puppeteer) return null;
+  if (!browserPromise) {
+    browserPromise = puppeteer.launch({
+      headless: 'new',
+      args: [
+        '--no-sandbox',                 // required inside the Cloud Run container
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',      // /dev/shm is tiny here; without this Chromium dies mid-render
+        '--font-render-hinting=none'
+      ]
+    }).catch((e) => { browserPromise = null; throw e; });
+  }
+  return browserPromise;
+}
+
+exports.renderBook = onRequest(
+  { cors: true, memory: '1GiB', timeoutSeconds: 120, maxInstances: 3, concurrency: 1 },
+  async (req, res) => {
+    if (req.method === 'OPTIONS') { res.status(204).send(''); return; }
+    if (req.method !== 'POST') { res.status(405).json({ error: 'method' }); return; }
+
+    // Unlike the corpus proxy, this one requires an account. Rendering costs
+    // real CPU on someone's card, so "who is this" is not optional and there
+    // is no anonymous tier.
+    let uid, role;
+    try {
+      const header = String(req.get('authorization') || '');
+      const m = /^Bearer\s+(.+)$/i.exec(header.trim());
+      if (!m) { res.status(401).json({ error: 'auth' }); return; }
+      const decoded = await getAuth().verifyIdToken(m[1].trim());
+      uid = decoded.uid;
+      const snap = await db.collection(USERS).doc(uid).get();
+      role = (snap.exists && snap.data().role) || 'basic';
+    } catch (e) {
+      res.status(401).json({ error: 'auth' });
+      return;
+    }
+
+    let capabilities = {};
+    try {
+      const snap = await db.collection('config').doc('roleAccess').get();
+      if (snap.exists) capabilities = snap.data().capabilities || {};
+    } catch (e) {
+      // A capability map we could not read is not an open one.
+      logger.warn('renderBook could not read capabilities', { message: e && e.message });
+    }
+    if (!bookRender.mayRenderBook(role, capabilities)) {
+      // 403 rather than the corpus proxy's 404: there is nothing to hide
+      // here. The caller knows the feature exists — they pressed its button —
+      // and "you do not have this yet" is the useful answer.
+      res.status(403).json({ error: 'forbidden', capability: 'book' });
+      return;
+    }
+
+    const body = req.body && typeof req.body === 'object' ? req.body : {};
+    const bad = bookRender.checkHtml(body.html, bookRender.MAX_HTML_BYTES);
+    if (bad) { res.status(400).json({ error: bad }); return; }
+
+    const browser = await getBrowser().catch((e) => {
+      logger.error('could not launch the renderer', { message: e && e.message });
+      return null;
+    });
+    if (!browser) {
+      res.status(503).json({
+        error: 'renderer-unavailable',
+        hint: 'The PDF service is not installed on this deployment. Use Print → Save as PDF in the reader.'
+      });
+      return;
+    }
+
+    let page;
+    try {
+      page = await browser.newPage();
+      await page.setJavaScriptEnabled(false);
+      await page.setRequestInterception(true);
+      page.on('request', (r) => {
+        if (bookRender.allowedRequest(r.url())) r.continue();
+        else r.abort();
+      });
+      await page.setContent(body.html, { waitUntil: 'load', timeout: 30000 });
+      const pdf = await page.pdf(bookRender.pdfOptionsFor(body.spec));
+      res.set('Content-Type', 'application/pdf');
+      res.set('Content-Disposition',
+        bookRender.contentDispositionFor((body.spec && body.spec.title) || 'Sarvamula book'));
+      res.set('Cache-Control', 'private, no-store');
+      res.status(200).end(pdf);
+      logger.info('book rendered', { uid, role, bytes: pdf.length });
+    } catch (e) {
+      logger.error('renderBook failed', { uid, message: e && e.message });
+      if (!res.headersSent) res.status(500).json({ error: 'render-failed' });
+      else res.end();
+    } finally {
+      if (page) await page.close().catch(() => {});
+    }
   }
 );
 

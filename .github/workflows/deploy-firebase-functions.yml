@@ -30,6 +30,23 @@ on:
         description: 'Optional: a specific function or comma list (e.g. "requestOtp,verifyOtp"). Leave blank to deploy all functions.'
         required: false
         default: ""
+      corpus_bucket:
+        description: 'Authenticated corpus proxy: the PRIVATE GCS bucket holding the corpus (e.g. sarvamula-corpus). Blank leaves corpusFile switched off — it answers 503 and the reader keeps using static files. Upload with tools/migrate_corpus_to_gcs.py first.'
+        required: false
+        default: ""
+      corpus_prefix:
+        description: 'Object-name prefix inside that bucket. Must match the --prefix the migration script used.'
+        required: false
+        default: "corpus/"
+      corpus_config_url:
+        description: 'Where corpusFile reads the live shelf from (usually https://<project>.web.app/admin/config/library-overrides.json). Blank falls back to the copy bundled at deploy time, below.'
+        required: false
+        default: ""
+      install_pdf_renderer:
+        description: 'Install puppeteer so renderBook can return real PDFs. Adds ~170 MB to the image and a few minutes to the build; leave off and renderBook answers 503 while every other function deploys normally.'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -95,8 +112,52 @@ jobs:
       - name: Write .firebaserc (gitignored on purpose — the repo never carries a project id)
         run: |
           printf '{ "projects": { "default": "%s" } }\n' "${{ secrets.FIREBASE_PROJECT_ID }}" > dge/firebase/.firebaserc
+      - name: Bundle the shelf snapshot the corpus proxy falls back to
+        # corpusFile reads the LIVE shelf over HTTPS so widening it is a commit
+        # plus a Hosting deploy, not a function redeploy. This copy is the floor
+        # under that: if the fetch fails on a cold start the function must not
+        # end up with "no shelf", because no shelf means everything is open —
+        # failing open on a network blip is precisely what the proxy exists to
+        # prevent. Worst case with the snapshot is a stale shelf, and a stale one
+        # is only wrong in the widening direction, since the deploy that narrows
+        # it carries the new snapshot along.
+        run: |
+          cp admin/config/library-overrides.json dge/firebase/functions/library-overrides.json
+          python3 -c "import json;d=json.load(open('dge/firebase/functions/library-overrides.json'));print('bundled shelf:', 'enabled' if (d.get('shelf') or {}).get('enabled') else 'disabled', '|', len((d.get('shelf') or {}).get('allow') or []), 'allow entries')"
+      - name: Write the non-secret params corpusFile reads
+        # defineString() params come from this .env at deploy time. It holds no
+        # credentials — a bucket name and two URLs — and is written fresh on
+        # every run so a blank input genuinely means "off" rather than "keep
+        # whatever the last deploy set".
+        env:
+          CORPUS_BUCKET: ${{ inputs.corpus_bucket }}
+          CORPUS_PREFIX: ${{ inputs.corpus_prefix }}
+          CORPUS_CONFIG_URL: ${{ inputs.corpus_config_url }}
+        run: |
+          {
+            echo "CORPUS_BUCKET=${CORPUS_BUCKET}"
+            echo "CORPUS_PREFIX=${CORPUS_PREFIX:-corpus/}"
+            echo "CORPUS_CONFIG_URL=${CORPUS_CONFIG_URL}"
+          } > dge/firebase/functions/.env
+          cat dge/firebase/functions/.env
+          if [ -z "$CORPUS_BUCKET" ]; then
+            echo "::notice::corpusFile will answer 503 (no CORPUS_BUCKET). The reader keeps reading static files."
+          fi
       - name: Install function dependencies
-        run: cd dge/firebase/functions && npm install
+        env:
+          WANT_PDF: ${{ inputs.install_pdf_renderer }}
+        run: |
+          cd dge/firebase/functions
+          if [ "$WANT_PDF" = "true" ]; then
+            npm install
+            # Prove the browser is actually inside the directory that gets
+            # deployed. Without this the build passes and renderBook fails at
+            # runtime with "Could not find Chrome", which reads like a code bug.
+            ls -la .puppeteer-cache 2>/dev/null || { echo "puppeteer did not populate .puppeteer-cache — see .puppeteerrc.cjs"; exit 1; }
+          else
+            npm install --omit=optional
+            echo "::notice::renderBook will answer 503 (puppeteer not installed). The book builder's Prepare → print route is unaffected."
+          fi
       - name: Deploy Cloud Functions
         env:
           GOOGLE_APPLICATION_CREDENTIALS: /home/runner/.sa/key.json

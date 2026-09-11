@@ -100,12 +100,24 @@
         '<span class="dge-bb-hint">(for copies you would rather were not circulated)</span></label>' +
       '</div>' +
 
-      '<button class="btn-sm" style="width:100%;margin-top:6px;" onclick="window.dgePrepareBookNow()">📖 Prepare</button>';
+      '<button class="btn-sm" style="width:100%;margin-top:6px;" onclick="window.dgePrepareBookNow()">📖 Prepare</button>' +
+      // The download button only appears where it can actually work. A
+      // "Download PDF" that quietly opens a print dialog is exactly the thing
+      // book-builder.js's header says not to build, so when the renderer is
+      // not configured there is simply no second button and Prepare is the
+      // whole route.
+      (window.dgeBookPdfUrl && window.dgeBookPdfUrl()
+        ? '<button class="btn-sm" style="width:100%;margin-top:6px;" onclick="window.dgeDownloadBookNow()">⬇ Download PDF</button>' +
+          '<div class="dge-bb-hint" style="margin-top:4px;">Prepare opens the book to read and print. Download returns the finished file.</div>'
+        : '');
 
     if (typeof openModal === 'function') openModal('bookBuilderModal');
   };
 
-  window.dgePrepareBookNow = function () {
+  /* The spec the form currently describes, or null with a toast saying why
+     not. Split out of dgePrepareBookNow so the download button builds exactly
+     the same book rather than a second, drifting copy of it. */
+  function specFromForm() {
     var srcEl = document.querySelector('input[name="bbSrc"]:checked');
     var src = srcEl ? srcEl.value : 'whole';
     var units;
@@ -116,7 +128,7 @@
     }
     if (!units.length) {
       if (typeof showToast === 'function') showToast('That selection has no verses in it.');
-      return;
+      return null;
     }
     var sizeEl = document.querySelector('input[name="bbSize"]:checked');
     var spec = window.dgeBookDefaults();
@@ -137,13 +149,45 @@
     else if (src === 'studied') label += ' · studied verses';
     spec.sections = [{ label: label, granthaSlug: window.currentGranthaSlug || '', units: units }];
 
-    window.dgeOpenPreparedBook(spec, {
+    return spec;
+  }
+
+  /* The options both routes share: the commentary display names, and an
+     absolute base. The generated document lives in about:blank (and, for the
+     server render, in a browser with no origin at all), so a relative href
+     resolves against nothing and the book would come out unstyled. */
+  function bookOpts() {
+    return {
       commentaryNames: availableCommentaries(),
-      // The generated document lives in about:blank, so its stylesheet and
-      // icon have to be absolute — a relative href there resolves against
-      // nothing and the book would print unstyled.
       baseUrl: new URL('.', window.location.href).href
-    });
+    };
+  }
+
+  window.dgePrepareBookNow = function () {
+    var spec = specFromForm();
+    if (!spec) return;
+    window.dgeOpenPreparedBook(spec, bookOpts());
     if (typeof closeModal === 'function') closeModal('bookBuilderModal');
+  };
+
+  /* One tap, one file. Falls back to the print route on any failure rather
+     than leaving the person with nothing: a book they can still print beats
+     an error about a renderer they never asked about. */
+  window.dgeDownloadBookNow = function () {
+    var spec = specFromForm();
+    if (!spec) return;
+    if (typeof showToast === 'function') showToast('Preparing the PDF\u2026');
+    window.dgeDownloadPreparedBook(spec, bookOpts()).then(function (ok) {
+      if (ok) {
+        if (typeof closeModal === 'function') closeModal('bookBuilderModal');
+        if (typeof showToast === 'function') showToast('Downloaded.');
+        return;
+      }
+      if (typeof showToast === 'function') {
+        showToast('The PDF service could not be reached \u2014 opening the book to print instead.');
+      }
+      window.dgeOpenPreparedBook(spec, bookOpts());
+      if (typeof closeModal === 'function') closeModal('bookBuilderModal');
+    });
   };
 })();

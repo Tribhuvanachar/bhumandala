@@ -89,3 +89,12 @@ dge/data/ocr_staging/upanishad_tippani/prompts/
 
 # Vedavani (Hugging Face) Rigveda clips fetched by tools/vedavani_hf/vedavani_corpus.py -- never commit audio
 kamadhenu_dataset/incoming_audio/vedavani_hf/
+
+# The Chromium puppeteer downloads for the renderBook function (see
+# dge/firebase/functions/.puppeteerrc.cjs). Built at deploy time, never committed.
+dge/firebase/functions/.puppeteer-cache/
+
+# Written fresh by deploy-firebase-functions.yml (non-secret params) and copied
+# in from admin/config at deploy time (the corpus proxy shelf snapshot).
+dge/firebase/functions/.env
+dge/firebase/functions/library-overrides.json
