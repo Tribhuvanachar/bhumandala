@@ -191,6 +191,41 @@ IRREGULAR_LENGTHENING_BEFORE_CONSONANT = {
     "sacasva": "sacasvA",
 }
 
+# RPr 11.23 (yathaapadam sandhim apetahetuSu): naH -> NaH (natva/retroflexion)
+# is licensed across a word boundary specifically when the trigger (r/f/F/z)
+# sits in an upasarga immediately before it (Paanini 8.4.1/8.4.2/8.4.14),
+# and is undone once that upasarga is no longer adjacent -- Uvata's own
+# example: "pra NaH" vs "na indraH" (no "pra" adjacent). Deliberately NOT a
+# general tag-free natva engine: identifying an upasarga in general needs
+# morphological tagging this module doesn't have, and a broader phonological
+# sieve (checked directly, 11 Sep 2026, against an external review's first
+# attempt at one) either over-licenses interveners Paanini 8.4.2 doesn't
+# actually name (aT-ku-pu-aaN-num only) or under/over-fires without knowing
+# whether a given "r"-final word is really acting as an upasarga here. Kept
+# narrow and closed, sourced directly from the one attested example, exactly
+# like MONOSYLLABLE_AVASANA_SLP1/BAHUMADHYAGATA_LEXICAL_SLP1 in
+# pratishakhya_classify.py.
+NATVA_BOUNDARY_UPASARGAS_SLP1 = {"pra"}
+
+# RPr 11.43 (nudet ca zauddhaakSarasandhyam aagamam): a handful of words
+# attested (Uvata's own bhaashya on 11.43) with an inserted sibilant augment
+# in continuous Samhita that must be OMITTED when the word is retaken for
+# Parigraha. These four share no single derivable phonological trigger
+# (checked directly: suScandra is bahulaM chandasi with no classical rule;
+# parizkfRvan is Paanini 8.3.137's suT augment + 8.3.59's s->S; DUrzadam/
+# vanarzadam look like the SAME repha-before-uSman phenomenon already
+# covered by REPHI_CACHE_SLP1 below for duHsadam specifically, not a new
+# "augment" at all -- Uvata's own bhaashya reuses this exact example under
+# BOTH 11.41 (repha) and 11.43 (aagama) in the same continuous passage). Kept
+# as a small, explicit, closed table -- like IRREGULAR_VISARGA_STEMS above --
+# rather than guessed at as one general rule.
+SHAUDDHAKSHARA_AGAMA_SLP1 = {
+    ("su", "candra"): "suScandra",
+    ("pari", "kfRvan"): "parizkfRvan",
+    ("DUH", "sadam"): "DUrzadam",
+    ("vana", "sadam"): "vanarzadam",
+}
+
 
 def _match_lexical_suffix(s1, table):
     """Both lexical-exception tables above are keyed by a single bare
@@ -311,6 +346,33 @@ def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False, resolve_w1_compound=Tru
     if not s1 or not s2:
         return {"surface": w1_deva + w2_deva, "rule": "empty_input", "confidence": "low",
                 "note": "empty word passed to samhita_join"}
+
+    agama_match = SHAUDDHAKSHARA_AGAMA_SLP1.get((s1, s2))
+    if agama_match:
+        return _finish(agama_match, "shauddhakshara_agama_11_43", w1_deva, w2_deva,
+                        note="Closed lexical zuddhaakSara-sandhi aagama example, sourced "
+                             "directly from Uvata's bhaashya on 11.43 (see "
+                             "SHAUDDHAKSHARA_AGAMA_SLP1).")
+
+    if s1 in NATVA_BOUNDARY_UPASARGAS_SLP1 and s2[0] == "n" and len(s2) > 1 and s2[1] in ALL_VOWELS:
+        # Trigger-and-intervener check per Paanini 8.4.1/8.4.2, scanning s1
+        # from its end for r/f/F/z with only vowels between it and s1's own
+        # end (aT is the only intervener class this closed upasarga set
+        # actually needs -- "pra" itself never has ku/pu/aaN/num between the
+        # r and the boundary, so those classes are not implemented here;
+        # a future addition to NATVA_BOUNDARY_UPASARGAS_SLP1 that needs them
+        # would have to extend this).
+        trigger_pos = -1
+        for i in range(len(s1) - 1, -1, -1):
+            if s1[i] in ("r", "f", "F", "z"):
+                trigger_pos = i
+                break
+        if trigger_pos != -1 and all(ch in ALL_VOWELS for ch in s1[trigger_pos + 1:]):
+            natva_s2 = "R" + s2[1:]
+            return _finish(s1 + " " + natva_s2, "natva_boundary_11_23", w1_deva, w2_deva,
+                            note="Exact RPr 11.23/Uvata boundary case (pra + naH -> pra NaH); "
+                                 "NOT a general tag-free natva-at-a-distance rule -- see "
+                                 "NATVA_BOUNDARY_UPASARGAS_SLP1's own docstring.")
 
     lengthening_match = _match_lexical_suffix(s1, IRREGULAR_LENGTHENING_BEFORE_CONSONANT)
     if lengthening_match and s2[0] not in ALL_VOWELS:

@@ -273,6 +273,32 @@ complete record, not just a live queue.
   items externally rather than guess. Full detail in
   `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.12.
 
+  **Update, 11 Sep 2026 — Round 3 answers (Gemini + ChatGPT) evaluated, two narrow fixes
+  installed after catching a real bug in BOTH proposals.** Both models answered; every claim
+  checked against the actual code (run, not read) before installing anything — same discipline
+  as every prior round. **Task A (11.23 ṇatva-restoration)**: both models converged on
+  implementing ONLY the evidenced "प्र+नः→प्र णः" case as a narrow closed check, not a general
+  tag-free rule (ChatGPT correctly caught that Gemini's first, more general proposal licensed
+  intervener consonants Pāṇini 8.4.2 doesn't actually name — confirmed independently). Installed
+  as `NATVA_BOUNDARY_UPASARGAS_SLP1`. **Task B (11.43 śuddhākṣara-āgama)**: installed a 4-entry
+  closed lexical table — but only after catching a real, shared bug in both models' proposed
+  tables: both gave धूःसदम्→धूर्षदम् as SLP1 `"DUfzadam"`, which actually decodes to the WRONG
+  word "धूऋषदम्" (`f` is the vocalic-ऋ vowel, not the repha consonant `r`) — caught by literally
+  running `slp1_to_deva()` on it, not by trusting ChatGPT's own "I tested this, 5/5 PASS" claim,
+  which does not survive that check. Fixed to `"DUrzadam"` before installing. Found and fixed a
+  separate, unrelated, real bug while verifying this: `pratishakhya_classify.REPHI_CACHE_SLP1`
+  had two entries ("dhUHsadam", "durdhyaH") using invalid SLP1 (lowercase "dh" instead of the
+  single capital "D") that silently made `is_rephi()` always return False for the words they
+  were meant to cache. **Task C (10.10–11's scope)**: both models say don't touch the code
+  (Gemini confidently, ChatGPT more cautiously) — matching this session's own independent
+  reasoning before the prompt was even sent; recorded as "reasonably decided," not "proven," no
+  code change. All fixes covered by new tests (`NatvaBoundaryAndShuddhaksharaAgama` in
+  `tests/test_krama_engine.py`); confirmed RV 1.1's own regenerated output is byte-for-byte
+  unchanged (net-new coverage only). `validate_krama_rv1_1.py`'s Test A–H suite is now **8/8
+  PASS** (rescoped honestly to the evidenced sub-cases, not overclaiming a general
+  ṇatva-at-a-distance or Śuddhākṣara-derivation engine, which remain open). Full detail in
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.13.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

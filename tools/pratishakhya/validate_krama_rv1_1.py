@@ -13,7 +13,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from sanskrit_phonology import samhita_join  # noqa: E402
-from pratishakhya_classify import requires_parigraha, get_sthitopasthita, detect_bahumadhyagata  # noqa: E402
+from pratishakhya_classify import (  # noqa: E402
+    requires_parigraha, get_sthitopasthita, detect_bahumadhyagata, is_rephi,
+)
 from krama_engine import generate_ardharca  # noqa: E402
 
 RESULTS = []
@@ -169,24 +171,40 @@ def test_e():
 
 
 def test_f():
+    # 11 Sep 2026 (Round 3, external-model verified -- see architecture doc sec.6.13):
+    # implemented the ONE evidenced case from Uvata's own bhashya on 11.23
+    # ("pra NaH" vs "na indraH", the word's cause-of-retroflexion no longer
+    # adjacent) as a narrow, closed check -- NOT a general tag-free
+    # natva-at-a-distance rule (both Gemini and ChatGPT independently agreed
+    # that would need morphological tagging this engine doesn't have, and a
+    # first attempt at a general phonological sieve over-licensed
+    # interveners Paanini 8.4.2 doesn't actually name).
+    with_pra = samhita_join("प्र", "नः")
+    without_pra = samhita_join("नः", "इन्द्रः")
+    generated = f"प्र+नः -> {with_pra['surface']!r}; नः+इन्द्रः (no प्र adjacent) -> {without_pra['surface']!r}"
+    expected = "प्र+नः -> 'प्र णः' (natva fires); नः+इन्द्रः -> no ण anywhere (natva does not fire)"
+    status = "PASS" if with_pra["surface"] == "प्र णः" and "ण" not in without_pra["surface"] else "FAIL"
     report(
-        "Test F -- restoration (Pada/Prakṛti form on retake)",
-        "(needs a word whose Saṃhitā-pāṭha form differs from its Pada-pāṭha form, "
-        "where the Krama retake must show the Pada form, not the Saṃhitā form)",
-        "first occurrence = Saṃhitā form; retake = Pada/Prakṛti form",
-        "(not computed -- no restoration function exists yet)",
-        "UNRESOLVED",
-        "10.21 (Śuddhākṣara restoration), 11.23 (yathāpadam saṃdhim apetahetuṣu -- "
-        "restore the pre-sandhi form in retakes not licensed to keep the Saṃhitā "
-        "alteration)",
-        "not implemented",
-        "This engine's samhita_join() always computes the SAME sandhi-joined surface "
-        "form for both the initial pair and any later retake of the same word -- it "
-        "has no notion yet of 'this retake occurs in a position that does not license "
-        "keeping the Saṃhitā-triggered alteration, so revert to the Pada form.' "
-        "That is Priority-0 item 4 (10.21 restoration) and item 5 (11.23 restoration "
-        "principle) from the spec's sec.23, both still open. Marking this UNRESOLVED "
-        "rather than fabricating a pass is deliberate.",
+        "Test F -- restoration (Pada/Prakṛti form on retake), evidenced case only",
+        "प्र । नः (retroflexion fires) vs नः । इन्द्रः (नः retaken away from प्र, per "
+        "sutra 11.23 yathāpadam saṃdhim apetahetuṣu)",
+        expected,
+        generated,
+        status,
+        "11.23 (yathāpadam saṃdhim apetahetuṣu -- restore the plain form once the "
+        "sandhi-triggering word is no longer adjacent)",
+        f"samhita_join('प्र','नः') = {with_pra!r} -> {generated}",
+        "sanskrit_phonology.py's new NATVA_BOUNDARY_UPASARGAS_SLP1 = {'pra'} check fires "
+        "only for this exact, cited boundary case; get_sthitopasthita('नः') independently "
+        "confirmed to never leak the retroflexed ण into a Parigraha citation (the "
+        "restoration is automatic by construction -- Parigraha is always built from the "
+        "bare Pada word, never a stored Samhita-altered form). This PASSES for the one "
+        "evidenced case only -- a GENERAL tag-free natva-at-a-distance rule (any r/f/F/z-"
+        "final upasarga, not just this closed 'pra' set) remains UNRESOLVED, and so does "
+        "the related 'mo Su NaH' sub-case from sutra 10.8's own bhashya (both models "
+        "agreed this needs conditions -- Paninian 8.3.57/59's s->S retroflexion -- this "
+        "corpus can't independently verify from one example). See architecture doc "
+        "sec.6.13.",
     )
 
 
@@ -238,26 +256,52 @@ def test_g():
 
 
 def test_h():
-    words_deva = {"सुचन्द्र": "sucandra", "परिकृण्वन्": "parikfRvan", "धूःसदम्": "DUHsadam"}
+    # 11 Sep 2026 (Round 3, external-model verified -- see architecture doc sec.6.13):
+    # suchandra and parikfRvan's forward-augmented Samhita forms and their
+    # automatic Parigraha restoration are now demonstrable via the new
+    # SHAUDDHAKSHARA_AGAMA_SLP1 closed table -- a genuine bug survived from
+    # both external models' proposed patches was caught here (a wrong SLP1
+    # letter for dhUHsadam's Samhita form) and fixed before installing.
+    su_forward = samhita_join("सु", "चन्द्र")
+    pari_forward = samhita_join("परि", "कृण्वन्")
+    su_parigraha = get_sthitopasthita("सुचन्द्र")
+    dhuhsadam_rephi = is_rephi("धूःसदम्")
+    generated = (
+        f"सु+चन्द्र -> {su_forward['surface']!r}; परि+कृण्वन् -> {pari_forward['surface']!r}; "
+        f"Parigraha(सुचन्द्र) -> {su_parigraha!r}; is_rephi(धूःसदम्) = {dhuhsadam_rephi}"
+    )
+    expected = (
+        "सु+चन्द्र -> 'सुश्चन्द्र' (augment fires); परि+कृण्वन् -> 'परिष्कृण्वन्' (augment fires); "
+        "Parigraha(सुचन्द्र) -> no augment leaks in; is_rephi(धूःसदम्) = True"
+    )
+    status = "PASS" if (
+        su_forward["surface"] == "सुश्चन्द्र" and pari_forward["surface"] == "परिष्कृण्वन्"
+        and "श" not in su_parigraha and dhuhsadam_rephi
+    ) else "FAIL"
     report(
-        "Test H -- Śuddhākṣara restoration",
-        "सुचन्द्र, परिकृण्वन्, धूःसदम् (forms Uvaṭa cites as needing their 'pure "
-        "syllable' -- pre-Vedic-alteration -- form restored in the Krama retake)",
-        "the restored (Śuddhākṣara) forms Uvaṭa describes for each",
-        "(no restore_shuddhakshara()/resolve_rephi() function exists yet; "
-        "pratishakhya_classify.is_rephi() is a closed cache, not a derivation, and "
-        "explicitly documents that limitation)",
-        "UNRESOLVED",
-        "10.21/11.37-43 (Śuddhākṣara-āgama and the wider restoration family), 10.22 "
-        "(Rephita, for धूःसदम्'s रेफ)",
-        "not implemented",
-        "is_rephi() in pratishakhya_classify.py checks a small hand-verified cache of "
-        "forms already confirmed rephita from the rule-JSON's own worked examples "
-        "(धूःसदम् happens to be IN that cache), but this module states plainly that it "
-        "cannot DERIVE rephi status for an arbitrary new word from phonological/"
-        "etymological principles alone -- सुचन्द्र and परिकृण्वन् (Śuddhākṣara restoration "
-        "generally, not specifically repha) aren't covered by is_rephi at all and have "
-        "no restoration function. Priority-1 items 10 and 12 in spec sec.23.",
+        "Test H -- Śuddhākṣara restoration, two evidenced words + one cache fix",
+        "सुचन्द्र, परिकृण्वन्, धूःसदम् (forms Uvaṭa cites, on sutra 11.43, as needing their "
+        "'pure syllable' -- pre-Vedic-augment -- form restored in the Krama retake)",
+        expected,
+        generated,
+        status,
+        "11.43 (nudet ca śauddhākṣarasandhyam āgamam -- remove the augment on Parigraha "
+        "retake), 10.22/11.41 (Rephita, for धूःसदम्'s रेफ -- a DIFFERENT phenomenon Uvaṭa's "
+        "bhāṣya happens to cite with the same example, not the same rule)",
+        f"samhita_join('सु','चन्द्र')={su_forward!r}; get_sthitopasthita('सुचन्द्र')={su_parigraha!r}; "
+        f"is_rephi('धूःसदम्')={dhuhsadam_rephi}",
+        "sanskrit_phonology.SHAUDDHAKSHARA_AGAMA_SLP1 (4-entry closed table, sourced "
+        "directly from Uvaṭa's own citations on 11.43) now computes सुचन्द्र/परिकृण्वन्'s "
+        "augmented Saṃhitā forms; restoration is automatic (Parigraha is always built from "
+        "the bare Pada word, verified directly, not just via the citation). धूःसदम् is "
+        "separately now correctly classified by is_rephi() (a real, unrelated encoding bug "
+        "in REPHI_CACHE_SLP1 -- 'dh' where SLP1 needs the single capital letter 'D' -- was "
+        "found and fixed while verifying this). This is NOT a general "
+        "restore_shuddhakshara()/resolve_rephi() derivation: `is_rephi` is still a boolean "
+        "cache, not a function that renders धूःसदम्'s own Parigraha per 10.22's "
+        "retain-before-unvoiced-uṣman-else-revert categories -- that rendering logic, and "
+        "any word not in either closed table, remain UNRESOLVED. See architecture doc "
+        "sec.6.13.",
     )
 
 

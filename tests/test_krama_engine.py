@@ -17,7 +17,7 @@ from sanskrit_phonology import (  # noqa: E402
 )
 from pratishakhya_classify import (  # noqa: E402
     is_pragrhya, is_monosyllable_avasana, parse_compound, requires_parigraha,
-    get_sthita, get_upasthita, get_sthitopasthita, detect_bahumadhyagata,
+    get_sthita, get_upasthita, get_sthitopasthita, detect_bahumadhyagata, is_rephi,
 )
 from krama_engine import generate_ardharca, generate_verse, split_into_ardharcas  # noqa: E402
 
@@ -102,6 +102,65 @@ class SamhitaJoin(unittest.TestCase):
     def test_visarga_before_short_a_elides(self):
         result = samhita_join("रामः", "अत्र")
         self.assertTrue(result["surface"].startswith("रामो"))
+
+
+class NatvaBoundaryAndShuddhaksharaAgama(unittest.TestCase):
+    """Round 3 (11 Sep 2026): two narrow, closed, source-cited additions from
+    Uvata's own bhashya on 11.23 and 11.43, checked against an external
+    review's proposed patches before installing -- both proposals had the
+    same real bug, caught by actually running the code rather than trusting
+    "I tested this" claims: "DUfzadam" uses SLP1 "f" (vocalic r, an
+    independent VOWEL) instead of "r" (the consonant repha) for
+    dhuuHsadam's Samhita form, which slp1_to_deva turns into the wrong word
+    (dhuu-R-SADAM, not dhuurSadam) -- verified directly below."""
+
+    def test_natva_boundary_pra_naH_exact_citation(self):
+        result = samhita_join("प्र", "नः")
+        self.assertEqual(result["surface"], "प्र णः")
+        self.assertEqual(result["rule"], "natva_boundary_11_23")
+
+    def test_natva_does_not_fire_without_the_upasarga_adjacent(self):
+        # 11.23's whole point: apetahetuSu -- once "pra" is no longer
+        # adjacent, plain sandhi applies, no retroflexion.
+        result = samhita_join("नः", "इन्द्रः")
+        self.assertNotIn("ण", result["surface"])
+        self.assertNotEqual(result["rule"], "natva_boundary_11_23")
+
+    def test_parigraha_restoration_is_automatic_no_leaked_retroflexion(self):
+        # get_sthitopasthita builds the Parigraha citation for "naH" as
+        # retaken on its own (not adjacent to "pra") -- the retroflexed
+        # "NaH" form must never leak into it.
+        result = get_sthitopasthita("नः")
+        self.assertNotIn("ण", result)
+
+    def test_shuddhakshara_agama_exact_citations(self):
+        cases = [
+            ("सु", "चन्द्र", "सुश्चन्द्र"),
+            ("परि", "कृण्वन्", "परिष्कृण्वन्"),
+            ("धूः", "सदम्", "धूर्षदम्"),
+            ("वन", "सदम्", "वनर्षदम्"),
+        ]
+        for w1, w2, expected in cases:
+            with self.subTest(w1=w1, w2=w2):
+                result = samhita_join(w1, w2)
+                self.assertEqual(result["surface"], expected)
+                self.assertEqual(result["rule"], "shauddhakshara_agama_11_43")
+
+    def test_shuddhakshara_agama_restoration_is_automatic(self):
+        # Parigraha for "सुचन्द्र" is computed from the bare Pada word
+        # directly (never from the augmented "सुश्चन्द्र" Samhita form), so
+        # the augment must never appear in its Parigraha citation.
+        result = get_sthitopasthita("सुचन्द्र")
+        self.assertNotIn("श", result)
+
+    def test_dhuuHsadam_rephi_cache_encoding_fix(self):
+        # Regression test for a real, separate encoding bug found while
+        # verifying the agama table above: REPHI_CACHE_SLP1 had "dh"
+        # (lowercase d + h, not valid SLP1 for dha) where it needed the
+        # single capital letter "D" -- is_rephi() on the actual Devanagari
+        # word silently always returned False. Two entries were affected.
+        self.assertTrue(is_rephi("धूःसदम्"))
+        self.assertTrue(is_rephi("दुर्ध्यः"))
 
 
 class Predicates(unittest.TestCase):

@@ -1159,6 +1159,77 @@ session is better off putting to an external model as a scoped, code-and-citatio
 
 ---
 
+### 6.13 Round-3 answers (Gemini + ChatGPT) evaluated, two narrow fixes installed after catching
+
+a real bug in BOTH proposals
+
+Both models answered all three V3 tasks. Per this session's standing discipline, every claim was
+checked against the actual code (run, not read) before anything was installed — which caught a
+real, shared bug neither model's own "I tested this" claim caught.
+
+**Task A (11.23 ṇatva-restoration) — both models independently converged on the same scope
+judgment I'd already leaned toward myself:** implement ONLY the evidenced "प्र + नः → प्र णः"
+case as a narrow, closed check (a `NATVA_BOUNDARY_UPASARGAS_SLP1 = {"pra"}` set), not a general
+tag-free ṇatva-at-a-distance engine. Gemini's first answer *did* propose a general Pāṇinian sieve
+(citing 8.4.1/8.4.2/8.4.14/8.4.37), but ChatGPT's review caught a real flaw in it: Gemini's
+`allowed_interveners` set included consonants (h, y, v, r, k-varga, p-varga) that Pāṇini 8.4.2
+does not actually license — 8.4.2 names exactly *aṭ* (vowels) + *ku* + *pu* + *āṅ* + *num*, not
+that broader set — and 8.4.14's "upasargād" licenses the boundary specifically for an upasarga's
+own listed roots, not any r/f/F/z-final word in general. Independently confirmed this by reading
+8.4.2's own gloss rather than taking either model's paraphrase on faith; installed the narrow
+version. **A2 ("मो षु णः") — both models say UNRESOLVED, agreed and left alone**: स्→ष् retroflexion
+(8.3.57/8.3.59) has its own separate conditions this corpus has no independent way to verify are
+met here, and neither model would commit to a general rule for it either.
+
+**Task B (11.43 śuddhākṣara-āgama) — installed a 4-entry closed lexical table
+(`SHAUDDHAKSHARA_AGAMA_SLP1`), but only after fixing a real bug both models' proposed tables
+shared:** both gave `("DUH", "sadam"): "DUfzadam"` for धूःसदम्→धूर्षदम् — but `"DUfzadam"` uses
+SLP1 `f` (vocalic ऋ, an independent VOWEL letter) instead of `r` (the consonant repha). Checked
+by literally running `slp1_to_deva("DUfzadam")`: it gives **"धूऋषदम्"**, not "धूर्षदम्" — a
+different, wrong word. ChatGPT's response claimed "I tested the patch against the extracted
+source code: 5/5 forward A/B cases passed" — that claim does not survive actually running the
+code; whatever check produced it did not verify the Devanāgarī output string correctness for
+this entry. Fixed to `"DUrzadam"` (verified: `slp1_to_deva("DUrzadam")` → "धूर्षदम्", matching
+Uvaṭa's citation exactly) before installing; the other three entries (सु+चन्द्र, परि+कृण्वन्,
+वन+सदम्) were independently verified correct and installed as given. **B1's classification
+question (is there one Pāṇinian rule behind all four examples?) — both models say no unified
+rule exists** (परिष्कृण्वन्: Pāṇini 8.3.137's सुट्-augment + 8.3.59's स्→ष्; सुश्चन्द्र: bahulaṃ
+chandasi, no classical rule; धूर्षदम्/वनर्षदम्: likely the SAME repha-before-uṣman phenomenon
+this project's existing `REPHI_CACHE_SLP1` already covers for धूःसदम् specifically, not a new
+"augment" at all — Uvaṭa's own bhāṣya reuses this exact example under both 11.41 and 11.43 in
+the same continuous passage) — confirming a closed table, not a derived rule, is the honest
+choice here, consistent with this project's existing `IRREGULAR_VISARGA_STEMS`/`REPHI_CACHE_SLP1`
+pattern. **B3 (is restoration automatic?) — confirmed independently by reading the actual code
+path**, not by trusting either model's claim: `_parigraha_unit()` always builds the Parigraha
+citation from the bare `word_deva` (or `resolve_compound`'s result for an avagrhya compound),
+and `get_sthitopasthita`'s internal `samhita_join(word, "इति")` call can never match a
+`(w1, w2)` key in `SHAUDDHAKSHARA_AGAMA_SLP1` (keyed on the word's real neighbour, never "इति")
+— so the augment genuinely cannot leak into a Parigraha citation by construction. Verified with
+`get_sthitopasthita("सुचन्द्र")` directly (no "श" appears). One incidental but real bug found
+along the way while verifying this: `pratishakhya_classify.REPHI_CACHE_SLP1` had two entries
+("dhUHsadam", "durdhyaH") using an invalid SLP1 spelling (lowercase "dh" where the single capital
+letter "D" is needed for ध) — `is_rephi("धूःसदम्")` and `is_rephi("दुर्ध्यः")` had silently
+always returned False. Fixed (encoding only, not a change to which word each entry represents).
+
+**Task C (10.10–11's scope) — both models say don't touch the code, for different reasons.**
+Gemini argues confidently for reading (ii) — the "before the ardharca-final word" wording
+describes where the retaken monosyllable ends up *after* 10.3's own skip has already happened
+(matching the worked example's own structure), not an independent restriction — and calls the
+existing, more general implementation correct as-is. ChatGPT is more cautious: the quotations
+given don't by themselves prove that reading, so leave the code alone as "the safer executable
+interpretation" pending more evidence. Both land on **no code change**, which matches the
+conclusion I'd already reasoned my way to independently before sending the prompt (§6.12) —
+three independent readings converging is real, if not certain, support for interpretation (ii),
+recorded in §10 as "reasonably decided," not "proven."
+
+All fixes verified against the actual test cases (not just the citation), added to
+`tests/test_krama_engine.py` as a new `NatvaBoundaryAndShuddhaksharaAgama` class, and confirmed
+to leave RV 1.1's own regenerated output byte-for-byte unchanged (no RV 1.1 word pair matches
+either new closed table) — this round is pure net-new coverage, not a change to already-checked
+output.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -1384,36 +1455,39 @@ Kept as a short index back to the full review, not restated in full here:
   file for the unrelated, already-explained 10.3-generalization reason in §6.6, even though
   chain reconstruction itself now matches DGE's attested text for 1.1.2 exactly. Two different
   metrics; do not conflate them.)
-- (Added 11 Sep 2026, Part V; **10.8 done, §6.12**) Priority-0 items 10.10–10.11 (आ before
-  ardharca-final Parigraha, distinct from 10.3), 10.21/11.23 restoration as an explicit function
-  (currently 10.21's segmental effects are folded implicitly into `samhita_join`, not a
-  separately named restoration step, and 11.23's principle has no function at all — Test F in
-  `validate_krama_rv1_1.py` reports this UNRESOLVED), and Priority-1 items 10.20/10.22
-  Pragṛhya/Rephī restoration as named functions, and 11.25/11.37–43 remain open — not started.
+- (Added 11 Sep 2026, Part V; **10.8 done §6.12; 11.23's evidenced case done §6.13**) Priority-0
+  item 10.10–10.11 (आ before ardharca-final Parigraha, distinct from 10.3) — **settled, no code
+  change, §6.13** (see the next bullet). 11.23 restoration — **the one evidenced case
+  (प्र+नः→प्र णः) is done** (`NATVA_BOUNDARY_UPASARGAS_SLP1` in `sanskrit_phonology.py`,
+  §6.13); a GENERAL tag-free ṇatva-at-a-distance rule remains open — both Gemini and ChatGPT
+  agreed identifying an upasarga in general needs morphological tagging this engine doesn't have,
+  and a first attempt at a general phonological sieve (Gemini's) licensed intervener consonants
+  Pāṇini 8.4.2 doesn't actually name. Priority-1 items 10.20/10.22 Pragṛhya/Rephī restoration as
+  named functions and 11.25 remain open — not started. **11.37–43 — the one evidenced sub-case
+  (11.43's śuddhākṣara-āgama, 4 closed examples) is done** (`SHAUDDHAKSHARA_AGAMA_SLP1`, §6.13);
+  no general derivation exists (checked directly: the 4 examples share no single Pāṇinian origin).
   ~~10.8 bahumadhyagata auto-detection~~ **Done 11 Sep 2026 (§6.12):
   `pratishakhya_classify.detect_bahumadhyagata()`, backed directly by Uvaṭa's own three worked
   examples on 10.8 (ca/vā/cit); Test G now PASSES.** One sub-case from the same bhāṣya passage
-  ("मो षु णः") did NOT fit this pattern and is still open, folded into the Test F/10.21
-  restoration question below since it looks like the same kind of retroflexion-restoration-on-
-  retake issue.
-- (Added 11 Sep 2026, §6.12) A specific, well-scoped reading of 10.10–10.11's own bhāṣya
-  ("न आकारम् प्रागतः अननुनासिकम्" / "प्रत्यादाय एव तं ब्रूयात् उत्तरेण पुनः सह") raises a real
-  question about the EXISTING sūtra-10.3 आ-exception mechanism (`krama_engine.py`'s
-  `monosyllable_retake_tri_unit`/`monosyllable_confirm_pair`, in production use since §6.6):
-  10.10 conditions the "don't do ordinary Parigraha, instead re-cite together with what follows"
-  behaviour on the monosyllable being "प्रागतः" (immediately before) the ARDHARCA-FINAL word
-  specifically — but the current code fires this mechanism whenever ANY word about to be
-  retaken was preceded by a monosyllable, anywhere in the ardharca (which is how it correctly
-  reproduces RV 1.1.2's इह case, itself NOT ardharca-final-adjacent). Whether 10.10's
-  "प्रागतः अर्धर्चान्त्यात्" is describing a genuinely narrower condition than 10.3 alone
-  establishes, or just redescribing — from the retake sequence's own point of view, after 10.3's
-  skip — the same configuration 10.3's own worked example (मन्द्रम्/आ/वरेण्यम्, where वरेण्यम्
-  does happen to be that example's own last word) already illustrates, could not be settled with
-  confidence from Uvaṭa's bhāṣya prose alone. Do NOT narrow the existing mechanism from this
-  alone — it currently matches every attested case this engine has actually been run against
-  (RV 1.1's 1.1.2 and 1.1.7) — but this needs an authoritative reading before scaling past RV 1.1
-  finds a case where the two readings actually diverge. Sent to Gemini/ChatGPT as part of
-  `tools/pratishakhya/GEMINI_CHATGPT_TASK_PROMPT_V3.md`.
+  ("मो षु णः") did NOT fit this pattern and is **still open, deliberately** — both external
+  models agreed स्→ष् retroflexion's own conditions (8.3.57/59) can't be safely generalized from
+  this one example either.
+- (Added 11 Sep 2026, §6.12; **reasonably decided, §6.13**) A specific, well-scoped reading of
+  10.10–10.11's own bhāṣya ("न आकारम् प्रागतः अननुनासिकम्" / "प्रत्यादाय एव तं ब्रूयात् उत्तरेण
+  पुनः सह") raised a real question about the EXISTING sūtra-10.3 आ-exception mechanism
+  (`krama_engine.py`'s `monosyllable_retake_tri_unit`/`monosyllable_confirm_pair`, in production
+  use since §6.6): does 10.10's "प्रागतः अर्धर्चान्त्यात्" (immediately before the ardharca-final
+  word) narrow 10.3's mechanism to only that position, or just redescribe, from the retake
+  sequence's own point of view after 10.3's skip, the same configuration its worked example
+  (मन्द्रम्/आ/वरेण्यम्) already shows? **Three independent readings now converge on "just
+  redescribes, no narrowing"**: my own reasoning before sending the V3 prompt (§6.12), Gemini's
+  answer (confident: (ii), the ā's position 10.10 describes is a post-10.3-skip artifact, not an
+  independent restriction), and ChatGPT's more cautious "the quotations don't prove it, but don't
+  narrow a mechanism that already matches every attested case on unproven grounds either." **No
+  code change** — this is convergent-but-not-certain, recorded here as "reasonably decided," not
+  "proven": a case where RV 1.1.2's own इह-configuration actually diverges from वरेण्यम्-style
+  ardharca-final-adjacency (should scaling past RV 1.1 ever produce one) would still be the real
+  test of this reading, not a further citation search.
 
 - ~~The `indic_transliteration` SLP1 scheme's "र्ऋ"/"रृ" collision.~~ **Fixed, Part VII/VIII
   (§6.8–6.9): a ZWNJ marker, verified to survive 10 consecutive re-joins (checked after every

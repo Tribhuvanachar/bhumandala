@@ -70,7 +70,16 @@ def is_pragrhya(token_deva, context=None):
 # form; see krama_engine.py's use of this alongside samhita_join's own
 # visarga rules, which don't independently know a given word's
 # historical repha origin).
-REPHI_CACHE_SLP1 = {"svaScanAH", "dhUHsadam", "pUHpatim", "duHnaSam", "durdhyaH", "durlaBaH"}
+#
+# Two entries had a real encoding bug (found 11 Sep 2026 while
+# cross-checking sutra 11.43's own dhUHsadam/durdhyaH-style citations
+# against transliterate_word()): "dh"/"DUH..." with a lowercase d is not
+# valid SLP1 for dha (needs capital "D") -- "dhUHsadam"/"durdhyaH" could
+# never match is_rephi("धूःसदम्")/is_rephi("दुर्ध्यः") and silently always
+# returned False for them. Fixed to "DUHsadam"/"durDyaH" (verified against
+# transliterate_word() directly, not just eyeballed) -- an encoding
+# correction only, not a change to which word this entry represents.
+REPHI_CACHE_SLP1 = {"svaScanAH", "DUHsadam", "pUHpatim", "duHnaSam", "durDyaH", "durlaBaH"}
 
 
 def is_rephi(token_deva, left_context=None, right_context_slp1_first_char=None):
