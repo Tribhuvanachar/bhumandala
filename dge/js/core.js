@@ -1086,7 +1086,15 @@ document.addEventListener('DOMContentLoaded', () => {
       // Rigveda maṇḍala (2MB+) on a mobile connection, gives zero
       // tolerance for an ordinary transient network hiccup. One retry
       // covers exactly that case without needing to know the real cause.
-      return fetch(window.jsonFileName + '?t=' + Date.now())
+      // Through corpus-fetch.js, which is the corpusBase switch: unset, it
+      // is the same static fetch with the same cache-buster this line always
+      // did; set, it is a token-authenticated read from the corpusFile
+      // proxy. The fallback keeps a page that forgot to load the module
+      // working exactly as before rather than failing to open a grantha.
+      const corpusFetch = (typeof window.dgeFetchCorpus === 'function')
+        ? window.dgeFetchCorpus(window.jsonFileName)
+        : fetch(window.jsonFileName + '?t=' + Date.now());
+      return Promise.resolve(corpusFetch)
         .then(res => {
           if (!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName} (HTTP ${res.status})`);
           return res.json();

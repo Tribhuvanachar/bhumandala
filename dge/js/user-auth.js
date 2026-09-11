@@ -489,13 +489,23 @@ window.dgeBridgeRoleToAdminTools = dgeBridgeRoleToAdminTools;
 // A fresh sign-in (Google popup or OTP confirmed) pays respects again (7 Sep 2026, the lead: "every time a user
 // logs in"): forget today's pass and go through the gate, which brings the person straight back here.
 function dgeVandanaAfterSignIn() {
-  try { localStorage.removeItem('dge_vandana_day'); } catch (e) { /* ignore */ }
-  try { sessionStorage.removeItem('dge_vandana_passed'); } catch (e) { /* ignore */ }
-  var guard = document.querySelector('script[src*="vandana-guard.js"]');
-  var gate;
-  try { gate = new URL('../../index.html', guard ? guard.src : new URL('js/x.js', location.href).href); } catch (e) { return; }
-  if (gate.pathname === location.pathname) return;
-  gate.searchParams.set('next', location.pathname + location.search + location.hash);
-  setTimeout(function () { location.href = gate.href; }, 600);
+  // The WHOLE body is guarded, not just the URL parse. This runs AFTER a
+  // sign-in has already succeeded, from inside the caller's try — so anything
+  // that throws here (a page with no guard script, an embedded context with no
+  // location) would be caught by the caller and reported to the person as
+  // "Incorrect or expired code" or "Sign-in failed", for a sign-in that
+  // actually worked. Sending someone back through the gate is a courtesy;
+  // it must never be able to fail the thing it follows.
+  try {
+    try { localStorage.removeItem('dge_vandana_day'); } catch (e) { /* ignore */ }
+    try { sessionStorage.removeItem('dge_vandana_passed'); } catch (e) { /* ignore */ }
+    var guard = document.querySelector('script[src*="vandana-guard.js"]');
+    var gate = new URL('../../index.html', guard ? guard.src : new URL('js/x.js', location.href).href);
+    if (gate.pathname === location.pathname) return;
+    gate.searchParams.set('next', location.pathname + location.search + location.hash);
+    setTimeout(function () { location.href = gate.href; }, 600);
+  } catch (e) {
+    /* no gate to return to — the sign-in still stands */
+  }
 }
 window.dgeVandanaAfterSignIn = dgeVandanaAfterSignIn;

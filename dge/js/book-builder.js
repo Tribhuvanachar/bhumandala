@@ -25,7 +25,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['book-builder.js'] = 'v1.0 (10 Sep 2026: publisher-style book preparation — cover, TOC, watermark, print-to-PDF)';
+  window.DGE_VERSIONS['book-builder.js'] = 'v1.1 (11 Sep 2026: self-contained document + one-tap server PDF via renderBook) · v1.0 (publisher-style book preparation — cover, TOC, watermark, print-to-PDF)';
 
   var IMPRINT = 'Sarvamūla Digital Library';
 
@@ -122,10 +122,21 @@
 
   /* ---- Rendering --------------------------------------------------------- */
 
+  /* A verse's stored text carries the reader's own line breaks as literal
+     <br> tags. Escaping it whole printed "<br>" as words in the middle of
+     every shloka (found 11 Sep 2026, looking at a rendered page). Escape
+     first, THEN turn the breaks back into breaks: the order matters, because
+     converting first would leave a real <br> in a string that then gets
+     escaped anyway. Nothing else in the stored markup survives. */
+  function verseHtml(text) {
+    return esc(String(text == null ? '' : text).replace(/<br\s*\/?>/gi, '\n'))
+      .replace(/\n/g, '<br>');
+  }
+
   function renderVerse(u, spec, names) {
     var out = '<div class="dge-verse">';
     out += '<span class="dge-verse-num">' + esc(u.id) + '</span>';
-    out += '<p class="dge-verse-text">' + esc(u.sa) + '</p>';
+    out += '<p class="dge-verse-text">' + verseHtml(u.sa) + '</p>';
     if (spec.includePadaccheda && window.dgePadaccheda && window.dgePadaccheda.units) {
       var rows = window.dgePadaccheda.units[String(u.id)];
       if (rows && rows.length) {
@@ -139,7 +150,9 @@
       if (typeof text !== 'string' || !text.trim()) return;
       out += '<div class="dge-comm">' +
         '<p class="dge-comm-title">' + esc(names[key] || key) + '</p>' +
-        '<p class="dge-comm-body">' + esc(plainText(text)) + '</p></div>';
+        // plainText() has already turned <br> into newlines and stripped the
+        // reader's spans; the breaks it left are real ones and should print.
+        '<p class="dge-comm-body">' + esc(plainText(text)).replace(/\n/g, '<br>') + '</p></div>';
     });
     return out + '</div>';
   }
@@ -154,7 +167,11 @@
     var o = opts || {};
     var names = o.commentaryNames || {};
     var base = o.baseUrl || '';
-    var icon = base + 'images/genie/favicon-192.png';
+    // Inlined when the caller has them (dgeBuildStandaloneBook fetches both),
+    // linked otherwise. A server-side render needs the inlined form: the
+    // renderer runs with every network request blocked, so a <link> would
+    // silently produce an unstyled book.
+    var icon = o.iconDataUri || (base + 'images/genie/favicon-192.png');
     var css = base + 'css/book-print.css';
     var total = (spec.sections || []).reduce(function (n, s) { return n + (s.units || []).length; }, 0);
     var today = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -199,15 +216,21 @@
     return '<!DOCTYPE html><html lang="sa"><head><meta charset="utf-8">' +
       '<title>' + esc(spec.title || 'Prepared book') + ' · ' + esc(IMPRINT) + '</title>' +
       '<meta name="viewport" content="width=device-width, initial-scale=1">' +
-      '<link rel="stylesheet" href="' + esc(css) + '">' +
+      (o.inlineCss ? '<style>' + String(o.inlineCss).replace(/<\/style/gi, '<\\/style') + '</style>'
+                   : '<link rel="stylesheet" href="' + esc(css) + '">') +
       (spec.pageSize === 'a4' ? '<style>@page { size: A4; }</style>' : '') +
       '</head><body>' +
-      '<div class="dge-noprint" style="position:sticky;top:0;z-index:9;background:#1a1512;color:#fff;' +
-      'padding:10px 14px;font:13px/1.4 system-ui,sans-serif;display:flex;gap:10px;align-items:center;">' +
-      '<span>' + total + ' verses ready. Use your browser’s <b>Save as PDF</b> in the print dialog.</span>' +
-      '<button onclick="window.print()" style="margin-left:auto;padding:6px 14px;border:0;border-radius:6px;' +
-      'background:#e2664a;color:#fff;font:inherit;font-weight:700;cursor:pointer;">Print / Save as PDF</button>' +
-      '</div>' +
+      // The preview toolbar is for a human looking at the book in a tab. A
+      // document being rendered to PDF by a machine has nobody to press it,
+      // and its onclick would be dead markup in a renderer with JavaScript
+      // switched off.
+      (o.forPrint ? '' :
+        '<div class="dge-noprint" style="position:sticky;top:0;z-index:9;background:#1a1512;color:#fff;' +
+        'padding:10px 14px;font:13px/1.4 system-ui,sans-serif;display:flex;gap:10px;align-items:center;">' +
+        '<span>' + total + ' verses ready. Use your browser’s <b>Save as PDF</b> in the print dialog.</span>' +
+        '<button onclick="window.print()" style="margin-left:auto;padding:6px 14px;border:0;border-radius:6px;' +
+        'background:#e2664a;color:#fff;font:inherit;font-weight:700;cursor:pointer;">Print / Save as PDF</button>' +
+        '</div>') +
       '<div class="dge-watermark' + (spec.watermark ? '' : ' dge-watermark-off') + '">' + esc(IMPRINT) + '</div>' +
       cover +
       '<div class="dge-book-body">' + front + body + '</div>' +
@@ -232,6 +255,109 @@
     w.document.write(html);
     w.document.close();
     return w;
+  };
+
+  /* ---- One-tap PDF ------------------------------------------------------
+   *
+   * The print dialog stays the default and the fallback: it is free, it
+   * needs no account, and it is the same engine. This is the route that
+   * hands back a FILE instead of asking someone to find "Save as PDF",
+   * pick the paper size and hope. It needs appConfig.bookPdfUrl pointing at
+   * the renderBook function, which needs the Blaze plan, which is why it is
+   * off unless configured rather than always on.
+   */
+
+  /** Fetch text, or null — a missing asset must not stop a book being built. */
+  function fetchText(url) {
+    return fetch(url).then(function (r) { return r.ok ? r.text() : null; })
+      .catch(function () { return null; });
+  }
+
+  /** Fetch an image as a data: URI, or null. */
+  function fetchDataUri(url) {
+    return fetch(url).then(function (r) { return r.ok ? r.blob() : null; })
+      .then(function (b) {
+        if (!b) return null;
+        return new Promise(function (resolve) {
+          var fr = new FileReader();
+          fr.onload = function () { resolve(fr.result); };
+          fr.onerror = function () { resolve(null); };
+          fr.readAsDataURL(b);
+        });
+      }).catch(function () { return null; });
+  }
+
+  /**
+   * The book as ONE self-contained document — stylesheet and imprint icon
+   * inlined, no external reference left in it.
+   *
+   * This is what makes a server-side render safe to allow: the renderer can
+   * then run with every network request blocked, because a correct book
+   * needs nothing from the network. A document that does need something was
+   * not built here.
+   */
+  window.dgeBuildStandaloneBook = function (spec, opts) {
+    var o = opts || {};
+    var base = o.baseUrl || '';
+    return Promise.all([
+      fetchText(base + 'css/book-print.css'),
+      fetchDataUri(base + 'images/genie/favicon-192.png')
+    ]).then(function (parts) {
+      var merged = {};
+      Object.keys(o).forEach(function (k) { merged[k] = o[k]; });
+      merged.forPrint = true;
+      if (parts[0]) merged.inlineCss = parts[0];
+      if (parts[1]) merged.iconDataUri = parts[1];
+      return window.dgeBuildBookHtml(spec, merged);
+    });
+  };
+
+  /** The renderBook endpoint, or '' when one-tap PDF is not configured. */
+  window.dgeBookPdfUrl = function () {
+    var u = (window.appConfig && window.appConfig.bookPdfUrl) || '';
+    return (typeof u === 'string' && u.trim()) ? u.trim().replace(/\/+$/, '') : '';
+  };
+
+  /**
+   * Ask the server for the finished PDF and save it.
+   *
+   * Resolves to true when a file was delivered, false when the caller should
+   * fall back to the print dialog — every failure path resolves false rather
+   * than throwing, because "the download did not work" must land the person
+   * on the working route, not on an error.
+   */
+  window.dgeDownloadPreparedBook = function (spec, opts) {
+    var url = window.dgeBookPdfUrl();
+    if (!url) return Promise.resolve(false);
+    return window.dgeBuildStandaloneBook(spec, opts).then(function (html) {
+      return Promise.resolve(
+        (window.dgeIdTokenForApi ? window.dgeIdTokenForApi() : null)
+      ).then(function (token) {
+        if (!token) return false;
+        return fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ spec: spec, html: html })
+        }).then(function (r) {
+          if (!r.ok) return false;
+          return r.blob().then(function (blob) {
+            var a = document.createElement('a');
+            var href = URL.createObjectURL(blob);
+            a.href = href;
+            a.download = (String(spec.title || '').replace(/[^A-Za-z0-9 _-]+/g, ' ')
+              .replace(/\s+/g, '-').replace(/^-+|-+$/g, '') || 'sarvamula-book') + '.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(function () { URL.revokeObjectURL(href); }, 10000);
+            return true;
+          });
+        });
+      });
+    }).catch(function (e) {
+      console.warn('[Book] PDF download failed, falling back to print:', e && e.message);
+      return false;
+    });
   };
 
   /** Who may prepare a book — a granted capability, like copy. */

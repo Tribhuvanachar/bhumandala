@@ -1475,6 +1475,10 @@
 <script src="js/config-editor.js?v=4.85.0"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
+<!-- The corpusBase switch. Must load BEFORE core.js, which calls
+     dgeFetchCorpus for the grantha dataset (and falls back to a plain
+     static fetch if this file is somehow absent). -->
+<script src="js/corpus-fetch.js?v=1.0"></script>
 <script src="js/core.js?v=4.85.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the

@@ -90,6 +90,30 @@ const appConfig = {
   // dev proxy, curl to the same URL was fine) -- worth a quick real-browser
   // check next time this file is touched.
   searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@5788183609e027eaa8d652c629a70907bcdd186f",
+  // THE CORPUS SWITCH. Empty (the default, and what is live today) means
+  // the reader fetches dge/data/<path>/data.json as a public static file,
+  // exactly as it always has. Set it to the corpusFile function's base URL
+  //   https://asia-south1-sarvamula-org.cloudfunctions.net/corpusFile
+  // and every grantha read instead goes through the authenticated proxy:
+  // the caller's Firebase ID token is sent, the function resolves their
+  // stored role, applies the same shelf and gates the reader applies, and
+  // streams the file from a PRIVATE bucket. That is the difference between
+  // "the site does not show this text" and "this text cannot be fetched".
+  //
+  // Flipping this one string is the whole migration, and flipping it back
+  // is the whole rollback — but only once the corpus has actually been
+  // uploaded (tools/migrate_corpus_to_gcs.py) and CORPUS_BUCKET is set on
+  // the function. See dge/CORPUS_PROXY.md for the order of operations.
+  corpusBase: "",
+  // ONE-TAP PDF. Empty (the default) means the book builder's only route is
+  // Prepare -> the browser's own print dialog -> Save as PDF: free, no
+  // account needed, and the same rendering engine. Set it to the renderBook
+  // function's URL
+  //   https://asia-south1-sarvamula-org.cloudfunctions.net/renderBook
+  // and a second button appears that returns the finished .pdf file instead.
+  // That needs the Blaze plan (it runs a real headless browser) and the
+  // `book` capability granted to the reader's role — see dge/CORPUS_PROXY.md.
+  bookPdfUrl: "",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
