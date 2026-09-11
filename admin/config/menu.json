@@ -224,6 +224,14 @@
     "enabled": true
    },
    {
+    "id": "adminOcrStudioItem",
+    "icon": "🔍",
+    "label": "OCR Studio",
+    "href": "../admin/ocr-studio.html",
+    "requires": "admin",
+    "enabled": true
+   },
+   {
     "id": "adminUserRolesItem",
     "icon": "👥",
     "label": "Manage Users",
