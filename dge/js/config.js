@@ -89,7 +89,7 @@ const appConfig = {
   // (cdn.jsdelivr.net fetches from the headless browser were dropped by the
   // dev proxy, curl to the same URL was fine) -- worth a quick real-browser
   // check next time this file is touched.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@5788183609e027eaa8d652c629a70907bcdd186f",
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@838335f8152654c37ee1c256c36b6ff6aab3927f",
   // THE CORPUS SWITCH. Empty (the default, and what is live today) means
   // the reader fetches dge/data/<path>/data.json as a public static file,
   // exactly as it always has. Set it to the corpusFile function's base URL
