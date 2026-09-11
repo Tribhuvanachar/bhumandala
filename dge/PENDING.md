@@ -5863,3 +5863,30 @@ gloss-line pattern plus a check that new verse text won't itself contain an
 (sandhi 1's Kannada text already gives an exact verse count to check a
 candidate split against, the same technique this project used for the
 Raghavendra Vijaya canto-boundary problem).
+
+## Vyāsarāja Hanuma Pratima: 323-location dataset cleaned and archived, not wired in yet (11 Sep 2026, 1:11 pm IST)
+
+Merged and cleaned the `com.kannada.anjaneya` app's 4 state-by-state JSON
+files (Karnataka 231, Tamil Nadu 47, Andhra Pradesh 43, Maharashtra 2 = 323
+total) into one dataset at
+`dge/sources/vyasaraja_anjaneya_app/vyasaraja_hanuman_installations.json`
+-- state/district/place/address/Google-Maps-link/plus-code per entry. This
+is a devotee-curated directory of idols traditionally attributed to Sri
+Vyāsarāja Tīrtha's installations (~732 total per the app's own intro,
+732 idols with description of the identifying physical marks -- kore hallu
+tooth, both eyes visible in profile, sougandhika pushpa, abhaya hasta,
+shanka+chakra, tail raised with a bell, a demon underfoot, sun+moon
+motifs). **Scope caveat, important:** this is the broader idol network the
+saint is credited with, not "Vyāsarāja Maṭha, Sosale" specifically -- no
+entry is tagged as the historical Sosale seat by that name (two entries
+mention "Sosale Sri Vyasaraja Matha" as part of a Bengaluru and a Tumakuru
+branch address, not the town of Sosale itself).
+
+**Not wired into `dge/guru-parampara/data/` yet, on purpose.** There is
+currently no deity/pratima schema anywhere in this corpus at all --
+`mathas.json` and `parampara.json` model saints and institutions, not
+individual worshipped images. Building a one-off schema just to fit this
+dataset risks being incompatible with whatever schema Phase 2 eventually
+needs for Uttaradi's own deity table, Sode's daily-worshipped-deities list,
+etc. This should get wired in as part of that cross-institution decision
+(architecture doc §26), not solved piecemeal per dataset.
