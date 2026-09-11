@@ -17,8 +17,8 @@ as additive fields the reader renders. Output overwrites bhashya/data.json.
 """
 import json, os, re, html
 
-BSB = 'dge/data/darshana/vedanta/dvaita/SetuTila/sutra_prasthana/brahmasutra_bhashya/data.json'
-FAM = 'dge/data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra'
+BSB = 'dge/data/DvaitaVedanta/SarvaMula/sutra_prasthana/brahmasutra_bhashya/data.json'
+FAM = 'dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra'
 OUT = FAM + '/bhashya/data.json'
 SUTRA = FAM + '/sutra/data.json'
 DVMAP = FAM + '/_sources/dv_map.json'

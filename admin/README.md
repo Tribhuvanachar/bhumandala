@@ -117,7 +117,7 @@ remain in git history if any is ever wanted back.
   early prototypes of the reading page, superseded by `dge/`.
 - `PrahladaKrutaNarasimhaStotra.html` and `data_pns.json` — a standalone
   copy of the Prahlāda-kṛta Nṛsiṃha Stotra, superseded by the live text at
-  `dge/data/stotra/PrahladaKrutaNarasimha/` (renamed from `pns/` 23 Aug
+  `dge/data/DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha/` (renamed from `pns/` 23 Aug
   2026; the internal `stotraCode`/localStorage namespace stayed `pns`,
   see `core.js`'s `STOTRA_CODE_CONTINUITY`).
 - `version.json` at the root — read by nothing. `dge/convert/version.json`
@@ -178,11 +178,11 @@ recognise:
 | `itihasas` / `puranas` / `stotras` / `koshas` | `itihasa` / `purana` / `stotra` / `kosha` |
 | `smritis` / `dharmashastra` | `smriti_dharma/smriti` / `smriti_dharma/dharmashastra` |
 | `kavya` | `kavya_alankara` |
-| `dvaitavedanta` (23 Aug 2026) | `darshana/vedanta/dvaita/DvaitaVedanta` — admin-only, see `entry.hidden` in `library.json` |
+| `dvaitavedanta` (23 Aug 2026) | `darshana/vedanta/dvaita/DvaitaSahitya` — admin-only, see `entry.hidden` in `library.json` |
 | `darshana/vedanta/dvaita/sarvamula` (23 Aug 2026) | `darshana/vedanta/dvaita/Anandamakaranda` |
-| `stotra/pns` (23 Aug 2026) | `stotra/PrahladaKrutaNarasimha` |
+| `stotra/pns` (23 Aug 2026) | `DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha` |
 | `pancharatra_agama` | `agama/pancharatra` |
-| `dasakuta` / `vyasakuta` | `dasa_sahitya/dasakuta` / `dasa_sahitya/vyasakuta` |
+| `dasakuta` / `vyasakuta` | `DvaitaVedanta/Itara/DasaSahitya/dasakuta` / `DvaitaVedanta/Itara/DasaSahitya/vyasakuta` |
 | `vedas` | unchanged |
 
 Two scripts did it, and both still run: `tools/restructure_taxonomy.py`

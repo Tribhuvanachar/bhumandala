@@ -229,9 +229,9 @@ describe('dgeMatchShelf — the go-live allow-list', () => {
 
   test('an unrelated section is NOT on the shelf', () => {
     const w = loadRoleAccess();
-    ['darshana/vedanta/dvaita/DvaitaVedanta',
-     'darshana/vedanta/dvaita/SetuTila/mula_granthas/atharvana',
-     'vedas/rigveda', 'dasa_sahitya'].forEach(p => {
+    ['darshana/vedanta/dvaita/DvaitaSahitya',
+     'DvaitaVedanta/SarvaMula/mula_granthas/atharvana',
+     'vedas/rigveda', 'DvaitaVedanta/Itara/DasaSahitya'].forEach(p => {
       assert.equal(w.dgeMatchShelf(p, ALLOW), false, p);
     });
   });

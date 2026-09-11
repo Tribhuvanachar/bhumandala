@@ -123,20 +123,20 @@ const DGE_LEGACY_SLUGS = {
   // kavya_alankara copy, which has the better mula, so every one of those
   // paths lands on the real text instead. Exact slugs, not a prefix: there is
   // no tika_* folder on the other side to append.
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_prakashika':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_padarthadipikodbodhika':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_mandopakarini':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_shrichalarisheshacarya':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuni':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrinarayanapanditacarya':
-    'kavya_alankara/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya/tika_prakashika':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya/tika_padarthadipikodbodhika':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya/tika_mandopakarini':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya/tika_shrichalarisheshacarya':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuni':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/sumadhva_vijaya/tika_iti_shrinarayanapanditacarya':
+    'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1',
   'shankara_bhashya':       'darshana/vedanta/advaita/shankara_bhashya',
   'itihasas':               'itihasa',
   'puranas':                'purana',
@@ -146,8 +146,8 @@ const DGE_LEGACY_SLUGS = {
   'koshas':                 'kosha',
   'stotras':                'stotra',
   'pancharatra_agama':      'agama/vaishnava_agama/pancharatra',
-  'dasakuta':               'dasa_sahitya/dasakuta',
-  'vyasakuta':              'dasa_sahitya/vyasakuta',
+  'dasakuta':               'DvaitaVedanta/Itara/DasaSahitya/dasakuta',
+  'vyasakuta':              'DvaitaVedanta/Itara/DasaSahitya/vyasakuta',
   // 25 Aug 2026 Agama restructure. pancharatra/pashupata/shaiva_siddhanta
   // moved intact under new parents, so their sub-paths resolve exactly.
   // pratyabhijna/natha_sampradaya/shakta_agama were split across several
@@ -198,9 +198,9 @@ const DGE_LEGACY_SLUGS = {
   // sarvamula itself was renamed SarvaMula for display-name consistency
   // with the same pass's other renames. stotra/pns became stotra/
   // PrahladaKrutaNarasimha for the same reason.
-  'dvaitavedanta':                       'darshana/vedanta/dvaita/DvaitaVedanta',
+  'dvaitavedanta':                       'darshana/vedanta/dvaita/DvaitaSahitya',
   'darshana/vedanta/dvaita/sarvamula':   'darshana/vedanta/dvaita/Anandamakaranda',
-  'stotra/pns':                          'stotra/PrahladaKrutaNarasimha',
+  'stotra/pns':                          'DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha',
   // 25 Aug 2026 Purana restructure: purana/<X> split into purana/maha_purana/
   // (the 18 traditional Mahapuranas, plus the Bhagavata-Madhva variant and
   // Vayu Purana, already present) and purana/upa_purana/ (was upapuranas).
@@ -900,7 +900,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Global short-URL abbreviations (js/text-abbreviations.js, loaded before
   // this file, is the one place these are configured) — ?SMV=1.1 means the
-  // same as ?path=kavya_alankara/sumadhva_vijaya/sarga_1&jumpShloka=1, just
+  // same as ?path=DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1&jumpShloka=1, just
   // short enough to type or share. Resolved to plain path/jumpShloka values
   // BEFORE those are read below, so everything downstream — including the
   // legacy-slug upgrade and the namespace logic — behaves exactly as if the
@@ -996,7 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const stotrasDirectChild = slug.match(/^stotra\/([^/]+)$/);
 
-  // 23 Aug 2026: stotra/pns was renamed stotra/PrahladaKrutaNarasimha for
+  // 23 Aug 2026: stotra/pns was renamed DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha for
   // display-name consistency (see DGE_LEGACY_SLUGS above), but this text's
   // localStorage/audio-cache namespace has always been the bare folder
   // name (see the comment at dgeGranthaFetchUrl above this block). Without
@@ -1038,7 +1038,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Admin-only content (entry.hidden, see the 23 Aug 2026 restructure --
-    // e.g. darshana/vedanta/dvaita/DvaitaVedanta/*) reached by a direct
+    // e.g. darshana/vedanta/dvaita/DvaitaSahitya/*) reached by a direct
     // ?path= link rather than the nav, which already excludes it. Refuses
     // to fetch/render for anyone not signed in as admin. Not real access
     // control -- the underlying data.json is still a public static file on

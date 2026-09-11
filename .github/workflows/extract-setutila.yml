@@ -18,7 +18,7 @@
 name: Extract SetuTila
 
 # Delta-syncs the setutila.in Sarvamula corpus into
-# dge/data/darshana/vedanta/dvaita/SetuTila/.
+# dge/data/DvaitaVedanta/SarvaMula/.
 #
 # The importer (tools/setutila/import_setutila.py) is sync-by-design:
 #   * every post's modified_gmt is recorded in _sync_state.json, so a run
@@ -85,4 +85,4 @@ jobs:
             for per-post modified_gmt, chunk hashes and any persisted
             upstream-404 errors.
           add-paths: |
-            dge/data/darshana/vedanta/dvaita/SetuTila/**
+            dge/data/DvaitaVedanta/SarvaMula/**

@@ -112,7 +112,7 @@
   {
    "id": "sumadhva_vijaya",
    "title": "Sumadhva Vijaya (mula)",
-   "target": "kavya_alankara/sumadhva_vijaya",
+   "target": "DvaitaVedanta/Itara/Kavya/sumadhva_vijaya",
    "url": "https://www.dvaita.net/pdf/smvijaya/smv.pdf",
    "format": "typeset PDF (pdftotext)",
    "importer": "special (PDF pdftotext)"

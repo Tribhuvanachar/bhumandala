@@ -31,7 +31,7 @@
   var BRANCH_LABEL = { vedas: 'वेदाः', upaveda: 'उपवेदाः', 'vedanga/kalpa': 'वेदाङ्गम् · कल्पः', 'vedanga/vyakarana': 'वेदाङ्गम् · व्याकरणम्',
     'vedanga/shiksha': 'वेदाङ्गम् · शिक्षा', 'vedanga/jyotisha': 'वेदाङ्गम् · ज्योतिषम्', 'vedanga/nirukta': 'वेदाङ्गम् · निरुक्तम्',
     darshana: 'दर्शनानि', itihasa: 'इतिहासाः', purana: 'पुराणानि', agama: 'आगमाः', shastra: 'शास्त्राणि',
-    smriti_dharma: 'स्मृतिधर्मशास्त्राणि', kavya_alankara: 'काव्यालङ्कारौ', dasa_sahitya: 'दाससाहित्यम्', stotra: 'स्तोत्राणि', misc: 'अन्यत्' };
+    smriti_dharma: 'स्मृतिधर्मशास्त्राणि', kavya_alankara: 'काव्यालङ्कारौ', DasaSahitya: 'दाससाहित्यम्', stotra: 'स्तोत्राणि', misc: 'अन्यत्' };
   var S = { features: {}, lib: [], libBySlug: {}, manifest: null, byVrutta: null, running: false, cancel: false };
 
   function $(sel) { return document.querySelector(sel); }

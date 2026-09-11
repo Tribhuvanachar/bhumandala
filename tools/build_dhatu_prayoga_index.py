@@ -71,7 +71,7 @@ FORMINDEX = VY / 'prakriya/formindex'
 KRTINDEX = VY / 'prakriya/krtindex'
 OUT = VY / 'dhatu_prayoga'
 
-SCAN_TOPDIRS = ['darshana', 'dasa_sahitya', 'itihasa', 'kavya_alankara', 'purana',
+SCAN_TOPDIRS = ['darshana', 'DvaitaVedanta/Itara/DasaSahitya', 'itihasa', 'kavya_alankara', 'purana',
                 'smriti_dharma', 'stotra', 'nitishastra', 'upaveda', 'agama', 'vedas',
                 'vedanga/chandas', 'vedanga/nirukta', 'vedanga/jyotisha', 'vedanga/shiksha',
                 'vedanga/kalpa', 'shastra', 'misc']
@@ -101,9 +101,9 @@ TRAIL = re.compile(r'[।॥०-९0-9\s]+$')
 def rank_of(slug):
     if slug.startswith('darshana/vedanta/dvaita/Anandamakaranda'):
         return 0
-    if slug.startswith('darshana/vedanta/dvaita/DvaitaVedanta'):
+    if slug.startswith('darshana/vedanta/dvaita/DvaitaSahitya'):
         return 1
-    if slug.startswith('dasa_sahitya'):
+    if slug.startswith('DvaitaVedanta/Itara/DasaSahitya'):
         return 2
     return 3
 

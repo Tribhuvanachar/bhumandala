@@ -17,7 +17,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DV = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana"
+DV = ROOT / "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/upanishad_prasthana"
 BOOKS = {
     "kena":       {"vision": ["kena_upanishad_bhashya_tippani"],       "dge": DV / "kenopanishad_bhashya",           "title": "तलवकार (केन) उपनिषद्भाष्यम् — 8 व्याख्याः"},
     "isha":       {"vision": ["isha_upanishad_bhashya_tippani"],       "dge": DV / "ishavasyopanishad_bhashya",      "title": "ईशावास्योपनिषद्भाष्यम् — 13 व्याख्याः"},
@@ -28,7 +28,7 @@ BOOKS = {
     "taittiriya": {"vision": ["taittiriya_upanishad_bhashya_tippani"], "dge": DV / "taittiriyopanishad_bhashya",     "title": "तैत्तिरीयोपनिषद्भाष्यम् — 6 टिप्पण्यः"},
     "tantrasara": {"vision": ["tantrasara_sangraha_tippani_a", "tantrasara_sangraha_tippani_b"],
                    "dge": [ROOT / "dge/data/darshana/vedanta/dvaita/Anandamakaranda/achara_and_ancillary_granthas/tantrasara_sangraha",
-                           ROOT / "dge/data/darshana/vedanta/dvaita/SetuTila/achara_granthas/tantrasara"],
+                           ROOT / "dge/data/DvaitaVedanta/SarvaMula/achara_granthas/tantrasara"],
                    "title": "तन्त्रसारसङ्ग्रहः (2017, प्रह्लादाचार्य जोशी) — 4 टिप्पण्यः"},
 }
 LABEL = re.compile(r"^\s*((?:[ऀ-ॿ]{1,7}\.){1,3}(?:[ऀ-ॿ]{1,12})?[ः:]?)\s*[-–—:]+\s*")

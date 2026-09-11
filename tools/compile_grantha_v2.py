@@ -35,8 +35,8 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-SRC = Path("dge/data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya")
-DST = Path("dge/data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra")
+SRC = Path("dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya")
+DST = Path("dge/data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra")
 
 DEVA_DIGIT = str.maketrans("०१२३४५६७८९", "0123456789")
 

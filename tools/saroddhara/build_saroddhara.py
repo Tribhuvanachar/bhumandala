@@ -2,7 +2,7 @@
 """Stage B — build the Bhāgavata Sāroddhāra grantha from merged OCR pages.
 
 Reads <work>/pages_merged.json (tools/saroddhara/ocr_merge.py) and the Vision page text, and writes:
-  dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara/
+  dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara/
       mula/data.json                 366 Bhāgavata verses selected by Viṣṇutīrtha (one item per verse; category = prakaraṇa)
       tika_vishnutirtha/data.json    the svopajña commentary, one item per verse (same ids → layer-stitch)
       tika_tippani/data.json         footnotes, one item per verse that has any (tika_* so layer-stitch joins it)
@@ -19,7 +19,7 @@ from collections import defaultdict, Counter
 
 ROOT = Path(__file__).resolve().parents[2]
 DEV = str.maketrans("०१२३४५६७८९", "0123456789"); KAN = str.maketrans("೦೧೨೩೪೫೬೭೮೯", "0123456789")
-OUT_REL = "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/bhagavata_saroddhara"
+OUT_REL = "dge/data/darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/bhagavata_saroddhara"
 BHP_REL = "dge/data/purana/maha_purana/bhagavata_purana_madhva"
 RE_VERSE_END = re.compile(r"(?:॥|\|\||।।|\|)\s*([०-९]{1,3})\s*(?:॥|\|\||।।|\|)")
 RE_HEADING = re.compile(r"(\S.{1,60}?प्रकरणम्)\s*[॥|]+\s*([०-९]{1,2})\s*[॥|]")

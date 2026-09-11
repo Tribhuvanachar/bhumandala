@@ -288,32 +288,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.gopaladasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.gopaladasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.gopaladasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.gopaladasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.gopaladasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.gopaladasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.gopaladasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.gopaladasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.gopaladasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.gopaladasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.gopaladasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.gopaladasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -366,32 +366,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -404,7 +404,7 @@
    "works": [
     {
      "key": "harikathamrutasara",
-     "path": "dasa_sahitya.dasakuta.jagannathadasa.harikathamrutasara",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.jagannathadasa.harikathamrutasara",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -804,32 +804,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.kanakadasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.kanakadasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.kanakadasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.kanakadasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.kanakadasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.kanakadasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.kanakadasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.kanakadasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.kanakadasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.kanakadasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.kanakadasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.kanakadasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -1243,32 +1243,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.mahipatidasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.mahipatidasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.mahipatidasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.mahipatidasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.mahipatidasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.mahipatidasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.mahipatidasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.mahipatidasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.mahipatidasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.mahipatidasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.mahipatidasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.mahipatidasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -1505,32 +1505,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.prasannavenkatadasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.prasannavenkatadasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.prasannavenkatadasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.prasannavenkatadasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.prasannavenkatadasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.prasannavenkatadasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.prasannavenkatadasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.prasannavenkatadasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.prasannavenkatadasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.prasannavenkatadasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.prasannavenkatadasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.prasannavenkatadasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -1543,32 +1543,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.purandaradasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.purandaradasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.purandaradasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.purandaradasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.purandaradasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.purandaradasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.purandaradasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.purandaradasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.purandaradasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.purandaradasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.purandaradasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.purandaradasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -1594,32 +1594,32 @@
    "works": [
     {
      "key": "bhattasangraha",
-     "path": "dasa_sahitya.vyasakuta.raghavendra_tirtha.bhattasangraha",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.raghavendra_tirtha.bhattasangraha",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "bhavabodha",
-     "path": "dasa_sahitya.vyasakuta.raghavendra_tirtha.bhavabodha",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.raghavendra_tirtha.bhavabodha",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "gurvarthadipika",
-     "path": "dasa_sahitya.vyasakuta.raghavendra_tirtha.gurvarthadipika",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.raghavendra_tirtha.gurvarthadipika",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "nyayamuktavali",
-     "path": "dasa_sahitya.vyasakuta.raghavendra_tirtha.nyayamuktavali",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.raghavendra_tirtha.nyayamuktavali",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "parimala",
-     "path": "dasa_sahitya.vyasakuta.raghavendra_tirtha.parimala",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.raghavendra_tirtha.parimala",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "tantradipika",
-     "path": "dasa_sahitya.vyasakuta.raghavendra_tirtha.tantradipika",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.raghavendra_tirtha.tantradipika",
      "schema": "grantha_prakarana_text"
     },
     {
@@ -2092,7 +2092,7 @@
    "works": [
     {
      "key": "sripadaraja",
-     "path": "dasa_sahitya.vyasakuta.sripadaraja",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.sripadaraja",
      "schema": "grantha_prakarana_text"
     },
     {
@@ -2233,17 +2233,17 @@
    "works": [
     {
      "key": "rukminisha_vijaya",
-     "path": "dasa_sahitya.vyasakuta.vadiraja_tirtha.rukminisha_vijaya",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vadiraja_tirtha.rukminisha_vijaya",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "svapna_vrindavana_akhyana",
-     "path": "dasa_sahitya.vyasakuta.vadiraja_tirtha.svapna_vrindavana_akhyana",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vadiraja_tirtha.svapna_vrindavana_akhyana",
      "schema": "grantha_mula_text"
     },
     {
      "key": "yuktimallika",
-     "path": "dasa_sahitya.vyasakuta.vadiraja_tirtha.yuktimallika",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vadiraja_tirtha.yuktimallika",
      "schema": "grantha_prakarana_text"
     },
     {
@@ -2431,32 +2431,32 @@
    "works": [
     {
      "key": "dandaka",
-     "path": "dasa_sahitya.dasakuta.vijayadasa.dandaka",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.vijayadasa.dandaka",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "mundige",
-     "path": "dasa_sahitya.dasakuta.vijayadasa.mundige",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.vijayadasa.mundige",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "other_compositions",
-     "path": "dasa_sahitya.dasakuta.vijayadasa.other_compositions",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.vijayadasa.other_compositions",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "pada_kirtane",
-     "path": "dasa_sahitya.dasakuta.vijayadasa.pada_kirtane",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.vijayadasa.pada_kirtane",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "suladi",
-     "path": "dasa_sahitya.dasakuta.vijayadasa.suladi",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.vijayadasa.suladi",
      "schema": "dasa_sahitya_composition"
     },
     {
      "key": "ugabhoga",
-     "path": "dasa_sahitya.dasakuta.vijayadasa.ugabhoga",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.dasakuta.vijayadasa.ugabhoga",
      "schema": "dasa_sahitya_composition"
     }
    ]
@@ -2487,7 +2487,7 @@
    "works": [
     {
      "key": "vijayendra_tirtha",
-     "path": "dasa_sahitya.vyasakuta.vijayendra_tirtha",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vijayendra_tirtha",
      "schema": "grantha_prakarana_text"
     }
    ]
@@ -2551,7 +2551,7 @@
    "works": [
     {
      "key": "vishnu_tirtha",
-     "path": "dasa_sahitya.vyasakuta.vishnu_tirtha",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vishnu_tirtha",
      "schema": "grantha_prakarana_text"
     }
    ]
@@ -2647,7 +2647,7 @@
    "works": [
     {
      "key": "vyasatatvajna_tirtha",
-     "path": "dasa_sahitya.vyasakuta.vyasatatvajna_tirtha",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatatvajna_tirtha",
      "schema": "grantha_prakarana_text"
     }
    ]
@@ -2660,32 +2660,32 @@
    "works": [
     {
      "key": "bhedojjivana",
-     "path": "dasa_sahitya.vyasakuta.vyasatirtha.bhedojjivana",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatirtha.bhedojjivana",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "chandrika",
-     "path": "dasa_sahitya.vyasakuta.vyasatirtha.chandrika",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatirtha.chandrika",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "mandaramanjari",
-     "path": "dasa_sahitya.vyasakuta.vyasatirtha.mandaramanjari",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatirtha.mandaramanjari",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "nyayamrita",
-     "path": "dasa_sahitya.vyasakuta.vyasatirtha.nyayamrita",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatirtha.nyayamrita",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "tarkatandava",
-     "path": "dasa_sahitya.vyasakuta.vyasatirtha.tarkatandava",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatirtha.tarkatandava",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "tatparyachandrika",
-     "path": "dasa_sahitya.vyasakuta.vyasatirtha.tatparyachandrika",
+     "path": "DvaitaVedanta/Itara/DasaSahitya.vyasakuta.vyasatirtha.tatparyachandrika",
      "schema": "grantha_prakarana_text"
     },
     {

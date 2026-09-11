@@ -89,7 +89,7 @@ that has nothing to do with query speed:
 
 The section list falls out of the taxonomy already in use — `vedas`,
 `vedanga`, `itihasa`, `purana`, `darshana`, `dvaitavedanta`, `kavya_alankara`,
-`smriti_dharma`, `agama`, `stotra`, `dasa_sahitya` — with Āyurveda, Nyāya and
+`smriti_dharma`, `agama`, `stotra`, `DvaitaVedanta/Itara/DasaSahitya` — with Āyurveda, Nyāya and
 Mīmāṃsā joining as their own top-level nodes or under `darshana` as the
 taxonomy already has them.
 
@@ -102,7 +102,7 @@ taxonomy already has them.
 | dvaitavedanta | 699 | 20,210 | 46.7 MB |
 | darshana | 50 | 16,092 | 13.4 MB |
 | itihasa | 49 | 3,203 | 14.6 MB |
-| dasa_sahitya | 1 | 2,355 | 1.1 MB |
+| DvaitaVedanta/Itara/DasaSahitya | 1 | 2,355 | 1.1 MB |
 | kavya_alankara | 36 | 1,741 | 1.8 MB |
 | purana | 24 | 680 | 3.5 MB |
 | smriti_dharma, agama, stotra | 7 | 175 | 0.5 MB |
@@ -274,7 +274,7 @@ site — the category filter chips, the corpus-scope popup, and the
 advaita/dvaita/viśiṣṭādvaita siddhānta row — now reads from this one function.
 Verified live (Playwright, real running app): `window.dgeSegLabel('vedanga')`
 → `वेदाङ्गानि`, `dvaitavedanta` → `द्वैतवेदान्तः` (previously the literal Latin
-string `"Dvaitavedanta"` in one map and absent from the other), `dasa_sahitya`
+string `"Dvaitavedanta"` in one map and absent from the other), `DvaitaVedanta/Itara/DasaSahitya`
 → `दाससाहित्यम्` (previously misspelled `दासस्ताहित्यम्` in the removed map).
 One canonical policy, one place a new taxonomy category needs a label added
 (`DGE_PATH_LABELS` in `library.js`), full script-preference support
@@ -512,7 +512,7 @@ the registry against real reader traffic.
 | **Citable-work (entity) registry** | `dge/data/dge_entities.json` **(new)** | id → `{aliases, category, canonical_route, reference_scheme, ...}` |
 | Content schemas | `dge/data/schemas.json` | per-schema field contract (referenced by `dge-search.js`'s `classifyContentType`) |
 
-**Access control**: search results from `darshana/vedanta/dvaita/DvaitaVedanta/`
+**Access control**: search results from `darshana/vedanta/dvaita/DvaitaSahitya/`
 (admin-only content) are filtered client-side in `global-search.js`'s
 `dgeSearchIsAdminOnlyHit()` — explicitly documented in that file as *not*
 real access control (it hides the hit from the UI; the underlying static
@@ -847,7 +847,7 @@ overflow:hidden cut the list at the panel's pre-search height).
 
 - **Engine** (dge-search.js): all three search paths accept
   `opts.includeGranthaPrefixes` — an OR'd list of slug-path prefixes at ANY
-  depth (`kavya_alankara`, `kavya_alankara/sumadhva_vijaya`, a single
+  depth (`kavya_alankara`, `DvaitaVedanta/Itara/Kavya/sumadhva_vijaya`, a single
   sarga's own slug). Matching is segment-bounded (`slugInPrefixes`).
   Candidates outside the scope are dropped BEFORE the shard budget (same
   reasoning as excludeGranthaPrefixes), and `_sectionsForPrefixes()`

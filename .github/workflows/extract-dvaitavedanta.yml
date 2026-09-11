@@ -17,7 +17,7 @@
 # ============================================================================
 name: Extract DvaitaVedanta
 
-# Pulls the dvaitavedanta.in corpus into dge/data/darshana/vedanta/dvaita/DvaitaVedanta/.
+# Pulls the dvaitavedanta.in corpus into dge/data/darshana/vedanta/dvaita/DvaitaSahitya/.
 #
 # Fetching must happen here, not in the Cowork sandbox — that sandbox has no
 # network egress to the source host (see dge/PENDING.md), which is why every DGE
@@ -222,10 +222,10 @@ jobs:
           # names included, and putting them straight back on the collect side
           # however carefully collect removed them first. A shard must contain
           # only what this job crawled.
-          rm -rf dge/data/darshana/vedanta/dvaita/DvaitaVedanta
+          rm -rf dge/data/darshana/vedanta/dvaita/DvaitaSahitya
           ARGS=(
             --config tools/dvaitavedanta/dv_sources.json
-            --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta
+            --out dge/data/darshana/vedanta/dvaita/DvaitaSahitya
             --cache .dv_cache
             --sections "$SECTION"
             --delay "$DELAY"
@@ -253,8 +253,8 @@ jobs:
           # A section with every grantha disabled writes nothing and exits 0.
           # That is a legitimate no-op, not a failure — do not treat the
           # missing directory as one (run 32036326082 failed exactly here).
-          [ -d dge/data/darshana/vedanta/dvaita/DvaitaVedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
-          python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta --strict
+          [ -d dge/data/darshana/vedanta/dvaita/DvaitaSahitya ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
+          python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaSahitya --strict
 
       # Runs even if the round is cancelled at the timeout, so a killed job
       # still hands its crawled pages to the next round instead of losing
@@ -270,9 +270,9 @@ jobs:
       - name: Stage shard output
         if: ${{ !fromJSON(inputs.dry_run) }}
         run: |
-          [ -d dge/data/darshana/vedanta/dvaita/DvaitaVedanta ] || { echo "nothing to stage"; exit 0; }
+          [ -d dge/data/darshana/vedanta/dvaita/DvaitaSahitya ] || { echo "nothing to stage"; exit 0; }
           mkdir -p shard
-          cp -r dge/data/darshana/vedanta/dvaita/DvaitaVedanta shard/dvaitavedanta
+          cp -r dge/data/darshana/vedanta/dvaita/DvaitaSahitya shard/dvaitavedanta
           mv shard/dvaitavedanta/_extract_status.json \
              "shard/status-${{ matrix.section }}.json" || true
 
@@ -336,7 +336,7 @@ jobs:
       - name: Merge shards into dge/data
         run: |
           set -euo pipefail
-          mkdir -p dge/data/darshana/vedanta/dvaita/DvaitaVedanta
+          mkdir -p dge/data/darshana/vedanta/dvaita/DvaitaSahitya
           # Replace each arriving section outright instead of copying over it.
           # A plain copy only ever ADDS: when a commentary is refiled under a
           # better folder name, the old folder survives in main and the work is
@@ -351,7 +351,7 @@ jobs:
             for grantha in "$dir"/*/*/; do
               [ -d "$grantha" ] || continue
               rel=${grantha#"$dir"/}
-              stale="dge/data/darshana/vedanta/dvaita/DvaitaVedanta/${rel%/}"
+              stale="dge/data/darshana/vedanta/dvaita/DvaitaSahitya/${rel%/}"
               # A grantha whose crawl failed ships only _meta.json — no
               # data.json anywhere. Replacing with that stub would erase
               # good data (run 33543273107 deleted both itihasa texts
@@ -366,11 +366,11 @@ jobs:
                 rm -rf "$stale"
               fi
             done
-            cp -r "$dir/." dge/data/darshana/vedanta/dvaita/DvaitaVedanta/
+            cp -r "$dir/." dge/data/darshana/vedanta/dvaita/DvaitaSahitya/
           done
           python tools/dvaitavedanta/merge_status.py \
             --inputs "shards/dv-*/status-*.json" \
-            --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json
+            --out dge/data/darshana/vedanta/dvaita/DvaitaSahitya/_extract_status.json
 
       - name: Fold auto-slugged heading layers
         run: |
@@ -379,7 +379,7 @@ jobs:
           # otherwise mints a tika_<slug> folder per unmapped heading
           # (1,255 of them in run 33543273107).
           python tools/dvaitavedanta/fold_tiny_layers.py \
-            --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta
+            --data dge/data/darshana/vedanta/dvaita/DvaitaSahitya
 
       - name: Name the sections that did NOT arrive
         run: |
@@ -404,13 +404,13 @@ jobs:
           python tools/gen_library_status.py
 
       - name: Verify merged tree
-        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta --strict
+        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaSahitya --strict
 
       - name: Report
         run: |
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json, pathlib
-          p = pathlib.Path("dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json")
+          p = pathlib.Path("dge/data/darshana/vedanta/dvaita/DvaitaSahitya/_extract_status.json")
           s = json.loads(p.read_text(encoding="utf-8"))
           t = s.get("totals", {})
           print("## Merged result\n")
@@ -425,7 +425,7 @@ jobs:
           for name, c in (s.get("sections") or {}).items():
               print(f"| {name} | {c.get('complete',0)}/{c.get('granthas',0)} | {c.get('items',0):,} | {c.get('failed',0)} |")
           PY
-          du -sh dge/data/darshana/vedanta/dvaita/DvaitaVedanta || true
+          du -sh dge/data/darshana/vedanta/dvaita/DvaitaSahitya || true
 
       # Note: dge/build_search_index.py is deliberately NOT run here. The index
       # is a regenerable build product and dge/search_index is already 162 MB;
@@ -449,16 +449,16 @@ jobs:
             convention in `dge/PROJECT_STATUS.md`. Every record retains its
             `source_url`.
 
-            - Landed under `dge/data/darshana/vedanta/dvaita/DvaitaVedanta/` (staging tree) — no existing
+            - Landed under `dge/data/darshana/vedanta/dvaita/DvaitaSahitya/` (staging tree) — no existing
               grantha was modified.
-            - Progress tracker: `dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json`
+            - Progress tracker: `dge/data/darshana/vedanta/dvaita/DvaitaSahitya/_extract_status.json`
             - Dashboard: `dge/dvaitavedanta-status.html`
             - Search index intentionally not rebuilt; run `reindex.yml` after review.
 
             See the run summary for per-grantha counts and any unmapped
             commentary layers.
           add-paths: |
-            dge/data/darshana/vedanta/dvaita/DvaitaVedanta
+            dge/data/darshana/vedanta/dvaita/DvaitaSahitya
             dge/data/taxonomy.json
             dge/data/library.json
             admin/config/library-status.json

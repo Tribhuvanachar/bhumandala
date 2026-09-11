@@ -63,7 +63,7 @@ describe('matchShelf', () => {
   });
 
   test('an unrelated branch is off the shelf', () => {
-    assert.equal(ca.matchShelf('darshana/vedanta/dvaita/SetuTila',
+    assert.equal(ca.matchShelf('DvaitaVedanta/SarvaMula',
       ['SarvaMula/kavya/sumadhva_vijaya']), false);
   });
 
@@ -87,7 +87,7 @@ describe('matchShelf', () => {
 describe('matchGate', () => {
   const gates = [
     { prefix: 'darshana', allowRoles: ['subscriber'] },
-    { prefix: 'darshana/vedanta/dvaita/SetuTila', allowRoles: ['sponsor'] }
+    { prefix: 'DvaitaVedanta/SarvaMula', allowRoles: ['sponsor'] }
   ];
 
   test('a path with no gate above it matches nothing', () => {
@@ -99,8 +99,8 @@ describe('matchGate', () => {
   });
 
   test('the deepest matching gate wins', () => {
-    assert.equal(ca.matchGate('darshana/vedanta/dvaita/SetuTila/ch_01', gates).prefix,
-      'darshana/vedanta/dvaita/SetuTila');
+    assert.equal(ca.matchGate('DvaitaVedanta/SarvaMula/ch_01', gates).prefix,
+      'DvaitaVedanta/SarvaMula');
   });
 
   test('a sibling sharing a prefix does not inherit the deeper gate', () => {
@@ -131,7 +131,7 @@ describe('decide — the whole rule', () => {
   });
 
   test('a signed-out visitor may not read an off-shelf text', () => {
-    const d = ca.decide('darshana/vedanta/dvaita/SetuTila', null, SHELF);
+    const d = ca.decide('DvaitaVedanta/SarvaMula', null, SHELF);
     assert.equal(d.allowed, false);
     assert.equal(d.reason, 'off-shelf');
   });
@@ -139,25 +139,25 @@ describe('decide — the whole rule', () => {
   test('an ordinary signed-in role is held to the shelf exactly like a visitor', () => {
     // The shelf is a launch gate, not a paywall: signing up does not open it.
     for (const role of ['basic', 'subscriber', 'sponsor', 'special']) {
-      assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', role, SHELF).allowed, false,
+      assert.equal(ca.decide('DvaitaVedanta/SarvaMula', role, SHELF).allowed, false,
         role + ' must not clear the shelf');
     }
   });
 
   test('a role named in openToRoles clears the shelf', () => {
     const cfg = { shelf: { enabled: true, allow: ['SarvaMula/kavya/sumadhva_vijaya'], openToRoles: ['reviewer'] } };
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', 'reviewer', cfg).allowed, true);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', 'basic', cfg).allowed, false);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', 'reviewer', cfg).allowed, true);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', 'basic', cfg).allowed, false);
   });
 
   test('shelf.enabled false opens the library again without emptying the list', () => {
     const cfg = { shelf: { enabled: false, allow: ['SarvaMula/kavya/sumadhva_vijaya'], openToRoles: [] } };
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', null, cfg).allowed, true);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', null, cfg).allowed, true);
   });
 
   test('admin and superadmin see everything', () => {
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', 'admin', SHELF).allowed, true);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', 'superadmin', SHELF).allowed, true);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', 'admin', SHELF).allowed, true);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', 'superadmin', SHELF).allowed, true);
   });
 
   test('the admin bypass is on the STORED role only — a made-up role is just a stranger', () => {
@@ -165,16 +165,16 @@ describe('decide — the whole rule', () => {
     // reaches this argument. These assertions pin the behaviour if that ever
     // slips: a near-miss spelling must not be treated as admin.
     for (const claim of ['Admin', 'ADMIN', ' admin', 'admin ', 'superadmin\n', 'admin;superadmin']) {
-      assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', claim, SHELF).allowed, false,
+      assert.equal(ca.decide('DvaitaVedanta/SarvaMula', claim, SHELF).allowed, false,
         JSON.stringify(claim) + ' must not pass as admin');
     }
   });
 
   test('a gate refuses a role it does not list, on-shelf or not', () => {
-    const cfg = { gates: [{ prefix: 'darshana/vedanta/dvaita/SetuTila', allowRoles: ['sponsor'] }] };
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila/ch_01', 'basic', cfg).allowed, false);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila/ch_01', 'sponsor', cfg).allowed, true);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila/ch_01', null, cfg).allowed, false);
+    const cfg = { gates: [{ prefix: 'DvaitaVedanta/SarvaMula', allowRoles: ['sponsor'] }] };
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula/ch_01', 'basic', cfg).allowed, false);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula/ch_01', 'sponsor', cfg).allowed, true);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula/ch_01', null, cfg).allowed, false);
   });
 
   test('a gate with an empty allowRoles closes the path to everyone but admins', () => {
@@ -196,39 +196,42 @@ describe('decide — the whole rule', () => {
   test('the reason is diagnostic only — never a thing to return to the caller', () => {
     // Pinned as a reminder, not a mechanism: "gate:darshana/.../SetuTila"
     // tells a prober exactly what exists. corpusFile logs it and answers 404.
-    const d = ca.decide('darshana/vedanta/dvaita/SetuTila', null, SHELF);
+    const d = ca.decide('DvaitaVedanta/SarvaMula', null, SHELF);
     assert.equal(typeof d.reason, 'string');
     assert.ok(d.reason.length);
   });
 
-  test('the live committed shelf: Sumadhva Vijaya is public, SetuTila and DvaitaVedanta are not', () => {
+  test('the live committed shelf: the four kavyas are public, nothing else is', () => {
     const cfg = { shelf: OVERRIDES.shelf };
-    assert.equal(ca.decide('SarvaMula/kavya/sumadhva_vijaya/sarga_01', null, cfg).allowed, true);
-    assert.equal(ca.decide('SarvaMula/kavya/raghavendra_vijaya', null, cfg).allowed, true);
-    assert.equal(ca.decide('SarvaMula/kavya/tirtha_prabandha', null, cfg).allowed, true);
-    assert.equal(ca.decide('SarvaMula/kavya/mani_manjari', null, cfg).allowed, true);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', null, cfg).allowed, false);
-    assert.equal(ca.decide('darshana/vedanta/dvaita/DvaitaVedanta/others/yuktimallika', null, cfg).allowed, false);
-    assert.equal(ca.decide('SarvaMula/stotra/prahlada_kruta_narasimha', null, cfg).allowed, false,
-      'the wider SarvaMula shelf is deliberately closed — only the four listed works are live');
+    const K = 'DvaitaVedanta/Itara/Kavya/';
+    assert.equal(ca.decide(K + 'sumadhva_vijaya/sarga_01', null, cfg).allowed, true);
+    assert.equal(ca.decide(K + 'raghavendra_vijaya', null, cfg).allowed, true);
+    assert.equal(ca.decide(K + 'tirtha_prabandha', null, cfg).allowed, true);
+    assert.equal(ca.decide(K + 'mani_manjari', null, cfg).allowed, true);
+    // SarvaMula is SetuTila's material now, and it is NOT on the shelf.
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', null, cfg).allowed, false);
+    assert.equal(ca.decide('DvaitaVedanta/Itara/DasaSahitya', null, cfg).allowed, false);
+    assert.equal(ca.decide('darshana/vedanta/dvaita/DvaitaSahitya/others/yuktimallika', null, cfg).allowed, false);
+    assert.equal(ca.decide('DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha', null, cfg).allowed, false,
+      'only the four listed kavyas are live — Itara is not opened wholesale');
   });
 });
 
 describe('objectNameFor — hostile input is the whole job', () => {
   test('a well-formed corpus path passes through unchanged', () => {
-    assert.equal(ca.objectNameFor('kavya_alankara/sumadhva_vijaya/sarga_01/data.json'),
-      'kavya_alankara/sumadhva_vijaya/sarga_01/data.json');
+    assert.equal(ca.objectNameFor('DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_01/data.json'),
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_01/data.json');
   });
 
   test('a leading slash is stripped, not refused', () => {
-    assert.equal(ca.objectNameFor('/kavya_alankara/sumadhva_vijaya/data.json'),
-      'kavya_alankara/sumadhva_vijaya/data.json');
+    assert.equal(ca.objectNameFor('/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json'),
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json');
     assert.equal(ca.objectNameFor('///kavya_alankara/data.json'), 'kavya_alankara/data.json');
   });
 
   test('percent-encoding is decoded once, then judged on the decoded form', () => {
-    assert.equal(ca.objectNameFor('kavya_alankara%2Fsumadhva_vijaya/data.json'),
-      'kavya_alankara/sumadhva_vijaya/data.json');
+    assert.equal(ca.objectNameFor('upanishad%2Fisha/data.json'),
+      'upanishad/isha/data.json');
     assert.equal(ca.objectNameFor('%2e%2e/%2e%2e/etc/data.json'), null,
       'encoded traversal must be refused after decoding');
   });
@@ -253,11 +256,11 @@ describe('objectNameFor — hostile input is the whole job', () => {
 
   test('only a data.json may be asked for', () => {
     for (const bad of [
-      'kavya_alankara/sumadhva_vijaya/notes.txt',
-      'kavya_alankara/sumadhva_vijaya/data.json.bak',
-      'kavya_alankara/sumadhva_vijaya/',
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/notes.txt',
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json.bak',
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/',
       'data.json.txt',
-      'kavya_alankara/sumadhva_vijaya/DATA.JSON'
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/DATA.JSON'
     ]) {
       assert.equal(ca.objectNameFor(bad), null, JSON.stringify(bad) + ' must be refused');
     }
@@ -300,11 +303,22 @@ describe('displayPathFor — the object name is on disk, the gate is written in 
     assert.equal(ca.displayPathFor('upanishad/isha/data.json', MOVES), 'upanishad/isha');
   });
 
-  test('a moved work resolves to where the shelf expects it', () => {
-    assert.equal(ca.displayPathFor('kavya_alankara/sumadhva_vijaya/data.json', MOVES),
-      'SarvaMula/kavya/sumadhva_vijaya');
-    assert.equal(ca.displayPathFor('kavya_alankara/sumadhva_vijaya/sarga_01/data.json', MOVES),
-      'SarvaMula/kavya/sumadhva_vijaya/sarga_01');
+  test('after the V1 restructure most paths are their own display path', () => {
+    // The `moves` overlay used to promote works to the top of the library.
+    // V1 made the disk tree BE the library tree, so only genuine
+    // cross-placements remain and everything else maps to itself. That is the
+    // point of the restructure, and this is what it looks like from here.
+    assert.equal(ca.displayPathFor('DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json', MOVES),
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya');
+    assert.equal(ca.displayPathFor('DvaitaVedanta/SarvaMula/mula_granthas/data.json', MOVES),
+      'DvaitaVedanta/SarvaMula/mula_granthas');
+  });
+
+  test('the cross-placements that DID survive still resolve', () => {
+    // Two Vadiraja works live under Dasa Sahitya but belong in the Dvaita tree.
+    const src = Object.keys(MOVES)[0];
+    if (!src) return;                       // none configured is a valid state
+    assert.equal(ca.displayPathFor(src + '/data.json', MOVES), MOVES[src]);
   });
 
   test('the longest matching source wins, so a move inside a moved tree still lands right', () => {
@@ -314,7 +328,7 @@ describe('displayPathFor — the object name is on disk, the gate is written in 
   });
 
   test('a sibling sharing a prefix is not moved with it', () => {
-    const moves = { 'kavya_alankara/sumadhva_vijaya': 'SarvaMula/kavya/sumadhva_vijaya' };
+    const moves = { 'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya': 'SarvaMula/kavya/sumadhva_vijaya' };
     assert.equal(ca.displayPathFor('kavya_alankara/sumadhva_vijaya_tika/data.json', moves),
       'kavya_alankara/sumadhva_vijaya_tika');
   });
@@ -324,15 +338,16 @@ describe('displayPathFor — the object name is on disk, the gate is written in 
     assert.equal(ca.displayPathFor('a/b/data.json', {}), 'a/b');
   });
 
-  test('end to end: the on-disk path of a gated work is judged by its display path', () => {
+  test('end to end: a public grantha is allowed and a private one is not', () => {
     const cfg = { shelf: OVERRIDES.shelf };
-    const obj = ca.objectNameFor('kavya_alankara/sumadhva_vijaya/sarga_01/data.json');
+    const obj = ca.objectNameFor('DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_01/data.json');
     assert.ok(obj);
-    const disp = ca.displayPathFor(obj, MOVES);
-    assert.equal(ca.decide(disp, null, cfg).allowed, true,
-      'judging the on-disk path directly would have refused a public grantha');
-    // and the same check against the unmoved on-disk form would be wrong:
-    assert.equal(ca.decide(obj.replace(/\/data\.json$/, ''), null, cfg).allowed, false);
+    assert.equal(ca.decide(ca.displayPathFor(obj, MOVES), null, cfg).allowed, true);
+    // The same walk for something off the shelf must refuse. Before V1 this
+    // test had to prove the display path differed from the on-disk one; now
+    // they are the same string and the gate is simpler for it.
+    const priv = ca.objectNameFor('DvaitaVedanta/SarvaMula/mula_granthas/data.json');
+    assert.equal(ca.decide(ca.displayPathFor(priv, MOVES), null, cfg).allowed, false);
   });
 });
 
@@ -371,7 +386,7 @@ describe('parity with dge/js/role-access.js', () => {
     ['SarvaMula', ['SarvaMula/kavya/sumadhva_vijaya']],
     ['SarvaMulaOther', ['SarvaMula/kavya/sumadhva_vijaya']],
     ['SarvaMula/kavya/sumadhva_vijayam', ['SarvaMula/kavya/sumadhva_vijaya']],
-    ['darshana/vedanta/dvaita/SetuTila', ['SarvaMula/kavya/sumadhva_vijaya']],
+    ['DvaitaVedanta/SarvaMula', ['SarvaMula/kavya/sumadhva_vijaya']],
     ['anything', []],
     ['', ['SarvaMula']]
   ];
@@ -388,9 +403,9 @@ describe('parity with dge/js/role-access.js', () => {
     const w = loadClientShelfMatcher();
     const gates = [
       { prefix: 'darshana', allowRoles: ['subscriber'] },
-      { prefix: 'darshana/vedanta/dvaita/SetuTila', allowRoles: ['sponsor'] }
+      { prefix: 'DvaitaVedanta/SarvaMula', allowRoles: ['sponsor'] }
     ];
-    for (const p of ['darshana/nyaya', 'darshana/vedanta/dvaita/SetuTila/ch_01',
+    for (const p of ['darshana/nyaya', 'DvaitaVedanta/SarvaMula/ch_01',
                      'darshana/vedanta/dvaita/SetuTilaka', 'SarvaMula/kavya', '']) {
       const mine = ca.matchGate(p, gates);
       const theirs = w.dgeMatchRoleGate(p, gates);
@@ -401,10 +416,10 @@ describe('parity with dge/js/role-access.js', () => {
 
   test('a gated refusal matches dgeIsRoleGatedPath for every role', () => {
     const w = loadClientShelfMatcher();
-    const gates = [{ prefix: 'darshana/vedanta/dvaita/SetuTila', allowRoles: ['sponsor'] }];
+    const gates = [{ prefix: 'DvaitaVedanta/SarvaMula', allowRoles: ['sponsor'] }];
     for (const role of ['basic', 'subscriber', 'sponsor', 'special', null]) {
-      const server = ca.decide('darshana/vedanta/dvaita/SetuTila/ch_01', role, { gates });
-      const client = w.dgeIsRoleGatedPath('darshana/vedanta/dvaita/SetuTila/ch_01', role, gates);
+      const server = ca.decide('DvaitaVedanta/SarvaMula/ch_01', role, { gates });
+      const client = w.dgeIsRoleGatedPath('DvaitaVedanta/SarvaMula/ch_01', role, gates);
       assert.equal(server.allowed, !client, 'gate disagreement for role ' + role);
     }
   });
@@ -442,8 +457,10 @@ describe('configFrom — two sources, one rule', () => {
   test('the real committed overrides flow straight through', () => {
     const cfg = ca.configFrom(OVERRIDES, null);
     assert.equal(cfg.shelf.enabled, true);
-    assert.ok(cfg.shelf.allow.includes('SarvaMula/kavya/sumadhva_vijaya'));
-    assert.equal(cfg.moves['kavya_alankara/sumadhva_vijaya'], 'SarvaMula/kavya/sumadhva_vijaya');
-    assert.equal(ca.decide('darshana/vedanta/dvaita/SetuTila', null, cfg).allowed, false);
+    assert.ok(cfg.shelf.allow.includes('DvaitaVedanta/Itara/Kavya/sumadhva_vijaya'));
+    // `moves` is nearly empty after the V1 restructure -- the shelf now names
+    // paths that really exist, so there is no overlay left to flow through.
+    assert.equal(ca.decide('DvaitaVedanta/Itara/Kavya/sumadhva_vijaya', null, cfg).allowed, true);
+    assert.equal(ca.decide('DvaitaVedanta/SarvaMula', null, cfg).allowed, false);
   });
 });

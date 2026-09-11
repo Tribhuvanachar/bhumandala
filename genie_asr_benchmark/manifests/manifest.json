@@ -20,7 +20,7 @@
     "language": "en-IN",
     "transcript_text": "Open Sumadhwa Vijaya 1.1",
     "audio_file": "audio/01_english/sumadhwa_test.wav",
-    "notes": "REAL recording, provided by the project lead 28 Aug 2026 -- lives on the genie-asr-audio-seed branch (kept off main, personal recording; see genie_asr_benchmark/audio/README.md there), not in this checkout. Re-verified live via scripts/providers/sarvam_rest.js on 28 Aug 2026: Sarvam Saaras v3 REST (en-IN) transcribed it as exactly this text in 1900ms, matching the earlier result recorded in CLAUDE.md section 2. Feeding that real transcript through resolver.js resolves correctly end-to-end (open_text, kavya_alankara/sumadhva_vijaya/sarga_1, reference 1.1, confidence 0.58).",
+    "notes": "REAL recording, provided by the project lead 28 Aug 2026 -- lives on the genie-asr-audio-seed branch (kept off main, personal recording; see genie_asr_benchmark/audio/README.md there), not in this checkout. Re-verified live via scripts/providers/sarvam_rest.js on 28 Aug 2026: Sarvam Saaras v3 REST (en-IN) transcribed it as exactly this text in 1900ms, matching the earlier result recorded in CLAUDE.md section 2. Feeding that real transcript through resolver.js resolves correctly end-to-end (open_text, DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1, reference 1.1, confidence 0.58).",
     "expected": {
       "intent": "open_text",
       "target_pattern": "sumadhva_vijaya/sarga_1$",
@@ -37,7 +37,7 @@
     "transcript_text": "Sumadha Open Sumadha Vijaya 1.1",
     "asr_noise_variant": "Sumadha Open Sumadha Vijaya 1.1",
     "audio_file": "audio/01_english/sumadhwa_16k.m4a",
-    "notes": "REAL recording (noisier -- 16kHz/64kbps re-recording of the same phrase as 01_english_002), provided by the project lead 28 Aug 2026 -- same genie-asr-audio-seed branch as above, kept off main. Re-verified live 28 Aug 2026: Sarvam Saaras v3 REST (en-IN) transcribed it as exactly this text in 1681ms, matching CLAUDE.md section 2's prior result. Real transcript fed through resolver.js resolves correctly end-to-end despite the noise (open_text, kavya_alankara/sumadhva_vijaya/sarga_1, reference 1.1, confidence 0.58) -- proves the ASR-confusion normalization + resolver design actually works on real, not simulated, noisy audio.",
+    "notes": "REAL recording (noisier -- 16kHz/64kbps re-recording of the same phrase as 01_english_002), provided by the project lead 28 Aug 2026 -- same genie-asr-audio-seed branch as above, kept off main. Re-verified live 28 Aug 2026: Sarvam Saaras v3 REST (en-IN) transcribed it as exactly this text in 1681ms, matching CLAUDE.md section 2's prior result. Real transcript fed through resolver.js resolves correctly end-to-end despite the noise (open_text, DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_1, reference 1.1, confidence 0.58) -- proves the ASR-confusion normalization + resolver design actually works on real, not simulated, noisy audio.",
     "expected": {
       "intent": "open_text",
       "target_pattern": "sumadhva_vijaya/sarga_1$",
@@ -64,7 +64,7 @@
     "category": "01_english",
     "language": "en-IN",
     "transcript_text": "Open Purandara Dasa's collections",
-    "notes": "Resolves to the real grantha dasa_sahitya/composers/purandara_dasaru (a composer index page), not the parampara person node -- reasonable for an 'open' intent since the person node itself isn't a readable text; the grantha match wins because open_text prefers grantha over person matches.",
+    "notes": "Resolves to the real grantha DvaitaVedanta/Itara/DasaSahitya/composers/purandara_dasaru (a composer index page), not the parampara person node -- reasonable for an 'open' intent since the person node itself isn't a readable text; the grantha match wins because open_text prefers grantha over person matches.",
     "expected": {
       "intent": "open_text",
       "target_pattern": "purandara_dasaru$",
@@ -367,7 +367,7 @@
     "category": "06_proper_names",
     "language": "en-IN",
     "transcript_text": "Open Raghavendra Vijaya 1.1",
-    "notes": "Real grantha kavya_alankara/raghavendra_vijaya/sarga_1 — same multi-sarga sibling-disambiguation pattern as Sumadhva Vijaya.",
+    "notes": "Real grantha DvaitaVedanta/Itara/Kavya/raghavendra_vijaya/sarga_1 — same multi-sarga sibling-disambiguation pattern as Sumadhva Vijaya.",
     "expected": {
       "intent": "open_text",
       "target_pattern": "raghavendra_vijaya/sarga_1$",
@@ -383,7 +383,7 @@
     "category": "06_proper_names",
     "language": "en-IN",
     "transcript_text": "Open Harikathamrutasara",
-    "notes": "Real grantha dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara — tests the ASR_CONFUSIONS entries for this title's common mis-hearings.",
+    "notes": "Real grantha DvaitaVedanta/Itara/DasaSahitya/dasakuta/jagannathadasa/harikathamrutasara — tests the ASR_CONFUSIONS entries for this title's common mis-hearings.",
     "expected": {
       "intent": "open_text",
       "target_pattern": "harikathamrutasara$",
@@ -829,7 +829,7 @@
 
   { "id": "15_content_actions_002", "category": "15_content_actions", "language": "en-IN",
     "transcript_text": "Open Vijaya Dasa collections",
-    "notes": "Real project-lead example, rephrased with a recognized trigger ('open' instead of bare 'show') -- the LITERAL quoted phrasing 'show vijayadasara hADugaLu' does NOT resolve today (see 15_content_actions_003's note for exactly why) and is intentionally NOT claimed fixed here. This entry proves the underlying entity (dasa_sahitya/composers/vijaya_dasaru, parampara node 'vijayadasa'/'Vijaya Dasa', both verified real) IS reachable through the existing open_text pipeline once phrased with a working trigger, same as the already-working Purandara Dasa case (01_english_005). Real corpus also has a 'vijaya_ramacamdravithala' composer sharing the word 'vijaya', so a bare 'Vijaya Dasa' query is genuinely ambiguous between the two -- correctly low-confidence with candidates surfaced, not a wrong silent pick.",
+    "notes": "Real project-lead example, rephrased with a recognized trigger ('open' instead of bare 'show') -- the LITERAL quoted phrasing 'show vijayadasara hADugaLu' does NOT resolve today (see 15_content_actions_003's note for exactly why) and is intentionally NOT claimed fixed here. This entry proves the underlying entity (DvaitaVedanta/Itara/DasaSahitya/composers/vijaya_dasaru, parampara node 'vijayadasa'/'Vijaya Dasa', both verified real) IS reachable through the existing open_text pipeline once phrased with a working trigger, same as the already-working Purandara Dasa case (01_english_005). Real corpus also has a 'vijaya_ramacamdravithala' composer sharing the word 'vijaya', so a bare 'Vijaya Dasa' query is genuinely ambiguous between the two -- correctly low-confidence with candidates surfaced, not a wrong silent pick.",
     "expected": { "intent": "open_text", "target_pattern": null, "max_confidence": 0.55 } },
 
   { "id": "15_content_actions_003", "category": "15_content_actions", "language": "en-IN",

@@ -56,9 +56,9 @@ describe('the switch itself', () => {
 
   test('off, the request is exactly what the reader made before — same URL, same cache-buster', async () => {
     const { w, calls } = load();
-    await w.dgeFetchCorpus('data/kavya_alankara/sumadhva_vijaya/data.json');
+    await w.dgeFetchCorpus('data/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json');
     assert.equal(calls.length, 1);
-    assert.match(calls[0].url, /^data\/kavya_alankara\/sumadhva_vijaya\/data\.json\?t=\d+$/);
+    assert.match(calls[0].url, /^data\/DvaitaVedanta\/Itara\/Kavya\/sumadhva_vijaya\/data\.json\?t=\d+$/);
     assert.deepEqual(Object.keys(calls[0].init), [], 'no init options beyond the URL');
   });
 
@@ -76,9 +76,9 @@ describe('the switch itself', () => {
 
   test('on, the request goes to the proxy with no cache-buster (the ETag does that job)', async () => {
     const { w, calls } = load({ corpusBase: 'https://asia-south1-p.cloudfunctions.net/corpusFile' });
-    await w.dgeFetchCorpus('data/kavya_alankara/sumadhva_vijaya/data.json');
+    await w.dgeFetchCorpus('data/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json');
     assert.equal(calls[0].url,
-      'https://asia-south1-p.cloudfunctions.net/corpusFile/kavya_alankara/sumadhva_vijaya/data.json');
+      'https://asia-south1-p.cloudfunctions.net/corpusFile/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json');
     assert.ok(!/[?&]t=/.test(calls[0].url));
   });
 
@@ -111,8 +111,8 @@ describe('the token', () => {
 
 describe('dgeCorpusObjectPath — every shape the reader holds must land on one string', () => {
   const cases = [
-    ['data/kavya_alankara/sumadhva_vijaya/data.json', 'kavya_alankara/sumadhva_vijaya/data.json'],
-    ['dge/data/kavya_alankara/sumadhva_vijaya/data.json', 'kavya_alankara/sumadhva_vijaya/data.json'],
+    ['data/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json', 'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json'],
+    ['dge/data/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json', 'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/data.json'],
     ['/data/upanishad/isha/data.json', 'upanishad/isha/data.json'],
     ['data/x/data.json?t=123', 'x/data.json'],
     ['data/x/data.json#frag', 'x/data.json']
@@ -178,8 +178,8 @@ describe('dgeCorpusObjectPath — "data/" is a segment, not a substring', () => 
   test('a CDN path with NO data/ segment keeps its whole path', () => {
     // kavyaDataBase points at a branch whose layout has no data/ level.
     assert.equal(
-      w().dgeCorpusObjectPath('https://cdn.jsdelivr.net/gh/O/r@sha/kavya_alankara/sumadhva_vijaya/sarga_01/data.json'),
-      'kavya_alankara/sumadhva_vijaya/sarga_01/data.json');
+      w().dgeCorpusObjectPath('https://cdn.jsdelivr.net/gh/O/r@sha/DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_01/data.json'),
+      'DvaitaVedanta/Itara/Kavya/sumadhva_vijaya/sarga_01/data.json');
   });
 
   test('the FIRST data/ segment wins, so a grantha called data/ below it survives', () => {

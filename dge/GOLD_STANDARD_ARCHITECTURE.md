@@ -57,7 +57,7 @@ today — not a restyle. The gap is genuine and worth closing.
 
 ## 2. What DGE actually has today
 
-Checked directly against a live file (`dge/data/stotra/PrahladaKrutaNarasimha/data.json`)
+Checked directly against a live file (`dge/data/DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha/data.json`)
 and the render path (`dge/js/render.js`), not assumed:
 
 ```json

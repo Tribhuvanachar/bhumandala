@@ -186,7 +186,7 @@
     [/\bpurandaradasa\b/g, 'purandara dasa'],
     [/\bkanaka das\b/g, 'kanaka dasa'],
     [/\bkanakadasa\b/g, 'kanaka dasa'],
-    // Real grantha slug is "dasa_sahitya/composers/vijaya_dasaru"
+    // Real grantha slug is "DvaitaVedanta/Itara/DasaSahitya/composers/vijaya_dasaru"
     // (title "Vijaya Dasaru") -- "vijayadasara" (joined, "-dasara"
     // honorific spelling) is the realistic spoken/ASR form.
     [/\bvijaya das\b/g, 'vijaya dasaru'],

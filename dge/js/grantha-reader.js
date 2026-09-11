@@ -11,11 +11,11 @@
   // v2 families available to this reader. Paths are relative to dge/.
   var REGISTRY = {
     brahma_sutra: {
-      path: 'data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra',
+      path: 'data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra',
       base_label: 'सूत्रम्'
     },
     anuvyakhyana_sudha: {
-      path: 'data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana_sudha',
+      path: 'data/darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/anuvyakhyana_sudha',
       base_label: 'अनुव्याख्यानम्'
     }
   };

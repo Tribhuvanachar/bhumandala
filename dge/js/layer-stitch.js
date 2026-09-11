@@ -45,20 +45,20 @@ window.dgeLayerManifestPromise = fetch('data/layer_manifest.json?t=' + Date.now(
 // Keys and targets are grantha-dir slugs relative to data/. Each chain is
 // rendered oldest-first above the title, ending at the current grantha.
 const DGE_GRANTHA_LINEAGE = {
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha': [
-    { label: 'ब्रह्मसूत्राणि', slug: 'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/mula' },
-    { label: 'अनुव्याख्यानम्', slug: 'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/mula' }
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyaya_sudha': [
+    { label: 'ब्रह्मसूत्राणि', slug: 'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/mula' },
+    { label: 'अनुव्याख्यानम्', slug: 'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/anuvyakhyana/mula' }
   ],
-  'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana': [
-    { label: 'ब्रह्मसूत्राणि', slug: 'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/mula' }
+  'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/anuvyakhyana': [
+    { label: 'ब्रह्मसूत्राणि', slug: 'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/mula' }
   ],
-  'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya': [
+  'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya': [
     { label: 'ब्रह्मसूत्राणि', slug: null } // the spine of this grantha IS the sutra text
   ],
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyayamrita': [],
-  'darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tatparya_chandrika': [
-    { label: 'ब्रह्मसूत्राणि', slug: 'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/mula' },
-    { label: 'तत्त्वप्रकाशिका', slug: 'darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashika' }
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/nyayamrita': [],
+  'darshana/vedanta/dvaita/DvaitaSahitya/later_acharyas/tatparya_chandrika': [
+    { label: 'ब्रह्मसूत्राणि', slug: 'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/mula' },
+    { label: 'तत्त्वप्रकाशिका', slug: 'darshana/vedanta/dvaita/DvaitaSahitya/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashika' }
   ]
 };
 

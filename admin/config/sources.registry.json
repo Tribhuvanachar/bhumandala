@@ -4,7 +4,7 @@
   "",
   "This is an INDEX, not a copy. The detail for each family stays in the",
   "registry that importer already owns -- importers/sources.json,",
-  "tools/darshanas/darshana_sources.json, tools/dasa_sahitya/dasa_sources.json,",
+  "tools/darshanas/darshana_sources.json, tools/DvaitaVedanta/Itara/DasaSahitya/dasa_sources.json,",
   "tools/dvaitavedanta/dv_sources.json, tools/sayana_smriti/sources.json,",
   "tools/kavya/config/sources.json, dge/kosha_toolkit/LICENSING.md -- and",
   "`config` below points at it. Copying those entries here would guarantee the",
@@ -131,10 +131,10 @@
     "url": "https://madhwafestivals.com/feed/"
    },
    "feeds": [
-    "dasa_sahitya"
+    "DvaitaVedanta/Itara/DasaSahitya"
    ],
    "importer": "import-dasa-sahitya.yml",
-   "config": "tools/dasa_sahitya/dasa_sources.json",
+   "config": "tools/DvaitaVedanta/Itara/DasaSahitya/dasa_sources.json",
    "rights": "Public devotional archive; non-commercial reproduction.",
    "cadence": "fortnightly — a blog, so new posts are exactly what we want to catch"
   },
@@ -148,10 +148,10 @@
     "url": "https://dasasahitya.net/feed/"
    },
    "feeds": [
-    "dasa_sahitya"
+    "DvaitaVedanta/Itara/DasaSahitya"
    ],
    "importer": "import-dasa-sahitya.yml",
-   "config": "tools/dasa_sahitya/dasa_sources.json",
+   "config": "tools/DvaitaVedanta/Itara/DasaSahitya/dasa_sources.json",
    "rights": "Public Haridasa lyrics site; non-commercial.",
    "cadence": "fortnightly"
   },
@@ -165,10 +165,10 @@
     "url": "https://meerasubbarao.wordpress.com/feed/"
    },
    "feeds": [
-    "dasa_sahitya"
+    "DvaitaVedanta/Itara/DasaSahitya"
    ],
    "importer": "import-dasa-sahitya.yml",
-   "config": "tools/dasa_sahitya/dasa_sources.json",
+   "config": "tools/DvaitaVedanta/Itara/DasaSahitya/dasa_sources.json",
    "rights": "Public devotional lyrics blog; non-commercial.",
    "cadence": "fortnightly"
   },
@@ -355,7 +355,7 @@
     "note": "Total published posts plus the newest modified_gmt, the same field tools/setutila/import_setutila.py's delta sync keys on."
    },
    "feeds": [
-    "darshana/vedanta/dvaita/SetuTila (47 granthas, 67 MiB)"
+    "DvaitaVedanta/SarvaMula (47 granthas, 67 MiB)"
    ],
    "importer": "extract-setutila.yml",
    "config": "tools/setutila/import_setutila.py",

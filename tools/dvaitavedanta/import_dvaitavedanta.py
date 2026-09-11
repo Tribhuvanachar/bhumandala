@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Extract the dvaitavedanta.in corpus into dge/data/darshana/vedanta/dvaita/DvaitaVedanta/.
+"""Extract the dvaitavedanta.in corpus into dge/data/darshana/vedanta/dvaita/DvaitaSahitya/.
 
 Runs on GitHub Actions (open network egress). It does NOT run inside the Cowork
 sandbox, which has no scraping egress to this host — that is by design and
-matches the established DGE import workflow (see tools/dasa_sahitya/).
+matches the established DGE import workflow (see tools/DvaitaVedanta/Itara/DasaSahitya/).
 
 Pipeline per grantha
   1. discover  fetch the seed leaf, harvest the full sidebar -> the leaf id set
