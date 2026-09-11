@@ -6137,3 +6137,38 @@ cross-checked against parampara.json's existing `works` list per node
 (kept in the companion file's own `aradhane`/no separate `works` field,
 avoiding a naming collision that could look like an authoritative
 override of the hand-curated list).
+
+## Uttarādi's own stotra/recitation library found: 121 items, 16,027 timed lines (11 Sep 2026, 4:34 pm IST)
+
+Last thing checked in the same db while I had it open: `stotra_table`
+(121 rows) + `stotra_lyrics_table` (16,027 rows). This solves the UM
+Stotra dead-end differently than expected — that separate app
+(`com.digilearn.umstotra`) had nothing bundled, but Uttarādi's own main
+app already carries a full stotra/recitation library: Devanagari
+Sanskrit, Kannada script, and English/Kannada/Tamil/Telugu transliteration
+per line, each with `start_ms`/`end_ms` timing for audio sync and an
+`is_remark` flag separating real verse lines from spoken framing (closing
+"iti ... stotram" announcements etc).
+
+Broader than short hymns — includes multi-part recitations of larger
+works: **Dvādaśa Stotra** (12 parts), **Jitante Stotra** (5 parts),
+**Brahma Sūtra Anu Bhāṣya** excerpts (4 parts), and **Sumadhva Vijaya**
+recitation audio. Checked before archiving, not just assumed new:
+Dvādaśa Stotra's mūla text is **already ingested from two independent
+sources** (SarvaMula and SetuTila editions) — this would be an audio
+enrichment of existing text, not a new acquisition. Jitante Stotra and
+Madhwanāma didn't turn up in a quick `library.json`/`taxonomy.json`
+check and look like genuine gaps, though that wasn't exhaustive.
+
+Archived clean and organized (grouped by stotra, not a raw table dump) to
+`dge/sources/uttaradi_matha/stotra/uttaradi_stotras.json` (3.8 MB) with a
+manifest. **Deliberately not ingested into `dge/data/stotra/` this pass**
+— that domain currently holds exactly one real text
+(`PrahladaKrutaNarasimha`) with a schema this project treats carefully
+per item (author attribution, commentary provenance, taxonomy
+placement — see that file's own metadata for how much per-text care goes
+in). 121 items is genuinely multi-session ingestion work, not something
+to force through in one sitting; flagged Jitante Stotra and Madhwanāma
+as the two best-motivated candidates to start with if this gets picked up.
+
+`./run_tests.sh`: same pre-existing baseline, nothing new.
