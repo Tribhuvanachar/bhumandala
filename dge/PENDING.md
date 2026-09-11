@@ -5661,3 +5661,115 @@ that folder and start Phase 1 in the order §58 now specifies (Udupi →
 Vishwesha → SRS → Uttarādi → Tithi Nirṇaya → Vyāsarāja → Sode), skipping
 Pejāvara and Śrīpādarāja as separate APK targets per the corrections
 above.
+
+## Madhva acquisition, round 1: 14 APKs pulled, Panchāṅga sources archived, several real findings (11 Sep 2026, 12:35 pm IST)
+
+Drive access came through (the earlier "anyone with the link" folder just
+hadn't finished indexing on the connector's side — no permission change was
+actually needed, it resolved on its own a few hours later). Downloaded all
+14 APKs (276 MB total, via the public link's virus-scan-warning confirm
+flow, since the MCP connector's base64 return would have blown up context
+on files this size — see `scratchpad/dl.sh` if this needs doing again).
+Installed `androguard` to read manifests/resources without `aapt`.
+
+**Package identification, all 14** (this alone caught two real problems):
+Uttaradi (`org.uttaradimath.app` 1.9.0), SRS Panchanga (`com.panchanga`
+2.0.0), old SRS (`srsmatha.com.srsmatha` 2.0), Vishwesha Panchanga
+(`maha.kani` V.26), Tithi Nirṇaya (`com.krishna.panchanga_app` 2.0.3), Sode
+Matha (`com.ampwork.sodematha` 3.3), Vyāsarāja Matha Sosale
+(`com.hpm.sp.streaminfoportal.stage` 22.0.0), Shri HKS
+(`com.devloop0.shrihks` 1.2), UM Stotra (`com.digilearn.umstotra` 1.2.3),
+UM VVS Matrimony (`com.jspn.vvs` 1.1.37), plus four apps outside the
+original spec: Ashtadhyayi.com (`com.ashtadhyayi.twa` — a **Trusted Web
+Activity wrapper only**, confirms there's genuinely no bundled data and
+nothing to sync but the live site, matching what `DGE_Vyakarana_Source_Acquisition_List.md`
+already assumed), Vyāsarāja Anjaneya Hanuman (`com.kannada.anjaneya` 18.0),
+"Vadiraja Vijaya" (`vvm.g` VV V.01), and Hindu Calendar
+(`com.alokmandavgane.hinducalendar` 9.2.1 — **an unrelated third-party
+generic panchang app, not a Udupi Panchanga rebrand**; confirmed by package
+name and by its Jetpack-Compose structure not matching Udupi's known B4A
+`.vss`/`.bal` asset pattern at all).
+
+**Udupi Panchanga's own APK is still missing** from this delivery — it was
+not among the 14 files, under any name. Needs a supply request.
+
+**Panchāṅga (top priority, per the lead's explicit sequencing) — archived
+to `dge/sources/<institution>/panchanga/...` with `source-manifest.json`
+per the architecture doc's §24, nothing normalized into the site schema
+yet:**
+- **Uttaradi**: `um_app_seed.db` (4478 rows, 2024-02-29→2027-04-05)
+  archived whole. Real finding: the db's own `sync_timestamps_table` proves
+  the shipped app syncs from a live backend at runtime (`panchanga_data`
+  among the synced features) — this db is a bootstrap seed, not the whole
+  story, so there likely is a real API worth finding rather than just
+  re-pulling the asset on every app update. Couldn't find the endpoint
+  statically: **this APK (and Tithi Nirṇaya's, and Vyāsarāja Sosale's) has
+  no `lib/` folder at all** — no `libapp.so` for any ABI, meaning none of
+  these three can actually run as delivered and none can have their Dart
+  logic inspected. This is very likely a base-APK-only export missing its
+  ABI splits (architecture doc §6 already warned not to conclude "no
+  Flutter code" from one base APK) — getting the full split bundle is a
+  prerequisite for the runtime/network-capture phase on these three.
+- **SRS (Mantralaya)**: JSON bundle archived whole (402 rows,
+  2026-03-01→2027-04-06) — already close to DGE's canonical
+  `panchanga_day` shape field-for-field.
+- **Vishwesha (= Pejāvara's Panchāṅga, per the correction above)**:
+  **partial only**. `vss4.vss` (793 lines, 2022-2026 festival/special-day
+  annotations) archived. The actual five-anga daily Panchāṅga is not
+  human-readable — it's packed into opaque numeric codes in `thithi.vss`
+  (and that file only covers 2020), decoded by the app's compiled B4A
+  bytecode, not yet reverse-engineered. The numbered per-month files
+  (`1-2025.vss`…`12-2026.vss`) that look like they might be the real data
+  are actually **JPEG calendar-page scans** despite the `.vss` extension —
+  same trick the architecture doc already documented for sibling app
+  Udupi Panchanga (§13).
+- Deliberately **not** archived: `ph.vss` (a pontiffs' name+phone-number
+  directory bundled in the Vishwesha app — personal contact data, needs an
+  explicit rights call first) and the Uttaradi db's `bank_account_table`
+  (sensitive financial data, never to be extracted).
+
+**Phase 2 finds, not yet ingested (need schema/verification work before
+touching the live corpus, flagged rather than rushed):**
+- **HKS**: this is the *same* app already used for the existing 947-verse
+  ingestion (`com.devloop0.shrihks`, confirmed via the exact
+  `hks_sandhi_content_list`/`hks_sandhi_title_list` string-array names) —
+  not the different "still open, remote server" app PROJECT_STATUS.md's
+  older note refers to. New finding though: the ingestion's own claim of
+  "no verse-level meaning exists in this source" is **not quite right** —
+  the same array resource has a second, non-Kannada locale config that
+  turns out to hold romanized text *with inline word-by-word meaning*
+  ("# word = meaning" glosses) for 3 of the 33 sandhis (1, 26, 27 — the
+  other 30 are empty in that locale). Partial, not a full fix, but real
+  content that was missed. Not merged into `data.json` yet — needs careful
+  per-verse alignment against the existing Kannada text, not a blind
+  overwrite.
+- **Vyāsarāja Hanuma Pratima**: the `com.kannada.anjaneya` app is a
+  323-entry directory (Karnataka 231, Tamil Nadu 47, Andhra 43,
+  Maharashtra 2) of Hanuman/Anjaneya idols traditionally installed by Sri
+  Vyāsarāja Tīrtha, each with address + a Google Maps link. Real, usable
+  GPS-bearing data for the institutional graph's BRANCH/KSHETRA model —
+  but no single entry is tagged as "the Sosale seat itself" by that exact
+  name, so this is the broader idol network, not a stand-in for Vyāsarāja
+  Matha's own location. Not wired into `guru-parampara/data/mathas.json`
+  yet (needs a schema decision — see below).
+- **"Vadiraja Vijaya" app**: turned out **not to contain the Vādirāja
+  Vijaya kāvya text at all** despite the name. Static analysis of every
+  `.vss`/`.txt` file in it shows it's a digitization of a *different,
+  genuinely new-to-this-corpus* text — **Svāpnavṛndāvanākhyānam** (22
+  full adhyāyas, confirmed complete start-to-colophon) plus a small
+  bundled stotra collection (Narasimha Nakhastuti, Harivāyustuti,
+  Madhvāṣṭakam, etc.). The app's own title-index file lists
+  "वादिराजविजयः" as part of a printed volume's front matter (alongside a
+  Brahmasūtrabhāṣya + commentary set), but that text's actual verses
+  aren't bundled here. Confirmed absent from the DGE corpus already
+  (neither Svāpnavṛndāvanākhyāna nor Vādirāja Vijaya). Net effect: **one
+  genuine bonus text found (Svāpnavṛndāvanākhyāna, not yet ingested), and
+  Vādirāja Vijaya itself is still an open acquisition** — the original ask
+  isn't solved by this app.
+- **UM Stotra** (`com.digilearn.umstotra`, Flutter): downloaded, not yet
+  opened up for its asset structure. Next in line.
+
+Task tracking for all of this is in the session's live task list (Drive
+access, Panchāṅga sync design, Phase 2 extraction, HKS, Vyāsarāja
+Hanuma+GPS, Vādirāja Vijaya, Ashtadhyayi sync, UM Stotra) rather than
+duplicated here.
