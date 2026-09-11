@@ -43,6 +43,7 @@ import re
 import subprocess
 import sys
 import time
+from html.parser import HTMLParser
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -72,6 +73,82 @@ def html_to_text(html):
     return re.sub(r"\n{3,}", "\n\n", html).strip()
 
 
+#: Elements that start a new reviewable block. Everything else (inline
+#: markup, bare text) is gathered into the block it sits in.
+_BLOCK_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6", "p", "blockquote",
+               "div", "ul", "ol", "table", "pre", "section", "article"}
+
+
+class _BlockSplitter(HTMLParser):
+    """Split a page of HTML into top-level blocks, each keeping its own markup.
+
+    Why this exists (11 Sep 2026). This module used to turn a Sarvam page into
+    blocks by splitting its PLAIN TEXT on blank lines and throwing the HTML
+    away — so the layout-preserving engine's entire output was reduced to
+    strings before a reviewer ever saw it, and a heading was indistinguishable
+    from a line of verse. Splitting on element boundaries instead keeps each
+    block's own markup, which is what the reviewer edits and what the layer
+    now stores.
+
+    Deliberately simple: it tracks nesting depth and closes a fragment when
+    depth returns to zero. Malformed markup degrades to fewer, larger blocks
+    rather than to an exception — a coarse review beats a crashed import.
+    """
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.blocks = []
+        self._buf = []
+        self._depth = 0
+
+    def _flush(self):
+        frag = "".join(self._buf).strip()
+        self._buf = []
+        if frag:
+            self.blocks.append(frag)
+
+    def handle_starttag(self, tag, attrs):
+        if self._depth == 0 and tag in _BLOCK_TAGS:
+            self._flush()
+        self._buf.append(self.get_starttag_text() or f"<{tag}>")
+        if tag not in ("br", "img", "hr", "meta", "link", "input"):
+            self._depth += 1
+
+    def handle_startendtag(self, tag, attrs):
+        self._buf.append(self.get_starttag_text() or f"<{tag}/>")
+
+    def handle_endtag(self, tag):
+        self._buf.append(f"</{tag}>")
+        if self._depth > 0:
+            self._depth -= 1
+        if self._depth == 0 and tag in _BLOCK_TAGS:
+            self._flush()
+
+    def handle_data(self, data):
+        self._buf.append(data)
+
+    def close(self):
+        super().close()
+        self._flush()
+
+
+def split_html_blocks(html):
+    """[(html fragment, plain text), …] for one page of layout-preserving OCR."""
+    sp = _BlockSplitter()
+    try:
+        sp.feed(html or "")
+        sp.close()
+    except Exception:                                     # pragma: no cover
+        # Never let one odd page stop an import; fall back to the whole page.
+        return [(html, html_to_text(html))] if (html or "").strip() else []
+    out = []
+    for frag in sp.blocks:
+        text = html_to_text(frag).strip()
+        if text:
+            out.append((frag, text))
+    return out
+
+
 def units_of(staged):
     """The same unit model admin/ocr-review.html builds: [{id, page, text, kind}]."""
     units = []
@@ -88,9 +165,16 @@ def units_of(staged):
         for pg in staged["pages"]:
             if not pg.get("ok", True):
                 continue
-            body = pg.get("html") or pg.get("md") or (json.dumps(pg.get("json"), ensure_ascii=False) if pg.get("json") else "")
-            text = html_to_text(body) if pg.get("html") else body
-            for n, chunk in enumerate([c for c in re.split(r"\n\s*\n", text) if c.strip()], 1):
+            if pg.get("html"):
+                # Split on ELEMENT boundaries, keeping each block's markup —
+                # see _BlockSplitter above for why blank-line splitting was
+                # wrong here.
+                for n, (frag, text) in enumerate(split_html_blocks(pg["html"]), 1):
+                    units.append({"id": f"p{pg['page']}_b{n}", "page": pg["page"],
+                                  "text": text, "html": frag, "kind": "block"})
+                continue
+            body = pg.get("md") or (json.dumps(pg.get("json"), ensure_ascii=False) if pg.get("json") else "")
+            for n, chunk in enumerate([c for c in re.split(r"\n\s*\n", body) if c.strip()], 1):
                 units.append({"id": f"p{pg['page']}_b{n}", "page": pg["page"], "text": chunk.strip(), "kind": "block"})
         return "layer", units
     if page_objs:
@@ -129,6 +213,17 @@ def build_layer(staged, decisions, args):
             text = (d.get("text") if dec == "edit" and d.get("text") is not None else u["text"]).strip()
         if not text:
             continue
+        # The reviewer's STRUCTURE, not only their text (11 Sep 2026).
+        # admin/ocr-review.html now edits the rendered layout itself, so a
+        # decision can carry `html` — headings still headings, indentation
+        # still indentation, and <b> where a प्रतीक was marked. Running a
+        # layout-preserving OCR engine and then storing a flat string threw
+        # away the entire reason for running it.
+        # The reviewer's edited markup if they touched it, otherwise the
+        # engine's own. A decision that carries no html (an older client, or a
+        # plain accept) must NOT fall back to nothing — that would throw the
+        # layout away on exactly the units nobody needed to correct.
+        structured = (d or {}).get("html") or u.get("html")
         item = {
             "id": f"{args.id_prefix}{u['id']}",
             "reference": u.get("reference") or (f"p.{u['page']}" if u.get("page") is not None else u["id"]),
@@ -139,6 +234,11 @@ def build_layer(staged, decisions, args):
             "verification": {"human": {"decision": dec, "by": (d or {}).get("by", ""), "at": (d or {}).get("at", now),
                                        "note": (d or {}).get("note", "")}},
         }
+        # sanskrit_text stays the plain string every existing consumer reads;
+        # the structure rides alongside it rather than replacing it, so this
+        # change cannot break a reader that has never heard of it.
+        if structured:
+            item["sanskrit_html"] = structured
         if args.schema == "grantha_tippani_text":
             item["author"] = args.author
         items.append(item)

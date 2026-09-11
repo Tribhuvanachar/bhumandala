@@ -1223,6 +1223,21 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **11 Sep 2026 — the OCR review UI edits STRUCTURE, not a flat string.** The lead asked for a digitisation UI that keeps
+  heading→heading and paragraph→paragraph mapping. Most of it already existed and had since the Sarvam work:
+  `tools/sarvam_docai.py` (layout-preserving OCR, HTML/MD/JSON), `.github/workflows/ocr-sarvam.yml`,
+  `admin/ocr-review.html` (scan on the left, units on the right), `tools/ocr_review_merge.py`, three works staged.
+  **The gap was at the last two steps and it undid the whole point:**
+  1. the reviewer could SEE the rendered layout but edited a flat `<textarea>` beneath it, so correcting one letter discarded
+     every heading and indentation;
+  2. `ocr_review_merge.py` built its units by splitting a page's PLAIN TEXT on blank lines and threw the HTML away entirely —
+     so the structure never reached the library even untouched.
+  Both fixed: the render is now `contenteditable` with a toolbar (**B** is how a प्रतीक gets marked, H2/H3/¶/❝/strip/revert),
+  a decision carries `html`, `_BlockSplitter` splits pages on ELEMENT boundaries so each unit keeps its own markup, and the
+  layer stores `sanskrit_html` beside the unchanged plain `sanskrit_text`. 17 new tests.
+  - **Open:** the reader does not render `sanskrit_html` yet — layers written with it still display via `sanskrit_text`.
+    Showing the structure in the reader is the next step, and is what makes bidirectional प्रतीक links off OCR'd text possible.
+
 - **10 Sep 2026, ~10:40 pm IST — 📖 Prepare a book / PDF, phase 1 (the print path).** `dge/js/book-builder.js` (pure spec → HTML,
   no DOM, so a server renderer can call it unchanged), `dge/js/book-ui.js` (the picking sheet), `dge/css/book-print.css`
   (A5/A4 @page, mirrored margins, cover, TOC, running foot, watermark). Sources: whole grantha, verse range, starred verses,

@@ -59,6 +59,21 @@ main{max-width:1400px;margin:0 auto;padding:12px 14px 80px}
 .unit .render{margin:8px 0 4px;padding:8px 10px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font-size:15px;line-height:1.7;max-height:260px;overflow:auto}
 .unit .render h1,.unit .render h2,.unit .render h3{font-size:1.05em;margin:.4em 0}
 .unit .render table{border-collapse:collapse}.unit .render td,.unit .render th{border:1px solid var(--line);padding:2px 6px}
+/* The structured editor (11 Sep 2026). The rendered layout IS the edit
+   surface now -- headings stay headings while they are corrected, and bold
+   is how a प्रतीक gets marked. It is given a visible focus ring because a
+   contenteditable region with no chrome looks like static text, and a
+   reviewer needs to know their keystrokes are going somewhere. */
+.unit .render[contenteditable="true"]{outline:none;cursor:text;min-height:2.4em}
+.unit .render[contenteditable="true"]:focus{border-color:var(--accent,#e2664a);box-shadow:0 0 0 2px rgba(226,102,74,.18)}
+.unit .render.dirty{border-left:3px solid var(--warn,#c8912a)}
+.unit .render blockquote{margin:.4em 0 .4em 1.4em;padding-left:.8em;border-left:2px solid var(--line);color:var(--muted)}
+.unit .render b,.unit .render strong{color:var(--accent,#e2664a)}
+.unit .rendertools{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:8px}
+.unit .rendertools .tbtn{min-width:28px;padding:3px 7px;font:600 12px/1.2 inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.unit .rendertools .tbtn:hover{border-color:var(--accent,#e2664a)}
+.unit .rendertools .tsep{width:1px;height:16px;background:var(--line);margin:0 4px}
+.unit .rendertools .thint{flex:1 1 100%;font-size:11px;color:var(--muted);margin-top:2px}
 .unit textarea{width:100%;min-height:90px;border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:8px 10px;font:inherit;font-size:15px;line-height:1.7;color:var(--ink);resize:vertical;margin-top:6px}
 .unit textarea.dirty{border-color:var(--accent2)}
 .unit label.f{display:block;font-size:11.5px;color:var(--muted);margin-top:6px}
