@@ -96,6 +96,22 @@ class Predicates(unittest.TestCase):
         ok, _ = is_pragrhya("अग्निम्")
         self.assertFalse(ok)
 
+    def test_is_pragrhya_vocative_o(self):
+        # Regression test for a real gap found 11 Sep 2026 while
+        # fact-checking an external citation for sutra 1.68 ("okAra
+        # AmantritajaH pragfhyaH" -- vocative 'o' is pragrhya): this
+        # function had a context-gated check for vocative words ending in
+        # -e, but none at all for -o, even though vibhaavaso (this
+        # project's own cited 10.14 example) is exactly this case.
+        ok, reason = is_pragrhya("विभावसो", context={"is_amantrita": True})
+        self.assertTrue(ok)
+        self.assertIn("1.68", reason)
+        # Without is_amantrita context, an "o"-ending word must NOT be
+        # assumed pragrhya -- plenty of non-vocative words end in "o" via
+        # ordinary a-class visarga sandhi and are not pragrhya for that.
+        ok2, _ = is_pragrhya("देवो")
+        self.assertFalse(ok2)
+
     def test_is_monosyllable_avasana(self):
         self.assertTrue(is_monosyllable_avasana("आ"))
         self.assertFalse(is_monosyllable_avasana("अग्निम्"))

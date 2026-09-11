@@ -40,6 +40,21 @@ def is_pragrhya(token_deva, context=None):
             return True, "morphological (dual ending in -ii/-uu/-e)"
         if context.get("is_amantrita") and s and s[-1] == "e":
             return True, "contextual (aamantrita vocative ending in -e)"
+        if context.get("is_amantrita") and s and s[-1] == "o":
+            # sutra 1.68 ("okAra AmantritajaH pragfhyaH" -- the vowel 'o'
+            # arising from vocative is pragrhya), found missing from this
+            # function entirely 11 Sep 2026 while fact-checking an external
+            # citation (which itself cited the wrong sutra number, 1.74
+            # instead of the correct 1.68, but the underlying substance
+            # checked out against this project's own corpus). Gated on
+            # is_amantrita, like the -e case above, because plenty of
+            # non-vocative words also end in "o" (e.g. any a-class visarga
+            # word after visarga_a_class_before_voiced) and are NOT
+            # pragrhya for that reason -- this predicate still cannot
+            # itself distinguish "vocative o" from "o that arose from
+            # visarga sandhi" without the caller telling it which case it
+            # is, same limitation as the existing amantrita-e check.
+            return True, "contextual (aamantrita vocative ending in -o, sutra 1.68)"
     return False, "not matched (lexical/morphological/contextual checks all negative -- " \
                   "context-dependent classes not checked here return False if context " \
                   "wasn't supplied by the caller, not because they were ruled out)"
