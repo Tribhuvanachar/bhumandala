@@ -6172,3 +6172,32 @@ to force through in one sitting; flagged Jitante Stotra and Madhwanāma
 as the two best-motivated candidates to start with if this gets picked up.
 
 `./run_tests.sh`: same pre-existing baseline, nothing new.
+
+## Uttarādi institutional contacts + seva offerings archived (11 Sep 2026, 4:36 pm IST)
+
+Last pass through the same db: `contact_table` (165 rows) and
+`seva_table`/`seva_item_table` (16 active seva offerings with priced
+sub-items, e.g. Tulasi Dala Samarpaṇe ₹1001). Archived to
+`dge/sources/uttaradi_matha/institutional/`.
+
+Checked the sensitivity question deliberately before archiving, not after:
+these are **office/branch phone numbers tied to a place** (Digvijaya
+Lakshmi Narasimha Sannidhi, research centres, publication offices), not
+named individuals' personal numbers — a different situation from the
+Vishwesha app's `ph.vss` (pontiffs' own mobile numbers), which stays
+unarchived. This is exactly the "official contacts" institutional-
+knowledge domain the architecture doc wants, and `mathas.json` even has a
+currently-null `contact` field per maṭha waiting for real data like this.
+Still marked `rights_status: UNKNOWN` in the manifest, not asserted clean.
+
+Noted but not fixed: the source's own `state` field is inconsistently
+spelled/capitalized (Bengaluru/Bangalore/bengaluru all appear as literal
+values) — kept as-is since this is a raw acquisition archive; normalizing
+it is Phase 2 wiring work, not an acquisition-time decision.
+
+This closes out what's readily extractable from the Uttarādi seed database
+for this round — remaining unexamined tables (`gallery_table`,
+`generic_media_table`, `article_table`, `booklet_table`, `announcement_table`,
+`feed_table`, `page_table`, `menu_table`) are either photo/media content
+needing the rights review already flagged, or lower-value UI/navigation
+tables not worth a dedicated pass right now.
