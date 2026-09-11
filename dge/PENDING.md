@@ -5990,3 +5990,62 @@ fresh APK's institutional-content tables (Sode's app has explicit
 network capture) or a website pass (e.g. `sodematha.in/dailyworship.html`,
 already identified as a strong candidate in
 DGE_Madhva_Acquisition_Architecture.md §16).
+
+## Runtime/network investigation: emulator ruled out, real backends found, all properly locked down (11 Sep 2026, 2:52 pm IST)
+
+Project lead asked to try actually running the APKs (emulator) and hitting
+whatever server/database backs them. Checked feasibility first rather than
+attempting it blind:
+
+- **No Android emulator is possible in this sandbox**: no `/dev/kvm`, no
+  VMX/SVM CPU flags exposed to the container at all. A software-only
+  (non-accelerated) emulator would be painfully slow and prone to timing
+  out just booting -- not attempted, flagged instead of forced.
+- **Playwright/Chromium (installed fresh, browsers were already
+  pre-cached) can't reach the internet at all through this session's
+  proxy right now** -- confirmed general, not site-specific: even
+  `https://example.com` fails with `ERR_CONNECTION_RESET`, while plain
+  `curl` through the same proxy works fine. `recentRelayFailures` in the
+  proxy's own status endpoint shows the same `ws_closed_mid_exchange`
+  pattern against an unrelated host (`accounts.google.com`) at the same
+  time -- an infra-level relay issue for Chromium's connection pattern,
+  not something worth fighting further this session.
+
+**What *did* work, no emulator needed:** static extraction with
+`androguard` already had the tooling from earlier today, so pulled
+`resources.arsc` string resources across the missing-native-lib apps for
+Firebase config (the Firebase Gradle plugin bakes `google-services.json`
+into compiled Android string resources even for a Flutter app, so this
+survives even without `libapp.so`):
+
+| app | finding |
+|---|---|
+| Uttarādi | Firebase Realtime Database at `umapp-277119-default-rtdb.firebaseio.com`, plus API key, project id (`umapp-277119`), storage bucket -- all four compiled in plainly |
+| UM Stotra | Firebase project `um-stotra-1ab27` (Firestore-shaped, no RTDB url string found, so no single obvious REST path to test without knowing a collection name) |
+| Sode Matha | `sode-matha.firebaseio.com` (already known from this morning) |
+| Tithi Nirnaya, Vyāsarāja Sosale | **nothing** -- no Firebase config, no app-specific URL of any kind in the native/DEX code (only generic library boilerplate: Razorpay payment SDK, generic Firebase Installations API, Android docs links). Their real content-fetching logic is entirely inside the missing Dart AOT layer -- genuinely inaccessible without the full split APK bundle, not a matter of looking harder here. |
+
+**Tested the two real leads, properly, then stopped:**
+1. Direct anonymous read on both Uttarādi's and Sode's Realtime Database
+   root and several plausible node paths (`panchanga_data`, `paramparas`,
+   `main_deities`, matching the exact feature names from Uttarādi's own
+   `sync_timestamps_table`) -- `"error": "Permission denied"` on every
+   single one. Properly secured.
+2. Whether the app might rely on Firebase's own anonymous sign-in (the
+   same front door any real installer of the app would use, not a
+   bypass) -- tried `accounts:signUp` against Uttarādi's project with its
+   compiled API key: `"ADMIN_ONLY_OPERATION"`. Anonymous auth is
+   deliberately disabled on their project; whatever the app authenticates
+   with, it isn't that.
+
+**Conclusion, matching the architecture doc's own AUTHORIZATION_REQUIRED
+category exactly**: these backends are real and now identified, but
+properly access-controlled. Did not go further (no credential guessing,
+no looking for a leaked service-account key, nothing adjacent to actually
+attacking the system) -- per the doc's own security/ethics rule (§67)
+and because "properly secured" is itself the honest answer to "can the
+server be hit," not a puzzle to keep solving. srsmatha.org's old
+`dbupd.php` (the legacy pre-2.0.0 sync endpoint) is a 404 now -- dead, not
+locked; `www.srsmatha.org/srsapp/?p=srsmatha` (the old jQuery-era site) is
+still live and 200s, lower priority since the current 2.0.0 app's packaged
+JSON is already the better-structured source per the architecture doc.
