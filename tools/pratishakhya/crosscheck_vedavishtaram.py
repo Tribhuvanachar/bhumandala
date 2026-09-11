@@ -108,6 +108,31 @@ P10_11_RESOLUTIONS = {
     "11.66": (["U"], "Not in VedaVishtaram's numbered div (tail-only). Resolved by the 'pUrva' pattern."),
 }
 
+# Hand-verified for patala 2 (Samhita/sandhi definitions), sutras 1-42 only
+# (11 Sep 2026) -- see dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.10 for
+# the full cross-check. VedaVishtaram's OWN "patala 2" page content stops at
+# sutra 42 (confirmed: (2,43) has no entry at all, and VedaVishtaram's
+# "patala 3" is a DIFFERENT topic -- accent -- not a continuation of Layer
+# A's patala-2 sutras 43-82, which remain entirely unchecked against this
+# source). Within 1-42, the great majority of what LOOKS like a text
+# divergence between Layer A and VedaVishtaram is NOT an error in either
+# source: Layer A presents each sutra's words UN-SANDHI'd (pada-boundaries
+# kept separate), VedaVishtaram presents the CONTINUOUSLY sandhi-joined
+# recitation form of the identical sutra (e.g. Layer A "ataH anyAH" =
+# VedaVishtaram "atonyAH", the same words with ordinary a-class-visarga
+# sandhi applied) -- a real, useful thing to know before assuming any
+# character-level difference is a content error. A few positions where
+# VedaVishtaram's OWN page independently drops a trailing visarga (2.20,
+# 2.29, 2.30) look like small VedaVishtaram-side scan/rendering slips, not
+# something to import into Layer A.
+P2_RESOLUTIONS = {
+    "2.8":  (["U"], "Not in VedaVishtaram's own numbered div (tail-only match -- VedaVishtaram 2.8 covers only 'te 'nvakSarasandhayo 'nulomAH', the sutra's second clause). Resolved by the 'pUrva' pattern, now independently confirmed 4 times within this same patala via direct VedaVishtaram matches (2.24, 2.27, 2.28, 2.33)."),
+    "2.27": (["U"], "Direct match (sandhi-joined in VedaVishtaram): VedaVishtaram 2.27 = 'hrasvapUrvastu so'kAram' (pUrvaH + tu sandhi-joined into pUrvastu) -- confirms pUrva."),
+    "2.33": (["U", "U", "U"], "Third [?] ('ozWyap[?]rvAH'): direct match, VedaVishtaram 2.33 = '...paYcAlAnAm ozWyapUrvA Bavanti'. First two [?] ('p[?]rvar[?]pARi', in the sutra's opening clause -- not present in VedaVishtaram's own numbered div, tail-only source): resolved as 'pUrvarUpa' (retention-of-the-former-sound), a standard, independently well-attested Sanskrit phonetics technical term (a recognized sandhi-outcome category alongside guna/vrddhi/pararUpa) -- not sourced from VedaVishtaram for these two, unlike the third."),
+    "2.36": (["'"], "NOT a missing letter, resolved as an avagraha: VedaVishtaram's own page renders this exact position as a literal ZERO WIDTH NON-JOINER (U+200C) character, not text -- the same site-side corruption-of-an-avagraha artifact independently confirmed at the corresponding position in VedaVishtaram's own 2.24 ('viSarjanIyaH'+'ariPitaH' -> 'viSarjanIyo'riPitaH', an ordinary a-class-visarga-before-a elision). Read the same way here ('...Avo'+'antopahitAt' -> 'Avo'ntopahitAt', the identical rule), which is also grammatically sensible on its own terms, not merely inferred from the artifact."),
+    "2.40": (["SKIP"], "'ayo[?]pAzwiH' sits in a portion of this long citation-heavy sutra that VedaVishtaram's own numbered div does not cover at all (VedaVishtaram 2.40 is a much shorter tail excerpt starting later, at 'amum uktam...'). No independent confirmation found; left unresolved rather than guessed."),
+}
+
 
 def fetch_vv_html():
     resp = requests.get(VV_URL, timeout=60)
@@ -214,13 +239,20 @@ def main():
         data = json.load(f)
 
     n_resolved_1011 = n_skipped_1011 = n_algo_resolved = n_attached = 0
+    n_resolved_p2 = n_skipped_p2 = 0
     for item in data["items"]:
         key = (item["patala"], item["sutra"])
         vv_text = vv_deva.get(key)
         if vv_text is not None:
             item["vedavishtaram_sutra_text"] = vv_text
             item["vedavishtaram_bhashya"] = vv_bhashya.get(key, "")
-            item["vedavishtaram_index_verified"] = item["patala"] in (10, 11)
+            # patala 2 sutras 1-42: hand cross-checked 11 Sep 2026, sec.6.10 --
+            # VedaVishtaram's own patala-2 page content stops at 42, so 43+
+            # has no VV counterpart at all and stays unverified regardless.
+            item["vedavishtaram_index_verified"] = (
+                item["patala"] in (10, 11)
+                or (item["patala"] == 2 and item["sutra"] <= 42)
+            )
             n_attached += 1
 
         if not item["has_uncertain_reading"]:
@@ -242,6 +274,22 @@ def main():
                 "VedaVishtaram (vedavishtaram.in), 11 Sep 2026 -- " + note
             )
             n_resolved_1011 += 1
+        elif item["id"] in P2_RESOLUTIONS:
+            chars, note = P2_RESOLUTIONS[item["id"]]
+            if "SKIP" in chars:
+                item["crosscheck"] = (
+                    "VedaVishtaram (vedavishtaram.in) checked, 11 Sep 2026 -- " + note
+                )
+                n_skipped_p2 += 1
+                continue
+            deva, iast = apply_resolution(item, chars)
+            item["text_devanagari"] = deva
+            item["text_iast"] = iast
+            item["has_uncertain_reading"] = False
+            item["crosscheck"] = (
+                "VedaVishtaram (vedavishtaram.in), 11 Sep 2026 -- " + note
+            )
+            n_resolved_p2 += 1
         elif item["patala"] not in (10, 11) and vv_text is not None:
             resolved = algorithmic_resolve(item["text_slp1"], vv_slp1[key])
             if resolved:
@@ -259,19 +307,24 @@ def main():
     still_uncertain = sum(1 for it in data["items"] if it["has_uncertain_reading"])
     print(f"patala 10-11: {n_resolved_1011} resolved by hand-verified table, "
           f"{n_skipped_1011} deliberately left unresolved", file=sys.stderr)
+    print(f"patala 2 (sutras 1-42): {n_resolved_p2} resolved by hand-verified table, "
+          f"{n_skipped_p2} deliberately left unresolved", file=sys.stderr)
     print(f"other patalas: {n_algo_resolved} resolved by unambiguous same-index match", file=sys.stderr)
     print(f"{n_attached} items got VedaVishtaram text/bhashya attached", file=sys.stderr)
     print(f"{still_uncertain} sutras remain has_uncertain_reading=true", file=sys.stderr)
 
-    data["note"] += (
+    CROSSCHECK_NOTE_MARKER = " Cross-checked against VedaVishtaram"
+    base_note = data["note"].split(CROSSCHECK_NOTE_MARKER)[0].rstrip()
+    data["note"] = base_note + (
         " Cross-checked against VedaVishtaram (Layer B, vedavishtaram.in/lakshanam/rp.html "
         "-- Saunaka's text with Uvata's Bhasya and Vishnumitra's Vrtti) on 11 Sep 2026 via "
         "tools/pratishakhya/crosscheck_vedavishtaram.py; see that script's docstring for "
         "what was and wasn't verified. vedavishtaram_sutra_text/vedavishtaram_bhashya are "
         "attached wherever a same-index VedaVishtaram entry exists; "
-        "vedavishtaram_index_verified is only true for patalas 10-11, where that "
-        "correspondence was checked by hand against actual content, not assumed from "
-        "matching indices."
+        "vedavishtaram_index_verified is true for patalas 10-11 and for patala 2's sutras "
+        "1-42 (VedaVishtaram's own patala-2 page content stops at 42; sutras 43-82 have no "
+        "VedaVishtaram counterpart at all and stay unverified), where correspondence was "
+        "checked by hand against actual content, not assumed from matching indices."
     )
 
     with open(DATA_PATH, "w", encoding="utf-8") as f:

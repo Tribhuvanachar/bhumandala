@@ -942,6 +942,98 @@ adopted or discarded.
 
 ---
 
+### 6.10 Paṭala 2 cross-check against VedaViṣṭāram (11 Sep 2026) — done directly, no external
+     prompt
+
+The lead asked for the Paṭala 2 cross-check (flagged as a likely one-pass fix for both the
+RV 1.1.7 visarga gap and the word+iti sandhi question — §6.8/§10) to be run directly rather than
+via another external prompt. Done by hand, the same way Paṭala 10–11 were (§4c), not by
+re-running the existing script unchanged — the existing `algorithmic_resolve()` path had already
+tried and failed on several of these, and a proper cross-check meant finding out *why* and
+fixing what could be fixed with real evidence.
+
+**The headline finding: the "82 vs 41/42 sutra count" gap noted back in §4a.1 is not a numbering
+bug — it's a chapter-scope difference.** VedaViṣṭāram's own Paṭala 2 page content stops dead at
+sutra 42; its Paṭala 3 is the *accent* chapter (confirmed: its opening sūtras are about
+āyāma/viśrambha/ākṣepa and udātta/anudātta/svarita), not a continuation of Layer A's Paṭala-2
+sūtras 43–82. Those 40 sūtras (worked Vedic-verse citations illustrating sandhi patterns, then a
+distinct block of Pragṛhya rules at 2.51 onward, then a closing note attributing a reading to
+"Śākalya the elder") have **no VedaViṣṭāram counterpart at all** under this URL and remain
+entirely uncross-checked by this source — a real, separate gap from what could be closed today.
+
+**Within sūtras 1–42, the correspondence is genuinely reliable**, more so than the module's
+earlier "not verified outside paṭala 10–11" caution implied. Checked systematically (not
+spot-checked): comparing Layer A's own independent transcription against VedaViṣṭāram's,
+character for character, across the full range. The overwhelming majority of what looks like a
+divergence is not a content disagreement at all — **Layer A presents each sūtra's words
+un-sandhi'd (pada boundaries kept separate); VedaViṣṭāram presents the same sūtra continuously
+sandhi-joined** (e.g. Layer A's "ataḥ anyāḥ" = VedaViṣṭāram's "ato'nyāḥ" — the identical words,
+ordinary a-class-visarga-before-a sandhi applied). A few positions where VedaViṣṭāram's own page
+independently drops a trailing visarga (2.20, 2.29, 2.30) look like small scan/rendering slips on
+its side, not something to import into Layer A, which already has the visarga present correctly.
+
+**Five previously-uncertain sūtras in this range were resolved with real evidence, extending
+`crosscheck_vedavishtaram.py`'s hand-verified-table pattern to a new `P2_RESOLUTIONS` table
+(mirroring `P10_11_RESOLUTIONS`, kept separate rather than merged so its scope stays honest):**
+- **2.8, 2.27**: the recurring "pūrva" pattern — 2.27 by a *direct* VedaViṣṭāram match (sandhi-
+  joined as "pūrvastu", which is exactly why the automated `algorithmic_resolve()` missed it
+  before: its word-boundary anchor assumed a space that VedaViṣṭāram's sandhi'd rendering
+  doesn't have), 2.8 by the pattern now independently confirmed 4 times within this same paṭala.
+- **2.33**: three `[?]` resolved — one by direct VedaViṣṭāram match, two by the standard,
+  independently well-attested Sanskrit phonetics term "pūrva-rūpa" (a recognized sandhi-outcome
+  category alongside guṇa/vṛddhi/para-rūpa), not sourced from VedaViṣṭāram for those two.
+- **2.36**: a different KIND of resolution, not "pūrva" — VedaViṣṭāram's own page renders this
+  exact position as a literal ZERO WIDTH NON-JOINER character (U+200C), not text. This is
+  VedaViṣṭāram's own site-side corruption of an avagraha, the identical artifact independently
+  found at the corresponding position in its own sūtra 2.24 (both are ordinary
+  a-class-visarga-before-a elisions). Resolved as an avagraha, not a missing letter — and this
+  reading is independently grammatically sensible on its own terms, not merely inferred from the
+  artifact matching.
+- **2.40**: checked and left genuinely unresolved — VedaViṣṭāram's own numbered div for this
+  sūtra is a much shorter tail excerpt that doesn't reach the position of the uncertain
+  character at all. No independent confirmation exists; not guessed.
+
+Also fixed a real, pre-existing bug in `crosscheck_vedavishtaram.py` found while re-running it
+for real: `data["note"] += (...)` was unconditional, so a second run duplicated the whole
+cross-check sentence verbatim. Now dedupes by splitting on a marker before appending.
+`vedavishtaram_index_verified` is now `true` for Paṭala 2 sūtras 1–42 too (checked by hand, not
+assumed), still `false`/absent for 43–82 (no VedaViṣṭāram data exists to check them against).
+
+**The original question this was meant to help answer — RV 1.1.7's visarga-before-आ gap
+(sūtras 2.24/2.27) — is NOT resolved by this pass, and that's a real, honest result, not a
+failure of the method.** VedaViṣṭāram carries **no Bhāṣya at all** for this region (checked
+2.23–2.28 explicitly: every `bhashya` field is empty). The sūtra *text* itself is now fully
+confirmed clean (matches VedaViṣṭāram exactly, no OCR uncertainty), but the *interpretive*
+question — does 2.24/2.27 describe a general visarga→o/ā derivation step, or something closer
+to Gemini's claimed full-elision-before-ā reading — still has no commentary to settle it via
+this source. Needs either the Sanskrit Library's own critical apparatus (if it has translation
+notes not yet pulled into this corpus) or a genuinely different secondary source.
+
+**A second, more promising, and completely unexpected lead surfaced instead**, sitting in the
+40-sūtra block VedaViṣṭāram doesn't cover at all: **sūtra 2.51, "prakṛtyā itikaraṇādau
+pragṛhyāḥ"** ("[words] before iti-karaṇa [remain in their original form], being pragṛhya") —
+this reads as if it could be directly, generally answering the still-open Q2 question (does
+ordinary sandhi apply to word+iti, except for pragṛhya words?) by making words-before-iti
+pragṛhya *by virtue of* preceding iti, not merely coincidentally pragṛhya for an unrelated
+reason. **This is not being acted on.** The immediately following sūtras qualify it in ways this
+session cannot confidently parse without a commentary: 2.52 ("svareṣu ca ārṣyām" — "and in
+vowels, in the Ārṣī/Ārṣa [tradition/reading]?") may restrict 2.51 to vowel-final words under a
+specific named tradition rather than stating a universal rule; 2.54's "sahodayāḥ ... sarvatra
+eva" and 2.55's "tryakṣarāntāḥ tu na ive" add further conditions and an exception whose precise
+scope is genuinely unclear without expert grammatical parsing or a gloss (this corpus has none
+for this region — checked, `apparatus.comments` is empty for all of 2.51–2.59). Treating this as
+settling Q2 without that parsing would repeat exactly the mistake this whole project has been
+correcting other reviewers for. Flagged in §10 as a real, specific, well-scoped next question —
+NOT implemented as a change to `get_sthitopasthita()`.
+
+No code in the Krama generator itself changed as a result of this pass — only
+`crosscheck_vedavishtaram.py` (the new table, the note-duplication fix) and the underlying
+`rigveda_pratishakhya/data.json` (5 sūtras' text filled in, `vedavishtaram_index_verified`
+extended). Four new tests in `tests/test_rv_pratishakhya_import.py` cover the new resolutions
+and the verified-range boundary.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -1077,6 +1169,21 @@ Kept as a short index back to the full review, not restated in full here:
     Gemini's Pāṇini 8.3.17/8.3.19 citation for RV 1.1.7 — procedurally out of bounds for that
     specific prompt's rule, but a real, checkable, name-relevant (Śākalya/Śākala) lead that
     deserves investigation, not discarding — recorded as an open item in §10.
+24. (Part IX, 11 Sep 2026) Cross-checked Paṭala 2 against VedaViṣṭāram directly, no external
+    prompt, at the lead's explicit request (§6.10). Found the "82 vs 41/42 sūtra" count gap
+    (§4a.1) is a chapter-scope difference, not a numbering bug: VedaViṣṭāram's own Paṭala 2 stops
+    at sūtra 42; its Paṭala 3 is the accent chapter, not a continuation of Layer A's 43–82.
+    Within 1–42, resolved 5 previously-uncertain sūtras with real evidence (a new
+    `P2_RESOLUTIONS` table) — including a genuinely new kind of resolution (VedaViṣṭāram's own
+    page corrupts an avagraha into a literal zero-width-non-joiner character, confirmed at two
+    separate sūtras) — and left one honestly unresolved where VedaViṣṭāram's excerpt doesn't
+    reach the relevant position. Also caught and fixed a real pre-existing bug in
+    `crosscheck_vedavishtaram.py`: re-running it duplicated the corpus `note` field. The
+    RV 1.1.7 visarga gap this was meant to help resolve remains open — VedaViṣṭāram has no
+    Bhāṣya at all for that region — but a promising new lead for the separate Q2 word+iti
+    question turned up instead (sūtra 2.51), in the 40-sūtra block VedaViṣṭāram doesn't cover,
+    genuinely unparseable with confidence without a commentary this corpus doesn't have. Not
+    acted on without one.
 
 ---
 
@@ -1104,16 +1211,25 @@ Kept as a short index back to the full review, not restated in full here:
   word-level cross-check against DGE's own Pada/Saṃhitā data before the Krama work leans on
   it, or whether the existing 96.61%-validated VedaWeb cross-check is sufficient.
 
-- (Added 11 Sep 2026, Part V; updated Part VII) The visarga-before-आ gap found in RV 1.1.7
-  (§6.6) needs either a Prātiśākhya sūtra that specifically licenses Vedic visarga-lopa in this
-  environment or confirmation this is genuinely `bahulaṃ chandasi` free variation with no
-  single derivable rule. Gemini's Part VII answer proposed RPr 2.27, but checking that sūtra's
-  own text (and 2.24's) in this project's already-ingested corpus did not clearly support the
-  specific claim (full elision before ā specifically) — Paṭala 2 overall is one of the paṭalas
-  this project's VedaViṣṭāram cross-check pass (§4c) never reached, so most of its sūtras
-  (including 2.24/2.27) still carry `has_uncertain_reading: true` and no Bhāṣya gloss. Cross-
-  checking Paṭala 2 the way Paṭala 10–11 already were would likely resolve both this and the
-  Q2 question below in one pass.
+- (Added 11 Sep 2026, Part V; updated Part VII; updated §6.10) The visarga-before-आ gap found in
+  RV 1.1.7 (§6.6) needs either a Prātiśākhya sūtra that specifically licenses Vedic visarga-lopa
+  in this environment or confirmation this is genuinely `bahulaṃ chandasi` free variation with
+  no single derivable rule. **Still open after the §6.10 Paṭala 2 cross-check**: 2.24/2.27's
+  text is now fully confirmed accurate (no OCR uncertainty), but VedaViṣṭāram carries no Bhāṣya
+  at all for this region, so the interpretive question (general derivation step vs. Gemini's
+  claimed full-elision-before-ā) still has no commentary to settle it. Needs the Sanskrit
+  Library's own critical apparatus (if any translation notes exist there, not yet pulled into
+  this corpus) or a different secondary source.
+- (Added 11 Sep 2026, §6.10) A genuinely new, well-scoped lead for the Q2 question below, found
+  while cross-checking Paṭala 2: sūtra 2.51, "prakṛtyā itikaraṇādau pragṛhyāḥ" ("[words] before
+  iti-karaṇa are pragṛhya"), sitting in the 40-sūtra block (2.43–82) VedaViṣṭāram doesn't cover
+  at all. Reads as though it could directly answer Q2 (word-before-iti is pragṛhya BECAUSE it
+  precedes iti, not only when independently pragṛhya for an unrelated reason) — but 2.52's
+  "svareṣu ca ārṣyām" and 2.54–55's further conditions/exception genuinely cannot be parsed
+  confidently without a commentary this corpus doesn't have for this range. Do not implement a
+  change to `get_sthitopasthita()` from this alone — get an authoritative reading of 2.51–2.58
+  first (a well-scoped citation-verification task, the same shape as the Paṭala-2 work just
+  done, or worth putting to an external source with the literal text quoted).
 - (Added 11 Sep 2026, Part VIII) A second candidate citation for the same RV 1.1.7 gap: Gemini's
   Round 2 answer invoked Pāṇini 8.3.17 ("bho-bhago-agho-apūrvasya yo'śi") and 8.3.19 ("lopaḥ
   śākalyasya" — the semivowel arising from this sandhi may optionally elide before a vowel, per

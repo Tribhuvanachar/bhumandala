@@ -102,6 +102,49 @@ class RigvedaPratishakhyaData(unittest.TestCase):
             if item["patala"] in (10, 11) and item["has_uncertain_reading"]:
                 self.assertTrue(item["crosscheck"], item["id"])
 
+    def test_hand_verified_uncertain_resolutions_cover_patala_2_up_to_42(self):
+        # 11 Sep 2026: patala 2 sutras 1-42 were hand cross-checked against
+        # VedaVishtaram the same way patala 10-11 were (see
+        # crosscheck_vedavishtaram.py's P2_RESOLUTIONS and
+        # dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md sec.6.10). Every
+        # has_uncertain_reading sutra in that range must have gone through
+        # that table, not be silently untouched.
+        for item in self.data["items"]:
+            if item["patala"] == 2 and item["sutra"] <= 42 and item["has_uncertain_reading"]:
+                self.assertTrue(item["crosscheck"], item["id"])
+
+    def test_patala_2_up_to_42_marked_index_verified(self):
+        # VedaVishtaram's own patala-2 page content stops at sutra 42 --
+        # confirmed directly, not assumed -- so only 1-42 can honestly be
+        # marked as having their VedaVishtaram correspondence checked by
+        # hand; 43-82 have no VedaVishtaram counterpart at all.
+        for item in self.data["items"]:
+            if item["patala"] == 2 and item.get("vedavishtaram_sutra_text"):
+                with self.subTest(sutra=item["id"]):
+                    self.assertEqual(item["vedavishtaram_index_verified"], item["sutra"] <= 42)
+        for n in range(43, 83):
+            with self.subTest(sutra=f"2.{n}"):
+                self.assertNotIn("vedavishtaram_sutra_text", self.by_id[f"2.{n}"])
+
+    def test_2_36_resolved_as_avagraha_not_missing_letter(self):
+        # A real, distinct kind of resolution found 11 Sep 2026: VedaVishtaram's
+        # own page renders an avagraha as a literal ZERO WIDTH NON-JOINER
+        # character at this position (a site-side rendering artifact, not
+        # a missing letter) -- confirmed against the same artifact at the
+        # corresponding position in VedaVishtaram's own 2.24.
+        self.assertEqual(self.by_id["2.36"]["text_devanagari"], "अन्यादि अपि तथा युक्तम् आवोऽन्तोपहितात् सतः।")
+
+    def test_2_40_left_genuinely_unresolved(self):
+        # VedaVishtaram's own numbered div for 2.40 is a much shorter tail
+        # excerpt that doesn't reach the position of this sutra's
+        # uncertain character -- no independent confirmation exists, so
+        # this must stay unresolved rather than guessed.
+        item = self.by_id["2.40"]
+        self.assertTrue(item["has_uncertain_reading"])
+        self.assertEqual(item["text_devanagari"], "")
+        self.assertIn("[?]", item["text_slp1"])
+        self.assertTrue(item["crosscheck"])
+
     def test_vedic_retroflex_la_transliterated_correctly(self):
         # Sanskrit Library's SLP1 uses "x" for the Vedic retroflex la
         # (Xa), not standard SLP1's vocalic X -- see

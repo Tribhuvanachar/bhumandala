@@ -217,6 +217,24 @@ complete record, not just a live queue.
   verify in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §10, not adopted or dismissed. Full
   detail in that doc's §6.9.
 
+  **Update, 11 Sep 2026 — Paṭala 2 cross-checked against VedaViṣṭāram directly, no external
+  prompt.** Done by hand the same way Paṭala 10–11 were, at the lead's request. Found the "82
+  vs 41/42 sūtra" count gap noted back at ingestion time (§4a.1) is a chapter-scope difference,
+  not a numbering bug: VedaViṣṭāram's own Paṭala 2 content stops at sūtra 42; its Paṭala 3 is a
+  different chapter (accent), not a continuation of Layer A's 43–82, which have no
+  VedaViṣṭāram counterpart at all. Within 1–42, resolved 5 previously-uncertain sūtras with real
+  evidence (`crosscheck_vedavishtaram.py`'s new `P2_RESOLUTIONS` table) — including a genuinely
+  new resolution *kind*: VedaViṣṭāram's own page corrupts an avagraha into a literal zero-width-
+  non-joiner character, confirmed independently at two sūtras — and left one honestly unresolved
+  where VedaViṣṭāram's own excerpt doesn't reach the relevant position. Also found and fixed a
+  real pre-existing bug: re-running the crosscheck script duplicated the corpus's `note` field.
+  The RV 1.1.7 visarga gap this was meant to help resolve is **still open** — VedaViṣṭāram
+  carries no Bhāṣya at all for that region — but a promising new lead turned up for the separate
+  Q2 (word+iti sandhi) question instead: sūtra 2.51, in the 40-sūtra block VedaViṣṭāram doesn't
+  cover, which cannot be confidently parsed without a commentary this corpus doesn't have for
+  that range. Not acted on without one. Full detail in
+  `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.10.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead
