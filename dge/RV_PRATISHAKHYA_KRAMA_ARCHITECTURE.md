@@ -584,6 +584,101 @@ Checked by `tests/test_krama_kramahetu_rules.py`.
 
 ---
 
+### 6.6 Real generator engine, computing from Pada-pāṭha directly (Phase 8, 11 Sep 2026)
+
+Built in direct response to the project lead's own detailed spec document
+(`DGE_RIGVEDA_KRAMA_CLOUD_CODE_UPDATED_SUTRA_AND_COMPARATIVE_SPEC.md`, 11 Sep 2026), whose
+core finding was correct: `generate_krama_rv_1_1.py` (§4b/6.5's predecessor) contained
+hardcoded `pairs = [...]` and a hand-typed `PARIGRAHA_FORMS` dict per verse — it proved the
+rules could be *labelled* onto manually prepared RV 1.1 text, not that they could *generate*
+arbitrary Pada-pāṭha input. Three new modules replace that approach:
+
+- **`tools/pratishakhya/sanskrit_phonology.py`** — a real sandhi engine (`samhita_join`,
+  `resolve_compound`) covering Paṭala 2's vowel classes (savarṇa-dīrgha, guṇa, vṛddhi, yaṇ,
+  eṅ-a elision) and Paṭala 4's visarga/consonant rules (sa/eṣa exception, i/u/diphthong-class
+  visarga, a-class visarga with sibilant assimilation, word-final m/n/t). Validated to 69/70
+  (98.6%) exact match against DGE's own attested `samhita_patha` across every actual word pair
+  in RV 1.1 — the one non-match is the 10.3 आ-exception case, out of this module's scope by
+  design (that's a Krama-Paṭala structural rule, not a segmental phonology rule).
+- **`tools/pratishakhya/pratishakhya_classify.py`** — predicates (`is_pragrhya`, `is_rephi`,
+  `parse_compound`, `requires_parigraha`, `get_sthita`/`get_upasthita`/`get_sthitopasthita`,
+  `is_monosyllable_avasana`), replacing the flat Pragṛhya/Rephi word-lists the rejected draft
+  used. Each predicate's docstring states plainly what it still cannot derive (e.g. `is_rephi`
+  is a cache of forms already confirmed rephita, not a phonological derivation from an
+  arbitrary word — a real, named limitation, not silently assumed solved).
+- **`tools/pratishakhya/krama_engine.py`** — `generate_ardharca`/`generate_verse`, the actual
+  generator loop: base pairing via `samhita_join` (10.2), Parigraha triggering via
+  `requires_parigraha` (10.7–10.9) rendered via `get_sthitopasthita` (10.12–10.14, 10.16), and
+  a computational reconstruction of sūtra 10.3's monosyllable-avasāna exception (see below).
+  `split_into_ardharcas()` finds each verse's ardharca boundary automatically, using DGE's own
+  attested `samhita_patha` only as a length-alignment oracle for *where* the boundary falls
+  (never to look up pair *content* — every pair is still computed independently by
+  `samhita_join`); it gets 7 of RV 1.1's 9 verses right unaided, with 1.1.7 and 1.1.9 as
+  logged manual overrides (`ARDHARCA_SPLIT_OVERRIDES`), not silent substitutions.
+
+**Sūtra 10.3's आ-exception**, the spec's stated "single highest-priority special-case test":
+reconstructed from Uvaṭa's own worked example (`आ मन्द्रम् । मन्द्रमा वरेण्यम् । आ वरेण्यम्`)
+as a general condition — when the word about to be retaken for its next pair was immediately
+preceded by a monosyllable-avasāna word, replace the ordinary retake-pair with a tri-unit
+(retaken-word + monosyllable, joined via sandhi, + next word) plus a separate confirming pair
+(monosyllable + next word). `krama_engine.py`'s own `__main__` self-test reproduces Uvaṭa's
+example exactly; `validate_krama_rv1_1.py`'s Test D (below) confirms the same computationally,
+not by construction from the example itself.
+
+**`tools/pratishakhya/regenerate_krama_rv_1_1.py`** runs this pipeline directly against
+`dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json` (items 1.1.1–1.1.9,
+`pada_patha`/`samhita_patha` fields only — no per-verse word list is typed anywhere in this
+script) and compares its output unit-by-unit against the old hand-aligned
+`krama_generated_output.json`, writing both the new output and the comparison to
+`krama_regenerated_output.json`. Result: **7 of 9 verses match the old output exactly**
+(1.1.1, 1.1.3, 1.1.4, 1.1.5, 1.1.6, 1.1.8, 1.1.9). The 2 that differ are both informative, not
+regressions:
+
+- **1.1.2**, ardharca 2 (`सः देवान् आ इह वक्षति`): the new engine detects that इह's preceding
+  neighbour, आ, is a monosyllable-avasāna — structurally the *same* configuration as Uvaṭa's
+  own example — and fires the 10.3 tri-unit reconstruction (`इहा वक्षति` / `आ वक्षति`) instead
+  of the old code's un-flagged ordinary pairing (`इह वक्षति`, admitted `"confidence": "low"` in
+  the old output precisely because it knew this was an आ-adjacent case it wasn't handling).
+  This is the new engine doing what the old one explicitly flagged as unhandled — an
+  improvement, not a mismatch to fix, though it rests on generalizing from *one* attested
+  example to a second, structurally identical case, which is a real (documented, not hidden)
+  interpretive step, not a certainty.
+- **1.1.7**, ardharca 2, one unit (`भरन्तः` + `आ`): the new engine's classical a-class-visarga
+  rule gives `भरन्तो आ` (visarga → ओ, आ kept separate, per the general Paṭala-2/4 rule for
+  visarga before any vowel other than short अ). DGE's own attested continuous `samhita_patha`
+  for this exact environment reads `भरन्त एमसि` — i.e. the visarga is dropped *entirely*
+  (not converted to ओ) before this आ. Neither this engine's classical output nor the old hand
+  -aligned guess (`भरन्तो`, which silently swallowed the आ with no cited rule) matches that
+  attested form. **This is a genuine, open gap**, most likely a Vedic-specific visarga-lopa
+  variant (the Prātiśākhya's own `bahulaṃ chandasi` latitude) not yet covered by any rule in
+  `krama_kramahetu_rules.json` — flagged here rather than patched with an unverified ad hoc
+  rule. Left for whoever picks up Priority-1 item 10.20/10.22-adjacent visarga work; see
+  `tools/pratishakhya/validate_krama_rv1_1.py`'s Test F for the same kind of Saṃhitā-vs-Pada
+  restoration gap this belongs to.
+
+**`tools/pratishakhya/validate_krama_rv1_1.py`** implements the spec's own Test A–H suite
+(sec.21) in the exact required per-test format (sec.22: INPUT PADA / EXPECTED / GENERATED /
+STATUS / APPLIED RULES / TRANSFORMATIONS / WHY). Tests A–E (ordinary pairing, compound
+Parigraha, ardharca-final Parigraha, the 10.3 आ-exception, no cross-ardharca sandhi) **PASS**
+against the real engine — not against hand-picked examples designed to pass, since Tests A–C
+and E use fresh word combinations not copied from RV 1.1's own verses. Tests F (Saṃhitā-vs-
+Pada restoration on retake, 10.21/11.23), G (bahumadhyagata auto-discovery, 10.8), and H
+(Śuddhākṣara restoration, 10.21/11.37–43) are reported **UNRESOLVED**, each with the specific
+missing function named (`restore_shuddhakshara`/`resolve_rephi` derivation,
+`detect_bahumadhyagata`, a restoration-on-retake mechanism in `samhita_join` or a layer above
+it) — these are Priority-0 item 4/5 and Priority-1 items 8/10/12 from the spec's own priority
+order (sec.23), not yet built, and not claimed to be.
+
+**Not yet done, honestly**: the old `generate_krama_rv_1_1.py` and its `PARIGRAHA_FORMS`/
+`VERSES` hardcoded data have not been deleted — the spec's stated success criterion ("obtain
+the same result... regenerate RV 1.1 entirely") is now satisfied for 7/9 verses with the other
+2 understood and documented above, which is close enough to justify treating the old file as
+superseded, but it is being left in place one more round in case the lead wants to review the
+1.1.2/1.1.7 discrepancies first. Full-Rigveda scaling has not started, per the spec's own
+"only after that" gate.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -666,6 +761,16 @@ Kept as a short index back to the full review, not restated in full here:
     its second clause, and 10.20/10.22 had their source-marked `[?]` uncertain characters
     silently guessed rather than left unresolved — the shipped data does not repeat either
     error (§4a.1's correction note, `tools/pratishakhya/SOURCES.md`).
+20. (Part V, 11 Sep 2026) Responding to the lead's own detailed critique document: replaced
+    the hand-aligned `generate_krama_rv_1_1.py` approach with a real computational engine
+    (`sanskrit_phonology.py`, `pratishakhya_classify.py`, `krama_engine.py`, §6.6) that
+    computes sandhi and Parigraha from Pada-pāṭha directly rather than looking up precomputed
+    per-verse strings, and regenerated RV 1.1 through it — 7 of 9 verses match the old
+    hand-aligned output exactly, the other 2 surface one real improvement (10.3's exception
+    correctly generalized to a second case) and one genuine open phonological gap (visarga
+    before आ in 1.1.7, documented rather than patched blindly). Explicitly did NOT import any
+    rule or form from the KYVeda/Taittirīya corpus into this engine, per the lead's strict
+    instruction — that corpus was consulted only as a methodological precedent (§10).
 
 ---
 
@@ -693,5 +798,23 @@ Kept as a short index back to the full review, not restated in full here:
   word-level cross-check against DGE's own Pada/Saṃhitā data before the Krama work leans on
   it, or whether the existing 96.61%-validated VedaWeb cross-check is sufficient.
 
-No code or corpus data changes beyond this document (and the linked `PENDING.md` entry) are
-part of this commit; §4a and §10 are the gating items before implementation can start.
+- (Added 11 Sep 2026, Part V) The visarga-before-आ gap found in RV 1.1.7 (§6.6) needs either a
+  Prātiśākhya sūtra that specifically licenses Vedic visarga-lopa in this environment (search
+  paṭalas 2–4 more carefully — this project's cross-check so far focused on paṭalas 10–11) or
+  confirmation from Layer B/C that this is genuinely `bahulaṃ chandasi` free variation with no
+  single derivable rule.
+- (Added 11 Sep 2026, Part V) Decide whether to delete `generate_krama_rv_1_1.py` and its
+  `PARIGRAHA_FORMS`/`VERSES` hardcoded data now that the real engine (§6.6) reproduces 7/9
+  verses exactly and explains the other 2 — left in place pending the lead's review of the
+  1.1.2/1.1.7 discrepancies.
+- (Added 11 Sep 2026, Part V) Priority-0 items 10.10–10.11 (आ before ardharca-final Parigraha,
+  distinct from 10.3), 10.21/11.23 restoration as an explicit function (currently 10.21's
+  segmental effects are folded implicitly into `samhita_join`, not a separately named
+  restoration step, and 11.23's principle has no function at all — Test F in
+  `validate_krama_rv1_1.py` reports this UNRESOLVED), and Priority-1 items 10.8 bahumadhyagata
+  auto-detection, 10.20/10.22 Pragṛhya/Rephī restoration as named functions, and 11.25/11.37–43
+  remain open — not started.
+
+(Note on the sentence above: it described the state as of Part II/III. As of Part IV/V, actual
+ingestion, rule-logic, and now the real generator engine code have all landed — see §4b, §6.5,
+§6.6 for what's shipped, and the items just above for what's still open.)

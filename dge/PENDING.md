@@ -124,11 +124,32 @@ complete record, not just a live queue.
   Checked by `tests/test_krama_kramahetu_rules.py`. Full detail in
   `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.5.
 
-  **Still open:** an actual generator that executes this rule logic against Pada-pāṭha input
-  hasn't been written yet (this is the rule *data*, not the engine code); the VALIDATE-mode
-  ground-truth question (an independently attested Krama text) from §10 is still unresolved;
-  the Layer C cross-check and the 135 still-unresolved sūtras outside paṭala 10–11 also
-  remain (§10).
+  **Update, 11 Sep 2026 — real generator engine built, RV 1.1 regenerated computationally.**
+  The project lead reviewed the first RV 1.1 output and correctly identified it as a
+  hand-aligned transcription (`generate_krama_rv_1_1.py`'s hardcoded `pairs`/`PARIGRAHA_FORMS`
+  per verse), not a generator, in a detailed spec document. Replaced with
+  `tools/pratishakhya/sanskrit_phonology.py` (a real sandhi engine, validated 69/70 against
+  DGE's own attested `samhita_patha`), `pratishakhya_classify.py` (predicate functions:
+  `is_pragrhya`, `is_rephi`, `requires_parigraha`, `get_sthita`/`get_upasthita`/
+  `get_sthitopasthita` — not flat lookup tables), and `krama_engine.py` (the generator loop,
+  including a computational reconstruction of sūtra 10.3's monosyllable-आ exception from
+  Uvaṭa's own worked example). `tools/pratishakhya/regenerate_krama_rv_1_1.py` runs this
+  directly against DGE's Pada-pāṭha/Saṃhitā-pāṭha (no per-verse word list typed by hand) for
+  all 9 verses of RV 1.1: **7 of 9 match the old hand-aligned output exactly**; the other 2
+  surface one real improvement (10.3 correctly firing on a second, previously-unflagged case
+  in 1.1.2) and one genuine open phonological gap (visarga-before-आ in 1.1.7 not matching
+  DGE's attested `भरन्त एमसि`, documented rather than guessed). `validate_krama_rv1_1.py`
+  implements the spec's own Test A–H suite in its required PASS/FAIL/UNRESOLVED format: A–E
+  pass against the real engine, F/G/H are honestly reported UNRESOLVED (Saṃhitā-vs-Pada
+  restoration on retake, bahumadhyagata auto-detection, and Śuddhākṣara restoration all still
+  need dedicated functions that don't exist yet). Full detail, including exactly which sūtras
+  are and are not covered, in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.6.
+
+  **Still open:** the VALIDATE-mode ground-truth question (an independently attested Krama
+  text) from §10 is still unresolved; the Layer C cross-check and the 135 still-unresolved
+  sūtras outside paṭala 10–11 also remain (§10); Priority-0 items 10.10–10.11 and 10.21/11.23
+  restoration, and Priority-1 items 10.8/10.20/10.22/11.25/11.37–43, are not yet implemented
+  (§6.6, §10). Full-Rigveda scaling has not started, per the spec's own explicit gate.
 
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First

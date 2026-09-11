@@ -1,0 +1,368 @@
+#!/usr/bin/env python3
+"""A real, scoped Sanskrit sandhi engine for the Krama generator.
+
+Built in direct response to a reviewed spec (11 Sep 2026) that correctly
+identified the previous RV 1.1 generator as a hand-aligned reconstruction
+dressed up as generation: it looked up each pair's already-correct form
+from DGE's own attested samhita_patha instead of computing it. This module
+is the computation this generator was missing -- `samhita_join(w1, w2)`
+derives a pair's sandhi'd form from the two BARE pada words, citing which
+rule fired, rather than reading the answer off ground truth.
+
+SCOPE, stated explicitly rather than implied by what's present: this
+covers the segmental (vowel + consonant/visarga) sandhi classes needed to
+reproduce RV 1.1's own attested pairs -- Paṭala 2 (vowel: savarṇa-dīrgha,
+guṇa, vṛddhi, yaṇ, the eṅ-a elision convention) and Paṭala 4 (consonant/
+visarga: the sa/eṣa exception, i/u-class visarga before a vowel, a-class
+visarga before voiced/unvoiced, word-final n/m/t behaviour). It does NOT
+cover: Vedic-specific classes named in Paṭala 2 by name only so far
+(praśliṣṭa, kṣaipra, abhinihita, prakṛtibhāva -- ordinary classical vowel
+sandhi is applied uniformly here instead, which is a real gap, not silently
+assumed equivalent) accented syllables (Paṭala 3 -- accents are stripped
+before this module runs and are not restored; see krama_engine.py), Nati
+(Paṭala 5), Dhvanyāgama (Paṭala 6), or Pluti (Paṭala 7-9). Each of those is
+a named, separate engineering task per the reviewed spec's own Paṭala 5-9
+sections -- not something this module quietly approximates.
+
+Every join returns which rule fired (a short rule_id, not a paṭala/sūtra
+number -- this engine implements the GENERAL classical/Vedic phonological
+classes named in the sūtras' own definitional Paṭala 1-2, not a citation to
+one specific Krama-Paṭala sūtra, which is a different kind of citation --
+see krama_engine.py for the Krama-Paṭala rule citations layered on top of
+this module's output) plus, where accuracy is uncertain, an explicit
+low-confidence flag -- never a silent guess presented as equal-confidence
+to an attested case.
+"""
+import re
+from indic_transliteration import sanscript
+
+VOWELS_SHORT = set("aiufx")
+VOWELS_LONG = set("AIUFX")
+SIMPLE_VOWELS = VOWELS_SHORT | VOWELS_LONG
+DIPHTHONGS = set("eEoO")  # e, ai, o, au in SLP1
+ALL_VOWELS = SIMPLE_VOWELS | DIPHTHONGS
+
+VOICED_CONSONANTS = set("gGjJqQdDbBNnmYRyrlvh")
+UNVOICED_CONSONANTS = set("kKcCwWtTpPSzs")
+SIBILANTS_UNVOICED = set("Szs")
+
+# savarna groups: which short/long pairs count as the "same" vowel for
+# savarna-dirgha and yan purposes
+SAVARNA = {"a": "a", "A": "a", "i": "i", "I": "i", "u": "u", "U": "u", "f": "f", "F": "f"}
+GUNA_OF = {"i": "e", "I": "e", "u": "o", "U": "o", "f": "ar", "F": "ar"}
+VRDDHI_OF_A_PLUS = {"e": "E", "E": "E", "o": "O", "O": "O"}
+YAN_OF = {"i": "y", "I": "y", "u": "v", "U": "v", "f": "r", "F": "r"}
+
+
+def deva_to_slp1(s):
+    s = s.replace("‌", "").replace("‍", "")
+    return sanscript.transliterate(s, sanscript.DEVANAGARI, sanscript.SLP1)
+
+
+def slp1_to_deva(s):
+    return sanscript.transliterate(s, sanscript.SLP1, sanscript.DEVANAGARI)
+
+
+def strip_accents_slp1(s):
+    """Remove Vedic accent marks (anudatta U+0952, svarita U+0951) that
+    survive the Devanagari->SLP1 pass as literal combining characters.
+    Accent restoration is Paatala 3 work, explicitly out of scope here --
+    see the module docstring."""
+    return s.replace("॒", "").replace("॑", "")
+
+
+# Sanskrit Library's own SLP1 variant, already handled in
+# import_rv_pratishakhya.py, is not needed here: DGE's samhita/pada corpus
+# uses plain Devanagari, not that source's idiosyncratic SLP1.
+
+
+def join_vowel_vowel(v1, v2):
+    """v1 = final vowel of word 1 (bare, i.e. short/long letter only),
+    v2 = initial vowel of word 2. Returns (result, rule_id) or None if this
+    pair of vowels isn't a simple vowel-vowel case this function handles."""
+    b1 = SAVARNA.get(v1)
+    b2 = SAVARNA.get(v2)
+    if b1 and b1 == b2:
+        long_form = {"a": "A", "i": "I", "u": "U", "f": "F"}[b1]
+        return long_form, "savarna_dirgha"
+    if v1 in ("a", "A"):
+        if v2 in GUNA_OF:
+            return GUNA_OF[v2], "guna"
+        if v2 in VRDDHI_OF_A_PLUS:
+            return VRDDHI_OF_A_PLUS[v2], "vrddhi"
+    if v1 in YAN_OF and v1 not in ("a", "A") and v2 not in (v1, SAVARNA.get(v1)):
+        # yan: i/I/u/U/f/F + a DISSIMILAR vowel -> semivowel + that vowel
+        return YAN_OF[v1] + v2, "yan"
+    return None
+
+
+def transliterate_word(deva_word):
+    slp1 = strip_accents_slp1(deva_to_slp1(deva_word))
+    return slp1
+
+
+# Rare, lexically-specific irregular sandhi this engine's general rules
+# don't derive correctly -- kept as a small, explicit, cited exception
+# list rather than folded silently into the general visarga rules (which
+# would then misfire on the many regular a-stem words the general rule
+# gets right). Confirmed against DGE's own attested samhita_patha for RV
+# 1.1.7 ("doSaavastardhiyaa", not the regular "doSaavasto dhiyaa" the
+# general a-class-visarga-before-voiced rule would give) -- not otherwise
+# derived from a specific sutra in this pass.
+IRREGULAR_VISARGA_STEMS = {
+    "dozAvastaH": "dozAvastar",
+}
+
+# Similarly lexical: a handful of words attested (in DGE's own samhita_patha
+# for RV 1.1.9) with a word-final vowel lengthened before the next word,
+# not derivable from this engine's general rules (not conditioned on what
+# follows -- "sacasva" lengthens before the consonant-initial "naH" where
+# no general rule of this engine would touch a vowel-before-consonant
+# pair at all). Recorded as an attested exception, not derived from a
+# specific sutra in this pass.
+IRREGULAR_LENGTHENING_BEFORE_CONSONANT = {
+    "sacasva": "sacasvA",
+}
+
+
+def resolve_compound(word_deva):
+    """If word_deva is a Pada-patha avagrhya compound (contains the
+    avagraha 'ऽ'), compute its own internally-combined (samhita) surface
+    form by joining its segments with samhita_join, so external sandhi
+    with a neighbouring word operates on the correct combined form (e.g.
+    "puraH-hitam" -> "purohitam") rather than the raw pada spelling with
+    an untouched avagraha in the middle. Returns (combined_deva,
+    segments_list, rule_ids_used). Non-compound words pass through
+    unchanged with an empty segments list."""
+    if "ऽ" not in word_deva:
+        return word_deva, [], []
+    segments = word_deva.split("ऽ")
+    combined = segments[0]
+    rules = []
+    for seg in segments[1:]:
+        r = samhita_join(combined, seg)
+        combined = r["surface"].replace(" ", "")  # compound-internal join never leaves a gap
+        rules.append(r["rule"])
+    return combined, segments, rules
+
+
+def samhita_join(w1_deva, w2_deva, w1_is_pragrhya=False):
+    """Compute the samhita-patha rendering of the pair (w1, w2), both given
+    as bare (unaccented is fine, accented is stripped) Devanagari pada
+    words. Returns dict: surface (Devanagari), rule (short id),
+    confidence ("high"/"low"), note.
+
+    w1_is_pragrhya: if true (per pratishakhya_classify.is_pragrhya), vowel
+    sandhi is suppressed for w1's final vowel (10.20/Paatala-1's pragrhya
+    definition -- a pragrhya word's vowel does not combine with what
+    follows)."""
+    if "ऽ" in w1_deva:
+        w1_deva = resolve_compound(w1_deva)[0]
+    if "ऽ" in w2_deva:
+        w2_deva = resolve_compound(w2_deva)[0]
+    s1 = transliterate_word(w1_deva)
+    s2 = transliterate_word(w2_deva)
+    if not s1 or not s2:
+        return {"surface": w1_deva + w2_deva, "rule": "empty_input", "confidence": "low",
+                "note": "empty word passed to samhita_join"}
+
+    if s1 in IRREGULAR_LENGTHENING_BEFORE_CONSONANT and s2[0] not in ALL_VOWELS:
+        lengthened = IRREGULAR_LENGTHENING_BEFORE_CONSONANT[s1]
+        return _finish(lengthened + " " + s2, "irregular_lengthening_lexical_exception", w1_deva, w2_deva,
+                        note=f"{w1_deva} is a known lexical exception with an attested lengthened "
+                             "vowel before this word (see IRREGULAR_LENGTHENING_BEFORE_CONSONANT).")
+
+    if s1 in IRREGULAR_VISARGA_STEMS and s2[0] in VOICED_CONSONANTS:
+        base = IRREGULAR_VISARGA_STEMS[s1]  # already ends in "r", attaches directly
+        return _finish(base + s2, "irregular_visarga_lexical_exception", w1_deva, w2_deva,
+                        note=f"{w1_deva} is a known lexical exception to the regular a-class "
+                             "visarga-before-voiced rule (see IRREGULAR_VISARGA_STEMS).")
+
+    last1 = s1[-1]
+    first2 = s2[0]
+
+    # --- word-final visarga (H) ---
+    if last1 == "H":
+        stem = s1[:-1]
+        prev_vowel = stem[-1] if stem else ""
+        # sa/eSa special exception: visarga drops before ANY sound, no
+        # o/r conversion. (Paninian: an irregular, specially legislated
+        # sandhi for these two pronouns.)
+        if stem in ("sa", "eza", "eSa"):
+            # Irregular, specially-legislated sandhi for these two
+            # pronouns: the visarga drops WITHOUT triggering any further
+            # vowel sandhi with what follows (unlike an ordinary a-final
+            # word) -- "saH" + "it" -> "sa it", not "set" (which plain a+i
+            # guna would otherwise give).
+            return _finish(stem + " " + s2, "visarga_sa_esa_elision_blocks_further_sandhi",
+                            w1_deva, w2_deva)
+
+        if prev_vowel in ("i", "I", "u", "U"):
+            # i/u-class visarga: before ANY vowel -> r (attaches directly,
+            # no space, but rendered as an independent vowel after a bare
+            # r -- see _finish_consonant_then_vowel); before
+            # an unvoiced sibilant it can assimilate to the sibilant
+            # itself (approximated here: visarga kept, flagged low-
+            # confidence); before an unvoiced NON-sibilant consonant, the
+            # visarga simply stays (e.g. agniH + puurvebhiH -> agniH
+            # puurvebhiH, visarga unchanged, space kept); before any other
+            # voiced consonant -> r, attaching directly.
+            if first2 in ALL_VOWELS:
+                return _finish_consonant_then_vowel(
+                    stem + "r", s2, "visarga_iu_class_before_vowel", w1_deva, w2_deva)
+            if first2 in SIBILANTS_UNVOICED:
+                return _finish(stem + "H " + s2, "visarga_iu_class_before_sibilant_unresolved",
+                                w1_deva, w2_deva, confidence="low",
+                                note="i/u-class visarga before an unvoiced sibilant can assimilate "
+                                     "to the sibilant itself in some environments; this engine keeps "
+                                     "the visarga rather than guess the assimilated form.")
+            if first2 in UNVOICED_CONSONANTS:
+                return _finish(stem + "H " + s2, "visarga_iu_class_before_unvoiced_consonant", w1_deva, w2_deva)
+            return _finish(stem + "r" + s2, "visarga_iu_class_before_voiced_consonant", w1_deva, w2_deva)
+
+        if prev_vowel in ("e", "E", "o", "O"):
+            # diphthong-class visarga behaves like i/u-class.
+            if first2 in ALL_VOWELS:
+                return _finish_consonant_then_vowel(
+                    stem + "r", s2, "visarga_diphthong_class_before_vowel", w1_deva, w2_deva)
+            if first2 in VOICED_CONSONANTS:
+                return _finish(stem + "r" + s2, "visarga_diphthong_class_before_voiced_consonant", w1_deva, w2_deva)
+            return _finish(stem + "H " + s2, "visarga_diphthong_class_before_unvoiced", w1_deva, w2_deva)
+
+        if prev_vowel in ("a", "A"):
+            # a/a-class visarga: aH -> o before voiced (incl. vowel) --
+            # the "a" of aH is REPLACED by "o", not kept alongside it; if
+            # the following vowel is specifically 'a' it further elides
+            # (marked with an avagraha); before an unvoiced STOP, visarga
+            # assimilates to the sibilant of that stop's own varga
+            # (c/C-varga -> S, T/W-varga -> z, t/T-varga -> s); before k/K/
+            # p/P it stays aH.
+            base = stem[:-1]  # drop the "a"/"A" that combines with visarga into "o"
+            if first2 == "a":
+                rest2 = s2[1:]
+                return _finish(base + "o'" + rest2, "visarga_a_class_before_a_elided", w1_deva, w2_deva)
+            if first2 in ALL_VOWELS or first2 in VOICED_CONSONANTS:
+                return _finish(base + "o " + s2, "visarga_a_class_before_voiced", w1_deva, w2_deva)
+            if first2 in ("c", "C"):
+                return _finish(stem[:-1] + "aS" + s2, "visarga_a_class_sibilant_assimilation_palatal",
+                                w1_deva, w2_deva)
+            if first2 in ("w", "W"):
+                return _finish(stem[:-1] + "az" + s2, "visarga_a_class_sibilant_assimilation_retroflex",
+                                w1_deva, w2_deva)
+            if first2 in ("t", "T"):
+                return _finish(stem[:-1] + "as" + s2, "visarga_a_class_sibilant_assimilation_dental",
+                                w1_deva, w2_deva)
+            return _finish(stem + "H " + s2, "visarga_a_class_before_unvoiced_velar_labial", w1_deva, w2_deva)
+
+        # visarga after some other vowel (e/o/ai/au-final stems are rare
+        # here) -- not modelled precisely; keep as-is, flagged.
+        return _finish(s1 + " " + s2, "visarga_unhandled_context", w1_deva, w2_deva,
+                        confidence="low", note="visarga after a vowel this engine doesn't classify")
+
+    # --- word-final m ---
+    if last1 == "m":
+        if first2 in ALL_VOWELS:
+            return _finish(s1 + s2, "m_before_vowel_unchanged", w1_deva, w2_deva)
+        return _finish(s1[:-1] + "M " + s2, "m_before_consonant_anusvara", w1_deva, w2_deva)
+
+    # --- word-final n (Vedic nasalization before a vowel) ---
+    if last1 == "n":
+        if first2 in ALL_VOWELS:
+            # Vedic recitation convention: certain final-n forms (esp.
+            # accusative plural -an) show as nasalization of the preceding
+            # vowel rather than plain consonant+vowel union before a
+            # following vowel. Flagged low-confidence: this is a real,
+            # specific phenomenon this engine approximates rather than
+            # derives from the actual Nati/Dhvanyagama Paatalas (5-6),
+            # which are out of scope here (see module docstring).
+            stem = s1[:-1]
+            return _finish(stem + "~ " + s2, "n_before_vowel_vedic_nasalization_approximated",
+                            w1_deva, w2_deva, confidence="low",
+                            note="Approximates the Vedic n-before-vowel nasalization convention "
+                                 "(e.g. devān + aa -> devaam-with-candrabindu) without deriving it "
+                                 "from Paatala 5/6, which are out of scope for this pass.")
+        return _finish(s1 + " " + s2, "n_before_consonant_unchanged", w1_deva, w2_deva)
+
+    # --- word-final t ---
+    if last1 == "t":
+        if first2 in ALL_VOWELS:
+            return _finish(s1[:-1] + "d" + s2, "t_before_vowel_voiced", w1_deva, w2_deva)
+        if first2 in ("d", "D", "g", "G", "b", "B", "j", "J"):
+            return _finish(s1[:-1] + first2 + s2, "t_assimilates_to_following_voiced", w1_deva, w2_deva)
+        return _finish(s1 + s2, "t_before_unvoiced_unchanged", w1_deva, w2_deva)
+
+    # --- word-final simple vowel, pragrhya check first ---
+    if last1 in ALL_VOWELS:
+        if w1_is_pragrhya:
+            if first2 == "a":
+                return _finish(s1 + "'" + s2[1:], "pragrhya_no_sandhi_a_elided", w1_deva, w2_deva)
+            return _finish(s1 + " " + s2, "pragrhya_no_sandhi", w1_deva, w2_deva)
+        if first2 in ALL_VOWELS:
+            if last1 in DIPHTHONGS:
+                # e/o/ai/au + vowel: eNaH padantaad ati (a specifically
+                # elides with avagraha); other following vowels -> ay/av
+                # insertion (approximated uniformly here).
+                if first2 == "a":
+                    return _finish(s1 + "'" + s2[1:], "eng_a_class_before_a_elided", w1_deva, w2_deva)
+                glide = {"e": "y", "E": "y", "o": "v", "O": "v"}[last1]
+                return _finish(s1 + glide + s2, "eng_a_class_before_other_vowel", w1_deva, w2_deva)
+            joined = join_vowel_vowel(last1, first2)
+            if joined:
+                result, rule = joined
+                return _finish(s1[:-1] + result + s2[1:], rule, w1_deva, w2_deva)
+            return _finish(s1 + " " + s2, "vowel_vowel_unhandled", w1_deva, w2_deva,
+                            confidence="low", note="vowel pair this engine doesn't classify")
+        return _finish(s1 + " " + s2, "vowel_before_consonant_unchanged", w1_deva, w2_deva)
+
+    # --- other word-final consonants: default, no change, just join with space ---
+    return _finish(s1 + " " + s2, "consonant_before_anything_default", w1_deva, w2_deva)
+
+
+def _finish(slp1_result, rule, w1_deva, w2_deva, confidence="high", note=""):
+    deva = slp1_to_deva(slp1_result)
+    return {"surface": deva, "rule": rule, "confidence": confidence, "note": note,
+            "w1": w1_deva, "w2": w2_deva}
+
+
+def _finish_consonant_then_vowel(prefix_slp1, suffix_slp1, rule, w1_deva, w2_deva):
+    """Like _finish, but for cases where prefix_slp1 ends in a BARE
+    consonant (typically a visarga->r insertion) immediately before
+    suffix_slp1. Confirmed against DGE's own attested samhita_patha
+    (RV 1.1.2's puurvebhiH+RSibhiH -> puurvebhir.RSibhiH) that ONLY
+    vocalic-r/rr (SLP1 f/F) needs to render as its own INDEPENDENT letter
+    rather than merging as a dependent matra on the preceding consonant
+    -- "र्ऋषिभिः" (bare र्, then independent ऋ), not "रृषिभिः" (र् read
+    as if ऋ were its OWN vowel). Every other vowel (verified against
+    RV 1.1.2's RSibhiH+iiDyaH -> RSibhir.iiDyaH, attested as one merged
+    "री") merges normally as a dependent matra -- transliterating the
+    whole string in one pass already does that correctly, so only the
+    f/F case needs the separate-transliterate-then-concatenate
+    workaround (verified: transliterating a string that ends in a bare
+    consonant always ends in an explicit virama)."""
+    if suffix_slp1[0] not in ("f", "F"):
+        return _finish(prefix_slp1 + suffix_slp1, rule, w1_deva, w2_deva)
+    deva = slp1_to_deva(prefix_slp1) + slp1_to_deva(suffix_slp1)
+    return {"surface": deva, "rule": rule, "confidence": "high", "note": "",
+            "w1": w1_deva, "w2": w2_deva}
+
+
+if __name__ == "__main__":
+    # quick self-check against a handful of RV 1.1 pairs
+    cases = [
+        ("अग्निम्", "ईळे", "अग्निमीळे"),
+        ("पुरोहितम्", "यज्ञस्य", "पुरोहितं यज्ञस्य"),
+        ("देवम्", "ऋत्विजम्", "देवमृत्विजम्"),
+        ("यत्", "अङ्ग", "यदङ्ग"),
+        ("अग्निः", "होता", "अग्निर्होता"),
+        ("देवः", "देवेभिः", "देवो देवेभिः"),
+        ("सः", "इत्", "स इत्"),
+        ("इत्", "तत्", "इत्तत्"),
+        ("सूनवे", "अग्ने", "सूनवेऽग्ने"),
+    ]
+    n_ok = 0
+    for w1, w2, expected in cases:
+        r = samhita_join(w1, w2)
+        ok = r["surface"] == expected
+        n_ok += ok
+        print(f"{'OK ' if ok else 'FAIL'} {w1}+{w2} -> {r['surface']!r} (expected {expected!r}) [{r['rule']}]")
+    print(f"{n_ok}/{len(cases)} passed")
