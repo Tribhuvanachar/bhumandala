@@ -64,16 +64,19 @@ window.dgeShowSuperAdminAccessPrompt = function() {
 };
 
 // The path this device's access code is bound to — navigation can never
-// go above this, regardless of what's clicked or dragged. Defaults to
-// 'dge' (the narrowest, safest scope) if nothing was ever granted.
+// go above this, regardless of what's clicked or dragged. Defaults to the
+// repository root ('' — no restriction) if nothing was ever granted: since
+// dge/ moved to the repo root (12 Sep 2026) it no longer names a distinct
+// content-only subfolder to fall back to, so an ungranted device now gets
+// the same scope as an explicit full-repo grant.
 //
-// Deliberately NOT `localStorage.getItem(...) || 'dge'`: a full-repo grant
-// stores '' (empty string, meaning "no restriction"), and '' is falsy —
-// the || would have silently replaced it with 'dge' again, undoing the
-// grant. Only an actually-absent key (never granted at all) falls back.
+// Deliberately NOT `localStorage.getItem(...) || ''`: that would be a
+// no-op either way now, but the ternary is kept so a real narrower default
+// could be reintroduced later without silently being undone by ||'s
+// falsy-empty-string trap (see js/config.js's rootPath: '' convention).
 function dgeAdminGetRootPath() {
   const stored = localStorage.getItem('admin_root_path');
-  return stored !== null ? stored : 'dge';
+  return stored !== null ? stored : '';
 }
 
 function dgeAdminGetName() {
