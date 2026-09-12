@@ -62,7 +62,7 @@
     { id: "phitsutra", group: "tools", label: "Phiṭ-sūtra", glyph: "फि", href: "vyakarana/phitsutra.html" },
     { id: "linganushasana", group: "tools", label: "Liṅgānuśāsana", glyph: "लि", href: "vyakarana/linganushasana.html" },
     { id: "ganapatha", group: "tools", label: "Gaṇapāṭha", glyph: "ग", href: "vyakarana/ganapatha.html" },
-    { id: "kamadhenu", group: "lab", label: "Kamadhenu trials", glyph: "🐄", href: "kamadhenu.html" }
+    { id: "kamadhenu", group: "lab", label: "Kamadhenu trials", glyph: "🐄", href: "kamadhenu/kamadhenu.html" }
   ];
 
   // Per-device vertical position of the tab (px from viewport top). Absent
