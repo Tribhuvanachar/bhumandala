@@ -675,7 +675,7 @@
             '<button data-arrup="' + esc(d.slug) + '" aria-label="Move up">↑</button>' +
             '<button data-arrtop="' + esc(d.slug) + '" aria-label="Move to top">⇱</button></div>';
         }).join('') : '') +
-      (state.superadmin ? '<div class="k2-note" style="margin-top:8px"><a href="javascript:void(0)" onclick="window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage(\'admin/kosha.html\')" style="color:inherit">Kosha Manager → committed tiers & pins</a></div>' : '');
+      (state.superadmin ? '<div class="k2-note" style="margin-top:8px"><a href="javascript:void(0)" onclick="window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage(\'bbKoshaManagerItem\')" style="color:inherit">Kosha Manager → committed tiers & pins</a></div>' : '');
     popAt(anchor, html);
     var pop = $('#k2Pop');
     pop.querySelectorAll('[data-cscript]').forEach(function (b) {

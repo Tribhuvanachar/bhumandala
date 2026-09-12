@@ -1561,7 +1561,7 @@ function dgeSectionTrackerHtml(key) {
   // popup's own "Management Tools" entry uses.
   return `<a href="javascript:void(0)"
       style="margin-left:auto; font-size:11px; color:var(--muted-text); text-decoration:none; white-space:nowrap;"
-      onclick="event.stopPropagation(); window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage('admin/library.html?section=${encodeURIComponent(key)}')"
+      onclick="event.stopPropagation(); window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage('bbLibraryManagerItem', '?section=${encodeURIComponent(key)}')"
       title="Open the completion tracker for this section (super-admin)">📊 Progress</a>`;
 }
 
@@ -1638,7 +1638,7 @@ function dgeRenderLibraryRoot() {
     ? `<div style="font-size:11px; margin-bottom:8px; padding:7px 10px; border:1px dashed var(--accent-gold,#b8860b); border-radius:8px; color:var(--accent-red,#7a3b1d);">
         🛠 <b>Draft preview</b> — showing this browser's unexported Library Manager draft.
         Readers still see the committed file; use <b>⬇ Export overrides</b> in the
-        <a href="javascript:void(0)" onclick="window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage('admin/library.html')" style="color:inherit;">Library Manager</a>
+        <a href="javascript:void(0)" onclick="window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage('bbLibraryManagerItem')" style="color:inherit;">Library Manager</a>
         and commit it to publish.</div>`
     : '';
   const header = draftNote + `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;

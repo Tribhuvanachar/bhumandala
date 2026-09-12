@@ -187,6 +187,28 @@
 
   var injectedRowIds = []; // so re-opening the gate replaces rather than duplicates
 
+  // Every page this loader can open is keyed by its admin-menu.json `id` —
+  // a caller elsewhere in bhumandala (a deep-link button inside Library
+  // Manager, Kosha Manager, etc.) passes that id, never a literal path, so
+  // no BrahmaBuddhi path string sits in bhumandala's public JS anywhere.
+  // Resolved lazily against the same fetch loadMenu() already does, cached
+  // so a deep link opened before the popup menu itself doesn't re-fetch.
+  var menuItemsById = null; // null = not yet fetched; {} once it is
+  var menuFetchPromise = null;
+  function fetchMenuItems() {
+    if (menuItemsById) return Promise.resolve(menuItemsById);
+    if (menuFetchPromise) return menuFetchPromise;
+    menuFetchPromise = fetchFromBrahma('admin/config/admin-menu.json')
+      .then(function (res) { return res.json(); })
+      .then(function (cfg) {
+        menuItemsById = {};
+        (cfg.items || []).forEach(function (item) { menuItemsById[item.id] = item; });
+        return menuItemsById;
+      })
+      .catch(function (e) { menuFetchPromise = null; throw e; });
+    return menuFetchPromise;
+  }
+
   function loadMenu() {
     var popup = document.getElementById('adminToolsPopup');
     if (!popup) return;
@@ -201,11 +223,11 @@
     loadingRow.textContent = 'Loading management tools…';
     popup.appendChild(loadingRow);
 
-    fetchFromBrahma('admin/config/admin-menu.json')
-      .then(function (res) { return res.json(); })
-      .then(function (cfg) {
+    fetchMenuItems()
+      .then(function (itemsById) {
         loadingRow.remove();
         var who = tier();
+        var cfg = { items: Object.keys(itemsById).map(function (k) { return itemsById[k]; }) };
         (cfg.items || []).forEach(function (item, i) {
           var need = item.requires === 'superadmin' ? who.superadmin : (item.requires === 'admin' ? who.admin : true);
           if (!need) return;
@@ -231,8 +253,34 @@
   // ------------------------------------------------------------------
   // Page loading
   // ------------------------------------------------------------------
-  window.dgeOpenBrahmaBuddhiPage = function (path) {
+  // `dest` is EITHER a real BrahmaBuddhi path (always contains "/" — this is
+  // how loadMenu()'s own click handler calls it, having already fetched the
+  // menu securely) OR a bare admin-menu.json `id` (never contains "/" — how
+  // every OTHER caller in bhumandala's public JS/HTML must call it, e.g. a
+  // deep-link button inside Library Manager). An id is resolved against
+  // fetchMenuItems()'s cache before anything loads, so the only path
+  // strings that ever exist in bhumandala's shipped source are the ids
+  // themselves, which mean nothing without a valid BrahmaBuddhi token to
+  // resolve them. `querySuffix`, if given, is appended to the resolved
+  // path (e.g. deep-linking to a specific Library Manager section).
+  window.dgeOpenBrahmaBuddhiPage = function (dest, querySuffix) {
     if (!token()) { showTokenPrompt(); return; }
+    var resolved = dest.indexOf('/') !== -1
+      ? Promise.resolve(dest)
+      : fetchMenuItems().then(function (itemsById) {
+          var item = itemsById[dest];
+          if (!item) throw new Error('unknown management-tool id: ' + dest);
+          return item.path;
+        });
+    resolved.then(function (path) {
+      path = path + (querySuffix || '');
+      openResolvedPage(path);
+    }).catch(function (e) {
+      if (typeof window.showToast === 'function') window.showToast('BrahmaBuddhi: ' + e.message);
+    });
+  };
+
+  function openResolvedPage(path) {
     var overlay = document.getElementById('bbPageOverlay');
     if (!overlay) {
       overlay = document.createElement('div');
@@ -264,7 +312,7 @@
         titleEl.textContent = 'Failed to load ' + path;
         frame.setAttribute('srcdoc', '<pre style="padding:20px;color:#a00;font-family:monospace;white-space:pre-wrap;">' + String(e.message || e).replace(/</g, '&lt;') + '</pre>');
       });
-  };
+  }
 
   // Rewrites <script src>, stylesheet/icon <link href>, <img src> and
   // <a href> found in the fetched page's raw HTML text. See the file
