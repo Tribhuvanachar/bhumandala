@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../js/vandana-guard.js?v=2"></script>
-<script src="../js/admin-gate.js?v=1"></script>
-<script src="../js/contact-email.js?v=1"></script>
+<script src="../../js/vandana-guard.js?v=2"></script>
+<script src="../../js/admin-gate.js?v=1"></script>
+<script src="../../js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ದಾಸ ಸಾಹಿತ್ಯ · Dāsa Sāhitya — DGE</title>
-<link rel="stylesheet" href="../css/dasa-sahitya.css?v=1">
+<link rel="stylesheet" href="../../css/dasa-sahitya.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
 <link rel="icon" type="image/png" sizes="48x48" href="../../images/genie/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/genie/favicon-192.png">
@@ -77,9 +77,9 @@
      link sets/behavior as site-footer.js, see that file's own header comment. -->
 <dge-footer class="site-footer-links"><a class="footer-link" href="../../index.html#architect">About Us</a><span class="footer-sep">·</span><a class="footer-link" href="mailto:sanatanavidyagurukulam@gmail.com">Contact Us</a><span class="footer-sep">·</span><a class="footer-link" href="https://github.com/Tribhuvanachar/bhumandala/blob/main/LICENSE" target="_blank" rel="noopener">License</a><span class="footer-sep">·</span><button class="footer-link" onclick="window.dgeShowTermsNotice()">Terms &amp; Conditions</button></dge-footer>
 
-<script src="../js/dge-shell.js?v=1"></script>
-<script src="../js/dge-breadcrumb.js?v=1"></script>
-<script src="../js/dge-nav-rail.js?v=5"></script>
+<script src="../../js/dge-shell.js?v=1"></script>
+<script src="../../js/dge-breadcrumb.js?v=1"></script>
+<script src="../../js/dge-nav-rail.js?v=5"></script>
 <dge-nav-rail current="dasa-sahitya"></dge-nav-rail>
 <!-- Reader-redesign integration: this page used to be a fully standalone
      mini-app with no cross-reference linking and no reachable word/composer
@@ -91,8 +91,8 @@
      matter). Nothing here is a second bottom-sheet/toast system — the
      composer sheet and composition menu below reuse this exact modal
      shell (see dasa-sahitya.css's narrowly-copied .modal-overlay rules). -->
-<script src="../js/modals.js?v=1"></script>
-<script src="../js/reader-state.js?v=1"></script>
+<script src="../../js/modals.js?v=1"></script>
+<script src="../../js/reader-state.js?v=1"></script>
 <!-- kosha.js's own data-base default ("data/kosha") is a plain relative
      string resolved against the PAGE's URL, correct only one level under
      the repo root (render.html). This page sits one level deeper
@@ -100,9 +100,9 @@
      point (see that file's KOSHA_DATA_BASE comment) rather than a patch to
      the shared file. Set before kosha.js loads. -->
 <script>window.KOSHA_DATA_BASE = '../data/kosha';</script>
-<script src="../js/kosha.js?v=3"></script>
-<script src="../js/contextual-actions.js?v=1"></script>
-<script src="../js/entity-linker.js?v=1"></script>
+<script src="../../js/kosha.js?v=3"></script>
+<script src="../../js/contextual-actions.js?v=1"></script>
+<script src="../../js/entity-linker.js?v=1"></script>
 <!-- 29 Aug 2026, real gap found auditing Kosha's sutra-backlink coverage
      (DGE_UI_CONTRACT.md Part IV-D): kosha.js's openEntry() already guards
      its dgeScanForSutras() call with `typeof window.dgeScanForSutras ===
@@ -111,7 +111,7 @@
      not assumed. Self-contained (fetches its own sutra index relative to
      its own script src -- see that file's own header comment), so adding
      it costs nothing else on the page and needs no data-* config here. -->
-<script src="../js/intellisense.js?v=4.71.1"></script>
+<script src="../../js/intellisense.js?v=4.71.1"></script>
 <script>
 "use strict";
 const BASE = (window.DASA_DATA_BASE || "../data/DvaitaVedanta/Itara/DasaSahitya").replace(/\/$/,"");
@@ -530,6 +530,6 @@ window.dgeOpenComposerSheet=function(composer,slug){
 boot();
 </script>
 <!-- 7 Sep 2026: same reader copy/right-click guard as index.html (admins exempt). -->
-<script src="../js/copy-guard.js?v=2"></script>
+<script src="../../js/copy-guard.js?v=2"></script>
 </body>
 </html>

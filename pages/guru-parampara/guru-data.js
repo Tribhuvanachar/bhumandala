@@ -48,7 +48,7 @@
       // The द्वैतवेदान्तग्रन्थानुक्रमणी catalogue's works for these ācāryas,
       // keyed by this file's own node ids (tools/sync_dvaita_crosslinks.py).
       // Optional: an older checkout without it just shows no extra works.
-      fetch('../data/catalogs/author_works_index.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+      fetch('../../data/catalogs/author_works_index.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       var d = res[0], placesDoc = res[1], worksDoc = res[2];
       var nodes = (d.nodes || []).map(function (n) { return Object.assign({}, n); });

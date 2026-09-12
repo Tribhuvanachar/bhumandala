@@ -866,7 +866,7 @@ window.DGE.App = (function () {
   async function loadLibraryCatalog() {
     const searchEl = $('targetSlugSearch');
     try {
-      const res = await fetch('../data/library.json', { cache: 'no-store' });
+      const res = await fetch('../../data/library.json', { cache: 'no-store' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       libraryCatalog = await res.json();
       const granthas = (libraryCatalog && libraryCatalog.granthas) || [];
