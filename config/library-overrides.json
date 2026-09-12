@@ -1,5 +1,5 @@
 {
- "note": "DGE library curation overrides — a NON-DESTRUCTIVE display layer read by js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
+ "note": "DGE library curation overrides — a NON-DESTRUCTIVE display layer read by js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to config/library-overrides.json.",
  "version": 1,
  "updatedAt": 1788999600000,
  "hidden": [],

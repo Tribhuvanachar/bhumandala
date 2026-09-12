@@ -5,7 +5,7 @@
 // role doesn't clear the gate. It does NOT stop a determined visitor who
 // already knows (or guesses) the direct file path from fetching the raw
 // data.json — the corpus files stay public static assets on Hosting,
-// exactly like the pre-existing admin/config/library-overrides.json
+// exactly like the pre-existing config/library-overrides.json
 // "hidden" list this extends. Real per-request enforcement would mean
 // serving corpus text through an authenticated proxy instead of static
 // files, which is a materially different (and more expensive) hosting

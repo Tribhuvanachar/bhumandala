@@ -17,7 +17,7 @@
 //   4. Leaderboards — most used, least used, never-attested vṛttas of the
 //      DB, granthas with the most variety.
 //
-// Feature visibility comes from admin/config/chandas-features.json (a
+// Feature visibility comes from config/chandas-features.json (a
 // per-device override lives in localStorage 'dge_chandas_features'); the
 // super-admin panel at the bottom edits it and can publish it to the repo
 // with the same GitHub token the content editor uses ('github_admin_pat').
@@ -25,7 +25,7 @@
   'use strict';
   var ROOT = '../';
   var REPORTS = ROOT + 'data/vedanga/chandas/reports/';
-  var FEATURES_URL = '../../admin/config/chandas-features.json';
+  var FEATURES_URL = '../../config/chandas-features.json';
   var FEATURE_KEYS = ['reports', 'regenerate', 'downloadJson', 'corpusStats', 'branchScan', 'libraryScan',
     'vruttaReport', 'leaderboards', 'unattested', 'readerLinks'];
   var BRANCH_LABEL = { vedas: 'वेदाः', upaveda: 'उपवेदाः', 'vedanga/kalpa': 'वेदाङ्गम् · कल्पः', 'vedanga/vyakarana': 'वेदाङ्गम् · व्याकरणम्',
@@ -348,7 +348,7 @@
       '<button type="button" class="btn ai" id="cr-adm-save">Save on this device</button> ' +
       '<button type="button" class="btn" id="cr-adm-reset">Reset to repo file</button> ' +
       '<button type="button" class="btn" id="cr-adm-dl">⬇ chandas-features.json</button> ' +
-      '<button type="button" class="btn" id="cr-adm-publish" title="PUT admin/config/chandas-features.json on main with the stored GitHub token">⬆ Publish to repo</button>' +
+      '<button type="button" class="btn" id="cr-adm-publish" title="PUT config/chandas-features.json on main with the stored GitHub token">⬆ Publish to repo</button>' +
       '</div><div id="cr-adm-msg" class="muted small"></div>';
     return h;
   }
@@ -363,7 +363,7 @@
     var msg = $('#cr-adm-msg');
     var tok = ''; try { tok = localStorage.getItem('github_admin_pat') || ''; } catch (e) {}
     if (!tok) { msg.textContent = 'No GitHub token on this device (set it in the reader\'s Admin → Repo Files).'; return; }
-    var owner = 'Tribhuvanachar', repo = 'bhumandala', path = 'admin/config/chandas-features.json';
+    var owner = 'Tribhuvanachar', repo = 'bhumandala', path = 'config/chandas-features.json';
     var body = JSON.stringify({ note: S.featuresNote || 'Chandas report page feature visibility (see js/chandas-page.js).', updatedAt: new Date().toISOString(), features: features }, null, 2) + '\n';
     var api = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path;
     var hdr = { Authorization: 'token ' + tok, Accept: 'application/vnd.github+json' };

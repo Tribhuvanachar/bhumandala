@@ -24,7 +24,7 @@
   "                     neither needs an entry here.",
   "                     ONE EXCEPTION: the section with panel:\"contributors\" has",
   "                     no items[] here on purpose -- its list is read live from",
-  "                     admin/content/reader.json's CONTRIBUTORS_CONFIG instead,",
+  "                     content/reader.json's CONTRIBUTORS_CONFIG instead,",
   "                     so there is one editable contributor list, not two that",
   "                     can drift apart. Edit that list from the reader app's own",
   "                     About panel, not here.",
@@ -41,7 +41,7 @@
   "lotus, anjali, home, lamp, seed. An unknown name simply draws nothing.",
   "",
   "How the page behaves — where it leads, whether respects are required, where the",
-  "flowers land — is admin/config/home.json, not this file."
+  "flowers land — is config/home.json, not this file."
  ],
  "brand": {
   "latin": "Sarvamūla Digital Library",

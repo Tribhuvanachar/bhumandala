@@ -13,7 +13,7 @@
 //   · AI strictly behind the ⋯ context menu (BYOK, via window.DGEGemini)
 //   · per-card copy + whole-page copy/share + #word= deep links ·
 //   pin/hide/reorder (reader-local) · committed visibility tiers from
-//   admin/config/kosha-overrides.json · per-kosha A-Z browse mode.
+//   config/kosha-overrides.json · per-kosha A-Z browse mode.
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
@@ -675,7 +675,7 @@
             '<button data-arrup="' + esc(d.slug) + '" aria-label="Move up">↑</button>' +
             '<button data-arrtop="' + esc(d.slug) + '" aria-label="Move to top">⇱</button></div>';
         }).join('') : '') +
-      (state.superadmin ? '<div class="k2-note" style="margin-top:8px"><a href="../admin/kosha.html" style="color:inherit">Kosha Manager → committed tiers & pins</a></div>' : '');
+      (state.superadmin ? '<div class="k2-note" style="margin-top:8px"><a href="javascript:void(0)" onclick="window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage(\'admin/kosha.html\')" style="color:inherit">Kosha Manager → committed tiers & pins</a></div>' : '');
     popAt(anchor, html);
     var pop = $('#k2Pop');
     pop.querySelectorAll('[data-cscript]').forEach(function (b) {
@@ -950,7 +950,7 @@
   // ---- boot ---------------------------------------------------------------
   function boot() {
     try { state.superadmin = localStorage.getItem('is_superadmin') === 'true' || localStorage.getItem('dge.admin.ok') === '1'; } catch (e) {}
-    fetchJson('../admin/config/kosha-overrides.json').then(function (ov) {
+    fetchJson('../config/kosha-overrides.json').then(function (ov) {
       if (ov) state.overrides = Object.assign(state.overrides, ov);
       var input = $('#k2Input'), t;
       input.oninput = function () {

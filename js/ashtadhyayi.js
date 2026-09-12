@@ -1,6 +1,6 @@
 /* ==========================================================================
  * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.6.1
- *   v1.6.1 — admin/content/ashtadhyayi-layers.json: a site-wide, admin-level
+ *   v1.6.1 — content/ashtadhyayi-layers.json: a site-wide, admin-level
  *            visibility gate on commentary layers and enrichment fields
  *            (distinct from each reader's own layer toggle), fetched fresh
  *            on every load. Ships with the ashtadhyayi.com English gloss
@@ -62,7 +62,7 @@
   // Site-wide, admin-level gate on which commentary layers (and which
   // per-sutra enrichment fields, e.g. the removed ashtadhyayi.com English
   // gloss) are even offered to a reader at all -- see
-  // admin/content/ashtadhyayi-layers.json's own _readme for why this is a
+  // content/ashtadhyayi-layers.json's own _readme for why this is a
   // separate thing from state.enabled below (that one is each reader's own
   // preference among whichever layers THIS gate already approved). Fetched
   // fresh on every load, no caching, so an admin toggle takes effect for
@@ -72,7 +72,7 @@
   // the thing that has to succeed for the reader to see anything.
   var siteVisibleFields = {};
   function loadLayerVisibility(){
-    return fetchJSON("../admin/content/ashtadhyayi-layers.json?t=" + Date.now()).then(function(cfg){
+    return fetchJSON("../content/ashtadhyayi-layers.json?t=" + Date.now()).then(function(cfg){
       var layers = (cfg && cfg.layers) || {};
       ORDER = ORDER.filter(function(k){ return !(layers[k] && layers[k].visible === false); });
       siteVisibleFields = (cfg && cfg.fields) || {};
@@ -915,7 +915,7 @@
   // action set -- via contextual-actions.js's runtime extension point
   // (dgeRegisterContextualActions), scoped to this page's own taxonomy path
   // so no other reader's commentary/shloka menus are affected. Base
-  // 'commentary' actions in admin/config/contextual-actions.json assume
+  // 'commentary' actions in config/contextual-actions.json assume
   // render.html's shloka-card shape (their handlers call
   // openBhashyaPickerForShloka etc., which don't exist here) -- removed for
   // this taxonomy path and replaced with handlers that fit THIS page's own

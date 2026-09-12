@@ -10,11 +10,11 @@
    So the page teaches itself: everything dims, one thing lights up, a card
    says what it is, and Next moves on.
 
-   The steps are admin/content/tour.json — wording, order and what each one
+   The steps are content/tour.json — wording, order and what each one
    points at, all editable in place like the rest of the site's text.
 
    A step whose target is not on the page is skipped rather than shown
-   pointing at nothing. That is not an edge case: admin/config/menu.json can
+   pointing at nothing. That is not an edge case: config/menu.json can
    switch a menu item off, and the admin controls do not exist at all for an
    ordinary reader, so the tour has to describe the site THIS person can see.
    ========================================================================= */
@@ -28,8 +28,8 @@
   const self = (document.currentScript && document.currentScript.src) || '';
 
   function contentUrl() {
-    try { return new URL('../admin/content/tour.json', self).href; }
-    catch (e) { return '../admin/content/tour.json'; }
+    try { return new URL('../content/tour.json', self).href; }
+    catch (e) { return '../content/tour.json'; }
   }
 
   const esc = (s) => String(s == null ? '' : s)

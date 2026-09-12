@@ -138,7 +138,7 @@ function displayPathFor(objectName, moves) {
 /**
  * Fold the two config sources into the one shape `decide` wants.
  *
- *   overrides   admin/config/library-overrides.json, which owns the shelf
+ *   overrides   config/library-overrides.json, which owns the shelf
  *               and the `moves` that turn an on-disk path into a display one.
  *   roleAccess  Firestore's config/roleAccess, which owns the gates, because
  *               a superadmin edits those live in admin/access-control.html

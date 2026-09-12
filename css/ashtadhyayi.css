@@ -3,7 +3,7 @@
 
    Lifted out of the page unchanged — same rules, same order, so it renders
    exactly as before. Pages hold structure; their styles live here and their
-   words in admin/content/.
+   words in content/.
 
    Page chrome shared byte-for-byte with vyakarana.css (reset, body font,
    header, .ctl, .icon, the bare input/select look, .crumbs, .btn.ai,

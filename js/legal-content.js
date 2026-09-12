@@ -1,6 +1,6 @@
 /* =========================================================================
    legal-content.js — fill the Credits / License / Terms modals from one
-   admin-editable source, admin/content/legal.json.
+   admin-editable source, content/legal.json.
 
    The reader ships static fallback copy inside #licenseModal / #termsModal so
    the modals are never empty if this file or the JSON fails to load; when the
@@ -8,7 +8,7 @@
    JSON (Credits was previously just an alias for the About modal).
 
    Edit the text at admin/legal.html (super-admin → Edit text → publish) or by
-   hand in admin/content/legal.json — both the reader modals and that admin
+   hand in content/legal.json — both the reader modals and that admin
    page read the same file, so there is one source of truth.
    ========================================================================= */
 (function () {
@@ -49,13 +49,13 @@
   }
 
   function contentUrl() {
-    // core.js's dgeContentUrl resolves admin/content/<file> correctly whether
+    // core.js's dgeContentUrl resolves content/<file> correctly whether
     // the site is served from a domain root or a project sub-path — the same
     // helper the reader uses for whats-new.json. Fall back to a page-relative
     // path (the reader lives one level deep, at render.html) if it's absent.
     var base = (typeof window.dgeContentUrl === 'function')
       ? window.dgeContentUrl('legal.json')
-      : '../admin/content/legal.json';
+      : '../content/legal.json';
     return base + (base.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now();
   }
 

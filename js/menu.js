@@ -1,5 +1,5 @@
 /* =========================================================================
-   Menus, from admin/config/menu.json.
+   Menus, from config/menu.json.
 
    The top-bar buttons, the Explore popup, the Admin popup and the theme list
    used to be fixed markup in render.html: adding an item meant editing the
@@ -19,8 +19,8 @@
   // at any depth and on a project subpath as well as a domain root.
   const self = (document.currentScript && document.currentScript.src) || '';
   let url;
-  try { url = new URL('../admin/config/menu.json', self).href; }
-  catch (e) { url = '../admin/config/menu.json'; }
+  try { url = new URL('../config/menu.json', self).href; }
+  catch (e) { url = '../config/menu.json'; }
 
   const esc = (s) => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')

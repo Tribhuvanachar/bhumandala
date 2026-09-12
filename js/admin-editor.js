@@ -103,16 +103,23 @@ function dgeRevealAdminTools() {
   if (!dgeCheckSuperadminGate()) return;
   const btn = document.getElementById('adminToolsBtn');
   if (btn) btn.style.display = 'flex';
-  ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem', 'adminContentProvenanceItem', 'adminRepoMapItem', 'adminOcrReviewItem'].forEach(id => {
+  // 12 Sep 2026: every id that used to name an admin/*.html page directly
+  // (adminLibraryManagerItem, adminKoshaManagerItem, ...) was removed from
+  // this list along with those pages themselves — they moved to the private
+  // BrahmaBuddhi repo and are no longer named anywhere in this one.
+  // adminBrahmaBuddhiItem is the single, generically-labelled replacement:
+  // it only opens the PAT prompt (js/admin-brahmabuddhi.js), which fetches
+  // the real (page-naming) menu from BrahmaBuddhi itself once unlocked.
+  ['adminFilesItem', 'adminConfigItem', 'adminBrahmaBuddhiItem'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'flex';
   });
-  // Manage Users / Access Control only make sense once accounts are
-  // actually set up — showing them before then would just be menu items
-  // that always toast "not set up yet" (see openUserRolesModal in
-  // user-roles.js and admin/access-control.html's own gate).
+  // Manage Users only makes sense once accounts are actually set up —
+  // showing it before then would just be a menu item that always toasts
+  // "not set up yet" (see openUserRolesModal in user-roles.js). Access
+  // Control's own gate moved with it to BrahmaBuddhi's admin/access-control.html.
   if (window.AUTH_CONFIG && window.AUTH_CONFIG.enabled) {
-    ['adminUserRolesItem', 'adminAccessControlItem', 'adminViewAsItem'].forEach(id => {
+    ['adminUserRolesItem', 'adminViewAsItem'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'flex';
     });

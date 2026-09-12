@@ -46,17 +46,17 @@
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="../../css/intellisense.css?v=3">
 <link rel="stylesheet" href="../../css/footnotes.css?v=2">
-<!-- In-place editing of admin/content/reader.json for a super admin. -->
+<!-- In-place editing of content/reader.json for a super admin. -->
 <link rel="stylesheet" href="../../css/content-inline.css?v=1">
 <!-- The guided walkthrough, offered once on a first visit and reopenable
-     from About. Steps live in admin/content/tour.json. -->
+     from About. Steps live in content/tour.json. -->
 <link rel="stylesheet" href="../../css/tour.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
 <link rel="icon" type="image/png" sizes="48x48" href="../../images/genie/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/genie/favicon-192.png">
 <link rel="apple-touch-icon" href="../../images/genie/apple-touch-icon.png">
 </head>
-<body data-content-file="admin/content/reader.json">
+<body data-content-file="content/reader.json">
 
 <div id="toastMsg"></div>
 
@@ -187,7 +187,7 @@
      break this drawer's own position:fixed anchoring.
      Every id, onclick handler and data-topbar attribute below is byte-for-
      byte unchanged, so admin-editor.js, core.js, user-auth.js and
-     menu.js's admin/config/menu.json-driven reordering (which finds these
+     menu.js's config/menu.json-driven reordering (which finds these
      via `.top-actions [data-topbar=...]` and reorders within .top-actions)
      all keep working with no JS changes: .top-actions is still exactly
      the element menu.js looks for and reorders, just relocated as a
@@ -207,7 +207,7 @@
       </div>
       <div class="top-actions">
 
-        <!-- data-topbar names each entry for admin/config/menu.json, which decides
+        <!-- data-topbar names each entry for config/menu.json, which decides
              which of these appear and in what order. Without that file they stay
              exactly as written here.
 
@@ -237,19 +237,20 @@
             <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
             <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
             <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
-            <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
-            <div class="pop-item" id="adminLibraryManagerItem" style="display:none;" onclick="window.location.href='../../admin/library.html'">🗂️ Library Manager</div>
-            <div class="pop-item" id="adminKoshaManagerItem" style="display:none;" onclick="window.location.href='../../admin/kosha.html'">📖 Kosha Manager</div>
-            <div class="pop-item" id="adminAshtadhyayiManagerItem" style="display:none;" onclick="window.location.href='../../admin/ashtadhyayi.html'">📜 Ashtadhyayi Manager</div>
-            <div class="pop-item" id="adminDasaCaptureItem" style="display:none;" onclick="window.location.href='../../admin/dasa-capture.html'">🎶 Dasa Sahitya Capture</div>
-            <div class="pop-item" id="adminHolyPlacesManagerItem" style="display:none;" onclick="window.location.href='../../admin/holy-places.html'">🛕 Holy Places Curation</div>
-            <div class="pop-item" id="adminAudioManagerItem" style="display:none;" onclick="window.location.href='../../admin/audio.html'">🎙️ Audio Admin<span class="new-badge" id="adminAudioManagerBadge" style="display:none;">NEW</span></div>
-            <div class="pop-item" id="adminRepoMapItem" style="display:none;" onclick="window.location.href='../../admin/repo-map.html'">⚙️ Repository &amp; Workflows</div>
-            <div class="pop-item" id="adminOcrReviewItem" style="display:none;" onclick="window.location.href='../../admin/ocr-review.html'">🔍 OCR Review</div>
-            <div class="pop-item" id="adminOcrStudioItem" style="display:none;" onclick="window.location.href='../../admin/ocr-studio.html'">🎨 OCR Studio</div>
-            <div class="pop-item" id="adminContentProvenanceItem" style="display:none;" onclick="window.location.href='../../admin/content-provenance.html'">🗺️ Content Provenance</div>
+            <!-- 12 Sep 2026: every item that used to href straight to an
+                 admin/*.html page (Library Manager, Kosha Manager, Repo &
+                 Workflows, OCR Review/Studio, Access Control, the Convert
+                 tool, ...) was removed from here along with those pages —
+                 they moved to the private BrahmaBuddhi repo and this
+                 markup is served to EVERY visitor regardless of what
+                 config/menu.json later does to it, so a hardcoded href
+                 would have named every one of them in this repo's raw
+                 HTML. This one generically-labelled row is the only trace
+                 left; js/admin-brahmabuddhi.js fetches the real (page-
+                 naming) menu from BrahmaBuddhi only after a valid token
+                 unlocks it. -->
+            <div class="pop-item" id="adminBrahmaBuddhiItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.dgeOpenBrahmaBuddhiGate()">🔒 Management Tools</div>
             <div class="pop-item" id="adminUserRolesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openUserRolesModal()">👥 Manage Users</div>
-            <div class="pop-item" id="adminAccessControlItem" style="display:none;" onclick="window.location.href='../../admin/access-control.html'">🔐 Access Control</div>
           </div>
         </div>
 
@@ -261,7 +262,7 @@
              open their "choose a view" page (vyakarana/<tool>/index.html) rather
              than the single old flat page. Three layouts each were built for all
              four and reachable from none of them -- only Guru Paramparā's chooser
-             was ever linked. admin/config/menu.json already named these URLs; it
+             was ever linked. config/menu.json already named these URLs; it
              only ever filters and reorders the markup below, so naming a page
              there could never wire it up on its own. Each chooser links back to
              its own classic page, so nothing became unreachable. -->
@@ -1485,6 +1486,7 @@
      abbreviation routing it was first noticed against) never run. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" async></script>
 <script src="../../js/admin-editor.js?v=4.87.0"></script>
+<script src="../../js/admin-brahmabuddhi.js?v=1"></script>
 <script src="../../js/config-editor.js?v=4.85.0"></script>
 <script src="../../js/content-editor.js?v=4.61.4"></script>
 <script src="../../js/text-abbreviations.js?v=1"></script>
@@ -1493,7 +1495,7 @@
      static fetch if this file is somehow absent). -->
 <script src="../../js/corpus-fetch.js?v=1.0"></script>
 <script src="../../js/core.js?v=4.85.0"></script>
-<!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
+<!-- Reads config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
 <script src="../../js/menu.js?v=4.79.0"></script>

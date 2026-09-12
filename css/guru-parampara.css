@@ -3,7 +3,7 @@
 
    Lifted out of the page unchanged — same rules, same order, so it renders
    exactly as before. Pages hold structure; their styles live here and their
-   words in admin/content/.
+   words in content/.
    ========================================================================= */
 
 :root{--bg:#0e1116;--panel:#161b23;--panel2:#1d2430;--ink:#e8ecf3;--muted:#9aa6b6;--line:#2b3644;--accent:#e8b23a;--gold:#ffd166;

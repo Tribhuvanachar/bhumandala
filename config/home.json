@@ -1,6 +1,6 @@
 {
   "_readme": [
-    "How the landing page behaves. Its words are admin/content/home.json.",
+    "How the landing page behaves. Its words are content/home.json.",
     "",
     "  enterUrl         where 'Enter the Library' goes.",
     "  requireOffering  false lets visitors straight through, vandana still shown.",

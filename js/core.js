@@ -75,7 +75,7 @@ window.dgeForceRefreshContent = function() {
 // the fields actually changed, and anything absent falls back to the
 // hardcoded default. config.js itself is never modified by the UI.
 /* ---------------------------------------------------------------------- //
-   Admin config lives outside  — see /admin/config/. These files used to
+   Config and content live outside  — see /config/ and /content/. These files used to
    sit in data/ and were fetched with a page-relative path, which only
    worked from pages one level deep. The path is now derived from this
    script's own URL (always <site>/js/), so it holds at any page depth
@@ -298,19 +298,23 @@ const dgeUpgradeLegacySlug = window.dgeUpgradeLegacySlug;
 window.dgeAdminConfigUrl = window.dgeAdminConfigUrl || function (name) {
   const self = (document.currentScript && document.currentScript.src) ||
                (window.DGE_SCRIPT_BASE || '');
-  try { return new URL('../admin/config/' + name, self).href; }
-  catch (e) { return '../admin/config/' + name; }   // fail soft, never throw
+  try { return new URL('../config/' + name, self).href; }
+  catch (e) { return '../config/' + name; }   // fail soft, never throw
 };
 
-/* What's New and Coming Soon are content, not settings — admin/content/, not
-   admin/config/. Loaded here so the Site Settings editor can fill its form
+/* What's New and Coming Soon are content, not settings — content/, not
+   config/. Loaded here so the Site Settings editor can fill its form
    from the same source the reader sees; modals.js re-fetches on open so a
-   freshly published update reaches someone who already has the site loaded. */
+   freshly published update reaches someone who already has the site loaded.
+   (12 Sep 2026: these used to sit under admin/config/ and admin/content/ —
+   both renamed to repo-root config/ and content/ when the actual admin
+   TOOLS moved out to BrahmaBuddhi; these two files are read live by every
+   visitor and stayed public.) */
 window.dgeContentUrl = window.dgeContentUrl || function (name) {
   const self = (document.currentScript && document.currentScript.src) ||
                (window.DGE_SCRIPT_BASE || '');
-  try { return new URL('../admin/content/' + name, self).href; }
-  catch (e) { return '../admin/content/' + name; }
+  try { return new URL('../content/' + name, self).href; }
+  catch (e) { return '../content/' + name; }
 };
 
 window.dgeWhatsNewPromise = fetch(window.dgeContentUrl('whats-new.json') + '?t=' + Date.now(),
@@ -326,7 +330,7 @@ window.dgeWhatsNewPromise = fetch(window.dgeContentUrl('whats-new.json') + '?t='
   });
 
 /* The Support and About panels' text. These were constants in config.js; they
-   are content, so they come from admin/content/reader.json. Everything that
+   are content, so they come from content/reader.json. Everything that
    reads window.SPONSOR_CONFIG and friends is unchanged — the globals are set
    here instead of there, before the first render. */
 window.dgeReaderContentPromise = fetch(window.dgeContentUrl('reader.json') + '?t=' + Date.now(),
@@ -348,7 +352,7 @@ window.dgeReaderContentPromise = fetch(window.dgeContentUrl('reader.json') + '?t
     if (rc.CONTRIBUTORS_CONFIG) window.CONTRIBUTORS_CONFIG = rc.CONTRIBUTORS_CONFIG;
     if (rc.KEY_SPONSORS_CONFIG) window.KEY_SPONSORS_CONFIG = rc.KEY_SPONSORS_CONFIG;
     // content-inline.js (loaded on this page via <body data-content-file=
-    // "admin/content/reader.json">) stages every edit into window.SITE_CONFIG
+    // "content/reader.json">) stages every edit into window.SITE_CONFIG
     // by dotted path and expects the live page to already be reading off
     // that same object -- rc IS this file, so pointing SITE_CONFIG at it
     // directly means an edit to e.g. "SPONSOR_CONFIG.introText" lands on the
@@ -372,7 +376,7 @@ window.dgeConfigOverridesPromise = Promise.all([
       SPONSOR_CONFIG: window.SPONSOR_CONFIG,
       CONTRIBUTORS_CONFIG: window.CONTRIBUTORS_CONFIG,
       KEY_SPONSORS_CONFIG: window.KEY_SPONSORS_CONFIG
-      // WHATS_NEW_CONFIG is not here: it is admin/content/whats-new.json now,
+      // WHATS_NEW_CONFIG is not here: it is content/whats-new.json now,
       // fetched fresh by modals.js rather than merged once at boot.
     };
     Object.keys(targets).forEach(k => {
@@ -1328,11 +1332,11 @@ window.dgeHighlightQueryOnLoad = dgeHighlightQueryOnLoad;
 
 // SEO canonical (7 Sep 2026, tools/seo): the interactive reader is one URL family (?path=…&jumpShloka=…, ?rv1.1.3)
 // over content that also exists as static pages (/veda/rigveda/samhita/mandala-1/…). Once those pages are
-// served (admin/config/seo.json canonicalLive), the reader points <link rel="canonical"> at the grantha's page so
+// served (config/seo.json canonicalLive), the reader points <link rel="canonical"> at the grantha's page so
 // search engines index the crawlable copy and treat every reader URL as a view of it.
 window.dgeApplySeoCanonical = async function (slug) {
   try {
-    const cfg = await fetch('../admin/config/seo.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+    const cfg = await fetch('../config/seo.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
     if (!cfg || !cfg.canonicalLive) return;
     const map = await fetch('data/seo_urls.json').then(r => r.ok ? r.json() : null).catch(() => null);
     const hit = map && map.granthas && map.granthas[slug];

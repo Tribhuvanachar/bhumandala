@@ -50,9 +50,11 @@ function closeModal(id) {
 // already in css/main.css) until the user has opened this menu once WHILE
 // it's visible; add a new {itemId, badgeId} pair whenever an admin-only
 // feature ships, and remove it once it's no longer worth flagging.
-const NEW_ADMIN_FEATURES = [
-  { itemId: 'adminAudioManagerItem', badgeId: 'adminAudioManagerBadge' }
-];
+// 12 Sep 2026: Audio Admin (the one entry ever listed here) moved to the
+// private BrahmaBuddhi repo along with the rest of the admin/*.html pages —
+// its badge markup went with it. Add a new {itemId, badgeId} pair here
+// whenever a LOCAL (this-repo) admin-only feature ships.
+const NEW_ADMIN_FEATURES = [];
 const NEW_FEATURES_SEEN_KEY = 'dge_admin_new_features_seen';
 function markNewFeatureBadges() {
   let seen;
@@ -187,12 +189,12 @@ function dgeAboutEsc(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// admin/content/home.json, fetched lazily and only once -- most visitors
+// content/home.json, fetched lazily and only once -- most visitors
 // never open a profile panel, so this shouldn't cost a request at boot.
 let dgeHomeContentPromise = null;
 function dgeFetchHomeContent() {
   if (!dgeHomeContentPromise) {
-    dgeHomeContentPromise = fetch('../admin/content/home.json?t=' + Date.now(), { cache: 'no-store' })
+    dgeHomeContentPromise = fetch('../content/home.json?t=' + Date.now(), { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : null))
       .catch(() => null);
   }
@@ -244,7 +246,7 @@ window.openProfilePanel = function(key) {
 };
 
 // About This Project's opening paragraph and "Designed By" line, and Our
-// Story's full bio — admin/content/reader.json's `about`/`ourStory` keys.
+// Story's full bio — content/reader.json's `about`/`ourStory` keys.
 // Rendered into these two functions (not baked into render.html) so a
 // super admin's content-inline.js edit here actually has a data-edit path
 // pointing somewhere: what "which file, which field" the edit tool's own
@@ -337,7 +339,7 @@ window.dgeOpenOurStory = function() { window.openOurStoryModal(); };
 // content-inline.js stages an edit into window.SITE_CONFIG and calls this
 // (see js/content-inline.js) so the change appears in the real layout
 // immediately rather than only after Publish + a refresh. Re-runs whichever
-// of this page's own render functions actually draw from admin/content/
+// of this page's own render functions actually draw from content/
 // reader.json; each one is cheap and safe to call even while its modal is
 // closed, since they just repopulate an offscreen container.
 window.dgeContentRerender = function() {
@@ -355,7 +357,7 @@ window.openSponsorModal = function() {
   const cfg = SPONSOR_CONFIG;
   const cur = cfg.currency || '₹';
 
-  // data-edit names the path inside admin/content/reader.json, so a super
+  // data-edit names the path inside content/reader.json, so a super
   // admin can correct this paragraph on the panel itself (content-inline.js).
   let html = `<p data-edit="SPONSOR_CONFIG.introText" style="font-size:13px; line-height:1.6; margin:0 0 18px 0;">${cfg.introText || ''}</p>`;
 
@@ -424,7 +426,7 @@ function dgeSortUpdatesNewestFirst(updates) {
    tab open would never see it. */
 window.openWhatsNewModal = function() {
   const url = (typeof window.dgeContentUrl === 'function')
-    ? window.dgeContentUrl('whats-new.json') : 'admin/content/whats-new.json';
+    ? window.dgeContentUrl('whats-new.json') : 'content/whats-new.json';
   fetch(url + '?t=' + Date.now(), { cache: 'no-store' })
     .then(r => (r.ok ? r.json() : null))
     .catch(() => null)

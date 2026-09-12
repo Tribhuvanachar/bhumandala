@@ -8,7 +8,7 @@
 // (same safe "diff, don't blind-overwrite" discipline as Config Editor).
 //
 // This is deliberately a SEPARATE tool from content-inline.js, not a mode
-// of it: this one edits the corpus (shloka text, in admin/content/*.json
+// of it: this one edits the corpus (shloka text, in content/*.json
 // grantha files, with reorder/insert/delete), while content-inline.js
 // edits page chrome (titles, panel copy, labels — small JSON page-content
 // files unrelated to any grantha). Merging them would let one wrong click

@@ -530,7 +530,7 @@
     inp.dispatchEvent(new Event('input')); inp.focus();
   };
 
-  // Curator "hide from search" (admin/config/library-overrides.json's
+  // Curator "hide from search" (config/library-overrides.json's
   // searchHidden list — written by the Library Manager, independent of the
   // Library tree's own hidden list). Admins still see the hits, exactly
   // like the admin-only grantha filter beside it in render().
@@ -544,7 +544,7 @@
   // go-live shelf pointless.
   var gsMoves = {};
   try {
-    fetch(new URL('admin/config/library-overrides.json', GS_ROOT).href, { cache: 'no-store' })
+    fetch(new URL('config/library-overrides.json', GS_ROOT).href, { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (ov) {
         gsSearchHidden = (ov && Array.isArray(ov.searchHidden)) ? ov.searchHidden : [];

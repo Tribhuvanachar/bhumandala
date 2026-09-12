@@ -14,7 +14,7 @@
 <meta property="og:description" content="A digital initiative to preserve, organize and present the complete heritage of our Śāstra, Itihāsa, Purāṇa, Stotra and Kāvya.">
 <!-- The one place on this site that needs a fully-qualified URL: preview
      crawlers don't run JavaScript, so this cannot be resolved at runtime.
-     Managed from admin/config/site.config.json — don't hand-edit the origin
+     Managed from config/site.config.json — don't hand-edit the origin
      `python3 tools/set_site_url.py` after changing siteOrigin there. -->
 <!-- site-url: images/guru/guruji.jpg -->
 <meta property="og:image" content="https://tribhuvanachar.github.io/bhumandala/images/guru/guruji.jpg">
@@ -35,7 +35,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/home.css?v=2">
-<!-- In-place editing of admin/content/home.json, for a signed-in super
+<!-- In-place editing of content/home.json, for a signed-in super
      admin. Inert for everyone else — it checks before it draws anything. -->
 <link rel="stylesheet" href="css/content-inline.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
@@ -43,7 +43,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="images/genie/favicon-192.png">
 <link rel="apple-touch-icon" href="images/genie/apple-touch-icon.png">
 </head>
-<body data-content-file="admin/content/home.json">
+<body data-content-file="content/home.json">
 
 <div id="veil"></div>
 
@@ -154,8 +154,8 @@
 /* =========================================================================
    This page carries no words of its own.
 
-   Everything it says is admin/content/home.json, and everything it does is
-   admin/config/home.json — one file an editor changes, one an operator
+   Everything it says is content/home.json, and everything it does is
+   config/home.json — one file an editor changes, one an operator
    changes, neither of them this file. There is deliberately no fallback copy
    here: a second copy of the text is a second thing to keep in step, and it
    is always the stale one that ends up on screen.
@@ -245,7 +245,7 @@ let SITE_CONFIG = null;
       if (t.scrollHeight <= t.clientHeight + 2) return;
       btn.hidden = false;
       btn.textContent = t.classList.contains('open') ? cfg.labels.readLess : cfg.labels.readMore;
-      // render() runs a second time when admin/config/landing.json lands, so
+      // render() runs a second time when config/home.json lands, so
       // the listener is attached once and reads cfg fresh on every click.
       if (btn.dataset.bound) return;
       btn.dataset.bound = '1';
@@ -336,7 +336,7 @@ let SITE_CONFIG = null;
       ${[].concat(sec.blurb).map((t, bi) => `<p class="person-blurb" data-edit="sections.${si}.blurb${Array.isArray(sec.blurb) ? '.' + bi : ''}">${esc(t)}</p>`).join('')}`;
 
     if (sec.panel === 'contributors') {
-      // Sourced live from admin/content/reader.json's CONTRIBUTORS_CONFIG
+      // Sourced live from content/reader.json's CONTRIBUTORS_CONFIG
       // (see the boot fetch) rather than a second copy in this file —
       // view-only here since that file's own edit tool already covers it
       // (render.html's About panel).
@@ -483,7 +483,7 @@ let SITE_CONFIG = null;
   }
 
   /* The "Contributors & Seva Support" Know More sheet — same visual shape
-     as panelHtml()'s groups/entries, but sourced from admin/content/
+     as panelHtml()'s groups/entries, but sourced from content/
      reader.json (window.READER_CONTENT, see the boot fetch) rather than
      home.json's panels{}, and view-only here: that file's own edit tool
      already lives on the reader app's About panel, so this is not a
@@ -802,15 +802,15 @@ let SITE_CONFIG = null;
   }
 
   Promise.all([
-      get('admin/content/home.json'),
-      get('admin/config/home.json'),
+      get('content/home.json'),
+      get('config/home.json'),
       // The Contributors & Seva Support section reads its list from here —
       // the SAME file the reader app's own About panel already edits —
       // rather than home.json keeping a second, separately hand-maintained
       // copy that can silently drift out of sync with it. Non-fatal: a
       // missing/unreachable reader.json just means that one section's list
       // stays empty, not that the whole vandana gate fails to load.
-      get('admin/content/reader.json').catch(function () { return null; })
+      get('content/reader.json').catch(function () { return null; })
     ])
     .then(function (all) {
       const content = all[0], conf = all[1];

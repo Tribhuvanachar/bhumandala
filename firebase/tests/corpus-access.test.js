@@ -27,7 +27,7 @@ const ca = require('../functions/lib/corpus-access');
 // The live go-live shelf, read from the committed config rather than
 // retyped, so this suite notices if the shelf is edited.
 const OVERRIDES = JSON.parse(fs.readFileSync(
-  path.resolve(__dirname, '../../../admin/config/library-overrides.json'), 'utf8'));
+  path.resolve(__dirname, '../../../config/library-overrides.json'), 'utf8'));
 
 describe('matchShelf', () => {
   test('no shelf configured means everything is on it', () => {

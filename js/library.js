@@ -31,7 +31,7 @@ const DGE_PATH_LABELS = {
   // The branches of the recommended DGE taxonomy (DGE_Shastra_Taxonomy.md).
   // Listed whether or not the corpus has been moved onto it yet: the Library
   // Manager can regroup the tree onto these names without the folders moving
-  // (see the "moves" map in admin/config/library-overrides.json, and
+  // (see the "moves" map in config/library-overrides.json, and
   // tools/restructure_taxonomy.py), and an unlabelled segment falls back to
   // ASCII, which would leave a Sanskrit tree with English branch headings.
   vedanga: 'वेदाङ्गानि',
@@ -610,7 +610,7 @@ function dgeLocalizeNumerals(text) {
 
 // ---------------------------------------------------------------------- //
 // Library Manager curation overrides (admin/library.html exports
-// admin/config/library-overrides.json). A NON-DESTRUCTIVE display layer only:
+// config/library-overrides.json). A NON-DESTRUCTIVE display layer only:
 // hide/pin/reorder/rename/move all affect how populated granthas group
 // and sort in this tree, never library.json/taxonomy.json or the actual
 // fetch path -- dgeGoToGrantha always navigates on the real slug even
@@ -627,7 +627,7 @@ let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {}
 // browser's localStorage, see admin/library.html) is being overlaid in
 // place of the committed file -- drives the "draft preview" notice in
 // dgeRenderLibraryRoot(). Readers never take this branch: for them the
-// committed admin/config/library-overrides.json is the only source.
+// committed config/library-overrides.json is the only source.
 let dgeLibOverridesDraftPreview = false;
 
 function dgeNormalizeOverrides(ov) {
@@ -661,7 +661,7 @@ async function dgeLoadLibraryOverrides() {
   dgeLibOverridesDraftPreview = false;
   try {
     const url = window.dgeAdminConfigUrl ? window.dgeAdminConfigUrl('library-overrides.json')
-                                        : '../admin/config/library-overrides.json';
+                                        : '../config/library-overrides.json';
     const ov = await fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (ov) {
       dgeLibOverrides = dgeNormalizeOverrides(ov);
@@ -1554,9 +1554,15 @@ function dgeRenderFacetView(node, facetKey) {
 // flex child pushed to the far end of the breadcrumb row via margin-left:auto.
 function dgeSectionTrackerHtml(key) {
   if (!dgeIsSuperAdmin()) return '';
-  return `<a href="../admin/library.html?section=${encodeURIComponent(key)}" target="_blank" rel="noopener"
+  // 12 Sep 2026: Library Manager moved to the private BrahmaBuddhi repo —
+  // a plain href can no longer reach it (no public Pages there, and even if
+  // there were, the visitor's browser has no way to attach the token a
+  // private repo needs). Reopens through the same BYOK loader the Admin
+  // popup's own "Management Tools" entry uses.
+  return `<a href="javascript:void(0)"
       style="margin-left:auto; font-size:11px; color:var(--muted-text); text-decoration:none; white-space:nowrap;"
-      onclick="event.stopPropagation()" title="Open the completion tracker for this section (super-admin)">📊 Progress</a>`;
+      onclick="event.stopPropagation(); window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage('admin/library.html?section=${encodeURIComponent(key)}')"
+      title="Open the completion tracker for this section (super-admin)">📊 Progress</a>`;
 }
 
 // One category's own subtree, reached by tapping its grid tile -- reuses
@@ -1632,7 +1638,7 @@ function dgeRenderLibraryRoot() {
     ? `<div style="font-size:11px; margin-bottom:8px; padding:7px 10px; border:1px dashed var(--accent-gold,#b8860b); border-radius:8px; color:var(--accent-red,#7a3b1d);">
         🛠 <b>Draft preview</b> — showing this browser's unexported Library Manager draft.
         Readers still see the committed file; use <b>⬇ Export overrides</b> in the
-        <a href="../admin/library.html" target="_blank" rel="noopener" style="color:inherit;">Library Manager</a>
+        <a href="javascript:void(0)" onclick="window.dgeOpenBrahmaBuddhiPage && window.dgeOpenBrahmaBuddhiPage('admin/library.html')" style="color:inherit;">Library Manager</a>
         and commit it to publish.</div>`
     : '';
   const header = draftNote + `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;

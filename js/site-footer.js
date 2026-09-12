@@ -45,7 +45,7 @@
   // "js/site-footer.js", tirtha/index.html says
   // "../js/site-footer.js"), and a fixed relative string would resolve
   // wrong on anything but the shallowest one. Same technique
-  // contact-email.js already uses for admin/config/config-overrides.json.
+  // contact-email.js already uses for config/config-overrides.json.
   // Computed NOW, synchronously, while this script is still the one
   // document.currentScript points to -- render() below runs later (often
   // after a DOMContentLoaded callback), by which point currentScript is

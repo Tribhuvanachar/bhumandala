@@ -10,7 +10,7 @@
     "",
     "Read by js/contextual-actions.js at boot. If this file is missing",
     "or malformed, only the hardcoded base actions in that file are used —",
-    "nothing crashes, matching admin/config/menu.json's own convention.",
+    "nothing crashes, matching config/menu.json's own convention.",
     "",
     "  base              the default action list per object type (shloka,",
     "                    word, phrase, commentary, reference, chapter,",

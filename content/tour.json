@@ -20,7 +20,7 @@
     "                 target. Omitted, it picks whichever side has room.",
     "",
     "A step whose target is not on the page is SKIPPED, not shown pointing at",
-    "nothing. That matters because admin/config/menu.json can hide a menu item and",
+    "nothing. That matters because config/menu.json can hide a menu item and",
     "admin controls do not exist for an ordinary reader — the tour adapts to what",
     "that person can actually see.",
     "",

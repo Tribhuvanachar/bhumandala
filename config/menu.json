@@ -22,11 +22,22 @@
   "NOT HERE, ON PURPOSE — one source of truth each:",
   "  reading scripts      SCRIPT_OPTIONS in js/config.js",
   "  feature switches     FEATURE_FLAGS in js/config.js",
-  "  passkeys             admin/config/keys.json",
-  "  the landing page     admin/config/landing.json",
-  "  everything else      admin/config/config-overrides.json",
+  "  passkeys             config/keys.json in BrahmaBuddhi now (see below)",
+  "  the landing page     config/home.json",
+  "  everything else      config/config-overrides.json",
   "",
-  "The 'commentary' topBar entry was removed 10 Sep 2026 with the button itself: the commentary bar above the verses (render.js dgeRenderCommentaryBar) carries every name and switch, so the global 💬 icon was the same control in a worse place. #commentaryPopup still exists for a verse card's '+N 💬' overflow tab."
+  "The 'commentary' topBar entry was removed 10 Sep 2026 with the button itself: the commentary bar above the verses (render.js dgeRenderCommentaryBar) carries every name and switch, so the global 💬 icon was the same control in a worse place. #commentaryPopup still exists for a verse card's '+N 💬' overflow tab.",
+  "",
+  "12 Sep 2026: every admin item that used to 'href' straight to an admin/*.html",
+  "page (Library Manager, Kosha Manager, Repo & Workflows, OCR Review/Studio, ...)",
+  "was removed from this array — those pages now live in the private BrahmaBuddhi",
+  "repo, physically absent from this one, and are reachable only through",
+  "js/admin-brahmabuddhi.js's own PAT-gated menu (admin/config/admin-menu.json",
+  "in BrahmaBuddhi, fetched live, never bundled here). The 'adminBrahmaBuddhiItem'",
+  "below is the only trace of that mechanism in this repo, and it names no",
+  "individual page. adminKeysItem/adminFilesItem/adminConfigItem/adminUserRolesItem",
+  "stayed: they open a LOCAL js/ modal (admin-editor.js, config-editor.js, ...),",
+  "not a page, and were never part of what moved."
  ],
  "topBar": [
   {
@@ -144,91 +155,11 @@
     "enabled": true
    },
    {
-    "id": "adminConvertItem",
-    "icon": "🔄",
-    "label": "Convert Tool",
-    "href": "convert/index.html",
+    "id": "adminBrahmaBuddhiItem",
+    "icon": "🔒",
+    "label": "Management Tools",
+    "action": "dgeOpenBrahmaBuddhiGate",
     "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminLibraryManagerItem",
-    "icon": "🗂️",
-    "label": "Library Manager",
-    "href": "../admin/library.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminKoshaManagerItem",
-    "icon": "📖",
-    "label": "Kosha Manager",
-    "href": "../admin/kosha.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminAshtadhyayiManagerItem",
-    "icon": "📜",
-    "label": "Ashtadhyayi Manager",
-    "href": "../admin/ashtadhyayi.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminDasaCaptureItem",
-    "icon": "🎶",
-    "label": "Dasa Sahitya Capture",
-    "href": "../admin/dasa-capture.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminHolyPlacesManagerItem",
-    "icon": "🛕",
-    "label": "Holy Places Curation",
-    "href": "../admin/holy-places.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminAudioManagerItem",
-    "icon": "🎙️",
-    "label": "Audio Admin",
-    "href": "../admin/audio.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminGenieAsrRecorderItem",
-    "icon": "🗣️",
-    "label": "Genie ASR Recorder",
-    "href": "../admin/genie-asr-recorder.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminRepoMapItem",
-    "icon": "⚙️",
-    "label": "Repository & Workflows",
-    "href": "../admin/repo-map.html",
-    "requires": "superadmin",
-    "enabled": true
-   },
-   {
-    "id": "adminOcrReviewItem",
-    "icon": "🔍",
-    "label": "OCR Review",
-    "href": "../admin/ocr-review.html",
-    "requires": "admin",
-    "enabled": true
-   },
-   {
-    "id": "adminOcrStudioItem",
-    "icon": "🔍",
-    "label": "OCR Studio",
-    "href": "../admin/ocr-studio.html",
-    "requires": "admin",
     "enabled": true
    },
    {

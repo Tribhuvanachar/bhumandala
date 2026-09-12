@@ -405,7 +405,7 @@ document.getElementById('list').addEventListener('click',function(e){
 
 // --- composition-level contextual menu (Favorite/Needs practice/Completed/
 // Mark doubt/Play/References/Share), via js/contextual-actions.js's
-// registry + admin/config/contextual-actions.json's "composition" entry --
+// registry + config/contextual-actions.json's "composition" entry --
 // not a second bespoke action sheet. ---------------------------------
 window.dgeOpenCompositionMenu=function(rec){
   if(typeof window.dgeOpenContextualMenu!=='function'){ toast('Actions menu is not available on this page yet.'); return; }

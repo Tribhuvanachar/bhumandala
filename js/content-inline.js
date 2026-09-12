@@ -1,7 +1,7 @@
 /* =========================================================================
    Edit a page's words on the page itself.
 
-   Every page whose text now lives in admin/content/<page>.json can be edited
+   Every page whose text now lives in content/<page>.json can be edited
    where it is read: unlock super-admin, turn on Edit text, tap a sentence,
    change it, publish. The same shape as the reading page's shloka editor —
    nothing reaches GitHub on a keystroke; edits stage in memory, survive a
@@ -9,7 +9,7 @@
 
    A page opts in with two attributes and nothing else:
 
-     <body data-content-file="admin/content/home.json">
+     <body data-content-file="content/home.json">
      ...<h1 data-edit="brand.latin">…</h1>
 
    data-edit is a path into that JSON — "brand.latin", "sections.0.name",

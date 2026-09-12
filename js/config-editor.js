@@ -7,7 +7,7 @@
 // comments and API wiring. A UI that rewrote it would risk corrupting
 // working code on a bad edit — which is exactly why a config UI was
 // deferred for so long. Instead this reads and writes a plain data file,
-// admin/config/config-overrides.json, holding ONLY the fields exposed below.
+// config/config-overrides.json, holding ONLY the fields exposed below.
 // core.js merges it over the defaults at load. Consequences:
 //   - a mistake can only ever change a piece of text, never break the app
 //   - deleting the overrides file restores every default instantly
@@ -15,13 +15,13 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['config-editor.js'] = 'v1.3 (10 Sep 2026: a Word tools section -- appConfig.wordActions was read by config.js and written by nothing, so "turn Sandhi/Samasa off for everyone" had no page to do it on) \u00b7 v1.2 (toggle for appConfig.showCopyrightGatedCommentaries)';
 
-const DGE_CONFIG_OVERRIDES_PATH = 'admin/config/config-overrides.json';
+const DGE_CONFIG_OVERRIDES_PATH = 'config/config-overrides.json';
 // What's New is content rather than a setting, and lives in its own file so
 // the reader can fetch it fresh on every open (see modals.js). The editor
 // still edits it in the same form; it just lands somewhere else on save.
-const DGE_WHATS_NEW_PATH = 'admin/content/whats-new.json';
+const DGE_WHATS_NEW_PATH = 'content/whats-new.json';
 // The Support and About panels' text, likewise content rather than settings.
-const DGE_READER_CONTENT_PATH = 'admin/content/reader.json';
+const DGE_READER_CONTENT_PATH = 'content/reader.json';
 const DGE_READER_CONTENT_KEYS = ['SPONSOR_CONFIG', 'CONTRIBUTORS_CONFIG', 'KEY_SPONSORS_CONFIG'];
 
 // Only these are editable. Anything not listed here is untouchable from
@@ -363,7 +363,7 @@ function dgeRenderConfigEditor() {
 
   el.innerHTML =
     `<p class="hint" style="margin-top:0;">These settings are saved to
-      <code>admin/config/config-overrides.json</code>, a plain data file — never to
+      <code>config/config-overrides.json</code>, a plain data file — never to
       <code>config.js</code>. A mistake here can only change text, never break
       the app, and "Reset all" restores every default.</p>` +
     dgeSection('General', general, true) +

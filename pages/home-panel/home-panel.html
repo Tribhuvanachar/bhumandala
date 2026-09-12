@@ -23,7 +23,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/genie/favicon-192.png">
 <link rel="apple-touch-icon" href="../../images/genie/apple-touch-icon.png">
 </head>
-<body data-content-file="admin/content/home.json">
+<body data-content-file="content/home.json">
 
 <div class="panel-page">
   <a class="panel-back" href="index.html">← Back to Sarvamūla Digital Library</a>
@@ -99,14 +99,14 @@
   var key = new URLSearchParams(location.search).get('panel') || '';
   var root = document.getElementById('panelRoot');
 
-  Promise.all([get('admin/content/home.json'), get('admin/config/home.json')])
+  Promise.all([get('content/home.json'), get('config/home.json')])
     .then(function (both) {
       var cfg = Object.assign({}, both[1], both[0]);
       window.SITE_CONFIG = cfg; // content-inline.js edits this object in place
       var html = panelHtml(cfg, key);
       if (!html) {
         root.className = 'panel-empty';
-        root.textContent = key ? 'No "' + key + '" panel in admin/content/home.json.' : 'Add ?panel=<key> to the URL — e.g. ?panel=tribhuvan';
+        root.textContent = key ? 'No "' + key + '" panel in content/home.json.' : 'Add ?panel=<key> to the URL — e.g. ?panel=tribhuvan';
         return;
       }
       root.className = '';

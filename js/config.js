@@ -415,7 +415,7 @@ window.AI_ALLOW_EXTERNAL_LINKS = false;
 // auth + a backend, which is a later phase); each category links to a
 // pre-filled contact email.
 /* The Support and About panels' text — SPONSOR_CONFIG, CONTRIBUTORS_CONFIG and
-   KEY_SPONSORS_CONFIG — now live in admin/content/reader.json, loaded by
+   KEY_SPONSORS_CONFIG — now live in content/reader.json, loaded by
    core.js before the first render and editable in place on the page. They are
    content rather than settings: a sentence about what the project spends
    should not need a code change, and a constant here could only be changed by
@@ -429,7 +429,7 @@ window.AI_ALLOW_EXTERNAL_LINKS = false;
 // array order IS the display order — reorder those manually to reflect
 // priority. Empty by default — nothing invented; add real entries as
 // features actually ship or get planned.
-/* What's New and Coming Soon now live in admin/content/whats-new.json, read
+/* What's New and Coming Soon now live in content/whats-new.json, read
    by js/modals.js each time the panel opens. Publishing an update should
    not need a code change, and a constant here could only be updated by one. */
 
@@ -503,7 +503,7 @@ window.FEATURE_FLAGS = FEATURE_FLAGS;
                 it sends the reader's selection off-site.
 
    Precedence, matching every other configurable in this file: shipped default
-   < global admin (appConfig.wordActions, via admin/config/config-overrides.json)
+   < global admin (appConfig.wordActions, via config/config-overrides.json)
    < per-device (localStorage 'word_actions_override', ⚙️ → 🎛️).
    --------------------------------------------------------------------------- */
 const WORD_ACTIONS = [

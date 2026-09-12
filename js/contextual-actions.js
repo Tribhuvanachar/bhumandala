@@ -11,7 +11,7 @@
 //  1. A REGISTRY (dgeGetContextualActions/dgeRegisterContextualActions)
 //     that answers "what actions apply to THIS object type, in THIS
 //     taxonomy section, for THIS reader" — sourced from
-//     admin/config/contextual-actions.json (the base menu, admin-editable,
+//     config/contextual-actions.json (the base menu, admin-editable,
 //     same convention as menu.json/keys.json) plus any taxonomy overrides
 //     registered there, plus anything a page registers at runtime.
 //  2. A generic contextual-menu component (dgeOpenContextualMenu) for
@@ -36,7 +36,7 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
 (function () {
   'use strict';
 
-  // Fallback used only if admin/config/contextual-actions.json is missing
+  // Fallback used only if config/contextual-actions.json is missing
   // or fails to parse — mirrors menu.json's own "never crash, just fall
   // back to what's hardcoded" convention. Kept intentionally small (base
   // shloka/word/commentary/reference only) since the full config is the
@@ -96,8 +96,8 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
     // async work), same pattern entity-linker.js already uses for
     // dge_entities.json -- correct at any page depth.
     var self = (document.currentScript && document.currentScript.src) || (window.DGE_SCRIPT_BASE || '');
-    try { return new URL('../admin/config/contextual-actions.json', self).href; }
-    catch (e) { return '../admin/config/contextual-actions.json'; }
+    try { return new URL('../config/contextual-actions.json', self).href; }
+    catch (e) { return '../config/contextual-actions.json'; }
   }
   var CONFIG_URL = configUrl(); // must run synchronously at parse time -- document.currentScript is only valid then
 
