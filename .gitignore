@@ -3,6 +3,10 @@ __pycache__/
 # Personal Claude Code permission overrides -- not shared with the team.
 .claude/settings.local.json
 
+# A background agent's isolated worktree checkout -- a full nested copy of
+# this repo, created and torn down by the agent itself, never project content.
+.claude/worktrees/
+
 # Sayana/Smriti importer scratch: the HTTP response cache that lets a timed-out
 # run resume, and the standalone JSONL dump it writes beside the merged data.
 # --cache-dir/--out-dir default to ./.httpcache and ./dump (relative to
