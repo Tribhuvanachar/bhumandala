@@ -28,7 +28,7 @@ import subprocess
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(REPO, 'dge', 'data')
+DATA = os.path.join(REPO, 'data')
 
 # ---------------------------------------------------------------------------
 # The mapping. Ordered longest-source-first when matched, so a mapping of a
@@ -291,12 +291,12 @@ def report(args):
     print(f'  data/taxonomy.json         {len(tax_changed)} of {len(tax)} top-level keys')
     print(f'                                 ({", ".join(tax_changed)})')
 
-    man_path = os.path.join(REPO, 'dge', 'search_index', 'manifest.json')
+    man_path = os.path.join(REPO, 'search_index', 'manifest.json')
     if os.path.exists(man_path):
         man = json.load(open(man_path, encoding='utf-8'))
         gs = man.get('granthas', [])
         sc = sum(1 for g in gs if rewrite_prefix(g.get('slug', ''), live)[1])
-        _, isize = tree_stats(os.path.join(REPO, 'dge', 'search_index'))
+        _, isize = tree_stats(os.path.join(REPO, 'search_index'))
         print(f'  search_index/manifest.json {sc} of {len(gs)} slugs, and the same number of')
         print(f'                                 shard FILENAMES under units/ — the slug is baked')
         print(f'                                 into each filename. {human(isize)} of index in total.')
@@ -365,7 +365,7 @@ def report(args):
     print('  Every URL into the library changes. Anyone holding a bookmark or a')
     print('  shared link into a grantha gets a 404, and there is no redirect layer')
     print('  on GitHub Pages to soften it.')
-    print(f'  The search index ({human(tree_stats(os.path.join(REPO, "dge", "search_index"))[1])}) has the old slugs in both the')
+    print(f'  The search index ({human(tree_stats(os.path.join(REPO, "search_index"))[1])}) has the old slugs in both the')
     print('  manifest and every shard filename, so it needs a full rebuild.')
     print(f'  {nb} references in {len(groups["breaking"])} code files have to move with it, plus {nd}')
     print('  more in documentation.')

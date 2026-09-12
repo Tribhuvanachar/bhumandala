@@ -95,7 +95,7 @@ def make_item(ref, samhita, padapatha, rishi, devata, chandas, svara,
 
 
 def write_grantha(rel_path, title, items, schema="vedic_text", author=""):
-    d = OUT_DIR / "dge" / "data" / rel_path
+    d = OUT_DIR / "data" / rel_path
     d.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema": schema,
@@ -292,7 +292,7 @@ def update_library(populated):
             added += 1
     print(f"  {updated} existing entries marked populated, {added} new entries added")
 
-    d = OUT_DIR / "dge" / "data"
+    d = OUT_DIR / "data"
     d.mkdir(parents=True, exist_ok=True)
     with open(d / "library.json", "w", encoding="utf-8") as f:
         json.dump(lib, f, ensure_ascii=False, indent=2)

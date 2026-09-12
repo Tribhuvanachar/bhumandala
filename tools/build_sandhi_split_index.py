@@ -59,7 +59,7 @@ from multiprocessing import Pool
 logging.disable(logging.CRITICAL)  # the library logs every attempted split at DEBUG
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(REPO, 'dge', 'data')
+DATA = os.path.join(REPO, 'data')
 OUT_DIR = os.path.join(DATA, '_sandhi_local')
 
 # Which list recognised a half. The reader shows 'v' differently: that half is

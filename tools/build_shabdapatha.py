@@ -62,7 +62,7 @@ def main():
         "count": len(items),
         "items": items,
     }
-    out_path = (Path(__file__).resolve().parent.parent / "dge" / "data" / "vedanga"
+    out_path = (Path(__file__).resolve().parent.parent / "data" / "vedanga"
                 / "vyakarana" / "shabdapatha" / "data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

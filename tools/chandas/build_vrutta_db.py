@@ -17,7 +17,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 VENDOR = HERE / "vendor"
-OUT = HERE.parent.parent / "dge" / "data" / "vedanga" / "chandas" / "data.json"
+OUT = HERE.parent.parent / "data" / "vedanga" / "chandas" / "data.json"
 
 SOURCE = "hrishikeshrt/chanda (Chandojnanam) @ 3a9607c6e7a23d60c03d10f839913d01f8bd7ee2"
 LICENCE = "AGPL-3.0-or-later"

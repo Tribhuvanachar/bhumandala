@@ -16,7 +16,7 @@ import os
 import unittest
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
-DGE_DATA = os.path.join(REPO_ROOT, "dge", "data")
+DGE_DATA = os.path.join(REPO_ROOT, "data")
 REGISTRY_PATH = os.path.join(DGE_DATA, "dge_entities.json")
 
 

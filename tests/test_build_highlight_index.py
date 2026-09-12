@@ -164,7 +164,7 @@ class ClientAgreement(unittest.TestCase):
     itself rather than against a comment describing it."""
 
     def setUp(self):
-        path = os.path.join(os.path.dirname(__file__), "..", "dge", "js", "highlight-words.js")
+        path = os.path.join(os.path.dirname(__file__), "..", "js", "highlight-words.js")
         with open(path, encoding="utf-8") as fh:
             self.js = fh.read()
 
@@ -182,7 +182,7 @@ class ClientAgreement(unittest.TestCase):
 
     def test_the_client_reads_the_directory_this_writes(self):
         self.assertIn("'data/_highlight'", self.js)
-        self.assertTrue(b.OUT_DIR.endswith(os.path.join("dge", "data", "_highlight")))
+        self.assertTrue(b.OUT_DIR.endswith(os.path.join("data", "_highlight")))
 
     def test_the_client_walks_down_for_a_declared_deep_prefix(self):
         # prefix_of(word, 3) on the Python side; the JS must ask for depth 3

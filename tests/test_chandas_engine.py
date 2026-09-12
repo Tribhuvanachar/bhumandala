@@ -17,7 +17,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 RUNNER = ROOT / "tools" / "kamadhenu" / "chandas_runner.js"
-DB_PATH = ROOT / "dge" / "data" / "vedanga" / "chandas" / "data.json"
+DB_PATH = ROOT / "data" / "vedanga" / "chandas" / "data.json"
 
 pytestmark = pytest.mark.skipif(shutil.which("node") is None, reason="node not installed")
 

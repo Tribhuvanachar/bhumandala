@@ -1,5 +1,5 @@
 {
- "page_count": 66,
+ "page_count": 84,
  "pages": [
   {
    "path": "index.html",
@@ -106,6 +106,20 @@
    "has_modals_js": true,
    "css_links": [],
    "title": "ದಾಸ ಸಾಹಿತ್ಯ · Curated · DGE"
+  },
+  {
+   "path": "dvaita-grantha-anukramani/index.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "../css/vyakarana-base.css",
+    "../css/dvaita-catalog.css"
+   ],
+   "title": "द्वैतवेदान्तग्रन्थानुक्रमणी · DGE"
   },
   {
    "path": "dvaitavedanta-status.html",
@@ -217,21 +231,18 @@
    "title": "Guru Parampara — Data Completeness Tracker"
   },
   {
-   "path": "render.html",
+   "path": "home-panel.html",
    "gated": true,
-   "first_head_script": "vandana-guard.js",
-   "vandana_guard_first": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
    "has_site_footer_js": false,
-   "has_ai_js": true,
-   "has_modals_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
    "css_links": [
-    "css/main.css",
-    "css/intellisense.css",
-    "css/footnotes.css",
-    "css/content-inline.css",
-    "css/tour.css"
+    "css/home.css",
+    "css/content-inline.css"
    ],
-   "title": "Sarvamoola Digital Library"
+   "title": "Know More — Sarvamūla Digital Library"
   },
   {
    "path": "kamadhenu.html",
@@ -245,6 +256,72 @@
     "css/vyakarana-base.css"
    ],
    "title": "Kamadhenu — chant trials · DGE"
+  },
+  {
+   "path": "kamadhenu_dataset/KAMADHENU_STATUS.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "KAMADHENU — DGE × VĀGDHENU"
+  },
+  {
+   "path": "kamadhenu_dataset/audio_text_mapping_review.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Kamadhenu — audio ↔ text mapping review"
+  },
+  {
+   "path": "kamadhenu_dataset/chandas_coverage.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Kamadhenu — Chandas coverage"
+  },
+  {
+   "path": "kamadhenu_dataset/dataset_health_report.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Kamadhenu — dataset health"
+  },
+  {
+   "path": "kamadhenu_dataset/kamadhenu_gap_matrix.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Kamadhenu — component gap matrix"
+  },
+  {
+   "path": "kamadhenu_dataset/reference_bank.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Kamadhenu — Chandas reference bank"
   },
   {
    "path": "kavya/index.html",
@@ -274,17 +351,6 @@
    "title": "कोश — DGE Dictionary Reader (v2 preview)"
   },
   {
-   "path": "legacy/PrahladaKrutaNarasimhaStotra.html",
-   "gated": true,
-   "first_head_script": "sanscript.min.js",
-   "vandana_guard_first": false,
-   "has_site_footer_js": false,
-   "has_ai_js": false,
-   "has_modals_js": false,
-   "css_links": [],
-   "title": "Bhagavata Digital Library"
-  },
-  {
    "path": "reader.html",
    "gated": true,
    "first_head_script": "vandana-guard.js",
@@ -294,6 +360,23 @@
    "has_modals_js": false,
    "css_links": [],
    "title": "Sarvamoola Digital Library — Scholar layout"
+  },
+  {
+   "path": "render.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": true,
+   "has_modals_js": true,
+   "css_links": [
+    "css/main.css",
+    "css/intellisense.css",
+    "css/footnotes.css",
+    "css/content-inline.css",
+    "css/tour.css"
+   ],
+   "title": "Sarvamoola Digital Library"
   },
   {
    "path": "tirtha/index.html",
@@ -308,6 +391,116 @@
     "../css/tirtha.css"
    ],
    "title": "Tīrtha Prabandha — Holy Places Database"
+  },
+  {
+   "path": "tools/audio_admin/templates/index.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "DGE · Audio Admin"
+  },
+  {
+   "path": "tools/audio_admin/tests/browser-check.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "audio-detect browser check"
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/st_av.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Atharva Veda: Book 1: Hymn 1"
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/st_ts.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Yajur Veda Kanda II"
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/st_vishnu.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": null
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/st_wyv.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "White Yajur Veda: Book I"
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/wl_manu.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Verse 1.1"
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/wl_rigveda.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Rig Veda 1.164.1 [Rig Veda]"
+  },
+  {
+   "path": "tools/sayana_smriti/tests/fixtures/wl_yajnavalkya.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Verse 1.1"
+  },
+  {
+   "path": "tools/shortcuts/user-site-index.html",
+   "gated": true,
+   "first_head_script": null,
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Sarvamūla Digital Library"
   },
   {
    "path": "vyakarana/ashtadhyayi/index.html",
@@ -816,6 +1009,17 @@
     "css/ocr-review.css"
    ],
    "title": "OCR Review · DGE (scholar)"
+  },
+  {
+   "path": "admin/ocr-studio.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "OCR Studio · DGE"
   },
   {
    "path": "admin/repo-map.html",

@@ -33,7 +33,7 @@ import re
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(REPO, 'dge', 'data')
+DATA = os.path.join(REPO, 'data')
 OUT = os.path.join(DATA, '_morph')
 
 DEVA_RUN = re.compile(r'[ऀ-ॿ]+')

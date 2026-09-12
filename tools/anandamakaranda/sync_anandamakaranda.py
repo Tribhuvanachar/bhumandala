@@ -53,7 +53,7 @@ import urllib.parse
 import urllib.request
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-ROOT = os.path.join(REPO, "dge", "data", "darshana", "vedanta", "dvaita", "SarvaMula")
+ROOT = os.path.join(REPO, "data", "darshana", "vedanta", "dvaita", "SarvaMula")
 STATE = os.path.join(REPO, "admin", "config", "sync", "anandamakaranda.state.json")
 API = "https://anandamakaranda.in/api.php"
 RAW = "https://anandamakaranda.in/index.php?action=raw&title="

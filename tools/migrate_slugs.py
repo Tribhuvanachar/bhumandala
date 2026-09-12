@@ -32,8 +32,8 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, 'tools'))
 from restructure_taxonomy import MAPPING, rewrite_prefix   # one source of truth
 
-DATA = os.path.join(REPO, 'dge', 'data')
-INDEX = os.path.join(REPO, 'dge', 'search_index')
+DATA = os.path.join(REPO, 'data')
+INDEX = os.path.join(REPO, 'search_index')
 
 
 def upgrade(slug):

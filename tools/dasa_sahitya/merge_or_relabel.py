@@ -57,9 +57,9 @@ import os
 import re
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-COMP_DIR = os.path.join(ROOT, "dge", "data", "DvaitaVedanta/Itara/DasaSahitya", "composers")
-MANIFEST_PATH = os.path.join(ROOT, "dge", "data", "DvaitaVedanta/Itara/DasaSahitya", "index.json")
-COUNTS_PATH = os.path.join(ROOT, "dge", "data", "DvaitaVedanta/Itara/DasaSahitya", "counts.json")
+COMP_DIR = os.path.join(ROOT, "data", "DvaitaVedanta/Itara/DasaSahitya", "composers")
+MANIFEST_PATH = os.path.join(ROOT, "data", "DvaitaVedanta/Itara/DasaSahitya", "index.json")
+COUNTS_PATH = os.path.join(ROOT, "data", "DvaitaVedanta/Itara/DasaSahitya", "counts.json")
 FETCH_DATE = _dt.date.today().isoformat()
 
 _PUNCT_RE = re.compile(r"[\s।॥.,\-–—’‘'\"()\[\]:;!?|/]+")

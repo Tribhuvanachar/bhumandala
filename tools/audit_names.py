@@ -50,11 +50,11 @@ import unicodedata
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "dge", "data")
+DATA = os.path.join(ROOT, "data")
 LIBRARY = os.path.join(DATA, "library.json")
 TAXONOMY = os.path.join(DATA, "taxonomy.json")
 ALIASES = os.path.join(DATA, "author_aliases.json")
-PARAMPARA = os.path.join(ROOT, "dge", "guru-parampara", "data", "parampara.json")
+PARAMPARA = os.path.join(ROOT, "guru-parampara", "data", "parampara.json")
 DASA_INDEX = os.path.join(DATA, "DvaitaVedanta/Itara/DasaSahitya", "index.json")
 ADMIN_ASHTADHYAYI = os.path.join(ROOT, "admin", "ashtadhyayi.html")
 

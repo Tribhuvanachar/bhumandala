@@ -63,7 +63,7 @@ import os
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(REPO, 'dge', 'data')
+DATA = os.path.join(REPO, 'data')
 OUT = os.path.join(DATA, '_sandhi')
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

@@ -41,7 +41,7 @@ from pathlib import Path
 from typing import Iterable, Optional
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
-_DGE_DIR = _REPO_ROOT / "dge"
+_DGE_DIR = _REPO_ROOT
 if str(_DGE_DIR) not in sys.path:
     sys.path.insert(0, str(_DGE_DIR))
 

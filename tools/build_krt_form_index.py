@@ -63,7 +63,7 @@ import os
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PRAKRIYA_DIR = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana', 'prakriya')
+PRAKRIYA_DIR = os.path.join(REPO, 'data', 'vedanga', 'vyakarana', 'prakriya')
 OUT_DIR = os.path.join(PRAKRIYA_DIR, 'krtindex')
 
 # Matches KRTS in tools/build_prakriya.py.

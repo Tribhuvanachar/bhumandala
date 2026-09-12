@@ -333,7 +333,7 @@ def parse_book_file(book_path, book_num):
 def write_output(mandalas):
     if OUTPUT_DIR.exists():
         shutil.rmtree(OUTPUT_DIR)
-    base = OUTPUT_DIR / "dge" / "data" / "vedas" / "rigveda" / "shakala_shakha" / "samhita"
+    base = OUTPUT_DIR / "data" / "vedas" / "rigveda" / "shakala_shakha" / "samhita"
 
     for mandala_key, items in mandalas.items():
         d = base / mandala_key

@@ -48,7 +48,7 @@ import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-DATA = REPO / "dge" / "data"
+DATA = REPO / "data"
 DEFAULT_PREFIX = "corpus/"
 
 # Folders under data that are not grantha text and have no business behind

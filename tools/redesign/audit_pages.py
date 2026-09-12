@@ -55,8 +55,12 @@ def discover_pages():
         # data/ holds source material, not pages: SetuTila's _raw/
         # chapter chunks are the site's own HTML kept verbatim for
         # provenance (317 files) and must never be audited as DGE chrome.
+        # .claude/ can hold a full nested worktree checkout (a background
+        # agent's isolated copy of this repo) once dge/ stops being the
+        # only thing rglob'd here -- excluded the same way node_modules is.
         return sorted(p for p in root.rglob("*.html")
-                      if "node_modules" not in p.parts and p.relative_to(root).parts[0] not in skip_top)
+                      if "node_modules" not in p.parts and ".claude" not in p.parts
+                      and p.relative_to(root).parts[0] not in skip_top)
 
     pages = [REPO_ROOT / "index.html"]
     # dge/ moved to the repo root (12 Sep 2026); admin/ and data/ are walked

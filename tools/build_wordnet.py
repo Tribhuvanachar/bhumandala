@@ -89,7 +89,7 @@ import tarfile
 import urllib.request
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(REPO, 'dge', 'data', '_wordnet')
+OUT = os.path.join(REPO, 'data', '_wordnet')
 
 # From pyiwn/constants.py. Roughly 30 MB, all eighteen languages.
 DATA_URL = 'https://www.dropbox.com/s/t29eqq19nt5eygs/iwn_data.tar.gz?dl=1'

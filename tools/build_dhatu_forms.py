@@ -47,7 +47,7 @@ def main():
     if len(sys.argv) != 2:
         sys.exit("usage: build_dhatu_forms.py /path/to/ashtadhyayi-com/data")
     src_root = Path(sys.argv[1]) / "dhatu"
-    out_dir = Path(__file__).resolve().parent.parent / "dge" / "data" / "vedanga" / "vyakarana" / "dhatuforms"
+    out_dir = Path(__file__).resolve().parent.parent / "data" / "vedanga" / "vyakarana" / "dhatuforms"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # by_code[code][gana_key][pada_key] = {lakara: formstring}

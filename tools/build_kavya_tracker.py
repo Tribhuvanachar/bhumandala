@@ -135,10 +135,10 @@ def classify(entry):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data-root", default=os.path.join(REPO, "dge", "data"))
+    ap.add_argument("--data-root", default=os.path.join(REPO, "data"))
     ap.add_argument("--corpus", default="", help="a kavya-dist checkout, or a URL")
     ap.add_argument("--out-json", default=os.path.join(REPO, "admin", "config", "kavya-status.json"))
-    ap.add_argument("--out-md", default=os.path.join(REPO, "dge", "KAVYA_TRACKER.md"))
+    ap.add_argument("--out-md", default=os.path.join(REPO, "KAVYA_TRACKER.md"))
     args = ap.parse_args()
 
     works = {w["id"]: w for w in json.load(

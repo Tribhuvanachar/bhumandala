@@ -50,10 +50,10 @@ import os
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KOSHA_DIR = os.path.join(REPO, 'dge', 'data', 'kosha')
-FORM_DIR = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana', 'prakriya', 'formindex')
-KRT_DIR = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana', 'prakriya', 'krtindex')
-OUT_DIR = os.path.join(REPO, 'dge', 'data', '_highlight')
+KOSHA_DIR = os.path.join(REPO, 'data', 'kosha')
+FORM_DIR = os.path.join(REPO, 'data', 'vedanga', 'vyakarana', 'prakriya', 'formindex')
+KRT_DIR = os.path.join(REPO, 'data', 'vedanga', 'vyakarana', 'prakriya', 'krtindex')
+OUT_DIR = os.path.join(REPO, 'data', '_highlight')
 
 # Sanskrit-headword categories. `reverse/` is MW English-Sanskrit, whose
 # headwords are English words and would mark nothing in a Devanagari text.

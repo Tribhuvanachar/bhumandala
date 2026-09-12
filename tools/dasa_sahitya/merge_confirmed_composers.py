@@ -46,8 +46,8 @@ import os
 import re
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-WEB_DIR = os.path.join(ROOT, "dge", "data", "DvaitaVedanta/Itara/DasaSahitya")
-LOCAL_DIR = os.path.join(ROOT, "dge", "data", "dasa_sahitya_local")
+WEB_DIR = os.path.join(ROOT, "data", "DvaitaVedanta/Itara/DasaSahitya")
+LOCAL_DIR = os.path.join(ROOT, "data", "dasa_sahitya_local")
 FETCH_DATE = _dt.date.today().isoformat()
 
 # canonical_english_name -> {

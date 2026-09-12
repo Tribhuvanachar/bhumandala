@@ -51,7 +51,7 @@ from padaccheda import Segmenter, strip_punct, is_devanagari   # noqa: E402
 from sanskrit_text import protected_spans                     # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(REPO, 'dge', 'data')
+DATA = os.path.join(REPO, 'data')
 OUT_DIR = os.path.join(DATA, '_padaccheda')
 HIGHLIGHT = os.path.join(DATA, '_highlight')
 MORPH = os.path.join(DATA, '_morph')

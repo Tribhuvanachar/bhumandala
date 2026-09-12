@@ -56,7 +56,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from set_site_url import load_config, build_url, SiteUrlError  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-LIBRARY_JSON = REPO_ROOT / "dge" / "data" / "library.json"
+LIBRARY_JSON = REPO_ROOT / "data" / "library.json"
 OVERRIDES_JSON = REPO_ROOT / "admin" / "config" / "library-overrides.json"
 SITEMAP_PATH = REPO_ROOT / "sitemap.xml"
 ROBOTS_PATH = REPO_ROOT / "robots.txt"

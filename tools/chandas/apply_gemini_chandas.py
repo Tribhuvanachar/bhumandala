@@ -23,7 +23,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[2]
-DB = ROOT / "dge" / "data" / "vedanga" / "chandas" / "data.json"
+DB = ROOT / "data" / "vedanga" / "chandas" / "data.json"
 FIXTURE = ROOT / "tests" / "fixtures" / "chandas_examples.json"
 INDEX = ROOT / "kamadhenu_dataset" / "text_index.json"
 REPORT = ROOT / "kamadhenu_dataset" / "chandas_gemini_review.md"

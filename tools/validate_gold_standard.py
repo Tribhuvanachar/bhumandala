@@ -38,7 +38,7 @@ import tempfile
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHECKSUM_MANIFEST = os.path.join(REPO, "tools", "gold_source_checksums.json")
-GOLD_RENDER_JS = os.path.join(REPO, "dge", "js", "gold-render.js")
+GOLD_RENDER_JS = os.path.join(REPO, "js", "gold-render.js")
 
 PRATIKA_RE = re.compile(r'\*\*"([^"]*)"\*\*')
 # Near-miss quote styles that are legitimate *emphasis* on their own (the

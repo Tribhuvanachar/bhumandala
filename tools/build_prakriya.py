@@ -47,8 +47,8 @@ import sys
 import time
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana', 'prakriya')
-DHATUPATHA = os.path.join(REPO, 'dge', 'data', 'vedanga', 'vyakarana',
+OUT = os.path.join(REPO, 'data', 'vedanga', 'vyakarana', 'prakriya')
+DHATUPATHA = os.path.join(REPO, 'data', 'vedanga', 'vyakarana',
                           'dhatupatha', 'data.json')
 
 # The two a learner conjugates first. The rest of the paradigm still ships as

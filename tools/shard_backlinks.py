@@ -29,7 +29,7 @@ import os
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INDEX = os.path.join(REPO, 'dge', 'search_index')
+INDEX = os.path.join(REPO, 'search_index')
 SRC = os.path.join(INDEX, 'backlinks.json')
 OUT = os.path.join(INDEX, 'backlinks')
 
@@ -55,7 +55,7 @@ def main():
         'vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali': 'महाभाष्यम्',
         'vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi': 'सिद्धान्तकौमुदी',
     }
-    lib = os.path.join(REPO, 'dge', 'data', 'library.json')
+    lib = os.path.join(REPO, 'data', 'library.json')
     if os.path.exists(lib):
         with open(lib, encoding='utf-8') as fh:
             for g in json.load(fh).get('granthas', []):

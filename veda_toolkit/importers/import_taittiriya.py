@@ -131,7 +131,7 @@ def parse(text):
 
 
 def write_grantha(rel_path, title, items):
-    d = OUT_DIR / "dge" / "data" / rel_path
+    d = OUT_DIR / "data" / rel_path
     d.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema": "vedic_text",
@@ -219,7 +219,7 @@ def main():
             lib["granthas"].append({"path": path, "title": title, "populated": True})
             added += 1
     print(f"  {updated} updated, {added} added")
-    d = OUT_DIR / "dge" / "data"
+    d = OUT_DIR / "data"
     d.mkdir(parents=True, exist_ok=True)
     with open(d / "library.json", "w", encoding="utf-8") as f:
         json.dump(lib, f, ensure_ascii=False, indent=2)

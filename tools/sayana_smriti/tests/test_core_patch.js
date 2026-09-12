@@ -20,7 +20,7 @@ const assert = require('assert');
 // change lives in the real file -- and this test guards the copy the browser
 // actually loads, which is the only one whose behaviour matters.
 const src = fs.readFileSync(
-  path.join(__dirname, '..', '..', '..', 'dge', 'js', 'core.js'), 'utf8');
+  path.join(__dirname, '..', '..', '..', 'js', 'core.js'), 'utf8');
 const start = src.indexOf('function dgeSanitizeVedicAccents');
 const end = src.indexOf('function initApp');
 assert.ok(start > 0 && end > start, 'could not slice the normaliser out of core.js');

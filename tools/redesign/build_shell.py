@@ -86,8 +86,18 @@ def parse_attrs(attrs_str):
 
 
 def discover_pages():
+    # dge/ moved to the repo root (12 Sep 2026). This script's page universe
+    # was, and remains, everything that used to live under dge/ -- not
+    # admin/ (untouched, per the module docstring above) and not data/
+    # (source material, not pages -- see audit_pages.py's discover_pages()
+    # for why that must be excluded from an rglob rooted here).
+    def real_pages(root, skip_top=()):
+        return sorted(p for p in root.rglob("*.html")
+                      if "node_modules" not in p.parts and ".claude" not in p.parts
+                      and p.relative_to(root).parts[0] not in skip_top)
+
     pages = [REPO_ROOT / "index.html"]
-    pages.extend(sorted((REPO_ROOT / "dge").rglob("*.html")))
+    pages.extend(p for p in real_pages(REPO_ROOT, skip_top={"admin", "data"}) if p != REPO_ROOT / "index.html")
     return pages
 
 

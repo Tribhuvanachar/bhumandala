@@ -24,7 +24,7 @@ from dcs_common import build_generic_import
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 VENDOR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor", "conllu")
-OUT = os.path.join(REPO, "dge", "data", "vedanga", "jyotisha", "data.json")
+OUT = os.path.join(REPO, "data", "vedanga", "jyotisha", "data.json")
 
 
 def main():

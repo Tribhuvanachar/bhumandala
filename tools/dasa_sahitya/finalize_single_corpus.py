@@ -47,7 +47,7 @@ import os
 import re
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-WEB_DIR = os.path.join(ROOT, "dge", "data", "DvaitaVedanta/Itara/DasaSahitya")
+WEB_DIR = os.path.join(ROOT, "data", "DvaitaVedanta/Itara/DasaSahitya")
 FETCH_DATE = _dt.date.today().isoformat()
 
 _PUNCT_RE = re.compile(r"[\s।॥.,\-–—’‘'\"()\[\]:;!?|/]+")
