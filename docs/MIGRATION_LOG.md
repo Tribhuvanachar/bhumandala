@@ -66,10 +66,21 @@ known to break as a result (if anything), and status.
 
 ## Obsolete-file audit (12 Sep 2026, full report in conversation)
 
-High-confidence DELETE (not yet executed, pending lead's go-ahead):
-- `dge/legacy/PrahladaKrutaNarasimhaStotra.html`
-- `patches/apply_taxonomy_patch.py`, `patches/nav-snippets.md`
-- `dge/veda_toolkit/superseded/*` (5 files)
+High-confidence DELETE, re-verified 12 Sep 2026, blocked by this session's
+own auto-mode safety classifier ("Irreversible Local Destruction") when
+`git rm` was attempted — needs the lead to delete manually or grant Bash
+permission for it:
+- `dge/legacy/PrahladaKrutaNarasimhaStotra.html` — re-verify note: root
+  `README.md` links to this file directly; deleting breaks that link
+  (deferred per the lead's "don't fix broken links for now" instruction).
+- `patches/apply_taxonomy_patch.py`, `patches/nav-snippets.md` — re-verified;
+  nav-snippets.md's other two sections (kavya nav link, library.js label)
+  are also already done (`kavya_alankara` is live in `library.js` today),
+  so the whole file is a completed one-time checklist.
+
+**Correction to the audit**: `dge/veda_toolkit/superseded/*` should NOT be
+deleted — its own `README.md` says "kept for the record, not for reuse,"
+a deliberate retention statement, not an obsolescence marker. Left in place.
 
 MOVE to docs/ (not yet executed): ~20 loose `.md` files at `dge/`'s top
 level (`GO_LIVE_ARCHITECTURE.md`, `PROJECT_STATUS.md`, `PENDING.md`, etc.)

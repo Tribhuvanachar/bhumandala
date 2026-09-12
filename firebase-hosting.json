@@ -23,6 +23,8 @@
       "tests/**",
       "kamadhenu/**",
       "kamadhenu_dataset/**",
+      "genie_asr_benchmark/**",
+      "local_drive/**",
       "docs/**",
       "**/*.md",
       "**/__pycache__/**",
