@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kosha Manager · DGE (super-admin)</title>
 <link rel="stylesheet" href="css/kosha.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -26,9 +26,9 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 📖 Kosha Manager <small>· super-admin</small></div>
+    <div class="brand"><a href="../render.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 📖 Kosha Manager <small>· super-admin</small></div>
     <span class="spacer"></span>
-    <a class="icon" href="../dge/index.html#kosha" title="The कोश search opens from the floating button on the main library page">कोश →</a>
+    <a class="icon" href="../render.html#kosha" title="The कोश search opens from the floating button on the main library page">कोश →</a>
     <button class="icon" id="theme">◐</button>
     <button class="btn" id="reload">↻ Refresh</button>
     <button class="btn" id="export">⬇ Legacy visibility</button>
@@ -60,7 +60,7 @@
     </tr></thead>
     <tbody id="tb"></tbody>
   </table>
-  <p class="muted" style="margin-top:10px"><b>Tier</b> is the committed, every-visitor policy from <code>admin/config/kosha-overrides.json</code>, read by <code>dge/kosha2.html</code>: <b>public</b> (searchable + browsable), <b>search-hidden</b> (browse list only), <b>unlisted</b> (direct <code>?browse=</code> link only), <b>disabled</b> (not served). ★ pins a dictionary to the top of every visitor's results. Changes here are a local draft (dot-marked) until you download <b>Export kosha-overrides.json</b> and commit it at <code>admin/config/kosha-overrides.json</code>. 👁 is the older per-browser flag the classic <b>कोश</b> overlay reads (<code>kosha_hidden_dicts</code>).</p>
+  <p class="muted" style="margin-top:10px"><b>Tier</b> is the committed, every-visitor policy from <code>admin/config/kosha-overrides.json</code>, read by <code>kosha2.html</code>: <b>public</b> (searchable + browsable), <b>search-hidden</b> (browse list only), <b>unlisted</b> (direct <code>?browse=</code> link only), <b>disabled</b> (not served). ★ pins a dictionary to the top of every visitor's results. Changes here are a local draft (dot-marked) until you download <b>Export kosha-overrides.json</b> and commit it at <code>admin/config/kosha-overrides.json</code>. 👁 is the older per-browser flag the classic <b>कोश</b> overlay reads (<code>kosha_hidden_dicts</code>).</p>
 
   <h2 class="sect">Known but not loaded <span class="muted">— and why · see <code>kosha_toolkit/LICENSING.md</code></span></h2>
   <p class="muted" style="margin:0 0 8px">Every dictionary in <code>indic-dict/stardict-sanskrit</code> is loaded, as are the encyclopaedias and indices of <code>-kAvya</code>, the Aṣṭādhyāyī/dhātu set of <code>-vyAkaraNa</code>, and the two Cologne dictionaries (<code>pwkvn</code>, <code>krm</code>) that the indic-dict mirror lacks — a code-by-code diff found the other 42 of <code>sanskrit-lexicon/csl-orig</code> already present under different names. What is left out below is left out <b>on purpose</b>, not for want of ingesting — each row says why. Rows are cross-checked against the live manifest on every load, so anything that does get ingested drops off this list by itself rather than sitting here stale.</p>
@@ -279,7 +279,7 @@
     Object.keys(OV.visibility).forEach(function(s){ vis[s]=OV.visibility[s]; });
     Object.keys(DRAFT.visibility).forEach(function(s){ vis[s]=DRAFT.visibility[s]; });
     Object.keys(vis).forEach(function(s){ if(vis[s]==="public") delete vis[s]; });
-    var out={ _readme:OV._readme||["See dge/kosha2.html; tiers: public | search_hidden | unlisted | disabled."],
+    var out={ _readme:OV._readme||["See kosha2.html; tiers: public | search_hidden | unlisted | disabled."],
       version:OV.version||1, updatedAt:Date.now(), visibility:vis, pins:pinsNow(), order:OV.order||[] };
     var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
     var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="kosha-overrides.json"; a.click();

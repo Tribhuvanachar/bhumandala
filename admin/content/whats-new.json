@@ -2,7 +2,7 @@
   "_readme": [
     "What's New and Coming Soon, as the reader sees them.",
     "",
-    "Read by dge/js/modals.js each time the panel is opened, with no caching — so",
+    "Read by js/modals.js each time the panel is opened, with no caching — so",
     "publishing an update is an edit to this file, not a code change, and a visitor",
     "who already has the site open sees it the next time they look.",
     "",

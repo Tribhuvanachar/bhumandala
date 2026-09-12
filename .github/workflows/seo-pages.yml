@@ -3,8 +3,8 @@
 # the whole site — repo files + generated pages — with GitHub Pages' Actions deployment.
 #
 # Why an artifact and not a commit: the published tree is already ~2.7 GB against the 1 GB Pages soft limit
-# (dge/GO_LIVE_ARCHITECTURE.md §0.3), and the generated pages are a few hundred MB more. They are derived
-# from dge/data, so they are rebuilt here on every run instead of being stored twice.
+# (GO_LIVE_ARCHITECTURE.md §0.3), and the generated pages are a few hundred MB more. They are derived
+# from data, so they are rebuilt here on every run instead of being stored twice.
 #
 # To publish: Settings → Pages → Source → "GitHub Actions" (a one-time switch by the repository owner), then run
 # this workflow with deploy=true. Until then run it with deploy=false: it still builds, validates and uploads
@@ -55,7 +55,7 @@ jobs:
           mkdir -p _site
           rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='tools' --exclude='tests' --exclude='kamadhenu' \
                 --exclude='kamadhenu_dataset' --exclude='docs' --exclude='*.md' --exclude='__pycache__' --exclude='node_modules' \
-                --exclude='dge/firebase' ./ _site/
+                --exclude='firebase' ./ _site/
           du -sh _site
       - name: Generate canonical pages, sitemaps, robots.txt
         id: build
@@ -64,7 +64,7 @@ jobs:
           python3 tools/seo/build_seo_site.py --out _site --quiet ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
           cp _site/seo-build.json seo-build.json
           echo "pages=$(python3 -c "import json;print(json.load(open('seo-build.json'))['pages'])")" >> "$GITHUB_OUTPUT"
-          du -sh _site/dge/veda _site/dge 2>/dev/null || true
+          du -sh _site/veda _site/dge 2>/dev/null || true
       - name: Validate
         run: python3 tools/seo/validate_seo.py --site _site --report seo-validation.json
       - uses: actions/upload-artifact@v4
@@ -73,7 +73,7 @@ jobs:
           path: |
             seo-build.json
             seo-validation.json
-            dge/data/seo_urls.json
+            data/seo_urls.json
       - name: Upload the site as the Pages artifact
         if: ${{ inputs.deploy == 'true' }}
         uses: actions/upload-pages-artifact@v3

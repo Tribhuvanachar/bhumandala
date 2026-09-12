@@ -3,7 +3,7 @@ name: DGE OCR Sanskrit/Kannada commentary (server-side)
 # Stage 1 of the server-side OCR pipeline (see tools/ocr_pipeline.py /
 # tools/gemini_ocr_commentary.py / tools/merge_staged_commentary.py):
 # PDF pages -> Vision OCR -> Gemini proofreading -> a staged JSON file,
-# uploaded as a build artifact. Exists because dge/convert/ (the browser
+# uploaded as a build artifact. Exists because convert/ (the browser
 # admin tool) has no server-side equivalent -- a real scanned book times
 # out a browser tab, and that tool has no way to skip its manual review
 # step. This workflow has no wall-clock UI timeout (GitHub Actions' own
@@ -24,7 +24,7 @@ name: DGE OCR Sanskrit/Kannada commentary (server-side)
 #
 # Requires GEMINI_API_KEY (already used by the other Gemini workflows) and
 # a VISION_API_KEY repository secret (Google Cloud Vision API key -- same
-# key dge/convert/'s browser tool takes from the admin, just stored as a
+# key convert/'s browser tool takes from the admin, just stored as a
 # repo secret here instead of localStorage). Same deliberate, scoped
 # exception to this project's BYOK-only convention as the other
 # server-side Gemini pipelines -- see gemini-enrich.yml's header comment.
@@ -55,7 +55,7 @@ on:
         required: false
         default: ""
       work_slug:
-        description: "Folder name under dge/data/ocr_staging/ for this work, e.g. raghavendra_vijaya"
+        description: "Folder name under data/ocr_staging/ for this work, e.g. raghavendra_vijaya"
         required: true
       canto:
         description: "Which canto (sarga) these pages belong to -- run once per canto"

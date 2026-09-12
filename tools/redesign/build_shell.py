@@ -5,8 +5,8 @@ custom elements to static markup at build time, closing the
 shell.js's own header comment) instead of standing up a real build
 pipeline for it.
 
-Ports dge/js/dge-shell.js's footerLinks()/renderFooterLinks() and
-dge/js/dge-breadcrumb.js's DgeBreadcrumb.connectedCallback() -- same
+Ports js/dge-shell.js's footerLinks()/renderFooterLinks() and
+js/dge-breadcrumb.js's DgeBreadcrumb.connectedCallback() -- same
 branches, same output -- rather than re-deriving the markup, so this stays
 in lockstep with what the browser would render. Both custom elements
 already guard `if (childElementCount) return`, so baked-in children make
@@ -21,7 +21,7 @@ Usage:
                                                        # the CI drift gate
 
 Deliberately conservative (Phase 9's "written in place, not a dist/
-mirror" scope): this writes fully rendered markup into the SAME dge/**/*.html
+mirror" scope): this writes fully rendered markup into the SAME **/*.html
 files the site already ships, once. It does not introduce a bundler, a
 templating language, or a separate output directory -- every page keeps
 working exactly as it does today (site-footer.js pages, admin pages, and

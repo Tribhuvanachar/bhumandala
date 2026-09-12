@@ -1,12 +1,12 @@
 """dge_entities.json registry + cross-reference test data.
 
 Validates the canonical entity registry's shape against the real corpus on
-disk (dge/data/), and separately pins down the exact test cases the second-
+disk (data/), and separately pins down the exact test cases the second-
 stage review asked for: कान्ताय, ब्रह्मसूत्रे १.१.२, अष्टाध्याय्याम् १.१.१,
 ऋग्वेद १.१.१, भागवते १०.१४.८ -- including the "कान्ताय -> Sumadhvavijaya 1.1"
 scenario from the original screenshots. The detection/resolution LOGIC for
-those same cases is unit-tested under Node (dge/js/entity-linker.test.js,
-run with `node --test dge/js/entity-linker.test.js`) since entity-linker.js
+those same cases is unit-tested under Node (js/entity-linker.test.js,
+run with `node --test js/entity-linker.test.js`) since entity-linker.js
 is a browser module; this file instead verifies the DATA those tests
 assume is actually true of the real corpus -- so a future corpus edit that
 breaks either test suite's assumptions is caught wherever it actually broke.
@@ -131,7 +131,7 @@ class TestRequiredCrossReferenceCases(unittest.TestCase):
         # The exact screenshot scenario: searching कान्ताय should surface
         # Sumadhvavijaya 1.1 as a (near-)exact match, because it verbatim
         # opens that shloka. This pins down the underlying corpus fact
-        # dge-search.js's word-exact scoring path (dge/js/dge-search.js's
+        # dge-search.js's word-exact scoring path (js/dge-search.js's
         # _score(), 'word-exact' via) relies on; the search engine itself is
         # a browser/CDN-index module exercised via Playwright, not here.
         data = _load_json(os.path.join(

@@ -1,4 +1,4 @@
-"""Regression suite for the DGE Chandas engine (dge/js/chandas.js).
+"""Regression suite for the DGE Chandas engine (js/chandas.js).
 
 The engine is browser JS; tools/kamadhenu/chandas_runner.js loads it unmodified
 under node with three stubbed globals, so every assertion here is about the

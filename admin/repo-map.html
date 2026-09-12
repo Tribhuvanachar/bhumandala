@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <!-- FIREBASE_CONFIG and AUTH_CONFIG: whether one-click dispatch through the
      Cloud Function is even possible on this deployment. Never assumed. -->
-<script src="../dge/js/config.js?v=1"></script>
+<script src="../js/config.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Repository &amp; Workflows · DGE (super-admin)</title>
 <link rel="stylesheet" href="css/repo-map.css?v=2">
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -28,7 +28,7 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> ⚙️ Repository &amp; Workflows</div>
+    <div class="brand"><a href="../render.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> ⚙️ Repository &amp; Workflows</div>
     <span class="spacer"></span>
     <button class="icon" id="theme" title="Light / dark">◐</button>
     <button class="btn" id="refresh" title="Re-fetch branches, workflows and recent runs">↻ Refresh</button>
@@ -102,7 +102,7 @@
 </main>
 
 <footer id="foot" style="display:none">
-  Purpose, notes and recommendations come from <code>admin/config/repo-map.json</code> (hand-maintained) and the input forms from <code>dge/firebase/functions/workflows.json</code>; <code>tools/build_repo_inventory.py</code> refreshes the generated parts and renders <a href="../docs/REPO_INVENTORY.md">docs/REPO_INVENTORY.md</a>, the same inventory as a document. Deleting a branch does <b>not</b> delete its pull-request history, and deleting a workflow file leaves it in git history. What each job does and why checking and importing are separate: <a href="../dge/SOURCE_SYNC.md">SOURCE_SYNC.md</a>.
+  Purpose, notes and recommendations come from <code>admin/config/repo-map.json</code> (hand-maintained) and the input forms from <code>firebase/functions/workflows.json</code>; <code>tools/build_repo_inventory.py</code> refreshes the generated parts and renders <a href="../docs/REPO_INVENTORY.md">docs/REPO_INVENTORY.md</a>, the same inventory as a document. Deleting a branch does <b>not</b> delete its pull-request history, and deleting a workflow file leaves it in git history. What each job does and why checking and importing are separate: <a href="../SOURCE_SYNC.md">SOURCE_SYNC.md</a>.
 </footer>
 
 <dialog id="confirmDlg">
@@ -133,7 +133,7 @@
   var OWNER = "Tribhuvanachar", REPO = "bhumandala";
   var API = "https://api.github.com/repos/" + OWNER + "/" + REPO;
   var GATE = "superadmin";
-  var TOK_KEY = "github_admin_pat"; // shared with dge/js/admin-editor.js
+  var TOK_KEY = "github_admin_pat"; // shared with js/admin-editor.js
   var $ = function(s, r){ return (r || document).querySelector(s); };
   var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   function esc(s){ var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
@@ -155,7 +155,7 @@
 
   // ---- state --------------------------------------------------------
   var MANIFEST = null;       // admin/config/repo-map.json
-  var CATALOGUE = [];        // dge/firebase/functions/workflows.json .workflows
+  var CATALOGUE = [];        // firebase/functions/workflows.json .workflows
   var CAT_BY_ID = {}, CAT_BY_FILE = {};
   var REGISTRY = {};         // admin/config/sources.registry.json by id
   var SRC_STATE = {};        // admin/config/sources.state.json .sources
@@ -227,7 +227,7 @@
 
     var loads = await Promise.all([
       fetch("config/repo-map.json?t=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.json(); }),
-      fetch("../dge/firebase/functions/workflows.json?t=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.json(); }).catch(function(){ return { workflows: [] }; }),
+      fetch("../firebase/functions/workflows.json?t=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.json(); }).catch(function(){ return { workflows: [] }; }),
       fetch("config/sources.registry.json?t=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.json(); }).catch(function(){ return { sources: [] }; }),
       fetch("config/sources.state.json?t=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.json(); }).catch(function(){ return { sources: {} }; })
     ]);
@@ -794,7 +794,7 @@
     if (ASK_READY) return;
     ASK_READY = true;
     try {
-      var lib = await fetch("../dge/data/library.json", { cache: "force-cache" }).then(function(r){ return r.json(); });
+      var lib = await fetch("../data/library.json", { cache: "force-cache" }).then(function(r){ return r.json(); });
       LIB = (lib.granthas || []).map(function(g){
         var p = String(g.path || "").replace(/^dge\/data\//, "").replace(/\/data\.json$/, "");
         return { path: p, title: g.title || p, hay: (p + " " + (g.title || "")).toLowerCase() };
@@ -834,7 +834,7 @@
     if (!text) { say.className = "say bad"; say.textContent = "Write the instruction first."; return; }
     if (!patLive()) { say.className = "say bad"; say.textContent = "Set a GitHub token (🔑) first — the request is written to the repo as you."; return; }
     var id = askId();
-    var sections = Object.keys(CHOSEN).map(function(p){ var e = LIB.find(function(x){ return x.path === p; }); return { path: "dge/data/" + p + "/data.json", title: e ? e.title : p }; });
+    var sections = Object.keys(CHOSEN).map(function(p){ var e = LIB.find(function(x){ return x.path === p; }); return { path: "data/" + p + "/data.json", title: e ? e.title : p }; });
     var doc = { id: id, created_at: new Date().toISOString(), created_ist: nowIST(), by: "lead (via admin/repo-map.html)",
                 sections: sections, instruction: text, status: "pending",
                 thread: [{ who: "lead", at: new Date().toISOString(), text: text }] };

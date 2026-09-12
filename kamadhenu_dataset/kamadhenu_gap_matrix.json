@@ -8,7 +8,7 @@
    "status": "🟡 PARTIAL",
    "evidence": "frontend_gap_report.json: 22 cases; jihvāmūlīya/upadhmānīya dropped by DGE to_slp1, ZWJ leaks",
    "required_for_kamadhenu": "lossless Devanagari→SLP1 with Vedic-ext support, Kannada input, no search folds",
-   "file_or_path": "dge/search_toolkit_pkg/, tools/kamadhenu/texts.py",
+   "file_or_path": "search_toolkit_pkg/, tools/kamadhenu/texts.py",
    "what_is_missing": "one Kamadhenu normaliser with explicit, logged transforms",
    "exact_next_action": "port the 4 Vāgdhenu fixes (ᳵ/ᳶ, ZW strip, ṝ→rū option, parenthetical strip) into tools/kamadhenu/texts.py and unit-test them"
   },
@@ -30,9 +30,9 @@
    "status": "🟡 PARTIAL",
    "evidence": "chandas_runner.js runs the DGE engine headlessly over 7,696 units; 2 engine bugs found",
    "required_for_kamadhenu": "one akṣara segmenter agreeing with DGE Chandas",
-   "file_or_path": "tools/kamadhenu/chandas_runner.js, dge/js/chandas.js:58",
+   "file_or_path": "tools/kamadhenu/chandas_runner.js, js/chandas.js:58",
    "what_is_missing": "fix candrabindu + ᳵ/ᳶ weight in chandas.js; Kannada input",
-   "exact_next_action": "patch dge/js/chandas.js nasal test to /[ँंःᳵᳶ]/ and add a test"
+   "exact_next_action": "patch js/chandas.js nasal test to /[ँंःᳵᳶ]/ and add a test"
   },
   {
    "component": "Chandas",
@@ -41,7 +41,7 @@
    "status": "🟡 PARTIAL",
    "evidence": "chandas_comparison.json: 6 Vāgdhenu patterns disagree with DGE; 256 DGE metres",
    "required_for_kamadhenu": "ONE authoritative layer = DGE",
-   "file_or_path": "dge/data/vedanga/chandas/data.json, tools/kamadhenu/compare_vagdhenu.py",
+   "file_or_path": "data/vedanga/chandas/data.json, tools/kamadhenu/compare_vagdhenu.py",
    "what_is_missing": "DGE: strict anuṣṭubh (vipulā → अज्ञातम्), upajāti table missing U-I-U-U, no Kannada input; 44% of corpus units unresolved",
    "exact_next_action": "extend chandas.js: vipulā classes + generic indra/upendra mix; fix ऋद्धि row in data.json"
   },
@@ -63,7 +63,7 @@
    "status": "🟢 DONE",
    "evidence": "chandas_analysis.gana populated",
    "required_for_kamadhenu": "gaṇa string per pāda",
-   "file_or_path": "dge/js/chandas.js:85-91",
+   "file_or_path": "js/chandas.js:85-91",
    "what_is_missing": "—",
    "exact_next_action": "—"
   },
@@ -138,9 +138,9 @@
    "dge": "Vedic corpus present; accent marks stripped by all text paths",
    "vagdhenu": "out of scope (classical chant only)",
    "status": "🔴 NOT STARTED",
-   "evidence": "frontend_gap_report.json 'Vedic svara' finding; dge/veda_toolkit/superseded/05_chandas_autodetect_FAILED.py",
+   "evidence": "frontend_gap_report.json 'Vedic svara' finding; veda_toolkit/superseded/05_chandas_autodetect_FAILED.py",
    "required_for_kamadhenu": "separate annotation + recording track (Stage 6)",
-   "file_or_path": "dge/tts/ARCHITECTURE.md §Vedic",
+   "file_or_path": "tts/ARCHITECTURE.md §Vedic",
    "what_is_missing": "everything",
    "exact_next_action": "do not start"
   },
@@ -184,7 +184,7 @@
    "status": "🟢 DONE",
    "evidence": "1,042 SMV files served from the audio-data repo; 5 verse links 404 (fetch_manifest.json failed)",
    "required_for_kamadhenu": "object store per ARCHITECTURE.md §storage; keep DGE's URL convention",
-   "file_or_path": "dge/js/config.js:485-508, dge/js/audio.js:66-72",
+   "file_or_path": "js/config.js:485-508, js/audio.js:66-72",
    "what_is_missing": "fix 5 broken links; decide storage for TTS output",
    "exact_next_action": "upload smv5.8/5.14/5.16 + rv02.54/rv10.06 or unlink them"
   },
@@ -193,9 +193,9 @@
    "dge": "audio.js v3.1 (speed memory, resume, offline cache, estimated word sync)",
    "vagdhenu": "karaoke video assembly (MBTN)",
    "status": "🟡 PARTIAL",
-   "evidence": "dge/js/audio.js:585-592 says word sync is an estimate; no timing JSON exists",
+   "evidence": "js/audio.js:585-592 says word sync is an estimate; no timing JSON exists",
    "required_for_kamadhenu": "per-verse audio + akṣara timing JSON (ARCHITECTURE.md §player)",
-   "file_or_path": "dge/js/audio.js",
+   "file_or_path": "js/audio.js",
    "what_is_missing": "timing data (needs forced alignment)",
    "exact_next_action": "after Stage 1 renders exist"
   }

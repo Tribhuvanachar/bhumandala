@@ -2,7 +2,7 @@
 """Every heading in DvaitaVedanta/SarvaMula, as a downloadable workbook.
 
 WHAT A "COMMENTARY TITLE" IS HERE. The reader's .commentary-title element is
-fed from two different places (dge/js/render.js): the commentary's display name
+fed from two different places (js/render.js): the commentary's display name
 for a layered grantha, and an analysis field's label for a per-unit block. Under
 SarvaMula each data.json IS one layer, so the title that matters is the
 document's own, and the headings a reader actually sees beneath it are the

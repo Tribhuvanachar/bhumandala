@@ -9,7 +9,7 @@ text) pulled from the primary mirror:
 Licence is clean attribution-only (unlike AGPL chanda / CC-BY-SA skrutable
 elsewhere in this project) -- no share-alike obligation, but attribution
 is still recorded per-entry and at the top of the output file, matching
-the sourcing convention in dge/kosha_toolkit/LICENSING.md.
+the sourcing convention in kosha_toolkit/LICENSING.md.
 
 This was the original PILOT: proved the DCS CoNLL-U -> DGE "generic"
 schema mapping on one text. Parsing logic since factored out to
@@ -39,7 +39,7 @@ def main():
         note=(
             "Pilot import: {count} verses across chapters {chapters} of "
             "Suryasiddhanta, as excerpted in DCS -- not the full 14-chapter "
-            "classical text. See dge/PENDING.md for the DCS integration "
+            "classical text. See PENDING.md for the DCS integration "
             "scoping decision this pilot exists to inform, and "
             "tools/dcs/README.md for how to extend it."
         ),

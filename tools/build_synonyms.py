@@ -21,8 +21,8 @@ own group instead, carrying its own label.
 
     python3 tools/build_synonyms.py
 
-Output: dge/data/_synonyms/<bucket>.json plus manifest.json, sharded by the
-first two SLP1 characters exactly as dge/data/_morph is, so the client uses
+Output: data/_synonyms/<bucket>.json plus manifest.json, sharded by the
+first two SLP1 characters exactly as data/_morph is, so the client uses
 one bucketing rule for both.
 """
 

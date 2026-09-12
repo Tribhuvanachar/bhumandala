@@ -13,7 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 
-// Points at the shipping dge/js/core.js rather than a bundled copy under
+// Points at the shipping js/core.js rather than a bundled copy under
 // patches/. The package keeps re-shipping its own snapshot of core.js, but
 // core.js has moved on in main (kosha citations, the tour, inline content), so
 // applying that snapshot wholesale would revert unrelated work. The normaliser

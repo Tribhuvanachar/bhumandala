@@ -29,7 +29,7 @@ collection_padagalu/ is already empty -- its composers were among the 12
 confirmed duplicates and got merged out by the earlier pass.
 
 After this runs, dasa_sahitya_local/ holds nothing new to review; every
-composition lives under dge/data/DvaitaVedanta/Itara/DasaSahitya/composers/. Re-running this
+composition lives under data/DvaitaVedanta/Itara/DasaSahitya/composers/. Re-running this
 script is safe as long as dasa_sahitya_local/dasa1/dasaru/ and
 raw_dump/dasaru/ugabhoga.json still exist locally (they are NOT deleted by
 this script -- only referenced -- since they live on the

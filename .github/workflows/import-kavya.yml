@@ -4,7 +4,7 @@ name: Import Kavya corpus
 # sanskritsahitya should be a deliberate act, not something a push triggers.
 #
 # The corpus is built into _build/ and published to the "kavya-dist" branch,
-# NEVER into dge/data on main. Two reasons, both learned the hard way on the
+# NEVER into data on main. Two reasons, both learned the hard way on the
 # first real run:
 #   * 50 MB of text on a published site that has about 1% of the GitHub Pages
 #     1 GB limit left is the whole 1 GB problem again.

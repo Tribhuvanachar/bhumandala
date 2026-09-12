@@ -4,31 +4,31 @@
 <meta charset="utf-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <script>
   // Same super-admin gate as Convert — this page can push straight to
   // GitHub, so a hidden link alone isn't enough.
   if (localStorage.getItem('is_superadmin') !== 'true') {
-    window.location.replace('../dge/index.html');
+    window.location.replace('../render.html');
   }
 </script>
 <title>Dasa Sahitya — Capture &amp; Progress — DGE</title>
 <link rel="stylesheet" href="css/dasa-capture.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <header>
   <div class="wrap" style="padding-bottom:10px">
     <h1>Dasa Sahitya — Capture &amp; Progress<small>Track what's crawled, hand-capture what didn't come out well</small></h1>
     <div class="nav">
-      <a href="../dge/index.html">🏠 Main site</a>
-      <a href="../dge/dasa-sahitya/index.html">📖 Browse corpus</a>
-      <a href="../dge/convert/index.html">🔁 Convert (OCR tool)</a>
+      <a href="../render.html">🏠 Main site</a>
+      <a href="../dasa-sahitya/index.html">📖 Browse corpus</a>
+      <a href="../convert/index.html">🔁 Convert (OCR tool)</a>
     </div>
   </div>
 </header>
@@ -154,11 +154,11 @@
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="../dge/convert/github.js"></script>
+<script src="../convert/github.js"></script>
 <script>
 "use strict";
-const BASE = "../dge/data/DvaitaVedanta/Itara/DasaSahitya";
-const GH_BASE = "dge/data/DvaitaVedanta/Itara/DasaSahitya";
+const BASE = "../data/DvaitaVedanta/Itara/DasaSahitya";
+const GH_BASE = "data/DvaitaVedanta/Itara/DasaSahitya";
 const FORM_LABELS = {pada:"Pada",suladi:"Suladi",ugabhoga:"Ugabhoga",devaranama:"Devaranama",
   aarati:"Aarati",mangala:"Mangala",kolu:"Kolu",shobhane:"Shobhane",laali:"Laali",
   dashavatara:"Dashavatara",sampradaya:"Sampradaya",kavya:"Kavya",
@@ -414,7 +414,7 @@ document.getElementById('saveBtn').onclick = async () => {
   try{
     // Read the manifest FIRST so the slug can reuse the composer's existing
     // folder. The corpus shape is composers/<slug>/data.json with `items`
-    // (see dge/data/DvaitaVedanta/Itara/DasaSahitya/composers/*/data.json and schemas.json
+    // (see data/DvaitaVedanta/Itara/DasaSahitya/composers/*/data.json and schemas.json
     // `dasa_pada_text`); the earlier composers/<slug>.json + `compositions`
     // wrote a file the reader never fetched and re-pointed index.json at it.
     const indexPath = `${GH_BASE}/index.json`;

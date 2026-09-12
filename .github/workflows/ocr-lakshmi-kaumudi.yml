@@ -3,7 +3,7 @@ name: DGE OCR Lakshmi Vyakhya (Sanskrit, pratika-mode)
 # Stage 1 of the Lakshmi Vyakhya pipeline (tools/lakshmi_kaumudi_ocr.py):
 # archive.org PDF pages -> Vision OCR -> Gemini proofreading
 # (pratika-anchored Sanskrit blocks, classification-gated) -> a staged
-# JSON committed under dge/data/ocr_staging/lakshmi_kaumudi/. Sutra
+# JSON committed under data/ocr_staging/lakshmi_kaumudi/. Sutra
 # alignment + merging is Stage 2, run deliberately after inspection.
 # Same conventions as ocr-vasu-kaumudi.yml (committed staged files,
 # GEMINI_HTTP_TIMEOUT, parallel disjoint page ranges).
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: staged-lakshmi-kaumudi
-          path: dge/data/ocr_staging/lakshmi_kaumudi/
+          path: data/ocr_staging/lakshmi_kaumudi/
 
       - name: Commit the staged file
         env:
@@ -83,7 +83,7 @@ jobs:
           GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
         run: |
           set -euo pipefail
-          git add dge/data/ocr_staging/lakshmi_kaumudi/
+          git add data/ocr_staging/lakshmi_kaumudi/
           if git diff --cached --quiet; then
             echo "No staged changes."
             exit 0

@@ -1,22 +1,22 @@
 name: DGE re-index (search + library status)
 
 # The "Re-index" job: rebuilds the corpus-wide search index and the Library
-# Manager status snapshot so both reflect the current dge/data.
+# Manager status snapshot so both reflect the current data.
 #
 # Two ways it runs:
 #   * by hand (Repository & Workflows → Search index, or the Actions tab) —
 #     opens a PR with the status/backlinks and prints the search-dist hash to
 #     pin, exactly as before;
 #   * every night at 00:30 IST (19:00 UTC), after nightly.yml — and then ONLY
-#     if dge/data has changed since the index was last published (the last
+#     if data has changed since the index was last published (the last
 #     data commit is remembered in admin/config/search-index.state.json).
-#     A scheduled run bumps the CDN pin itself (dge/js/config.js and
-#     dge/js/global-search.js) and commits pin + status + backlinks straight to
+#     A scheduled run bumps the CDN pin itself (js/config.js and
+#     js/global-search.js) and commits pin + status + backlinks straight to
 #     main, so readers get the new index by morning without a hand on it.
 #
 # It regenerates two build products (generated-from-data artifacts, never
 # hand-edited):
-#   dge/search_index/**               (build_search_index.py)
+#   search_index/**               (build_search_index.py)
 #   admin/config/library-status.json  (tools/gen_library_status.py)
 # The index itself (330 MB) is force-pushed to the search-dist branch and read
 # over jsDelivr; only backlinks and status live on main.
@@ -40,11 +40,11 @@ on:
         type: boolean
         default: false
       bump_pin:
-        description: "Bump the CDN pin in dge/js and commit it to main (what the nightly run does)"
+        description: "Bump the CDN pin in js and commit it to main (what the nightly run does)"
         type: boolean
         default: false
       force:
-        description: "Rebuild even if dge/data has not changed since the last publish"
+        description: "Rebuild even if data has not changed since the last publish"
         type: boolean
         default: true
 
@@ -68,27 +68,27 @@ jobs:
           python-version: "3.11"
 
       # The nightly run is only worth its 25 minutes when something changed.
-      - name: Has dge/data changed since the last publish?
+      - name: Has data changed since the last publish?
         id: gate
         env:
           FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
         run: |
           set -euo pipefail
-          DATA_SHA=$(git log -1 --format=%H -- dge/data)
+          DATA_SHA=$(git log -1 --format=%H -- data)
           LAST=$(python3 -c "import json,os;p='admin/config/search-index.state.json';print(json.load(open(p)).get('data_sha','') if os.path.exists(p) else '')")
           echo "data_sha=$DATA_SHA" >> "$GITHUB_OUTPUT"
           if [ "$FORCE" = "true" ] || [ "$DATA_SHA" != "$LAST" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
           else
             echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "dge/data unchanged since the last publish ($LAST) — nothing to rebuild." >> "$GITHUB_STEP_SUMMARY"
+            echo "data unchanged since the last publish ($LAST) — nothing to rebuild." >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      # The Kavya corpus is not in dge/data -- it is 50 MB on the kavya-dist
+      # The Kavya corpus is not in data -- it is 50 MB on the kavya-dist
       # branch, served to the reader over jsDelivr. Checked out here so its
       # 67,000 verses are searchable; slugs come out relative to the checkout,
       # so they read kavya_alankara/<work>/<layer> exactly as if the corpus sat
-      # in dge/data, and core.js sends a hit on one of those to the CDN.
+      # in data, and core.js sends a hit on one of those to the CDN.
       - name: Fetch the Kavya corpus
         if: steps.gate.outputs.run == 'true' && (github.event_name == 'schedule' || inputs.include_kavya)
         run: |
@@ -101,10 +101,10 @@ jobs:
         if: steps.gate.outputs.run == 'true'
         run: |
           set -euo pipefail
-          ARGS=(--data dge/data --out dge/search_index)
+          ARGS=(--data data --out search_index)
           [ -d _kavya ] && ARGS+=(--extra-data _kavya)
           [ "${{ inputs.commentaries }}" = "true" ] && ARGS+=(--commentaries)
-          python dge/build_search_index.py "${ARGS[@]}"
+          python build_search_index.py "${ARGS[@]}"
 
       - name: Put the Kavya checkout back
         if: ${{ always() }}
@@ -119,7 +119,7 @@ jobs:
       - name: Show what changed
         if: steps.gate.outputs.run == 'true'
         run: |
-          git status --porcelain dge/search_index admin/config/library-status.json || true
+          git status --porcelain search_index admin/config/library-status.json || true
 
       - name: Publish the index to search-dist
         if: steps.gate.outputs.run == 'true'
@@ -138,10 +138,10 @@ jobs:
           # js/backlinks.js reads it from beside the app.
           rm -rf /tmp/search-dist
           mkdir -p /tmp/search-dist
-          cp -r dge/search_index/manifest.json dge/search_index/postings \
-                dge/search_index/units dge/search_index/words \
-                dge/search_index/vocab /tmp/search-dist/
-          cp dge/search_index_dist_README.md /tmp/search-dist/README.md
+          cp -r search_index/manifest.json search_index/postings \
+                search_index/units search_index/words \
+                search_index/vocab /tmp/search-dist/
+          cp search_index_dist_README.md /tmp/search-dist/README.md
           cd /tmp/search-dist
           git init -q -b search-dist
           git add -A
@@ -169,7 +169,7 @@ jobs:
           import json, os, re, time
           sha, data_sha = os.environ["SHA"], os.environ["DATA_SHA"]
           pin = re.compile(r"(cdn\.jsdelivr\.net/gh/Tribhuvanachar/bhumandala@)[0-9a-f]{40}(?=['\"])")
-          for path in ("dge/js/config.js", "dge/js/global-search.js"):
+          for path in ("js/config.js", "js/global-search.js"):
               src = open(path, encoding="utf-8").read()
               # Only the search-index pin: the wordnet/kavya pins carry a path suffix (/_wordnet) or sit on other keys.
               def repl(m, line):
@@ -180,7 +180,7 @@ jobs:
                       line = pin.sub(lambda m: m.group(1) + sha, line)
                   out.append(line)
               open(path, "w", encoding="utf-8").write("\n".join(out))
-          json.dump({"_readme": "Written by reindex.yml: which dge/data commit the published search index was built from, and where it went.",
+          json.dump({"_readme": "Written by reindex.yml: which data commit the published search index was built from, and where it went.",
                      "data_sha": data_sha, "dist_sha": sha,
                      "published_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
                     open("admin/config/search-index.state.json", "w", encoding="utf-8"), indent=1)
@@ -188,8 +188,8 @@ jobs:
           PY
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dge/js/config.js dge/js/global-search.js admin/config/search-index.state.json \
-                  admin/config/library-status.json dge/search_index/backlinks dge/search_index/backlinks.json 2>/dev/null || true
+          git add js/config.js js/global-search.js admin/config/search-index.state.json \
+                  admin/config/library-status.json search_index/backlinks search_index/backlinks.json 2>/dev/null || true
           git commit -q -m "Re-index: publish search index ${SHA:0:12}, bump CDN pin, refresh status and backlinks" || echo "nothing to commit"
           for attempt in 1 2 3; do
             git push -q origin HEAD:main && break
@@ -213,8 +213,8 @@ jobs:
 
             What this PR carries is the part that belongs on main:
             `admin/config/library-status.json` and
-            `dge/search_index/backlinks/**`.
+            `search_index/backlinks/**`.
           add-paths: |
             admin/config/library-status.json
-            dge/search_index/backlinks/**
-            dge/search_index/backlinks.json
+            search_index/backlinks/**
+            search_index/backlinks.json

@@ -1,6 +1,6 @@
 name: Probe — verify the alignment by eye, and check wikisource for Sayana
 
-# Diagnostic only. Writes nothing into dge/, opens no PR.
+# Diagnostic only. Writes nothing into , opens no PR.
 #
 # TWO QUESTIONS, and the second may make the first moot.
 #
@@ -92,7 +92,7 @@ jobs:
           sys.path.insert(0, "tools/sayana_smriti")
           from archive_sayana import align, parse_blocks, skeleton, volume_for
 
-          SAM = "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_{m:02d}/data.json"
+          SAM = "data/vedas/rigveda/shakala_shakha/samhita/mandala_{m:02d}/data.json"
           slipped = checked = 0
           for m in (1, 5, 9):
               items = json.load(open(SAM.format(m=m)))["items"]

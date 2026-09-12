@@ -39,7 +39,7 @@ does morphology; that is what tapping the word is for.
 
     python3 tools/build_highlight_index.py
 
-Output: dge/data/_highlight/<bucket>.json  {"k"|"d"|"b": newline-joined words}
+Output: data/_highlight/<bucket>.json  {"k"|"d"|"b": newline-joined words}
         k = कोश headword, d = verb form, b = both; plus manifest.json
 """
 

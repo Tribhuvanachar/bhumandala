@@ -26,7 +26,7 @@ Two layouts exist on our side, and the sync treats them differently:
     the review page, with the wiki's text in front of them.
 
 Either way:
-  1. Map: every dge/data/…/SarvaMula/**/data.json whose source_url is
+  1. Map: every data/…/SarvaMula/**/data.json whose source_url is
      https://anandamakaranda.in/index.php?title=<Title> (47 files; asserted).
   2. Change detection: revision ids per page (one API call per 50 titles)
      against admin/config/sync/anandamakaranda.state.json.

@@ -1,6 +1,6 @@
 # The DGE Chandas engine as Kamadhenu's analysis layer (Phase 5)
 
-Decision: **the DGE Chandas engine (`dge/js/chandas.js` + `dge/data/vedanga/chandas/data.json`) is the authoritative
+Decision: **the DGE Chandas engine (`js/chandas.js` + `data/vedanga/chandas/data.json`) is the authoritative
 metre layer for Kamadhenu.** Vāgdhenu's own metre code is used only as a comparison. Reasons and evidence below.
 
 ## What the engine produces (checked by running it headlessly)
@@ -33,7 +33,7 @@ verses, growing as the Gemini brief is answered).
 |---|---|
 | no duration model (it scans, it does not time) | Kamadhenu measures seconds-per-akṣara from verified recordings per metre (`kamadhenu_dataset/mapping.py` band 0.26–0.44 s today; `pace_by_chandas.json` planned) |
 | pāda split of prose / gadya | `meter = गद्यम्`, no pādas; prosody from punctuation |
-| Vedic svara | out of scope for both engines; separate track (`dge/tts/ARCHITECTURE.md` §25) |
+| Vedic svara | out of scope for both engines; separate track (`tts/ARCHITECTURE.md` §25) |
 | verse defects in the corpus | flagged, sent to the Gemini brief; never "fixed" silently |
 
 ## Comparison with Vāgdhenu's metre code (differences only)

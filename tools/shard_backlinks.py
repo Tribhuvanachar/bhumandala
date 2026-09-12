@@ -2,7 +2,7 @@
 """
 shard_backlinks.py — split backlinks.json so a reading page can use it.
 
-dge/search_index/backlinks.json answers "which commentaries discuss this
+search_index/backlinks.json answers "which commentaries discuss this
 verse". It is built by build_search_index.py by inverting every
 references[].target in the corpus, and at 2.8 MB it is sized for an offline
 tool, not for a phone opening one grantha.
@@ -13,7 +13,7 @@ shard, and the reader fetches nothing at all.
 
     python3 tools/shard_backlinks.py
 
-Output: dge/search_index/backlinks/<slug with / as __>.json, each
+Output: search_index/backlinks/<slug with / as __>.json, each
 {unitId: [[citing slug, unit, note], ...]}, plus an index.json naming which
 granthas have one.
 
@@ -59,7 +59,7 @@ def main():
     if os.path.exists(lib):
         with open(lib, encoding='utf-8') as fh:
             for g in json.load(fh).get('granthas', []):
-                slug = g['path'].replace('dge/data/', '').replace('/data.json', '')
+                slug = g['path'].replace('data/', '').replace('/data.json', '')
                 # The catalogue wins where it has an entry; the table above
                 # only fills the gaps it leaves.
                 if g.get('title'):

@@ -1,6 +1,6 @@
 {
   "_readme": [
-    "The guided walkthrough — dge/js/tour.js.",
+    "The guided walkthrough — js/tour.js.",
     "",
     "A new reader has no way to discover that double-tapping a word explains it, or",
     "that the number at the end of a verse lists its commentators. This is the",

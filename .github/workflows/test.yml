@@ -8,7 +8,7 @@ name: Tests
 # tools/, the plain-Node JS tests (no framework, no build step -- this
 # project's own convention), tools/validate_data.py's structural corpus
 # check, tools/validate_gold_standard.py's V1-V7 gate over any
-# format:gold_v2_2 commentary already in dge/data/, and the generated-file
+# format:gold_v2_2 commentary already in data/, and the generated-file
 # drift gates (frontend shell, sitemap.xml/robots.txt) that fail if their
 # source changed without regenerating the committed output.
 #
@@ -68,13 +68,13 @@ jobs:
         run: python3 tools/test_build_sitemap.py
 
       - name: JS -- search resilience
-        run: node dge/js/test-search-resilience.js
+        run: node js/test-search-resilience.js
 
       - name: JS -- JS/Python normalizer parity
-        run: node dge/js/test-parity.js
+        run: node js/test-parity.js
 
       - name: JS -- Gold-Standard renderer
-        run: node dge/js/test-gold-render.js
+        run: node js/test-gold-render.js
 
       - name: JS -- audio detection
         run: node tools/audio_admin/test-audio-detect.js
@@ -83,7 +83,7 @@ jobs:
         run: python3 tools/validate_data.py
 
       - name: Gold-Standard contract gate (validate_gold_standard.py)
-        run: python3 tools/validate_gold_standard.py --scan-corpus --data dge/data
+        run: python3 tools/validate_gold_standard.py --scan-corpus --data data
 
       - name: Frontend redesign -- shared-chrome regression guard
         run: python3 tools/redesign/audit_pages.py --check

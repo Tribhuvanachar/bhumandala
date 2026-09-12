@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
-<script src="../dge/js/audio-detect.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
+<script src="../js/audio-detect.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Audio Admin · DGE (restricted)</title>
 <link rel="stylesheet" href="css/audio.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -29,9 +29,9 @@
   <div class="bar">
     <div class="brand">🎙️ Audio Admin <small>· trim/chunk chanting audio, push to bhumandala-audio-data</small></div>
     <span class="spacer"></span>
-    <a class="icon" href="../dge/index.html">◂ DGE</a>
+    <a class="icon" href="../render.html">◂ DGE</a>
     <button class="icon" id="theme">◐</button>
-    <a class="icon" href="../dge/index.html" title="Close Audio Admin">✕</a>
+    <a class="icon" href="../render.html" title="Close Audio Admin">✕</a>
   </div>
 </header>
 
@@ -282,7 +282,7 @@
   // same 5ms boundary refinement window, same overlap resolution. Ported
   // so the web tool and the notebook produce comparable results on the
   // same recording, not two independently-tuned algorithms.
-  // Boundary detection now lives in dge/js/audio-detect.js so it can be tested
+  // Boundary detection now lives in js/audio-detect.js so it can be tested
   // in Node instead of by reloading this page and squinting at the result --
   // see tests/test-audio-detect.js, which reproduces the one-segment bug on a
   // synthetic recording with continuous accompaniment and then asserts the fix.

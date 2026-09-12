@@ -65,7 +65,7 @@ Whichever session sees it — the Sunday routine, or any Claude Code session the
 lead points at it with the **Copy prompt for a Claude session** button:
 
 1. Read `tasks/inbox/<id>.json`. The `sections[]` carry `path` (a `data.json`
-   under `dge/data/`) and `title`; `instruction` is the ask; `thread[]` is
+   under `data/`) and `title`; `instruction` is the ask; `thread[]` is
    the whole conversation so far, newest last.
 2. Do it, or answer it. A question gets an answer; a change (delete, pair,
    categorise, rename, move) is made on a branch, tested, and merged by the

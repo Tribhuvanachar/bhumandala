@@ -1,6 +1,6 @@
 name: Kāvya tracker — refresh
 
-# One button. Regenerates dge/KAVYA_TRACKER.md and admin/config/kavya-status.json
+# One button. Regenerates KAVYA_TRACKER.md and admin/config/kavya-status.json
 # from what is actually published, what the Kavya corpus holds, and what the
 # wanted-list names -- and commits the result if anything moved.
 #
@@ -50,16 +50,16 @@ jobs:
           print(f"- named, nothing yet: **{s['wanted']}**")
           PY
             echo ""
-            echo "Full table: [dge/KAVYA_TRACKER.md](../blob/main/dge/KAVYA_TRACKER.md)"
+            echo "Full table: [KAVYA_TRACKER.md](../blob/main/KAVYA_TRACKER.md)"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit it if it moved
         run: |
           set -euo pipefail
-          if [ -n "$(git status --porcelain dge/KAVYA_TRACKER.md admin/config/kavya-status.json)" ]; then
+          if [ -n "$(git status --porcelain KAVYA_TRACKER.md admin/config/kavya-status.json)" ]; then
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add dge/KAVYA_TRACKER.md admin/config/kavya-status.json
+            git add KAVYA_TRACKER.md admin/config/kavya-status.json
             git commit -q -m "Kāvya tracker: refresh"
             # main moves under these jobs: the tracker refresh and the source
             # check both push, and the first run of the pair had its state

@@ -1,6 +1,6 @@
 name: Publish Dasa Sahitya local-asset imports
 
-# Publishes dge/data/dasa_sahitya_local/ (the app/export/dump imports still
+# Publishes data/dasa_sahitya_local/ (the app/export/dump imports still
 # pending human review + merge, see dasa_sahitya_local/ARCHITECTURE.md) to
 # this repo's "dasa-sahitya-local-dist" branch, then removes it from
 # whichever branch this was dispatched against so it stops counting toward
@@ -12,14 +12,14 @@ name: Publish Dasa Sahitya local-asset imports
 # uploaded straight into an editing session and imported there with
 # tools/DvaitaVedanta/Itara/DasaSahitya/import_dasa_sahitya_{local_db,collection_json,flat_json}.py.
 # So the flow for a NEW asset arriving is: import it locally in a session,
-# commit dge/data/dasa_sahitya_local/<asset>/ to a branch same as always,
+# commit data/dasa_sahitya_local/<asset>/ to a branch same as always,
 # THEN run this workflow (against that branch) to move it off main and onto
 # the dist branch, publishing whatever is on disk at dispatch time rather
 # than rebuilding it here.
 #
 # Nothing reads this branch yet -- there is no dasa_sahitya_local UI, only
 # the plan in ARCHITECTURE.md for when composer-identity review finishes and
-# a composer's data is ready to fold into dge/data/DvaitaVedanta/Itara/DasaSahitya/ (see
+# a composer's data is ready to fold into data/DvaitaVedanta/Itara/DasaSahitya/ (see
 # tools/DvaitaVedanta/Itara/DasaSahitya/merge_confirmed_composers.py for how that half works).
 # This just keeps the pending, not-yet-merged data reviewable via git
 # without it costing main anything.
@@ -28,7 +28,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm_remove_from_source_branch:
-        description: "After publishing, also remove dge/data/dasa_sahitya_local/ from the branch this ran on and add it to .gitignore (leaves it committed on dasa-sahitya-local-dist regardless)"
+        description: "After publishing, also remove data/dasa_sahitya_local/ from the branch this ran on and add it to .gitignore (leaves it committed on dasa-sahitya-local-dist regardless)"
         type: boolean
         default: true
 
@@ -50,11 +50,11 @@ jobs:
       - name: Check there is something to publish
         run: |
           set -euo pipefail
-          if [ ! -d dge/data/dasa_sahitya_local ]; then
-            echo "::error::dge/data/dasa_sahitya_local does not exist on this branch -- nothing to publish. If it was already moved to dasa-sahitya-local-dist and removed from here, this workflow has already done its job."
+          if [ ! -d data/dasa_sahitya_local ]; then
+            echo "::error::data/dasa_sahitya_local does not exist on this branch -- nothing to publish. If it was already moved to dasa-sahitya-local-dist and removed from here, this workflow has already done its job."
             exit 1
           fi
-          du -sh dge/data/dasa_sahitya_local
+          du -sh data/dasa_sahitya_local
 
       - name: Publish to dasa-sahitya-local-dist
         env:
@@ -69,7 +69,7 @@ jobs:
           # publication of current state, not a log of every past state.
           rm -rf /tmp/dasa-sahitya-local-dist
           mkdir -p /tmp/dasa-sahitya-local-dist
-          cp -r dge/data/dasa_sahitya_local/* /tmp/dasa-sahitya-local-dist/
+          cp -r data/dasa_sahitya_local/* /tmp/dasa-sahitya-local-dist/
           cp tools/DvaitaVedanta/Itara/DasaSahitya/dasa_sahitya_local_dist_README.md /tmp/dasa-sahitya-local-dist/README.md
           cd /tmp/dasa-sahitya-local-dist
           git init -q -b dasa-sahitya-local-dist
@@ -86,7 +86,7 @@ jobs:
             echo "No pin to bump yet -- nothing reads this branch over jsDelivr. Once a composer's data is ready to fold into the live corpus, that goes through tools/DvaitaVedanta/Itara/DasaSahitya/merge_confirmed_composers.py, not through pointing a UI at this branch."
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Remove dge/data/dasa_sahitya_local from this branch
+      - name: Remove data/dasa_sahitya_local from this branch
         if: ${{ fromJSON(inputs.confirm_remove_from_source_branch) }}
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
@@ -95,8 +95,8 @@ jobs:
           GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
         run: |
           set -euo pipefail
-          git rm -rq dge/data/dasa_sahitya_local
-          if ! grep -qxF 'dge/data/dasa_sahitya_local/' .gitignore; then
+          git rm -rq data/dasa_sahitya_local
+          if ! grep -qxF 'data/dasa_sahitya_local/' .gitignore; then
             {
               echo ""
               echo "# Published to the \"dasa-sahitya-local-dist\" branch by"
@@ -104,10 +104,10 @@ jobs:
               echo "# local-asset imports, kept off main the same reason wordnet/kavya/search-dist"
               echo "# are. Rebuild it here (or checkout the dist branch) to review or continue the"
               echo "# merge in tools/DvaitaVedanta/Itara/DasaSahitya/merge_confirmed_composers.py."
-              echo "dge/data/dasa_sahitya_local/"
+              echo "data/dasa_sahitya_local/"
             } >> .gitignore
           fi
           git add .gitignore
-          git commit -q -m "Move dge/data/dasa_sahitya_local to the dasa-sahitya-local-dist branch"
+          git commit -q -m "Move data/dasa_sahitya_local to the dasa-sahitya-local-dist branch"
           git push -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" \
             HEAD:${{ github.ref_name }}

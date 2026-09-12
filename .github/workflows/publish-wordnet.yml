@@ -1,6 +1,6 @@
 name: Publish the Sanskrit WordNet
 
-# Rebuilds dge/data/_wordnet/ from IndoWordNet and publishes it to this repo's
+# Rebuilds data/_wordnet/ from IndoWordNet and publishes it to this repo's
 # "wordnet-dist" branch, which jsDelivr serves to js/intellisense.js.
 #
 # The tree is 24 MB and never lands on main: GitHub Pages publishes main and
@@ -61,7 +61,7 @@ jobs:
         run: |
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json, pathlib
-          d = pathlib.Path("dge/data/_wordnet")
+          d = pathlib.Path("data/_wordnet")
           m = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
           mb = sum(f.stat().st_size for f in d.glob("*.json")) / 1024 / 1024
           print("## Sanskrit WordNet\n")
@@ -82,7 +82,7 @@ jobs:
         run: |
           python - <<'PY'
           import json, pathlib, sys
-          d = pathlib.Path("dge/data/_wordnet")
+          d = pathlib.Path("data/_wordnet")
           man = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
           missing = [b for b in man["buckets"] if not (d / f"{b}.json").exists()]
           if missing:
@@ -117,7 +117,7 @@ jobs:
           # not a log.
           rm -rf /tmp/wordnet-dist
           mkdir -p /tmp/wordnet-dist/_wordnet
-          cp dge/data/_wordnet/*.json /tmp/wordnet-dist/_wordnet/
+          cp data/_wordnet/*.json /tmp/wordnet-dist/_wordnet/
           # The branch's own README is versioned here on main, so a rebuild
           # reproduces the whole branch rather than depending on what happens
           # to be on it already.

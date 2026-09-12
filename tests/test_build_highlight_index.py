@@ -4,7 +4,7 @@ reader's धातु/कोश highlighting reads.
 The one thing that MUST hold here is that the Python side and the JavaScript
 side agree on the lookup key. A word is written into a shard under a
 normalised spelling and looked up under a normalised spelling computed
-independently in dge/js/highlight-words.js; if the two ever disagree about,
+independently in js/highlight-words.js; if the two ever disagree about,
 say, a trailing danda, every word at the end of a pāda silently stops being
 marked and nothing errors. So normalise() and the bucketing are pinned here,
 and the JS copies are pinned against the same cases in the browser check.
@@ -158,7 +158,7 @@ class Manifest(unittest.TestCase):
 
 
 class ClientAgreement(unittest.TestCase):
-    """dge/js/highlight-words.js recomputes the lookup key and the shard name
+    """js/highlight-words.js recomputes the lookup key and the shard name
     independently. Neither side errors when they drift -- words simply stop
     being marked -- so the shared constants are pinned against the JS source
     itself rather than against a comment describing it."""
@@ -307,14 +307,14 @@ class ScriptRoundTrip(unittest.TestCase):
 const fs=require('fs'), path=require('path');
 // node -e leaves no script path in argv, so the first extra arg is argv[1].
 const repo=process.argv[1], scheme=process.argv[2], words=JSON.parse(process.argv[3]);
-const sans=fs.readFileSync(path.join(repo,'dge/js/vendor/sanscript-1.3.3.min.js'),'utf8');
+const sans=fs.readFileSync(path.join(repo,'js/vendor/sanscript-1.3.3.min.js'),'utf8');
 const win={activeScript:scheme};
 (new Function('window','self','globalThis','exports','module',sans)).call(win,win,win,win,undefined,undefined);
 global.window=win;
 global.document={addEventListener(){},querySelectorAll(){return[]},getElementById(){return null}};
 global.fetch=()=>Promise.resolve({ok:false});
-eval(fs.readFileSync(path.join(repo,'dge/js/highlight-words.js'),'utf8'));
-const dir=path.join(repo,'dge/data/_highlight');
+eval(fs.readFileSync(path.join(repo,'js/highlight-words.js'),'utf8'));
+const dir=path.join(repo,'data/_highlight');
 const index=new Set();
 for(const f of fs.readdirSync(dir)){ if(f==='manifest.json') continue;
   const raw=JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'));

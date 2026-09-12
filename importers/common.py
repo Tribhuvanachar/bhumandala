@@ -31,7 +31,7 @@ def strip_html(doc):
     return html.unescape(txt)
 
 def data_base():
-    return "dge/data" if os.path.isdir("dge/data") else ("data" if os.path.isdir("data") else "dge/data")
+    return "data" if os.path.isdir("data") else ("data" if os.path.isdir("data") else "data")
 
 def write_grantha(rel_path, schema, default_author, items, **extra):
     folder = os.path.join(data_base(), rel_path)

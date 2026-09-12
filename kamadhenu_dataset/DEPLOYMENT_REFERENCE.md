@@ -75,10 +75,10 @@ below burns GPU minutes.
 ```
 GitHub Pages (static)                     Hugging Face (free tier)
 ──────────────────────                    ────────────────────────────────────
-dge/index.html                            Space  SarvamulaOrg/kamadhenu     (ZeroGPU, Gradio)
-dge/js/chandas.js   ── metre name ──┐        app.py           tools/kamadhenu/space/app.py
-dge/js/kamadhenu.js ── verse text ──┼──►     src/             Vāgdhenu src @ c18927a8 (Apache-2.0)
-dge/js/audio.js     ◄── wav url ────┘        reference_bank/  Vāgdhenu bank (later: Kamadhenu voice)
+render.html                            Space  SarvamulaOrg/kamadhenu     (ZeroGPU, Gradio)
+js/chandas.js   ── metre name ──┐        app.py           tools/kamadhenu/space/app.py
+js/kamadhenu.js ── verse text ──┼──►     src/             Vāgdhenu src @ c18927a8 (Apache-2.0)
+js/audio.js     ◄── wav url ────┘        reference_bank/  Vāgdhenu bank (later: Kamadhenu voice)
                                              weights ◄─ hf_hub_download(prathoshap/vagdhenu)
 ```
 

@@ -1,16 +1,16 @@
 # Deploy the static site to Firebase Hosting (project from the FIREBASE_PROJECT_ID secret).
 #
-# Context: dge/GO_LIVE_ARCHITECTURE.md §3 and the lead's "GitHub Pages → Firebase Migration Guide"
+# Context: GO_LIVE_ARCHITECTURE.md §3 and the lead's "GitHub Pages → Firebase Migration Guide"
 # (6 Sep 2026). GitHub Pages stays the live origin until the DNS cutover in that guide's Part 3; this
 # workflow publishes the same commit to https://<project>.web.app so it can be checked first.
 #
-# 8 Sep 2026: uses dge/FIREBASE_SETUP.md §0.1's now-resolved service account (secret + IAM roles +
+# 8 Sep 2026: uses FIREBASE_SETUP.md §0.1's now-resolved service account (secret + IAM roles +
 # correct FIREBASE_PROJECT_ID). One Hosting-specific issue on top of that: the CLI rejected
-# dge/firebase/firebase.json's hosting.public ("../..", reaching the repo root) with
+# firebase/firebase.json's hosting.public ("../..", reaching the repo root) with
 # "Error: ../.. is outside of project directory" -- firebase-tools requires hosting.public to resolve
 # within the directory containing the config file it's reading. Fixed by giving Hosting its own config
 # at the repo root, ../firebase-hosting.json (public: "."), used here via --config instead of
-# dge/firebase/firebase.json (which still owns firestore/functions/emulators, unchanged).
+# firebase/firebase.json (which still owns firestore/functions/emulators, unchanged).
 #
 # Secrets used (Settings → Secrets and variables → Actions):
 #   FIREBASE_PROJECT_ID        e.g. sarvamula-org                       (added by the lead 6 Sep 2026)
@@ -18,7 +18,7 @@
 #                              fields as separate secrets: FIREBASE_PRIVATE_KEY, FIREBASE_PRIVATE_KEY_ID,
 #                              FIREBASE_CLIENT_EMAIL, FIREBASE_CLIENT_ID (the lead stored them this way, 6 Sep 2026).
 # FIREBASE_API_KEY / FIREBASE_AUTH_DOMAIN are not needed here: the web config is public and lives in
-# dge/js/config.js (FIREBASE_SETUP.md §4).
+# js/config.js (FIREBASE_SETUP.md §4).
 name: Deploy — Firebase Hosting
 
 on:
@@ -93,7 +93,7 @@ jobs:
           print("service account:", sa.get("client_email"), "| source:", ", ".join(found))
           PY
       - name: Deploy with the Firebase CLI
-        # Run from the repo root with --config firebase-hosting.json (not dge/firebase/firebase.json)
+        # Run from the repo root with --config firebase-hosting.json (not firebase/firebase.json)
         # so hosting.public: "." stays within the CLI's "project directory" -- see the header note above.
         # --project is passed explicitly on every command, so no .firebaserc is needed.
         env:

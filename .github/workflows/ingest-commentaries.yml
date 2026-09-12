@@ -39,7 +39,7 @@ jobs:
         run: pip install -r importers/requirements.txt
       - name: Run importer (${{ inputs.text }})
         # Run from repo root (like ingest.yml): Python puts importers/ on the
-        # path so `import common` resolves, and write_grantha() finds dge/data.
+        # path so `import common` resolves, and write_grantha() finds data.
         env:
           GITA_SUPERSITE: ${{ inputs.gita_supersite && '1' || '0' }}
         run: python importers/dispatch.py "${{ inputs.text }}"
@@ -65,4 +65,4 @@ jobs:
             - `data/taxonomy.json` + `data/library.json` list the new layers
               (run `python tools/register_layers.py` if a new subtree is missing).
           add-paths: |
-            dge/data/**
+            data/**

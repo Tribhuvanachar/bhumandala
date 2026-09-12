@@ -3,7 +3,7 @@
 # This file (unlike the rest of this repo, which is Apache-2.0) is licensed
 # AGPL-3.0-or-later: it exists solely to process the AGPL-licensed vendored
 # data in vendor/, and its output is a derivative compilation of that data.
-"""Build dge/data/vedanga/chandas/data.json from the vendored Chandojnanam CSVs.
+"""Build data/vedanga/chandas/data.json from the vendored Chandojnanam CSVs.
 
 Source: hrishikeshrt/chanda ("Chandojnanam"), AGPL-3.0-or-later.
 See vendor/NOTICE.md for the pinned commit and the licence caveat.

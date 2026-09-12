@@ -8,8 +8,8 @@ name: DGE Gemini dhātu lexicon (multilingual meanings)
 # Gemini, not derived from ashtadhyayi.com or any other existing source --
 # the project lead's own framing of the ask, after the 23 Aug removal of
 # the unattributed ashtadhyayi.com English gloss elsewhere in this project
-# (see dge/PENDING.md). Every output is labeled "AI-generated (Gemini),
-# unreviewed" in the reader (dge/js/ai.js's Dhatu modal).
+# (see PENDING.md). Every output is labeled "AI-generated (Gemini),
+# unreviewed" in the reader (js/ai.js's Dhatu modal).
 #
 # Checkpointed and resumable: re-running with the same --dhatus selector
 # only fills in roots that don't already have an entry (pass force to
@@ -27,7 +27,7 @@ on:
         required: true
         default: "all"
       model:
-        description: "Gemini model to use. Default is gemini-flash-lite-latest -- see dge/PENDING.md's gemini-bench.yml entry for why."
+        description: "Gemini model to use. Default is gemini-flash-lite-latest -- see PENDING.md's gemini-bench.yml entry for why."
         required: true
         default: gemini-flash-lite-latest
         type: choice
@@ -87,7 +87,7 @@ jobs:
       - name: Validate corpus data
         run: python3 tools/validate_data.py
       - name: Show what changed
-        run: git status --porcelain dge/data/vedanga/vyakarana/dhatu_lexicon
+        run: git status --porcelain data/vedanga/vyakarana/dhatu_lexicon
 
       - name: Push directly to main
         if: ${{ fromJSON(inputs.direct_push) }}
@@ -98,11 +98,11 @@ jobs:
           GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
         run: |
           set -euo pipefail
-          if git diff --quiet -- dge/data/vedanga/vyakarana/dhatu_lexicon; then
+          if git diff --quiet -- data/vedanga/vyakarana/dhatu_lexicon; then
             echo "No changes to push."
             exit 0
           fi
-          git add dge/data/vedanga/vyakarana/dhatu_lexicon
+          git add data/vedanga/vyakarana/dhatu_lexicon
           git commit -m "data: gemini dhatu lexicon (${{ inputs.dhatus }}) [direct-push]"
           git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:main
 
@@ -121,7 +121,7 @@ jobs:
             Independently composed by Gemini -- not derived from
             ashtadhyayi.com or any other existing source. Labeled "AI
             Multilingual Meanings (Gemini, unreviewed)" in the reader
-            (`dge/js/ai.js`'s Dhātu modal) -- this is a first pass, not a
+            (`js/ai.js`'s Dhātu modal) -- this is a first pass, not a
             scholarly-verified one. Spot-check a sample before merging.
           add-paths: |
-            dge/data/vedanga/vyakarana/dhatu_lexicon/**
+            data/vedanga/vyakarana/dhatu_lexicon/**

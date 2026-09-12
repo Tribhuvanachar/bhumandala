@@ -38,7 +38,7 @@ Only where measurement says the existing audio cannot serve. Full list with exac
 | भुजङ्गप्रयात | SV 11.77, TP DAK 6 | 2 | full śloka | ≈16 s | 1 recording only |
 | हरिणी | SV 10.56 | 1 | full śloka | ≈22 s | 1 recording only |
 
-Recording requirements (from Vāgdhenu's protocol and `dge/tts/ARCHITECTURE.md`): one room, one microphone, 48 kHz / 24-bit WAV, peaks around −6 dB, no tanpura in the recording, **no gaps between words inside a pāda**, pause only at pāda ends and at the yati of long metres, hold long vowels, sustain final visarga, articulate retroflexes and aspirates, one clean take per verse, file named `<dge_id>.wav` (e.g. `sumadhva_vijaya_sarga_5_24.wav`). These are **reference** recordings; they double as training data.
+Recording requirements (from Vāgdhenu's protocol and `tts/ARCHITECTURE.md`): one room, one microphone, 48 kHz / 24-bit WAV, peaks around −6 dB, no tanpura in the recording, **no gaps between words inside a pāda**, pause only at pāda ends and at the yati of long metres, hold long vowels, sustain final visarga, articulate retroflexes and aspirates, one clean take per verse, file named `<dge_id>.wav` (e.g. `sumadhva_vijaya_sarga_5_24.wav`). These are **reference** recordings; they double as training data.
 
 What NOT to record yet: anuṣṭubh, upajāti, vasantatilakā, स्वागता, शालिनी, रथोद्धता, मञ्जुभाषिणी, प्रमिताक्षरा, द्रुतविलम्बित, वंशस्थ, मालिनी, प्रहर्षिणी — we already hold 49–402 recordings each; they need *verification*, not more takes. Training-volume recording (hours) waits for the voice decision (§A.1).
 

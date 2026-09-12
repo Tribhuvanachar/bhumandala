@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OCR Review · DGE (scholar)</title>
 <link rel="stylesheet" href="css/ocr-review.css?v=2">
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -25,7 +25,7 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🔍 OCR Review</div>
+    <div class="brand"><a href="../render.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🔍 OCR Review</div>
     <span class="spacer"></span>
     <input type="text" id="reviewer" placeholder="Your name (goes on every decision)" style="min-width:200px">
     <button class="icon" id="theme" title="Light / dark">◐</button>
@@ -83,12 +83,12 @@
     <h2>Finalise — merge approved text into the library</h2>
     <p class="muted" style="margin:0 0 8px">Runs <code>ocr-review-merge.yml</code> on GitHub: it reads the saved decisions, builds the layer, validates, and opens a pull request for you to merge. Nothing reaches readers until that PR is merged; the nightly job then registers the folder in the library.</p>
     <div class="grid2" id="finForm">
-      <label>Target layer data.json<input type="text" id="finTarget" placeholder="dge/data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/isha/tippani_x/data.json"></label>
+      <label>Target layer data.json<input type="text" id="finTarget" placeholder="data/darshana/vedanta/dvaita/DvaitaVedantaIn/upanishad_prasthana/isha/tippani_x/data.json"></label>
       <label>Schema<select id="finSchema"><option>grantha_tippani_text</option><option>grantha_tika_text</option><option>grantha_mula_text</option></select></label>
       <label>Title (Devanagari)<input type="text" id="finTitle" placeholder="ईशावास्योपनिषद्भाष्यटिप्पणी"></label>
       <label>Author (Devanagari)<input type="text" id="finAuthor" placeholder="श्री…"></label>
       <label>Mode<select id="finMode"><option value="append">append — merge by id into an existing layer</option><option value="replace">replace — rewrite the layer</option></select></label>
-      <label>Sarga directory (Gemini commentary files only)<input type="text" id="finSarga" placeholder="dge/data/kavya_alankara/kumarasambhava"></label>
+      <label>Sarga directory (Gemini commentary files only)<input type="text" id="finSarga" placeholder="data/kavya_alankara/kumarasambhava"></label>
     </div>
     <div class="toolbar" style="margin-top:10px">
       <label class="say"><input type="checkbox" id="finUndecided"> include undecided units too</label>
@@ -206,7 +206,7 @@
     if (!BRANCH) { sel.innerHTML = '<option value="">— pick a branch first —</option>'; return; }
     var files = [];
     try {
-      var r = await gh("/contents/dge/data/ocr_staging?ref=" + encodeURIComponent(BRANCH));
+      var r = await gh("/contents/data/ocr_staging?ref=" + encodeURIComponent(BRANCH));
       var dirs = r.ok ? (await r.json()).filter(function(x){ return x.type === "dir"; }) : [];
       for (var i = 0; i < dirs.length; i++) {
         var rr = await gh("/contents/" + dirs[i].path + "?ref=" + encodeURIComponent(BRANCH));

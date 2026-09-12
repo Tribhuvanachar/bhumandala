@@ -2,7 +2,7 @@
 """
 build_prakriya.py — the derivation viewer's data, from Vidyut.
 
-dge/js/dhatu.js has shipped two buttons per root, प्रक्रिया · तिङन्त and
+js/dhatu.js has shipped two buttons per root, प्रक्रिया · तिङन्त and
 कृदन्त forms, pointing at prakriya.html and krdanta.html. Neither page ever
 existed, so both 404 on tap; the code calls them a "Stage-2 hook". This
 builds what they were always meant to show.
@@ -36,7 +36,7 @@ of it and nothing else.
     python3 -c "import vidyut; vidyut.download_data('/tmp/vidyut_data')"
     python3 tools/build_prakriya.py
 
-The sūtra code on every step is the same id dge/js/intellisense.js already
+The sūtra code on every step is the same id js/intellisense.js already
 resolves, so each step in the viewer opens the rule that produced it.
 """
 

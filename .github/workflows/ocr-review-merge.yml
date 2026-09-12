@@ -4,7 +4,7 @@ name: OCR review — merge approved text into a layer
 # the reviewer's accept / edit / reject decisions beside the staged OCR file
 # (on the ocr-staging/<work> branch, or on main). This job fetches both, runs
 # tools/ocr_review_merge.py, validates, and opens a pull request that adds or
-# updates the layer in dge/data — a person merges it, and the nightly job
+# updates the layer in data — a person merges it, and the nightly job
 # registers the new folder in the library catalogue.
 #
 # Dispatched from the review page's "Finalise" panel (with the browser's
@@ -18,11 +18,11 @@ on:
         required: true
         type: string
       staged:
-        description: "Path of the staged OCR file, e.g. dge/data/ocr_staging/isha_upanishad_bhashya_tippani/vision_pages_1-292.json"
+        description: "Path of the staged OCR file, e.g. data/ocr_staging/isha_upanishad_bhashya_tippani/vision_pages_1-292.json"
         required: true
         type: string
       target:
-        description: "Layer to write (page/block OCR), e.g. dge/data/darshana/.../isha/tippani_x/data.json — blank for a Gemini commentary file"
+        description: "Layer to write (page/block OCR), e.g. data/darshana/.../isha/tippani_x/data.json — blank for a Gemini commentary file"
         type: string
         default: ""
       sarga_dir:
@@ -94,7 +94,7 @@ jobs:
           [ "${{ inputs.include_undecided }}" = "true" ] && ARGS+=(--include-undecided)
           python3 tools/ocr_review_merge.py "${ARGS[@]}"
           # The staged copy fetched from the branch must not ride into the PR.
-          if [ "${{ inputs.branch }}" != "main" ]; then git checkout -q -- dge/data/ocr_staging 2>/dev/null || true; git clean -q -fd dge/data/ocr_staging || true; fi
+          if [ "${{ inputs.branch }}" != "main" ]; then git checkout -q -- data/ocr_staging 2>/dev/null || true; git clean -q -fd data/ocr_staging || true; fi
 
       - name: Validate
         run: python3 tools/validate_data.py
@@ -111,5 +111,5 @@ jobs:
             Every item carries the reviewer's decision under `verification.human`.
             After merging, the nightly job registers the folder in the library.
           add-paths: |
-            dge/data/**
+            data/**
           delete-branch: true

@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ashtadhyayi Manager · DGE (super-admin)</title>
 <link rel="stylesheet" href="css/ashtadhyayi.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -28,11 +28,11 @@
   <div class="bar">
     <div class="brand">📜 Ashtadhyayi Manager <small>· DGE super-admin</small></div>
     <span class="spacer"></span>
-    <a class="icon" href="../dge/vyakarana/ashtadhyayi.html">◂ Reader</a>
+    <a class="icon" href="../vyakarana/ashtadhyayi.html">◂ Reader</a>
     <button class="icon" id="theme">◐</button>
     <button class="btn" id="reload">↻ Refresh</button>
   </div>
-  <div class="crumbs"><a href="../dge/index.html">⌂ DGE</a> › <a href="../dge/vyakarana/ashtadhyayi.html">अष्टाध्यायी</a> › <b>Layer &amp; coverage tracker</b></div>
+  <div class="crumbs"><a href="../render.html">⌂ DGE</a> › <a href="../vyakarana/ashtadhyayi.html">अष्टाध्यायी</a> › <b>Layer &amp; coverage tracker</b></div>
 </header>
 
 <main id="app" style="display:none">
@@ -67,18 +67,18 @@
 
   // layer registry — mirrors ashtadhyayi.js META/ORDER + the two ancillary leaves
   var LAYERS=[
-    {key:"kashika",           t:"काशिकावृत्तिः",   sub:"Kāśikā-vṛtti",     who:"Vāmana–Jayāditya",  role:"tika",        tag:"var(--k)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/kashika/data.json"},
-    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"../dge/data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json"},
-    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"../dge/data/vedanga/vyakarana/ashtadhyayi/mahabhashya_patanjali/data.json"},
-    {key:"balamanorama",      t:"बालमनोरमा",       sub:"Bāla-manoramā",    who:"Vāsudeva Dīkṣita",  role:"tippani",     tag:"var(--b)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/balamanorama/data.json"},
-    {key:"tattvabodhini",     t:"तत्त्वबोधिनी",    sub:"Tattva-bodhinī",   who:"Jñānendra Sarasvatī",role:"tippani",    tag:"var(--t)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/tattvabodhini/data.json"},
-    {key:"nyasa",             t:"न्यासः",          sub:"Nyāsa",            who:"Jinendrabuddhi",    role:"tippani",     tag:"var(--n)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/nyasa/data.json"},
-    {key:"vasu",              t:"Vasu · English",  sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu",role:"translation", tag:"var(--vs)", path:"../dge/data/vedanga/vyakarana/ashtadhyayi/vasu/data.json"}
+    {key:"kashika",           t:"काशिकावृत्तिः",   sub:"Kāśikā-vṛtti",     who:"Vāmana–Jayāditya",  role:"tika",        tag:"var(--k)",  path:"../data/vedanga/vyakarana/ashtadhyayi/kashika/data.json"},
+    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"../data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json"},
+    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"../data/vedanga/vyakarana/ashtadhyayi/mahabhashya_patanjali/data.json"},
+    {key:"balamanorama",      t:"बालमनोरमा",       sub:"Bāla-manoramā",    who:"Vāsudeva Dīkṣita",  role:"tippani",     tag:"var(--b)",  path:"../data/vedanga/vyakarana/ashtadhyayi/balamanorama/data.json"},
+    {key:"tattvabodhini",     t:"तत्त्वबोधिनी",    sub:"Tattva-bodhinī",   who:"Jñānendra Sarasvatī",role:"tippani",    tag:"var(--t)",  path:"../data/vedanga/vyakarana/ashtadhyayi/tattvabodhini/data.json"},
+    {key:"nyasa",             t:"न्यासः",          sub:"Nyāsa",            who:"Jinendrabuddhi",    role:"tippani",     tag:"var(--n)",  path:"../data/vedanga/vyakarana/ashtadhyayi/nyasa/data.json"},
+    {key:"vasu",              t:"Vasu · English",  sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu",role:"translation", tag:"var(--vs)", path:"../data/vedanga/vyakarana/ashtadhyayi/vasu/data.json"}
   ];
   var PENDING=[{t:"⚙ प्रक्रिया (derivation engine)", note:"planned — external Vidyut/Vidyullekha engine, not a text layer"}];
 
   // ---- site-wide visibility config (admin/content/ashtadhyayi-layers.json) ----
-  // Same GitHub-Contents-API-direct-commit mechanism dge/js/content-inline.js
+  // Same GitHub-Contents-API-direct-commit mechanism js/content-inline.js
   // uses for prose fields (token()/repo()/b64()/api() below are copied from
   // there rather than exposed on window, since that file's closure is
   // private) — applied here to a small visibility config instead.
@@ -163,7 +163,7 @@
   function load(){
     var total=0;
     loadVis().then(function(){
-      return fetchJSON("../dge/data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json");
+      return fetchJSON("../data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json");
     }).then(function(sp){
       var sutras=sp.items||[]; total=sutras.length;
       window.__lastSutras=sutras; window.__lastTotal=total;
@@ -173,7 +173,7 @@
           .catch(function(){ return {L:L, n:0, meta:null, err:true}; });
       })).then(function(res){ window.__lastLayerRes=res; renderLayers(res, total); renderTotals(res, total); });
     }).catch(function(e){
-      $("#layers").innerHTML='<div class="muted">Could not load sutrapatha ('+e+'). Serve this page from the dge/ folder.</div>';
+      $("#layers").innerHTML='<div class="muted">Could not load sutrapatha ('+e+'). Serve this page from the  folder.</div>';
     });
   }
 

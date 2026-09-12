@@ -1,6 +1,6 @@
 name: Probe — is Sayana obtainable from archive.org
 
-# Diagnostic only. Writes nothing into dge/, opens no PR.
+# Diagnostic only. Writes nothing into , opens no PR.
 #
 # probe-sources.yml established that a runner reaches archive.org (200 on the
 # details, metadata and search APIs) while wisdomlib and sacred-texts refuse it

@@ -23,7 +23,7 @@ Run against a local clone:
 Or let it fetch the raw files from GitHub:
     python importers/ashtadhyayi_layers.py
 
-Writes into dge/data/ (falls back to data/).  Non-destructive: only the four
+Writes into data/ (falls back to data/).  Non-destructive: only the four
 target files are rewritten.
 """
 import os, re, json, argparse, urllib.request
@@ -39,10 +39,10 @@ def ash_id(ref):
     return f"{a}{p}{int(n):03d}"
 
 def data_base():
-    for c in ("dge/data", "data"):
+    for c in ("data", "data"):
         if os.path.isdir(c):
             return c
-    return "dge/data"
+    return "data"
 
 # --- field parsers -------------------------------------------------------
 def parse_padaccheda(pc):
@@ -161,7 +161,7 @@ def main():
     # an informal curator e-mail permission (no formal licence). Off by
     # default so a routine re-run of this importer (e.g. to refresh
     # padaccheda/anvaya/anuvritti/sutra_type from a newer upstream commit)
-    # does not silently reintroduce it. See dge/PENDING.md and
+    # does not silently reintroduce it. See PENDING.md and
     # admin/content/ashtadhyayi-layers.json -- do not pass this flag until
     # real licensing is resolved with ashtadhyayi.com.
     ap.add_argument("--allow-ashtadhyayi-com-english", action="store_true",
@@ -266,7 +266,7 @@ def main():
             "'english' (verbatim ashtadhyayi.com sutrartha_english.txt) is deliberately "
             "not imported by default -- pass --allow-ashtadhyayi-com-english to this "
             "script to re-include it, only once real licensing is resolved. See "
-            "dge/PENDING.md and admin/content/ashtadhyayi-layers.json."
+            "PENDING.md and admin/content/ashtadhyayi-layers.json."
         )
     json.dump(sutrapatha, open(sut_fp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"  enriched sutrapatha in place  ({enriched}/{len(sutras)} sutras got >=1 new field)")
@@ -278,7 +278,7 @@ def main():
     # Siddhānta-Kaumudī is NOT written any more: on 29 Aug 2026 that layer was
     # re-sourced to Dhaval Patel's MIT-licensed TEI (github.com/drdhaval2785/
     # siddhantakaumudi) — see the licence_note in
-    # dge/data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json.
+    # data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json.
     # Rewriting it from kaumudi.txt would be a regression to the superseded
     # source. sk_items is still built so the count below stays comparable.
     # (The paniniya_vyakarana/ folder the earlier version wrote to was folded

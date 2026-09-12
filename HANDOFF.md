@@ -19,17 +19,17 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
 
 | What | File |
 |---|---|
-| Everything done 6–7 Sep, with numbers and known limits | `dge/PENDING.md`, section "Pending on this session / next Claude session" — the top three entries (7 Sep scholar features; 7 Sep ten-point reader review; 7 Sep reader declutter) |
+| Everything done 6–7 Sep, with numbers and known limits | `PENDING.md`, section "Pending on this session / next Claude session" — the top three entries (7 Sep scholar features; 7 Sep ten-point reader review; 7 Sep reader declutter) |
 | Kamadhenu TTS programme — phases, numbers, human actions | `kamadhenu/KAMADHENU_STATUS.md` (+ `kamadhenu_dataset/WHAT_I_NEED_TO_DO.md` for the lead's view) |
 | Kamadhenu Space (ZeroGPU) deployment + measurements + the ×1.5 GPU-duration accounting | `kamadhenu_dataset/DEPLOYMENT_REFERENCE.md` §2, `kamadhenu_dataset/space_measurements.json` |
-| Firebase / accounts / hosting migration state | `dge/FIREBASE_SETUP.md` §0, `dge/GO_LIVE_ARCHITECTURE.md` |
-| Vṛtta reports (data + builder + page) | `dge/data/vedanga/chandas/reports/manifest.json`, `tools/chandas/build_chandas_reports.js`, `dge/js/chandas-report.js`, `dge/js/chandas-page.js`, `admin/config/chandas-features.json` |
-| Dhātu occurrence index | `dge/data/vedanga/vyakarana/dhatu_prayoga/manifest.json`, `tools/build_dhatu_prayoga_index.py` (its docstring is the design note) |
-| Any-stem declension | `dge/js/shabda-gen.js` (+ `subanta-steps.js`, `dge/wasm/vidyut/`) |
+| Firebase / accounts / hosting migration state | `FIREBASE_SETUP.md` §0, `GO_LIVE_ARCHITECTURE.md` |
+| Vṛtta reports (data + builder + page) | `data/vedanga/chandas/reports/manifest.json`, `tools/chandas/build_chandas_reports.js`, `js/chandas-report.js`, `js/chandas-page.js`, `admin/config/chandas-features.json` |
+| Dhātu occurrence index | `data/vedanga/vyakarana/dhatu_prayoga/manifest.json`, `tools/build_dhatu_prayoga_index.py` (its docstring is the design note) |
+| Any-stem declension | `js/shabda-gen.js` (+ `subanta-steps.js`, `wasm/vidyut/`) |
 | Library curation (display-only moves, labels) | `admin/config/library-overrides.json` |
-| Role-based content access (create roles, gate paths, preview-as-role) | `admin/access-control.html`, `dge/js/role-access.js`, `dge/firebase/firestore.rules` (`config/{docId}`), `dge/FIREBASE_SETUP.md` §0.3 |
-| Donations/payments/supporters (Phase 1 foundation, no gateway chosen yet) | `dge/PAYMENTS_SETUP.md`, `dge/firebase/functions/lib/{donation-core,payment-state,payment-providers,receipt-core,email-providers}.js`, `index.js`'s `createDonation`/`paymentWebhook`/`getDonationStatus` |
-| Upaniṣad ṭippaṇī OCR, Chandas Gemini workflow, Sāroddhāra | `dge/data/ocr_staging/upanishad_tippani/<book>/summary.json`, `kamadhenu_dataset/chandas_gemini_review.md`, `tools/saroddhara/` |
+| Role-based content access (create roles, gate paths, preview-as-role) | `admin/access-control.html`, `js/role-access.js`, `firebase/firestore.rules` (`config/{docId}`), `FIREBASE_SETUP.md` §0.3 |
+| Donations/payments/supporters (Phase 1 foundation, no gateway chosen yet) | `PAYMENTS_SETUP.md`, `firebase/functions/lib/{donation-core,payment-state,payment-providers,receipt-core,email-providers}.js`, `index.js`'s `createDonation`/`paymentWebhook`/`getDonationStatus` |
+| Upaniṣad ṭippaṇī OCR, Chandas Gemini workflow, Sāroddhāra | `data/ocr_staging/upanishad_tippani/<book>/summary.json`, `kamadhenu_dataset/chandas_gemini_review.md`, `tools/saroddhara/` |
 
 ## 3. Standing rules from the lead (non-negotiable)
 
@@ -37,7 +37,7 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
   (349) + `python3 tools/audit_library.py` + `python3 tools/validate_data.py` → push temp:main → ff-only sync
   the feature branch → delete temp → push feature. Playwright screenshots before merging any UI change
   (the `pip install playwright` + `/opt/pw-browsers/chromium` recipe in this session's scratch scripts works;
-  serve the REPO ROOT, not `dge/`, or `admin/config/*` overrides don't load; set
+  serve the REPO ROOT, not ``, or `admin/config/*` overrides don't load; set
   `sessionStorage.dge_vandana_passed=1`, `localStorage.has_seen_welcome=true`, `dge_tour_seen=1`,
   `dge_onboarded=true` to skip the gates).
 - **Commit trailers, exactly**: `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>` and the session URL
@@ -94,12 +94,12 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    gitignored `kamadhenu_dataset/incoming_audio/`). The lead now has `kamadhenu/docs/EXPERIMENT_A_CARD.md` to approve:
    ~1–1.7 h on a 24 GB card, ₹30–95 estimated, cap ₹185. Nothing trained, nothing rented.
 
-9. **Short URLs, shareable verses, grouped verse sheet, daily vandana** (index.html 4.68.0, evening): `dge/js/shortcuts.js`
+9. **Short URLs, shareable verses, grouped verse sheet, daily vandana** (index.html 4.68.0, evening): `js/shortcuts.js`
    is the one grammar for `?rv1.1.3`-style addresses (13 keys: rv av avp ts vs sv smv rgv pns bhp mbh rm hv; docs/SHORT_URLS.md;
    `tests/test_shortcuts.py` resolves every key's example against the real data); the reader resolves a bare token, keeps the
    short form in the address bar and writes it back as you read (`dgeSyncUrl` on selection and paging); the landing page
    forwards a bare token; `tools/shortcuts/user-site-index.html` is the file for a future `tribhuvanachar.github.io` repo
-   (the root user site is a 404 today). `dge/js/share.js`: every Share / Copy carries the taxonomy crumbs, the verse reference
+   (the root user site is a 404 today). `js/share.js`: every Share / Copy carries the taxonomy crumbs, the verse reference
    and the canonical link; the verse sheet (contextual-actions.json/js) is grouped Mark / Share this verse / Study with
    Share link, Copy link, Bookmark. Vandana: once per device per day (`dge_vandana_day`) and again at every sign-in
    (user-auth.js `dgeVandanaAfterSignIn`); "Meet the Founder" in the Explore menu; tapping the portrait itself offers flowers.
@@ -110,7 +110,7 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    NOT a discriminator for F5 (fixed by the reference/text ratio) — the lead's ear decides. `kamadhenu-hf-job-logs.yml`
    prints any HF job's log by id.
 
-11. **SEO architecture** (docs/SEO_ARCHITECTURE.md, evening): `tools/seo/` turns dge/data into a crawlable static tree —
+11. **SEO architecture** (docs/SEO_ARCHITECTURE.md, evening): `tools/seo/` turns data into a crawlable static tree —
    one HTML page per section (16,977 pages, 726,698 units, ~0.9 GB, 2.5 min), category indexes, canonical tags, unique
    titles/descriptions, breadcrumbs + BreadcrumbList/WebPage/CreativeWork JSON-LD, prev/next, sitemap index, robots;
    `tools/seo/validate_seo.py` passes clean (0 duplicate titles, 0 orphans). Generated pages are a deploy artifact
@@ -140,8 +140,8 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    training pulls from a repo we own; the lead has not yet said yes. Also pending: listen to the three sample clips
    sent in chat (group chant, not a single voice — style reference, not a Kamadhenu voice).
 4. **SEO proof-build — validator now passes locally after a real fix (7 Sep, 11:55 pm IST):** the builder
-   used to write its catalogue over `/dge/index.html` and `/dge/kavya/index.html` (the app shell and the Kāvya
-   reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/dge/texts/`, `/dge/kavya/texts/`). CI
+   used to write its catalogue over `/render.html` and `/kavya/index.html` (the app shell and the Kāvya
+   reader). Now stamped pages + refuse-to-overwrite + reserved URLs (`/texts/`, `/kavya/texts/`). CI
    proof-build re-dispatched with deploy=false; deploy=true still waits on the artifact-size question (see PENDING).
 5. **Firebase: Firestore rules + indexes are LIVE (8 Sep, ~11:56 am IST) after four real, distinct root
    causes.** In order: (1) no service-account secret at all — fixed by adding `FIREBASE_SERVICE_ACCOUNT`;
@@ -150,17 +150,17 @@ standing rules. Read it first, then the files it points to. Delete or rewrite it
    held `sarvamula` instead of `sarvamula-org` (found via a diagnostic step reporting the secret's length/shape
    without ever printing it — 9 chars, didn't end in `-org`) — fixed by the lead correcting the secret;
    (4) a redundant single-field index in `firestore.indexes.json` (`users`/`lastLoginAt`) that Firestore
-   rejects when declared as composite — fixed in the repo, removed. Full writeup in `dge/FIREBASE_SETUP.md`
+   rejects when declared as composite — fixed in the repo, removed. Full writeup in `FIREBASE_SETUP.md`
    §0.1. `Deploy — Firebase Hosting` (channel=preview) and `Deploy — Firebase Functions` both dispatched
    right after; check their outcome and, once hosting preview is confirmed, verify Google sign-in and a
    real profile write on it before the lead decides live channel / DNS cutover.
    `.github/workflows/push-firebase-function-secrets.yml` is ready for the WhatsApp/MSG91/OTP_PEPPER secrets
-   once the lead works through `dge/FIREBASE_SETUP.md` §0.2's ordered checklist (Meta Business setup is
+   once the lead works through `FIREBASE_SETUP.md` §0.2's ordered checklist (Meta Business setup is
    the lead's part; the rest is mine once each prerequisite lands).
    Security note left for the lead: the service-account JSON passed through this chat session to get set up —
    worth generating a fresh key and deleting the old one from Firebase Console → Project settings → Service
    accounts now that the deploy is confirmed working, as routine hygiene.
-   Unrelated, noticed while re-running the JS suite: `dge/firebase/tests/user-auth.test.js` "phone OTP —
+   Unrelated, noticed while re-running the JS suite: `firebase/tests/user-auth.test.js` "phone OTP —
    Firebase SMS transport → confirms the code through the confirmation result" fails on a clean checkout
    (pre-existing, not caused by anything this session touched, not part of the Python merge gate) — worth a
    look next time that file is touched.

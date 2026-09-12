@@ -13,7 +13,7 @@ where they do not:
               consumer sees verbatim), and titles with a garbage tail.
   authors     every distinct spelling of `default_author` / `author` /
               `composer` across the data.json files, which of them map to a
-              person id in dge/data/author_aliases.json, and which do not —
+              person id in data/author_aliases.json, and which do not —
               grouped so the same person's spellings are visible side by side.
   taxonomy    `_default_author` values in taxonomy.json that are not names
               (the karmavijaya corruption: commentary body-text as author).
@@ -100,7 +100,7 @@ def check_titles(lib):
 
 
 def walk_data_json():
-    """Yield (relpath, payload) for every data.json under dge/data."""
+    """Yield (relpath, payload) for every data.json under data."""
     for dp, dns, fns in os.walk(DATA):
         dns[:] = [d for d in dns if not d.startswith(("_", "."))]
         if "data.json" in fns:

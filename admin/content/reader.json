@@ -2,7 +2,7 @@
   "_readme": [
     "The reader's editorial text — what the Support and About panels say.",
     "",
-    "Read by dge/js/core.js at boot and editable in place on the page itself: unlock",
+    "Read by js/core.js at boot and editable in place on the page itself: unlock",
     "super admin, press Edit text, tap a line. Site Settings edits the same file.",
     "",
     "  SPONSOR_CONFIG        the Support panel — its opening paragraph, what the",
@@ -18,7 +18,7 @@
     "",
     "Each has an \"enabled\" flag; false hides that section entirely.",
     "",
-    "These were constants in dge/js/config.js, so changing a sentence about the",
+    "These were constants in js/config.js, so changing a sentence about the",
     "project meant editing source. They are content, not settings, which is why they",
     "sit in admin/content/ rather than admin/config/."
   ],

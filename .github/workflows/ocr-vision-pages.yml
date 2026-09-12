@@ -1,7 +1,7 @@
 # Vision-only page OCR -> committed JSON on a staging branch.
 #
 # Runs Google Cloud Vision (DOCUMENT_TEXT_DETECTION) over a PDF page range and commits the raw
-# per-page result to branch  ocr-staging/<work_slug>  under dge/data/ocr_staging/<work_slug>/.
+# per-page result to branch  ocr-staging/<work_slug>  under data/ocr_staging/<work_slug>/.
 # No Gemini call is made (₹0 Gemini). The local importer for the work merges this with a
 # Tesseract pass, classifies agreement, and emits the human/Gemini verification queue.
 # Needs the VISION_API_KEY repository secret (Settings -> Secrets and variables -> Actions).
@@ -20,7 +20,7 @@ on:
         description: "Last PDF page (inclusive)"
         required: true
       work_slug:
-        description: "Folder under dge/data/ocr_staging/ and branch suffix, e.g. bhagavata_saroddhara"
+        description: "Folder under data/ocr_staging/ and branch suffix, e.g. bhagavata_saroddhara"
         required: true
       dpi:
         description: "Render resolution"
@@ -59,7 +59,7 @@ jobs:
           [ -n "$VISION_API_KEY" ] || { echo "::error::VISION_API_KEY secret is not set"; exit 1; }
           python3 tools/vision_ocr_pages.py --pdf source.pdf --start "${{ inputs.start_page }}" --end "${{ inputs.end_page }}" \
             --dpi "${{ inputs.dpi }}" --lang "${{ inputs.lang_hints }}" \
-            --out "dge/data/ocr_staging/${{ inputs.work_slug }}/vision_pages_${{ inputs.start_page }}-${{ inputs.end_page }}.json"
+            --out "data/ocr_staging/${{ inputs.work_slug }}/vision_pages_${{ inputs.start_page }}-${{ inputs.end_page }}.json"
       - name: Commit to the staging branch
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
@@ -70,6 +70,6 @@ jobs:
           set -euo pipefail
           BR="ocr-staging/${{ inputs.work_slug }}"
           git fetch origin "$BR" && git checkout -B "$BR" "origin/$BR" || git checkout -B "$BR"
-          git add "dge/data/ocr_staging/${{ inputs.work_slug }}"
+          git add "data/ocr_staging/${{ inputs.work_slug }}"
           git commit -m "ocr: Vision pages ${{ inputs.start_page }}-${{ inputs.end_page }} for ${{ inputs.work_slug }}" || { echo "nothing to commit"; exit 0; }
           git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "HEAD:$BR"

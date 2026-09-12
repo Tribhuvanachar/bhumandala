@@ -15,7 +15,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[2]
-DB = ROOT / "dge/data/vedanga/chandas/data.json"
+DB = ROOT / "data/vedanga/chandas/data.json"
 REPORT = ROOT / "kamadhenu/reports/kamadhenu_dataset_report"
 SEC_PER_SYLL = (0.20, 0.75)          # plausible recitation pace band (Vāgdhenu bank: 0.26–0.44 s/akṣara; teaching style slower)
 ALIAS = {"chandas": "meter", "chandas_confidence": "meter_confidence", "audio_quality": "recording_quality", "mapping_confidence": "text_audio_confidence",

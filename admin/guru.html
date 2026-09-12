@@ -3,12 +3,12 @@
 <head>
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Guru Paramparā Manager · DGE Admin</title>
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<!-- Central editor for dge/guru-parampara/data/parampara.json.
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<!-- Central editor for guru-parampara/data/parampara.json.
      STATIC-SITE ADMIN CONVENTION (same as the Kosha/Library managers):
      edits accumulate in a localStorage DRAFT (guru_admin_draft) with a
      visible per-field change log; a superadmin sees the draft overlaid in
@@ -62,7 +62,7 @@ a{color:var(--gold)}
   <button id="addBtn">＋ Add guru</button>
   <button id="exportBtn" class="primary">⬇ Export merged JSON</button>
   <button id="discardBtn" class="danger">Discard draft</button>
-  <a href="../dge/guru-parampara/guru1.html" target="_blank" rel="noopener">Preview in reader ↗</a>
+  <a href="../guru-parampara/guru1.html" target="_blank" rel="noopener">Preview in reader ↗</a>
 </header>
 
 <div class="wrap" id="app" hidden>
@@ -270,7 +270,7 @@ $('#exportBtn').onclick=function(){
   doc.meta=Object.assign({},doc.meta,{last_admin_export:new Date().toISOString()});
   dl('parampara.json',JSON.stringify(doc,null,1));
   dl('parampara_changelog.json',JSON.stringify(DRAFT.log,null,1));
-  toast('Exported — commit dge/guru-parampara/data/parampara.json, then re-run tools/build_guru_parampara_entities.py');
+  toast('Exported — commit guru-parampara/data/parampara.json, then re-run tools/build_guru_parampara_entities.py');
 };
 function dl(name,text){
   var a=document.createElement('a');
@@ -286,9 +286,9 @@ $('#filter').oninput=renderList;
 /* boot: canonical store + entity lists (people, places, works from
    parampara works + library authors' granthas via library.json titles) */
 Promise.all([
-  fetch('../dge/guru-parampara/data/parampara.json').then(function(r){return r.json()}),
-  fetch('../dge/guru-parampara/data/places.json').then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-  fetch('../dge/data/library.json').then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+  fetch('../guru-parampara/data/parampara.json').then(function(r){return r.json()}),
+  fetch('../guru-parampara/data/places.json').then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+  fetch('../data/library.json').then(function(r){return r.ok?r.json():null}).catch(function(){return null})
 ]).then(function(res){
   var d=res[0], places=res[1], lib=res[2];
   var byId={}; (d.nodes||[]).forEach(function(n){byId[n.id]=n});

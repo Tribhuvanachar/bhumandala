@@ -53,7 +53,7 @@ except ImportError:
 
 SITE = "https://advaitasharada.sringeri.net"
 SITEMAP = SITE + "/sitemap-0.xml"
-OUT_ROOT = Path("dge/data/darshana/vedanta/advaita")
+OUT_ROOT = Path("data/darshana/vedanta/advaita")
 
 SOURCE_NOTE = (
     "Advaita Sharada — the Dharmika Granthas digitisation project of "

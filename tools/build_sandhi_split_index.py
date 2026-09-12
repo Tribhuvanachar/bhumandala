@@ -235,7 +235,7 @@ def main(argv=None):
                     if any(s['sa'] == SRC_VERB or s['sb'] == SRC_VERB for s in v))
     manifest = {
         '_readme': (
-            "Sandhi splits for dge/js/ai.js's Sandhi word-tool: word -> "
+            "Sandhi splits for js/ai.js's Sandhi word-tool: word -> "
             '[{"a","b","sa","sb"}], best first. sa/sb say which list recognised '
             'that half — "v" a real verb form (so it links to a dhatu, and the '
             'reader highlights it), "n" a nominal form from _morph, "u" an '

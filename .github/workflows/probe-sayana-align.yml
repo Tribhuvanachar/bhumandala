@@ -1,7 +1,7 @@
 name: Probe — archive.org Sayana alignment coverage
 
 # Diagnostic only while --dry-run is set: reports coverage, writes nothing into
-# dge/, opens no PR.
+# , opens no PR.
 #
 # Runs tools/sayana_smriti/archive_sayana.py, whose logic is unit-tested against
 # a fixture that reproduces the edition's real defects (OCR damage inside a

@@ -64,7 +64,7 @@ jobs:
           set -euo pipefail
           git clone -q --depth 1 https://github.com/ashtadhyayi-com/data /tmp/ashtadhyayi-data
           NOW=$(git -C /tmp/ashtadhyayi-data rev-parse HEAD)
-          WAS=$(python3 -c "import json;print(json.load(open('dge/data/vedanga/vyakarana/unadi/data.json')).get('attribution',{}).get('source_commit',''))")
+          WAS=$(python3 -c "import json;print(json.load(open('data/vedanga/vyakarana/unadi/data.json')).get('attribution',{}).get('source_commit',''))")
           echo "now=$NOW" >> "$GITHUB_OUTPUT"
           echo "was=$WAS" >> "$GITHUB_OUTPUT"
           if [ "$NOW" = "$WAS" ] && [ "${{ inputs.force }}" != "true" ]; then
@@ -88,13 +88,13 @@ jobs:
           python3 tools/realign_sutra_enrichment.py --apply
           python3 tools/build_sutra_index.py
           # A drifted delimiter once shipped a literal "$2$3$1" to readers.
-          if grep -l '\$[0-9]\$' dge/data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json; then
+          if grep -l '\$[0-9]\$' data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json; then
             echo "::error::unparsed '$n$' markers in the sūtrapāṭha — the source micro-format changed"; exit 1
           fi
 
       - name: Guard — no lost items, nothing outside the vyākaraṇa folder
         if: steps.up.outputs.run == 'true'
-        run: python3 tools/sync_guard.py --scope dge/data/vedanga/vyakarana --max-files 40
+        run: python3 tools/sync_guard.py --scope data/vedanga/vyakarana --max-files 40
 
       - name: Validate
         if: steps.up.outputs.run == 'true'
@@ -113,5 +113,5 @@ jobs:
             the run summary lists items-before/after per file (tools/sync_guard.py).
             The Siddhānta-Kaumudī layer is deliberately untouched (re-sourced 29 Aug 2026).
           add-paths: |
-            dge/data/vedanga/vyakarana/**
+            data/vedanga/vyakarana/**
           delete-branch: true

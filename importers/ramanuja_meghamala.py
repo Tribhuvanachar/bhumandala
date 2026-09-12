@@ -89,7 +89,7 @@ def sanitize_walk(node) -> str:
         return ""
     return out
 
-OUT_ROOT = Path("dge/data/darshana/vedanta/vishishtadvaita/RamanujaMeghamala")
+OUT_ROOT = Path("data/darshana/vedanta/vishishtadvaita/RamanujaMeghamala")
 SOURCE_NOTE = (
     "Sri Ramanuja Meghamala — the JIR Foundation's digital archive "
     "(srivaishnavan.com/sri-ramanuja-meghamala). Imported with "

@@ -26,7 +26,7 @@ around this block to make one real):
 
 - On the kosha page, make the Sanskrit headword font slightly bigger.
 - Add a "back to top" button on grantha.html that appears after you scroll.
-- Report only (no code change): list the 10 biggest data files in dge/data
+- Report only (no code change): list the 10 biggest data files in data
   with their sizes, in the run summary email.
 - ಗ್ರಂಥ ಪುಟದಲ್ಲಿ (grantha.html) ಪ್ರತಿ ಸೂತ್ರದ ಸಂಖ್ಯೆಯನ್ನು ಸ್ವಲ್ಪ ದೊಡ್ಡದಾಗಿ ತೋರಿಸಿ.
 - ಕೋಶ ಪುಟದ ಹುಡುಕಾಟ ಪೆಟ್ಟಿಗೆಯಲ್ಲಿ "ಪದವನ್ನು ಹುಡುಕಿ" ಎಂಬ ಕನ್ನಡ ಸೂಚನೆ ಸೇರಿಸಿ.

@@ -5,7 +5,7 @@
 # account (SarvamulaOrg → Settings → Access Tokens → New token → Write). Nothing else is required.
 # After the first upload, open the Space on huggingface.co → Settings → Hardware → ZeroGPU (the account is
 # PRO since 6 Sep 2026, so this is available immediately) and set appConfig.kamadhenuSpaceUrl in
-# dge/js/config.js to https://sarvamulaorg-kamadhenu.hf.space . Re-run to redeploy after code changes.
+# js/config.js to https://sarvamulaorg-kamadhenu.hf.space . Re-run to redeploy after code changes.
 name: Deploy — Kamadhenu Space (Hugging Face)
 
 on:

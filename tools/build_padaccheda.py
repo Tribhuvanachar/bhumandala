@@ -31,7 +31,7 @@ position, not a claim of accuracy.
     python3 tools/build_padaccheda.py --paths kavya_alankara,stotra
     python3 tools/build_padaccheda.py --evaluate     (re-run the scoring above)
 
-Output: dge/data/_padaccheda/<slug>.json
+Output: data/_padaccheda/<slug>.json
         {unit_id: [[piece, piece, …], …]} — one list per written token that
         was split, in the order the tokens appear; a token with no analysis is
         absent rather than echoed.

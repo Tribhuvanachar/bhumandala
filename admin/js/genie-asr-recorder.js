@@ -32,7 +32,7 @@
  * wiring below) and in Node (module.exports), so the parts that don't touch
  * the DOM — WAV encoding, manifest grouping, tree-presence mapping, push
  * request construction — are covered by tests instead of by reloading the
- * page and eyeballing it. Same convention as dge/js/audio-detect.js.
+ * page and eyeballing it. Same convention as js/audio-detect.js.
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();

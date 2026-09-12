@@ -374,7 +374,7 @@
    "case": "Vedic svara marks",
    "problem": "no path preserves udātta/anudātta/svarita — Vedic accent is out of scope for every existing frontend",
    "evidence": "",
-   "fix": "separate Vedic annotation track (dge/tts/ARCHITECTURE.md §Vedic) — Stage 6 only"
+   "fix": "separate Vedic annotation track (tts/ARCHITECTURE.md §Vedic) — Stage 6 only"
   },
   {
    "severity": "info",

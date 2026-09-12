@@ -85,7 +85,7 @@ jobs:
         if: ${{ !fromJSON(inputs.dry_run) }}
         run: |
           python tools/validate_data.py || true
-          python tools/audit_library.py --data dge/data --fix
+          python tools/audit_library.py --data data --fix
           python tools/gen_library_status.py || true
 
       - name: Report
@@ -98,7 +98,7 @@ jobs:
             cat ingest.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          python tools/audit_library.py --data dge/data >> "$GITHUB_STEP_SUMMARY" || true
+          python tools/audit_library.py --data data >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Open Pull Request
         if: ${{ !fromJSON(inputs.dry_run) && fromJSON(inputs.open_pr) }}
@@ -121,4 +121,4 @@ jobs:
 
             Search index not rebuilt; run `reindex.yml` after review.
           add-paths: |
-            dge/data/**
+            data/**

@@ -2,7 +2,7 @@
 
 Evidence file: `kamadhenu_dataset/frontend_gap_report.json`; regenerate with `python3 -m tools.kamadhenu.frontend_gap`
 (the script runs 22 probe inputs through every existing text path and derives the findings mechanically).
-Paths probed — DGE: `search_toolkit_pkg.translit.to_slp1` + `normalize.phonetic_key` (site search), `dge/js/subanta-steps.js slp()` (vyākaraṇa tool), `dge/js/chandas.js` syllabifier (guru marked with ̲);
+Paths probed — DGE: `search_toolkit_pkg.translit.to_slp1` + `normalize.phonetic_key` (site search), `js/subanta-steps.js slp()` (vyākaraṇa tool), `js/chandas.js` syllabifier (guru marked with ̲);
 Vāgdhenu: `prep_text.align_slp1 / model_text / model_text_sandhi / mfa_text`, `tts_normalize + tts_g2p + tts_syllabify + tts_weight`.
 
 ## Checklist (section 11 of the task)
@@ -42,7 +42,7 @@ Vāgdhenu: `prep_text.align_slp1 / model_text / model_text_sandhi / mfa_text`, `
 | high | DGE search_toolkit.to_slp1 (as used by texts.py) | Kannada script input | Kannada input is not transliterated by the Devanagari path; build_search_index folds Kannada→Devanagari by code-point shift first, texts.py must do the same before Chandas | `ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ` | always run fold_indic_to_devanagari() before to_slp1/Chandas |
 | high | DGE chandas.js | Kannada script input | Kannada-script verse yields zero syllables (engine is Devanagari-only, silent) | `padas: []` | transliterate to Devanagari upstream (kamadhenu texts.py does; the site page does not) |
 | low | DGE search_toolkit.to_slp1 | Vedic svara marks | svara marks leak into SLP1 | `a॒gnimI॑Le pu॒rohi॑tam` | strip U+0951/U+0952 (build_search_index.clean_devanagari already does) |
-| info | all | Vedic svara marks | no path preserves udātta/anudātta/svarita — Vedic accent is out of scope for every existing frontend | `` | separate Vedic annotation track (dge/tts/ARCHITECTURE.md §Vedic) — Stage 6 only |
+| info | all | Vedic svara marks | no path preserves udātta/anudātta/svarita — Vedic accent is out of scope for every existing frontend | `` | separate Vedic annotation track (tts/ARCHITECTURE.md §Vedic) — Stage 6 only |
 | info | Vāgdhenu prep_text.visarga_echo_final | word-final visarga (echo/lengthening) | chant echo-vowel (rāmaḥ→rāmaha) is applied to the last word — a tradition-specific pronunciation choice, must be a per-project switch | `ರಾಮಹ` | expose as a parameter in the Kamadhenu frontend; default follows the lead's recitation style |
 | info | Vāgdhenu prep_text.model_text_sandhi | visarga sandhi context aḥ+voiced | applies utva/rutva/lopa visarga sandhi at word boundaries — changes the text that will be spoken; DGE has no equivalent, and this must NOT be applied when the recording already has plain visarga | `ರಾಮೋ ಗಚ್ಛತಿ` | keep as an explicit, logged pronunciation transform; never rewrite DGE canonical text |
 | high | DGE (everywhere) | akṣara segmentation | DGE has no reusable Sanskrit syllabifier outside chandas.js (browser JS, Devanagari-only, ल/ग alphabet); Vāgdhenu has two (tts_syllabify.py maximize-onset, chandas_labeler.py orthographic) that count the same but split codas differently | `see rows` | Kamadhenu wraps chandas.js headlessly (done: tools/kamadhenu/chandas_runner.js); a Python port is NOT needed for the dataset stage |
@@ -85,7 +85,7 @@ Vāgdhenu: `prep_text.align_slp1 / model_text / model_text_sandhi / mfa_text`, `
 
 ## What Kamadhenu should do (engineering, in order)
 1. `tools/kamadhenu/texts.py`: strip U+200C/U+200D, map U+1CF5→`Z`, U+1CF6→`V`, keep `~` for candrabindu, strip Vedic svara marks, strip editorial parentheses (done), join hyphenated compounds (done) — with unit tests on the 22 probe cases.
-2. `dge/js/chandas.js`: nasal test → `/[ँंःᳵᳶ]/`; add vipulā classes; generic indra/upendra mix; accept Kannada by transliterating on input. Add `tests/test_chandas_engine.py` driving `tools/kamadhenu/chandas_runner.js`.
+2. `js/chandas.js`: nasal test → `/[ँंःᳵᳶ]/`; add vipulā classes; generic indra/upendra mix; accept Kannada by transliterating on input. Add `tests/test_chandas_engine.py` driving `tools/kamadhenu/chandas_runner.js`.
 3. A single `kamadhenu_frontend.py` that produces, per verse: canonical Devanagari (DGE), SLP1 (lossless), rendering text (policy transforms from `prep_text.py`, each one logged), akṣara list + L/G (DGE Chandas). No second text database.
 4. Pāda-split text for reference-bank verses stored in DGE (human-checked), because line-based pāda splitting is wrong for uneven metres.
 5. Vedic: nothing until Stage 6.

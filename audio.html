@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+<!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
+     back to the vandana at the site root. Must stay the first script here. -->
+<script src="js/vandana-guard.js?v=2"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harikathamritasara - Mangalacharana Sandhi</title>
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --bg-color: #fbf9ff;
+            --text-color: #2c3e50;
+            --highlight: #9b59b6;
+            --hover-bg: #f5eef8;
+        }
+
+        body {
+            font-family: "Tunga", "Kedage", "Mallige", system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 2;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .controls {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--hover-bg);
+            border-color: var(--highlight);
+        }
+        
+        #audio-player {
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .scripture-container {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 1.5rem;
+            text-align: justify;
+        }
+
+        .shloka-block {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .shloka-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .shloka-number {
+            font-size: 1.1rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .word {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.15s ease-in-out;
+            display: inline-block;
+        }
+
+        .word:hover {
+            background-color: var(--hover-bg);
+        }
+        
+        .word.active {
+            background-color: var(--highlight);
+            color: #fff;
+            font-weight: bold;
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+<!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
+</head>
+<body>
+
+    <div style="font-size:.85rem;margin:0 0 10px;color:var(--text-color);opacity:.75"><a href="index.html" title="DGE Home" style="color:var(--highlight);text-decoration:none;font-weight:700">⌂ DGE</a><span style="opacity:.6;margin:0 6px">›</span><b>Harikathāmr̥tasāra</b></div>
+    <h1>ಹರಿಕಥಾಮೃತಸಾರ - ಮಂಗಲಾಚರಣ ಸಂಧಿ</h1>
+
+    <div class="controls">
+        <button id="btn-prev">⏮ ಹಿಂದಿನ ಪದ್ಯ (Prev)</button>
+        <button id="btn-play">⏯ ಪ್ಲೇ / ವಿರಾಮ (Play/Pause)</button>
+        <button id="btn-next">⏭ ಮುಂದಿನ ಪದ್ಯ (Next)</button>
+
+        <!-- Placeholder Audio Track for Demo -->
+        <audio id="audio-player" controls src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    </div>
+
+    <div class="scripture-container" id="text-container">
+        <!-- Words will be injected here via JavaScript -->
+    </div>
+
+<script>
+    // The raw text data provided.
+    const rawStanzas = [
+        {
+            title: "ಪೀಠಿಕೆ",
+            text: "ಹರಿಕಥಾಮೃತಸಾರ ಗುರುಗಳ | ಕರುಣದಿಂದಾಪನಿತು ಪೇಳುವೆ | ಪರಮಭಗವದ್ಭಕ್ತರಿದನಾದರದಿ ಕೇಳುವುದು ||"
+        },
+        {
+            title: "ಪದ್ಯ ೧",
+            text: "ಶ್ರೀರಮಣಿಕರಕಮಲಪೂಜಿತ ಚಾರುಚರಣಸರೋಜ ಬ್ರಹ್ಮಸ ಮೀರವಾಣಿ ಫಣೀಂದ್ರ ವೀಂದ್ರ ಭವೇಂದ್ರ ಮುಖವಿನುತ | ನೀರಜಭವಾಂಡೋದಯಸ್ಥಿತಿ ಕಾರಣನೆ ಕೈವಲ್ಯದಾಯಕ ನಾರಸಿಂಹನೆ ನಮಿಪೆ ಕರುಣಿಪುದೆಮಗೆ ಮಂಗಳವಾ || ೧ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೨",
+            text: "ಜಗದುದರನತಿ ವಿಮಲಗುಣರೂ ಪಗಳನಾಲೋಚನದಿ ಭಾರತ ನಿಗಮತತಿಗಳತಿಕ್ರಮಿಸಿ ಕ್ರಿಯಾವಿಶೇಷಗಳ | ಬಗೆಬಗೆಯ ನೂತನವ ಕಾಣುತ ಮಿಗೆ ಹರುಷದಿಂ ಪೊಗಳಿ ಹಿಗ್ಗುವ ತ್ರಿಗುಣಮಾನಿ ಮಹಾಲಕುಮಿ ಸಂತೈಸಲನುದಿನವು || ೨ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೩",
+            text: "ನಿರುಪಮಾನಂದಾತ್ಮಭವ ನಿರ್ಜರಸಭಾಸಂಸೇವ್ಯ ಋಜುಗಣ ದರಸೆ ಸತ್ತ್ವ ಪ್ರಚುರ ವಾಣೀಮುಖಸರೋಜೇನ | ಗರುಡಶೇಷಶಶಾಂಕದಳಶೇಖರರ ಜನಕ ಜಗದ್ಗುರುವೇ ತ್ವ ಚ್ಚರಣಗಳಿಗಭಿವಂದಿಸುವೆ ಪಾಲಿಪುದು ಸನ್ಮತಿಯ || ೩ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೪",
+            text: "ಆರು ಮೂರೆರಡೊಂದು ಸಾವಿರ ಮೂರೆರಡು ಶತಶ್ವಾಸ ಜಪಗಳ ಮೂರುವಿಧ ಜೀವರೊಳಗಬ್ಜಜಕಲ್ಪಪರಿಯಂತ | ತಾ ರಚಿಸಿ ಸಾತ್ತ್ವರಿಗೆ ಸುಖ ಸಂಸಾರ ಮಿಶ್ರರಿಗಧಮಜನರಿಗ ಪಾರ ದುಃಖಗಳೀವ ಗುರು ಪವಮಾನ ಸಲಹೆಮ್ಮ || ೪ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೫",
+            text: "ಚತುರವದನನ ರಾಣಿ ಅತಿರೋಹಿತ ವಿಮಲ ವಿಜ್ಞಾನಿ ನಿಗಮ ಪ್ರತತಿಗಳಿಗಭಿಮಾನಿ ವೀಣಾಪಾಣಿ ಬ್ರಹ್ಮಾಣಿ | ನತಿಸಿ ಬೇಡುವೆ ಜನನಿ ಲಕ್ಷ್ಮೀಪತಿಯ ಗುಣಗಳ ತುತಿಪುದಕೆ ಸ ನ್ಮತಿಯ ಪಾಲಿಸಿ ನೆಲೆಸು ನೀ ಮದ್ವದನ ಸದನದಲಿ || ೫ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೬",
+            text: "ಕೃತಿರಮಣ ಪ್ರದ್ಯುಮ್ನನಂದನೆ ಚತುರವಿಶಂತಿ ತತ್ತ್ವಪತಿ ದೇ ವತೆಗಳಿಗೆ ಗುರುವೆನಿಸುತಿಹ ಮಾರುತನ ನಿಜಪತ್ನಿ || ಸತತ ಹರಿಯಲಿ ಗುರುಗಳಲಿ ಸದ್ರತಿಯ ಪಾಲಿಸಿ ಭಾಗವತ ಭಾ ರತಪುರಾಣರಹಸ್ಯ ತತ್ತ್ವಗಳರುಪು ಕರುಣದಲಿ || ೬ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೭",
+            text: "ವೇದಪೀಠ ವಿರಿಂಚಿ ಭವ ಶಕ್ರಾದಿ ಸುರ ವಿಜ್ಞಾನದಾಯಕ ಮೋದ ಚಿನ್ಮಯಗಾತ್ರ ಲೋಕಪವಿತ್ರ ಸುಚರಿತ್ರ || ಛೇದ ಭೇದ ವಿಷಾದ ಕುಟಿಲಾಂತಾದಿ ಮಧ್ಯ ವಿದೂರ ಆದ್ಯಾ ನಾದಿ ಕಾರಣ ಬಾದರಾಯಣ ಪಾಹಿ ಸತ್ರಾಣ || ೭ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೮",
+            text: "ಕ್ಷಿತಿಯೊಳಗೆ ಮಣಿಮಂತ ಮೊದಲಾ ದತಿ ದುರಾತ್ಮರು ಬಂದಧಿಕ ವಿಂ ಶತಿ ಕುಭಾಷ್ಯವ ರಚಿಸೆ ನಡುಮನೆಯೆಂಬ ಬ್ರಾಹ್ಮಣನ | ಸತಿಯ ಜಠರದೊಳವತರಿಸಿ ಬಾ ರತಿ ರಮಣ ಮಧ್ವಾಭಿಧಾ ನದಿ ಚತುರದಶ ಲೋಕದಲಿ ಮೆರೆದ ಪ್ರತಿಮಗೊಂದಿಸುವೆ || ೮ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೯",
+            text: "ಪಂಚ ಭೇದಾತ್ಮಕ ಪ್ರಪಂಚಕೆ ಪಂಚರೂಪಾತ್ಮಕನೆ ದೈವತ ಪಂಚಮುಖ ಶಕ್ರಾದಿಗಳು ಕಿಂಕರರು ಶ್ರೀಹರಿಗೆ || ಪಂಚ ವಿಂಶತಿ ತತ್ತ್ವತರತಮ ಪಂಚಿಕೆಗಳನು ಪೇಳ್ದಭಾವಿ ವಿ ರಂಚಿಯೆನಿಪಾನಂದ ತೀರ್ಥರ ನೆನೆವೆನನುದಿನವು || ೯ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೧೦",
+            text: "ವಾಮದೇವ ವಿರಿಂಚಿತನಯ ಉ ಮಾ ಮನೋಹರ ಉಗ್ರ ಧೂರ್ಜಟಿ ಸಾಮಜಾಜಿನವಸನ ಭೂಷಣ ಸುಮನಸೋತ್ತಂಸ || ಕಾಮ ಹರ ಕೈಲಾಸ ಮಂದಿರ ಸೋಮ ಸೂರ್ಯನಲ ವಿಲೋಚನ ಕಾಮಿತಪ್ರದ ಕರುಣಿಸೆಮಗೆ ಸದಾ ಸುಮಂಗಳವಾ || ೧೦ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೧೧",
+            text: "ಕೃತ್ತಿ ವಾಸನೆ ಹಿಂದೆ ನೀ ನಾ ಲ್ವತ್ತು ಕಲ್ಪಸಮೀರನಲಿ ಶಿ ಷ್ಯತ್ವವಹಿಸ್ಯಖಿಳಾಗಮಾರ್ಥಗಳೋದಿ ಜಲಧಿಯೊಳು | ಹತ್ತು ಕಲ್ಪದಿ ತಪವಗೈದಾ ದಿತ್ಯರೊಳುಗುತ್ತಮನೆನಿಸಿ ಪುರು ಷೋತ್ತಮನೆ ಪರಿಯಂಕ ಪದವೈದಿದೆಯೊ ಮಹಾದೇವ || ೧೧ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೧೨",
+            text: "ಪಾಕಶಾಸನ ಮುಖ್ಯ ಸಕಲದಿ ಪಾಕಸರಿಗಭಿನಮಿಪ ಋಷಿಗಳೆ ಗೇಕಚಿತ್ತದಿ ಪಿತೃಗಳಿಗೆ ಗಂಧರ್ವ ಕ್ಷಿತಿಪರಿಗೆ || ಆ ಕಮಲನಾಭಾದಿ ಯತಿಗಳ ನೀಕಕಾನಮಿಸುವೆನು ಬಿಡದೆ ರ ಮಾಕಳತ್ರನ ದಾಸವರ್ಗಕೆ ನಮಿಪೆನನವರತ || ೧೨ ||"
+        },
+        {
+            title: "ಪದ್ಯ ೧೩",
+            text: "ಪರಿಮಳವು ಸುಮನದೊಳಗನಲ ನರಣಿಯೊಳಿಗಿಪ್ಪೆಂತೆ ದಾಮೋ ದರನು ಬ್ರಹ್ಮಾದಿಗಳ ಮನದಲ್ಲಿ ತೋರಿ ತೋರದಲೆ || ಇರುತಿಹ ಜಗನಾಥ ವಿಠಲನ ಕರುಣ ಪಡೆವ ಮುಮುಕ್ಷುಜೀವರು ಪರಮ ಭಾಗವತರನು ಕೊಂಡಾಡುವುದು ಪ್ರತಿದಿನವು || ೧೩ ||"
+        },
+        {
+            title: "ಮಂಗಳಾಚರಣೆ",
+            text: "|| ಇತಿ ಶ್ರೀ ಮಂಗಲಾಚರಣ ಸಂಧಿ ಸಂಪೂರ್ಣಂ || || ಶ್ರೀ ಕೃಷ್ಣಾರ್ಪಣಮಸ್ತು ||"
+        }
+    ];
+
+    // Convert raw text into the words.json structure with sequential mock timestamps for the demo.
+    // In production, this wordsData array will be loaded directly from your aligned JSON file.
+    const wordsData = [];
+    let currentTimeCounter = 0;
+    const MOCK_SECONDS_PER_WORD = 0.6; 
+
+    rawStanzas.forEach((stanza) => {
+        const wordsArray = stanza.text.split(/\s+/).filter(w => w.length > 0);
+        const mappedWords = wordsArray.map(word => {
+            const start = currentTimeCounter;
+            const end = currentTimeCounter + MOCK_SECONDS_PER_WORD;
+            currentTimeCounter = end + 0.05; // 50ms gap between words
+            return { text: word, start: start, end: end };
+        });
+
+        wordsData.push({
+            shloka: stanza.title,
+            words: mappedWords
+        });
+    });
+
+    const audio = document.getElementById('audio-player');
+    const textContainer = document.getElementById('text-container');
+    const btnPlay = document.getElementById('btn-play');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+
+    let currentShlokaIndex = 0;
+    let wordElements = []; 
+
+    // 1. Render the text dynamically
+    function renderText() {
+        textContainer.innerHTML = '';
+        wordElements = [];
+
+        wordsData.forEach((shlokaObj, sIndex) => {
+            const shlokaDiv = document.createElement('div');
+            shlokaDiv.className = 'shloka-block';
+            
+            const shlokaNum = document.createElement('span');
+            shlokaNum.className = 'shloka-number';
+            shlokaNum.innerText = shlokaObj.shloka;
+            shlokaDiv.appendChild(shlokaNum);
+
+            shlokaObj.words.forEach((wordObj) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                wordSpan.innerText = wordObj.text + ' ';
+                
+                // Click word -> jump to timestamp
+                wordSpan.addEventListener('click', () => {
+                    audio.currentTime = wordObj.start;
+                    audio.play();
+                });
+
+                shlokaDiv.appendChild(wordSpan);
+                
+                // Push to our fast cache
+                wordElements.push({ 
+                    span: wordSpan, 
+                    start: wordObj.start, 
+                    end: wordObj.end,
+                    shlokaIndex: sIndex
+                });
+            });
+
+            textContainer.appendChild(shlokaDiv);
+        });
+    }
+
+    // 2. High-performance auto-highlight words on timeupdate
+    audio.addEventListener('timeupdate', () => {
+        const currentTime = audio.currentTime;
+        
+        for (let i = 0; i < wordElements.length; i++) {
+            const item = wordElements[i];
+            const isActive = item.span.classList.contains('active');
+            const shouldBeActive = currentTime >= item.start && currentTime <= item.end;
+
+            if (shouldBeActive && !isActive) {
+                item.span.classList.add('active');
+                currentShlokaIndex = item.shlokaIndex;
+                
+                // Auto-scroll logic (optional, keeps active word somewhat in view)
+                const rect = item.span.getBoundingClientRect();
+                if (rect.top > window.innerHeight - 150 || rect.top < 100) {
+                    item.span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+            } else if (!shouldBeActive && isActive) {
+                item.span.classList.remove('active');
+            }
+        }
+    });
+
+    // 3. Play / Pause logic
+    btnPlay.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    });
+
+    // 4. Previous / Next Shloka Navigation
+    btnPrev.addEventListener('click', () => {
+        if (currentShlokaIndex > 0) {
+            currentShlokaIndex--;
+            const targetShloka = wordsData[currentShlokaIndex];
+            audio.currentTime = targetShloka.words[0].start;
+            audio.play();
+        } else {
+            audio.currentTime = 0;
+        }
+    });
+
+    btnNext.addEventListener('click', () => {
+        if (currentShlokaIndex < wordsData.length - 1) {
+            currentShlokaIndex++;
+            const targetShloka = wordsData[currentShlokaIndex];
+            audio.currentTime = targetShloka.words[0].start;
+            audio.play();
+        }
+    });
+
+    // Initialize the app
+    renderText();
+
+</script>
+</body>
+</html>

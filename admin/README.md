@@ -1,7 +1,7 @@
 # Admin
 
 Every admin page and every hand-editable config file for the Sarvamūla
-Digital Library. They used to be scattered through `dge/`; this folder is
+Digital Library. They used to be scattered through ``; this folder is
 the one place to look.
 
 ## Pages
@@ -15,16 +15,16 @@ the one place to look.
 | `genie-asr-recorder.html` | Records the Genie ASR benchmark's voice samples and pushes them straight to the `genie-asr-audio-seed` branch of this repo — see its own note in `config/keys.json` (gate `genieasr`) for why that's a separate gate from `audioadmin`. |
 | `dasa-capture.html` | Dāsa Sāhitya capture and entry. |
 | `holy-places.html` | Holy places and brindāvana curation for Guru Paramparā. |
-| `repo-map.html` | **Repository & Workflows** — one page, three tabs. *Workflows*: every workflow file grouped in accordions (online source syncers first, one card per website; then importers, Gemini enrichment, OCR, index & cross-links, deploy, Kamadhenu, tests, one-off probes), each with what it does, when it runs, what it writes, what it costs, its last run, a recommendation with the reason, its real input form, and Run / Delete buttons. *Branches*: the same for every branch. *Ask Claude*: leave an instruction for Claude against chosen library sections (`tasks/README.md`). Runs go through the Cloud Function when deployed (`dge/FIREBASE_SETUP.md` §12), else through the browser's GitHub token, else GitHub itself. Data: `config/repo-map.json` (hand-written purpose/recommendation + generated fields, refreshed by `tools/build_repo_inventory.py`, which also renders `docs/REPO_INVENTORY.md`) and `dge/firebase/functions/workflows.json` (the curated input forms). |
+| `repo-map.html` | **Repository & Workflows** — one page, three tabs. *Workflows*: every workflow file grouped in accordions (online source syncers first, one card per website; then importers, Gemini enrichment, OCR, index & cross-links, deploy, Kamadhenu, tests, one-off probes), each with what it does, when it runs, what it writes, what it costs, its last run, a recommendation with the reason, its real input form, and Run / Delete buttons. *Branches*: the same for every branch. *Ask Claude*: leave an instruction for Claude against chosen library sections (`tasks/README.md`). Runs go through the Cloud Function when deployed (`FIREBASE_SETUP.md` §12), else through the browser's GitHub token, else GitHub itself. Data: `config/repo-map.json` (hand-written purpose/recommendation + generated fields, refreshed by `tools/build_repo_inventory.py`, which also renders `docs/REPO_INVENTORY.md`) and `firebase/functions/workflows.json` (the curated input forms). |
 | `ocr-review.html` | **OCR Review** — scholar review of staged OCR: the page scan on the left (from the `ocr-images/<work>` branch, rendered free on demand), the text in units on the right, accept / edit / reject per unit, decisions saved beside the staged file, and a Finalise panel that runs `ocr-review-merge.yml` to turn approved text into a library layer as a pull request. Pipeline: `docs/OCR_REVIEW.md`. Admin passkey is enough (a scholar need not be super-admin). |
-| `ocr-studio.html` | **OCR Studio** — the styling half of the same pipeline: the page scans on the left, the digitised document on the right, and a Word-style class panel. Each block keeps the tag the OCR gave it (`srcTag`) separately from the class we assign it (`cls`), so selecting one heading and pressing **all N** moves exactly the blocks the OCR tagged the same way, and editing a class's appearance restyles every block carrying it. Exports standalone HTML, or blocks in the shape `tools/ocr_review_merge.py` already reads. **⚖ Compare engines** stacks all three readers one beneath the other — Sarvam Document AI (layout kept, paid, `SARVAM_API_KEY`, `.github/workflows/ocr-sarvam.yml`), Google Cloud Vision (flat text, paid, `VISION_API_KEY`, `.github/workflows/ocr-vision-pages.yml`) and Tesseract.js (free, WASM, runs in the tab) — each beside the scan it read, with block/char counts and how far it agrees with the chosen reading; **Use this** adopts one for styling. Vision and Sarvam are loaded from their staged files (`?sarvam=…&vision=…`) because their keys are repository secrets only a workflow holds; Tesseract runs here on the loaded scans. Gemini is deliberately not offered: it proofreads Vision's text and never reads a scan. Model and its tests: `admin/js/ocr-studio-core.js`, `dge/firebase/tests/ocr-studio.test.js`. Same passkey as OCR Review. |
+| `ocr-studio.html` | **OCR Studio** — the styling half of the same pipeline: the page scans on the left, the digitised document on the right, and a Word-style class panel. Each block keeps the tag the OCR gave it (`srcTag`) separately from the class we assign it (`cls`), so selecting one heading and pressing **all N** moves exactly the blocks the OCR tagged the same way, and editing a class's appearance restyles every block carrying it. Exports standalone HTML, or blocks in the shape `tools/ocr_review_merge.py` already reads. **⚖ Compare engines** stacks all three readers one beneath the other — Sarvam Document AI (layout kept, paid, `SARVAM_API_KEY`, `.github/workflows/ocr-sarvam.yml`), Google Cloud Vision (flat text, paid, `VISION_API_KEY`, `.github/workflows/ocr-vision-pages.yml`) and Tesseract.js (free, WASM, runs in the tab) — each beside the scan it read, with block/char counts and how far it agrees with the chosen reading; **Use this** adopts one for styling. Vision and Sarvam are loaded from their staged files (`?sarvam=…&vision=…`) because their keys are repository secrets only a workflow holds; Tesseract runs here on the loaded scans. Gemini is deliberately not offered: it proofreads Vision's text and never reads a scan. Model and its tests: `admin/js/ocr-studio-core.js`, `firebase/tests/ocr-studio.test.js`. Same passkey as OCR Review. |
 | `workflows.html` | Redirect stub — the old "Run a Workflow" page, folded into `repo-map.html` on 9 Sep 2026. Kept so bookmarks land. |
 | `content-provenance.html` | Reference map of which file/field governs each part of the reader-facing site — a static "where do I change this?" lookup, not a live inspector. |
 
 Reached from the shield icon in the library's top bar, which appears only
 for authorised users.
 
-Not moved: `dge/convert/` — the OCR and conversion tool is a self-contained
+Not moved: `convert/` — the OCR and conversion tool is a self-contained
 app of some fifteen files that reference each other relatively. It stays
 where it is, and is still linked from the same admin menu.
 
@@ -32,15 +32,15 @@ where it is, and is still linked from the same admin menu.
 
 | File | Read by | Written by |
 |---|---|---|
-| `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
+| `config/config-overrides.json` | `js/core.js` at boot, merged over `js/config.js` | Site Settings, in-app (`js/config-editor.js`) |
 | `content/home.json` | the landing page — **all of its words** | hand-edited |
-| `content/whats-new.json` | `dge/js/modals.js`, re-read every time the panel opens | Site Settings, or by hand |
-| `content/reader.json` | `dge/js/core.js` at boot — the Support and About panels' text | in place on the page, Site Settings, or by hand |
-| `content/tour.json` | `dge/js/tour.js` — the guided walkthrough's steps | in place on the page, or by hand |
+| `content/whats-new.json` | `js/modals.js`, re-read every time the panel opens | Site Settings, or by hand |
+| `content/reader.json` | `js/core.js` at boot — the Support and About panels' text | in place on the page, Site Settings, or by hand |
+| `content/tour.json` | `js/tour.js` — the guided walkthrough's steps | in place on the page, or by hand |
 | `config/home.json` | the landing page — where it leads, the photo, the flowers | hand-edited |
-| `config/menu.json` | `dge/js/menu.js` — which menu items appear, and in what order | hand-edited |
-| `config/intellisense.json` | `dge/js/intellisense.js` — sūtra identification | hand-edited |
-| `config/library-overrides.json` | `dge/js/library.js` | `library.html`, exported and committed by hand |
+| `config/menu.json` | `js/menu.js` — which menu items appear, and in what order | hand-edited |
+| `config/intellisense.json` | `js/intellisense.js` — sūtra identification | hand-edited |
+| `config/library-overrides.json` | `js/library.js` | `library.html`, exported and committed by hand |
 | `config/library-status.json` | `library.html` | `tools/gen_library_status.py` — a generated snapshot of what is loaded |
 | `config/site.config.json` | `tools/set_site_url.py` | hand-edited, then applied with that script |
 | `config/keys.json` | `js/keys.js`, used by every gated admin page | hand-edited |
@@ -87,8 +87,8 @@ Asked often enough to be worth stating once:
 | Where sūtra citations become tappable, and word analysis | `config/intellisense.json` |
 | Any word on the landing page | `content/home.json` |
 | Where the landing page leads, or how the gate behaves | `config/home.json` |
-| Which reading scripts are offered | `SCRIPT_OPTIONS` in `dge/js/config.js` |
-| Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `dge/js/config.js` |
+| Which reading scripts are offered | `SCRIPT_OPTIONS` in `js/config.js` |
+| Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `js/config.js` |
 | Passkeys | `config/keys.json` |
 | What's New and Coming Soon | `content/whats-new.json` |
 | Sponsor, contributors, key sponsors | `content/reader.json` |
@@ -99,13 +99,13 @@ Asked often enough to be worth stating once:
 
 Deliberately, because moving it would mean moving the code that owns it:
 
-- **`dge/js/config.js`** — the defaults themselves: `appConfig`,
+- **`js/config.js`** — the defaults themselves: `appConfig`,
   `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG`, `WHATS_NEW_CONFIG`,
   `FEATURE_FLAGS`, `AI_PROVIDERS`, `GITHUB_REPO_CONFIG`,
   `ADMIN_ACCESS_LEVELS`. Loaded by every page in the app. `WHATS_NEW_CONFIG`,
   `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG` and `KEY_SPONSORS_CONFIG` used to
   live here and no longer do — they are content, in `admin/content/`.
-- **`dge/data/`** — corpus data rather than settings: `library.json`,
+- **`data/`** — corpus data rather than settings: `library.json`,
   `taxonomy.json`, `schemas.json`, `tippanikaras.json`.
 
 ## Removed
@@ -115,15 +115,15 @@ remain in git history if any is ever wanted back.
 
 - `Config.json` — dead, and it carried the `SHRI108` passkey.
 - `Claude.html`, `grok.html`, `MegaInteractive.html`, `Sunrise.html` —
-  early prototypes of the reading page, superseded by `dge/`.
+  early prototypes of the reading page, superseded by ``.
 - `PrahladaKrutaNarasimhaStotra.html` and `data_pns.json` — a standalone
   copy of the Prahlāda-kṛta Nṛsiṃha Stotra, superseded by the live text at
-  `dge/data/DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha/` (renamed from `pns/` 23 Aug
+  `data/DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha/` (renamed from `pns/` 23 Aug
   2026; the internal `stotraCode`/localStorage namespace stayed `pns`,
   see `core.js`'s `STOTRA_CODE_CONTINUITY`).
-- `version.json` at the root — read by nothing. `dge/convert/version.json`
+- `version.json` at the root — read by nothing. `convert/version.json`
   is a different file and is still in use.
-- `dge/data/tippanikaras.json`, `dge/data/_taxonomy.json` — no reader.
+- `data/tippanikaras.json`, `data/_taxonomy.json` — no reader.
 
 One consequence worth naming: anyone holding a link to
 `PrahladaKrutaNarasimhaStotra.html` will now get a 404. The same stotra
@@ -137,9 +137,9 @@ they guarded. That makes them changeable; it does not make them secret. The
 file sits in a public repository, and the page source reveals them anyway.
 They stop an admin tool being opened by accident or wandered into. Nothing
 genuinely sensitive belongs behind them. Real protection needs a server, or
-the Firebase accounts being wired up in `dge/js/user-auth.js`.
+the Firebase accounts being wired up in `js/user-auth.js`.
 
-**Paths here are derived, not written.** `dge/js/core.js`, `dge/js/menu.js`
+**Paths here are derived, not written.** `js/core.js`, `js/menu.js`
 and `js/keys.js` each resolve this folder from their own script URL rather
 than from the page's, so the config loads correctly from any page depth, and
 whether the site is served from a domain root or from a project subpath such
@@ -159,11 +159,11 @@ personal access token as Repo Files.
 To make a new field editable, give the element `data-edit="<path>"` — a path
 into that page's content file, such as `brand.latin`,
 `sections.0.name`, or `SPONSOR_CONFIG.introText`. Nothing else is needed;
-`dge/js/content-inline.js` finds it.
+`js/content-inline.js` finds it.
 
 ## The taxonomy restructure
 
-`dge/data/` was reorganised onto the top level proposed in
+`data/` was reorganised onto the top level proposed in
 `DGE_Shastra_Taxonomy.md`. What used to be a mix of categories, single works
 and a drawer called `ancillary` now reads as a tree a student would
 recognise:
@@ -190,7 +190,7 @@ Two scripts did it, and both still run: `tools/restructure_taxonomy.py`
 (reports by default, `--apply` moves) and `tools/migrate_slugs.py` (the
 cross-references, the backlinks and the search-index shard names).
 
-**Old links still work.** `DGE_LEGACY_SLUGS` in `dge/js/core.js` rewrites an
+**Old links still work.** `DGE_LEGACY_SLUGS` in `js/core.js` rewrites an
 old `?path=` on the way in, so a bookmark or a shared link from before the
 move lands on the text rather than on "Not Yet Available". That table is now
 the only copy of the old names left in the codebase — don't delete it

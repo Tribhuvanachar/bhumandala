@@ -1,16 +1,16 @@
 name: DGE deep-interlink (auto, on library changes)
 
-# Whenever grantha content lands in dge/data/ -- a new text imported, an
+# Whenever grantha content lands in data/ -- a new text imported, an
 # existing one edited -- the cross-reference layers that point INTO and OUT
 # of that content go stale. This workflow rebuilds the small, in-repo ones
 # automatically and commits the result, so interlinking keeps itself
 # current without anyone remembering to run anything:
 #
-#   dge/data/.../ashtadhyayi/prayoga_index/**   (build_sutra_prayoga_index.py)
+#   data/.../ashtadhyayi/prayoga_index/**   (build_sutra_prayoga_index.py)
 #       where each Panini sutra is quoted or cited across the corpus,
 #       Madhva-lineage works ranked first -- the sutra page's
 #       साहित्ये प्रयोगाः panel
-#   dge/search_index/backlinks/**               (shard_backlinks.py)
+#   search_index/backlinks/**               (shard_backlinks.py)
 #       verse -> "who comments on this" pointers
 #   admin/config/library-status.json            (gen_library_status.py)
 #       the Library Manager's per-section status snapshot
@@ -27,9 +27,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "dge/data/**"
-      - "!dge/data/vedanga/vyakarana/ashtadhyayi/prayoga_index/**"
-      - "!dge/data/vedanga/vyakarana/ashtadhyayi/_index/**"
+      - "data/**"
+      - "!data/vedanga/vyakarana/ashtadhyayi/prayoga_index/**"
+      - "!data/vedanga/vyakarana/ashtadhyayi/_index/**"
   workflow_dispatch: {}
 
 permissions:
@@ -77,10 +77,10 @@ jobs:
           GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
         run: |
           set -euo pipefail
-          git add dge/data/vedanga/vyakarana/ashtadhyayi/prayoga_index \
-                  dge/data/vedanga/vyakarana/dhatu_prayoga \
-                  dge/data/vedanga/chandas/reports \
-                  dge/search_index/backlinks \
+          git add data/vedanga/vyakarana/ashtadhyayi/prayoga_index \
+                  data/vedanga/vyakarana/dhatu_prayoga \
+                  data/vedanga/chandas/reports \
+                  search_index/backlinks \
                   admin/config/library-status.json
           if git diff --cached --quiet; then
             echo "interlink layers already current -- nothing to commit"

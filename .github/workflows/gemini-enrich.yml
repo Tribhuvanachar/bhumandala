@@ -4,13 +4,13 @@ name: DGE Gemini reference enrichment
 # flags candidate quotations/citations in its commentary prose, and
 # tools/reference_resolution (the local corpus, no network) decides whether
 # each one is verified/possible/unresolved before anything is written back.
-# See dge/PENDING.md, "Reference Resolution Engine", for why this two-step
+# See PENDING.md, "Reference Resolution Engine", for why this two-step
 # shape exists instead of trusting Gemini's proposed source directly.
 #
 # Requires a GEMINI_API_KEY repository secret (Settings -> Secrets and
 # variables -> Actions). This is a deliberate, explicit exception to this
 # project's usual BYOK-only / no-server-side-key convention (see
-# dge/PROJECT_BRIEF.md) -- signed off on specifically for this batch job,
+# PROJECT_BRIEF.md) -- signed off on specifically for this batch job,
 # which runs as a one-off GitHub Action rather than something every visitor's
 # browser calls. No other part of the app uses a key stored this way.
 
@@ -20,7 +20,7 @@ on:
       target:
         description: "Path to the grantha data.json to enrich"
         required: true
-        default: dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json
+        default: data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json
       limit:
         description: "Enrich at most N not-yet-enriched items (blank = all)"
         required: false

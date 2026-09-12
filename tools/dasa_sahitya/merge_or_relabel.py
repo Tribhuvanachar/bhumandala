@@ -11,7 +11,7 @@ to be the same person after all; a song is filed under the wrong form). This
 script is how that change gets applied, WITHOUT hand-editing composer JSON
 files or re-deriving the manifest by hand every time.
 
-Both subcommands rewrite dge/data/DvaitaVedanta/Itara/DasaSahitya/index.json and counts.json
+Both subcommands rewrite data/DvaitaVedanta/Itara/DasaSahitya/index.json and counts.json
 before exiting, so the corpus is never left in a state where the manifest
 disagrees with what's actually on disk.
 

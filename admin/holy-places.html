@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Holy Places Curation · DGE Guru Parampara (super-admin)</title>
 <link rel="stylesheet" href="css/holy-places.css?v=1">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -26,7 +26,7 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="crumb"><a href="../dge/index.html">⌂ DGE</a> › <a href="../dge/guru-parampara/index.html">Guru Parampara</a> › Holy Places</div>
+    <div class="crumb"><a href="../render.html">⌂ DGE</a> › <a href="../guru-parampara/index.html">Guru Parampara</a> › Holy Places</div>
     <span class="spacer"></span>
     <button class="icon" id="theme">◐</button>
     <button class="btn" id="addNew">＋ Add place</button>
@@ -97,7 +97,7 @@
     $("#expPlaces").onclick=exportPlaces;
     $("#expImg").onclick=exportImages;
     fetch("data/parampara.json").then(function(r){return r.json();}).then(function(d){ seed(d); render(); })
-      .catch(function(e){ $("#list").innerHTML='<div class="muted" style="padding:14px">Could not load data/parampara.json ('+e+'). Serve this page from dge/guru-parampara/.</div>'; });
+      .catch(function(e){ $("#list").innerHTML='<div class="muted" style="padding:14px">Could not load data/parampara.json ('+e+'). Serve this page from guru-parampara/.</div>'; });
   }
 
   // Build the place list from every node that has a brindavana (primary) or place-only.
@@ -260,7 +260,7 @@
         image:r.image||null,image_page:r.image_page||null,image_credit:r.image_credit||null,image_licence:r.image_licence||null,
         status:(r.image?"verified":(HIDDEN.has(r.id)?"blank":"pending"))};
     });
-    dl("brindavana_images.json",{_note:"Curation registry for Brindavana images. Drop into dge/guru-parampara/data/ and re-embed into the views (the detail cards render image + image_credit · image_licence). Only fill image after verifying that file's licence on Wikimedia Commons.",images:imgs});
+    dl("brindavana_images.json",{_note:"Curation registry for Brindavana images. Drop into guru-parampara/data/ and re-embed into the views (the detail cards render image + image_credit · image_licence). Only fill image after verifying that file's licence on Wikimedia Commons.",images:imgs});
   }
 })();
 </script>

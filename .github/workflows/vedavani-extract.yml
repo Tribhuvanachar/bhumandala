@@ -97,7 +97,7 @@ jobs:
             Automated download + slice of VedaVaNi's recitation audio via GitHub Actions.
 
             - Veda: `${{ inputs.veda }}`, patha: `${{ inputs.patha }}`, mandalas: `${{ inputs.mandalas }}`, yajurveda part: `${{ inputs.yajurveda_part }}`
-            - Script: `tools/vedavani/extract_audio.py` (URL schemes reconstructed by decompiling VedaVaNi_1.3.3.apk — see dge/PROJECT_STATUS.md)
+            - Script: `tools/vedavani/extract_audio.py` (URL schemes reconstructed by decompiling VedaVaNi_1.3.3.apk — see PROJECT_STATUS.md)
             - Rigveda output is per-Sukta, not per-Rik (no real per-rik timestamp data exists anywhere in the app — see the script's module docstring). Yajurveda Samhita/Brahmanam output IS per-mantra, sliced from the bundled boundary JSON.
             - Spot-check a few files play correctly and text/audio counts line up before merging — this is a first pass, not yet cross-checked against the running app.
           add-paths: |

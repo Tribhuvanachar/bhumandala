@@ -32,7 +32,7 @@ on:
         type: boolean
         default: false
       dry_run:
-        description: "Produce the dump but do not modify dge/data"
+        description: "Produce the dump but do not modify data"
         type: boolean
         default: false
 
@@ -62,17 +62,17 @@ jobs:
       - name: Unit tests (patched core.js normaliser)
         run: node tools/sayana_smriti/tests/test_core_patch.js
 
-      # The core.js edits are committed in dge/js/core.js, and the packaged
+      # The core.js edits are committed in js/core.js, and the packaged
       # snapshot and diff are dropped on deployment, so nothing here can apply a
       # stale copy over a file main has moved on from. test_core_patch.js above
-      # reads the shipping dge/js/core.js directly, so the normaliser is verified
+      # reads the shipping js/core.js directly, so the normaliser is verified
       # rather than assumed. Only the taxonomy nodes still need adding before an
       # importer can write into those folders.
       - name: Add the new taxonomy folders
         if: inputs.job == 'smriti' || inputs.job == 'both'
         run: |
           set -e
-          node --check dge/js/core.js
+          node --check js/core.js
           python tools/sayana_smriti/patches/taxonomy_patch.py --dge-root dge
 
       # A partial run is resumable: the HTTP cache is keyed by URL, so a re-run
@@ -170,7 +170,7 @@ jobs:
 
       - name: Rebuild search index
         if: inputs.dry_run != true
-        run: python dge/build_search_index.py || echo "::warning::search index rebuild failed"
+        run: python build_search_index.py || echo "::warning::search index rebuild failed"
 
       - name: Upload dump + counts as an artifact
         uses: actions/upload-artifact@v4
@@ -189,7 +189,7 @@ jobs:
           title: "Ingest: Sāyaṇa Bhāṣya / Smṛti commentaries (run ${{ github.run_id }})"
           body-path: tools/sayana_smriti/dump/COUNTS_sayana.json
           add-paths: |
-            dge/data/**
-            dge/js/core.js
-            dge/search_index/**
+            data/**
+            js/core.js
+            search_index/**
           commit-message: "data: Sāyaṇa Bhāṣya + Smṛti commentary layers"

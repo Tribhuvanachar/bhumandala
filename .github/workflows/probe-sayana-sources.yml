@@ -1,6 +1,6 @@
 name: Probe — sanskritebooks.org, and how bad the Devanagari OCR really is
 
-# Diagnostic only. Fetches nothing into dge/, opens no PR.
+# Diagnostic only. Fetches nothing into , opens no PR.
 #
 # Two open questions about Sayana, now that wisdomlib is known to refuse every
 # datacenter IP range (250/250 x 403, /robots.txt included):

@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Library Manager · DGE (super-admin)</title>
 <link rel="stylesheet" href="css/library.css?v=3">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
-<link rel="apple-touch-icon" href="../dge/images/genie/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
+<link rel="apple-touch-icon" href="../images/genie/apple-touch-icon.png">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -26,7 +26,7 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🗂️ Library Manager <small>· super-admin</small></div>
+    <div class="brand"><a href="../render.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🗂️ Library Manager <small>· super-admin</small></div>
     <span class="spacer"></span>
     <span id="ovState" style="font-size:11px;color:var(--muted);white-space:nowrap"></span>
     <button class="btn" id="loadCommitted" style="display:none" title="Discard this browser's draft and reload the committed library-overrides.json">↺ Load committed</button>
@@ -150,7 +150,7 @@
   var OV; // {hidden:Set, pinned:[], labels:{}, order:{}, moves:{}}
   var LS="dge.liboverrides";
   // COMMITTED = the library-overrides.json actually in the repo -- the file
-  // the reader app (dge/js/library.js) reads. 31 Aug 2026, project-lead
+  // the reader app (js/library.js) reads. 31 Aug 2026, project-lead
   // sync report: this tool used to start every fresh browser from a BLANK
   // slate (localStorage only), so an admin never saw the live curation and
   // an export from that browser silently discarded it. Now the committed
@@ -295,7 +295,7 @@
       $("#actOv").classList.add("show");
     };
     Promise.all([
-      fetch("../dge/data/taxonomy.json").then(function(r){return r.json();}),
+      fetch("../data/taxonomy.json").then(function(r){return r.json();}),
       fetch("config/library-status.json").then(function(r){return r.json();}),
       // the committed overrides -- the reader's live curation; absent file
       // (first ever run) is fine and seeds a blank slate
@@ -307,7 +307,7 @@
       loadOV();
       renderTotals(); renderSections(); render();
       // Deep link from the reader app's "📊 Progress" nav link
-      // (dge/js/library.js's dgeSectionTrackerHtml) -- e.g.
+      // (js/library.js's dgeSectionTrackerHtml) -- e.g.
       // library.html?section=agama. Reuses the existing name/path filter
       // + auto-expand-on-search exactly as if the admin had typed it in,
       // so this needs no rendering path of its own.
@@ -812,7 +812,7 @@
   function exportOV(){
     // prune empties for a clean file
     var out={
-      note:"DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
+      note:"DGE library curation overrides — a NON-DESTRUCTIVE display layer read by js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
       version:1,
       // Stamps this export as the newest curation once committed: the
       // reader's draft preview and the manager's own state line compare

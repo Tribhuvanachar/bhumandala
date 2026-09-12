@@ -28,7 +28,7 @@ from common import http_get, to_text, iast_to_dev, itrans_to_iast, write_grantha
 
 BASE = "https://gretil.sub.uni-goettingen.de/gretil/"
 
-# id -> spec. `target` is a path under dge/data/ produced by the scaffolder.
+# id -> spec. `target` is a path under data/ produced by the scaffolder.
 DARSHANA_GRETIL = {
     "nyayasutra_bhashya": dict(
         name="Nyāyasūtra with Vātsyāyana's Bhāṣya",

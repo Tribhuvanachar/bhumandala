@@ -7,15 +7,15 @@ Written 6 Sep 2026, 5:20 pm IST, from the files as they are in this repository (
 **Where things live.** Kamadhenu is a sub-project of the DGE repository. Its working files are under `kamadhenu/`
 (this audit, the status file, `data/`, `docs/`, `scripts/`). The raw measurements, manifests and the audio drop-zone
 made by the earlier master audit stay in `kamadhenu_dataset/` (audio itself is git-ignored). The deployment scaffold
-is `tools/kamadhenu/space/`, the analysis toolkit `tools/kamadhenu/`, and the reader-side client `dge/js/kamadhenu.js`.
+is `tools/kamadhenu/space/`, the analysis toolkit `tools/kamadhenu/`, and the reader-side client `js/kamadhenu.js`.
 
 ## 1. What already exists
 
 | area | what | where | state |
 |---|---|---|---|
-| DGE library | 1,758 granthas as JSON, one item per verse/passage, with a taxonomy and reader | `dge/data/**`, `dge/index.html` | 🟢 live |
-| Chandas engine | browser JS metre identifier: syllables, laghu/guru, gaṇas, pāda split, 245 vṛttas + 10 mātrā metres, anuṣṭubh pathyā/vipulā, yati; headless runner for Python | `dge/js/chandas.js`, `dge/data/vedanga/chandas/data.json`, `tools/kamadhenu/chandas_runner.js` | 🟢 tested (81 pytest cases) |
-| Sanskrit text processing | speaker-line stripping, verse cleaning, SLP1 + phonetic keys per text unit; Indic-script folding | `tools/kamadhenu/texts.py`, `dge/build_search_index.py` | 🟢 |
+| DGE library | 1,758 granthas as JSON, one item per verse/passage, with a taxonomy and reader | `data/**`, `render.html` | 🟢 live |
+| Chandas engine | browser JS metre identifier: syllables, laghu/guru, gaṇas, pāda split, 245 vṛttas + 10 mātrā metres, anuṣṭubh pathyā/vipulā, yati; headless runner for Python | `js/chandas.js`, `data/vedanga/chandas/data.json`, `tools/kamadhenu/chandas_runner.js` | 🟢 tested (81 pytest cases) |
+| Sanskrit text processing | speaker-line stripping, verse cleaning, SLP1 + phonetic keys per text unit; Indic-script folding | `tools/kamadhenu/texts.py`, `build_search_index.py` | 🟢 |
 | Kamadhenu audit toolkit | inventory → sources → fetch → audio QC → text mapping → chandas → dataset subsets → reference bank → dashboard; one command | `tools/kamadhenu_audit.py`, `tools/kamadhenu/*.py` | 🟢 runs in ~10 s warm |
 | Audio measurements | ffprobe/decode of every file: sample rate, channels, duration, peak, RMS, noise floor, SNR, silences, clipping, SHA-1, duplicates, grade A–D | `kamadhenu_dataset/audio_inventory.json/.csv` | 🟢 2,544 files |
 | Text↔audio mapping | filename rules + phonetic matching, confidence 0–1, review queue | `kamadhenu_dataset/audio_text_mapping.json`, `metadata.jsonl` | 🟡 1,576 strong, 405 in review |
@@ -23,13 +23,13 @@ is `tools/kamadhenu/space/`, the analysis toolkit `tools/kamadhenu/`, and the re
 | Reference bank | per-metre best recording candidates, 147 entries, 0 human-verified | `kamadhenu_dataset/reference_bank.*` | 🟡 |
 | Chandas coverage | per-metre audio coverage: 37 of 256 metres have any recording | `kamadhenu_dataset/chandas_coverage.*` | 🟢 measured |
 | Vāgdhenu comparison | metre tables, frontend, text fixes, licence notes | `kamadhenu_dataset/chandas_comparison.md`, `frontend_gap_report.md` | 🟢 |
-| Deployment reference | how Vāgdhenu is really served (ZeroGPU Space), quotas, costs, two-mode architecture | `kamadhenu_dataset/DEPLOYMENT_REFERENCE.md`, `dge/tts/ARCHITECTURE.md` v1.2 | 🟢 |
+| Deployment reference | how Vāgdhenu is really served (ZeroGPU Space), quotas, costs, two-mode architecture | `kamadhenu_dataset/DEPLOYMENT_REFERENCE.md`, `tts/ARCHITECTURE.md` v1.2 | 🟢 |
 | Space scaffold | API-first Gradio app, DGE metre → bank map, build/deploy script, GitHub Action, measurement script | `tools/kamadhenu/space/`, `.github/workflows/deploy-kamadhenu-space.yml` | 🟡 not deployed (needs HF_TOKEN; ZeroGPU available now — account PRO since 6 Sep 2026) |
-| Reader client | "Generate this verse" call to the Space | `dge/js/kamadhenu.js`, `appConfig.kamadhenuSpaceUrl` | 🟡 not wired to a page |
+| Reader client | "Generate this verse" call to the Space | `js/kamadhenu.js`, `appConfig.kamadhenuSpaceUrl` | 🟡 not wired to a page |
 | Hugging Face account | `SarvamulaOrg`, created 6 Sep 2026 | — | 🟢 |
 | Recording plan | 249 targeted recording requests by metre and priority | `kamadhenu_dataset/RECORDING_REQUESTS.csv` | 🟡 nothing recorded yet |
-| Older TTS design | v1.0/1.1 architecture document (planning only) | `dge/tts/ARCHITECTURE.md` | reference |
-| Audio player | per-verse playback from the DGE audio repo / archive.org | `dge/js/audio.js` | 🟢 live |
+| Older TTS design | v1.0/1.1 architecture document (planning only) | `tts/ARCHITECTURE.md` | reference |
+| Audio player | per-verse playback from the DGE audio repo / archive.org | `js/audio.js` | 🟢 live |
 | Vāgdhenu code | clone in the session scratchpad only (not in the repo); Apache-2.0 | `$VAGDHENU` | reference |
 | Model files | none in the repository | — | ⚪ by design |
 

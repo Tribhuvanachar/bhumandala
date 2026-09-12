@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../js/vandana-guard.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OCR Studio · DGE</title>
-<link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/genie/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../images/genie/favicon-192.png">
 <style>
 :root{
   --bg:#faf9f7; --panel:#fff; --line:#e3ded6; --text:#1d1a16; --muted:#6f665c;
@@ -142,7 +142,7 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="brand"><a href="../dge/index.html" title="DGE Home">⌂ DGE</a>
+    <div class="brand"><a href="../render.html" title="DGE Home">⌂ DGE</a>
       <span style="color:var(--muted)">›</span> 🎨 OCR Studio</div>
     <select id="file"><option value="">— staged OCR file —</option></select>
     <select id="asEngine" title="Which engine produced that file. Auto reads the file\'s own engine/model field.">
@@ -201,7 +201,7 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="../dge/convert/tesseract-check.js?v=1"></script>
+<script src="../convert/tesseract-check.js?v=1"></script>
 <script src="js/ocr-studio-core.js?v=2"></script>
 <script>
 (function(){
@@ -258,7 +258,7 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
   // Same location ocr-review.html reads from, so the two pages see the same
   // work and a file reviewed in one can be styled in the other.
   function listFiles(){
-    fetch("../dge/data/ocr_staging/index.json").then(function(r){
+    fetch("../data/ocr_staging/index.json").then(function(r){
       return r.ok ? r.json() : null;
     }).catch(function(){ return null; }).then(function(idx){
       var files = (idx && idx.files) || [];
@@ -285,7 +285,7 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
   // The "as …" dropdown is the override for a file that says nothing.
   function loadFile(path, forceId){
     var url = path.indexOf("/") === 0 || /^https?:/.test(path)
-      ? path : "../dge/data/ocr_staging/" + path;
+      ? path : "../data/ocr_staging/" + path;
     $("#docBody").innerHTML = '<div class="empty">Loading…</div>';
     fetch(url).then(function(r){
       if (!r.ok) throw new Error("HTTP " + r.status);

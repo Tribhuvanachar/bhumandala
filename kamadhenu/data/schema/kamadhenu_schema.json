@@ -2,7 +2,7 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "kamadhenu_schema_v1",
  "title": "Kamadhenu training example",
- "description": "One text↔audio pair for Sanskrit TTS / chanting. Fields may be null when unknown; the validator reports what is missing, nothing is deleted. Laghu/guru, metre and pāda fields come from the DGE Chandas engine (dge/js/chandas.js) unless `chandas_source` says otherwise.",
+ "description": "One text↔audio pair for Sanskrit TTS / chanting. Fields may be null when unknown; the validator reports what is missing, nothing is deleted. Laghu/guru, metre and pāda fields come from the DGE Chandas engine (js/chandas.js) unless `chandas_source` says otherwise.",
  "type": "object",
  "required": ["id", "text", "audio", "speaker", "source", "split"],
  "properties": {

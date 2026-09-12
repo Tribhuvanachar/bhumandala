@@ -1,4 +1,4 @@
-"""dge/js/pratika.js — which commentary words count as quotations of the verse.
+"""js/pratika.js — which commentary words count as quotations of the verse.
 
 Run under node against the real module, because the thing being asserted is
 behavioural: given this verse and this commentary word, is it a pratīka?

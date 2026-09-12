@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build per-root lakara conjugation tables (dge/data/vedanga/vyakarana/dhatuforms/<code>.json)
+"""Build per-root lakara conjugation tables (data/vedanga/vyakarana/dhatuforms/<code>.json)
 from ashtadhyayi-com/data's dhatuforms_vidyut_*.txt files.
 
 Ten finite-verb tables (Issue 15's "Lunganta / Yang-lunganta / Sananta / Nichanta /
 Karmani / Kartari" ask) -- shuddha (basic), san (desiderative), nich (causative),
 yang (intensive), yangluk (intensive-luk), each in kartari (active) and karmani
 (passive) voice, each carrying all 10 lakaras x 9 persons/numbers. The krut
-(participle/krdanta) tables are NOT imported here: dge/krdanta.html already
+(participle/krdanta) tables are NOT imported here: krdanta.html already
 derives those live from vidyut-prakriya (js/prakriya.js), so importing a static
 copy would just be redundant data with no reader benefit.
 
@@ -22,10 +22,10 @@ import sys
 from pathlib import Path
 
 # (json key prefix in the source file, our field name). shuddha_kartari is
-# deliberately NOT included: dge/data/vedanga/vyakarana/prakriya/<gana>/<code>.json
+# deliberately NOT included: data/vedanga/vyakarana/prakriya/<gana>/<code>.json
 # (built by tools/build_prakriya.py from vidyut-prakriya, no external data
 # dependency) already derives that exact table -- basic active voice, 8 of its
-# 10 lakaras -- and dge/prakriya.html already shows it with its full
+# 10 lakaras -- and prakriya.html already shows it with its full
 # step-by-step derivation. Re-importing it here would be the same wordforms
 # twice from two independently-generated sources, a real risk of the two
 # quietly disagreeing on some root with no way for a reader to tell which is

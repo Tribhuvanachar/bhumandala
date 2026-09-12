@@ -6,7 +6,7 @@
 # repo's tools/publish.py — which strips the origin's URLs and record ids and
 # writes the provenance map that keeps the cut recoverable.
 #
-# Importing straight into dge/data, as the job below used to, puts the origin's
+# Importing straight into data, as the job below used to, puts the origin's
 # own database keys (content_id, work_id, anchor, block_uuid) and its raw
 # source_html into a public repository. That is what this whole change exists to
 # stop, so the guard step below fails the run before anything is fetched.
@@ -18,7 +18,7 @@
 name: Extract SetuTila
 
 # Delta-syncs the setutila.in Sarvamula corpus into
-# dge/data/DvaitaVedanta/SarvaMula/.
+# data/DvaitaVedanta/SarvaMula/.
 #
 # The importer (tools/setutila/import_setutila.py) is sync-by-design:
 #   * every post's modified_gmt is recorded in _sync_state.json, so a run
@@ -57,7 +57,7 @@ jobs:
         run: |
           echo "::error::Imports from a rights-unresolved source no longer run in the public repository."
           echo "Run 'Import — private tier' in Tribhuvanachar/Parabuddhi instead."
-          echo "See dge/PROVENANCE.md for why, and Parabuddhi's README for the pipeline."
+          echo "See PROVENANCE.md for why, and Parabuddhi's README for the pipeline."
           exit 1
       - uses: actions/checkout@v4
 
@@ -85,4 +85,4 @@ jobs:
             for per-post modified_gmt, chunk hashes and any persisted
             upstream-404 errors.
           add-paths: |
-            dge/data/DvaitaVedanta/SarvaMula/**
+            data/DvaitaVedanta/SarvaMula/**

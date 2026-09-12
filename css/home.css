@@ -495,7 +495,7 @@ body.leaving #veil { opacity: 1; }
   letter-spacing: .06em; margin-top: 4px;
 }
 
-/* site-footer.js's shared links row -- same class names as dge/css/main.css's
+/* site-footer.js's shared links row -- same class names as css/main.css's
    copy (the reader), styled with this page's own --gold/--text-faint/--hairline
    tokens rather than the reader's short-form vocabulary, since the two are
    not yet unified (see the CSS consolidation task). */

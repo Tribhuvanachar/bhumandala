@@ -177,7 +177,7 @@
       blurb: 'free, in-browser WASM, needs a language hint',
       layout: false,
       runsIn: 'browser',
-      where: 'dge/convert/tesseract-check.js',
+      where: 'convert/tesseract-check.js',
       key: null,
       cost: 'free · runs on this machine, sends nothing'
     }

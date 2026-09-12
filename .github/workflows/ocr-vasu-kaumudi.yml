@@ -3,7 +3,7 @@ name: DGE OCR Vasu Siddhanta-Kaumudi (English, SK-mode)
 # Stage 1 of the Vasu SK pipeline (tools/vasu_kaumudi_ocr.py): archive.org
 # volume PDF pages -> Vision OCR -> Gemini proofreading (SK entry units,
 # classification-gated) -> a staged JSON committed under
-# dge/data/ocr_staging/vasu_siddhanta_kaumudi/. Merging into the reader's
+# data/ocr_staging/vasu_siddhanta_kaumudi/. Merging into the reader's
 # vasu_kaumudi layer is Stage 2 (tools/merge_staged_vasu_kaumudi.py), run
 # deliberately after inspection — this workflow never touches the layer.
 #
@@ -84,7 +84,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: staged-vasu-kaumudi
-          path: dge/data/ocr_staging/vasu_siddhanta_kaumudi/
+          path: data/ocr_staging/vasu_siddhanta_kaumudi/
 
       - name: Commit the staged file
         env:
@@ -94,7 +94,7 @@ jobs:
           GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
         run: |
           set -euo pipefail
-          git add dge/data/ocr_staging/vasu_siddhanta_kaumudi/
+          git add data/ocr_staging/vasu_siddhanta_kaumudi/
           if git diff --cached --quiet; then
             echo "No staged changes."
             exit 0

@@ -1,7 +1,7 @@
 name: DGE Gemini padaccheda/anvaya/summary (kavya)
 
 # Batch-generates padaccheda/anvaya/summary for a kavya's shlokas using
-# Gemini (see tools/gemini_summarize.py and dge/PENDING.md's Raghavendra
+# Gemini (see tools/gemini_summarize.py and PENDING.md's Raghavendra
 # Vijaya writeup). Every output is Gemini's own linguistic analysis, not a
 # claim tools/reference_resolution can verify against the corpus -- so
 # unlike gemini-enrich.yml there is no local-verification step here. What
@@ -9,7 +9,7 @@ name: DGE Gemini padaccheda/anvaya/summary (kavya)
 # and this corpus's own linked English translation as context, rather than
 # translating blind; (2) every output lands under a clearly-labeled
 # gemini_padaccheda/gemini_anvaya/gemini_summary key -- "AI ..., unreviewed"
-# -- never presented as a vetted commentary (dge/js/core.js's
+# -- never presented as a vetted commentary (js/core.js's
 # KNOWN_COMMENTARY_LABELS); (3) review before merge is the default (see
 # direct_push below).
 #
@@ -23,7 +23,7 @@ on:
       sarga_dir:
         description: "Directory of sarga_N/data.json subfolders to process"
         required: true
-        default: dge/data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya
+        default: data/DvaitaVedanta/Itara/Kavya/raghavendra_vijaya
       cantos:
         description: "Canto range or comma list, e.g. '1-10' or '1,3,5'"
         required: true
@@ -37,7 +37,7 @@ on:
         required: false
         default: ""
       model:
-        description: "Gemini model to use. Default is gemini-flash-lite-latest: a real gemini-bench.yml run (see dge/PENDING.md) found gemini-flash-latest resolves to a thinking-capable model that spends MORE tokens on invisible internal reasoning than on the visible answer, making it 4-6x costlier for this task with no measured quality gain -- flash-lite does not do this."
+        description: "Gemini model to use. Default is gemini-flash-lite-latest: a real gemini-bench.yml run (see PENDING.md) found gemini-flash-latest resolves to a thinking-capable model that spends MORE tokens on invisible internal reasoning than on the visible answer, making it 4-6x costlier for this task with no measured quality gain -- flash-lite does not do this."
         required: true
         default: gemini-flash-lite-latest
         type: choice
@@ -45,7 +45,7 @@ on:
           - gemini-flash-lite-latest
           - gemini-flash-latest
       batch_size:
-        description: "Verses per Gemini request -- the cost lever (amortizes fixed prompt overhead across more verses). Default 10 per the gemini-bench.yml run in dge/PENDING.md. 1 = old one-verse-per-call behaviour."
+        description: "Verses per Gemini request -- the cost lever (amortizes fixed prompt overhead across more verses). Default 10 per the gemini-bench.yml run in PENDING.md. 1 = old one-verse-per-call behaviour."
         required: true
         default: "10"
       concurrency:
@@ -129,7 +129,7 @@ jobs:
 
             Every output landed under a `gemini_padaccheda`/`gemini_anvaya`/
             `gemini_summary` key and is labeled "AI ..., unreviewed" in the
-            reader (see `dge/js/core.js`'s `KNOWN_COMMENTARY_LABELS`) --
+            reader (see `js/core.js`'s `KNOWN_COMMENTARY_LABELS`) --
             this is a first pass, not a scholarly-verified one. Spot-check
             a sample before merging, especially the padaccheda/anvaya
             (there is no automatic local verification for these, unlike

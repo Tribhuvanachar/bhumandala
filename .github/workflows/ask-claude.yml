@@ -139,7 +139,7 @@ jobs:
 
             Requests to handle now (ids): ${{ steps.pending.outputs.ids }}
             Each is tasks/inbox/<id>.json: `instruction` is the ask, `sections[]`
-            name the library paths it concerns (dge/data/…/data.json), `thread[]`
+            name the library paths it concerns (data/…/data.json), `thread[]`
             is the conversation so far.
 
             For each request:
