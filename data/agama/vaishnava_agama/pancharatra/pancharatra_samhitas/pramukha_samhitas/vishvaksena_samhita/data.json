@@ -2,7 +2,7 @@
   "schema": "generic",
   "default_author": "Traditionally revealed (Pancharatra Agama)",
   "source": "GRETIL (Sansknet Project), https://gretil.sub.uni-goettingen.de/gretil/corpustei/sa_viSvaksenasaMhitA.xml",
-  "licence": "CC BY-NC-SA 4.0",
+  "licence_ref": "cc-by-nc-sa-4.0",
   "note": "39 adhyayas, 3796 shlokas total, Devanagari produced from the GRETIL IAST e-text via skrutable's transliterator (pip dependency, no vendored code).",
   "items": [
     {

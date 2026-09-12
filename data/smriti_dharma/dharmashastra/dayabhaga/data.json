@@ -3,7 +3,7 @@
  "default_author": "Jimutavahana",
  "source": "South Asia Institute Open Educational Resources, University of Texas at Austin (Patrick Olivelle)",
  "source_url": "https://docs.google.com/document/d/1-208O-oJYj6MyyBmsq1TckbJ6PtTUAajY5x5A8muDCY/",
- "licence": "CC BY 4.0",
+ "licence_ref": "cc-by-4.0",
  "note": "Searchable Electronic Edition of the Dayabhaga of Jimutavahana, transcribed by Patrick Olivelle. Based on: Ludo Rocher, Jimutavahana's Dayabhaga: The Hindu Law of Inheritance in Bengal, Oxford University Press, 2002. 15 chapters, 677 numbered sections (some chapters are flat chapter.paragraph, others -- 4, 6, 7, 8, 11 -- use chapter.section.paragraph; ids preserve whichever the source itself uses). 26 of Olivelle's 27 documented errata corrections applied (the 27th, at 11.1.35, is a paleography note about a Devanagari stroke, not a text substitution, and was left as-is). One transcription typo -- a marker printed <31.0> sitting between <1.29> and <1.31> -- was corrected to <1.30>, confirmed by its position in the sequence, not guessed.",
  "items": [
   {

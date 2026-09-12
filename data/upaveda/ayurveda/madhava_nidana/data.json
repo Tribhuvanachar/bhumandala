@@ -3,7 +3,7 @@
  "default_author": "माधवकरः",
  "source_url": "https://sa.wikisource.org/wiki/माधवनिदानम्",
  "source_note": "Sanskrit Wikisource (sa.wikisource.org). Mula text only -- no interleaved commentary on this page. Organized into 68 disease-topic sections (not numbered adhyayas), matching the source page's own == section == structure.",
- "licence": "CC BY-SA",
+ "licence_ref": "cc-by-sa-generic",
  "items": [
   {
    "id": "section_01",

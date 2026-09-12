@@ -2,7 +2,7 @@
   "schema": "generic",
   "default_author": "Traditionally revealed (Pancharatra Agama)",
   "source": "GRETIL (Sansknet Project), https://gretil.sub.uni-goettingen.de/gretil/corpustei/sa_pauSkarasaMhitA-27-43.xml",
-  "licence": "CC BY-NC-SA 4.0",
+  "licence_ref": "cc-by-nc-sa-4.0",
   "note": "17 adhyayas, 3551 shlokas total, Devanagari produced from the GRETIL IAST e-text via skrutable's transliterator (pip dependency, no vendored code). PARTIAL TEXT: only adhyayas 27-43 of the printed edition (P.P. Apte, ed., Tirupati 2006) are available on GRETIL -- adhyayas 1-26 and beyond 43 are not part of this e-text, not a coverage gap introduced here.",
   "items": [
     {

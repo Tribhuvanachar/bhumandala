@@ -1,7 +1,7 @@
 {
  "schema": "vedanga_chandas_vrutta_database",
  "source": "hrishikeshrt/chanda (Chandojnanam) @ 3a9607c6e7a23d60c03d10f839913d01f8bd7ee2",
- "licence": "AGPL-3.0-or-later",
+ "licence_ref": "agpl-3.0-chandas",
  "note": "Sama/ardhasama/vishama/upajati vrutta lakshana, matra-vrutta matra counts and akshara-count jaati names, for classical (laukika) Sanskrit metre lookup and identification -- not Vedic chandas, see PENDING.md for why that's a separate, unsolved problem. Ingest and build script under tools/chandas/; tools/chandas/identify_vrutta.py wraps the upstream `chanda` PyPI library (same project) for actually identifying the metre of a given verse against this data.",
  "counts": {
   "sama_vrutta": 190,

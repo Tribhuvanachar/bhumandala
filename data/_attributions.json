@@ -1,0 +1,67 @@
+{
+  "_readme": "Consolidated attribution/licence registry for this repository. Individual data.json files no longer carry licence prose inline; each carries only a 'licence_ref' key pointing to an id here. This file is the single place that text lives. See rewrite_licence_refs.py (repo root) for the migration that created it, and PROVENANCE.md in the parabuddhi sibling repo for the separate, already-planned rights/provenance architecture this extends. Public-domain / no-restriction texts (the majority of this corpus) carry no licence field at all and are not listed here -- there is nothing to attribute.",
+  "licences": {
+    "gpl-2.0-scl": {
+      "spdx": "GPL-2.0",
+      "name": "GNU General Public License v2.0",
+      "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+      "source_project": "samsaadhanii/scl (Sanskrit Computational Linguistics)",
+      "attribution_text": "Dhātu-vṛtti data (Mādhavīya, Kṣīrataraṅgiṇī, Dhātupradīpa and related dhātu-vṛtti sources) derived from the samsaadhanii/scl project. GPL-2.0 requires this attribution to be retained and any redistribution of this data to remain under GPL-2.0.",
+      "applies_to": "data/vedanga/vyakarana/vritti/*.json",
+      "file_count_at_migration": 1381
+    },
+    "cc-by-4.0": {
+      "spdx": "CC-BY-4.0",
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "source_project": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+      "source_url": "https://github.com/OliverHellwig/sanskrit",
+      "attribution_text": "Source: Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024, CC-BY 4.0. Devanagari produced from the DCS IAST transcription via skrutable's transliterator (pip dependency, no vendored code).",
+      "applies_to": "data/vedas/**/data.json (DCS-imported mula units)",
+      "file_count_at_migration": 171
+    },
+    "cc-by-sa-4.0": {
+      "spdx": "CC-BY-SA-4.0",
+      "name": "Creative Commons Attribution-ShareAlike 4.0 International",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution_text": "Pancharatra samhita text carries a CC BY-SA 4.0 licence at source; attribution and share-alike terms must be preserved on redistribution.",
+      "applies_to": "data/agama/vaishnava_agama/pancharatra/**/data.json",
+      "file_count_at_migration": 5
+    },
+    "cc-by-sa-generic": {
+      "spdx": "CC-BY-SA",
+      "name": "Creative Commons Attribution-ShareAlike (version unspecified at source)",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution_text": "Ayurveda samhita text (Madhava Nidana, Sharngadhara Samhita) carries a CC BY-SA licence at source without an explicit version; treated as the current version (4.0) pending confirmation. Attribution and share-alike terms must be preserved on redistribution.",
+      "applies_to": "data/upaveda/ayurveda/{madhava_nidana,sharngadhara_samhita}/data.json",
+      "file_count_at_migration": 2
+    },
+    "cc-by-nc-sa-4.0": {
+      "spdx": "CC-BY-NC-SA-4.0",
+      "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution_text": "Pancharatra samhita text (Paushkara, Prakasha, Vishvaksena samhitas) carries a CC BY-NC-SA 4.0 licence at source. This project's non-commercial public distribution is within the licence's terms; attribution and share-alike terms must be preserved on redistribution, and no commercial use is permitted.",
+      "applies_to": "data/agama/vaishnava_agama/pancharatra/**/data.json",
+      "file_count_at_migration": 3
+    },
+    "mit-generic": {
+      "spdx": "MIT",
+      "name": "MIT License",
+      "url": "https://opensource.org/license/mit/",
+      "source_project": "vidyut (ambuda-org/vidyut)",
+      "attribution_text": "Dhātupāṭha data derived from vidyut (ambuda-org/vidyut), MIT licence. Attribution retained per MIT terms.",
+      "applies_to": "data/vedanga/vyakarana/dhatupatha/data.json",
+      "file_count_at_migration": 1
+    },
+    "agpl-3.0-chandas": {
+      "spdx": "AGPL-3.0-or-later",
+      "name": "GNU Affero General Public License v3.0 or later",
+      "url": "https://www.gnu.org/licenses/agpl-3.0.html",
+      "source_project": "hrishikeshrt/chanda (Chandojnanam)",
+      "source_commit": "3a9607c6e7a23d60c03d10f839913d01f8bd7ee2",
+      "attribution_text": "Chandas (metre) lakshana database derived from hrishikeshrt/chanda (Chandojnanam) at the pinned commit above, AGPL-3.0-or-later. Attribution retained and redistribution kept under AGPL-3.0-or-later per its terms.",
+      "applies_to": "data/vedanga/chandas/data.json",
+      "file_count_at_migration": 1
+    }
+  }
+}

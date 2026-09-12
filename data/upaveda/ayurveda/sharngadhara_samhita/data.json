@@ -3,7 +3,7 @@
  "default_author": "शार्ङ्गधराचार्यः",
  "source_url": "https://sa.wikisource.org/wiki/शार्ङ्गधरसंहिता",
  "source_note": "Sanskrit Wikisource (sa.wikisource.org). All four khandas (Purva/Madhya/Uttara + the Parishishta appendix). Known, accepted minor imperfection: a short un-numbered caption/topic-tag line before a verse (e.g. 'मङ्गलाचरणम्') is occasionally prepended onto that verse's own text rather than being cleanly separated -- no safe general filter was found (unlike Madhava Nidana's section-title repeats, these captions are not simple title-repeats), so it is left as-is rather than risk dropping real content.",
- "licence": "CC BY-SA",
+ "licence_ref": "cc-by-sa-generic",
  "items": [
   {
    "id": "purva_adhyaya_01",

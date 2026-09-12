@@ -2,7 +2,7 @@
   "schema": "generic",
   "default_author": "Traditionally revealed (Pancharatra Agama); this recension per GRETIL corpustei",
   "source": "GRETIL (Sansknet Project), https://gretil.sub.uni-goettingen.de/gretil/corpustei/sa_prakAzasaMhitA.xml",
-  "licence": "CC BY-NC-SA 4.0",
+  "licence_ref": "cc-by-nc-sa-4.0",
   "items": [
     {
       "id": "paricchheda01_adhyaya01",

@@ -2,7 +2,7 @@
   "schema": "generic",
   "default_author": "Traditionally revealed (Pancharatra Agama)",
   "source": "Sanskrit Wikisource, https://sa.wikisource.org/wiki/लक्ष्मीतन्त्रम्",
-  "licence": "CC BY-SA 4.0",
+  "licence_ref": "cc-by-sa-4.0",
   "note": "56 adhyayas, 3689 shlokas total, transcribed by Sanskrit Wikisource contributors. Adhyaya 56 is missing entirely -- its Wikisource page exists (linked from the work's own index) but carries no content at all, just the page header template; a genuine gap in the source transcription itself, not a parsing gap.",
   "items": [
     {

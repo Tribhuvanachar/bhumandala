@@ -6672,12 +6672,9 @@
   },
   {
    "path": "data/darshana/vedanta/dvaita/Anandamakaranda/gita_prasthana/gita_bhashya/tika_english_boray/data.json",
-   "populated": true,
+   "populated": false,
    "title": "गीताभाष्यम् — tika_english_boray",
    "addedAt": "2026-09-04",
-   "source": {
-    "source_url": "https://upanishat.com/"
-   },
    "facets": {
     "default_author": "Dr. Giridhar Boray"
    }
