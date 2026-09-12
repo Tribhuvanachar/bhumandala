@@ -1,2 +1,2 @@
 welcome.
-/PrahladaKrutaNarasimhaStotra.html
+/index.html
