@@ -12764,14 +12764,12 @@
    "title": "Agni Purana",
    "addedAt": "2026-08-25",
    "source": {
-    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Agnipurāṇa",
-    "licence": "CC-BY 4.0"
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_agnipurANa.txt"
    },
    "facets": {
     "guna_classification": "tamasa",
     "purana_class": "mahapurana",
-    "default_author": "unspecified"
+    "default_author": "महर्षिवेदव्यासः"
    }
   },
   {
@@ -13178,13 +13176,16 @@
   },
   {
    "path": "data/purana/maha_purana/garuda_purana/brahma_khanda/data.json",
-   "populated": false,
+   "populated": true,
    "title": "Brahma Khanda",
    "addedAt": "2026-08-25",
    "facets": {
     "guna_classification": "sattvika",
     "purana_class": "mahapurana",
-    "default_author": "Maharshi Veda Vyasa"
+    "default_author": "महर्षिवेदव्यासः"
+   },
+   "source": {
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_garuDapurANa.txt"
    }
   },
   {
@@ -13193,25 +13194,26 @@
    "title": "Purva Khanda",
    "addedAt": "2026-08-25",
    "source": {
-    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Garuḍapurāṇa",
-    "licence": "CC-BY 4.0"
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_garuDapurANa.txt"
    },
    "facets": {
     "guna_classification": "sattvika",
     "purana_class": "mahapurana",
-    "default_author": "unspecified"
+    "default_author": "महर्षिवेदव्यासः"
    }
   },
   {
    "path": "data/purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa/data.json",
-   "populated": false,
+   "populated": true,
    "title": "Uttara Khanda Pretakalpa",
    "addedAt": "2026-08-25",
    "facets": {
     "guna_classification": "sattvika",
     "purana_class": "mahapurana",
-    "default_author": "Maharshi Veda Vyasa"
+    "default_author": "महर्षिवेदव्यासः"
+   },
+   "source": {
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_garuDapurANa.txt"
    }
   },
   {
@@ -13696,13 +13698,16 @@
   },
   {
    "path": "data/purana/maha_purana/vamana_purana/saromahatmya/data.json",
-   "populated": false,
+   "populated": true,
    "title": "Saromahatmya",
    "addedAt": "2026-08-25",
    "facets": {
     "guna_classification": "rajasa",
     "purana_class": "mahapurana",
-    "default_author": "Maharshi Veda Vyasa"
+    "default_author": "महर्षिवेदव्यासः"
+   },
+   "source": {
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAmanapurANa1-69.txt"
    }
   },
   {
@@ -13898,13 +13903,11 @@
    "title": "Narasimha Purana",
    "addedAt": "2026-08-25",
    "source": {
-    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Narasiṃhapurāṇa",
-    "licence": "CC-BY 4.0"
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_narasiMhapurANa.txt"
    },
    "facets": {
     "purana_class": "upapurana",
-    "default_author": "unspecified"
+    "default_author": "महर्षिवेदव्यासः"
    }
   },
   {
@@ -17843,6 +17846,19 @@
    "title": "Isha Upanishad",
    "facets": {
     "default_author": "Apaurusheya (traditionally unauthored / eternally revealed; rishi per mantra may be noted in the item's own 'rishi' field)"
+   }
+  },
+  {
+   "path": "data/purana/maha_purana/vayu_purana/revakhanda/data.json",
+   "populated": true,
+   "title": "Revakhanda",
+   "addedAt": "2026-09-12",
+   "source": {
+    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_revAkhANDa-of-the-vAyupurANa-rkv.txt"
+   },
+   "facets": {
+    "purana_class": "mahapurana",
+    "default_author": "महर्षिवेदव्यासः"
    }
   }
  ]

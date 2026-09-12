@@ -550,7 +550,8 @@
    },
    "vayu_purana": {
     "_schema": "itihasa_purana_text",
-    "_default_author": "Maharshi Veda Vyasa"
+    "_default_author": "Maharshi Veda Vyasa",
+    "revakhanda": {}
    }
   },
   "upa_purana": {
