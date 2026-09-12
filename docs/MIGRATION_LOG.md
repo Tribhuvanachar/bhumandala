@@ -108,23 +108,41 @@ delete/move whole — §3 is read by `ask-claude.yml`), `local_drive/Panini_Dhat
 
 ## Per-shloka field splitting (Itara + Parabuddhi dvaitavedanta)
 
-- **Pending, schema proposed not yet built.** Requested 12 Sep 2026: split
-  monolithic per-work `data.json` files (mula + all commentaries inline
-  per shloka, e.g. `DvaitaVedanta/Itara/Stotra/prahlada_kruta_narasimha/data.json`
-  — 97KB/11 shlokas, `shlokas[n].commentaries[name]`) into one file per
-  field, extending the convention `Bhagavata_Saroddhara/` already uses
-  (`mula/data.json`, `tika_vishnutirtha/data.json`, one subfolder per
-  layer, named by the actual commentary where known). Purpose: per-field
-  lazy loading and per-field public/private visibility.
-- Reader code (`core.js`, `grantha-reader.js`, `layer-stitch.js`) currently
-  fetches one file per work and reads `commentaries[name]` inline — must be
-  updated to fetch per-field files in the same pass as the data split, not
-  after (this is a functional break, not a deferred link/bookmark issue).
-  Not yet started.
-- Also requested: an admin-toggled visibility setting that automatically
-  relocates a field's file between the public and private repo when
-  flipped (workflow/Action, not yet designed) — ties into the separately
-  in-progress ContentResolver/BYOK access-mode work.
+- **Decided 12 Sep 2026, schema built, corpus-wide conversion not started.**
+  Full reasoning in `docs/CONTENT_ACCESS_ARCHITECTURE.md` — short version:
+  extend each grantha's `_meta.json` with a `layers` array (id, type,
+  multi-script label, author, path, `access`), reusing the folder-per-layer
+  convention `Bhagavata_Saroddhara/` already uses rather than inventing a
+  new one. `access` is `public` / `gated` (stays in this repo, served
+  through the existing-but-off `corpusFile` Firebase proxy once switched
+  on — see below) / `private_provenance` (physically in Parabuddhi).
+  Worked example done: `Bhagavata_Saroddhara/_meta.json` now carries the
+  full `layers` array (all six confirmed public-domain, all `access:
+  "public"`).
+- **Correction to the original framing**: "authenticated users only" and
+  "rights-unresolved source material" are two different problems. This
+  repo already has a built, tested (51 tests), currently-off mechanism for
+  the first — `dge/CORPUS_PROXY.md`'s `corpusFile` Cloud Function, one
+  private GCS bucket + per-path role gates reusing the existing
+  `role-access.js` role system (admin/superadmin/subscriber/sponsor/basic).
+  BYOK-with-GitHub-PAT (from the architecture doc pasted 12 Sep 2026)
+  would have been a weaker, redundant third mechanism for that same
+  problem — a PAT is repo-scoped, not folder-scoped, where `corpusFile`'s
+  gates already work at arbitrary path granularity. BYOK is now scoped
+  down to its one genuine remaining use: an external scholar granted
+  access without a tracked Firebase account — not the primary private-
+  content path.
+- Still not done: monolithic files that bundle mula + all commentaries
+  inline per shloka (e.g. `Stotra/prahlada_kruta_narasimha/data.json`,
+  97KB/11 shlokas, `shlokas[n].commentaries[name]`) have not yet been
+  split into the new per-layer form. Reader code (`core.js`,
+  `grantha-reader.js`, `layer-stitch.js`) currently expects the monolithic
+  shape and must be updated in the SAME pass as any conversion — this is a
+  functional break, not a deferred link/bookmark issue, unlike the broken-
+  link items elsewhere in this log.
+- The admin-toggled workflow that flips a layer's `access` and (for
+  `private_provenance`) actually relocates its bytes between repos is
+  still undesigned.
 
 ## Admin-tool changes already shipped (for reference, not pending)
 
