@@ -45,8 +45,13 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
   height:calc(100vh - 52px);min-height:0}
 @media (max-width:1100px){ .wrap{grid-template-columns:1fr 1fr;} .styles{grid-column:1/-1} }
 @media (max-width:760px){ .wrap{grid-template-columns:1fr;height:auto} }
+/* min-width:0 matters as much as min-height:0 here. A grid item defaults to
+   min-width:auto — it refuses to shrink below its longest unbreakable word —
+   and Sanskrit compounds are very long words. At 400px, with the body type
+   turned up, one compound pushed the column to 480px and carried the style
+   panel's "all N" button off the right edge, where it could not be pressed. */
 .pane{background:var(--panel);border:1px solid var(--line);border-radius:10px;
-  display:flex;flex-direction:column;min-height:0;box-shadow:var(--shadow)}
+  display:flex;flex-direction:column;min-height:0;min-width:0;box-shadow:var(--shadow)}
 .pane > h2{margin:0;padding:9px 12px;border-bottom:1px solid var(--line);
   font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
   display:flex;align-items:center;gap:8px}
@@ -59,7 +64,7 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
 /* The document. Every block is a button for selection purposes, but must
    still read as prose — so the affordance is a hairline that only appears
    on hover, not a box around every paragraph. */
-.doc{font-family:"Noto Serif Devanagari","Nirmala UI",serif;line-height:1.75}
+.doc{font-family:"Noto Serif Devanagari","Nirmala UI",serif;line-height:1.75;overflow-wrap:anywhere}
 .doc [data-cls]{cursor:pointer;border-left:3px solid transparent;padding-left:7px;
   margin-left:-10px;border-radius:0 4px 4px 0}
 .doc [data-cls]:hover{border-left-color:var(--line);background:var(--accent-soft)}
@@ -477,8 +482,13 @@ select,input[type=text],input[type=number],input[type=color]{padding:6px 9px;bor
 
   function renderCompare(){
     var rows = $("#cmpRows");
+    // The page NUMBER and the position in the set are two different things.
+    // Reading a staged range that starts at PDF page 44 used to say
+    // "page 44 of 10"; the number a scholar cites is 44, so keep it and put
+    // the position beside it rather than pretending the set starts at one.
+    var pgAt = cmp.pages.indexOf(page);
     $("#pgLabel").textContent = page == null ? "no pages"
-      : "page " + page + " of " + cmp.pages.length;
+      : "page " + page + " (" + (pgAt + 1) + " of " + cmp.pages.length + ")";
     var chosen = cmp.engines.find(function(e){ return e.id === cmp.chosen; });
     $("#cmpChosen").textContent = chosen ? "styling: " + chosen.label : "nothing chosen yet";
     $("#cmpNote").textContent = scans.length ? scans.length + " scan(s) loaded"
