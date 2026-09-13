@@ -3,7 +3,10 @@
   "permissions": {
     "allow": [
       "Bash(curl https://api.github.com/repos/Tribhuvanachar/bhumandala/actions/*)",
-      "Bash(git push origin --delete:*)"
+      "Bash(git push origin --delete:*)",
+       "Bash(git push origin --delete:*)",
+       "Bash(cp -a*)"
+
     ]
   }
 }
