@@ -314,6 +314,22 @@ complete record, not just a live queue.
   software/data decision, not something stuck on grammar expertise — not re-sent. Full detail in
   `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.14.
 
+  **Update, 13 Sep 2026 — diagnostic scan beyond RV 1.1 while waiting on the Round-4 answer; one
+  real bug fixed, the actual scaling blocker identified (not attempted).** Ran the existing
+  `reconstruct_chain()` checker (not the committed generator) against RV 1.1–1.10 as a pure
+  diagnostic — not an attempt to scale the shipped output, still gated on the lead's own decision.
+  Found and fixed a real, isolated parsing bug: DGE's own `pada_patha` uses "iti" as an editorial
+  disambiguation gloss on the word before it (541+76+1 times in Mandala 1 — RV 1.1 itself has
+  zero instances, confirmed directly), a different thing from a real, independent "iti" *word*
+  that also occurs 12 times in the same corpus (this actually confirms the very Q2 distinction
+  reasoned out two days ago). `regenerate_krama_rv_1_1.py`'s word-splitter was treating the whole
+  gloss as one wrong word; fixed, covered by 7 new tests, confirmed a strict no-op for RV 1.1
+  (committed output byte-for-byte unchanged) and a real improvement elsewhere (77→96 of 204
+  ardharcas now match exactly). The actual scaling blocker — the automatic ardharca-boundary
+  detector's failure rate is much higher outside RV 1.1 — was identified with real numbers but
+  deliberately NOT touched: that's a structural question for the scaling gate itself, not a
+  diagnostic-session fix. Full detail in `dge/RV_PRATISHAKHYA_KRAMA_ARCHITECTURE.md` §6.15.
+
 - **Raghavendra Vijaya: English translation OCR-linked + Gemini
   padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
   real, non-proof-of-concept run of the "AI automation" this project's lead

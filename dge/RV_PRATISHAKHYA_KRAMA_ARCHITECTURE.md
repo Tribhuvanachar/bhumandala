@@ -1277,6 +1277,50 @@ on grammar expertise — not re-sent, to avoid diluting this round's one real qu
 
 ---
 
+### 6.15 Diagnostic scan beyond RV 1.1 (13 Sep 2026) — one real, fixed parsing bug; the actual
+
+scaling blocker identified but NOT attempted
+
+While waiting on the Round-4 answer, continued "solid coding+testing" with something that
+doesn't depend on it: ran the already-built `reconstruct_chain()` checker (not the committed
+generator itself) against RV 1.1–1.10 (204 ardharcas) purely as a diagnostic — **not** an attempt
+to scale the shipped Krama-pāṭha output past RV 1.1, which stays on the spec's own explicit
+"only after [the lead decides]" gate (§6.6/§10). Two things came out of it, kept clearly separate:
+
+**A real, fixed, isolated bug: DGE's own `pada_patha` carries an "iti"-gloss convention RV 1.1
+never happens to exercise.** A pada_patha token can gloss the word immediately before it with
+"iti" — either bare disambiguation ("वायो इति", 541 times in Mandala 1) or giving both a fused
+citation form AND the true avagraha-split compound ("वाजिनीवसू इति वाजिनीऽवसू", 76 times) — a
+DIFFERENT thing entirely from a real, independent "iti" *word* (a quotative particle) that also
+appears as its own pada elsewhere in this exact corpus (12 times in Mandala 1 — directly confirms
+the Q2/§6.14 finding that ordinary Saṃhitā-pāṭha "iti" occurrences are a real, separate
+phenomenon from Krama's own Parigraha convention). `regenerate_krama_rv_1_1.py`'s
+`split_pada_words()` was treating the whole gloss token as one literal (wrong) word, e.g. feeding
+`samhita_join` the string "वायो इति" as if it were a single Pada word. Fixed with
+`_strip_pada_iti_gloss()`, derived from all 3 shapes actually observed (not guessed), including
+one genuine one-off data quirk (a missing danda merging two independent words into one token,
+"उपऽआसते उतो इति"). **RV 1.1 has zero instances of this pattern (checked directly)** — the fix
+is confirmed a strict no-op there (`krama_regenerated_output.json` byte-for-byte unchanged after
+re-running the generator) and a real, measurable improvement elsewhere: the diagnostic's own
+match rate against RV 1.1–1.10 went from 77/204 to 96/204 ardharcas purely from this one fix.
+Covered by a new `tests/test_pada_iti_gloss.py` (7 tests, all 3 real shapes plus the standalone-
+iti-is-a-real-word negative case).
+
+**The actual scaling blocker, identified but explicitly NOT attempted this round: the
+`split_into_ardharcas()` automatic length-alignment heuristic's failure rate is much higher
+outside RV 1.1.** Of the 108 remaining mismatches after the iti-gloss fix, inspecting a sample
+shows most are NOT phonology bugs at all — the automatic ardharca-boundary detector (which
+already needed 2 manual overrides even within RV 1.1's own 9 verses — §6.6) picks the wrong
+split point often enough outside RV 1.1 that whole trailing words end up missing from one
+ardharca and never reach the other. This is a real, structural problem with the "closest
+cumulative length to the first daṇḍa" heuristic itself, not a small fix — and is exactly the kind
+of thing the spec's own scaling gate exists to make the lead's decision on (accept a much lower
+automatic-split success rate and rely on a growing manual-override table, or design a better
+heuristic, or require independent ardharca-boundary data) rather than something to quietly work
+around mid-diagnostic. **Not attempted.** Flagged here with real numbers instead.
+
+---
+
 ## 7. Two modes
 
 **GENERATE** — Pada-pāṭha → Krama-pāṭha, per §5.
@@ -1450,6 +1494,16 @@ Kept as a short index back to the full review, not restated in full here:
 - Confirm an independently attested Krama-pāṭha source to use as the VALIDATE-mode ground
   truth for RV 1.1.1 and subsequent sūktas — `github.com/vishvasa`'s Rigveda repo was
   checked (10 Sep 2026) and does not appear to carry one, so this is still open.
+- (Added 13 Sep 2026, §6.15) **When ready to decide on scaling past RV 1.1, the actual blocker
+  is now quantified, not just gated in principle**: `split_into_ardharcas()`'s automatic
+  length-alignment heuristic gets 7/9 right unaided on RV 1.1 (2 manual overrides already
+  needed there); a diagnostic pass against RV 1.1–1.10 (204 ardharcas, not committed as scaled
+  output) found its failure rate is much higher outside RV 1.1 — most of the 108 remaining
+  chain-reconstruction mismatches there (after a real, separate parsing bug was fixed — see
+  §6.15) trace back to the wrong ardharca split point, not a phonology error. Options for
+  whoever picks this up: accept a lower automatic success rate plus a growing manual-override
+  table (works, doesn't scale cleanly), design a better split heuristic, or find/require
+  independent ardharca-boundary data. Not attempted without the lead's steer on which.
 - Decide whether `github.com/vishvasa`'s per-sūkta Śākala Saṃhitā (2,226 files) is worth a
   word-level cross-check against DGE's own Pada/Saṃhitā data before the Krama work leans on
   it, or whether the existing 96.61%-validated VedaWeb cross-check is sufficient.

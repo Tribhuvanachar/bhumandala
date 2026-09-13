@@ -69,12 +69,58 @@ def strip_accents(s):
     return "".join(ch for ch in s if ch not in ACCENT_MARKS)
 
 
+def _strip_pada_iti_gloss(token):
+    """DGE's own pada_patha carries a real, common editorial convention this
+    script did not need to handle for RV 1.1 (checked directly: RV 1.1 has
+    zero instances) but that appears immediately in RV 1.2 onward (541+76+1
+    times across Mandala 1, found while scanning beyond RV 1.1's own scope
+    11-13 Sep 2026): a danda-delimited token can carry an "iti" GLOSS for
+    the word immediately before it, disambiguating an otherwise-ambiguous
+    Pada spelling -- e.g. "vaayo iti" (is "vaayo" complete, or truncated?)
+    or, for a compound, giving BOTH the fused citation form and the true
+    avagraha-split form: "vaajiiniivasuu iti vaajiiniiऽvasuu". This is a
+    DIFFERENT phenomenon from a real, independent "iti" WORD (a quotative
+    particle -- "thus [he/she said]") that stands as its OWN danda-
+    delimited token elsewhere in this same corpus (confirmed: 12 such
+    standalone tokens exist in Mandala 1) -- that one must NOT be touched
+    here, and isn't (a standalone "iti" token has no other word in it to
+    gloss).
+
+    Rule, derived directly from all 3 shapes actually observed in Mandala 1
+    (not guessed): within a token containing "iti" as one of several
+    space-separated words, the word immediately before "iti" is the one
+    being glossed; anything AFTER "iti" (if present) is its disambiguated
+    real form and replaces it; anything else BEFORE the glossed word is a
+    separate, unrelated real word in its own right (needed for exactly one
+    observed case, "upaऽaasate uto iti", where "upaऽaasate" and "uto" are
+    two distinct Pada words that happen to share one danda-token with no
+    danda between them -- an isolated data quirk, not a new convention).
+
+    Returns a list of 0+ real words (usually exactly 1)."""
+    words = token.split()
+    if words == ["इति"]:
+        return ["इति"]  # a genuine standalone iti word, never a gloss target
+    if "इति" not in words:
+        return [token]
+    idx = words.index("इति")
+    before, after = words[:idx], words[idx + 1:]
+    real_form = " ".join(after) if after else (before[-1] if before else "")
+    leading_extra = before[:-1] if before else []
+    return leading_extra + ([real_form] if real_form else [])
+
+
 def split_pada_words(pada_patha_stripped):
     """pada_patha uses '।' between words within a pada and '॥' verse-final.
-    Both are word separators here; strip whitespace per token."""
+    Both are word separators here; strip whitespace per token, then strip
+    any pada_patha-internal "iti" disambiguation gloss (see
+    _strip_pada_iti_gloss) -- a no-op for RV 1.1, which has none."""
     text = pada_patha_stripped.replace("॥", "।")
-    words = [w.strip() for w in text.split("।")]
-    return [w for w in words if w]
+    tokens = [w.strip() for w in text.split("।")]
+    words = []
+    for t in tokens:
+        if t:
+            words.extend(_strip_pada_iti_gloss(t))
+    return words
 
 
 def load_verses():
